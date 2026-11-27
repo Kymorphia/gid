@@ -11,6 +11,9 @@ enum string _gidGirNamespace = "Json";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["json-glib/json-glib.h"];
+
 /**
     Indicates the content of a node.
 */

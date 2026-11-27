@@ -12,6 +12,9 @@ enum string _gidGirNamespace = "WebKitWebProcessExtension";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "6.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["webkit/webkit-web-process-extension.h"];
+
 /**
     Enum values used to denote the various levels of console messages.
 */

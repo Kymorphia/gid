@@ -10,6 +10,9 @@ enum string _gidGirNamespace = "libxml2";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = [];
+
 /** */
 @gidGir("Char")
 struct xmlChar;

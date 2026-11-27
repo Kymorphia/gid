@@ -14,6 +14,9 @@ enum string _gidGirNamespace = "GstNet";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gst/net/net.h"];
+
 /**
     #GstNetAddressMeta can be used to store a network address (a #GSocketAddress)
     in a #GstBuffer so that it network elements can track the to and from address

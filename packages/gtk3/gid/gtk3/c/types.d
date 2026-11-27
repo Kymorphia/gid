@@ -12,6 +12,9 @@ enum string _gidGirNamespace = "Gtk";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "3.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gtk/gtk-a11y.h", "gtk/gtk.h", "gtk/gtkx.h"];
+
 /**
     A #GtkAllocation-struct of a widget represents region
     which has been allocated to the widget by its parent. It is a subregion

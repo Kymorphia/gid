@@ -10,6 +10,9 @@ enum string _gidGirNamespace = "GModule";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gmodule.h"];
+
 /**
     Errors returned by [gid.gmodule2.module_.Module.openFull].
 */

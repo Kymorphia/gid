@@ -10,6 +10,9 @@ enum string _gidGirNamespace = "GtkSource";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "5";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gtksourceview/gtksource.h"];
+
 /** */
 @gidGir("AnnotationStyle")
 enum GtkSourceAnnotationStyle

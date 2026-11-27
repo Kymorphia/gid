@@ -10,6 +10,9 @@ enum string _gidGirNamespace = "Graphene";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["graphene-gobject.h"];
+
 /**
     Specify the order of the rotations on each axis.
     

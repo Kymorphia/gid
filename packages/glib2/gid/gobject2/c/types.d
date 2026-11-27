@@ -10,6 +10,9 @@ enum string _gidGirNamespace = "GObject";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["glib-object.h"];
+
 /**
     This is the signature of marshaller functions, required to marshall
     arrays of parameter values to signal emissions into C language callback

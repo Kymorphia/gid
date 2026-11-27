@@ -9,6 +9,9 @@ enum string _gidGirNamespace = "GLib";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["glib.h"];
+
 /**
     Integer representing a day of the month; between 1 and 31.
     

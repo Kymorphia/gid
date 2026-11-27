@@ -11,6 +11,9 @@ enum string _gidGirNamespace = "cairo";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = [];
+
 /**
     #cairo_bool_t is used for boolean values. Returns of type
     #cairo_bool_t will always be either 0 or 1, but testing against

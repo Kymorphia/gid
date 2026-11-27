@@ -11,6 +11,9 @@ enum string _gidGirNamespace = "GdkPixbuf";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gdk-pixbuf/gdk-pixbuf.h"];
+
 /**
     This enumeration defines the color spaces that are supported by
     the gdk-pixbuf library.

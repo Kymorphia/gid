@@ -13,6 +13,9 @@ enum string _gidGirNamespace = "GstController";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gst/controller/controller.h"];
+
 /**
     The various interpolation modes available.
 */

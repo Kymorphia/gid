@@ -10,6 +10,9 @@ enum string _gidGirNamespace = "Atk";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["atk/atk.h"];
+
 /**
     This is a singly-linked list (a #GSList) of #AtkAttribute. It is
     used by [gid.atk1.text.Text.getRunAttributes],

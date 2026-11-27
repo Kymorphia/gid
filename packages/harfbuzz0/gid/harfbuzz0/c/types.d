@@ -11,6 +11,9 @@ enum string _gidGirNamespace = "HarfBuzz";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "0.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["hb-gobject.h"];
+
 /**
     Data type for booleans.
 */

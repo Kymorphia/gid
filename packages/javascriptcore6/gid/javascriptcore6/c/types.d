@@ -10,6 +10,9 @@ enum string _gidGirNamespace = "JavaScriptCore";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "6.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["jsc/jsc.h"];
+
 /**
     Enum values to specify a mode to check for syntax errors in [gid.javascriptcore6.context.Context.checkSyntax].
 */

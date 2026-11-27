@@ -13,6 +13,9 @@ enum string _gidGirNamespace = "GioUnix";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gio/gdesktopappinfo.h", "gio/gfiledescriptorbased.h", "gio/gio.h", "gio/gunixfdmessage.h", "gio/gunixinputstream.h", "gio/gunixmounts.h", "gio/gunixoutputstream.h"];
+
 /**
     [gid.giounix2.desktop_app_info.DesktopAppInfo] is an implementation of [gid.gio2.app_info.AppInfo] based on
     desktop files.

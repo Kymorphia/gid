@@ -14,6 +14,9 @@ enum string _gidGirNamespace = "Rsvg";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["librsvg/rsvg.h"];
+
 /**
     An enumeration representing possible errors
 */

@@ -11,6 +11,9 @@ enum string _gidGirNamespace = "Gsk";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "4.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gsk/gsk.h"];
+
 /**
     The blend modes available for render nodes.
     

@@ -13,6 +13,9 @@ enum string _gidGirNamespace = "GstGLWayland";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gst/gl/wayland/wayland.h"];
+
 /**
     the contents of a #GstGLDisplayWayland are private and should only be accessed
     through the provided API

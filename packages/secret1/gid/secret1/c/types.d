@@ -11,6 +11,9 @@ enum string _gidGirNamespace = "Secret";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["libsecret/secret.h"];
+
 /**
     Flags which determine which parts of the #SecretBackend are initialized.
 */

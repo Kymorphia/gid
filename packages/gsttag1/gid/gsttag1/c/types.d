@@ -11,6 +11,9 @@ enum string _gidGirNamespace = "GstTag";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gst/tag/tag.h"];
+
 /**
     Result values from the parse_tag virtual function.
 */

@@ -14,6 +14,9 @@ enum string _gidGirNamespace = "Gdk";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "4.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["gdk/gdk.h"];
+
 /**
     Positioning hints for aligning a surface relative to a rectangle.
     

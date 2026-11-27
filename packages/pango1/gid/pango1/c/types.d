@@ -13,6 +13,9 @@ enum string _gidGirNamespace = "Pango";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "1.0";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["pango/pango.h"];
+
 /**
     A `PangoGlyph` represents a single glyph in the output form of a string.
 */

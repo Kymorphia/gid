@@ -32,7 +32,8 @@ import gid.gobject2.dig_iface : _isDInterface;
 *   nsVersion = Version of the GIR namespace ("1.0"), or null to use the version given to GObjectNamespace
 *   sharedLibrary = Name of the shared library which C, Python and other languages load ("libmylib.so"), can be
 *     changed with the `--shared-library` option of the program
-*   cIncludes = C headers to list in the GIR (optional)
+*   cIncludes = C headers to list in the GIR (optional), the first one is the name of the C header the program writes
+*     (default: the namespace in snake case, `mylib.h`)
 *   packages = pkg-config packages to list in the GIR (optional)
 */
 struct GirInfo
@@ -53,6 +54,12 @@ struct GirInfo
 * one given to GObjectNamespace (they must be the same if both are given). Types of other namespaces that the API uses
 * need the GIR version of their namespace: `mixin GObjectNamespace!("Widgets", "1.0");`. Options: `--gir FILE` writes another
 * file (`-` for the standard output), and `--shared-library NAME` changes the shared library name.
+*
+* It also writes the C header of the types (`mylib.h`, the first header of `GirInfo.cIncludes` if given, which the GIR
+* lists as its C include): type macros (`MYLIB_TYPE_COUNTER`, `MYLIB_COUNTER()`, `MYLIB_IS_COUNTER()`, ...), the
+* instance, class and interface structs, and the prototypes of the exported functions. `--header FILE` writes another
+* file (`-` for the standard output), `--no-header` writes none. The header includes `glib-object.h` and the headers of
+* the namespaces it uses: those of the giD bindings and `<namespace>.h` for other D namespaces.
 *
 * Params:
 *   info = GIR namespace, version and shared library name (see GirInfo)
@@ -76,7 +83,8 @@ struct GirInfo
 * ]
 * ---
 *
-* Then `dub run -c gir` writes `Mylib-1.0.gir` and `g-ir-compiler Mylib-1.0.gir -o Mylib-1.0.typelib` compiles it.
+* Then `dub run -c gir` writes `Mylib-1.0.gir` and `mylib.h`, and
+* `g-ir-compiler Mylib-1.0.gir -o Mylib-1.0.typelib` compiles it.
 */
 mixin template GObjectGirMain(GirInfo info, Modules...)
 {
@@ -97,12 +105,15 @@ int girMain(GirInfo info, Modules...)(string[] args)
   import std.stdio : stderr, stdout;
 
   string output;
+  string headerOutput;
   string sharedLibrary;
+  bool noHeader;
 
   try
   {
-    auto help = getopt(args, "gir", "Output GIR file (- for the standard output)", &output, "shared-library",
-    "Shared library name (default " ~ info.sharedLibrary ~ ")", &sharedLibrary);
+    auto help = getopt(args, "gir", "Output GIR file (- for the standard output)", &output, "header",
+    "Output C header file (- for the standard output)", &headerOutput, "no-header", "Don't write the C header",
+    &noHeader, "shared-library", "Shared library name (default " ~ info.sharedLibrary ~ ")", &sharedLibrary);
 
     if (help.helpWanted)
     {
@@ -127,6 +138,17 @@ int girMain(GirInfo info, Modules...)(string[] args)
       stdout.write(gir.xml);
     else
       write(output, gir.xml);
+
+    if (!noHeader)
+    {
+      if (headerOutput.length == 0)
+        headerOutput = gir.headerName;
+
+      if (headerOutput == "-")
+        stdout.write(gir.header);
+      else
+        write(headerOutput, gir.header);
+    }
   }
   catch (Exception e)
   {
@@ -153,17 +175,34 @@ string girXml(GirInfo info, Modules...)(string sharedLibrary = null)
   return _girWrite!(info, Modules)(sharedLibrary).xml;
 }
 
-/// The GIR XML and the namespace version (see girXml)
+/**
+* C header of the GObjectExport classes and GInterfaceExport interfaces of the namespace of info declared in the given
+* modules (see girXml): type macros, instance, class and interface structs, get_type functions, constructors, methods,
+* functions and the invokers of the virtual methods.
+* Params:
+*   info = GIR namespace, version and shared library name
+*   Modules = The D modules which declare the exported types
+* Returns: The header
+* Throws: Exception with all the problems found
+*/
+string girHeader(GirInfo info, Modules...)()
+{
+  return _girWrite!(info, Modules)(null).header;
+}
+
+/// The GIR XML, the namespace version and the C header (see girXml and girHeader)
 struct _GirOutput
 {
   string xml; ///
   string nsVersion; ///
+  string header; /// C header
+  string headerName; /// Name of the C header (GirInfo.cIncludes[0] or <namespace>.h in snake case)
 }
 
 /// ditto
 _GirOutput _girWrite(GirInfo info, Modules...)(string sharedLibrary)
 {
-  import std.algorithm : sort, uniq;
+  import std.algorithm : canFind, sort, uniq;
   import std.array : array, join;
 
   _GirWriter w;
@@ -208,7 +247,10 @@ _GirOutput _girWrite(GirInfo info, Modules...)(string sharedLibrary)
   foreach (p; info.packages)
     xml ~= "  <package name=\"" ~ _girEsc(p) ~ "\"/>\n";
 
-  foreach (h; info.cIncludes)
+  // The generated header, or the headers of info
+  string headerName = info.cIncludes.length > 0 ? info.cIncludes[0] : _girDefaultHeader(info.namespace);
+
+  foreach (h; info.cIncludes.length > 0 ? info.cIncludes : [headerName])
     xml ~= "  <c:include name=\"" ~ _girEsc(h) ~ "\"/>\n";
 
   xml ~= "  <namespace name=\"" ~ _girEsc(info.namespace) ~ "\" version=\"" ~ _girEsc(nsVersion)
@@ -217,7 +259,21 @@ _GirOutput _girWrite(GirInfo info, Modules...)(string sharedLibrary)
   ~ _girEsc(w.symbolPrefix.length > 0 ? w.symbolPrefix : imported!"gid.gobject2.dig"._snakeCaseName(info.namespace))
   ~ "\">\n" ~ w.body ~ "  </namespace>\n</repository>\n";
 
-  return _GirOutput(xml, nsVersion);
+  // Headers of the included namespaces: GLib and GObject, the headers of the bindings and other D namespaces
+  string[] includes = ["glib-object.h"];
+
+  foreach (ns; w.includes.keys.sort)
+    if (ns != info.namespace)
+    if (auto hs = ns in w.cHeaders)
+    foreach (h; *hs)
+    if (!includes.canFind(h))
+    includes ~= h;
+
+  foreach (h; info.cIncludes.length > 1 ? info.cIncludes[1 .. $] : null)
+    if (!includes.canFind(h))
+    includes ~= h;
+
+  return _GirOutput(xml, nsVersion, _girHeader(xml, headerName, includes), headerName);
 }
 
 /// State of the GIR writer
@@ -230,6 +286,7 @@ struct _GirWriter
   string[] errors; /// Problems found
   bool[string] done; /// Types written
   string[] nsVersions; /// GIR versions declared for the types written
+  string[][string] cHeaders; /// C headers of the included namespaces, by namespace (where known)
 }
 
 // 1 for a GObjectExport class of namespace ns, 2 for a GInterfaceExport interface, 0 otherwise
@@ -304,12 +361,17 @@ private string _girRefName(PT)(ref _GirWriter w, string where)
     else
       w.includes[PT._gidExportNs] = PT._gidExportNsVersion;
 
+    w.cHeaders[PT._gidExportNs] = [_girDefaultHeader(PT._gidExportNs)];
     return PT._gidExportNs ~ "." ~ PT._gidExportName;
   }
   else static if (_dIsBindingType!PT)
   {
     alias G = imported!"gid.gobject2.dig"._dGirType!PT;
     w.includes[G.namespace] = G.nsVersion;
+
+    if (G.cIncludes.length > 0)
+      w.cHeaders[G.namespace] = G.cIncludes;
+
     return G.fullName;
   }
   else static if (is(PT == class) && BaseClassesTuple!PT.length > 0)
@@ -792,4 +854,297 @@ private void _girInterface(I)(ref _GirWriter w)
   ~ fields ~ "    </record>\n";
 
   w.body ~= s;
+}
+
+// Default C header name of a D namespace ("Mylib" -> "mylib.h", "GidgenExport" -> "gidgen_export.h")
+package string _girDefaultHeader(string ns) pure
+{
+  return imported!"gid.gobject2.dig"._snakeCaseName(ns) ~ ".h";
+}
+
+// Element of the GIR XML written by the GIR writer (for the C header)
+private class _GirNode
+{
+  string tag; // Element name
+  string[string] attrs; // Attributes (unescaped)
+  _GirNode[] kids; // Child elements
+
+  string attr(string name)
+  {
+    auto p = name in attrs;
+    return p ? *p : null;
+  }
+
+  _GirNode kid(string name)
+  {
+    foreach (k; kids)
+      if (k.tag == name)
+      return k;
+
+    return null;
+  }
+}
+
+// Parse the XML the GIR writer generates (elements and attributes, no text content)
+private _GirNode _girParse(string xml)
+{
+  import std.array : replace;
+  import std.string : indexOf;
+
+  auto root = new _GirNode;
+  _GirNode[] stack = [root];
+  size_t i;
+
+  while (true)
+  {
+    auto lt = xml[i .. $].indexOf('<');
+
+    if (lt < 0)
+      break;
+
+    i += lt + 1;
+
+    if (xml[i] == '?' || xml[i] == '!')
+    {
+      i += xml[i .. $].indexOf('>') + 1;
+      continue;
+    }
+
+    if (xml[i] == '/')
+    {
+      i += xml[i .. $].indexOf('>') + 1;
+      stack = stack[0 .. $ - 1];
+      continue;
+    }
+
+    auto node = new _GirNode;
+    auto start = i;
+
+    while (xml[i] != ' ' && xml[i] != '>' && xml[i] != '/')
+      i++;
+
+    node.tag = xml[start .. i];
+
+    while (true)
+    {
+      while (xml[i] == ' ' || xml[i] == '\n')
+        i++;
+
+      if (xml[i] == '/' || xml[i] == '>')
+        break;
+
+      auto eq = xml[i .. $].indexOf('=');
+      auto name = xml[i .. i + eq];
+      i += eq + 2; // ="
+      auto q = xml[i .. $].indexOf('"');
+      node.attrs[name] = xml[i .. i + q].replace("&#10;", "\n").replace("&quot;", "\"").replace("&lt;", "<")
+      .replace("&gt;", ">").replace("&amp;", "&");
+      i += q + 1;
+    }
+
+    stack[$ - 1].kids ~= node;
+
+    if (xml[i] == '/')
+      i += 2;
+    else
+    {
+      i++;
+      stack ~= node;
+    }
+  }
+
+  return root;
+}
+
+// C type of a <type> or <array> element in a parent element
+private string _girNodeCType(_GirNode n)
+{
+  foreach (k; n.kids)
+    if (k.tag == "type" || k.tag == "array")
+    return k.attr("c:type");
+
+  return "gpointer";
+}
+
+// C declaration of a variable or parameter of C type ctype ("const char*", "x" -> "const char *x")
+private string _girCDecl(string ctype, string name)
+{
+  size_t e = ctype.length;
+
+  while (e > 0 && ctype[e - 1] == '*')
+    e--;
+
+  return e < ctype.length ? ctype[0 .. e] ~ " " ~ ctype[e .. $] ~ name : ctype ~ " " ~ name;
+}
+
+// C parameter list of a constructor, method, function or callback element
+private string _girCParams(_GirNode fn)
+{
+  import std.array : join;
+
+  string[] params;
+
+  if (auto ps = fn.kid("parameters"))
+    foreach (p; ps.kids)
+    params ~= _girCDecl(_girNodeCType(p), p.attr("name"));
+
+  if (fn.attr("throws") == "1")
+    params ~= "GError **error";
+
+  return params.length > 0 ? params.join(", ") : "void";
+}
+
+// C prototype of a constructor, method or function element
+private string _girCPrototype(_GirNode fn)
+{
+  auto ret = _girNodeCType(fn.kid("return-value"));
+  return _girCDecl(ret, fn.attr("c:identifier")) ~ " (" ~ _girCParams(fn) ~ ");\n";
+}
+
+// C struct definition of a class or interface struct <record>
+private string _girCStruct(_GirNode rec)
+{
+  string s = "struct _" ~ rec.attr("c:type") ~ "\n{\n";
+
+  foreach (f; rec.kids)
+  {
+    if (f.tag != "field")
+      continue;
+
+    if (auto cb = f.kid("callback"))
+      s ~= "  " ~ _girCDecl(_girNodeCType(cb.kid("return-value")), "(*" ~ f.attr("name") ~ ")") ~ " ("
+    ~ _girCParams(cb) ~ ");\n";
+    else
+      s ~= "  " ~ _girCDecl(_girNodeCType(f), f.attr("name")) ~ ";\n";
+  }
+
+  return s ~ "};\n";
+}
+
+/**
+* C header of the GIR XML the GIR writer generated: type macros, instance, class and interface structs and the
+* prototypes of the exported functions.
+* Params:
+*   xml = The GIR XML
+*   headerName = Name of the header (for the include guard)
+*   includes = Headers to include
+* Returns: The header
+*/
+package string _girHeader(string xml, string headerName, string[] includes)
+{
+  import std.ascii : isAlphaNum, asciiUpper = toUpper;
+  import std.string : toUpper;
+
+  auto repo = _girParse(xml).kid("repository");
+  auto ns = repo.kid("namespace");
+  auto macroPrefix = ns.attr("c:symbol-prefixes").toUpper;
+
+  string guard;
+  foreach (char c; headerName)
+    guard ~= isAlphaNum(c) ? asciiUpper(c) : '_';
+
+  string s = "/* " ~ headerName ~ ": C API of the " ~ ns.attr("name") ~ " " ~ ns.attr("version")
+  ~ " GObject types, generated by giD (GObjectGirMain), do not edit */\n\n#ifndef " ~ guard ~ "\n#define " ~ guard
+  ~ "\n\n";
+
+  foreach (h; includes)
+    s ~= "#include <" ~ h ~ ">\n";
+
+  s ~= "\nG_BEGIN_DECLS\n\n";
+
+  _GirNode[string] records;
+  _GirNode[] types;
+
+  foreach (k; ns.kids)
+  {
+    if (k.tag == "record")
+      records[k.attr("name")] = k;
+    else if (k.tag == "class" || k.tag == "interface")
+    types ~= k;
+  }
+
+  foreach (t; types)
+    s ~= "typedef struct _" ~ t.attr("c:type") ~ " " ~ t.attr("c:type") ~ ";\n";
+
+  foreach (t; types)
+    if (auto rec = t.attr("glib:type-struct") in records)
+    s ~= "typedef struct _" ~ rec.attr("c:type") ~ " " ~ rec.attr("c:type") ~ ";\n";
+
+  // Interfaces first, then the classes after the parents of the namespace
+  _GirNode[] ordered;
+  bool[string] placed;
+
+  foreach (t; types)
+    if (t.tag == "interface")
+  {
+    ordered ~= t;
+    placed[t.attr("name")] = true;
+  }
+
+  for (bool progress = true; progress;)
+  {
+    progress = false;
+
+    foreach (t; types)
+    {
+      auto parent = t.attr("parent");
+      bool inNs = parent.length > 0 && !imported!"std.algorithm".canFind(parent, '.');
+
+      if (t.attr("name") !in placed && (!inNs || parent in placed))
+      {
+        ordered ~= t;
+        placed[t.attr("name")] = progress = true;
+      }
+    }
+  }
+
+  foreach (t; ordered)
+  {
+    auto cType = t.attr("c:type");
+    auto m = macroPrefix ~ "_" ~ t.attr("c:symbol-prefix").toUpper;
+    auto typeMacro = macroPrefix ~ "_TYPE_" ~ t.attr("c:symbol-prefix").toUpper;
+    auto rec = t.attr("glib:type-struct") in records;
+    auto recType = rec ? rec.attr("c:type") : null;
+
+    auto isMacro = macroPrefix ~ "_IS_" ~ t.attr("c:symbol-prefix").toUpper;
+
+    s ~= "\n/* " ~ cType ~ " */\n\n#define " ~ typeMacro ~ " (" ~ t.attr("glib:get-type") ~ " ())\n"
+    ~ "#define " ~ m ~ "(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), " ~ typeMacro ~ ", " ~ cType ~ "))\n"
+    ~ "#define " ~ isMacro ~ "(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), " ~ typeMacro ~ "))\n";
+
+    if (t.tag == "interface")
+    {
+      if (rec)
+        s ~= "#define " ~ m ~ "_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), " ~ typeMacro ~ ", " ~ recType
+      ~ "))\n";
+    }
+    else
+    {
+      if (rec)
+        s ~= "#define " ~ m ~ "_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), " ~ typeMacro ~ ", " ~ recType ~ "))\n"
+      ~ "#define " ~ isMacro ~ "_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), " ~ typeMacro ~ "))\n"
+      ~ "#define " ~ m ~ "_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), " ~ typeMacro ~ ", " ~ recType
+      ~ "))\n";
+
+      s ~= "\nstruct _" ~ cType ~ "\n{\n";
+
+      foreach (f; t.kids)
+        if (f.tag == "field")
+        s ~= "  " ~ _girCDecl(_girNodeCType(f), f.attr("name")) ~ ";\n";
+
+      s ~= "};\n";
+    }
+
+    if (rec)
+      s ~= "\n" ~ _girCStruct(*rec);
+
+    s ~= "\nGType " ~ t.attr("glib:get-type") ~ " (void) G_GNUC_CONST;\n";
+
+    foreach (fn; t.kids)
+      if (fn.tag == "constructor" || fn.tag == "method" || fn.tag == "function")
+      s ~= _girCPrototype(fn);
+  }
+
+  s ~= "\nG_END_DECLS\n\n#endif /* " ~ guard ~ " */\n";
+  return s;
 }

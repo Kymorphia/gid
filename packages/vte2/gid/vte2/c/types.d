@@ -13,6 +13,9 @@ enum string _gidGirNamespace = "Vte";
 /// GIR namespace version of the binding
 enum string _gidGirVersion = "2.91";
 
+/// C headers of the binding library (included by the C headers of D libraries using its types)
+enum string[] _gidGirCIncludes = ["vte/vte.h"];
+
 /**
     An enumeration type that can be used to specify how the terminal
     uses extra allocated space.
