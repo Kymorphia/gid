@@ -12,6 +12,7 @@
 public import gid.gobject2.dig_property;
 public import gid.gobject2.dig_signal;
 public import gid.gobject2.dig_iface;
+public import gid.gobject2.dig_method;
 public import gid.gobject2.dig_vfunc;
 
 import core.atomic;
@@ -19,12 +20,6 @@ import gid.glib2.c.functions;
 import gid.glib2.c.types : GLogLevelFlags;
 import gid.gobject2.c.functions;
 import gid.gobject2.c.types;
-
-/**
- * Attribute reserved for future support of exporting a non-virtual method on a D GObject type through GIR.
- * Not functional yet.
- */
-struct gMethod {}
 
 
 /**
@@ -101,6 +96,10 @@ mixin template GObjectSubclass(string typeName = null)
   {
     return true;
   }
+
+  static assert(is(typeof(this)._gidExportedAs == typeof(this))
+    || !imported!"gid.gobject2.dig_method"._dHasExportMethods!(typeof(this)), typeof(this).stringof
+    ~ ": @gMethod and @gConstructor need mixin GObjectExport instead of GObjectSubclass");
 
   static foreach (_gidSignalMem; __traits(derivedMembers, typeof(this)))
   {
@@ -201,6 +200,7 @@ mixin template GObjectNamespace(string ns, string symbolPrefix = null)
  * - one invoker per `@gVirtual` method the class declares, named after the D invoker (`vfuncDoThing` gives
  *   `mylib_foo_bar_do_thing(MylibFooBar *self, ...)`), which calls the implementation in the class struct of the
  *   instance (D, C, or another language)
+ * - one function per method, static method or constructor marked `@gMethod` or `@gConstructor` (see gMethod)
  *
  * Params:
  *   ns = Namespace, or null to use the one declared with GObjectNamespace
@@ -218,6 +218,11 @@ mixin template GObjectNamespace(string ns, string symbolPrefix = null)
  *   this()
  *   {
  *     super();
+ *   }
+ *
+ *   @gMethod int add(int a, int b) // C function int mylib_foo_add(MylibFoo *self, int a, int b)
+ *   {
+ *     return a + b;
  *   }
  * }
  * ---
@@ -241,6 +246,24 @@ mixin template GObjectExport(string ns = null, string name = null, string cSymbo
         .g_object_new_with_properties(_getGType, 0, null, null);
     }
   }
+
+  // Exported methods, functions and constructors (@gMethod, @gConstructor)
+  static foreach (_gidExportK, _gidExportM; imported!"gid.gobject2.dig_method"._dExportMethods!(typeof(this)))
+  {
+    static assert(imported!"gid.gobject2.dig_method"._dExportMethodProblem!(typeof(this), _gidExportM.mem,
+      _gidExportM.overload) is null, imported!"gid.gobject2.dig_method"._dExportMethodProblem!(typeof(this),
+      _gidExportM.mem, _gidExportM.overload));
+
+    static if (imported!"gid.gobject2.dig_method"._dExportMethodProblem!(typeof(this), _gidExportM.mem,
+        _gidExportM.overload) is null)
+      mixin imported!"gid.gobject2.dig_method"._GObjectExportMethod!(typeof(this), _gidExportM.mem,
+        _gidExportM.overload, _gidExportK, _gidExportSymbolBase ~ "_" ~ _gidExportM.name);
+  }
+
+  static assert(imported!"gid.gobject2.dig_method"._dExportNamesProblem!(typeof(this),
+    imported!"gid.gobject2.dig"._dHasPublicDefaultCtor!(typeof(this))) is null,
+    imported!"gid.gobject2.dig_method"._dExportNamesProblem!(typeof(this),
+    imported!"gid.gobject2.dig"._dHasPublicDefaultCtor!(typeof(this))));
 }
 
 /**
@@ -262,6 +285,9 @@ mixin template _GObjectExportNames(string ns, string name, string mixinName)
     ~ "!(\"Mylib\");`");
 
   private enum string _gidExportName = name.length > 0 ? name : __traits(identifier, typeof(this));
+
+  /// The exported type (not inherited: a subclass which isn't exported has the type of its parent here)
+  alias _gidExportedAs = typeof(this);
 
   /// C symbol prefix of the exported functions of the type (`mylib_foo`)
   static if (__traits(compiles, _gidSymbolPrefix) && __traits(compiles, _gidNamespace)

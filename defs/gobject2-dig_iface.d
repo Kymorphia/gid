@@ -111,6 +111,9 @@ mixin template GInterfaceExport(string ns = null, string name = null, string cSy
   mixin imported!"gid.gobject2.dig"._GObjectExportNames!(ns, name, "GInterfaceExport");
   mixin imported!"gid.gobject2.dig_iface".GInterfaceDef!(_gidExportNs ~ _gidExportName);
   mixin imported!"gid.gobject2.dig"._GObjectExportEntryPoints!cSymbol;
+
+  static assert(!imported!"gid.gobject2.dig_method"._dHasExportMethods!(typeof(this)), typeof(this).stringof
+    ~ ": @gMethod and @gConstructor are not supported in interfaces, use @gVirtual");
 }
 
 /**

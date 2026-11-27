@@ -138,14 +138,16 @@ class Foo : gid.gobject2.object.ObjectWrap
 
   @gSignal void changed(int value);
 
-  @gMethod @gVirtual void doThing(int x)
+  @gVirtual protected void vfuncDoThing(int x)
   {
     // default implementation; D subclasses override vfuncDoThing
   }
+
+  @gMethod int count() { return 0; }
 }
 ```
 
-`@gVirtual` defines a new vfunc (and, with `@gMethod`, a public invoker). `@gMethod` alone is a non-virtual method. `@gSignal` and `@gProperty` declare signals and properties. The implementation method uses the same `vfunc` + TitleCase rule as overrides (`vfuncDoThing`); the public method keeps the short name (`doThing`).
+`@gVirtual` defines a new vfunc, and the class gets the public invoker `doThing`. `@gMethod` alone is a non-virtual method. `@gSignal` and `@gProperty` declare signals and properties. The implementation method uses the same `vfunc` + TitleCase rule as overrides (`vfuncDoThing`); the public method keeps the short name (`doThing`).
 
 **Class struct and instance layout.** A type that *adds* vfuncs cannot reuse the parent class size. The generated class struct is the parent class struct, then one `extern(C)` function pointer per new vfunc, then reserved padding for ABI growth:
 
@@ -284,6 +286,16 @@ So `mixin GObjectNamespace!("Mylib");` plus `mixin GObjectExport;` gives `MylibF
 - `mylib_foo_new()` creates an instance with `g_object_new` (transfer full, floating for `GInitiallyUnowned`). It is exported when the class has a public `this()`, explicit or implicit, and isn't abstract.
 - `mylib_foo_<invoker>(self, ...)` is exported for each `@gVirtual` the class declares (`vfuncScaleBy` gives `mylib_foo_scale_by`). It calls the slot of the instance's class struct, so D, C and Python implementations are all used. Arguments and the result are the C values of the slot; the D trampoline converts them. A wrong instance type logs a "Gid" critical and returns 0/null.
 - `GInterfaceExport(ns, name, cSymbol)` does the same for D interfaces: `mylib_shape_get_type()` plus invokers through the interface struct. Plain `GInterfaceDef` exports nothing.
+
+**Exported methods (GIR export step 3).** `@gMethod` on a public method gives `mylib_foo_<snake_name>(self, ...)`, or `mylib_foo_<name>` with `@gMethod("name")`. A static method gives a function without `self`. `@gConstructor` on a constructor with parameters gives `mylib_foo_new`, or `mylib_foo_new_<name>` with `@gConstructor("name")`; on a static factory it gives `mylib_foo_new_<snake_name>`. The wrapper (`gid.gobject2.dig_method._dExportCall`):
+
+- initializes the runtime and attaches the thread;
+- checks `self` (a "Gid" critical and 0/NULL for a wrong type or NULL) and non-`@gNullable` string, array and object arguments (same critical);
+- converts the arguments: `bool` to `gboolean`, binding enums to their base type, `string` from `const char*` (copied), `string[]` from a NULL-terminated array, objects through `_getDObject` (not taken), boxed types and `Variant` with `No.Take` (a floating `GVariant` is sunk, as GLib functions do);
+- calls the D method (a virtual call, so D overrides are used), or `new T(args)` for a constructor;
+- returns strings and arrays with `g_strndup`/`g_malloc0` and objects, boxed types and variants with `_cPtr(Yes.Dup)` (transfer full; `@gTransfer(GidOwnership.None)` for objects). `out` values are converted the same way and their pointers can be NULL. `ref` (inout) is limited to `bool`, numbers and enums, to avoid ambiguous ownership.
+
+Exceptions go to `gidInvokeCallbackExceptionHandler` and the wrapper returns 0/NULL. With `@gThrows`, a trailing `GError **error` gets them instead: an `ErrorWrap` keeps its domain and code (`g_propagate_error`), other exceptions use `gid-d-exception-quark` (`gidDExceptionQuark`), code 0. `out` values are cleared on errors. All checks are compile-time `static assert`s with the member name: unsupported types (D-defined enums, classes without `GObjectExport`, other arrays, delegates), non-public members, `@gMethod` with `@gVirtual`/`@gSignal`/`@gProperty`, `@gMethod` in `GObjectSubclass` classes or interfaces, and duplicate or invalid C names (including overloads, `get_type`, `new` and invokers).
 
 **Name collisions.** If the GType name is already registered (by another library, or by two D classes with the same name), registration fails for both `GObjectSubclass` and `GObjectExport`: a "Gid" critical names the GType and the D class (`fullyQualifiedName`) and suggests passing a different `typeName` (or `GObjectExport` name or ns) or renaming the class. `_getGType` stays 0 and the critical is not repeated. Two exported get_type functions with the same symbol name are a link or `dlsym` problem, as in C.
 
