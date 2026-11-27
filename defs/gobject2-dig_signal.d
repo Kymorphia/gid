@@ -135,7 +135,7 @@ template _isDSignalMember(T, string mem)
 }
 
 // The @gSignal method
-private alias _dSignalFn(T, string mem) = _dFirstSignalFn!(__traits(getOverloads, T, mem));
+package alias _dSignalFn(T, string mem) = _dFirstSignalFn!(__traits(getOverloads, T, mem));
 
 /**
  * Argument types of a @gSignal method
@@ -161,7 +161,7 @@ private static gSignal _gSignalOf(alias member)() pure nothrow
   return gSignal.init;
 }
 
-private template _dSignalUDA(T, string mem)
+package template _dSignalUDA(T, string mem)
 {
   enum gSignal _dSignalUDA = _gSignalOf!(_dSignalFn!(T, mem));
 }
@@ -186,7 +186,7 @@ static string _dSignalTitle(string mem) pure nothrow
 }
 
 // GObject signal name: the explicit name or the D name in kebab-case
-private template _dSignalName(T, string mem)
+package template _dSignalName(T, string mem)
 {
   enum string _dSignalName = imported!"gid.gobject2.dig"._dPropertyName(mem, _dSignalUDA!(T, mem).name);
 }

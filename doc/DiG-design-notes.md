@@ -333,6 +333,35 @@ class Baz : ObjectWrap
 - A member whose types aren't supported is skipped with a compiler message by default (`GidSkip.Warn`). `GidSkip.Silent` skips without a message and `GidSkip.Error` stops the build. Explicit attributes on unsupported types are always errors.
 - Overloads are always an error, also with `GidSkip.Silent`, so that a new overload can't silently replace an exported function. Give each overload a distinct `@gMethod("name")`, or mark all but one `@gNoExport`.
 
+**GIR export (GIR export step 4).** Python, GJS, Vala and other languages need a GIR file (and the typelib compiled from it) to use the exported types. A D library gets one with a second dub configuration that builds a small program writing the GIR:
+
+```d
+// mylib/package.d
+module mylib;
+public import mylib.counter;
+
+mixin GObjectNamespace!("Mylib");
+version (GidGir) mixin GObjectGirMain!(GirInfo("Mylib", "1.0", "libmylib.so"), mylib.counter);
+```
+
+```json
+"configurations": [
+  { "name": "library", "targetType": "dynamicLibrary" },
+  { "name": "gir", "targetType": "executable", "targetName": "mylib-gir", "versions": ["GidGir"] }
+]
+```
+
+```sh
+dub build                      # libmylib.so
+dub run -c gir                 # writes Mylib-1.0.gir (--gir FILE or --gir - for another file or stdout,
+                               # --shared-library NAME for another library name)
+g-ir-compiler Mylib-1.0.gir -o Mylib-1.0.typelib
+```
+
+List the modules that declare the exported types. The GIR has the `GObjectExport` classes and `GInterfaceExport` interfaces of the `GirInfo` namespace (types of other namespaces are skipped): parent and interfaces, the class or interface struct with the `@gVirtual` slots, `get_type`, `_new` and `@gConstructor` constructors, methods and static functions, virtual methods with their invokers, properties (flags and default values as registered) and signals (flags as registered). Parameters carry the same rules as the C functions: transfer full for returned strings, arrays, objects, boxed types and variants (`@gTransfer(GidOwnership.None)` for objects), `@gNullable`, `out`/`ref` parameters, and `throws` for a `GError **error`. Binding types (`Gtk.Widget`, `GLib.Variant`) add an `<include>` of their namespace. `girXml!(info, modules)` returns the XML for custom build steps.
+
+Limits: types of another D namespace can't be used in the API yet, D-defined enums appear as their integer type in virtual methods and signals, and there are no doc comments in the GIR.
+
 **Name collisions.** If the GType name is already registered (by another library, or by two D classes with the same name), registration fails for both `GObjectSubclass` and `GObjectExport`: a "Gid" critical names the GType and the D class (`fullyQualifiedName`) and suggests passing a different `typeName` (or `GObjectExport` name or ns) or renaming the class. `_getGType` stays 0 and the critical is not repeated. Two exported get_type functions with the same symbol name are a link or `dlsym` problem, as in C.
 
 **D runtime initialization** (`gid.gid.gidInitRuntime`). It is idempotent and thread safe (an atomic flag plus a mutex), and calls `Runtime.initialize()` once. `rt_init` is reference counted: in a D program that loads a D library (or links it), `rt_init` only increments the count. The runtime is never terminated by gid (no `rt_term`) for these reasons:

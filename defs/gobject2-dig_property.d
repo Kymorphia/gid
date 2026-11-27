@@ -114,7 +114,7 @@ private static gProperty _gPropertyOf(alias member)() pure nothrow
 
 // True if T declares a @gProperty field or function named mem, or D @property accessors exported by
 // GidExport.Properties
-private template _isDPropertyMember(T, string mem)
+package template _isDPropertyMember(T, string mem)
 {
   static if (mem == "this" || mem.length == 0)
     enum _isDPropertyMember = false;
@@ -142,7 +142,7 @@ private template _isDExplicitPropertyMember(T, string mem)
 }
 
 // Combined @gProperty of a member (first annotated overload or the field)
-private static gProperty _dPropertyUDA(T, string mem)() pure nothrow
+package static gProperty _dPropertyUDA(T, string mem)() pure nothrow
 {
   static if (__traits(compiles, __traits(getOverloads, T, mem, true))
       && __traits(getOverloads, T, mem, true).length > 0)
@@ -253,7 +253,7 @@ private template _dPropertySetterType(T, string mem)
   alias _dPropertySetterType = _dFirstPropType!("set", T, __traits(getOverloads, T, mem, true));
 }
 
-private template _dPropertyType(T, string mem)
+package template _dPropertyType(T, string mem)
 {
   static if (_dPropertyIsField!(T, mem))
     alias _dPropertyType = typeof(__traits(getMember, T, mem));
