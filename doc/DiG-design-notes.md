@@ -297,6 +297,42 @@ So `mixin GObjectNamespace!("Mylib");` plus `mixin GObjectExport;` gives `MylibF
 
 Exceptions go to `gidInvokeCallbackExceptionHandler` and the wrapper returns 0/NULL. With `@gThrows`, a trailing `GError **error` gets them instead: an `ErrorWrap` keeps its domain and code (`g_propagate_error`), other exceptions use `gid-d-exception-quark` (`gidDExceptionQuark`), code 0. `out` values are cleared on errors. All checks are compile-time `static assert`s with the member name: unsupported types (D-defined enums, classes without `GObjectExport`, other arrays, delegates), non-public members, `@gMethod` with `@gVirtual`/`@gSignal`/`@gProperty`, `@gMethod` in `GObjectSubclass` classes or interfaces, and duplicate or invalid C names (including overloads, `get_type`, `new` and invokers).
 
+**Export defaults (GIR export step 3b).** Without options only members with attributes are exported. `GidExport` flags export members without attributes: `Methods` (public methods), `Functions` (public static methods), `Properties` (D `@property` getters and setters become GObject properties), `Throws` (members that aren't `nothrow` get a `GError **error`) and `All` (`Methods | Functions | Properties`). Flags are combined with `|`, and can be set for a class or as a default for the module:
+
+```d
+mixin GObjectNamespace!("Mylib", GidExport.Methods | GidExport.Throws); // Default for the classes of this module
+
+class Foo : ObjectWrap
+{
+  mixin GObjectExport; // Uses the module default
+
+  int add(int a, int b) nothrow { return a + b; } // mylib_foo_add(self, a, b)
+  void load(string path) { ... }                  // mylib_foo_load(self, path, error)
+  @gNoExport void internal() {}                   // Not exported
+}
+
+class Bar : ObjectWrap
+{
+  mixin GObjectExport!(GidExport.Functions | GidExport.Properties); // Replaces the module default
+
+  @property int level() { return _level; } // Property "level", read-write with the setter
+  @property void level(int v) { _level = v; }
+  static int twice(int x) { return 2 * x; } // mylib_bar_twice(x)
+  private int _level;
+}
+
+class Baz : ObjectWrap
+{
+  mixin GObjectExportAll; // GObjectExport!(GidExport.All)
+}
+```
+
+- Only members declared in the class itself are exported. Private and protected members, names starting with `_`, overrides, implementations of D interfaces, operator overloads, templates and the members DiG generates (signal `emitX`/`connectX`, vfunc invokers) are left out. Signals and virtual methods always need `@gSignal` and `@gVirtual`.
+- `@property` accessors are only exported as properties, never as methods. Public fields still need `@gProperty`. Properties behave like `@gProperty` accessors: `g_object_set` calls the setter and notifies when the value changed, calling the D setter doesn't notify.
+- Attributes win over flags: `@gMethod("name")`, `@gThrows(false)`, and `@gNoExport` to leave a member out.
+- A member whose types aren't supported is skipped with a compiler message by default (`GidSkip.Warn`). `GidSkip.Silent` skips without a message and `GidSkip.Error` stops the build. Explicit attributes on unsupported types are always errors.
+- Overloads are always an error, also with `GidSkip.Silent`, so that a new overload can't silently replace an exported function. Give each overload a distinct `@gMethod("name")`, or mark all but one `@gNoExport`.
+
 **Name collisions.** If the GType name is already registered (by another library, or by two D classes with the same name), registration fails for both `GObjectSubclass` and `GObjectExport`: a "Gid" critical names the GType and the D class (`fullyQualifiedName`) and suggests passing a different `typeName` (or `GObjectExport` name or ns) or renaming the class. `_getGType` stays 0 and the critical is not repeated. Two exported get_type functions with the same symbol name are a link or `dlsym` problem, as in C.
 
 **D runtime initialization** (`gid.gid.gidInitRuntime`). It is idempotent and thread safe (an atomic flag plus a mutex), and calls `Runtime.initialize()` once. `rt_init` is reference counted: in a D program that loads a D library (or links it), `rt_init` only increments the count. The runtime is never terminated by gid (no `rt_term`) for these reasons:

@@ -118,7 +118,7 @@ mixin template GObjectSubclass(string typeName = null)
  */
 mixin template _GObjectVfuncMembers(T, string mem)
 {
-  mixin("final imported!\"gid.gobject2.dig\"._dVfuncReturn!(T, mem) " ~ imported!"gid.gobject2.dig"._dVfuncInvokerName(mem)
+  mixin("@(imported!\"gid.gobject2.dig_method\"._gidGenerated) final imported!\"gid.gobject2.dig\"._dVfuncReturn!(T, mem) " ~ imported!"gid.gobject2.dig"._dVfuncInvokerName(mem)
     ~ "(imported!\"gid.gobject2.dig\"._dVfuncParams!(T, mem) args) { return imported!\"gid.gobject2.dig\"._dVfuncInvoke!(T, mem)(this, args); }");
   mixin("final imported!\"gid.gobject2.dig\"._dVfuncReturn!(T, mem) _gidVfuncImpl_" ~ imported!"gid.gobject2.dig"._dVfuncInvokerName(mem)
     ~ "(imported!\"gid.gobject2.dig\"._dVfuncParams!(T, mem) args) { return this." ~ mem ~ "(args); }");
@@ -129,25 +129,25 @@ mixin template _GObjectVfuncMembers(T, string mem)
  */
 mixin template _GObjectSignalMembers(T, string mem)
 {
-  mixin("final imported!\"gid.gobject2.dig\"._dSignalReturn!(T, mem) emit"
+  mixin("@(imported!\"gid.gobject2.dig_method\"._gidGenerated) final imported!\"gid.gobject2.dig\"._dSignalReturn!(T, mem) emit"
     ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
     ~ "(imported!\"gid.gobject2.dig\"._dSignalParams!(T, mem) args) { return"
     ~ " imported!\"gid.gobject2.dig\"._dSignalEmit!(T, mem)(this, null, args); }");
 
   static if (imported!"gid.gobject2.dig"._dSignalDetailed!(T, mem))
   {
-    mixin("final imported!\"gid.gobject2.dig\"._dSignalReturn!(T, mem) emit"
+    mixin("@(imported!\"gid.gobject2.dig_method\"._gidGenerated) final imported!\"gid.gobject2.dig\"._dSignalReturn!(T, mem) emit"
       ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
       ~ "(string detail, imported!\"gid.gobject2.dig\"._dSignalParams!(T, mem) args) { return"
       ~ " imported!\"gid.gobject2.dig\"._dSignalEmit!(T, mem)(this, detail, args); }");
 
-    mixin("final imported!\"gid.core.basictypes\".gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
+    mixin("@(imported!\"gid.gobject2.dig_method\"._gidGenerated) final imported!\"gid.core.basictypes\".gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
       ~ "(C)(string detail, C callback, imported!\"std.typecons\".Flag!\"After\" after ="
       ~ " imported!\"std.typecons\".No.After) nothrow if (imported!\"std.traits\".isCallable!C) { return"
       ~ " imported!\"gid.gobject2.dig\"._dSignalConnect!(T, mem, C)(this, detail, callback, after); }");
   }
 
-  mixin("final imported!\"gid.core.basictypes\".gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
+  mixin("@(imported!\"gid.gobject2.dig_method\"._gidGenerated) final imported!\"gid.core.basictypes\".gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
     ~ "(C)(C callback, imported!\"std.typecons\".Flag!\"After\" after = imported!\"std.typecons\".No.After)"
     ~ " nothrow if (imported!\"std.traits\".isCallable!C) { return"
     ~ " imported!\"gid.gobject2.dig\"._dSignalConnect!(T, mem, C)(this, null, callback, after); }");
@@ -159,29 +159,45 @@ mixin template _GObjectSignalMembers(T, string mem)
  *
  * For example, `mixin GObjectNamespace!("Mylib");` names types `MylibFoo` and C functions `mylib_foo_...`.
  *
+ * After the namespace you can pass, in any order: the C function prefix, GidExport flags and a GidSkip mode. The
+ * flags and mode are the defaults of the GObjectExport classes that see this declaration; a class that passes its own
+ * GidExport flags or GidSkip mode replaces them.
+ *
  * Params:
  *   ns = Namespace ("Mylib")
- *   symbolPrefix = C function prefix, or null to derive one from the namespace ("MyLib" becomes "my_lib"; pass
- *     "mylib" if that is what you want)
+ *   Options = C function prefix (null to derive one from the namespace: "MyLib" becomes "my_lib"; pass "mylib" if
+ *     that is what you want), GidExport flags, GidSkip mode
  *
  * Example:
  * ---
  * mixin GObjectNamespace!("Mylib");
+ * mixin GObjectNamespace!("MyLib", "mylib", GidExport.All | GidExport.Throws, GidSkip.Error); // Or with defaults
  * ---
  */
-mixin template GObjectNamespace(string ns, string symbolPrefix = null)
+mixin template GObjectNamespace(string ns, Options...)
 {
+  private enum _gidNamespaceOptions = imported!"gid.gobject2.dig_method"._dParseExportOptions!("GObjectNamespace", 1,
+    Options);
+  static assert(_gidNamespaceOptions.error is null, _gidNamespaceOptions.error);
+
   static assert(imported!"gid.gobject2.dig"._isValidNamespace(ns), "GObjectNamespace: invalid namespace \""
     ~ ns ~ "\" (must start with an ASCII letter, followed by letters and digits)");
-  static assert(symbolPrefix.length == 0 || imported!"gid.gobject2.dig"._isValidSymbolPrefix(symbolPrefix),
-    "GObjectNamespace: invalid C symbol prefix \"" ~ symbolPrefix ~ "\"");
+  static assert(_gidNamespaceOptions.str(0).length == 0
+    || imported!"gid.gobject2.dig"._isValidSymbolPrefix(_gidNamespaceOptions.str(0)),
+    "GObjectNamespace: invalid C symbol prefix \"" ~ _gidNamespaceOptions.str(0) ~ "\"");
 
   /// GObject namespace of exported types (see GObjectExport)
   enum string _gidNamespace = ns;
 
   /// C symbol prefix of exported types
-  enum string _gidSymbolPrefix = symbolPrefix.length > 0 ? symbolPrefix
+  enum string _gidSymbolPrefix = _gidNamespaceOptions.str(0).length > 0 ? _gidNamespaceOptions.str(0)
     : imported!"gid.gobject2.dig"._snakeCaseName(ns);
+
+  /// Default GidExport flags of exported types
+  enum imported!"gid.gobject2.dig_method".GidExport _gidNamespaceExportFlags = _gidNamespaceOptions.flags;
+
+  /// Default GidSkip mode of exported types
+  enum imported!"gid.gobject2.dig_method".GidSkip _gidNamespaceExportSkip = _gidNamespaceOptions.skip;
 }
 
 /**
@@ -202,10 +218,14 @@ mixin template GObjectNamespace(string ns, string symbolPrefix = null)
  *   instance (D, C, or another language)
  * - one function per method, static method or constructor marked `@gMethod` or `@gConstructor` (see gMethod)
  *
+ * Pass GidExport flags to also export public members without attributes, for example `GidExport.All` (or use
+ * GObjectExportAll) for public methods, static methods and D `@property` accessors. Without flags, the defaults of
+ * GObjectNamespace are used, or only members with attributes.
+ *
  * Params:
- *   ns = Namespace, or null to use the one declared with GObjectNamespace
- *   name = Type name without the namespace, or null to use the D class name
- *   cSymbol = Name of the exported C get_type function, or null for the default
+ *   Options = Up to three strings, in order: the namespace (null to use the one declared with GObjectNamespace),
+ *     the type name without the namespace (null to use the D class name) and the name of the exported C get_type
+ *     function (null for the default). In any position: GidExport flags and a GidSkip mode.
  *
  * Example:
  * ---
@@ -225,13 +245,45 @@ mixin template GObjectNamespace(string ns, string symbolPrefix = null)
  *     return a + b;
  *   }
  * }
+ *
+ * class Bar : gid.gobject2.object.ObjectWrap
+ * {
+ *   mixin GObjectExport!(GidExport.Methods | GidExport.Properties); // Type MylibBar
+ *
+ *   int sum(int a, int b) { return a + b; }  // C function int mylib_bar_sum(MylibBar *self, int a, int b)
+ *   @property int size() { return 1; }       // Read-only GObject property "size"
+ *   @gNoExport void debugDump() {}            // Not exported
+ * }
  * ---
  */
-mixin template GObjectExport(string ns = null, string name = null, string cSymbol = null)
+mixin template GObjectExport(Options...)
 {
-  mixin imported!"gid.gobject2.dig"._GObjectExportNames!(ns, name, "GObjectExport");
+  private enum _gidExportOptions = imported!"gid.gobject2.dig_method"._dParseExportOptions!("GObjectExport", 3,
+    Options);
+  static assert(_gidExportOptions.error is null, _gidExportOptions.error);
+
+  /// GidExport flags of the class: its options, otherwise the GObjectNamespace defaults
+  static if (_gidExportOptions.hasFlags)
+    enum imported!"gid.gobject2.dig_method".GidExport _gidExportFlags = _gidExportOptions.flags;
+  else static if (__traits(compiles, _gidNamespaceExportFlags))
+    enum imported!"gid.gobject2.dig_method".GidExport _gidExportFlags = _gidNamespaceExportFlags;
+  else
+    enum imported!"gid.gobject2.dig_method".GidExport _gidExportFlags = imported!"gid.gobject2.dig_method"
+      .GidExport.None;
+
+  /// GidSkip mode of the class
+  static if (_gidExportOptions.hasSkip)
+    enum imported!"gid.gobject2.dig_method".GidSkip _gidExportSkip = _gidExportOptions.skip;
+  else static if (__traits(compiles, _gidNamespaceExportSkip))
+    enum imported!"gid.gobject2.dig_method".GidSkip _gidExportSkip = _gidNamespaceExportSkip;
+  else
+    enum imported!"gid.gobject2.dig_method".GidSkip _gidExportSkip = imported!"gid.gobject2.dig_method"
+      .GidSkip.Warn;
+
+  mixin imported!"gid.gobject2.dig"._GObjectExportNames!(_gidExportOptions.str(0), _gidExportOptions.str(1),
+    "GObjectExport");
   mixin imported!"gid.gobject2.dig".GObjectSubclass!(_gidExportNs ~ _gidExportName);
-  mixin imported!"gid.gobject2.dig"._GObjectExportEntryPoints!cSymbol;
+  mixin imported!"gid.gobject2.dig"._GObjectExportEntryPoints!(_gidExportOptions.str(2));
 
   static if (imported!"gid.gobject2.dig"._dHasPublicDefaultCtor!(typeof(this)))
   {
@@ -258,6 +310,18 @@ mixin template GObjectExport(string ns = null, string name = null, string cSymbo
         _gidExportM.overload) is null)
       mixin imported!"gid.gobject2.dig_method"._GObjectExportMethod!(typeof(this), _gidExportM.mem,
         _gidExportM.overload, _gidExportK, _gidExportSymbolBase ~ "_" ~ _gidExportM.name);
+  }
+
+  // Auto-export: overloads and skipped members
+  static assert(imported!"gid.gobject2.dig_method"._dExportOverloadProblem!(typeof(this)) is null,
+    imported!"gid.gobject2.dig_method"._dExportOverloadProblem!(typeof(this)));
+
+  static foreach (_gidExportSkipMsg; imported!"gid.gobject2.dig_method"._dExportSkipped!(typeof(this)))
+  {
+    static if (_gidExportSkip == imported!"gid.gobject2.dig_method".GidSkip.Warn)
+      pragma(msg, "Warning: " ~ _gidExportSkipMsg);
+    else static if (_gidExportSkip == imported!"gid.gobject2.dig_method".GidSkip.Error)
+      static assert(0, _gidExportSkipMsg);
   }
 
   static assert(imported!"gid.gobject2.dig_method"._dExportNamesProblem!(typeof(this),
