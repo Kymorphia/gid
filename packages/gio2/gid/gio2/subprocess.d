@@ -82,6 +82,7 @@ import gid.gobject2.object;
     account the fact that your program will not automatically be killed
     if it tries to write to `stdout` after it has been closed.
 */
+@gidGir("Subprocess")
 class Subprocess : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
 {
 

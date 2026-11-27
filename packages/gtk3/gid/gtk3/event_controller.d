@@ -16,6 +16,7 @@ import gid.gtk3.widget;
     controllers. Those react to a series of #GdkEvents, and possibly trigger
     actions as a consequence of those.
 */
+@gidGir("EventController", "EventControllerClass")
 class EventController : gid.gobject2.object.ObjectWrap
 {
 

@@ -23,6 +23,7 @@ import gid.gtk4.widget;
     [gid.gtk4.flow_box.FlowBox] will automatically wrap its children in a [gid.gtk4.flow_box_child.FlowBoxChild]
     when necessary.
 */
+@gidGir("FlowBoxChild", "FlowBoxChildClass")
 class FlowBoxChild : gid.gtk4.widget.Widget
 {
 

@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     Determines if a string matches a file attribute.
 */
+@gidGir("FileAttributeMatcher")
 class FileAttributeMatcher : gid.gobject2.boxed.BoxedWrap!(g_file_attribute_matcher_get_type)
 {
 

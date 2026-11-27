@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to a scrolling motion.
 */
+@gidGir("ScrollEvent")
 class ScrollEvent : gid.gdk4.event.Event
 {
 

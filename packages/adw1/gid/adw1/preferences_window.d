@@ -44,6 +44,7 @@ import gid.gtk4.widget;
 
     Deprecated: Use [gid.adw1.preferences_dialog.PreferencesDialog].
 */
+@gidGir("PreferencesWindow", "PreferencesWindowClass")
 class PreferencesWindow : gid.adw1.window.Window
 {
 

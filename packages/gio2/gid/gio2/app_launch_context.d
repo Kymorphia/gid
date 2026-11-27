@@ -18,6 +18,7 @@ import gid.gobject2.object;
     handle for instance startup notification and launching the new application
     on the same screen as the launching window.
 */
+@gidGir("AppLaunchContext", "AppLaunchContextClass")
 class AppLaunchContext : gid.gobject2.object.ObjectWrap
 {
 

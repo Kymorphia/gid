@@ -21,6 +21,7 @@ import gid.gobject2.object;
     [gid.gio2.dbus_action_group.DBusActionGroup] can be used as a proxy for an action group
     that is exported over D-Bus with [gid.gio2.dbus_connection.DBusConnection.exportActionGroup].
 */
+@gidGir("DBusActionGroup")
 class DBusActionGroup : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.ActionGroup, gid.gio2.remote_action_group.RemoteActionGroup
 {
 

@@ -11,6 +11,7 @@ import gid.pango1.types;
     A [gid.pango1.glyph_info.GlyphInfo] structure represents a single glyph with
     positioning information and visual attributes.
 */
+@gidGir("GlyphInfo")
 class GlyphInfo : StructWrap!(PangoGlyphInfo)
 {
   /**

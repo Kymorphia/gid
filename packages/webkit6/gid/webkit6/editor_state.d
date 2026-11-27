@@ -17,6 +17,7 @@ import gid.webkit6.types;
     Use [gid.webkit6.web_view.WebView.getEditorState] to get the WebKitEditorState
     of a #WebKitWebView.
 */
+@gidGir("EditorState", "EditorStateClass")
 class EditorState : gid.gobject2.object.ObjectWrap
 {
 

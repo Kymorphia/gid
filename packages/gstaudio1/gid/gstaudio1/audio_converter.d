@@ -20,6 +20,7 @@ import gid.gstaudio1.types;
     
      * audio channels and channel layout
 */
+@gidGir("AudioConverter")
 class AudioConverter : gid.gobject2.boxed.BoxedWrap!(gst_audio_converter_get_type)
 {
 

@@ -22,6 +22,7 @@ import gid.gtk3.types;
     
     GtkVSeparator has been deprecated, use #GtkSeparator instead.
 */
+@gidGir("VSeparator", "VSeparatorClass")
 class VSeparator : gid.gtk3.separator.Separator
 {
 

@@ -84,6 +84,7 @@ import gid.gtk3.window_group;
     GtkWindow adds the .titlebar and .default-decoration style classes to the
     widget that is added as a titlebar child.
 */
+@gidGir("Window", "WindowClass")
 class Window : gid.gtk3.bin.Bin
 {
 

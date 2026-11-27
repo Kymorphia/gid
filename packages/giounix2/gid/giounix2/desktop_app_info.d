@@ -23,6 +23,7 @@ import gid.gobject2.object;
     GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
     file or the `GioUnix-2.0` GIR namespace when using it.
 */
+@gidGir("DesktopAppInfo", "DesktopAppInfoClass")
 class DesktopAppInfo : gid.gobject2.object.ObjectWrap, gid.gio2.app_info.AppInfo
 {
 

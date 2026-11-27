@@ -17,6 +17,7 @@ import gid.gstaudio1.types;
     Applications will be informed of the available tracks via a TOC message
     on the pipeline's #GstBus instead.
 */
+@gidGir("AudioCdSrcTrack")
 class AudioCdSrcTrack : StructWrap!(GstAudioCdSrcTrack)
 {
   /**

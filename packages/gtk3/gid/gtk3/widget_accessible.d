@@ -12,6 +12,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("WidgetAccessible", "WidgetAccessibleClass")
 class WidgetAccessible : gid.gtk3.accessible.Accessible, gid.atk1.component.Component
 {
 

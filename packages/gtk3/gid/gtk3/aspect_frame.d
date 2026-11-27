@@ -27,6 +27,7 @@ import gid.gtk3.types;
     
     GtkAspectFrame uses a CSS node with name frame.
 */
+@gidGir("AspectFrame", "AspectFrameClass")
 class AspectFrame : gid.gtk3.frame.Frame
 {
 

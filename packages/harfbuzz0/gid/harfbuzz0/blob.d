@@ -13,6 +13,7 @@ import gid.harfbuzz0.types;
     data and facilitates its lifecycle management between
     a client program and HarfBuzz.
 */
+@gidGir("blob_t")
 class Blob : gid.gobject2.boxed.BoxedWrap!(hb_gobject_blob_get_type)
 {
 

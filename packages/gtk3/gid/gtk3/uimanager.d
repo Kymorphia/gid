@@ -244,6 +244,7 @@ import gid.gtk3.widget;
     </object>
     ```
 */
+@gidGir("UIManager", "UIManagerClass")
 class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 {
 

@@ -33,6 +33,7 @@ import gid.gobject2.object;
     GIO interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file
     when using it. This is no longer necessary since GLib 2.72.
 */
+@gidGir("UnixSocketAddress", "UnixSocketAddressClass")
 class UnixSocketAddress : gid.gio2.socket_address.SocketAddress
 {
 

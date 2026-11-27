@@ -12,6 +12,7 @@ import gid.gstbase1.types;
     from a memory buffer. It provides functions for reading any number of bits
     into 8, 16, 32 and 64 bit variables.
 */
+@gidGir("BitReader")
 class BitReader : StructWrap!(GstBitReader)
 {
   /**

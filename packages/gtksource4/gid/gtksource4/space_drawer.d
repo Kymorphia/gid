@@ -13,6 +13,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("SpaceDrawer", "SpaceDrawerClass")
 class SpaceDrawer : gid.gobject2.object.ObjectWrap
 {
 

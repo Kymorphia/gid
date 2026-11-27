@@ -29,6 +29,7 @@ import gid.gtk3.types;
     
     The GtkRevealer widget was added in GTK+ 3.10.
 */
+@gidGir("Revealer", "RevealerClass")
 class Revealer : gid.gtk3.bin.Bin
 {
 

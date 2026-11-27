@@ -141,6 +141,7 @@ import gid.gtk3.widget;
     and include your widgets in it.  Then, set the container as
     the whole extra widget.
 */
+@gidGir("FileChooser")
 interface FileChooser : GidWrap
 {
 

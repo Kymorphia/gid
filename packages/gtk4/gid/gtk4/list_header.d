@@ -17,6 +17,7 @@ import gid.gtk4.widget;
     objects via their factory, but provide a different set of properties suitable
     for managing the header instead of individual items.
 */
+@gidGir("ListHeader", "ListHeaderClass")
 class ListHeader : gid.gobject2.object.ObjectWrap
 {
 

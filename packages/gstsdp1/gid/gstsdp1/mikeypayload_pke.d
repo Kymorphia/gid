@@ -14,6 +14,7 @@ import gid.gstsdp1.types;
     transport payload.  The encryption algorithm used is implicit from
     the certificate/public key used.
 */
+@gidGir("MIKEYPayloadPKE")
 class MIKEYPayloadPKE : StructWrap!(GstMIKEYPayloadPKE)
 {
   /**

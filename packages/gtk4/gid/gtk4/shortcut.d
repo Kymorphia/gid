@@ -29,6 +29,7 @@ import gid.gtk4.types;
     to work with shortcuts, either by providing informational strings
     for display purposes or by allowing shortcuts to be configured.
 */
+@gidGir("Shortcut", "ShortcutClass")
 class Shortcut : gid.gobject2.object.ObjectWrap
 {
 

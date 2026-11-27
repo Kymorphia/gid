@@ -199,6 +199,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
 */
+@gidGir("FileChooserDialog")
 class FileChooserDialog : gid.gtk4.dialog.Dialog, gid.gtk4.file_chooser.FileChooser
 {
 

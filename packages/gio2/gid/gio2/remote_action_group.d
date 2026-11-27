@@ -34,6 +34,7 @@ import gid.gobject2.gid_builder;
     provides a mechanism by which to receive platform data for action
     invocations that arrive by way of D-Bus.
 */
+@gidGir("RemoteActionGroup", "RemoteActionGroupInterface")
 interface RemoteActionGroup : gid.gio2.action_group.ActionGroup
 {
 

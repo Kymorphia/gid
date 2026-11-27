@@ -19,6 +19,7 @@ import gid.gst1.types;
     Strings in structures must be ASCII or UTF-8 encoded. Other encodings are
     not allowed. Strings must not be empty or null.
 */
+@gidGir("TagList")
 class TagList : gid.gobject2.boxed.BoxedWrap!(gst_tag_list_get_type)
 {
 

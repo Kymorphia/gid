@@ -12,6 +12,7 @@ import gid.gtksource4.style_scheme;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("StyleSchemeChooser", "StyleSchemeChooserInterface")
 interface StyleSchemeChooser : GidWrap
 {
 

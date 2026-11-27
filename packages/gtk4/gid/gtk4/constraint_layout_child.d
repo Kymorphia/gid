@@ -12,6 +12,7 @@ import gid.gtk4.types;
 /**
     [gid.gtk4.layout_child.LayoutChild] subclass for children in a [gid.gtk4.constraint_layout.ConstraintLayout].
 */
+@gidGir("ConstraintLayoutChild", "ConstraintLayoutChildClass")
 class ConstraintLayoutChild : gid.gtk4.layout_child.LayoutChild
 {
 

@@ -18,6 +18,7 @@ import gid.soup3.types;
     [gid.soup3.cookie_jar_text.CookieJarText] is a [gid.soup3.cookie_jar.CookieJar] that reads cookies from and writes
     them to a text file in format similar to Mozilla's "cookies.txt".
 */
+@gidGir("CookieJarText", "CookieJarTextClass")
 class CookieJarText : gid.soup3.cookie_jar.CookieJar
 {
 

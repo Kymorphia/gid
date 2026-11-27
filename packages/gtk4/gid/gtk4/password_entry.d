@@ -57,6 +57,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.password_entry.PasswordEntry] uses the [gid.gtk4.types.AccessibleRole.TextBox] role.
 */
+@gidGir("PasswordEntry", "PasswordEntryClass")
 class PasswordEntry : gid.gtk4.widget.Widget, gid.gtk4.editable.Editable
 {
 

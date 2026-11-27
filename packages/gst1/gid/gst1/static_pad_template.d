@@ -15,6 +15,7 @@ import gid.gst1.types;
 /**
     Structure describing the #GstStaticPadTemplate.
 */
+@gidGir("StaticPadTemplate")
 class StaticPadTemplate : gid.gobject2.boxed.BoxedWrap!(gst_static_pad_template_get_type)
 {
   /**

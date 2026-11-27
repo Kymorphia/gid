@@ -72,6 +72,7 @@ import gid.gtk3.widget;
     has a submenu, it gets another CSS node with name arrow, which has
     the .left or .right style class.
 */
+@gidGir("MenuItem", "MenuItemClass")
 class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activatable.Activatable
 {
 

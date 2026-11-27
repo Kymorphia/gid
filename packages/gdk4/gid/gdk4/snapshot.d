@@ -14,6 +14,7 @@ import gid.gobject2.object;
     
     The subclass of [gid.gdk4.snapshot.Snapshot] used by GTK is [GtkSnapshot](../gtk4/class.Snapshot.html).
 */
+@gidGir("Snapshot", "SnapshotClass")
 class Snapshot : gid.gobject2.object.ObjectWrap
 {
 

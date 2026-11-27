@@ -53,6 +53,7 @@ import gid.gtk4.window;
         implemented according to the design of each platform and/or
         application requiring them.
 */
+@gidGir("AppChooserDialog")
 class AppChooserDialog : gid.gtk4.dialog.Dialog, gid.gtk4.app_chooser.AppChooser
 {
 

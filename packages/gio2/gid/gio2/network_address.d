@@ -24,6 +24,7 @@ import gid.gobject2.object;
     See [gid.gio2.socket_connectable.SocketConnectable] for an example of using the connectable
     interface.
 */
+@gidGir("NetworkAddress", "NetworkAddressClass")
 class NetworkAddress : gid.gobject2.object.ObjectWrap, gid.gio2.socket_connectable.SocketConnectable
 {
 

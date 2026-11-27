@@ -16,6 +16,7 @@ import gid.pango1.types;
     available on the system and also for specifying the characteristics of
     a font to load.
 */
+@gidGir("FontDescription")
 class FontDescription : gid.gobject2.boxed.BoxedWrap!(pango_font_description_get_type)
 {
 

@@ -49,6 +49,7 @@ import gid.gobject2.boxed;
     the on disk representation, using [gid.glib2.bookmark_file.BookmarkFile.toData] or
     [gid.glib2.bookmark_file.BookmarkFile.toFile].
 */
+@gidGir("BookmarkFile")
 class BookmarkFile : gid.gobject2.boxed.BoxedWrap!(g_bookmark_file_get_type)
 {
 

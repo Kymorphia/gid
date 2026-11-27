@@ -12,6 +12,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.buildable_parse_context.BuildableParseContext] is an opaque struct.
 */
+@gidGir("BuildableParseContext")
 class BuildableParseContext : OpaqueWrap!(GtkBuildableParseContext*, void, void)
 {
 

@@ -18,6 +18,7 @@ import gid.gtksource4.file;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("FileSaver", "FileSaverClass")
 class FileSaver : gid.gobject2.object.ObjectWrap
 {
 

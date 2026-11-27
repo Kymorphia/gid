@@ -42,6 +42,7 @@ import gid.gsttag1.types;
      or not. A class parsing ID3v1 tags, for example, would set min_end_size to
      128 bytes.
 */
+@gidGir("TagDemux", "TagDemuxClass")
 class TagDemux : gid.gst1.element.Element
 {
 

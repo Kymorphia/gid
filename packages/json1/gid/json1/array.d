@@ -28,6 +28,7 @@ import gid.json1.types;
     
     To retrieve the length of the array, use [gid.json1.array.Array.getLength].
 */
+@gidGir("Array")
 class Array : gid.gobject2.boxed.BoxedWrap!(json_array_get_type)
 {
 

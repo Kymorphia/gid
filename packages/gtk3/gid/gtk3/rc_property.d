@@ -14,6 +14,7 @@ import gid.gtk3.types;
 /**
     Deprecated
 */
+@gidGir("RcProperty")
 class RcProperty : StructWrap!(GtkRcProperty)
 {
   /**

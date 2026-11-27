@@ -18,6 +18,7 @@ import gid.gtk3.types;
     own window. It is useful since it allows you to catch events for widgets
     which do not have their own window.
 */
+@gidGir("EventBox", "EventBoxClass")
 class EventBox : gid.gtk3.bin.Bin
 {
 

@@ -24,6 +24,7 @@ import gid.gtk3.types;
     
     Printing support has been added in GTK+ 2.10.
 */
+@gidGir("PaperSize")
 class PaperSize : gid.gobject2.boxed.BoxedWrap!(gtk_paper_size_get_type)
 {
 

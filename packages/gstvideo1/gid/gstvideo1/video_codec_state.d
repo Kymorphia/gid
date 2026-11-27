@@ -24,6 +24,7 @@ import gid.gstvideo1.video_mastering_display_info;
     [gid.gstvideo1.video_decoder.VideoDecoder.setOutputState] or
     [gid.gstvideo1.video_encoder.VideoEncoder.setOutputState] methods.
 */
+@gidGir("VideoCodecState")
 class VideoCodecState : gid.gobject2.boxed.BoxedWrap!(gst_video_codec_state_get_type)
 {
   /**

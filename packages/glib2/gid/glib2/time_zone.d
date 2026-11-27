@@ -36,6 +36,7 @@ import gid.gobject2.boxed;
     that some properties (like the abbreviation) change between intervals
     without other properties changing.
 */
+@gidGir("TimeZone")
 class TimeZone : gid.gobject2.boxed.BoxedWrap!(g_time_zone_get_type)
 {
 

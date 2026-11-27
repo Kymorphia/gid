@@ -28,6 +28,7 @@ import gid.gstaudio1.types;
     together with #GstAudioBaseSrc using a default implementation of a
     #GstAudioRingBuffer that uses threads.
 */
+@gidGir("AudioSrc", "AudioSrcClass")
 class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
 {
 

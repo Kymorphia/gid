@@ -31,6 +31,7 @@ import gid.gobject2.object;
     class is registered with the [gid.gobject2.types.size_t] type system before calling
     [gid.gio2.socket.Socket.receiveMessage] to read such a message.
 */
+@gidGir("SocketControlMessage", "SocketControlMessageClass")
 class SocketControlMessage : gid.gobject2.object.ObjectWrap
 {
 

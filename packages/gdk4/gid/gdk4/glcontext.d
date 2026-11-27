@@ -63,6 +63,7 @@ import gid.gobject2.object;
     [gid.gdk4.glcontext.GLContext.getCurrent]; you can also unset any [gid.gdk4.glcontext.GLContext]
     that is currently set by calling [gid.gdk4.glcontext.GLContext.clearCurrent].
 */
+@gidGir("GLContext")
 class GLContext : gid.gdk4.draw_context.DrawContext
 {
 

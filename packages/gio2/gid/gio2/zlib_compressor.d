@@ -16,6 +16,7 @@ import gid.gobject2.object;
     [gid.gio2.zlib_compressor.ZlibCompressor] is an implementation of [gid.gio2.converter.Converter] that
     compresses data using zlib.
 */
+@gidGir("ZlibCompressor", "ZlibCompressorClass")
 class ZlibCompressor : gid.gobject2.object.ObjectWrap, gid.gio2.converter.Converter
 {
 

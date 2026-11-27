@@ -43,6 +43,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gtk4.selection_model.SelectionModel] instead
 */
+@gidGir("TreeSelection")
 class TreeSelection : gid.gobject2.object.ObjectWrap
 {
 

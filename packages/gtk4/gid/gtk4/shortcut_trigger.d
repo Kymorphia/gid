@@ -26,6 +26,7 @@ import gid.gtk4.types;
     properties during construction. If you want to change a trigger, you
     have to replace it with a new one.
 */
+@gidGir("ShortcutTrigger", "ShortcutTriggerClass")
 class ShortcutTrigger : gid.gobject2.object.ObjectWrap
 {
 

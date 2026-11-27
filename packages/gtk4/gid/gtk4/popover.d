@@ -120,6 +120,7 @@ import gid.gtk4.widget;
     solid, no border-radius, only one border width (border-bottom-width is
     used) and no box-shadow.
 */
+@gidGir("Popover", "PopoverClass")
 class Popover : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.shortcut_manager.ShortcutManager
 {
 

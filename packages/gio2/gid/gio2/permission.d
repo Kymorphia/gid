@@ -29,6 +29,7 @@ import gid.gobject2.object;
     unlock” button in a dialog and to provide the mechanism to invoke
     when that button is clicked.
 */
+@gidGir("Permission", "PermissionClass")
 class Permission : gid.gobject2.object.ObjectWrap
 {
 

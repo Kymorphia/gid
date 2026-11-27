@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     An RFC 2822 Mailbox address.
 */
+@gidGir("InternetAddressMailbox", "InternetAddressMailboxClass")
 class InternetAddressMailbox : gid.gmime3.internet_address.InternetAddress
 {
 

@@ -31,6 +31,7 @@ import gid.gst1.types;
     }
     ```
 */
+@gidGir("DynamicTypeFactory", "DynamicTypeFactoryClass")
 class DynamicTypeFactory : gid.gst1.plugin_feature.PluginFeature
 {
 

@@ -64,6 +64,7 @@ import gid.gtk4.constraint_target_mixin;
       <img src="button-row-destructive-action.png" alt="button-row-destructive-action">
     </picture>
 */
+@gidGir("ButtonRow", "ButtonRowClass")
 class ButtonRow : gid.adw1.preferences_row.PreferencesRow
 {
 

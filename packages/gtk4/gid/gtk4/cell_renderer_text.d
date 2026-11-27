@@ -28,6 +28,7 @@ import gid.pango1.types;
     Deprecated: List views use widgets to display their contents.
         You should use [gid.gtk4.inscription.Inscription] or [gid.gtk4.label.Label] instead
 */
+@gidGir("CellRendererText", "CellRendererTextClass")
 class CellRendererText : gid.gtk4.cell_renderer.CellRenderer
 {
 

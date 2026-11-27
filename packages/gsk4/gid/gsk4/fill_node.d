@@ -13,6 +13,7 @@ import gid.gsk4.types;
     A render node filling the area given by [gid.gsk4.path.Path]
     and [gid.gsk4.types.FillRule] with the child node.
 */
+@gidGir("FillNode")
 class FillNode : gid.gsk4.render_node.RenderNode
 {
 

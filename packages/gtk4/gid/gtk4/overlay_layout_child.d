@@ -12,6 +12,7 @@ import gid.gtk4.types;
 /**
     [gid.gtk4.layout_child.LayoutChild] subclass for children in a [gid.gtk4.overlay_layout.OverlayLayout].
 */
+@gidGir("OverlayLayoutChild", "OverlayLayoutChildClass")
 class OverlayLayoutChild : gid.gtk4.layout_child.LayoutChild
 {
 

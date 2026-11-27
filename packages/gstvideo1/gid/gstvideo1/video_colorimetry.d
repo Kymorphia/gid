@@ -10,6 +10,7 @@ import gid.gstvideo1.types;
 /**
     Structure describing the color info.
 */
+@gidGir("VideoColorimetry")
 struct VideoColorimetry
 {
   /**

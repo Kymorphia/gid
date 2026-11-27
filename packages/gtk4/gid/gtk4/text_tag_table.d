@@ -36,6 +36,7 @@ import gid.gtk4.types;
     </object>
     ```
 */
+@gidGir("TextTagTable")
 class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable
 {
 

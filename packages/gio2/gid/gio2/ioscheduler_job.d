@@ -14,6 +14,7 @@ import gid.glib2.types;
     Deprecated: Use [gid.glib2.thread_pool.ThreadPool] or
         [gid.gio2.task.Task.runInThread]
 */
+@gidGir("IOSchedulerJob")
 class IOSchedulerJob : OpaqueWrap!(GIOSchedulerJob*, void, void)
 {
 

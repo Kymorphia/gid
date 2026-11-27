@@ -30,6 +30,7 @@ import gid.gstpbutils1.types;
     #GstDiscovererAudioInfo sub-stream and a #GstDiscovererVideoInfo sub-stream
     for the audio and video streams respectively.
 */
+@gidGir("DiscovererStreamInfo")
 class DiscovererStreamInfo : gid.gobject2.object.ObjectWrap
 {
 

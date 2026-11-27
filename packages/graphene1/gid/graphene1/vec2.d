@@ -14,6 +14,7 @@ import gid.graphene1.types;
     The contents of the #graphene_vec2_t structure are private and should
     never be accessed directly.
 */
+@gidGir("Vec2")
 class Vec2 : gid.gobject2.boxed.BoxedWrap!(graphene_vec2_get_type)
 {
   /**

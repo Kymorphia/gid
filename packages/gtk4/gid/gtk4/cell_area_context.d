@@ -26,6 +26,7 @@ import gid.gtk4.types;
 
     Deprecated: This object will be removed in GTK 5
 */
+@gidGir("CellAreaContext", "CellAreaContextClass")
 class CellAreaContext : gid.gobject2.object.ObjectWrap
 {
 

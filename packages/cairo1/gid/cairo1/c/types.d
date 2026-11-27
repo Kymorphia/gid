@@ -5,6 +5,12 @@ public import gid.core.basictypes;
 public import gid.gobject2.c.types;
 public import gid.freetype2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "cairo";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     #cairo_bool_t is used for boolean values. Returns of type
     #cairo_bool_t will always be either 0 or 1, but testing against
@@ -32,6 +38,7 @@ alias cairo_bool_t = int;
     The interpretation of @CAIRO_ANTIALIAS_DEFAULT is left entirely up to
     the backend, typically this will be similar to @CAIRO_ANTIALIAS_GOOD.
 */
+@gidGir("Antialias")
 enum cairo_antialias_t
 {
   /**
@@ -83,6 +90,7 @@ enum cairo_antialias_t
     presentation, and non-color fonts are not affected by this font
     option.
 */
+@gidGir("ColorMode")
 enum cairo_color_mode_t
 {
   /**
@@ -114,6 +122,7 @@ enum cairo_color_mode_t
     values distinct from #cairo_format_t values so that the
     implementation can detect the error if users confuse the two types.
 */
+@gidGir("Content")
 enum cairo_content_t
 {
   /**
@@ -150,6 +159,7 @@ enum cairo_content_t
     
     New entries may be added in future versions.
 */
+@gidGir("DeviceType")
 enum cairo_device_type_t
 {
   /**
@@ -193,6 +203,7 @@ enum cairo_device_type_t
     As of Pixman 0.40, FAST corresponds to a 8x8 ordered bayer noise and GOOD
     and BEST use an ordered 64x64 precomputed blue noise.
 */
+@gidGir("Dither")
 enum cairo_dither_t
 {
   /**
@@ -234,6 +245,7 @@ enum cairo_dither_t
     
     New entries may be added in future versions.
 */
+@gidGir("Extend")
 enum cairo_extend_t
 {
   /**
@@ -275,6 +287,7 @@ enum cairo_extend_t
     
     New entries may be added in future versions.
 */
+@gidGir("FillRule")
 enum cairo_fill_rule_t
 {
   /**
@@ -301,6 +314,7 @@ enum cairo_fill_rule_t
     [gid.cairo1.pattern.Pattern.setFilter] for indicating the desired filter to be
     used with a particular pattern.
 */
+@gidGir("Filter")
 enum cairo_filter_t
 {
   /**
@@ -341,6 +355,7 @@ enum cairo_filter_t
 /**
     Specifies variants of a font face based on their slant.
 */
+@gidGir("FontSlant")
 enum cairo_font_slant_t
 {
   /**
@@ -388,6 +403,7 @@ enum cairo_font_slant_t
     
     New entries may be added in future versions.
 */
+@gidGir("FontType")
 enum cairo_font_type_t
 {
   /**
@@ -420,6 +436,7 @@ enum cairo_font_type_t
 /**
     Specifies variants of a font face based on their weight.
 */
+@gidGir("FontWeight")
 enum cairo_font_weight_t
 {
   /**
@@ -439,6 +456,7 @@ enum cairo_font_weight_t
     
     New entries may be added in future versions.
 */
+@gidGir("Format")
 enum cairo_format_t
 {
   /**
@@ -493,6 +511,7 @@ enum cairo_format_t
     letter and line spacing, however it also means that text
     will be laid out differently at different zoom factors.
 */
+@gidGir("HintMetrics")
 enum cairo_hint_metrics_t
 {
   /**
@@ -522,6 +541,7 @@ enum cairo_hint_metrics_t
     
     New entries may be added in future versions.
 */
+@gidGir("HintStyle")
 enum cairo_hint_style_t
 {
   /**
@@ -560,6 +580,7 @@ enum cairo_hint_style_t
     
     The default line cap style is [gid.cairo1.types.LineCap.Butt].
 */
+@gidGir("LineCap")
 enum cairo_line_cap_t
 {
   /**
@@ -583,6 +604,7 @@ enum cairo_line_cap_t
     
     The default line join style is [gid.cairo1.types.LineJoin.Miter].
 */
+@gidGir("LineJoin")
 enum cairo_line_join_t
 {
   /**
@@ -623,6 +645,7 @@ enum cairo_line_join_t
     the mathematical definitions, see
     <ulink url="https://cairographics.org/operators/">https://cairographics.org/operators/</ulink>.
 */
+@gidGir("Operator")
 enum cairo_operator_t
 {
   /**
@@ -805,6 +828,7 @@ enum cairo_operator_t
     of a path when represented as a #cairo_path_t.
     See #cairo_path_data_t for details.
 */
+@gidGir("PathDataType")
 enum cairo_path_data_type_t
 {
   /**
@@ -849,6 +873,7 @@ enum cairo_path_data_type_t
     
     New entries may be added in future versions.
 */
+@gidGir("PatternType")
 enum cairo_pattern_type_t
 {
   /**
@@ -882,6 +907,7 @@ enum cairo_pattern_type_t
     #cairo_pdf_metadata_t is used by the
     [gid.cairo1.global.pdfSurfaceSetMetadata] function specify the metadata to set.
 */
+@gidGir("PdfMetadata")
 enum cairo_pdf_metadata_t
 {
   /**
@@ -926,6 +952,7 @@ enum cairo_pdf_metadata_t
     an outline item. These flags may be bitwise-or'd to produce any
     combination of flags.
 */
+@gidGir("PdfOutlineFlags")
 enum cairo_pdf_outline_flags_t
 {
   /**
@@ -948,6 +975,7 @@ enum cairo_pdf_outline_flags_t
     #cairo_pdf_version_t is used to describe the version number of the PDF
     specification that a generated PDF file will conform to.
 */
+@gidGir("PdfVersion")
 enum cairo_pdf_version_t
 {
   /**
@@ -976,6 +1004,7 @@ enum cairo_pdf_version_t
     PostScript Language Reference that a generated PostScript file will
     conform to.
 */
+@gidGir("PsLevel")
 enum cairo_ps_level_t
 {
   /**
@@ -992,6 +1021,7 @@ enum cairo_ps_level_t
 /**
     Used as the return value for [gid.cairo1.region.Region.containsRectangle].
 */
+@gidGir("RegionOverlap")
 enum cairo_region_overlap_t
 {
   /**
@@ -1014,6 +1044,7 @@ enum cairo_region_overlap_t
 /**
     A set of script output variants.
 */
+@gidGir("ScriptMode")
 enum cairo_script_mode_t
 {
   /**
@@ -1036,6 +1067,7 @@ enum cairo_script_mode_t
     New entries may be added in future versions.  Use [gid.cairo1.global.statusToString]
     to get a human-readable representation of an error message.
 */
+@gidGir("Status")
 enum cairo_status_t
 {
   /**
@@ -1266,6 +1298,7 @@ enum cairo_status_t
     each pixel on the display device when rendering with an
     antialiasing mode of [gid.cairo1.types.Antialias.Subpixel].
 */
+@gidGir("SubpixelOrder")
 enum cairo_subpixel_order_t
 {
   /**
@@ -1302,6 +1335,7 @@ enum cairo_subpixel_order_t
 /**
     Whether operations should be recorded.
 */
+@gidGir("SurfaceObserverMode")
 enum cairo_surface_observer_mode_t
 {
   /**
@@ -1338,6 +1372,7 @@ enum cairo_surface_observer_mode_t
     
     New entries may be added in future versions.
 */
+@gidGir("SurfaceType")
 enum cairo_surface_type_t
 {
   /**
@@ -1474,6 +1509,7 @@ enum cairo_surface_type_t
     - [SVG Types](https://www.w3.org/TR/SVG/types.html#DataTypeLength)
     - [CSS Length](https://www.w3.org/TR/css-values-3/#lengths)
 */
+@gidGir("SvgUnit")
 enum cairo_svg_unit_t
 {
   /**
@@ -1534,6 +1570,7 @@ enum cairo_svg_unit_t
     #cairo_svg_version_t is used to describe the version number of the SVG
     specification that a generated SVG file will conform to.
 */
+@gidGir("SvgVersion")
 enum cairo_svg_version_t
 {
   /**
@@ -1550,6 +1587,7 @@ enum cairo_svg_version_t
 /**
     Specifies properties of a text cluster mapping.
 */
+@gidGir("TextClusterFlags")
 enum cairo_text_cluster_flags_t
 {
   /**
@@ -1597,6 +1635,7 @@ struct cairo_device_t;
     can't assume that metrics are independent of the transformation
     matrix), but otherwise will remain unchanged.
 */
+@gidGir("FontExtents")
 struct cairo_font_extents_t
 {
   /**
@@ -1910,6 +1949,7 @@ struct cairo_pattern_t;
 /**
     A data structure for holding a rectangle.
 */
+@gidGir("Rectangle")
 struct cairo_rectangle_t
 {
   /**
@@ -1936,6 +1976,7 @@ struct cairo_rectangle_t
 /**
     A data structure for holding a rectangle with integer coordinates.
 */
+@gidGir("RectangleInt")
 struct cairo_rectangle_int_t
 {
   /**
@@ -2070,6 +2111,7 @@ struct cairo_text_cluster_t
     assume that metrics are independent of the transformation matrix),
     but otherwise will remain unchanged.
 */
+@gidGir("TextExtents")
 struct cairo_text_extents_t
 {
   /**
@@ -2118,6 +2160,7 @@ struct cairo_text_extents_t
     address of a #cairo_data_key_t object is used.  Typically, you
     would just use the address of a static #cairo_data_key_t object.
 */
+@gidGir("UserDataKey")
 struct cairo_user_data_key_t
 {
   /**

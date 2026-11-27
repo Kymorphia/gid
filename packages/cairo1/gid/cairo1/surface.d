@@ -33,6 +33,7 @@ import gid.gobject2.boxed;
     Memory management of #cairo_surface_t is done with
     [gid.cairo1.surface.Surface.reference] and [gid.cairo1.surface.Surface.destroy].
 */
+@gidGir("Surface")
 class Surface : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_surface_get_type)
 {
 

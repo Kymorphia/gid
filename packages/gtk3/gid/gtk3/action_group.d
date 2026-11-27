@@ -67,6 +67,7 @@ import gid.gtk3.widget;
     </object>
     ```
 */
+@gidGir("ActionGroup", "ActionGroupClass")
 class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 {
 

@@ -82,6 +82,7 @@ import gid.gobject2.object;
     Here is an example for exporting a #GObject:
     [gdbus-example-export.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-export.c)
 */
+@gidGir("DBusConnection")
 class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncInitable, gid.gio2.initable.Initable
 {
 

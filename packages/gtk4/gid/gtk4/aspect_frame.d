@@ -32,6 +32,7 @@ import gid.gtk4.widget;
     
     Starting from GTK 4.12, [gid.gtk4.aspect_frame.AspectFrame] uses the [gid.gtk4.types.AccessibleRole.Generic] role.
 */
+@gidGir("AspectFrame")
 class AspectFrame : gid.gtk4.widget.Widget
 {
 

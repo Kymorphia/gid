@@ -32,6 +32,7 @@ import gid.panel1.types;
     that menu may contain no children until something has extended it later
     on during the application process.
 */
+@gidGir("MenuManager", "MenuManagerClass")
 class MenuManager : gid.gobject2.object.ObjectWrap
 {
 

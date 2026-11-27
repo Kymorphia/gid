@@ -19,6 +19,7 @@ import gid.gstbase1.types;
     
     This class used to live in gst-plugins-bad and was moved to core.
 */
+@gidGir("AggregatorPad", "AggregatorPadClass")
 class AggregatorPad : gid.gst1.pad.Pad
 {
 

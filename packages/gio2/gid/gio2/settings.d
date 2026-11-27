@@ -399,6 +399,7 @@ import gid.gobject2.object;
     Translations **must not** be included in the `.gschema.xml` file by the build
     system, for example by using a rule to generate the XML file from a template.
 */
+@gidGir("Settings", "SettingsClass")
 class Settings : gid.gobject2.object.ObjectWrap
 {
 

@@ -13,6 +13,7 @@ import gid.webkit6.types;
 /**
     Groups information used for user authentication.
 */
+@gidGir("Credential")
 class Credential : gid.gobject2.boxed.BoxedWrap!(webkit_credential_get_type)
 {
 

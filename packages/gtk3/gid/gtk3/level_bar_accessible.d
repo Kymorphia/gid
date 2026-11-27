@@ -14,6 +14,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget_accessible;
 
 /** */
+@gidGir("LevelBarAccessible", "LevelBarAccessibleClass")
 class LevelBarAccessible : gid.gtk3.widget_accessible.WidgetAccessible, gid.atk1.value.Value
 {
 

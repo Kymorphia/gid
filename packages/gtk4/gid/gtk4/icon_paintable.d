@@ -20,6 +20,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.icon_paintable.IconPaintable] implements [gid.gdk4.paintable.Paintable] and [gid.gtk4.symbolic_paintable.SymbolicPaintable].
 */
+@gidGir("IconPaintable", "IconPaintableClass")
 class IconPaintable : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable, gid.gtk4.symbolic_paintable.SymbolicPaintable
 {
 

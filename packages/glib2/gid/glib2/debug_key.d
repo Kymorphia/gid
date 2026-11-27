@@ -11,6 +11,7 @@ import gid.glib2.types;
     Associates a string with a bit flag.
     Used in [gid.glib2.global.parseDebugString].
 */
+@gidGir("DebugKey")
 class DebugKey : StructWrap!(GDebugKey)
 {
   /**

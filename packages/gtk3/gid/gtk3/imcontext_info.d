@@ -10,6 +10,7 @@ import gid.gtk3.types;
 /**
     Bookkeeping information about a loadable input method.
 */
+@gidGir("IMContextInfo")
 class IMContextInfo : StructWrap!(GtkIMContextInfo)
 {
   /**

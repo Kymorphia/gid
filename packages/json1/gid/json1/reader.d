@@ -88,6 +88,7 @@ import gid.json1.types;
       }
     ```
 */
+@gidGir("Reader", "ReaderClass")
 class Reader : gid.gobject2.object.ObjectWrap
 {
 

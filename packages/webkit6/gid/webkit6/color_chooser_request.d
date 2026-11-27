@@ -29,6 +29,7 @@ import gid.webkit6.types;
     WebKit will provide a default handler which will asynchronously run
     a regular #GtkColorChooserDialog for the user to interact with.
 */
+@gidGir("ColorChooserRequest", "ColorChooserRequestClass")
 class ColorChooserRequest : gid.gobject2.object.ObjectWrap
 {
 

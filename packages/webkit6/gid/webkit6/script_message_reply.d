@@ -14,6 +14,7 @@ import gid.webkit6.types;
     If no reply has been sent by the user, an automatically generated reply with
     undefined value with be sent.
 */
+@gidGir("ScriptMessageReply")
 class ScriptMessageReply : gid.gobject2.boxed.BoxedWrap!(webkit_script_message_reply_get_type)
 {
 

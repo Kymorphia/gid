@@ -42,6 +42,7 @@ import gid.gtk3.types;
     to #GtkGrid. For more information about migrating to #GtkGrid, see
     [Migrating from other containers to GtkGrid][gtk-migrating-GtkGrid].
 */
+@gidGir("VBox", "VBoxClass")
 class VBox : gid.gtk3.box.Box
 {
 

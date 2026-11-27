@@ -25,6 +25,7 @@ import gid.gtksource5.types;
     Implement the [gid.gtksource5.hover_provider.HoverProvider] interface to be notified of when
     to populate a [gid.gtksource5.hover_display.HoverDisplay] on behalf of the user.
 */
+@gidGir("HoverDisplay", "HoverDisplayClass")
 class HoverDisplay : gid.gtk4.widget.Widget
 {
 

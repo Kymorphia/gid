@@ -16,6 +16,7 @@ import gid.gobject2.object;
 /**
     A crypto context for use with MIME.
 */
+@gidGir("CryptoContext", "CryptoContextClass")
 class CryptoContext : gid.gobject2.object.ObjectWrap
 {
 

@@ -19,6 +19,7 @@ import gid.gobject2.types;
     It provides insertions, deletions, and lookups in logarithmic time
     with a fast path for the common case of iterating the list linearly.
 */
+@gidGir("ListStore", "ListStoreClass")
 class ListStore : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

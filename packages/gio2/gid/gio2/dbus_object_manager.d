@@ -22,6 +22,7 @@ import gid.gobject2.object;
     See [gid.gio2.dbus_object_manager_client.DBusObjectManagerClient] for the client-side implementation
     and [gid.gio2.dbus_object_manager_server.DBusObjectManagerServer] for the service-side implementation.
 */
+@gidGir("DBusObjectManager", "DBusObjectManagerIface")
 interface DBusObjectManager : GidWrap
 {
 

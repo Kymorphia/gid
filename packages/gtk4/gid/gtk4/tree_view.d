@@ -127,6 +127,7 @@ import gid.gtk4.widget;
     Deprecated: Use [gid.gtk4.list_view.ListView] for lists, and [gid.gtk4.column_view.ColumnView]
         for tabular lists
 */
+@gidGir("TreeView", "TreeViewClass")
 class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
 {
 

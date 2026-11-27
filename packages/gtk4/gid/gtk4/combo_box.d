@@ -91,6 +91,7 @@ import gid.gtk4.widget;
 
     Deprecated: Use [gid.gtk4.drop_down.DropDown] instead
 */
+@gidGir("ComboBox", "ComboBoxClass")
 class ComboBox : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.gtk4.cell_layout.CellLayout
 {
 

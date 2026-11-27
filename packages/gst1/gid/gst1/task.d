@@ -53,6 +53,7 @@ import gid.gst1.types;
     task is started; changing the object name after the task has been started, has
     no effect on the thread name.
 */
+@gidGir("Task", "TaskClass")
 class Task : gid.gst1.object.ObjectWrap
 {
 

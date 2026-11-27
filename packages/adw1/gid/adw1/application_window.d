@@ -64,6 +64,7 @@ import gid.gtk4.widget;
     Using [gid.gtk4.application.Application.menubar] is not supported and may result in
     visual glitches.
 */
+@gidGir("ApplicationWindow", "ApplicationWindowClass")
 class ApplicationWindow : gid.gtk4.application_window.ApplicationWindow
 {
 

@@ -17,6 +17,7 @@ import gid.gtk4.types;
     It should only be used as a last resort if none of the other event
     controllers or gestures do the job.
 */
+@gidGir("EventControllerLegacy", "EventControllerLegacyClass")
 class EventControllerLegacy : gid.gtk4.event_controller.EventController
 {
 

@@ -40,6 +40,7 @@ import gid.gtk3.types;
     
     GtkColorChooserWidget has a single CSS node with name colorchooser.
 */
+@gidGir("ColorChooserWidget", "ColorChooserWidgetClass")
 class ColorChooserWidget : gid.gtk3.box.Box, gid.gtk3.color_chooser.ColorChooser
 {
 

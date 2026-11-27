@@ -18,6 +18,7 @@ import gid.gstvideo1.video_info;
     or [gid.gstglegl1.eglimage.EGLImage.fromDmabufDirect], or #GstGLMemoryEGL provides a
     #GstAllocator to allocate `EGLImage`'s bound to and OpenGL texture.
 */
+@gidGir("EGLImage")
 class EGLImage : gid.gobject2.boxed.BoxedWrap!(gst_egl_image_get_type)
 {
   /**

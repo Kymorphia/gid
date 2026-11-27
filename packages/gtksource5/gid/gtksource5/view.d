@@ -97,6 +97,7 @@ import gid.gtksource5.types;
     [gid.gtk4.text_tag.TextTag.scale] set so that the font size may be scaled relative to
     the default font set in CSS.
 */
+@gidGir("View", "ViewClass")
 class View : gid.gtk4.text_view.TextView
 {
 

@@ -59,6 +59,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.button.Button] uses the [gid.gtk4.types.AccessibleRole.Button] role.
 */
+@gidGir("Button", "ButtonClass")
 class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

@@ -35,6 +35,7 @@ import gid.gtk3.window;
     When contained offscreen widgets are redrawn, GtkOffscreenWindow
     will emit a #GtkWidget::damage-event signal.
 */
+@gidGir("OffscreenWindow", "OffscreenWindowClass")
 class OffscreenWindow : gid.gtk3.window.Window
 {
 

@@ -21,6 +21,7 @@ import gid.gtk4.types;
     This controller is not able to accept drops, use [gid.gtk4.drop_target.DropTarget]
     for that purpose.
 */
+@gidGir("DropControllerMotion", "DropControllerMotionClass")
 class DropControllerMotion : gid.gtk4.event_controller.EventController
 {
 

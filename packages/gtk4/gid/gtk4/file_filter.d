@@ -61,6 +61,7 @@ import gid.gtk4.types;
     </object>
     ```
 */
+@gidGir("FileFilter")
 class FileFilter : gid.gtk4.filter.Filter, gid.gtk4.buildable.Buildable
 {
 

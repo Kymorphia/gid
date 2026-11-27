@@ -7,6 +7,12 @@ public import gid.gio2.c.types;
 public import gid.pango1.c.types;
 public import gid.cairo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Gdk";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "3.0";
+
 /**
     Used to represent native events (XEvents for the X11
     backend, MSGs for Win32).
@@ -30,6 +36,7 @@ alias GdkXEvent = void;
     In general, when multiple flags are set, flipping should take precedence over
     sliding, which should take precedence over resizing.
 */
+@gidGir("AnchorHints")
 enum GdkAnchorHints : uint
 {
   /**
@@ -81,6 +88,7 @@ enum GdkAnchorHints : uint
 /**
     Flags describing the current capabilities of a device/tool.
 */
+@gidGir("AxisFlags")
 enum GdkAxisFlags : uint
 {
   /**
@@ -138,6 +146,7 @@ enum GdkAxisFlags : uint
     report their location via the x/y members of events regardless. Whether
     X and Y are present as axes depends on the GDK backend.
 */
+@gidGir("AxisUse")
 enum GdkAxisUse
 {
   /**
@@ -200,6 +209,7 @@ enum GdkAxisUse
     A set of values describing the possible byte-orders
     for storing pixel values in memory.
 */
+@gidGir("ByteOrder")
 enum GdkByteOrder
 {
   /**
@@ -220,6 +230,7 @@ enum GdkByteOrder
 /**
     Specifies the crossing mode for #GdkEventCrossing.
 */
+@gidGir("CrossingMode")
 enum GdkCrossingMode
 {
   /**
@@ -281,6 +292,7 @@ enum GdkCrossingMode
     
     The recommended way to create cursors is to use [gid.gdk4.cursor.Cursor.newFromName].
 */
+@gidGir("CursorType")
 enum GdkCursorType
 {
   /**
@@ -688,6 +700,7 @@ enum GdkCursorType
 /**
     A pad feature.
 */
+@gidGir("DevicePadFeature")
 enum GdkDevicePadFeature
 {
   /**
@@ -710,6 +723,7 @@ enum GdkDevicePadFeature
     Indicates the specific type of tool being used being a tablet. Such as an
     airbrush, pencil, etc.
 */
+@gidGir("DeviceToolType")
 enum GdkDeviceToolType
 {
   /**
@@ -757,6 +771,7 @@ enum GdkDeviceToolType
     Indicates the device type. See [above][GdkDeviceManager.description]
     for more information about the meaning of these device types.
 */
+@gidGir("DeviceType")
 enum GdkDeviceType
 {
   /**
@@ -781,6 +796,7 @@ enum GdkDeviceType
     Used in #GdkDragContext to indicate what the destination
     should do with the dropped data.
 */
+@gidGir("DragAction")
 enum GdkDragAction : uint
 {
   /**
@@ -820,6 +836,7 @@ enum GdkDragAction : uint
 /**
     Used in #GdkDragContext to the reason of a cancelled DND operation.
 */
+@gidGir("DragCancelReason")
 enum GdkDragCancelReason
 {
   /**
@@ -842,6 +859,7 @@ enum GdkDragCancelReason
     Used in #GdkDragContext to indicate the protocol according to
     which DND is done.
 */
+@gidGir("DragProtocol")
 enum GdkDragProtocol
 {
   /**
@@ -914,6 +932,7 @@ enum GdkDragProtocol
     [gid.gdk4.event.Event.getEventSequence] returns the event sequence for these
     events, so different sequences may be distinguished.
 */
+@gidGir("EventMask")
 enum GdkEventMask : uint
 {
   /**
@@ -1062,6 +1081,7 @@ enum GdkEventMask : uint
     aliases [gid.gdk3.types.EventType.DoubleButtonPress] and [gid.gdk3.types.EventType.TripleButtonPress] can
     be used instead.
 */
+@gidGir("EventType")
 enum GdkEventType
 {
   /**
@@ -1349,6 +1369,7 @@ enum GdkEventType
 /**
     Specifies the result of applying a #GdkFilterFunc to a native event.
 */
+@gidGir("FilterReturn")
 enum GdkFilterReturn
 {
   /**
@@ -1373,6 +1394,7 @@ enum GdkFilterReturn
     phases that can be requested. The elements of the enumeration
     correspond to the signals of #GdkFrameClock.
 */
+@gidGir("FrameClockPhase")
 enum GdkFrameClockPhase : uint
 {
   /**
@@ -1420,6 +1442,7 @@ enum GdkFrameClockPhase : uint
     Indicates which monitor (in a multi-head setup) a window should span over
     when in fullscreen mode.
 */
+@gidGir("FullscreenMode")
 enum GdkFullscreenMode
 {
   /**
@@ -1436,6 +1459,7 @@ enum GdkFullscreenMode
 /**
     Error enumeration for #GdkGLContext.
 */
+@gidGir("GLError")
 enum GdkGLError
 {
   /**
@@ -1457,6 +1481,7 @@ enum GdkGLError
 /**
     Defines how device grabs interact with other devices.
 */
+@gidGir("GrabOwnership")
 enum GdkGrabOwnership
 {
   /**
@@ -1479,6 +1504,7 @@ enum GdkGrabOwnership
     Returned by [gid.gdk3.device.Device.grab], [gid.gdk3.global.pointerGrab] and [gid.gdk3.global.keyboardGrab] to
     indicate success or the reason for the failure of the grab attempt.
 */
+@gidGir("GrabStatus")
 enum GdkGrabStatus
 {
   /**
@@ -1521,6 +1547,7 @@ enum GdkGrabStatus
     [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/)
     specification for more details.
 */
+@gidGir("Gravity")
 enum GdkGravity
 {
   /**
@@ -1578,6 +1605,7 @@ enum GdkGravity
 /**
     An enumeration that describes the mode of an input device.
 */
+@gidGir("InputMode")
 enum GdkInputMode
 {
   /**
@@ -1603,6 +1631,7 @@ enum GdkInputMode
 /**
     An enumeration describing the type of an input device in general terms.
 */
+@gidGir("InputSource")
 enum GdkInputSource
 {
   /**
@@ -1667,6 +1696,7 @@ enum GdkInputSource
     it’s the Command key (which correspond to [gid.gdk4.types.ModifierType.ControlMask] and
     [gid.gdk3.types.ModifierType.Mod2Mask], respectively).
 */
+@gidGir("ModifierIntent")
 enum GdkModifierIntent
 {
   /**
@@ -1737,6 +1767,7 @@ enum GdkModifierIntent
     4-7 as scroll events, so [gid.gdk4.types.ModifierType.Button4Mask] and [gid.gdk4.types.ModifierType.Button5Mask] will never
     be set.
 */
+@gidGir("ModifierType")
 enum GdkModifierType : uint
 {
   /**
@@ -1914,6 +1945,7 @@ enum GdkModifierType : uint
     See the X11 protocol specification of LeaveNotify for
     full details of crossing event generation.
 */
+@gidGir("NotifyType")
 enum GdkNotifyType
 {
   /**
@@ -1957,6 +1989,7 @@ enum GdkNotifyType
 /**
     Specifies why a selection ownership was changed.
 */
+@gidGir("OwnerChange")
 enum GdkOwnerChange
 {
   /**
@@ -1979,6 +2012,7 @@ enum GdkOwnerChange
     Describes how existing data is combined with new data when
     using [gid.gdk3.global.propertyChange].
 */
+@gidGir("PropMode")
 enum GdkPropMode
 {
   /**
@@ -2000,6 +2034,7 @@ enum GdkPropMode
 /**
     Specifies the type of a property change for a #GdkEventProperty.
 */
+@gidGir("PropertyState")
 enum GdkPropertyState
 {
   /**
@@ -2016,6 +2051,7 @@ enum GdkPropertyState
 /**
     Specifies the direction for #GdkEventScroll.
 */
+@gidGir("ScrollDirection")
 enum GdkScrollDirection
 {
   /**
@@ -2048,6 +2084,7 @@ enum GdkScrollDirection
 /**
     Flags describing the seat capabilities.
 */
+@gidGir("SeatCapabilities")
 enum GdkSeatCapabilities : uint
 {
   /**
@@ -2090,6 +2127,7 @@ enum GdkSeatCapabilities : uint
     Specifies the kind of modification applied to a setting in a
     #GdkEventSetting.
 */
+@gidGir("SettingAction")
 enum GdkSettingAction
 {
   /**
@@ -2109,6 +2147,7 @@ enum GdkSettingAction
 }
 
 /** */
+@gidGir("Status")
 enum GdkStatus
 {
   /** */
@@ -2131,6 +2170,7 @@ enum GdkStatus
     This enumeration describes how the red, green and blue components
     of physical pixels on an output device are laid out.
 */
+@gidGir("SubpixelLayout")
 enum GdkSubpixelLayout
 {
   /**
@@ -2184,6 +2224,7 @@ enum GdkSubpixelLayout
     
     See also #GdkEventTouchpadSwipe and #GdkEventTouchpadPinch.
 */
+@gidGir("TouchpadGesturePhase")
 enum GdkTouchpadGesturePhase
 {
   /**
@@ -2212,6 +2253,7 @@ enum GdkTouchpadGesturePhase
 /**
     Specifies the visiblity status of a window for a #GdkEventVisibility.
 */
+@gidGir("VisibilityState")
 enum GdkVisibilityState
 {
   /**
@@ -2234,6 +2276,7 @@ enum GdkVisibilityState
     A set of values that describe the manner in which the pixel values
     for a visual are converted into RGB values for display.
 */
+@gidGir("VisualType")
 enum GdkVisualType
 {
   /**
@@ -2284,6 +2327,7 @@ enum GdkVisualType
     The window manager can use them when determining how to decorate
     the window. The hint must be set before mapping the window.
 */
+@gidGir("WMDecoration")
 enum GdkWMDecoration : uint
 {
   /**
@@ -2327,6 +2371,7 @@ enum GdkWMDecoration : uint
     can use them when determining the functions to offer for the window. The
     hint must be set before mapping the window.
 */
+@gidGir("WMFunction")
 enum GdkWMFunction : uint
 {
   /**
@@ -2368,6 +2413,7 @@ enum GdkWMFunction : uint
     the @width/@height, @wclass, and @window_type fields are required, they have
     no corresponding flag in #GdkWindowAttributesType.
 */
+@gidGir("WindowAttributesType")
 enum GdkWindowAttributesType : uint
 {
   /**
@@ -2414,6 +2460,7 @@ enum GdkWindowAttributesType : uint
 /**
     Determines a window edge or corner.
 */
+@gidGir("WindowEdge")
 enum GdkWindowEdge
 {
   /**
@@ -2467,6 +2514,7 @@ enum GdkWindowEdge
     specified a size/position using a --geometry command-line argument;
     [gid.gtk3.window.Window.parseGeometry] automatically sets these flags.
 */
+@gidGir("WindowHints")
 enum GdkWindowHints : uint
 {
   /**
@@ -2520,6 +2568,7 @@ enum GdkWindowHints : uint
 /**
     Specifies the state of a toplevel window.
 */
+@gidGir("WindowState")
 enum GdkWindowState : uint
 {
   /**
@@ -2613,6 +2662,7 @@ enum GdkWindowState : uint
 /**
     Describes the kind of window.
 */
+@gidGir("WindowType")
 enum GdkWindowType
 {
   /**
@@ -2664,6 +2714,7 @@ enum GdkWindowType
     See the [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/)
     specification for more details about window types.
 */
+@gidGir("WindowTypeHint")
 enum GdkWindowTypeHint
 {
   /**
@@ -2750,6 +2801,7 @@ enum GdkWindowTypeHint
     windows in order to trap or filter the events. You can’t draw on
     @GDK_INPUT_ONLY windows.
 */
+@gidGir("WindowWindowClass")
 enum GdkWindowWindowClass
 {
   /**
@@ -2982,6 +3034,7 @@ struct GdkDeviceManager;
 struct GdkDevicePad;
 
 /** */
+@gidGir("DevicePadInterface")
 struct GdkDevicePadInterface;
 
 /** */
@@ -3070,6 +3123,7 @@ struct GdkDragContext;
 struct GdkDrawingContext;
 
 /** */
+@gidGir("DrawingContextClass")
 struct GdkDrawingContextClass;
 
 /**
@@ -4573,9 +4627,11 @@ struct GdkEventWindowState
 struct GdkFrameClock;
 
 /** */
+@gidGir("FrameClockClass")
 struct GdkFrameClockClass;
 
 /** */
+@gidGir("FrameClockPrivate")
 struct GdkFrameClockPrivate;
 
 /**
@@ -4700,6 +4756,7 @@ struct GdkGLContext;
     @max_aspect to the same value, thus forcing the window to keep a constant
     aspect ratio.
 */
+@gidGir("Geometry")
 struct GdkGeometry
 {
   /**
@@ -4777,6 +4834,7 @@ struct GdkKeymap;
 /**
     A #GdkKeymapKey is a hardware key that can be mapped to a keyval.
 */
+@gidGir("KeymapKey")
 struct GdkKeymapKey
 {
   /**
@@ -4805,6 +4863,7 @@ struct GdkKeymapKey
 }
 
 /** */
+@gidGir("MonitorClass")
 struct GdkMonitorClass;
 
 /**
@@ -4822,6 +4881,7 @@ struct GdkMonitor;
 /**
     Defines the x and y coordinates of a point.
 */
+@gidGir("Point")
 struct GdkPoint
 {
   /**
@@ -4910,6 +4970,7 @@ struct GdkSeat
 /**
     A #GdkTimeCoord stores a single event in a motion history.
 */
+@gidGir("TimeCoord")
 struct GdkTimeCoord
 {
   /**
@@ -5053,6 +5114,7 @@ struct GdkWindowClass
 }
 
 /** */
+@gidGir("WindowRedirect")
 struct GdkWindowRedirect;
 
 alias extern(C) void function(GdkEvent* event, void* data) GdkEventFunc;

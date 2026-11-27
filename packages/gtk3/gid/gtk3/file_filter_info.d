@@ -11,6 +11,7 @@ import gid.gtk3.types;
     A #GtkFileFilterInfo-struct is used to pass information about the
     tested file to [gid.gtk3.file_filter.FileFilter.filter].
 */
+@gidGir("FileFilterInfo")
 class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
 {
   /**

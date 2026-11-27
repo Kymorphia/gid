@@ -76,6 +76,7 @@ import gid.gst1.types;
       }
     ```
 */
+@gidGir("DeviceMonitor", "DeviceMonitorClass")
 class DeviceMonitor : gid.gst1.object.ObjectWrap
 {
 

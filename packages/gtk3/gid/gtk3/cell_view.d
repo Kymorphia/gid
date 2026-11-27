@@ -45,6 +45,7 @@ import gid.gtk3.widget;
     
     GtkCellView has a single CSS node with name cellview.
 */
+@gidGir("CellView", "CellViewClass")
 class CellView : gid.gtk3.widget.Widget, gid.gtk3.cell_layout.CellLayout, gid.gtk3.orientable.Orientable
 {
 

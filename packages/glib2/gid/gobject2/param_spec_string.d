@@ -12,6 +12,7 @@ import gid.gobject2.types;
     A #GParamSpec derived structure that contains the meta data for string
     properties.
 */
+@gidGir("ParamSpecString")
 class ParamSpecString : gid.gobject2.param_spec.ParamSpec
 {
 

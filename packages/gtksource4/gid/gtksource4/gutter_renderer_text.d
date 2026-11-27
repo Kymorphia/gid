@@ -11,6 +11,7 @@ import gid.gtksource4.gutter_renderer;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("GutterRendererText", "GutterRendererTextClass")
 class GutterRendererText : gid.gtksource4.gutter_renderer.GutterRenderer
 {
 

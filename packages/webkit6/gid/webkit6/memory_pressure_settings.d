@@ -30,6 +30,7 @@ import gid.webkit6.types;
     and the settings will be applied to all the network processes created after that call by any instance of
     #WebKitWebsiteDataManager.
 */
+@gidGir("MemoryPressureSettings")
 class MemoryPressureSettings : gid.gobject2.boxed.BoxedWrap!(webkit_memory_pressure_settings_get_type)
 {
 

@@ -30,6 +30,7 @@ import gid.gstaudio1.types;
     number of valid bytes from the size of the buffer. You should always
     use the @num_bytes_per_channel variable of this metadata.
 */
+@gidGir("DsdPlaneOffsetMeta")
 class DsdPlaneOffsetMeta : StructWrap!(GstDsdPlaneOffsetMeta)
 {
   /**

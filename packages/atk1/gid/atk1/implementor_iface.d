@@ -14,6 +14,7 @@ import gid.gobject2.gid_builder;
     AtkObject peers may be obtained via calls to
     iface->(ref_accessible)(implementor);
 */
+@gidGir("ImplementorIface")
 interface ImplementorIface : GidWrap
 {
 

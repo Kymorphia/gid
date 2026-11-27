@@ -66,6 +66,7 @@ import gid.gtk3.widget;
     from left to right. So :first-child will always select the leftmost child,
     regardless of text direction.
 */
+@gidGir("Box", "BoxClass")
 class Box : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
 {
 

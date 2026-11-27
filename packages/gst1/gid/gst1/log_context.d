@@ -55,6 +55,7 @@ import gid.gst1.types;
     );
     ```
 */
+@gidGir("LogContext")
 class LogContext : OpaqueWrap!(GstLogContext*, void, void)
 {
 

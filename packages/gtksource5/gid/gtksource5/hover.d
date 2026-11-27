@@ -25,6 +25,7 @@ import gid.gtksource5.types;
     You can change how long to wait to display the interactive tooltip by
     setting the [gid.gtksource5.hover.Hover.hoverDelay] property in milliseconds.
 */
+@gidGir("Hover", "HoverClass")
 class Hover : gid.gobject2.object.ObjectWrap
 {
 

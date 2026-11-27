@@ -29,6 +29,7 @@ import gid.soup3.types;
     and then use a filter ([gid.soup3.auth_domain.AuthDomain.setFilter] to bypass
     authentication for those requests that don't need it.
 */
+@gidGir("AuthDomain", "AuthDomainClass")
 class AuthDomain : gid.gobject2.object.ObjectWrap
 {
 

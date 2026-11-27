@@ -41,6 +41,7 @@ import gid.gtk3.types;
     .needs-attention style class to the widgets representing the
     stack pages.
 */
+@gidGir("StackSwitcher", "StackSwitcherClass")
 class StackSwitcher : gid.gtk3.box.Box
 {
 

@@ -46,6 +46,7 @@ import gid.gtk3.types;
     placed inside a #GtkSearchBar. If that is not the case,
     you can use [gid.gtk3.search_entry.SearchEntry.handleEvent] to pass events.
 */
+@gidGir("SearchEntry", "SearchEntryClass")
 class SearchEntry : gid.gtk3.entry.Entry
 {
 

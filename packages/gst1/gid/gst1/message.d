@@ -39,6 +39,7 @@ import gid.gst1.types;
     A #GstElement usually posts messages on the bus provided by the parent
     container using [gid.gst1.element.Element.postMessage].
 */
+@gidGir("Message")
 class Message : gid.gobject2.boxed.BoxedWrap!(gst_message_get_type)
 {
   /**

@@ -23,6 +23,7 @@ import gid.gstrtp1.types;
 /**
     Provides a base class for RTP payloaders
 */
+@gidGir("RTPBasePayload", "RTPBasePayloadClass")
 class RTPBasePayload : gid.gst1.element.Element
 {
 

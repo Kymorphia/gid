@@ -40,6 +40,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.carousel.Carousel] has a single CSS node with name `carousel`.
 */
+@gidGir("Carousel", "CarouselClass")
 class Carousel : gid.gtk4.widget.Widget, gid.adw1.swipeable.Swipeable, gid.gtk4.orientable.Orientable
 {
 

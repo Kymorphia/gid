@@ -45,6 +45,7 @@ import gid.gtk4.types;
     translatable strings with xgettext will not work for strings inside the
     marked section.
 */
+@gidGir("BuilderListItemFactory", "BuilderListItemFactoryClass")
 class BuilderListItemFactory : gid.gtk4.list_item_factory.ListItemFactory
 {
 

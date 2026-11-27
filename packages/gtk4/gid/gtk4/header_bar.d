@@ -92,6 +92,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.header_bar.HeaderBar] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("HeaderBar")
 class HeaderBar : gid.gtk4.widget.Widget
 {
 

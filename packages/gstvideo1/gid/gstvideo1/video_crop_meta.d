@@ -12,6 +12,7 @@ import gid.gstvideo1.types;
 /**
     Extra buffer metadata describing image cropping.
 */
+@gidGir("VideoCropMeta")
 class VideoCropMeta : StructWrap!(GstVideoCropMeta)
 {
   /**

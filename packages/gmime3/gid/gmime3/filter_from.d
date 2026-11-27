@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter for armoring or escaping lines beginning with "From ".
 */
+@gidGir("FilterFrom", "FilterFromClass")
 class FilterFrom : gid.gmime3.filter.Filter
 {
 

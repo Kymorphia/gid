@@ -17,6 +17,7 @@ import gid.gobject2.object;
     #GMenuItem is an opaque structure type.  You must access it using the
     functions below.
 */
+@gidGir("MenuItem")
 class MenuItem : gid.gobject2.object.ObjectWrap
 {
 

@@ -12,6 +12,7 @@ import gid.gsk4.types;
     A render node that copies the current state of the rendering canvas
     so a [gid.gsk4.paste_node.PasteNode] can draw it.
 */
+@gidGir("CopyNode")
 class CopyNode : gid.gsk4.render_node.RenderNode
 {
 

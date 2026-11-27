@@ -16,6 +16,7 @@ import gid.gobject2.boxed;
     See [gid.glib2.markup_parse_context.MarkupParseContext.new_], #GMarkupParser, and so
     on for more details.
 */
+@gidGir("MarkupParseContext")
 class MarkupParseContext : gid.gobject2.boxed.BoxedWrap!(g_markup_parse_context_get_type)
 {
 

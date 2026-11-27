@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
     A filter for converting text/enriched or text/richtext textual
     streams into text/html.
 */
+@gidGir("FilterEnriched", "FilterEnrichedClass")
 class FilterEnriched : gid.gmime3.filter.Filter
 {
 

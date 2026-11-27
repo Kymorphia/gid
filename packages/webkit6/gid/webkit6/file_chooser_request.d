@@ -30,6 +30,7 @@ import gid.webkit6.types;
     WebKit will provide a default handler which will asynchronously run
     a regular #GtkFileChooserDialog for the user to interact with.
 */
+@gidGir("FileChooserRequest", "FileChooserRequestClass")
 class FileChooserRequest : gid.gobject2.object.ObjectWrap
 {
 

@@ -13,6 +13,7 @@ import gid.gstpbutils1.types;
 /**
     Variant of #GstEncodingProfile for video streams, allows specifying the @pass.
 */
+@gidGir("EncodingVideoProfile", "EncodingVideoProfileClass")
 class EncodingVideoProfile : gid.gstpbutils1.encoding_profile.EncodingProfile
 {
 

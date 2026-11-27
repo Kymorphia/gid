@@ -16,6 +16,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("LockButtonAccessible", "LockButtonAccessibleClass")
 class LockButtonAccessible : gid.gtk3.button_accessible.ButtonAccessible
 {
 

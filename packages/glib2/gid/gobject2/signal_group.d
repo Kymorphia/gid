@@ -32,6 +32,7 @@ import gid.gobject2.types;
     all the signals you need. When the `GtkTextView:buffer` property changes
     all of the signals will be transitioned correctly.
 */
+@gidGir("SignalGroup")
 class SignalGroup : gid.gobject2.object.ObjectWrap
 {
 

@@ -15,6 +15,7 @@ import gid.gobject2.object;
     A set of utility functions for thread locking. This interface and
     all his related methods are deprecated since 2.12.
 */
+@gidGir("Misc", "MiscClass")
 class Misc : gid.gobject2.object.ObjectWrap
 {
 

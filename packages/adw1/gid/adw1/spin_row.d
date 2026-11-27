@@ -60,6 +60,7 @@ import gid.gtk4.types;
     [gid.adw1.spin_row.SpinRow] uses an internal [gid.gtk4.spin_button.SpinButton] with the
     `enum@Gtk.AccessibleRole.spin-button` role.
 */
+@gidGir("SpinRow", "SpinRowClass")
 class SpinRow : gid.adw1.action_row.ActionRow, gid.gtk4.editable.Editable
 {
 

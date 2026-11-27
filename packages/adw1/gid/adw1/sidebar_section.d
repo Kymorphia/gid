@@ -83,6 +83,7 @@ import gid.gtk4.buildable_mixin;
       <img src="sidebar-section.png" alt="sidebar-section">
     </picture>
 */
+@gidGir("SidebarSection", "SidebarSectionClass")
 class SidebarSection : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable
 {
 

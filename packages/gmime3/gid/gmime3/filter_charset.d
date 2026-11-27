@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter to convert between charsets.
 */
+@gidGir("FilterCharset", "FilterCharsetClass")
 class FilterCharset : gid.gmime3.filter.Filter
 {
 

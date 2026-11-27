@@ -84,6 +84,7 @@ import gid.gtk4.widget;
     [gid.gtk4.flow_box.FlowBox] uses the [gid.gtk4.types.AccessibleRole.Grid] role, and [gid.gtk4.flow_box_child.FlowBoxChild]
     uses the [gid.gtk4.types.AccessibleRole.GridCell] role.
 */
+@gidGir("FlowBox")
 class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

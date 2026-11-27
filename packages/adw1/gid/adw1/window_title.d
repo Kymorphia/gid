@@ -30,6 +30,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.window_title.WindowTitle] has a single CSS node with name `windowtitle`.
 */
+@gidGir("WindowTitle", "WindowTitleClass")
 class WindowTitle : gid.gtk4.widget.Widget
 {
 

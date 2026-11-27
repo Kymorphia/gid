@@ -66,6 +66,7 @@ import gid.webkit6.types;
     }
     ```
 */
+@gidGir("WindowProperties", "WindowPropertiesClass")
 class WindowProperties : gid.gobject2.object.ObjectWrap
 {
 

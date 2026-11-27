@@ -184,6 +184,7 @@ import gid.rsvg2.types;
     ordering, and panic if they are called out of order.  This will abort
     the program as if it had a failed assertion.
 */
+@gidGir("Handle", "HandleClass")
 class Handle : gid.gobject2.object.ObjectWrap
 {
 

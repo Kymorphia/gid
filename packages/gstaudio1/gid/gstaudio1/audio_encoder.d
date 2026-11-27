@@ -116,6 +116,7 @@ import gid.gstaudio1.types;
       * Accept data in @handle_frame and provide encoded results to
          [gid.gstaudio1.audio_encoder.AudioEncoder.finishFrame].
 */
+@gidGir("AudioEncoder", "AudioEncoderClass")
 class AudioEncoder : gid.gst1.element.Element, gid.gst1.preset.Preset
 {
 

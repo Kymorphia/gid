@@ -437,6 +437,7 @@ import gid.pango1.layout;
     }
     ```
 */
+@gidGir("Widget", "WidgetClass")
 class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessible.Accessible, gid.gtk4.buildable.Buildable, gid.gtk4.constraint_target.ConstraintTarget
 {
 

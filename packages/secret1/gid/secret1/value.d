@@ -23,6 +23,7 @@ import gid.secret1.types;
     #SecretValue is reference counted and immutable. The secret data is only
     freed when all references have been released via [gid.secret1.value.Value.unref].
 */
+@gidGir("Value")
 class Value : gid.gobject2.boxed.BoxedWrap!(secret_value_get_type)
 {
 

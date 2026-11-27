@@ -28,6 +28,7 @@ import gid.gtk4.list_box_row;
     rows as they take care of presenting the preference's title while letting you
     compose the inputs of the preference around it.
 */
+@gidGir("PreferencesRow", "PreferencesRowClass")
 class PreferencesRow : gid.gtk4.list_box_row.ListBoxRow
 {
 

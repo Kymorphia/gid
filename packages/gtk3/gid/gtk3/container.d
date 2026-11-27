@@ -224,6 +224,7 @@ import gid.gtk3.widget_path;
     </object>
     ```
 */
+@gidGir("Container", "ContainerClass")
 class Container : gid.gtk3.widget.Widget
 {
 

@@ -17,6 +17,7 @@ import gid.gstnet1.types;
     sending and receiving ancillary data such as unix credentials (See
     #GUnixCredentialsMessage) and Unix file descriptions (See #GUnixFDMessage).
 */
+@gidGir("NetControlMessageMeta")
 class NetControlMessageMeta : StructWrap!(GstNetControlMessageMeta)
 {
   /**

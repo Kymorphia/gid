@@ -54,6 +54,7 @@ import gid.gstrtp1.types;
     Be aware that in case [gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload.pushList] is used
     each buffer will see the same list of RTP header extensions.
 */
+@gidGir("RTPBaseDepayload", "RTPBaseDepayloadClass")
 class RTPBaseDepayload : gid.gst1.element.Element
 {
 

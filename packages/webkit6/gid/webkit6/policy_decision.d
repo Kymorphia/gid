@@ -23,6 +23,7 @@ import gid.webkit6.website_policies;
     completes. To make a policy decision asynchronously, simply increment
     the reference count of the #WebKitPolicyDecision object.
 */
+@gidGir("PolicyDecision", "PolicyDecisionClass")
 class PolicyDecision : gid.gobject2.object.ObjectWrap
 {
 

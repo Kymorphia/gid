@@ -41,6 +41,7 @@ import gid.gtk3.types;
     
     Marks are typically created using the [gid.gtk4.text_buffer.TextBuffer.createMark] function.
 */
+@gidGir("TextMark", "TextMarkClass")
 class TextMark : gid.gobject2.object.ObjectWrap
 {
 

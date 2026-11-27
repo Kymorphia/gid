@@ -83,6 +83,7 @@ import gid.glib2.types;
 
     Deprecated: Use a [gid.glib2.rwlock.RWLock] instead
 */
+@gidGir("StaticRWLock")
 class StaticRWLock : StructWrap!(GStaticRWLock)
 {
   /**

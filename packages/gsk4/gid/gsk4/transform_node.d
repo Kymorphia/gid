@@ -12,6 +12,7 @@ import gid.gsk4.types;
 /**
     A render node applying a [gid.gsk4.transform.Transform] to its single child node.
 */
+@gidGir("TransformNode")
 class TransformNode : gid.gsk4.render_node.RenderNode
 {
 

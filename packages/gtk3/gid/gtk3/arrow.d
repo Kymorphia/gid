@@ -36,6 +36,7 @@ import gid.gtk3.types;
     use the icon names “pan-start-symbolic“ and “pan-end-symbolic“, which
     react to the text direction.
 */
+@gidGir("Arrow", "ArrowClass")
 class Arrow : gid.gtk3.misc.Misc
 {
 

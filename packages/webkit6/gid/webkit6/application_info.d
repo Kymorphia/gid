@@ -11,6 +11,7 @@ import gid.webkit6.types;
 /**
     Information about an application running in automation mode.
 */
+@gidGir("ApplicationInfo")
 class ApplicationInfo : gid.gobject2.boxed.BoxedWrap!(webkit_application_info_get_type)
 {
 

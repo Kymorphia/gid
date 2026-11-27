@@ -181,6 +181,7 @@ import gid.gobject2.object;
     }
     ```
 */
+@gidGir("SimpleAsyncResult", "SimpleAsyncResultClass")
 class SimpleAsyncResult : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.AsyncResult
 {
 

@@ -14,6 +14,7 @@ import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 
 /** */
+@gidGir("DragContext")
 class DragContext : gid.gobject2.object.ObjectWrap
 {
 

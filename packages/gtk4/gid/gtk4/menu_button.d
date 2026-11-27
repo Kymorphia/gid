@@ -86,6 +86,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.menu_button.MenuButton] uses the [gid.gtk4.types.AccessibleRole.Button] role.
 */
+@gidGir("MenuButton")
 class MenuButton : gid.gtk4.widget.Widget
 {
 

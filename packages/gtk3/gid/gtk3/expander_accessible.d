@@ -15,6 +15,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ExpanderAccessible", "ExpanderAccessibleClass")
 class ExpanderAccessible : gid.gtk3.container_accessible.ContainerAccessible, gid.atk1.action.Action
 {
 

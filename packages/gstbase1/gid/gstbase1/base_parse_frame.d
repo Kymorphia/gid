@@ -18,6 +18,7 @@ import gid.gstbase1.types;
     only to some a particular one.  These parameters are effectively zeroed at start
     of each frame's processing, i.e. parsing virtual method invocation sequence.
 */
+@gidGir("BaseParseFrame")
 class BaseParseFrame : gid.gobject2.boxed.BoxedWrap!(gst_base_parse_frame_get_type)
 {
 

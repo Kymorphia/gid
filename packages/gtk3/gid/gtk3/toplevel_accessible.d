@@ -11,6 +11,7 @@ import gid.gtk3.types;
 import gid.gtk3.window;
 
 /** */
+@gidGir("ToplevelAccessible", "ToplevelAccessibleClass")
 class ToplevelAccessible : gid.atk1.object.ObjectWrap
 {
 

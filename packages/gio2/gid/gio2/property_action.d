@@ -67,6 +67,7 @@ import gid.gobject2.object;
     see [gid.gio2.settings.Settings.createAction] instead, and possibly combine its
     use with [gid.gio2.settings.Settings.bind].
 */
+@gidGir("PropertyAction")
 class PropertyAction : gid.gobject2.object.ObjectWrap, gid.gio2.action.Action
 {
 

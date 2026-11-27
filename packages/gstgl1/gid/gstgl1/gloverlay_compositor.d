@@ -16,6 +16,7 @@ import gid.gstgl1.types;
 /**
     Opaque #GstGLOverlayCompositor object
 */
+@gidGir("GLOverlayCompositor", "GLOverlayCompositorClass")
 class GLOverlayCompositor : gid.gst1.object.ObjectWrap
 {
 

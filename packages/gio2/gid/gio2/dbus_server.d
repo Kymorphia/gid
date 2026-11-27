@@ -38,6 +38,7 @@ import gid.gobject2.object;
     the [gid.gio2.types.DBusServerFlags.AuthenticationRequireSameUser] flag to the
     server.
 */
+@gidGir("DBusServer")
 class DBusServer : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
 {
 

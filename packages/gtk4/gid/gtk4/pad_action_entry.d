@@ -10,6 +10,7 @@ import gid.gtk4.types;
 /**
     Struct defining a pad action entry.
 */
+@gidGir("PadActionEntry")
 class PadActionEntry : StructWrap!(GtkPadActionEntry)
 {
   /**

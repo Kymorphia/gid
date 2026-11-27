@@ -14,6 +14,7 @@ import gid.gobject2.boxed;
     A GMatchInfo is an opaque struct used to return information about
     matches.
 */
+@gidGir("MatchInfo")
 class MatchInfo : gid.gobject2.boxed.BoxedWrap!(g_match_info_get_type)
 {
 

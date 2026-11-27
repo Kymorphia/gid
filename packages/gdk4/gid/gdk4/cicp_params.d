@@ -32,6 +32,7 @@ import gid.gobject2.object;
     create a variant of a color state, by changing just one of the cicp
     parameters, or just to obtain information about the color state.
 */
+@gidGir("CicpParams", "CicpParamsClass")
 class CicpParams : gid.gobject2.object.ObjectWrap
 {
 

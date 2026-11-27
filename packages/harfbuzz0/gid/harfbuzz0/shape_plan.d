@@ -19,6 +19,7 @@ import gid.harfbuzz0.types;
     of specific input parameters (script, language, direction, features,
     etc.).
 */
+@gidGir("shape_plan_t")
 class ShapePlan : gid.gobject2.boxed.BoxedWrap!(hb_gobject_shape_plan_get_type)
 {
 

@@ -14,6 +14,7 @@ import gid.gst1.types;
     Metadata type that holds information about a sample from a protection-protected
     track, including the information needed to decrypt it (if it is encrypted).
 */
+@gidGir("ProtectionMeta")
 class ProtectionMeta : StructWrap!(GstProtectionMeta)
 {
   /**

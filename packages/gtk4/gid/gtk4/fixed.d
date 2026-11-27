@@ -55,6 +55,7 @@ import gid.gtk4.widget;
     and prefer the simplicity of [gid.gtk4.fixed.Fixed], by all means use the
     widget. But you should be aware of the tradeoffs.
 */
+@gidGir("Fixed", "FixedClass")
 class Fixed : gid.gtk4.widget.Widget
 {
 

@@ -18,6 +18,7 @@ import gid.gtksource5.types;
     
     If the style is GTK_SOURCE_ANNOTATION_STYLE_NONE it will use the same color as [gid.gtksource5.space_drawer.SpaceDrawer].
 */
+@gidGir("Annotation", "AnnotationClass")
 class Annotation : gid.gobject2.object.ObjectWrap
 {
 

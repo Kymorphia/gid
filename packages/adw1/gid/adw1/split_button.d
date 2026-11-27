@@ -71,6 +71,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.split_button.SplitButton] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("SplitButton", "SplitButtonClass")
 class SplitButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

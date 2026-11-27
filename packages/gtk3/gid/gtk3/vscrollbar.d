@@ -26,6 +26,7 @@ import gid.gtk3.types;
     
     GtkVScrollbar has been deprecated, use #GtkScrollbar instead.
 */
+@gidGir("VScrollbar", "VScrollbarClass")
 class VScrollbar : gid.gtk3.scrollbar.Scrollbar
 {
 

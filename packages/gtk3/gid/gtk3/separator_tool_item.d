@@ -31,6 +31,7 @@ import gid.gtk3.widget;
     
     GtkSeparatorToolItem has a single CSS node with name separator.
 */
+@gidGir("SeparatorToolItem", "SeparatorToolItemClass")
 class SeparatorToolItem : gid.gtk3.tool_item.ToolItem
 {
 

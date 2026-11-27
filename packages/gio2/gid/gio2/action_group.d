@@ -59,6 +59,7 @@ import gid.gobject2.object;
     not be implemented — their ‘wrappers’ are actually implemented with
     calls to [gid.gio2.action_group.ActionGroup.queryAction].
 */
+@gidGir("ActionGroup", "ActionGroupInterface")
 interface ActionGroup : GidWrap
 {
 

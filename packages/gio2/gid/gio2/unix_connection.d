@@ -28,6 +28,7 @@ import gid.gobject2.object;
     interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file when
     using it. This is no longer necessary since GLib 2.72.
 */
+@gidGir("UnixConnection", "UnixConnectionClass")
 class UnixConnection : gid.gio2.socket_connection.SocketConnection
 {
 

@@ -4,9 +4,16 @@ module gid.glibunix2.c.types;
 public import gid.core.basictypes;
 public import gid.glib2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GLibUnix";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     Mnemonic constants for the ends of a Unix pipe.
 */
+@gidGir("PipeEnd")
 enum GUnixPipeEnd
 {
   /**
@@ -25,6 +32,7 @@ enum GUnixPipeEnd
     be closed automatically when it goes out of scope, using `g_auto(GUnixPipe)`,
     on compilers that support that feature.
 */
+@gidGir("Pipe")
 struct GUnixPipe
 {
   /**

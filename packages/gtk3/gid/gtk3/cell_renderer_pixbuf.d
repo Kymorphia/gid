@@ -27,6 +27,7 @@ import gid.gtk3.types;
     and the #GtkCellRendererPixbuf:pixbuf-expander-closed property is set to a
     pixbuf, it renders that one.
 */
+@gidGir("CellRendererPixbuf", "CellRendererPixbufClass")
 class CellRendererPixbuf : gid.gtk3.cell_renderer.CellRenderer
 {
 

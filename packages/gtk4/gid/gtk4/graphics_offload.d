@@ -53,6 +53,7 @@ import gid.gtk4.widget;
     
     The GTK inspector provides a visual debugging tool for graphics offload.
 */
+@gidGir("GraphicsOffload", "GraphicsOffloadClass")
 class GraphicsOffload : gid.gtk4.widget.Widget
 {
 

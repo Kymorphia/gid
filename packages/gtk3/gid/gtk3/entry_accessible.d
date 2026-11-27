@@ -19,6 +19,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget_accessible;
 
 /** */
+@gidGir("EntryAccessible", "EntryAccessibleClass")
 class EntryAccessible : gid.gtk3.widget_accessible.WidgetAccessible, gid.atk1.action.Action, gid.atk1.editable_text.EditableText, gid.atk1.text.Text
 {
 

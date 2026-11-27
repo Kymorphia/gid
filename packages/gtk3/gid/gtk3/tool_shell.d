@@ -16,6 +16,7 @@ import gid.pango1.types;
     The #GtkToolShell interface allows container widgets to provide additional
     information when embedding #GtkToolItem widgets.
 */
+@gidGir("ToolShell", "ToolShellIface")
 interface ToolShell : GidWrap
 {
 

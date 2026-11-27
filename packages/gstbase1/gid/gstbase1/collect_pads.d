@@ -54,6 +54,7 @@ import gid.gstbase1.types;
         Thus these pads may but need not have data when the callback is called.
         All pads are in waiting mode by default.
 */
+@gidGir("CollectPads", "CollectPadsClass")
 class CollectPads : gid.gst1.object.ObjectWrap
 {
 

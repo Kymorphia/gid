@@ -15,6 +15,7 @@ import gid.gobject2.param_spec;
     An [gid.adw1.animation_target.AnimationTarget] changing the value of a property of a
     [gid.gobject2.object.ObjectWrap] instance.
 */
+@gidGir("PropertyAnimationTarget", "PropertyAnimationTargetClass")
 class PropertyAnimationTarget : gid.adw1.animation_target.AnimationTarget
 {
 

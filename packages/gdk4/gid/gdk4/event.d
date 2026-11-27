@@ -23,6 +23,7 @@ import gid.gobject2.object;
     
     [gid.gdk4.event.Event] structs are immutable.
 */
+@gidGir("Event")
 class Event : ReffedWrap!(GdkEvent*, gdk_event_ref, gdk_event_unref)
 {
 

@@ -29,6 +29,7 @@ import gid.gobject2.value;
     
     Also see [gid.gdk4.content_deserializer.ContentDeserializer].
 */
+@gidGir("ContentSerializer")
 class ContentSerializer : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.AsyncResult
 {
 

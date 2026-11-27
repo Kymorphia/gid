@@ -42,6 +42,7 @@ import gid.gst1.types;
     Also, a non-persistent context won't override a previous persistent
     context set to an element.
 */
+@gidGir("Context")
 class Context : gid.gobject2.boxed.BoxedWrap!(gst_context_get_type)
 {
 

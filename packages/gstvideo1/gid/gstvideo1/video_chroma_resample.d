@@ -8,6 +8,7 @@ import gid.gstvideo1.c.types;
 import gid.gstvideo1.types;
 
 /** */
+@gidGir("VideoChromaResample")
 class VideoChromaResample : OpaqueWrap!(GstVideoChromaResample*, void, void)
 {
 

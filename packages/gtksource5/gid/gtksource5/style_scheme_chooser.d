@@ -20,6 +20,7 @@ import gid.gtksource5.types;
     In GtkSourceView, the main widgets that implement this interface are
     [gid.gtksource5.style_scheme_chooser_widget.StyleSchemeChooserWidget] and [gid.gtksource5.style_scheme_chooser_button.StyleSchemeChooserButton].
 */
+@gidGir("StyleSchemeChooser", "StyleSchemeChooserInterface")
 interface StyleSchemeChooser : GidWrap
 {
 

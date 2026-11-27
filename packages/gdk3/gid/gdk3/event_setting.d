@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated when a setting is modified.
 */
+@gidGir("EventSetting")
 class EventSetting : StructWrap!(GdkEventSetting, gdk_event_copy, gdk_event_free)
 {
   /**

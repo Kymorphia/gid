@@ -13,6 +13,7 @@ import gid.gobject2.value;
     The GObjectConstructParam struct is an auxiliary structure used to hand
     #GParamSpec/#GValue pairs to the @constructor of a #GObjectClass.
 */
+@gidGir("ObjectConstructParam")
 class ObjectConstructParam : StructWrap!(GObjectConstructParam)
 {
   /**

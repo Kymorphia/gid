@@ -14,6 +14,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget;
 
 /** */
+@gidGir("NotebookPageAccessible", "NotebookPageAccessibleClass")
 class NotebookPageAccessible : gid.atk1.object.ObjectWrap, gid.atk1.component.Component
 {
 

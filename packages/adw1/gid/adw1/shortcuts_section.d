@@ -28,6 +28,7 @@ import gid.gtk4.buildable_mixin;
     
     [gid.adw1.shortcuts_section.ShortcutsSection] allows adding [gid.adw1.shortcuts_item.ShortcutsItem] objects as children.
 */
+@gidGir("ShortcutsSection", "ShortcutsSectionClass")
 class ShortcutsSection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.buildable.Buildable
 {
 

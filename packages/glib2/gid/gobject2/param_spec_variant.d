@@ -17,6 +17,7 @@ import gid.gobject2.types;
     otherwise undefined. null is ordered before non-null variants. Two null
     values compare equal.
 */
+@gidGir("ParamSpecVariant")
 class ParamSpecVariant : gid.gobject2.param_spec.ParamSpec
 {
 

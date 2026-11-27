@@ -44,6 +44,7 @@ import gid.gtk3.widget;
     
     GtkToolButton has a single CSS node with name toolbutton.
 */
+@gidGir("ToolButton", "ToolButtonClass")
 class ToolButton : gid.gtk3.tool_item.ToolItem, gid.gtk3.actionable.Actionable
 {
 

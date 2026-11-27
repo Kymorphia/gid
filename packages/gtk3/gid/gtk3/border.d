@@ -11,6 +11,7 @@ import gid.gtk3.types;
     A struct that specifies a border around a rectangular area
     that can be of different width on each side.
 */
+@gidGir("Border")
 struct Border
 {
   /**

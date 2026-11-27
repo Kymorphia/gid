@@ -28,6 +28,7 @@ import gid.gobject2.gid_builder;
     [`lseek()`](man:lseek(2)) on a normal file.  Seeking past the end and writing
     data will usually cause the stream to resize by introducing zero bytes.
 */
+@gidGir("Seekable", "SeekableIface")
 interface Seekable : GidWrap
 {
 

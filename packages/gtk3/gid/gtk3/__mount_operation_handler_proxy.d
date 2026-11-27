@@ -10,6 +10,7 @@ import gid.gtk3.types;
 /**
     The #_GtkMountOperationHandlerProxy structure contains only private data and should only be accessed using the provided API.
 */
+@gidGir("_MountOperationHandlerProxy")
 class MountOperationHandlerProxy : StructWrap!(_GtkMountOperationHandlerProxy)
 {
   /**

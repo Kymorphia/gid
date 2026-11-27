@@ -34,6 +34,7 @@ import gid.gsk4.types;
       <img alt="A Path" src="path-light.png">
     </picture>
 */
+@gidGir("Path")
 class Path : gid.gobject2.boxed.BoxedWrap!(gsk_path_get_type)
 {
 

@@ -18,6 +18,7 @@ import gid.gobject2.object;
 /**
     A MIME Message object.
 */
+@gidGir("Message", "MessageClass")
 class Message : gid.gmime3.object.ObjectWrap
 {
 

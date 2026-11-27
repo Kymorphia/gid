@@ -24,6 +24,7 @@ import gid.gtksource5.types;
     passes through the text btree allowing GtkSourceView to reach more
     frames-per-second while performing kinetic scrolling.
 */
+@gidGir("GutterLines", "GutterLinesClass")
 class GutterLines : gid.gobject2.object.ObjectWrap
 {
 

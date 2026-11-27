@@ -17,6 +17,7 @@ import gid.webkit6.types;
     navigations. If the value of #WebKitNavigationPolicyDecision:mouse-button is not 0, then
     the navigation was triggered by a mouse event.
 */
+@gidGir("NavigationPolicyDecision", "NavigationPolicyDecisionClass")
 class NavigationPolicyDecision : gid.webkit6.policy_decision.PolicyDecision
 {
 

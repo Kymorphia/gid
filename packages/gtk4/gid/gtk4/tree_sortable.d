@@ -23,6 +23,7 @@ import gid.gtk4.types;
     Deprecated: There is no replacement for this interface. You should
         use [gid.gtk4.sort_list_model.SortListModel] to wrap your list model instead
 */
+@gidGir("TreeSortable", "TreeSortableIface")
 interface TreeSortable : gid.gtk4.tree_model.TreeModel
 {
 

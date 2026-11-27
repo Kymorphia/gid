@@ -38,6 +38,7 @@ import gid.gtksource5.view;
     in ascending order, from left to right. So the marks are displayed on the
     right of the line numbers.
 */
+@gidGir("Gutter", "GutterClass")
 class Gutter : gid.gtk4.widget.Widget
 {
 

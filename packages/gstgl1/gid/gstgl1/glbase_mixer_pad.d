@@ -10,6 +10,7 @@ import gid.gstgl1.types;
 import gid.gstvideo1.video_aggregator_pad;
 
 /** */
+@gidGir("GLBaseMixerPad", "GLBaseMixerPadClass")
 class GLBaseMixerPad : gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad
 {
 

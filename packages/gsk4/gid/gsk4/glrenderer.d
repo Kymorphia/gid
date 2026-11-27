@@ -14,6 +14,7 @@ import gid.gsk4.types;
     
     See [gid.gsk4.renderer.Renderer].
 */
+@gidGir("GLRenderer", "GLRendererClass")
 class GLRenderer : gid.gsk4.renderer.Renderer
 {
 

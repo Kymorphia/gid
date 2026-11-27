@@ -12,6 +12,7 @@ import gid.gobject2.value;
 /**
     A #GCClosure is a specialization of #GClosure for C function callbacks.
 */
+@gidGir("CClosure")
 class CClosure : StructWrap!(GCClosure)
 {
   /**

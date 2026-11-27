@@ -155,6 +155,7 @@ import gid.gobject2.object;
     callback on the data, which allows to e.g. write the image
     to a socket or store it in a database.
 */
+@gidGir("Pixbuf")
 class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.loadable_icon.LoadableIcon
 {
 

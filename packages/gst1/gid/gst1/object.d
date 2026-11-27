@@ -66,6 +66,7 @@ import gid.gst1.types;
     
       * start your pipeline
 */
+@gidGir("Object", "ObjectClass")
 class ObjectWrap : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

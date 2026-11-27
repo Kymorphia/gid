@@ -41,6 +41,7 @@ import gid.pango1.layout;
     Usually applications should not need to use or modify the #GtkStyle of
     their widgets.
 */
+@gidGir("Style", "StyleClass")
 class Style : gid.gobject2.object.ObjectWrap
 {
 

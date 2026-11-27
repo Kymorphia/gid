@@ -12,6 +12,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_int.AttrInt] structure is used to represent attributes with
     an integer or enumeration value.
 */
+@gidGir("AttrInt")
 class AttrInt : StructWrap!(PangoAttrInt)
 {
   /**

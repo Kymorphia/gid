@@ -85,6 +85,7 @@ import gid.pango1.layout;
     }
     ```
 */
+@gidGir("PrintContext")
 class PrintContext : gid.gobject2.object.ObjectWrap
 {
 

@@ -29,6 +29,7 @@ import gid.webkit6.types;
     authentication asynchronously, simply increase the reference count of the
     WebKitAuthenticationRequest object.
 */
+@gidGir("AuthenticationRequest", "AuthenticationRequestClass")
 class AuthenticationRequest : gid.gobject2.object.ObjectWrap
 {
 

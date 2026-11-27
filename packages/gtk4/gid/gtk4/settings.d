@@ -43,6 +43,7 @@ import gid.gtk4.types;
     [gid.gtk4.settings.Settings.getForDisplay], but in many cases, it is more
     convenient to use [gid.gtk4.widget.Widget.getSettings].
 */
+@gidGir("Settings")
 class Settings : gid.gobject2.object.ObjectWrap, gid.gtk4.style_provider.StyleProvider
 {
 

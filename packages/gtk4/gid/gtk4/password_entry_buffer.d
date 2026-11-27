@@ -15,6 +15,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.password_entry.PasswordEntry] uses a [gid.gtk4.password_entry_buffer.PasswordEntryBuffer].
 */
+@gidGir("PasswordEntryBuffer", "PasswordEntryBufferClass")
 class PasswordEntryBuffer : gid.gtk4.entry_buffer.EntryBuffer
 {
 

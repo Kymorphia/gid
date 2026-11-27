@@ -3,6 +3,12 @@ module gid.glib2.c.types;
 
 public import gid.core.basictypes;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GLib";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     Integer representing a day of the month; between 1 and 31.
     
@@ -141,6 +147,7 @@ alias GTimeSpan = long;
 alias GIConv = void*;
 
 /** */
+@gidGir("AsciiType")
 enum GAsciiType : uint
 {
   /** */
@@ -180,6 +187,7 @@ enum GAsciiType : uint
 /**
     Error codes returned by bookmark file parsing.
 */
+@gidGir("BookmarkFileError")
 enum GBookmarkFileError
 {
   /**
@@ -232,6 +240,7 @@ enum GBookmarkFileError
     Note that the #GChecksumType enumeration may be extended at a later
     date to include new hashing algorithm types.
 */
+@gidGir("ChecksumType")
 enum GChecksumType
 {
   /**
@@ -263,6 +272,7 @@ enum GChecksumType
 /**
     Error codes returned by character set conversion routines.
 */
+@gidGir("ConvertError")
 enum GConvertError
 {
   /**
@@ -315,6 +325,7 @@ enum GConvertError
     This enumeration isn't used in the API, but may be useful if you need
     to mark a number as a day, month, or year.
 */
+@gidGir("DateDMY")
 enum GDateDMY
 {
   /**
@@ -337,6 +348,7 @@ enum GDateDMY
     Enumeration representing a month; values are [gid.glib2.types.DateMonth.January],
     [gid.glib2.types.DateMonth.February], etc. [gid.glib2.types.DateMonth.BadMonth] is the invalid value.
 */
+@gidGir("DateMonth")
 enum GDateMonth
 {
   /**
@@ -409,6 +421,7 @@ enum GDateMonth
     Enumeration representing a day of the week; [gid.glib2.types.DateWeekday.Monday],
     [gid.glib2.types.DateWeekday.Tuesday], etc. [gid.glib2.types.DateWeekday.BadWeekday] is an invalid weekday.
 */
+@gidGir("DateWeekday")
 enum GDateWeekday
 {
   /**
@@ -456,6 +469,7 @@ enum GDateWeekday
     The possible errors, used in the @v_error field
     of #GTokenValue, when the token is a [gid.glib2.types.TokenType.Error].
 */
+@gidGir("ErrorType")
 enum GErrorType
 {
   /**
@@ -513,6 +527,7 @@ enum GErrorType
     don't occur on some systems, etc., sometimes there are subtle
     differences in when a system will report a given error, etc.
 */
+@gidGir("FileError")
 enum GFileError
 {
   /**
@@ -687,6 +702,7 @@ enum GFileError
     Flags to pass to [gid.glib2.global.fileSetContentsFull] to affect its safety and
     performance.
 */
+@gidGir("FileSetContentsFlags")
 enum GFileSetContentsFlags : uint
 {
   /**
@@ -725,6 +741,7 @@ enum GFileSetContentsFlags : uint
 /**
     A test to perform on a file using [gid.glib2.global.fileTest].
 */
+@gidGir("FileTest")
 enum GFileTest : uint
 {
   /**
@@ -759,6 +776,7 @@ enum GFileTest : uint
 /**
     Flags to modify the format of the string returned by [gid.glib2.global.formatSizeFull].
 */
+@gidGir("FormatSizeFlags")
 enum GFormatSizeFlags : uint
 {
   /**
@@ -804,6 +822,7 @@ enum GFormatSizeFlags : uint
 /**
     Flags used internally in the #GHook implementation.
 */
+@gidGir("HookFlagMask")
 enum GHookFlagMask : uint
 {
   /**
@@ -823,6 +842,7 @@ enum GHookFlagMask : uint
 /**
     Error codes returned by #GIOChannel operations.
 */
+@gidGir("IOChannelError")
 enum GIOChannelError
 {
   /**
@@ -875,6 +895,7 @@ enum GIOChannelError
     A bitwise combination representing a condition to watch for on an
     event source.
 */
+@gidGir("IOCondition")
 enum GIOCondition : uint
 {
   /**
@@ -913,6 +934,7 @@ enum GIOCondition : uint
     #GIOError is only used by the deprecated functions
     [gid.glib2.iochannel.IOChannel.read], [gid.glib2.iochannel.IOChannel.write], and [gid.glib2.iochannel.IOChannel.seek].
 */
+@gidGir("IOError")
 enum GIOError
 {
   /**
@@ -941,6 +963,7 @@ enum GIOError
     read with [gid.glib2.iochannel.IOChannel.getFlags], but not changed with
     [gid.glib2.iochannel.IOChannel.setFlags].
 */
+@gidGir("IOFlags")
 enum GIOFlags : uint
 {
   /**
@@ -1008,6 +1031,7 @@ enum GIOFlags : uint
 /**
     Statuses returned by most of the #GIOFuncs functions.
 */
+@gidGir("IOStatus")
 enum GIOStatus
 {
   /**
@@ -1034,6 +1058,7 @@ enum GIOStatus
 /**
     Error codes returned by key file parsing.
 */
+@gidGir("KeyFileError")
 enum GKeyFileError
 {
   /**
@@ -1071,6 +1096,7 @@ enum GKeyFileError
 /**
     Flags which influence the parsing.
 */
+@gidGir("KeyFileFlags")
 enum GKeyFileFlags : uint
 {
   /**
@@ -1101,6 +1127,7 @@ enum GKeyFileFlags : uint
     It is possible to change how GLib treats messages of the various
     levels using `func@GLib.log_set_handler` and `func@GLib.log_set_fatal_mask`.
 */
+@gidGir("LogLevelFlags")
 enum GLogLevelFlags : uint
 {
   /**
@@ -1160,6 +1187,7 @@ enum GLogLevelFlags : uint
     If a #GLogWriterFunc ignores a log entry, it should return
     [gid.glib2.types.LogWriterOutput.Handled].
 */
+@gidGir("LogWriterOutput")
 enum GLogWriterOutput
 {
   /**
@@ -1177,6 +1205,7 @@ enum GLogWriterOutput
     Flags to pass to [gid.glib2.main_context.MainContext.newWithFlags] which affect the
     behaviour of a [gid.glib2.main_context.MainContext].
 */
+@gidGir("MainContextFlags")
 enum GMainContextFlags : uint
 {
   /**
@@ -1201,6 +1230,7 @@ enum GMainContextFlags : uint
     It is likely that this enum will be extended in the future to
     support other types.
 */
+@gidGir("MarkupCollectType")
 enum GMarkupCollectType : uint
 {
   /**
@@ -1252,6 +1282,7 @@ enum GMarkupCollectType : uint
 /**
     Error codes returned by markup parsing.
 */
+@gidGir("MarkupError")
 enum GMarkupError
 {
   /**
@@ -1297,6 +1328,7 @@ enum GMarkupError
 /**
     Flags that affect the behaviour of the parser.
 */
+@gidGir("MarkupParseFlags")
 enum GMarkupParseFlags : uint
 {
   /**
@@ -1343,6 +1375,7 @@ enum GMarkupParseFlags : uint
     accent or as a single precomposed character. Unicode strings
     should generally be normalized before comparing them.
 */
+@gidGir("NormalizeMode")
 enum GNormalizeMode
 {
   /**
@@ -1396,6 +1429,7 @@ enum GNormalizeMode
 /**
     Error codes returned by functions converting a string to a number.
 */
+@gidGir("NumberParserError")
 enum GNumberParserError
 {
   /**
@@ -1413,6 +1447,7 @@ enum GNumberParserError
     The possible statuses of a one-time initialization function
     controlled by a #GOnce struct.
 */
+@gidGir("OnceStatus")
 enum GOnceStatus
 {
   /**
@@ -1437,6 +1472,7 @@ enum GOnceStatus
     be specified in several ways; with a short option: `-x arg`, with a long
     option: `--name arg` or combined in a single argument: `--name=arg`.
 */
+@gidGir("OptionArg")
 enum GOptionArg
 {
   /**
@@ -1497,6 +1533,7 @@ enum GOptionArg
 /**
     Error codes returned by option parsing.
 */
+@gidGir("OptionError")
 enum GOptionError
 {
   /**
@@ -1520,6 +1557,7 @@ enum GOptionError
 /**
     Flags which modify individual options.
 */
+@gidGir("OptionFlags")
 enum GOptionFlags : uint
 {
   /**
@@ -1590,6 +1628,7 @@ enum GOptionFlags : uint
 /**
     Flags specifying compile-time options.
 */
+@gidGir("RegexCompileFlags")
 enum GRegexCompileFlags : uint
 {
   /**
@@ -1722,6 +1761,7 @@ enum GRegexCompileFlags : uint
 /**
     Error codes returned by regular expressions functions.
 */
+@gidGir("RegexError")
 enum GRegexError
 {
   /**
@@ -2056,6 +2096,7 @@ enum GRegexError
 /**
     Flags specifying match-time options.
 */
+@gidGir("RegexMatchFlags")
 enum GRegexMatchFlags : uint
 {
   /**
@@ -2187,6 +2228,7 @@ enum GRegexMatchFlags : uint
     An enumeration specifying the base position for a
     [gid.glib2.iochannel.IOChannel.seekPosition] operation.
 */
+@gidGir("SeekType")
 enum GSeekType
 {
   /**
@@ -2208,6 +2250,7 @@ enum GSeekType
 /**
     Error codes returned by shell functions.
 */
+@gidGir("ShellError")
 enum GShellError
 {
   /**
@@ -2227,6 +2270,7 @@ enum GShellError
 }
 
 /** */
+@gidGir("SliceConfig")
 enum GSliceConfig
 {
   /** */
@@ -2251,6 +2295,7 @@ enum GSliceConfig
 /**
     Error codes returned by spawning processes.
 */
+@gidGir("SpawnError")
 enum GSpawnError
 {
   /**
@@ -2363,6 +2408,7 @@ enum GSpawnError
 /**
     Flags passed to [gid.glib2.global.spawnSync], [gid.glib2.global.spawnAsync] and [gid.glib2.global.spawnAsyncWithPipes].
 */
+@gidGir("SpawnFlags")
 enum GSpawnFlags : uint
 {
   /**
@@ -2463,6 +2509,7 @@ enum GSpawnFlags : uint
     
     The same principles apply for other build systems, such as meson.
 */
+@gidGir("TestFileType")
 enum GTestFileType
 {
   /**
@@ -2477,6 +2524,7 @@ enum GTestFileType
 }
 
 /** */
+@gidGir("TestLogType")
 enum GTestLogType
 {
   /** */
@@ -2517,6 +2565,7 @@ enum GTestLogType
 }
 
 /** */
+@gidGir("TestResult")
 enum GTestResult
 {
   /** */
@@ -2539,6 +2588,7 @@ enum GTestResult
     behavior of `func@GLib.test_trap_subprocess` is to not show stdout
     and stderr.
 */
+@gidGir("TestSubprocessFlags")
 enum GTestSubprocessFlags : uint
 {
   /**
@@ -2585,6 +2635,7 @@ enum GTestSubprocessFlags : uint
         which is deprecated. Its replacement, `func@GLib.test_trap_subprocess` uses
         [gid.glib2.types.TestSubprocessFlags].
 */
+@gidGir("TestTrapFlags")
 enum GTestTrapFlags : uint
 {
   /**
@@ -2619,6 +2670,7 @@ enum GTestTrapFlags : uint
 /**
     Possible errors of thread related functions.
 */
+@gidGir("ThreadError")
 enum GThreadError
 {
   /**
@@ -2633,6 +2685,7 @@ enum GThreadError
 
     Deprecated: Thread priorities no longer have any effect.
 */
+@gidGir("ThreadPriority")
 enum GThreadPriority
 {
   /**
@@ -2666,6 +2719,7 @@ enum GThreadPriority
     where the same local time occurs twice (during daylight savings time
     transitions, for example).
 */
+@gidGir("TimeType")
 enum GTimeType
 {
   /**
@@ -2688,6 +2742,7 @@ enum GTimeType
     The possible types of token returned from each
     [gid.glib2.scanner.Scanner.getNextToken] call.
 */
+@gidGir("TokenType")
 enum GTokenType
 {
   /**
@@ -2810,6 +2865,7 @@ enum GTokenType
     Specifies which nodes are visited during several of the tree
     functions, including [gid.glib2.node.Node.traverse] and [gid.glib2.node.Node.find].
 */
+@gidGir("TraverseFlags")
 enum GTraverseFlags : uint
 {
   /**
@@ -2882,6 +2938,7 @@ enum GTraverseFlags : uint
          alt="Sorted binary tree, breadth-first level order traversal">
       </picture>
 */
+@gidGir("TraverseType")
 enum GTraverseType
 {
   /**
@@ -2921,6 +2978,7 @@ enum GTraverseType
     
     See [Unicode Line Breaking Algorithm](https://www.unicode.org/reports/tr14/).
 */
+@gidGir("UnicodeBreakType")
 enum GUnicodeBreakType
 {
   /**
@@ -3184,6 +3242,7 @@ enum GUnicodeBreakType
     should be ready to handle unknown values.
     See [Unicode Standard Annex #24: Script names](http://www.unicode.org/reports/tr24/).
 */
+@gidGir("UnicodeScript")
 enum GUnicodeScript
 {
   /**
@@ -4078,6 +4137,7 @@ enum GUnicodeScript
     Unicode specification.
     See [Unicode Character Database](http://www.unicode.org/reports/tr44/#General_Category_Values).
 */
+@gidGir("UnicodeType")
 enum GUnicodeType
 {
   /**
@@ -4234,6 +4294,7 @@ enum GUnicodeType
 /**
     Error codes returned by #GUri methods.
 */
+@gidGir("UriError")
 enum GUriError
 {
   /**
@@ -4296,6 +4357,7 @@ enum GUriError
     to check the scheme first, and use that to decide what flags to
     parse it with.
 */
+@gidGir("UriFlags")
 enum GUriFlags : uint
 {
   /**
@@ -4374,6 +4436,7 @@ enum GUriFlags : uint
     [gid.glib2.types.UriHideFlags.AuthParams] will only work if the #GUri was parsed with
     the corresponding flags.
 */
+@gidGir("UriHideFlags")
 enum GUriHideFlags : uint
 {
   /**
@@ -4411,6 +4474,7 @@ enum GUriHideFlags : uint
     Flags modifying the way parameters are handled by [gid.glib2.uri.Uri.parseParams] and
     #GUriParamsIter.
 */
+@gidGir("UriParamsFlags")
 enum GUriParamsFlags : uint
 {
   /**
@@ -4444,6 +4508,7 @@ enum GUriParamsFlags : uint
     every platform has a directory for every logical id in this
     enumeration.
 */
+@gidGir("UserDirectory")
 enum GUserDirectory
 {
   /**
@@ -4495,6 +4560,7 @@ enum GUserDirectory
 /**
     The range of possible top-level types of #GVariant instances.
 */
+@gidGir("VariantClass")
 enum GVariantClass
 {
   /**
@@ -4593,6 +4659,7 @@ enum GVariantClass
 /**
     Error codes returned by parsing text-format GVariants.
 */
+@gidGir("VariantParseError")
 enum GVariantParseError
 {
   /**
@@ -4692,6 +4759,7 @@ enum GVariantParseError
 }
 
 /** */
+@gidGir("Allocator")
 struct GAllocator;
 
 /**
@@ -4979,6 +5047,7 @@ struct GCond
     
     See also: [Keyed data lists](datalist-and-dataset.html).
 */
+@gidGir("Data")
 struct GData;
 
 /**
@@ -5321,6 +5390,7 @@ struct GIOChannel;
     A table of functions used to handle different types of #GIOChannel
     in a generic way.
 */
+@gidGir("IOFuncs")
 struct GIOFuncs
 {
   /**
@@ -5612,6 +5682,7 @@ struct GMarkupParseContext;
     the scope and limitations of [gid.glib2.types.MarkupParser]. In particular, it is not a
     full XML parser and it must not be used to process untrusted data.
 */
+@gidGir("MarkupParser")
 struct GMarkupParser
 {
   /**
@@ -5668,6 +5739,7 @@ struct GMemChunk;
     
     This functions related to this has been deprecated in 2.46, and no longer work.
 */
+@gidGir("MemVTable")
 struct GMemVTable
 {
   /**
@@ -5835,6 +5907,7 @@ struct GOptionContext;
     must be added to a #GOptionGroup with [gid.glib2.option_context.OptionContext.addMainEntries]
     or [gid.glib2.option_group.OptionGroup.addEntries].
 */
+@gidGir("OptionEntry")
 struct GOptionEntry
 {
   /**
@@ -5962,6 +6035,7 @@ struct GPatternSpec;
     Represents a file descriptor, which events to poll for, and which events
     occurred.
 */
+@gidGir("PollFD")
 struct GPollFD
 {
   /**
@@ -6679,6 +6753,7 @@ struct GSource
     The [gid.glib2.types.SourceCallbackFuncs] struct contains
     functions for managing callback objects.
 */
+@gidGir("SourceCallbackFuncs")
 struct GSourceCallbackFuncs
 {
   /**
@@ -6720,6 +6795,7 @@ struct GSourceCallbackFuncs
     check function, it tests the results of the poll() call to see if the
     required condition has been met, and returns true if so.
 */
+@gidGir("SourceFuncs")
 struct GSourceFuncs
 {
   /**
@@ -6779,6 +6855,7 @@ struct GSourceFuncs
 }
 
 /** */
+@gidGir("SourcePrivate")
 struct GSourcePrivate;
 
 /**
@@ -6787,6 +6864,7 @@ struct GSourcePrivate;
     
     See [gid.glib2.global.stat] for more information.
 */
+@gidGir("StatBuf")
 struct GStatBuf;
 
 /**
@@ -7085,9 +7163,11 @@ struct GStrvBuilder;
 /**
     An opaque structure representing a test case.
 */
+@gidGir("TestCase")
 struct GTestCase;
 
 /** */
+@gidGir("TestConfig")
 struct GTestConfig
 {
   /** */
@@ -7177,6 +7257,7 @@ struct GThread
     This function table is no longer used by [gid.glib2.thread.Thread.init_]
     to initialize the thread system.
 */
+@gidGir("ThreadFunctions")
 struct GThreadFunctions
 {
   /**
@@ -7482,6 +7563,7 @@ union GTokenValue
 
     Deprecated: [gid.glib2.types.TrashStack] is deprecated without replacement
 */
+@gidGir("TrashStack")
 struct GTrashStack
 {
   /**

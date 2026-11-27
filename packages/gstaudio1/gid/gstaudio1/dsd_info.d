@@ -61,6 +61,7 @@ import gid.gstaudio1.types;
     
     Use the provided macros to access the info in this structure.
 */
+@gidGir("DsdInfo")
 struct DsdInfo
 {
   /**

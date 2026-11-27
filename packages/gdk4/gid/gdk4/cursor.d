@@ -46,6 +46,7 @@ import gid.gobject2.object;
     easier to support cursors. If none of the provided cursors can be supported,
     the default cursor will be the ultimate fallback.
 */
+@gidGir("Cursor")
 class Cursor : gid.gobject2.object.ObjectWrap
 {
 

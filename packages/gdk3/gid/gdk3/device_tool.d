@@ -10,6 +10,7 @@ import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 
 /** */
+@gidGir("DeviceTool")
 class DeviceTool : gid.gobject2.object.ObjectWrap
 {
 

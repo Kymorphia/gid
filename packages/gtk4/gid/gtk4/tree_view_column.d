@@ -35,6 +35,7 @@ import gid.gtk4.widget;
     Deprecated: Use [gid.gtk4.column_view.ColumnView] and [gid.gtk4.column_view_column.ColumnViewColumn]
         instead of [gid.gtk4.tree_view.TreeView] to show a tabular list
 */
+@gidGir("TreeViewColumn")
 class TreeViewColumn : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.buildable.Buildable, gid.gtk4.cell_layout.CellLayout
 {
 

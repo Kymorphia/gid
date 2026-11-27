@@ -37,6 +37,7 @@ import gid.gobject2.boxed;
     [gid.glib2.byte_array.ByteArray], use the [gid.glib2.byte_array.ByteArray.freeToBytes]
     function.
 */
+@gidGir("Bytes")
 class Bytes : gid.gobject2.boxed.BoxedWrap!(g_bytes_get_type)
 {
 

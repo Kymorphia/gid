@@ -20,6 +20,7 @@ import gid.gst1.types;
     
     Source and Sink plugins should implement this interface when possible.
 */
+@gidGir("URIHandler", "URIHandlerInterface")
 interface URIHandler : GidWrap
 {
 

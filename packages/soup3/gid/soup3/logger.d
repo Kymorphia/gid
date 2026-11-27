@@ -72,6 +72,7 @@ import gid.soup3.types;
     response will still be logged on the event of the [gid.soup3.message.Message.finished]
     signal.
 */
+@gidGir("Logger", "LoggerClass")
 class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

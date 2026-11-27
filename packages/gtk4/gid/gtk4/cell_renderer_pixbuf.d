@@ -32,6 +32,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents. You
         should use [gid.gtk4.image.Image] for icons, and [gid.gtk4.picture.Picture] for images
 */
+@gidGir("CellRendererPixbuf")
 class CellRendererPixbuf : gid.gtk4.cell_renderer.CellRenderer
 {
 

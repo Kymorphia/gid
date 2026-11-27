@@ -29,6 +29,7 @@ import gid.gtksource5.types;
     `vfunc@CompletionProvider.populate_async` to asynchronously populate the results
     to avoid blocking the main loop.
 */
+@gidGir("CompletionProvider", "CompletionProviderInterface")
 interface CompletionProvider : GidWrap
 {
 

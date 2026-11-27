@@ -18,6 +18,7 @@ import gid.gtk4.types;
     
     To add filters to a [gid.gtk4.any_filter.AnyFilter], use [gid.gtk4.multi_filter.MultiFilter.append].
 */
+@gidGir("AnyFilter", "AnyFilterClass")
 class AnyFilter : gid.gtk4.multi_filter.MultiFilter
 {
 

@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A text MIME part object.
 */
+@gidGir("TextPart", "TextPartClass")
 class TextPart : gid.gmime3.part.Part
 {
 

@@ -25,6 +25,7 @@ import gid.gtksource5.types;
     A [gid.gtksource5.gutter_renderer_pixbuf.GutterRendererPixbuf] can be used to render an image in a cell of
     [gid.gtksource5.gutter.Gutter].
 */
+@gidGir("GutterRendererPixbuf", "GutterRendererPixbufClass")
 class GutterRendererPixbuf : gid.gtksource5.gutter_renderer.GutterRenderer
 {
 

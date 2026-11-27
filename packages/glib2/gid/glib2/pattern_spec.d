@@ -26,6 +26,7 @@ import gid.gobject2.boxed;
     instead of `func@GLib.pattern_match_simple`. This avoids the overhead of repeated
     pattern compilation.
 */
+@gidGir("PatternSpec")
 class PatternSpec : gid.gobject2.boxed.BoxedWrap!(g_pattern_spec_get_type)
 {
 

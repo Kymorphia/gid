@@ -21,6 +21,7 @@ import gid.gst1.types;
     async notifications to implement their own callback methods or blocking
     wait operations.
 */
+@gidGir("SystemClock", "SystemClockClass")
 class SystemClock : gid.gst1.clock.Clock
 {
 

@@ -12,6 +12,7 @@ import gid.glib2.variant;
     #GVariantIter is an opaque data structure and can only be accessed
     using the following functions.
 */
+@gidGir("VariantIter")
 class VariantIter : OpaqueWrap!(GVariantIter*, g_variant_iter_free, void)
 {
 

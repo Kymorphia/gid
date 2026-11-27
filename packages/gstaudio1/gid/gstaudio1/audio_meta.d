@@ -15,6 +15,7 @@ import gid.gstaudio1.types;
     audio buffers. These functions in this module help to create and attach the
     meta as well as extracting it.
 */
+@gidGir("AudioMeta")
 class AudioMeta : StructWrap!(GstAudioMeta)
 {
   /**

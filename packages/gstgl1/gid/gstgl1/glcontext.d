@@ -36,6 +36,7 @@ import gid.gstgl1.types;
                        Not all platforms will support the same level of
                        functionality.
 */
+@gidGir("GLContext", "GLContextClass")
 class GLContext : gid.gst1.object.ObjectWrap
 {
 

@@ -40,6 +40,7 @@ import gid.gobject2.object;
     
     See `class@AtkPlug`
 */
+@gidGir("Socket", "SocketClass")
 class Socket : gid.atk1.object.ObjectWrap, gid.atk1.component.Component
 {
 

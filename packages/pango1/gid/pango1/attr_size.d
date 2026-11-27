@@ -12,6 +12,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_size.AttrSize] structure is used to represent attributes which
     set font size.
 */
+@gidGir("AttrSize")
 class AttrSize : StructWrap!(PangoAttrSize)
 {
   /**

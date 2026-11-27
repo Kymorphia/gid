@@ -20,6 +20,7 @@ import gid.gobject2.object;
     
     See `iface@AtkTable`
 */
+@gidGir("TableCell", "TableCellIface")
 interface TableCell : GidWrap
 {
 

@@ -118,6 +118,7 @@ import gid.gtk4.widget;
     [gid.adw1.toggle_group.ToggleGroup] uses the `enum@Gtk.AccessibleRole.radio-group` role. Its
     toggles use the [gid.gtk4.types.AccessibleRole.Radio] role.
 */
+@gidGir("ToggleGroup", "ToggleGroupClass")
 class ToggleGroup : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

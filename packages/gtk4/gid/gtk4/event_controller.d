@@ -27,6 +27,7 @@ import gid.gtk4.widget;
     an overview of the basic concepts, such as the capture and bubble
     phases of event propagation.
 */
+@gidGir("EventController", "EventControllerClass")
 class EventController : gid.gobject2.object.ObjectWrap
 {
 

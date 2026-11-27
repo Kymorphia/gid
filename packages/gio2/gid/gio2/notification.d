@@ -61,6 +61,7 @@ import gid.gobject2.object;
     In Windows, notification actions are unsupported, when sending the notification
     a warning will be printed if a default action or action buttons were added.
 */
+@gidGir("Notification")
 class Notification : gid.gobject2.object.ObjectWrap
 {
 

@@ -18,6 +18,7 @@ import gid.gstvideo1.types;
     for alpha channels to CODECs or formats that don't support that out of the
     box.
 */
+@gidGir("VideoCodecAlphaMeta")
 class VideoCodecAlphaMeta : StructWrap!(GstVideoCodecAlphaMeta)
 {
   /**

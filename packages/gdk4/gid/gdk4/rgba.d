@@ -18,6 +18,7 @@ import gid.glib2.string_;
     (1.0, 1.0, 1.0, 1.0) is opaque white. Other values will
     be clamped to this range when drawing.
 */
+@gidGir("RGBA")
 struct RGBA
 {
   /**

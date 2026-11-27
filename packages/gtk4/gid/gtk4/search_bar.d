@@ -72,6 +72,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.search_bar.SearchBar] uses the [gid.gtk4.types.AccessibleRole.Search] role.
 */
+@gidGir("SearchBar")
 class SearchBar : gid.gtk4.widget.Widget
 {
 

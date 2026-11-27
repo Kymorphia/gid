@@ -22,6 +22,7 @@ import gid.soup3.types;
     libsoup-gnome; it has just been moved into libsoup proper, and
     renamed to avoid conflicting.)
 */
+@gidGir("CookieJarDB", "CookieJarDBClass")
 class CookieJarDB : gid.soup3.cookie_jar.CookieJar
 {
 

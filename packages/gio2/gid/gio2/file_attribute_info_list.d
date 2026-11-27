@@ -13,6 +13,7 @@ import gid.gobject2.boxed;
     Acts as a lightweight registry for possible valid file attributes.
     The registry stores Key-Value pair formats as #GFileAttributeInfos.
 */
+@gidGir("FileAttributeInfoList")
 class FileAttributeInfoList : gid.gobject2.boxed.BoxedWrap!(g_file_attribute_info_list_get_type)
 {
 

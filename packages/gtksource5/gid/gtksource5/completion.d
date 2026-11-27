@@ -46,6 +46,7 @@ import gid.pango1.attr_list;
     A same [gid.gtksource5.completion_provider.CompletionProvider] object can be used for several
     [gid.gtksource5.completion.Completion]'s.
 */
+@gidGir("Completion", "CompletionClass")
 class Completion : gid.gobject2.object.ObjectWrap
 {
 

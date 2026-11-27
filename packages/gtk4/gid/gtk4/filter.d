@@ -29,6 +29,7 @@ import gid.gtk4.types;
     However, in particular for large lists or complex search methods, it is
     also possible to subclass [gid.gtk4.filter.Filter] and provide one's own filter.
 */
+@gidGir("Filter", "FilterClass")
 class Filter : gid.gobject2.object.ObjectWrap
 {
 

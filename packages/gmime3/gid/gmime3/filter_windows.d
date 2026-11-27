@@ -14,6 +14,7 @@ import gid.gobject2.gid_builder;
     iso-8859-X is really that charset or if it is really a
     Windows-CP125x charset.
 */
+@gidGir("FilterWindows", "FilterWindowsClass")
 class FilterWindows : gid.gmime3.filter.Filter
 {
 

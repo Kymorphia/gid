@@ -125,6 +125,7 @@ import gid.gst1.types;
     > compatibility reason, [gid.gst1.structure.Structure.serializeFull] has been added for
     > that purpose.
 */
+@gidGir("Structure")
 class Structure : gid.gobject2.boxed.BoxedWrap!(gst_structure_get_type)
 {
 

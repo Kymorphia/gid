@@ -12,6 +12,7 @@ import gid.gtk4.types;
 /**
     Sorts items via a callback function.
 */
+@gidGir("CustomSorter", "CustomSorterClass")
 class CustomSorter : gid.gtk4.sorter.Sorter
 {
 

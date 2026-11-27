@@ -41,6 +41,7 @@ import gid.gst1.types;
     
     Interpretation of the fields of @info depends on the @reference.
 */
+@gidGir("ReferenceTimestampMeta")
 class ReferenceTimestampMeta : StructWrap!(GstReferenceTimestampMeta)
 {
   /**

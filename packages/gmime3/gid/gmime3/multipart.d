@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A base MIME multipart object.
 */
+@gidGir("Multipart", "MultipartClass")
 class Multipart : gid.gmime3.object.ObjectWrap
 {
 

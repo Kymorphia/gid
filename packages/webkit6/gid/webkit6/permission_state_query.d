@@ -21,6 +21,7 @@ import gid.webkit6.types;
     When a #WebKitPermissionStateQuery is not handled by the user, the user-agent is instructed to
     `prompt` the user for the given permission.
 */
+@gidGir("PermissionStateQuery")
 class PermissionStateQuery : gid.gobject2.boxed.BoxedWrap!(webkit_permission_state_query_get_type)
 {
 

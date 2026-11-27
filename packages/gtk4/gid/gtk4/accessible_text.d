@@ -20,6 +20,7 @@ import gid.gtk4.types;
     `enum@Gtk.AccessibleProperty.DESCRIPTION` properties for accessible
     objects containing simple, unformatted text.
 */
+@gidGir("AccessibleText", "AccessibleTextInterface")
 interface AccessibleText : gid.gtk4.accessible.Accessible
 {
 

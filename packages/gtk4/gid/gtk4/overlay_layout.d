@@ -18,6 +18,7 @@ import gid.gtk4.types;
     to be a [gid.gtk4.overlay.Overlay]. It is only listed here so that its layout
     properties get documented.
 */
+@gidGir("OverlayLayout", "OverlayLayoutClass")
 class OverlayLayout : gid.gtk4.layout_manager.LayoutManager
 {
 

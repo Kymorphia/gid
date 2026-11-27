@@ -13,6 +13,7 @@ import gid.harfbuzz0.types;
     glyph in both horizontal and vertical directions. All positions in
     #hb_glyph_position_t are relative to the current point.
 */
+@gidGir("glyph_position_t")
 class GlyphPosition : gid.gobject2.boxed.BoxedWrap!(hb_gobject_glyph_position_get_type)
 {
   /**

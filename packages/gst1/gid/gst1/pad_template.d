@@ -77,6 +77,7 @@ import gid.gst1.types;
       }
     ```
 */
+@gidGir("PadTemplate", "PadTemplateClass")
 class PadTemplate : gid.gst1.object.ObjectWrap
 {
 

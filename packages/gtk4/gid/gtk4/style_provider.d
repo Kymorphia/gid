@@ -21,6 +21,7 @@ import gid.gtk4.types;
     GTK uses the [gid.gtk4.style_provider.StyleProvider] implementation for CSS in
     [gid.gtk4.css_provider.CssProvider].
 */
+@gidGir("StyleProvider")
 interface StyleProvider : GidWrap
 {
 

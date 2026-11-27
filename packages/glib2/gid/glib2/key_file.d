@@ -145,6 +145,7 @@ import gid.gobject2.boxed;
     g_autoptr(GBytes) bytes = g_bytes_new_take (g_steal_pointer (&data), data_len);
     ```
 */
+@gidGir("KeyFile")
 class KeyFile : gid.gobject2.boxed.BoxedWrap!(g_key_file_get_type)
 {
 

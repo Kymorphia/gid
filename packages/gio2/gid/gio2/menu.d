@@ -20,6 +20,7 @@ import gid.gobject2.gid_builder;
     [gid.gio2.menu.Menu.insertSection]. To add a submenu, use
     [gid.gio2.menu.Menu.insertSubmenu].
 */
+@gidGir("Menu")
 class Menu : gid.gio2.menu_model.MenuModel
 {
 

@@ -23,6 +23,7 @@ import gid.gobject2.gid_builder;
     
     Dma-buf textures can only be created on Linux.
 */
+@gidGir("DmabufTexture", "DmabufTextureClass")
 class DmabufTexture : gid.gdk4.texture.Texture
 {
 

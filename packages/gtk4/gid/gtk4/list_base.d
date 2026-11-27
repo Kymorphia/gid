@@ -66,6 +66,7 @@ import gid.gtk4.widget;
     - `listitem.scroll-to` moves the visible area of the list to this item with
       the minimum amount of scrolling required.
 */
+@gidGir("ListBase", "ListBaseClass")
 class ListBase : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable, gid.gtk4.scrollable.Scrollable
 {
 

@@ -30,6 +30,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents. You
         should use [gid.gtk4.drop_down.DropDown] instead
 */
+@gidGir("CellRendererCombo")
 class CellRendererCombo : gid.gtk4.cell_renderer_text.CellRendererText
 {
 

@@ -75,6 +75,7 @@ import gid.gtk4.widget;
     
     Marked day labels get the :selected state assigned.
 */
+@gidGir("Calendar")
 class Calendar : gid.gtk4.widget.Widget
 {
 

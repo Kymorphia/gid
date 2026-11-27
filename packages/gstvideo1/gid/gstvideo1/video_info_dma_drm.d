@@ -15,6 +15,7 @@ import gid.gstvideo1.video_info;
     adds DRM information such as drm-fourcc and drm-modifier, required for
     negotiation and mapping.
 */
+@gidGir("VideoInfoDmaDrm")
 class VideoInfoDmaDrm : gid.gobject2.boxed.BoxedWrap!(gst_video_info_dma_drm_get_type)
 {
 

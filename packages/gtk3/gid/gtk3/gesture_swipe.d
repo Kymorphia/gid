@@ -23,6 +23,7 @@ import gid.gtk3.widget;
     
     All velocities are reported in pixels/sec units.
 */
+@gidGir("GestureSwipe", "GestureSwipeClass")
 class GestureSwipe : gid.gtk3.gesture_single.GestureSingle
 {
 

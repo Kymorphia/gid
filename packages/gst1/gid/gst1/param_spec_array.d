@@ -11,6 +11,7 @@ import gid.gst1.types;
 /**
     A GParamSpec derived structure for arrays of values.
 */
+@gidGir("ParamSpecArray")
 class ParamSpecArray : StructWrap!(GstParamSpecArray)
 {
   /**

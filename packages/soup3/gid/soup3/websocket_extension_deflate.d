@@ -16,6 +16,7 @@ import gid.soup3.websocket_extension;
     This extension is used by default in a [gid.soup3.session.Session] when [gid.soup3.websocket_extension_manager.WebsocketExtensionManager]
     feature is present, and always used by [gid.soup3.server.Server].
 */
+@gidGir("WebsocketExtensionDeflate", "WebsocketExtensionDeflateClass")
 class WebsocketExtensionDeflate : gid.soup3.websocket_extension.WebsocketExtension
 {
 

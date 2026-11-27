@@ -10,6 +10,7 @@ import gid.gobject2.types;
 /**
     A union holding one collected value.
 */
+@gidGir("TypeCValue")
 class TypeCValue : StructWrap!(GTypeCValue)
 {
   /**

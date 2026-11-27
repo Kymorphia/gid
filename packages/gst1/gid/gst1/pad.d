@@ -83,6 +83,7 @@ import gid.gst1.types;
     [gid.gst1.pad.Pad.startTask], [gid.gst1.pad.Pad.pauseTask] and [gid.gst1.pad.Pad.stopTask]
     respectively.
 */
+@gidGir("Pad", "PadClass")
 class Pad : gid.gst1.object.ObjectWrap
 {
 

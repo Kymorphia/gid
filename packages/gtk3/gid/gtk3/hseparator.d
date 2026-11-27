@@ -27,6 +27,7 @@ import gid.gtk3.types;
     
     GtkHSeparator has been deprecated, use #GtkSeparator instead.
 */
+@gidGir("HSeparator", "HSeparatorClass")
 class HSeparator : gid.gtk3.separator.Separator
 {
 

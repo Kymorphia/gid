@@ -20,6 +20,7 @@ import gid.gobject2.object;
     implementing the [gid.gio2.action_group.ActionGroup] and [gid.gio2.action_map.ActionMap]
     interfaces.
 */
+@gidGir("SimpleActionGroup", "SimpleActionGroupClass")
 class SimpleActionGroup : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.ActionGroup, gid.gio2.action_map.ActionMap
 {
 

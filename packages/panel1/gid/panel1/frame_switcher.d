@@ -24,6 +24,7 @@ import gid.panel1.types;
     buttons to switch between #GtkStack pages, not disimilar to a
     #GtkStackSwitcher.
 */
+@gidGir("FrameSwitcher", "FrameSwitcherClass")
 class FrameSwitcher : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable, gid.panel1.frame_header.FrameHeader
 {
 

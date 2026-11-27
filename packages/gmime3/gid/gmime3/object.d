@@ -23,6 +23,7 @@ import gid.gobject2.types;
 /**
     Base class for all MIME parts.
 */
+@gidGir("Object", "ObjectClass")
 class ObjectWrap : gid.gobject2.object.ObjectWrap
 {
 

@@ -13,6 +13,7 @@ import gid.gtk4.types;
     See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management)
     for more information.
 */
+@gidGir("Requisition")
 struct Requisition
 {
   /**

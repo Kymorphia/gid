@@ -25,6 +25,7 @@ import gid.gobject2.gid_builder;
     g_socket_set_option (socket, IPPROTO_IP, IP_TOS, <ToS value>, &error);
     ```
 */
+@gidGir("IPTosMessage", "IPTosMessageClass")
 class IPTosMessage : gid.gio2.socket_control_message.SocketControlMessage
 {
 

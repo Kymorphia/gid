@@ -11,6 +11,7 @@ import gid.gstvideo1.types;
     #GstVideoScaler is a utility object for rescaling and resampling
     video frames using various interpolation / sampling methods.
 */
+@gidGir("VideoScaler")
 class VideoScaler : OpaqueWrap!(GstVideoScaler*, void, void)
 {
 

@@ -17,6 +17,7 @@ import gid.pango1.glyph_string;
 /**
     A render node drawing a set of glyphs.
 */
+@gidGir("TextNode")
 class TextNode : gid.gsk4.render_node.RenderNode
 {
 

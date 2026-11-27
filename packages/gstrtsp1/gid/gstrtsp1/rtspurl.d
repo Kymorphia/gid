@@ -11,6 +11,7 @@ import gid.gstrtsp1.types;
 /**
     Provides helper functions to handle RTSP urls.
 */
+@gidGir("RTSPUrl")
 class RTSPUrl : gid.gobject2.boxed.BoxedWrap!(gst_rtsp_url_get_type)
 {
   /**

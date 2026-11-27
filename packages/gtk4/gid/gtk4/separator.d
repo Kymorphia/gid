@@ -38,6 +38,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.separator.Separator] uses the [gid.gtk4.types.AccessibleRole.Separator] role.
 */
+@gidGir("Separator")
 class Separator : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

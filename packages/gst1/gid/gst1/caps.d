@@ -50,6 +50,7 @@ import gid.gst1.types;
     behavior when using serialization features, such as [gid.gst1.caps.Caps.toString_] or
     [gid.gst1.global.valueSerialize] and their counterparts.
 */
+@gidGir("Caps")
 class Caps : gid.gobject2.boxed.BoxedWrap!(gst_caps_get_type)
 {
   /**

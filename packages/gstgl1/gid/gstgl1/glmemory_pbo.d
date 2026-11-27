@@ -14,6 +14,7 @@ import gid.gstgl1.types;
     
     Data is uploaded or downloaded from the GPU as is necessary.
 */
+@gidGir("GLMemoryPBO")
 class GLMemoryPBO : gid.gobject2.boxed.BoxedWrap!(gst_gl_memory_pbo_get_type)
 {
   /**

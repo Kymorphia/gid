@@ -20,6 +20,7 @@ import gid.graphene1.vec3;
     The contents of the [gid.graphene1.ray.Ray] structure are private, and should not
     be modified directly.
 */
+@gidGir("Ray")
 class Ray : gid.gobject2.boxed.BoxedWrap!(graphene_ray_get_type)
 {
   /**

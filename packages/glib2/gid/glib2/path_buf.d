@@ -39,6 +39,7 @@ import gid.glib2.types;
     g_assert_cmpstr (sh, ==, "/usr/bin/sh");
     ```
 */
+@gidGir("PathBuf")
 struct PathBuf
 {
   /** */

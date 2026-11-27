@@ -78,6 +78,7 @@ import gid.gst1.types;
     toplevel #GstPipeline so the clock functions are only to be used in very
     specific situations.
 */
+@gidGir("Element", "ElementClass")
 class Element : gid.gst1.object.ObjectWrap
 {
 

@@ -45,6 +45,7 @@ import gid.gobject2.object;
     and the value inside the [gid.gdk4.frame_clock.FrameClock.update] signal of the clock,
     they will stay exactly synchronized.
 */
+@gidGir("FrameClock", "FrameClockClass")
 class FrameClock : gid.gobject2.object.ObjectWrap
 {
 

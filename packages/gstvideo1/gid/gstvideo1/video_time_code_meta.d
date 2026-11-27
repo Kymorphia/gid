@@ -16,6 +16,7 @@ import gid.gstvideo1.video_time_code;
     Each frame is assumed to have its own timecode, i.e. they are not
     automatically incremented/interpolated.
 */
+@gidGir("VideoTimeCodeMeta")
 class VideoTimeCodeMeta : StructWrap!(GstVideoTimeCodeMeta)
 {
   /**

@@ -12,6 +12,7 @@ import gid.gdk3.window;
 /**
     Describes a property change on a window.
 */
+@gidGir("EventProperty")
 class EventProperty : StructWrap!(GdkEventProperty, gdk_event_copy, gdk_event_free)
 {
   /**

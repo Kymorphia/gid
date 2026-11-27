@@ -15,6 +15,7 @@ import gid.gobject2.object;
 /**
     A data structure representing a Content-Disposition.
 */
+@gidGir("ContentDisposition", "ContentDispositionClass")
 class ContentDisposition : gid.gobject2.object.ObjectWrap
 {
 

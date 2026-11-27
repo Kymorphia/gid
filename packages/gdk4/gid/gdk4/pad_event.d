@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to a pad-based device.
 */
+@gidGir("PadEvent")
 class PadEvent : gid.gdk4.event.Event
 {
 

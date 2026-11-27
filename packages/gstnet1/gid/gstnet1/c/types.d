@@ -8,6 +8,12 @@ public import gid.gobject2.c.types;
 public import gid.gio2.c.types;
 public import gid.gst1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstNet";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     #GstNetAddressMeta can be used to store a network address (a #GSocketAddress)
     in a #GstBuffer so that it network elements can track the to and from address
@@ -73,6 +79,7 @@ struct GstNetClientClockClass
 }
 
 /** */
+@gidGir("NetClientClockPrivate")
 struct GstNetClientClockPrivate;
 
 /**
@@ -146,6 +153,7 @@ struct GstNetTimeProviderClass
 }
 
 /** */
+@gidGir("NetTimeProviderPrivate")
 struct GstNetTimeProviderPrivate;
 
 /** */
@@ -221,6 +229,7 @@ struct GstPtpClockClass
 }
 
 /** */
+@gidGir("PtpClockPrivate")
 struct GstPtpClockPrivate;
 
 alias extern(C) gboolean function(ubyte domain, const(GstStructure)* stats, void* userData) GstPtpStatisticsCallback;

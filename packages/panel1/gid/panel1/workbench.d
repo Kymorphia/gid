@@ -19,6 +19,7 @@ import gid.panel1.types;
 import gid.panel1.workspace;
 
 /** */
+@gidGir("Workbench", "WorkbenchClass")
 class Workbench : gid.gtk4.window_group.WindowGroup
 {
 

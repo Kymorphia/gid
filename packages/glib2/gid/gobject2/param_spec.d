@@ -23,6 +23,7 @@ import gid.gobject2.value;
     used, but they cannot be mixed. Using `-` is considerably more
     efficient, and is the ‘canonical form’. Using `_` is discouraged.
 */
+@gidGir("ParamSpec", "ParamSpecClass")
 class ParamSpec : ReffedWrap!(GParamSpec*, g_param_spec_ref, g_param_spec_unref)
 {
 

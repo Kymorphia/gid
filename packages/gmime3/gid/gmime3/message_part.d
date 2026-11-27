@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     A message/rfc822 or message/news MIME part.
 */
+@gidGir("MessagePart", "MessagePartClass")
 class MessagePart : gid.gmime3.object.ObjectWrap
 {
 

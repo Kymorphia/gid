@@ -23,6 +23,7 @@ import gid.gtk3.types;
     
     GtkHPaned has been deprecated, use #GtkPaned instead.
 */
+@gidGir("HPaned", "HPanedClass")
 class HPaned : gid.gtk3.paned.Paned
 {
 

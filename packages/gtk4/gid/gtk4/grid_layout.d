@@ -25,6 +25,7 @@ import gid.gtk4.types;
     attached to the same row or column; however, if you only ever need a
     single row or column, you should consider using [gid.gtk4.box_layout.BoxLayout].
 */
+@gidGir("GridLayout", "GridLayoutClass")
 class GridLayout : gid.gtk4.layout_manager.LayoutManager
 {
 

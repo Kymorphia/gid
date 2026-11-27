@@ -12,6 +12,7 @@ import gid.gsk4.types;
 /**
     Collects the parameters that are needed when stroking a path.
 */
+@gidGir("Stroke")
 class Stroke : gid.gobject2.boxed.BoxedWrap!(gsk_stroke_get_type)
 {
 

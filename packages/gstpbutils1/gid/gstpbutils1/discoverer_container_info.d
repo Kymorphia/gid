@@ -13,6 +13,7 @@ import gid.gstpbutils1.types;
 /**
     #GstDiscovererStreamInfo specific to container streams.
 */
+@gidGir("DiscovererContainerInfo")
 class DiscovererContainerInfo : gid.gstpbutils1.discoverer_stream_info.DiscovererStreamInfo
 {
 

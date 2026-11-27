@@ -17,6 +17,7 @@ import gid.gobject2.gid_builder;
     Calling [gid.gio2.permission.Permission.acquire] or [gid.gio2.permission.Permission.release]
     on a [gid.gio2.simple_permission.SimplePermission] will result in errors.
 */
+@gidGir("SimplePermission")
 class SimplePermission : gid.gio2.permission.Permission
 {
 

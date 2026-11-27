@@ -46,6 +46,7 @@ import gid.gtk3.widget;
     
     GtkAppChooserWidget has a single CSS node with name appchooser.
 */
+@gidGir("AppChooserWidget", "AppChooserWidgetClass")
 class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
 {
 

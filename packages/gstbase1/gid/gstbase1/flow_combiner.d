@@ -43,6 +43,7 @@ import gid.gstbase1.types;
     [gid.gst1.types.FlowReturn.Error] or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
     returned immediately from the [gid.gstbase1.flow_combiner.FlowCombiner.updateFlow] function.
 */
+@gidGir("FlowCombiner")
 class FlowCombiner : gid.gobject2.boxed.BoxedWrap!(gst_flow_combiner_get_type)
 {
 

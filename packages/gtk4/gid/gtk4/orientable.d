@@ -21,6 +21,7 @@ import gid.gtk4.types;
     automatically acquire the `horizontal` or `vertical` CSS class depending on
     the value of the [gid.gtk4.orientable.Orientable.orientation] property.
 */
+@gidGir("Orientable", "OrientableIface")
 interface Orientable : GidWrap
 {
 

@@ -46,6 +46,7 @@ import gid.gtk4.widget;
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
 */
+@gidGir("Squeezer", "SqueezerClass")
 class Squeezer : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

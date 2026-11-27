@@ -39,6 +39,7 @@ import gid.gstvideo1.types;
     The GstNavigation message functions provide functions for creating and
     parsing custom bus messages for signaling GstNavigation changes.
 */
+@gidGir("Navigation", "NavigationInterface")
 interface Navigation : GidWrap
 {
 

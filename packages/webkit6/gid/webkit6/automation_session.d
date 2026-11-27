@@ -22,6 +22,7 @@ import gid.webkit6.web_view;
     #WebKitWebView to interact with it. When this happens the signal #WebKitAutomationSession::create-web-view
     is emitted.
 */
+@gidGir("AutomationSession", "AutomationSessionClass")
 class AutomationSession : gid.gobject2.object.ObjectWrap
 {
 

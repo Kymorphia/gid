@@ -13,6 +13,7 @@ import gid.gobject2.value;
     valid value. This is a field defined with the purpose of contain
     the previous value of the property, but is not used anymore.
 */
+@gidGir("PropertyValues")
 class PropertyValues : StructWrap!(AtkPropertyValues)
 {
   /**

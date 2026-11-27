@@ -51,6 +51,7 @@ import gid.gobject2.object;
     often come in groups (like during system updates) and rescanning the list
     on every change is pointless and expensive.
 */
+@gidGir("AppInfoMonitor")
 class AppInfoMonitor : gid.gobject2.object.ObjectWrap
 {
 

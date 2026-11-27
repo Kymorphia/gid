@@ -38,6 +38,7 @@ import gid.soup3.websocket_extension;
     [gid.soup3.websocket_connection.WebsocketConnection.message] signal to receive data.
     ([gid.soup3.websocket_connection.WebsocketConnection] currently only supports asynchronous I/O.)
 */
+@gidGir("WebsocketConnection", "WebsocketConnectionClass")
 class WebsocketConnection : gid.gobject2.object.ObjectWrap
 {
 

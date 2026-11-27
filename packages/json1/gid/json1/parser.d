@@ -56,6 +56,7 @@ import gid.json1.types;
     you should use a [gid.gio2.task.Task] and the synchronous [gid.json1.parser.Parser] API inside the
     task itself.
 */
+@gidGir("Parser", "ParserClass")
 class Parser : gid.gobject2.object.ObjectWrap
 {
 

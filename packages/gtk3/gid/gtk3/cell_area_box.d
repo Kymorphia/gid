@@ -35,6 +35,7 @@ import gid.gtk3.types;
     with [gid.gtk4.cell_area.CellArea.cellSetProperty] or by specifying the "align"
     argument to [gid.gtk4.cell_area_box.CellAreaBox.packStart] and [gid.gtk4.cell_area_box.CellAreaBox.packEnd].
 */
+@gidGir("CellAreaBox", "CellAreaBoxClass")
 class CellAreaBox : gid.gtk3.cell_area.CellArea, gid.gtk3.orientable.Orientable
 {
 

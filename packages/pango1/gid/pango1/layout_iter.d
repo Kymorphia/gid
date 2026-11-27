@@ -19,6 +19,7 @@ import gid.pango1.types;
     
     The [gid.pango1.layout_iter.LayoutIter] structure is opaque, and has no user-visible fields.
 */
+@gidGir("LayoutIter")
 class LayoutIter : gid.gobject2.boxed.BoxedWrap!(pango_layout_iter_get_type)
 {
 

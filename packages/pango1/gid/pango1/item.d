@@ -16,6 +16,7 @@ import gid.pango1.types;
     You typically obtain `PangoItems` by itemizing a piece of text
     with `func@itemize`.
 */
+@gidGir("Item")
 class Item : gid.gobject2.boxed.BoxedWrap!(pango_item_get_type)
 {
 

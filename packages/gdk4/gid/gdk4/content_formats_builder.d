@@ -13,6 +13,7 @@ import gid.gobject2.types;
 /**
     Creates [gid.gdk4.content_formats.ContentFormats] objects.
 */
+@gidGir("ContentFormatsBuilder")
 class ContentFormatsBuilder : gid.gobject2.boxed.BoxedWrap!(gdk_content_formats_builder_get_type)
 {
 

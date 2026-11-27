@@ -11,6 +11,7 @@ import gid.glib2.types;
 /**
     The #GHook struct represents a single hook function in a #GHookList.
 */
+@gidGir("Hook")
 class Hook : StructWrap!(GHook)
 {
   /**

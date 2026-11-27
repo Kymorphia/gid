@@ -26,6 +26,7 @@ import gid.gtk4.widget;
     2. The bound stage where the listitem references an item from the list.
        The [gid.gtk4.list_item.ListItem.item] property is not `NULL`.
 */
+@gidGir("ListItem", "ListItemClass")
 class ListItem : gid.gobject2.object.ObjectWrap
 {
 

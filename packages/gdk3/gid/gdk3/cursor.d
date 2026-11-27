@@ -15,6 +15,7 @@ import gid.gobject2.object;
 /**
     A #GdkCursor represents a cursor. Its contents are private.
 */
+@gidGir("Cursor")
 class Cursor : gid.gobject2.object.ObjectWrap
 {
 

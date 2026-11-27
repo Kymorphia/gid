@@ -24,6 +24,7 @@ import gid.pango1.types;
     A [gid.pango1.font.Font] is used to represent a font in a
     rendering-system-independent manner.
 */
+@gidGir("Font", "FontClass")
 class Font : gid.gobject2.object.ObjectWrap
 {
 

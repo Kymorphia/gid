@@ -19,6 +19,7 @@ import gid.gobject2.types;
     bidirectionally and are connected when the source object is set
     with [gid.gobject2.binding_group.BindingGroup.setSource].
 */
+@gidGir("BindingGroup")
 class BindingGroup : gid.gobject2.object.ObjectWrap
 {
 

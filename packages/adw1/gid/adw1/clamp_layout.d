@@ -36,6 +36,7 @@ import gid.gtk4.orientable_mixin;
     
     See also: [gid.adw1.clamp.Clamp], [gid.adw1.clamp_scrollable.ClampScrollable].
 */
+@gidGir("ClampLayout", "ClampLayoutClass")
 class ClampLayout : gid.gtk4.layout_manager.LayoutManager, gid.gtk4.orientable.Orientable
 {
 

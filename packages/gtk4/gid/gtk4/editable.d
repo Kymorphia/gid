@@ -143,6 +143,7 @@ import gid.gtk4.types;
     and [gid.gtk4.editable.Editable.deleteText] signals, you will need to connect
     to them on the delegate obtained via [gid.gtk4.editable.Editable.getDelegate].
 */
+@gidGir("Editable", "EditableInterface")
 interface Editable : GidWrap
 {
 

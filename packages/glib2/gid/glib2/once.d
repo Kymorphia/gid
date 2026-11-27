@@ -12,6 +12,7 @@ import gid.glib2.types;
     one-time initialization function must have its own unique #GOnce
     struct.
 */
+@gidGir("Once")
 class Once : StructWrap!(GOnce)
 {
   /**

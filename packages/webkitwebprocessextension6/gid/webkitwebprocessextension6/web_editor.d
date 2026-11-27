@@ -18,6 +18,7 @@ import gid.webkitwebprocessextension6.web_page;
     a #WebKitWebPage such as a possibility to react to the current selection in
     #WebKitWebPage.
 */
+@gidGir("WebEditor", "WebEditorClass")
 class WebEditor : gid.gobject2.object.ObjectWrap
 {
 

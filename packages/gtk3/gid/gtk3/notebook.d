@@ -99,6 +99,7 @@ import gid.gtk3.widget;
     
     The nodes are always arranged from left-to-right, regarldess of text direction.
 */
+@gidGir("Notebook", "NotebookClass")
 class Notebook : gid.gtk3.container.Container
 {
 

@@ -20,6 +20,7 @@ import gid.gtk4.types;
     current locale by normalizing Unicode strings and possibly case-folding
     them before performing the comparison.
 */
+@gidGir("StringSorter", "StringSorterClass")
 class StringSorter : gid.gtk4.sorter.Sorter
 {
 

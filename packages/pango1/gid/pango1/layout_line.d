@@ -17,6 +17,7 @@ import gid.pango1.types;
     [gid.pango1.layout.Layout.getLine] and are only valid until the text,
     attributes, or settings of the parent [gid.pango1.layout.Layout] are modified.
 */
+@gidGir("LayoutLine")
 class LayoutLine : gid.gobject2.boxed.BoxedWrap!(pango_layout_line_get_type)
 {
   /**

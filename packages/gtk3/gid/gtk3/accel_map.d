@@ -67,6 +67,7 @@ import gid.gtk3.types;
     monitor only single accelerator path by using it as a detail of
     the #GtkAccelMap::changed signal.
 */
+@gidGir("AccelMap", "AccelMapClass")
 class AccelMap : gid.gobject2.object.ObjectWrap
 {
 

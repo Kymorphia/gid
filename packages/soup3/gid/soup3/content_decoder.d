@@ -37,6 +37,7 @@ import gid.soup3.types;
     Content-Encoding when sending a request body, or to pick specific
     encoding types to support.)
 */
+@gidGir("ContentDecoder", "ContentDecoderClass")
 class ContentDecoder : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

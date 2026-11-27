@@ -33,6 +33,7 @@ import gid.gobject2.object;
     As [gid.gio2.socket_client.SocketClient] is a lightweight object, you don't need to cache it. You
     can just create a new one any time you need one.
 */
+@gidGir("SocketClient", "SocketClientClass")
 class SocketClient : gid.gobject2.object.ObjectWrap
 {
 

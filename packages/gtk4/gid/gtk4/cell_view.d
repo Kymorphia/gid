@@ -49,6 +49,7 @@ import gid.gtk4.widget;
     Deprecated: List views use widgets to display their contents.
         You can use [gid.gtk4.box.Box] instead
 */
+@gidGir("CellView")
 class CellView : gid.gtk4.widget.Widget, gid.gtk4.cell_layout.CellLayout, gid.gtk4.orientable.Orientable
 {
 

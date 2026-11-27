@@ -14,6 +14,7 @@ import gid.gobject2.boxed;
     The [gid.glib2.source.Source] struct is an opaque data type
     representing an event source.
 */
+@gidGir("Source")
 class Source : gid.gobject2.boxed.BoxedWrap!(g_source_get_type)
 {
 

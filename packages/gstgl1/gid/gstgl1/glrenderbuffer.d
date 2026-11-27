@@ -15,6 +15,7 @@ import gid.gstgl1.types;
     #GstGLRenderbuffer is created or wrapped through [gid.gstgl1.glbase_memory.GLBaseMemory.alloc]
     with #GstGLRenderbufferAllocationParams.
 */
+@gidGir("GLRenderbuffer")
 class GLRenderbuffer : gid.gobject2.boxed.BoxedWrap!(gst_gl_renderbuffer_get_type)
 {
   /**

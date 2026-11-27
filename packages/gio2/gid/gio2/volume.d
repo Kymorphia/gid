@@ -68,6 +68,7 @@ import gid.gobject2.object;
     identifier, which can be used to obtain a hal device by means of
     `libhal_manager_find_device_string_match()`.
 */
+@gidGir("Volume", "VolumeIface")
 interface Volume : GidWrap
 {
 

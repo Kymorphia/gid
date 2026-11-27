@@ -16,6 +16,7 @@ import gid.gstpbutils1.types;
     The opaque base class object for all encoding profiles. This contains generic
     information like name, description, format and preset.
 */
+@gidGir("EncodingProfile", "EncodingProfileClass")
 class EncodingProfile : gid.gobject2.object.ObjectWrap
 {
 

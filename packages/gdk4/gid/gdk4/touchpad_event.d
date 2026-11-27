@@ -16,6 +16,7 @@ import gid.gdk4.types;
     recognition to the clients, touchpad gestures are typically
     processed by the system, resulting in these events.
 */
+@gidGir("TouchpadEvent")
 class TouchpadEvent : gid.gdk4.event.Event
 {
 

@@ -30,6 +30,7 @@ import gid.gtk3.types;
     To obtain the application that has been selected in a #GtkAppChooser,
     use [gid.gtk4.app_chooser.AppChooser.getAppInfo].
 */
+@gidGir("AppChooser")
 interface AppChooser : GidWrap
 {
 

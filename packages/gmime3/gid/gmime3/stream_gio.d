@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     A #GMimeStream wrapper around GLib's GIO streams.
 */
+@gidGir("StreamGIO", "StreamGIOClass")
 class StreamGIO : gid.gmime3.stream.Stream
 {
 

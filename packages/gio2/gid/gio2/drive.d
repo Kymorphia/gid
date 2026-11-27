@@ -45,6 +45,7 @@ import gid.gobject2.object;
     For [porting from GnomeVFS](migrating-gnome-vfs.html) note that there is no
     equivalent of [gid.gio2.drive.Drive] in that API.
 */
+@gidGir("Drive", "DriveIface")
 interface Drive : GidWrap
 {
 

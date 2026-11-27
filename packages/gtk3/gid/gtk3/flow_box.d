@@ -66,6 +66,7 @@ import gid.gtk3.widget;
     uses a single CSS node with name flowboxchild.
     For rubberband selection, a subnode with name rubberband is used.
 */
+@gidGir("FlowBox", "FlowBoxClass")
 class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
 {
 

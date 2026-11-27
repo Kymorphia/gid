@@ -19,6 +19,7 @@ import gid.gst1.types;
     interesting when multiple buffers need to be pushed in one go because it
     can reduce the amount of overhead for pushing each buffer individually.
 */
+@gidGir("BufferList")
 class BufferList : gid.gobject2.boxed.BoxedWrap!(gst_buffer_list_get_type)
 {
 

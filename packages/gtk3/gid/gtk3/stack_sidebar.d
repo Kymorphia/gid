@@ -33,6 +33,7 @@ import gid.gtk3.types;
     .needs-attention style class to the widgets representing the stack
     pages.
 */
+@gidGir("StackSidebar", "StackSidebarClass")
 class StackSidebar : gid.gtk3.bin.Bin
 {
 

@@ -13,6 +13,7 @@ import gid.gtksource5.types;
 /**
     Provides access to [gid.gtksource5.style_scheme.StyleScheme]s.
 */
+@gidGir("StyleSchemeManager", "StyleSchemeManagerClass")
 class StyleSchemeManager : gid.gobject2.object.ObjectWrap
 {
 

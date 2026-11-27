@@ -26,6 +26,7 @@ import gid.gobject2.boxed;
     for equality, merge, or compute a hash value of
     #cairo_font_options_t objects.
 */
+@gidGir("FontOptions")
 class FontOptions : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_font_options_get_type)
 {
 

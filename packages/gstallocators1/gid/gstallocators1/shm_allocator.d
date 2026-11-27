@@ -22,6 +22,7 @@ import gid.gstallocators1.types;
     #GstBufferPool. For that reason, this allocator has the
     [gid.gst1.types.AllocatorFlags.NoCopy] flag set.
 */
+@gidGir("ShmAllocator", "ShmAllocatorClass")
 class ShmAllocator : gid.gstallocators1.fd_allocator.FdAllocator
 {
 

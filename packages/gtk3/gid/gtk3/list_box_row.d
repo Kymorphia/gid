@@ -20,6 +20,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget;
 
 /** */
+@gidGir("ListBoxRow", "ListBoxRowClass")
 class ListBoxRow : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable
 {
 

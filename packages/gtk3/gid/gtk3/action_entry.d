@@ -12,6 +12,7 @@ import gid.gtk3.types;
     #GtkActionEntry structs are used with [gid.gtk3.action_group.ActionGroup.addActions] to
     construct actions.
 */
+@gidGir("ActionEntry")
 class ActionEntry : StructWrap!(GtkActionEntry)
 {
   /**

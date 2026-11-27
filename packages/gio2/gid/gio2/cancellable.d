@@ -20,6 +20,7 @@ import gid.gobject2.object;
     throughout GIO to allow for cancellation of synchronous and
     asynchronous operations.
 */
+@gidGir("Cancellable", "CancellableClass")
 class Cancellable : gid.gobject2.object.ObjectWrap
 {
 

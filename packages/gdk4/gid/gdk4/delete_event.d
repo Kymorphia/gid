@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to closing a top-level surface.
 */
+@gidGir("DeleteEvent")
 class DeleteEvent : gid.gdk4.event.Event
 {
 

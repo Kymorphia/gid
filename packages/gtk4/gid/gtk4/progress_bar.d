@@ -72,6 +72,7 @@ import gid.pango1.types;
     and sets the [gid.gtk4.types.AccessibleProperty.ValueMin], [gid.gtk4.types.AccessibleProperty.ValueMax] and [gid.gtk4.types.AccessibleProperty.ValueNow] properties to reflect
     the progress.
 */
+@gidGir("ProgressBar")
 class ProgressBar : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange, gid.gtk4.orientable.Orientable
 {
 

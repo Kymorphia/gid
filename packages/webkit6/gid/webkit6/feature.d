@@ -43,6 +43,7 @@ import gid.webkit6.types;
     or in specific scenarios to tweak how WebKit integrates with the
     application.
 */
+@gidGir("Feature")
 class Feature : gid.gobject2.boxed.BoxedWrap!(webkit_feature_get_type)
 {
 

@@ -10,6 +10,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("AccelGroupEntry")
 class AccelGroupEntry : StructWrap!(GtkAccelGroupEntry)
 {
   /**

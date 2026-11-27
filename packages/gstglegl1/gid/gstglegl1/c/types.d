@@ -7,6 +7,12 @@ public import gid.gstbase1.c.types;
 public import gid.gstgl1.c.types;
 public import gid.gstvideo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstGLEGL";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     #GstEGLImage represents and holds an `EGLImage` handle.
     

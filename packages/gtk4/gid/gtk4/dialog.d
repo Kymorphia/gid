@@ -154,6 +154,7 @@ import gid.gtk4.window;
 
     Deprecated: Use [gid.gtk4.window.Window] instead
 */
+@gidGir("Dialog", "DialogClass")
 class Dialog : gid.gtk4.window.Window
 {
 

@@ -36,6 +36,7 @@ import gid.pango1.attr_list;
     how to convert data from their [gid.gtksource5.completion_proposal.CompletionProposal] to content for
     the [gid.gtksource5.completion_cell.CompletionCell].
 */
+@gidGir("CompletionCell", "CompletionCellClass")
 class CompletionCell : gid.gtk4.widget.Widget
 {
 

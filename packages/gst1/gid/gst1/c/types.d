@@ -6,6 +6,12 @@ public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Gst";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Alias for #GstMapInfo to be used with g_auto():
     ```c
@@ -67,6 +73,7 @@ alias GstMemoryMapInfo = GstMapInfo;
 /**
     Flags for allocators.
 */
+@gidGir("AllocatorFlags")
 enum GstAllocatorFlags : uint
 {
   /**
@@ -96,6 +103,7 @@ enum GstAllocatorFlags : uint
     internally. They can be checked using the GST_OBJECT_FLAG_IS_SET() macro,
     and (un)set using GST_OBJECT_FLAG_SET() and GST_OBJECT_FLAG_UNSET().
 */
+@gidGir("BinFlags")
 enum GstBinFlags : uint
 {
   /**
@@ -120,6 +128,7 @@ enum GstBinFlags : uint
     A set of flags that can be provided to the [gid.gst1.buffer.Buffer.copyInto]
     function to specify which items should be copied.
 */
+@gidGir("BufferCopyFlags")
 enum GstBufferCopyFlags : uint
 {
   /**
@@ -167,6 +176,7 @@ enum GstBufferCopyFlags : uint
 /**
     A set of buffer flags used to describe properties of a #GstBuffer.
 */
+@gidGir("BufferFlags")
 enum GstBufferFlags : uint
 {
   /**
@@ -267,6 +277,7 @@ enum GstBufferFlags : uint
 /**
     Additional flags to control the allocation of a buffer
 */
+@gidGir("BufferPoolAcquireFlags")
 enum GstBufferPoolAcquireFlags : uint
 {
   /**
@@ -301,6 +312,7 @@ enum GstBufferPoolAcquireFlags : uint
 /**
     The different types of buffering methods.
 */
+@gidGir("BufferingMode")
 enum GstBufferingMode
 {
   /**
@@ -327,6 +339,7 @@ enum GstBufferingMode
 /**
     The standard flags that a bus may have.
 */
+@gidGir("BusFlags")
 enum GstBusFlags : uint
 {
   /**
@@ -343,6 +356,7 @@ enum GstBusFlags : uint
 /**
     The result values for a GstBusSyncHandler.
 */
+@gidGir("BusSyncReply")
 enum GstBusSyncReply
 {
   /**
@@ -364,6 +378,7 @@ enum GstBusSyncReply
 /**
     Extra flags for a caps.
 */
+@gidGir("CapsFlags")
 enum GstCapsFlags : uint
 {
   /**
@@ -396,6 +411,7 @@ enum GstCapsFlags : uint
     Example: If caps1 is `[A, B, C]` and caps2 is `[E, B, D, A]`, the result
     would be `[A, B]`, maintaining the first caps priority on the intersection.
 */
+@gidGir("CapsIntersectMode")
 enum GstCapsIntersectMode
 {
   /**
@@ -412,6 +428,7 @@ enum GstCapsIntersectMode
 /**
     The type of the clock entry
 */
+@gidGir("ClockEntryType")
 enum GstClockEntryType
 {
   /**
@@ -428,6 +445,7 @@ enum GstClockEntryType
 /**
     The capabilities of this clock
 */
+@gidGir("ClockFlags")
 enum GstClockFlags : uint
 {
   /**
@@ -474,6 +492,7 @@ enum GstClockFlags : uint
 /**
     The return value of a clock operation.
 */
+@gidGir("ClockReturn")
 enum GstClockReturn
 {
   /**
@@ -520,6 +539,7 @@ enum GstClockReturn
 /**
     The different kind of clocks.
 */
+@gidGir("ClockType")
 enum GstClockType
 {
   /**
@@ -548,6 +568,7 @@ enum GstClockType
 /**
     Core errors are errors inside the core GStreamer library.
 */
+@gidGir("CoreError")
 enum GstCoreError
 {
   /**
@@ -634,6 +655,7 @@ enum GstCoreError
     These are some terminal style flags you can use when creating your
     debugging categories to make them stand out in debugging output.
 */
+@gidGir("DebugColorFlags")
 enum GstDebugColorFlags : uint
 {
   /**
@@ -728,6 +750,7 @@ enum GstDebugColorFlags : uint
 }
 
 /** */
+@gidGir("DebugColorMode")
 enum GstDebugColorMode
 {
   /**
@@ -751,6 +774,7 @@ enum GstDebugColorMode
     Available details for pipeline graphs produced by GST_DEBUG_BIN_TO_DOT_FILE()
     and GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS().
 */
+@gidGir("DebugGraphDetails")
 enum GstDebugGraphDetails : uint
 {
   /**
@@ -796,6 +820,7 @@ enum GstDebugGraphDetails : uint
     The level defines the importance of a debugging message. The more important a
     message is, the greater the probability that the debugging system outputs it.
 */
+@gidGir("DebugLevel")
 enum GstDebugLevel
 {
   /**
@@ -879,6 +904,7 @@ enum GstDebugLevel
 /**
     The standard flags that an element may have.
 */
+@gidGir("ElementFlags")
 enum GstElementFlags : uint
 {
   /**
@@ -926,6 +952,7 @@ enum GstElementFlags : uint
     #GstStructure.
     Specific custom events are distinguished by the name of the structure.
 */
+@gidGir("EventType")
 enum GstEventType
 {
   /**
@@ -1122,6 +1149,7 @@ enum GstEventType
     values. You can get the type flags of a #GstEventType with the
     [gid.gst1.global.eventTypeGetFlags] function.
 */
+@gidGir("EventTypeFlags")
 enum GstEventTypeFlags : uint
 {
   /**
@@ -1158,6 +1186,7 @@ enum GstEventTypeFlags : uint
     Note that the custom return values should not be exposed outside of the
     element scope.
 */
+@gidGir("FlowReturn")
 enum GstFlowReturn
 {
   /**
@@ -1238,6 +1267,7 @@ enum GstFlowReturn
 /**
     Standard predefined formats
 */
+@gidGir("Format")
 enum GstFormat
 {
   /**
@@ -1280,6 +1310,7 @@ enum GstFormat
     The different flags that can be set on #GST_EVENT_GAP events. See
     [gid.gst1.event.Event.setGapFlags] for details.
 */
+@gidGir("GapFlags")
 enum GstGapFlags : uint
 {
   /**
@@ -1292,6 +1323,7 @@ enum GstGapFlags : uint
 /**
     The result of a #GstIteratorItemFunction.
 */
+@gidGir("IteratorItem")
 enum GstIteratorItem
 {
   /**
@@ -1313,6 +1345,7 @@ enum GstIteratorItem
 /**
     The result of [gid.gst1.iterator.Iterator.next].
 */
+@gidGir("IteratorResult")
 enum GstIteratorResult
 {
   /**
@@ -1340,6 +1373,7 @@ enum GstIteratorResult
     Library errors are for errors from the library being used by elements
     (initializing, finalizing, settings, ...)
 */
+@gidGir("LibraryError")
 enum GstLibraryError
 {
   /**
@@ -1383,6 +1417,7 @@ enum GstLibraryError
 /**
     Flags used when locking miniobjects
 */
+@gidGir("LockFlags")
 enum GstLockFlags : uint
 {
   /**
@@ -1409,6 +1444,7 @@ enum GstLockFlags : uint
 /**
     Flags to control the behavior of a #GstLogContext.
 */
+@gidGir("LogContextFlags")
 enum GstLogContextFlags : uint
 {
   /**
@@ -1431,6 +1467,7 @@ enum GstLogContextFlags : uint
     The message hash is used to determine if a message is a duplicate of a previously
     logged message.
 */
+@gidGir("LogContextHashFlags")
 enum GstLogContextHashFlags : uint
 {
   /**
@@ -1469,6 +1506,7 @@ enum GstLogContextHashFlags : uint
 /**
     Flags used when mapping memory
 */
+@gidGir("MapFlags")
 enum GstMapFlags : uint
 {
   /**
@@ -1497,6 +1535,7 @@ enum GstMapFlags : uint
 /**
     Flags for wrapped memory.
 */
+@gidGir("MemoryFlags")
 enum GstMemoryFlags : uint
 {
   /**
@@ -1545,6 +1584,7 @@ enum GstMemoryFlags : uint
 /**
     The different message types that are available.
 */
+@gidGir("MessageType")
 enum GstMessageType : uint
 {
   /**
@@ -1821,6 +1861,7 @@ enum GstMessageType : uint
 /**
     Extra metadata flags.
 */
+@gidGir("MetaFlags")
 enum GstMetaFlags : uint
 {
   /**
@@ -1852,6 +1893,7 @@ enum GstMetaFlags : uint
 /**
     Flags for the mini object
 */
+@gidGir("MiniObjectFlags")
 enum GstMiniObjectFlags : uint
 {
   /**
@@ -1882,6 +1924,7 @@ enum GstMiniObjectFlags : uint
 /**
     The standard flags that an gstobject may have.
 */
+@gidGir("ObjectFlags")
 enum GstObjectFlags : uint
 {
   /**
@@ -1910,6 +1953,7 @@ enum GstObjectFlags : uint
 /**
     The direction of a pad.
 */
+@gidGir("PadDirection")
 enum GstPadDirection
 {
   /**
@@ -1931,6 +1975,7 @@ enum GstPadDirection
 /**
     Pad state flags
 */
+@gidGir("PadFlags")
 enum GstPadFlags : uint
 {
   /**
@@ -2031,6 +2076,7 @@ enum GstPadFlags : uint
     > use the default checks ([gid.gst1.types.PadLinkCheck.Default]) or the regular methods
     > for linking the pads.
 */
+@gidGir("PadLinkCheck")
 enum GstPadLinkCheck : uint
 {
   /**
@@ -2074,6 +2120,7 @@ enum GstPadLinkCheck : uint
 /**
     Result values from gst_pad_link and friends.
 */
+@gidGir("PadLinkReturn")
 enum GstPadLinkReturn
 {
   /**
@@ -2117,6 +2164,7 @@ enum GstPadLinkReturn
     parent element goes from READY to PAUSED, the GstPadMode defines if the
     pad operates in push or pull mode.
 */
+@gidGir("PadMode")
 enum GstPadMode
 {
   /**
@@ -2138,6 +2186,7 @@ enum GstPadMode
 /**
     Indicates when this pad will become available.
 */
+@gidGir("PadPresence")
 enum GstPadPresence
 {
   /**
@@ -2160,6 +2209,7 @@ enum GstPadPresence
 /**
     Different return values for the #GstPadProbeCallback.
 */
+@gidGir("PadProbeReturn")
 enum GstPadProbeReturn
 {
   /**
@@ -2212,6 +2262,7 @@ enum GstPadProbeReturn
     @GST_PAD_PROBE_TYPE_IDLE or @GST_PAD_PROBE_TYPE_BLOCK is used, the probe will be a
     blocking probe.
 */
+@gidGir("PadProbeType")
 enum GstPadProbeType : uint
 {
   /**
@@ -2331,6 +2382,7 @@ enum GstPadProbeType : uint
 /**
     Flags for the padtemplate
 */
+@gidGir("PadTemplateFlags")
 enum GstPadTemplateFlags : uint
 {
   /**
@@ -2342,6 +2394,7 @@ enum GstPadTemplateFlags : uint
 /**
     The different parsing errors that can occur.
 */
+@gidGir("ParseError")
 enum GstParseError
 {
   /**
@@ -2388,6 +2441,7 @@ enum GstParseError
 /**
     Parsing options.
 */
+@gidGir("ParseFlags")
 enum GstParseFlags : uint
 {
   /**
@@ -2419,6 +2473,7 @@ enum GstParseFlags : uint
 /**
     Pipeline flags
 */
+@gidGir("PipelineFlags")
 enum GstPipelineFlags : uint
 {
   /**
@@ -2433,6 +2488,7 @@ enum GstPipelineFlags : uint
 }
 
 /** */
+@gidGir("PluginAPIFlags")
 enum GstPluginAPIFlags : uint
 {
   /**
@@ -2446,6 +2502,7 @@ enum GstPluginAPIFlags : uint
 /**
     Flags used in connection with [gid.gst1.plugin.Plugin.addDependency].
 */
+@gidGir("PluginDependencyFlags")
 enum GstPluginDependencyFlags : uint
 {
   /**
@@ -2489,6 +2546,7 @@ enum GstPluginDependencyFlags : uint
 /**
     The plugin loading errors
 */
+@gidGir("PluginError")
 enum GstPluginError
 {
   /**
@@ -2510,6 +2568,7 @@ enum GstPluginError
 /**
     The plugin loading state
 */
+@gidGir("PluginFlags")
 enum GstPluginFlags : uint
 {
   /**
@@ -2527,6 +2586,7 @@ enum GstPluginFlags : uint
     The type of a [gid.gst1.types.MessageType.Progress]. The progress messages inform the
     application of the status of asynchronous tasks.
 */
+@gidGir("ProgressType")
 enum GstProgressType
 {
   /**
@@ -2559,6 +2619,7 @@ enum GstProgressType
 /**
     The result of a #GstPromise
 */
+@gidGir("PromiseResult")
 enum GstPromiseResult
 {
   /**
@@ -2589,6 +2650,7 @@ enum GstPromiseResult
     The different types of QoS events that can be given to the
     [gid.gst1.event.Event.newQos] method.
 */
+@gidGir("QOSType")
 enum GstQOSType
 {
   /**
@@ -2616,6 +2678,7 @@ enum GstQOSType
 /**
     Standard predefined Query types
 */
+@gidGir("QueryType")
 enum GstQueryType
 {
   /**
@@ -2730,6 +2793,7 @@ enum GstQueryType
     values. You can get the type flags of a #GstQueryType with the
     [gid.gst1.global.queryTypeGetFlags] function.
 */
+@gidGir("QueryTypeFlags")
 enum GstQueryTypeFlags : uint
 {
   /**
@@ -2758,6 +2822,7 @@ enum GstQueryTypeFlags : uint
     #GstPluginFeature. Any value is valid, including values bigger than
     @GST_RANK_PRIMARY.
 */
+@gidGir("Rank")
 enum GstRank
 {
   /**
@@ -2786,6 +2851,7 @@ enum GstRank
     memory, files, network connections, process space, ...
     They're typically used by source and sink elements.
 */
+@gidGir("ResourceError")
 enum GstResourceError
 {
   /**
@@ -2877,6 +2943,7 @@ enum GstResourceError
 /**
     The different scheduling flags.
 */
+@gidGir("SchedulingFlags")
 enum GstSchedulingFlags : uint
 {
   /**
@@ -2898,6 +2965,7 @@ enum GstSchedulingFlags : uint
 /**
     The different search modes.
 */
+@gidGir("SearchMode")
 enum GstSearchMode
 {
   /**
@@ -2969,6 +3037,7 @@ enum GstSearchMode
     details on the meaning of these flags and the behaviour expected of
     elements that handle them.
 */
+@gidGir("SeekFlags")
 enum GstSeekFlags : uint
 {
   /**
@@ -3070,6 +3139,7 @@ enum GstSeekFlags : uint
     The different types of seek events. When constructing a seek event with
     [gid.gst1.event.Event.newSeek] or when doing gst_segment_do_seek ().
 */
+@gidGir("SeekType")
 enum GstSeekType
 {
   /**
@@ -3092,6 +3162,7 @@ enum GstSeekType
     Flags for the GstSegment structure. Currently mapped to the corresponding
     values of the seek flags.
 */
+@gidGir("SegmentFlags")
 enum GstSegmentFlags : uint
 {
   /**
@@ -3141,6 +3212,7 @@ enum GstSegmentFlags : uint
 }
 
 /** */
+@gidGir("SerializeFlags")
 enum GstSerializeFlags : uint
 {
   /**
@@ -3162,6 +3234,7 @@ enum GstSerializeFlags : uint
 }
 
 /** */
+@gidGir("StackTraceFlags")
 enum GstStackTraceFlags : uint
 {
   /**
@@ -3183,6 +3256,7 @@ enum GstStackTraceFlags : uint
     The possible states an element can be in. States can be changed using
     [gid.gst1.element.Element.setState] and checked using [gid.gst1.element.Element.getState].
 */
+@gidGir("State")
 enum GstState
 {
   /**
@@ -3219,6 +3293,7 @@ enum GstState
     [gid.gst1.types.State.Null] &rArr; [gid.gst1.types.State.Playing] is called an upwards state change
     and [gid.gst1.types.State.Playing] &rArr; [gid.gst1.types.State.Null] a downwards state change.
 */
+@gidGir("StateChange")
 enum GstStateChange
 {
   /**
@@ -3328,6 +3403,7 @@ enum GstStateChange
     The possible return values from a state change function such as
     [gid.gst1.element.Element.setState]. Only @GST_STATE_CHANGE_FAILURE is a real failure.
 */
+@gidGir("StateChangeReturn")
 enum GstStateChangeReturn
 {
   /**
@@ -3358,6 +3434,7 @@ enum GstStateChangeReturn
     format errors, media type errors, ...
     They're typically used by decoders, demuxers, converters, ...
 */
+@gidGir("StreamError")
 enum GstStreamError
 {
   /**
@@ -3441,6 +3518,7 @@ enum GstStreamError
 }
 
 /** */
+@gidGir("StreamFlags")
 enum GstStreamFlags : uint
 {
   /**
@@ -3476,6 +3554,7 @@ enum GstStreamFlags : uint
     The type of a [gid.gst1.types.MessageType.StreamStatus]. The stream status messages inform the
     application of new streaming threads and their status.
 */
+@gidGir("StreamStatusType")
 enum GstStreamStatusType
 {
   /**
@@ -3522,6 +3601,7 @@ enum GstStreamStatusType
     will be a single value. Do not use the equality operator for checking
     whether a stream is of a certain type.
 */
+@gidGir("StreamType")
 enum GstStreamType : uint
 {
   /**
@@ -3558,6 +3638,7 @@ enum GstStreamType : uint
 /**
     The type of a [gid.gst1.types.MessageType.StructureChange].
 */
+@gidGir("StructureChangeType")
 enum GstStructureChangeType
 {
   /**
@@ -3574,6 +3655,7 @@ enum GstStructureChangeType
 /**
     Extra tag flags used when registering tags.
 */
+@gidGir("TagFlag")
 enum GstTagFlag
 {
   /**
@@ -3620,6 +3702,7 @@ enum GstTagFlag
     | KEEP        | A     | A      | B      | ø       |
     | KEEP_ALL    | A     | A      | ø      | ø       |
 */
+@gidGir("TagMergeMode")
 enum GstTagMergeMode
 {
   /**
@@ -3667,6 +3750,7 @@ enum GstTagMergeMode
     GstTagScope specifies if a taglist applies to the complete
     medium or only to one single stream.
 */
+@gidGir("TagScope")
 enum GstTagScope
 {
   /**
@@ -3683,6 +3767,7 @@ enum GstTagScope
 /**
     The different states a task can be in
 */
+@gidGir("TaskState")
 enum GstTaskState
 {
   /**
@@ -3706,6 +3791,7 @@ enum GstTaskState
     
     There are two types of TOC entries: alternatives or parts in a sequence.
 */
+@gidGir("TocEntryType")
 enum GstTocEntryType
 {
   /**
@@ -3748,6 +3834,7 @@ enum GstTocEntryType
     How a #GstTocEntry should be repeated. By default, entries are played a
     single time.
 */
+@gidGir("TocLoopType")
 enum GstTocLoopType
 {
   /**
@@ -3774,6 +3861,7 @@ enum GstTocLoopType
 /**
     The scope of a TOC.
 */
+@gidGir("TocScope")
 enum GstTocScope
 {
   /**
@@ -3797,6 +3885,7 @@ enum GstTocScope
     Flag that describe the value. These flags help applications processing the
     logs to understand the values.
 */
+@gidGir("TracerValueFlags")
 enum GstTracerValueFlags : uint
 {
   /**
@@ -3825,6 +3914,7 @@ enum GstTracerValueFlags : uint
     relates to. If it is e.g. [gid.gst1.types.TracerValueScope.Pad], then each of the log
     events may contain values for different #GstPads.
 */
+@gidGir("TracerValueScope")
 enum GstTracerValueScope
 {
   /**
@@ -3852,6 +3942,7 @@ enum GstTracerValueScope
     The probability of the typefind function. Higher values have more certainty
     in doing a reliable typefind.
 */
+@gidGir("TypeFindProbability")
 enum GstTypeFindProbability
 {
   /**
@@ -3888,6 +3979,7 @@ enum GstTypeFindProbability
 /**
     Different URI-related errors that can occur.
 */
+@gidGir("URIError")
 enum GstURIError
 {
   /**
@@ -3916,6 +4008,7 @@ enum GstURIError
 /**
     The different types of URI direction.
 */
+@gidGir("URIType")
 enum GstURIType
 {
   /**
@@ -4053,6 +4146,7 @@ struct GstAllocatorClass
 }
 
 /** */
+@gidGir("AllocatorPrivate")
 struct GstAllocatorPrivate;
 
 /**
@@ -4281,11 +4375,13 @@ struct GstBinClass
 }
 
 /** */
+@gidGir("BinPrivate")
 struct GstBinPrivate;
 
 /**
     A fundamental type that describes a 64-bit bitmask
 */
+@gidGir("Bitmask")
 struct GstBitmask;
 
 /**
@@ -4502,6 +4598,7 @@ struct GstBufferPool
     implementations can use this extra information to decide what buffer to
     return.
 */
+@gidGir("BufferPoolAcquireParams")
 struct GstBufferPoolAcquireParams
 {
   /**
@@ -4576,6 +4673,7 @@ struct GstBufferPoolClass
 }
 
 /** */
+@gidGir("BufferPoolPrivate")
 struct GstBufferPoolPrivate;
 
 /**
@@ -4654,6 +4752,7 @@ struct GstBusClass
 }
 
 /** */
+@gidGir("BusPrivate")
 struct GstBusPrivate;
 
 /**
@@ -4978,6 +5077,7 @@ struct GstClockEntry
 }
 
 /** */
+@gidGir("ClockPrivate")
 struct GstClockPrivate;
 
 /**
@@ -5090,6 +5190,7 @@ struct GstControlBindingClass
 }
 
 /** */
+@gidGir("ControlBindingPrivate")
 struct GstControlBindingPrivate;
 
 /**
@@ -5338,9 +5439,11 @@ struct GstDeviceMonitorClass
 }
 
 /** */
+@gidGir("DeviceMonitorPrivate")
 struct GstDeviceMonitorPrivate;
 
 /** */
+@gidGir("DevicePrivate")
 struct GstDevicePrivate;
 
 /**
@@ -5430,14 +5533,17 @@ struct GstDeviceProviderFactory;
 /**
     The opaque #GstDeviceProviderFactoryClass data structure.
 */
+@gidGir("DeviceProviderFactoryClass")
 struct GstDeviceProviderFactoryClass;
 
 /** */
+@gidGir("DeviceProviderPrivate")
 struct GstDeviceProviderPrivate;
 
 /**
     A fundamental type that describes a #gdouble range
 */
+@gidGir("DoubleRange")
 struct GstDoubleRange;
 
 /**
@@ -5464,6 +5570,7 @@ struct GstDoubleRange;
 struct GstDynamicTypeFactory;
 
 /** */
+@gidGir("DynamicTypeFactoryClass")
 struct GstDynamicTypeFactoryClass;
 
 /**
@@ -5778,6 +5885,7 @@ struct GstElementClass
 struct GstElementFactory;
 
 /** */
+@gidGir("ElementFactoryClass")
 struct GstElementFactoryClass;
 
 /**
@@ -5850,6 +5958,7 @@ struct GstEvent
     A fundamental type that describes a 32-bit flag bitfield, with 32-bit
     mask indicating which of the bits in the field are explicitly set.
 */
+@gidGir("FlagSet")
 struct GstFlagSet;
 
 /**
@@ -5882,11 +5991,13 @@ struct GstFormatDefinition
     A fundamental type that describes a fraction of an integer numerator
     over an integer denominator
 */
+@gidGir("Fraction")
 struct GstFraction;
 
 /**
     A fundamental type that describes a #GstFractionRange range
 */
+@gidGir("FractionRange")
 struct GstFractionRange;
 
 /**
@@ -5924,6 +6035,7 @@ struct GstGhostPadClass
 }
 
 /** */
+@gidGir("GhostPadPrivate")
 struct GstGhostPadPrivate;
 
 /**
@@ -5954,11 +6066,13 @@ struct GstIdStr
 /**
     A fundamental type that describes a #gint64 range
 */
+@gidGir("Int64Range")
 struct GstInt64Range;
 
 /**
     A fundamental type that describes a #gint range
 */
+@gidGir("IntRange")
 struct GstIntRange;
 
 /**
@@ -6118,6 +6232,7 @@ struct GstLogContext;
     configure a log context with various options while maintaining immutability
     of the resulting context.
 */
+@gidGir("LogContextBuilder")
 struct GstLogContextBuilder;
 
 /**
@@ -6349,6 +6464,7 @@ struct GstMeta
 struct GstMetaFactory;
 
 /** */
+@gidGir("MetaFactoryClass")
 struct GstMetaFactoryClass;
 
 /**
@@ -6410,6 +6526,7 @@ struct GstMetaInfo
 /**
     Extra data passed to a "gst-copy" transform #GstMetaTransformFunction.
 */
+@gidGir("MetaTransformCopy")
 struct GstMetaTransformCopy
 {
   /**
@@ -6856,6 +6973,7 @@ struct GstPadClass
 }
 
 /** */
+@gidGir("PadPrivate")
 struct GstPadPrivate;
 
 /**
@@ -7220,6 +7338,7 @@ struct GstPipelineClass
 }
 
 /** */
+@gidGir("PipelinePrivate")
 struct GstPipelinePrivate;
 
 /**
@@ -7246,6 +7365,7 @@ struct GstPipelinePrivate;
 struct GstPlugin;
 
 /** */
+@gidGir("PluginClass")
 struct GstPluginClass;
 
 /**
@@ -7327,6 +7447,7 @@ struct GstPluginDesc
 struct GstPluginFeature;
 
 /** */
+@gidGir("PluginFeatureClass")
 struct GstPluginFeatureClass;
 
 /**
@@ -7552,6 +7673,7 @@ struct GstProxyPadClass
 }
 
 /** */
+@gidGir("ProxyPadPrivate")
 struct GstProxyPadPrivate;
 
 /**
@@ -7727,6 +7849,7 @@ struct GstRegistryClass
 }
 
 /** */
+@gidGir("RegistryPrivate")
 struct GstRegistryPrivate;
 
 /**
@@ -7919,6 +8042,7 @@ struct GstSharedTaskPoolClass
 }
 
 /** */
+@gidGir("SharedTaskPoolPrivate")
 struct GstSharedTaskPoolPrivate;
 
 /**
@@ -8066,9 +8190,11 @@ struct GstStreamCollectionClass
 }
 
 /** */
+@gidGir("StreamCollectionPrivate")
 struct GstStreamCollectionPrivate;
 
 /** */
+@gidGir("StreamPrivate")
 struct GstStreamPrivate;
 
 /**
@@ -8225,6 +8351,7 @@ struct GstSystemClockClass
 }
 
 /** */
+@gidGir("SystemClockPrivate")
 struct GstSystemClockPrivate;
 
 /**
@@ -8456,11 +8583,13 @@ struct GstTaskPoolClass
 }
 
 /** */
+@gidGir("TaskPrivate")
 struct GstTaskPrivate;
 
 /**
     Structure for storing a timestamp and a value.
 */
+@gidGir("TimedValue")
 struct GstTimedValue
 {
   /**
@@ -8590,9 +8719,11 @@ struct GstTracerClass
 struct GstTracerFactory;
 
 /** */
+@gidGir("TracerFactoryClass")
 struct GstTracerFactoryClass;
 
 /** */
+@gidGir("TracerPrivate")
 struct GstTracerPrivate;
 
 /**
@@ -8602,6 +8733,7 @@ struct GstTracerPrivate;
 struct GstTracerRecord;
 
 /** */
+@gidGir("TracerRecordClass")
 struct GstTracerRecordClass;
 
 /**
@@ -8688,6 +8820,7 @@ struct GstTypeFind
 struct GstTypeFindFactory;
 
 /** */
+@gidGir("TypeFindFactoryClass")
 struct GstTypeFindFactoryClass;
 
 /**
@@ -8743,16 +8876,19 @@ struct GstUri;
 /**
     A fundamental type that describes an ordered list of #GValue
 */
+@gidGir("ValueArray")
 struct GstValueArray;
 
 /**
     A fundamental type that describes an unordered list of #GValue
 */
+@gidGir("ValueList")
 struct GstValueList;
 
 /**
     VTable for the #GValue @type.
 */
+@gidGir("ValueTable")
 struct GstValueTable
 {
   /**
@@ -8792,6 +8928,7 @@ struct GstValueTable
 /**
     A fundamental type that describes a set of #GValue
 */
+@gidGir("ValueUniqueList")
 struct GstValueUniqueList;
 
 /**
@@ -8799,6 +8936,7 @@ struct GstValueUniqueList;
     functionality based on an array instead of linked lists. This reduces the
     overhead caused by memory management by a large factor.
 */
+@gidGir("VecDeque")
 struct GstVecDeque;
 
 alias extern(C) gboolean function(GstStructure** aggregatedParams, const(GstStructure)* params0, const(GstStructure)* params1) GstAllocationMetaParamsAggregator;

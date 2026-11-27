@@ -15,6 +15,7 @@ import gid.gtk4.types;
     
     Widgets are activated by calling [gid.gtk4.widget.Widget.activate].
 */
+@gidGir("ActivateAction", "ActivateActionClass")
 class ActivateAction : gid.gtk4.shortcut_action.ShortcutAction
 {
 

@@ -14,6 +14,7 @@ import gid.gsk4.types;
     
     See [gid.gsk4.renderer.Renderer].
 */
+@gidGir("BroadwayRenderer", "BroadwayRendererClass")
 class BroadwayRenderer : gid.gsk4.renderer.Renderer
 {
 

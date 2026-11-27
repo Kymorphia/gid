@@ -12,6 +12,7 @@ import gid.gstpbutils1.types;
     Opaque context structure for the plugin installation. Use the provided
     API to set details on it.
 */
+@gidGir("InstallPluginsContext")
 class InstallPluginsContext : gid.gobject2.boxed.BoxedWrap!(gst_install_plugins_context_get_type)
 {
 

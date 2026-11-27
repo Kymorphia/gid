@@ -41,6 +41,7 @@ import gid.gtk3.types;
     GtkLinkButton has a single CSS node with name button. To differentiate
     it from a plain #GtkButton, it gets the .link style class.
 */
+@gidGir("LinkButton", "LinkButtonClass")
 class LinkButton : gid.gtk3.button.Button
 {
 

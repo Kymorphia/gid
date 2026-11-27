@@ -17,6 +17,7 @@ import gid.gtk3.types;
     A #GtkToggleAction corresponds roughly to a #GtkCheckMenuItem. It has an
     “active” state specifying whether the action has been checked or not.
 */
+@gidGir("ToggleAction", "ToggleActionClass")
 class ToggleAction : gid.gtk3.action.Action
 {
 

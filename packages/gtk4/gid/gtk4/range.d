@@ -40,6 +40,7 @@ import gid.gtk4.widget;
     dragging, or initiating the drag with a long-press will enable the
     fine-tuning mode.
 */
+@gidGir("Range", "RangeClass")
 class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange, gid.gtk4.orientable.Orientable
 {
 

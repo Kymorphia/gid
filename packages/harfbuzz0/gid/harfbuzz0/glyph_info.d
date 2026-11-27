@@ -12,6 +12,7 @@ import gid.harfbuzz0.types;
     The #hb_glyph_info_t is the structure that holds information about the
     glyphs and their relation to input text.
 */
+@gidGir("glyph_info_t")
 class GlyphInfo : gid.gobject2.boxed.BoxedWrap!(hb_gobject_glyph_info_get_type)
 {
   /**

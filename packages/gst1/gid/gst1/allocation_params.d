@@ -10,6 +10,7 @@ import gid.gst1.types;
 /**
     Parameters to control the allocation of memory
 */
+@gidGir("AllocationParams")
 struct AllocationParams
 {
   /**

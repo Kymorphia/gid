@@ -10,6 +10,7 @@ import gid.gstsdp1.types;
 /**
     The contents of the SDP "a=" field which contains a key/value pair.
 */
+@gidGir("SDPAttribute")
 class SDPAttribute : StructWrap!(GstSDPAttribute)
 {
   /**

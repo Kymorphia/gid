@@ -21,6 +21,7 @@ import gid.gobject2.object;
     
     This type is intended to be used with [gid.gio2.dbus_object_manager.DBusObjectManager].
 */
+@gidGir("DBusObjectSkeleton", "DBusObjectSkeletonClass")
 class DBusObjectSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.DBusObject
 {
 

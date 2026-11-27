@@ -95,6 +95,7 @@ import gid.gtk4.widget;
     Since GTK 4.12, [gid.gtk4.tree_expander.TreeExpander] uses the [gid.gtk4.types.AccessibleRole.Button] role.
     Toggling it will change the [gid.gtk4.types.AccessibleState.Expanded] state.
 */
+@gidGir("TreeExpander", "TreeExpanderClass")
 class TreeExpander : gid.gtk4.widget.Widget
 {
 

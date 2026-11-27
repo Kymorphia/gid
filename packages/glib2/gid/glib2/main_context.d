@@ -13,6 +13,7 @@ import gid.gobject2.boxed;
     The [gid.glib2.main_context.MainContext] struct is an opaque data
     type representing a set of sources to be handled in a main loop.
 */
+@gidGir("MainContext")
 class MainContext : gid.gobject2.boxed.BoxedWrap!(g_main_context_get_type)
 {
 

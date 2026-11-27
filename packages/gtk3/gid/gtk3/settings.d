@@ -54,6 +54,7 @@ import gid.gtk3.types;
     to use [gid.gtk4.widget.Widget.getSettings]. [gid.gtk4.settings.Settings.getDefault] returns the
     GtkSettings instance for the default screen.
 */
+@gidGir("Settings", "SettingsClass")
 class Settings : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.StyleProvider
 {
 

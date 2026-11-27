@@ -10,6 +10,7 @@ import gid.core.utils;
 import gid.gobject2.object;
 
 /** */
+@gidGir("Implementor")
 class Implementor : OpaqueWrap!(AtkImplementor*, void, void)
 {
 

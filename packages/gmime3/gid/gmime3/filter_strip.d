@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter for stripping whitespace from the end of lines.
 */
+@gidGir("FilterStrip", "FilterStripClass")
 class FilterStrip : gid.gmime3.filter.Filter
 {
 

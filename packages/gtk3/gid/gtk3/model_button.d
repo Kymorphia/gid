@@ -120,6 +120,7 @@ import gid.gtk3.types;
     their main node to button and add a .model style class to it. The indicator
     subnode is invisible in this case.
 */
+@gidGir("ModelButton")
 class ModelButton : gid.gtk3.button.Button
 {
 

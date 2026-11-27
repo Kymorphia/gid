@@ -13,6 +13,7 @@ import gid.gtk4.types;
 /**
     Wraps a list of references to [gid.gtk4.accessible.Accessible] objects.
 */
+@gidGir("AccessibleList")
 class AccessibleList : gid.gobject2.boxed.BoxedWrap!(gtk_accessible_list_get_type)
 {
 

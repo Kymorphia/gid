@@ -14,6 +14,7 @@ import gid.gsk4.types;
 /**
     A render node for a [gid.gdk4.texture.Texture].
 */
+@gidGir("TextureNode")
 class TextureNode : gid.gsk4.render_node.RenderNode
 {
 

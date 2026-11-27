@@ -12,6 +12,7 @@ import gid.gstvideo1.types;
 /**
     H.264 H.265 metadata from SEI User Data Unregistered messages
 */
+@gidGir("VideoSEIUserDataUnregisteredMeta")
 class VideoSEIUserDataUnregisteredMeta : StructWrap!(GstVideoSEIUserDataUnregisteredMeta)
 {
   /**

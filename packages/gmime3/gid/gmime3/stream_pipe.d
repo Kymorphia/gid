@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A #GMimeStream wrapper around pipes.
 */
+@gidGir("StreamPipe", "StreamPipeClass")
 class StreamPipe : gid.gmime3.stream.Stream
 {
 

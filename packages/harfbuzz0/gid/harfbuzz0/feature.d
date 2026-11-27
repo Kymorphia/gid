@@ -14,6 +14,7 @@ import gid.harfbuzz0.types;
     Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END
     specifies that the feature always applies to the entire buffer.
 */
+@gidGir("feature_t")
 struct Feature
 {
   /**

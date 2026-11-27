@@ -18,6 +18,7 @@ import gid.gobject2.object;
     [gid.gio2.charset_converter.CharsetConverter] is an implementation of [gid.gio2.converter.Converter] based on
     [gid.glib2.types.void*].
 */
+@gidGir("CharsetConverter", "CharsetConverterClass")
 class CharsetConverter : gid.gobject2.object.ObjectWrap, gid.gio2.converter.Converter, gid.gio2.initable.Initable
 {
 

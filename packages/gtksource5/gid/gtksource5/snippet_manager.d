@@ -23,6 +23,7 @@ import gid.gtksource5.types;
     Use [gid.gtksource5.snippet_manager.SnippetManager.getSnippet] to retrieve snippets for
     a given snippets.
 */
+@gidGir("SnippetManager", "SnippetManagerClass")
 class SnippetManager : gid.gobject2.object.ObjectWrap
 {
 

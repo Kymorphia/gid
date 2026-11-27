@@ -15,6 +15,7 @@ import gid.webkit6.types;
     A history item is part of the #WebKitBackForwardList and consists
     out of a title and a URI.
 */
+@gidGir("BackForwardListItem", "BackForwardListItemClass")
 class BackForwardListItem : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

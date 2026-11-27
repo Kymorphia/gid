@@ -33,6 +33,7 @@ import gid.pango1.types;
     See the #GtkToolbar class for a description of the toolbar widget, and
     #GtkToolShell for a description of the tool shell interface.
 */
+@gidGir("ToolItem", "ToolItemClass")
 class ToolItem : gid.gtk3.bin.Bin, gid.gtk3.activatable.Activatable
 {
 

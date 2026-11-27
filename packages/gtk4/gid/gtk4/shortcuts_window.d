@@ -95,6 +95,7 @@ import gid.gtk4.window;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("ShortcutsWindow")
 class ShortcutsWindow : gid.gtk4.window.Window
 {
 

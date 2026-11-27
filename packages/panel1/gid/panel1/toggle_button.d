@@ -29,6 +29,7 @@ import gid.panel1.types;
     It will automatically reveal or hide the specified area from
     [gid.panel1.toggle_button.ToggleButton.dock].
 */
+@gidGir("ToggleButton", "ToggleButtonClass")
 class ToggleButton : gid.gtk4.widget.Widget
 {
 

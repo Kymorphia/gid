@@ -46,6 +46,7 @@ import gid.gtk3.widget;
     style classes such as .toggle, .popup, .scale, .lock, .color, .font, .file
     to differentiate themselves from a plain GtkButton.
 */
+@gidGir("Button", "ButtonClass")
 class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activatable.Activatable
 {
 

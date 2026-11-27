@@ -42,6 +42,7 @@ import gid.gobject2.object;
     accessible object is requested for an object type for which no
     factory type is specified.
 */
+@gidGir("NoOpObject", "NoOpObjectClass")
 class NoOpObject : gid.atk1.object.ObjectWrap, gid.atk1.action.Action, gid.atk1.component.Component, gid.atk1.document.Document, gid.atk1.editable_text.EditableText, gid.atk1.hypertext.Hypertext, gid.atk1.image.Image, gid.atk1.selection.Selection, gid.atk1.table.Table, gid.atk1.table_cell.TableCell, gid.atk1.text.Text, gid.atk1.value.Value, gid.atk1.window.Window
 {
 

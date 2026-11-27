@@ -14,6 +14,7 @@ import gid.gstrtsp1.types;
     Opaque RTSP watch object that can be used for asynchronous RTSP
     operations.
 */
+@gidGir("RTSPWatch")
 class RTSPWatch : OpaqueWrap!(GstRTSPWatch*, void, void)
 {
 

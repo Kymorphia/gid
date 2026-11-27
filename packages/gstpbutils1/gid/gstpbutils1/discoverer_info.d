@@ -23,6 +23,7 @@ import gid.gstpbutils1.types;
 /**
     Structure containing the information of a URI analyzed by #GstDiscoverer.
 */
+@gidGir("DiscovererInfo")
 class DiscovererInfo : gid.gobject2.object.ObjectWrap
 {
 

@@ -19,6 +19,7 @@ import gid.gdk3.window;
     these, the scroll deltas can be obtained with
     [gid.gdk3.event.Event.getScrollDeltas].
 */
+@gidGir("EventScroll")
 class EventScroll : StructWrap!(GdkEventScroll, gdk_event_copy, gdk_event_free)
 {
   /**

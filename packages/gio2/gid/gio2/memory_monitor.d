@@ -62,6 +62,7 @@ import gid.gobject2.object;
     Don’t forget to disconnect the [gid.gio2.memory_monitor.MemoryMonitor.lowMemoryWarning]
     signal, and unref the [gid.gio2.memory_monitor.MemoryMonitor] itself when exiting.
 */
+@gidGir("MemoryMonitor", "MemoryMonitorInterface")
 interface MemoryMonitor : gid.gio2.initable.Initable
 {
 

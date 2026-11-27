@@ -26,6 +26,7 @@ import gid.webkit6.web_view;
     request, and also finish the request with
     [gid.webkit6.urischeme_request.URISchemeRequest.finish].
 */
+@gidGir("URISchemeRequest", "URISchemeRequestClass")
 class URISchemeRequest : gid.gobject2.object.ObjectWrap
 {
 

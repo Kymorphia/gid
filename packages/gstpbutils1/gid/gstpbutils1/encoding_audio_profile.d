@@ -13,6 +13,7 @@ import gid.gstpbutils1.types;
 /**
     Variant of #GstEncodingProfile for audio streams.
 */
+@gidGir("EncodingAudioProfile", "EncodingAudioProfileClass")
 class EncodingAudioProfile : gid.gstpbutils1.encoding_profile.EncodingProfile
 {
 

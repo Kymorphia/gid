@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Describes a key press or key release event.
 */
+@gidGir("EventKey")
 class EventKey : StructWrap!(GdkEventKey, gdk_event_copy, gdk_event_free)
 {
   /**

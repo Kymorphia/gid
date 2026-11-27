@@ -23,6 +23,7 @@ import gid.gobject2.boxed;
     Memory management of #cairo_font_face_t is done with
     [gid.cairo1.font_face.FontFace.reference] and [gid.cairo1.font_face.FontFace.destroy].
 */
+@gidGir("FontFace")
 class FontFace : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_font_face_get_type)
 {
 

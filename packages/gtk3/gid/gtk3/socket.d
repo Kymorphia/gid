@@ -70,6 +70,7 @@ import gid.xlib2.types;
     They can only be used on a #GdkX11Display. To use #GtkPlug and
     #GtkSocket, you need to include the `gtk/gtkx.h` header.
 */
+@gidGir("Socket", "SocketClass")
 class Socket : gid.gtk3.container.Container
 {
 

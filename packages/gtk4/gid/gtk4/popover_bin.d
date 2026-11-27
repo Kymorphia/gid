@@ -33,6 +33,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.popover_bin.PopoverBin] has a single CSS node with the name `popoverbin`.
 */
+@gidGir("PopoverBin", "PopoverBinClass")
 class PopoverBin : gid.gtk4.widget.Widget
 {
 

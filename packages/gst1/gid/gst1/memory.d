@@ -50,6 +50,7 @@ import gid.gst1.types;
     
     Memory can be efficiently merged when [gid.gst1.memory.Memory.isSpan] returns true.
 */
+@gidGir("Memory")
 class Memory : gid.gobject2.boxed.BoxedWrap!(gst_memory_get_type)
 {
   /**

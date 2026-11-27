@@ -88,6 +88,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gtk4.filter_list_model.FilterListModel] instead.
 */
+@gidGir("TreeModelFilter", "TreeModelFilterClass")
 class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk4.tree_drag_source.TreeDragSource, gid.gtk4.tree_model.TreeModel
 {
 

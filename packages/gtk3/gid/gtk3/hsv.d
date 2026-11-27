@@ -25,6 +25,7 @@ import gid.gtk3.widget;
     #GtkHSV has been deprecated together with #GtkColorSelection, where
     it was used.
 */
+@gidGir("HSV", "HSVClass")
 class HSV : gid.gtk3.widget.Widget
 {
 

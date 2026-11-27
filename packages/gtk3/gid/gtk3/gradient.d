@@ -30,6 +30,7 @@ import gid.gtk3.types;
     web standards, it is not used anymore. If you want to use gradients in
     your own code, please use Cairo directly.
 */
+@gidGir("Gradient")
 class Gradient : gid.gobject2.boxed.BoxedWrap!(gtk_gradient_get_type)
 {
 

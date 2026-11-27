@@ -25,6 +25,7 @@ import gid.webkit6.types;
     When you finished setting up your #WebKitURISchemeResponse, call
     webkit_uri_request_finish_with_response() with it to return the response.
 */
+@gidGir("URISchemeResponse", "URISchemeResponseClass")
 class URISchemeResponse : gid.gobject2.object.ObjectWrap
 {
 

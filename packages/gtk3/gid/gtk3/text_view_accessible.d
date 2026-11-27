@@ -18,6 +18,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("TextViewAccessible", "TextViewAccessibleClass")
 class TextViewAccessible : gid.gtk3.container_accessible.ContainerAccessible, gid.atk1.editable_text.EditableText, gid.atk1.streamable_content.StreamableContent, gid.atk1.text.Text
 {
 

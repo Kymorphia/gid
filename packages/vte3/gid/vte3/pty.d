@@ -17,6 +17,7 @@ import gid.vte3.c.types;
 import gid.vte3.types;
 
 /** */
+@gidGir("Pty", "PtyClass")
 class Pty : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
 {
 

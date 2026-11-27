@@ -23,6 +23,7 @@ import gid.glib2.types;
     @msg_handler field. The type of the message handler function
     is declared by #GScannerMsgFunc.
 */
+@gidGir("Scanner")
 class Scanner : OpaqueWrap!(GScanner*, g_scanner_destroy, void)
 {
 

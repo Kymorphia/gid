@@ -19,6 +19,7 @@ import gid.gtk4.types;
     The provided signals just relay the basic information of the
     stylus events.
 */
+@gidGir("GestureStylus", "GestureStylusClass")
 class GestureStylus : gid.gtk4.gesture_single.GestureSingle
 {
 

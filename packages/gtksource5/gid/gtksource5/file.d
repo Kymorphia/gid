@@ -22,6 +22,7 @@ import gid.gtksource5.types;
     properties are updated. If an operation fails, the [gid.gtksource5.file.File] properties
     have still the previous valid values.
 */
+@gidGir("File", "FileClass")
 class File : gid.gobject2.object.ObjectWrap
 {
 

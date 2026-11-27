@@ -13,6 +13,7 @@ import gid.gdk3.window;
     Any event pointer can safely be cast to a pointer to a #GdkEventAny to
     access these fields.
 */
+@gidGir("EventAny")
 class EventAny : StructWrap!(GdkEventAny, gdk_event_copy, gdk_event_free)
 {
   /**

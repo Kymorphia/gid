@@ -10,6 +10,7 @@ import gid.gmime3.types;
 /**
     An OpenPGP marker for use with GMime's internal state machines used for detecting OpenPGP blocks.
 */
+@gidGir("OpenPGPMarker")
 class OpenPGPMarker : StructWrap!(GMimeOpenPGPMarker)
 {
   /**

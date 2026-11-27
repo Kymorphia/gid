@@ -143,6 +143,7 @@ import gid.gtk4.widget;
     [gid.gtk4.types.AccessibleRole.Checkbox] or [gid.gtk4.types.AccessibleRole.MenuItemRadio]
     roles, depending on the action they are connected to.
 */
+@gidGir("PopoverMenu")
 class PopoverMenu : gid.gtk4.popover.Popover
 {
 

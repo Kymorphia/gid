@@ -58,6 +58,7 @@ import gid.gtk4.types;
     widget you want to use it with, such as via [gid.gtk4.list_view.ListView.setFactory].
     Reusing factories across different views is allowed, but very uncommon.
 */
+@gidGir("ListItemFactory", "ListItemFactoryClass")
 class ListItemFactory : gid.gobject2.object.ObjectWrap
 {
 

@@ -28,6 +28,7 @@ import gid.gtk4.window;
     
     To launch uris that don't represent files, use [gid.gtk4.uri_launcher.UriLauncher].
 */
+@gidGir("FileLauncher", "FileLauncherClass")
 class FileLauncher : gid.gobject2.object.ObjectWrap
 {
 

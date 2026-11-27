@@ -27,6 +27,7 @@ import gid.gtk4.types;
     It can be modified by the [gid.gtk4.gesture_long_press.GestureLongPress.delayFactor]
     property.
 */
+@gidGir("GestureLongPress", "GestureLongPressClass")
 class GestureLongPress : gid.gtk4.gesture_single.GestureSingle
 {
 

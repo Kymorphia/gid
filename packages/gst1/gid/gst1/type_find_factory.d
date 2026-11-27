@@ -62,6 +62,7 @@ import gid.gst1.types;
       };
     ```
 */
+@gidGir("TypeFindFactory", "TypeFindFactoryClass")
 class TypeFindFactory : gid.gst1.plugin_feature.PluginFeature
 {
 

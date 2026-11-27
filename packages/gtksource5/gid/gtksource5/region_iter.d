@@ -13,6 +13,7 @@ import gid.gtksource5.types;
     
     Ignore all its fields and initialize the iter with [gid.gtksource5.region.Region.getStartRegionIter].
 */
+@gidGir("RegionIter")
 class RegionIter : StructWrap!(GtkSourceRegionIter)
 {
   /**

@@ -15,6 +15,7 @@ import gid.gdk3.window;
     again. Note that implicit grabs (which are initiated by button presses)
     can also cause #GdkEventGrabBroken events.
 */
+@gidGir("EventGrabBroken")
 class EventGrabBroken : StructWrap!(GdkEventGrabBroken, gdk_event_copy, gdk_event_free)
 {
   /**

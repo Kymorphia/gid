@@ -17,6 +17,7 @@ import gid.gtk4.types;
     [gid.gtk4.gesture_zoom.GestureZoom.scaleChanged] signal is emitted to report
     the scale factor.
 */
+@gidGir("GestureZoom", "GestureZoomClass")
 class GestureZoom : gid.gtk4.gesture.Gesture
 {
 

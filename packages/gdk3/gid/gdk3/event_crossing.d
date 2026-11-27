@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated when the pointer enters or leaves a window.
 */
+@gidGir("EventCrossing")
 class EventCrossing : StructWrap!(GdkEventCrossing, gdk_event_copy, gdk_event_free)
 {
   /**

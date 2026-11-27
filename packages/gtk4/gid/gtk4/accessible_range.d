@@ -37,6 +37,7 @@ import gid.gtk4.types;
     - [gid.gtk4.types.AccessibleProperty.ValueNow]
     - [gid.gtk4.types.AccessibleProperty.ValueText]
 */
+@gidGir("AccessibleRange", "AccessibleRangeInterface")
 interface AccessibleRange : gid.gtk4.accessible.Accessible
 {
 

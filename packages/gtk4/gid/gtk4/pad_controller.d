@@ -68,6 +68,7 @@ import gid.gtk4.types;
     Devices that support high-resolution scrolling may send events with fractions of
     120 to signify a smaller motion.
 */
+@gidGir("PadController", "PadControllerClass")
 class PadController : gid.gtk4.event_controller.EventController
 {
 

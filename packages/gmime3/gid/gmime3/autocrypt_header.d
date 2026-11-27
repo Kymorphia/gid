@@ -18,6 +18,7 @@ import gid.gobject2.object;
     
     See https://autocrypt.org/ for details and motivation.
 */
+@gidGir("AutocryptHeader", "AutocryptHeaderClass")
 class AutocryptHeader : gid.gobject2.object.ObjectWrap
 {
 

@@ -27,6 +27,7 @@ import gid.gobject2.object;
     [gid.gio2.types.DBusInterfaceVTable] that was passed to
     [gid.gio2.dbus_connection.DBusConnection.registerObject].
 */
+@gidGir("DBusMethodInvocation")
 class DBusMethodInvocation : gid.gobject2.object.ObjectWrap
 {
 

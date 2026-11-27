@@ -8,9 +8,16 @@ public import gid.gdkpixbuf2.c.types;
 public import gid.gio2.c.types;
 public import gid.cairo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Rsvg";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     An enumeration representing possible errors
 */
+@gidGir("Error")
 enum RsvgError
 {
   /**
@@ -24,6 +31,7 @@ enum RsvgError
     constructors let you specify flags.  For this reason, [gid.rsvg2.handle.Handle.newFromGfileSync]
     and [gid.rsvg2.handle.Handle.newFromStreamSync] are the preferred ways to create a handle.
 */
+@gidGir("HandleFlags")
 enum RsvgHandleFlags : uint
 {
   /**
@@ -59,6 +67,7 @@ enum RsvgHandleFlags : uint
     as its support for CSS improves.  Please make your code handle unknown units gracefully (e.g. with
     a `default` case in a `switch()` statement).
 */
+@gidGir("Unit")
 enum RsvgUnit
 {
   /**
@@ -120,6 +129,7 @@ enum RsvgUnit
     Deprecated: Use [gid.rsvg2.handle.Handle.getIntrinsicSizeInPixels] or
       [gid.rsvg2.handle.Handle.getGeometryForLayer] instead.
 */
+@gidGir("DimensionData")
 struct RsvgDimensionData
 {
   /**
@@ -348,6 +358,7 @@ struct RsvgHandleClass
     dots-per-inch (DPI) it is using, it can convert lengths with @unit in
     [gid.rsvg2.types.Unit.In] or other physical units.
 */
+@gidGir("Length")
 struct RsvgLength
 {
   /**
@@ -367,6 +378,7 @@ struct RsvgLength
 
     Deprecated: Use [gid.rsvg2.handle.Handle.getGeometryForLayer] instead.
 */
+@gidGir("PositionData")
 struct RsvgPositionData
 {
   /**
@@ -383,6 +395,7 @@ struct RsvgPositionData
 /**
     A data structure for holding a rectangle.
 */
+@gidGir("Rectangle")
 struct RsvgRectangle
 {
   /**

@@ -19,6 +19,7 @@ import gid.gtk3.widget;
     extracted through [gid.gtk4.gesture_drag.GestureDrag.getOffset] and
     [gid.gtk4.gesture_drag.GestureDrag.getStartPoint].
 */
+@gidGir("GestureDrag", "GestureDragClass")
 class GestureDrag : gid.gtk3.gesture_single.GestureSingle
 {
 

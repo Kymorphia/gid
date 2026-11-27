@@ -13,6 +13,7 @@ import gid.gtksource4.gutter_renderer;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("GutterRendererPixbuf", "GutterRendererPixbufClass")
 class GutterRendererPixbuf : gid.gtksource4.gutter_renderer.GutterRenderer
 {
 

@@ -101,6 +101,7 @@ import gid.gtk4.widget;
     If you need more complex control over your widget, you should consider
     creating your own [gid.gtk4.widget.Widget] subclass.
 */
+@gidGir("DrawingArea", "DrawingAreaClass")
 class DrawingArea : gid.gtk4.widget.Widget
 {
 

@@ -14,6 +14,7 @@ import gid.gsk4.types;
 /**
     A render node for a linear gradient.
 */
+@gidGir("LinearGradientNode")
 class LinearGradientNode : gid.gsk4.render_node.RenderNode
 {
 

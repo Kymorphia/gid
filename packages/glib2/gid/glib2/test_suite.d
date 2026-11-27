@@ -10,6 +10,7 @@ import gid.glib2.types;
 /**
     An opaque structure representing a test suite.
 */
+@gidGir("TestSuite")
 class TestSuite : OpaqueWrap!(GTestSuite*, g_test_suite_free, void)
 {
 

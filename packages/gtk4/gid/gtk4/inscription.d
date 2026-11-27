@@ -37,6 +37,7 @@ import gid.pango1.types;
     
     [gid.gtk4.inscription.Inscription] has a single CSS node with the name label.
 */
+@gidGir("Inscription", "InscriptionClass")
 class Inscription : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
 {
 

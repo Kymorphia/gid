@@ -26,6 +26,7 @@ import gid.gtksource4.space_drawer;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("View", "ViewClass")
 class View : gid.gtk3.text_view.TextView
 {
 

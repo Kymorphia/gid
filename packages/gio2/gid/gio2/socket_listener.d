@@ -33,6 +33,7 @@ import gid.gobject2.object;
     [gid.gio2.socket_service.SocketService] and [gid.gio2.threaded_socket_service.ThreadedSocketService] which are
     subclasses of [gid.gio2.socket_listener.SocketListener] that make this even easier.
 */
+@gidGir("SocketListener", "SocketListenerClass")
 class SocketListener : gid.gobject2.object.ObjectWrap
 {
 

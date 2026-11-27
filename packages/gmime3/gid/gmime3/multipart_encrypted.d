@@ -17,6 +17,7 @@ import gid.gobject2.object;
 /**
     A multipart/encrypted MIME part.
 */
+@gidGir("MultipartEncrypted", "MultipartEncryptedClass")
 class MultipartEncrypted : gid.gmime3.multipart.Multipart
 {
 

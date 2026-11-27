@@ -12,6 +12,7 @@ import gid.glib2.types;
     The #GSequenceIter struct is an opaque data type representing an
     iterator pointing into a #GSequence.
 */
+@gidGir("SequenceIter")
 class SequenceIter : OpaqueWrap!(GSequenceIter*, void, void)
 {
 

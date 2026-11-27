@@ -16,6 +16,7 @@ import gid.gtksource4.mark;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("MarkAttributes", "MarkAttributesClass")
 class MarkAttributes : gid.gobject2.object.ObjectWrap
 {
 

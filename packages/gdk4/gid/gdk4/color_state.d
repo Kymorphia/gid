@@ -21,6 +21,7 @@ import gid.gobject2.object;
     
     [gid.gdk4.color_state.ColorState] objects are immutable and therefore threadsafe.
 */
+@gidGir("ColorState")
 class ColorState : gid.gobject2.boxed.BoxedWrap!(gdk_color_state_get_type)
 {
 

@@ -11,6 +11,7 @@ import gid.secret1.types;
 /**
     An attribute in a #SecretSchema.
 */
+@gidGir("SchemaAttribute")
 class SchemaAttribute : gid.gobject2.boxed.BoxedWrap!(secret_schema_attribute_get_type)
 {
   /**

@@ -18,6 +18,7 @@ import gid.gtksource5.types;
     Use [gid.gtksource5.language_manager.LanguageManager] to obtain a [gid.gtksource5.language.Language] instance, and
     [gid.gtksource5.buffer.Buffer.setLanguage] to apply it to a [gid.gtksource5.buffer.Buffer].
 */
+@gidGir("Language", "LanguageClass")
 class Language : gid.gobject2.object.ObjectWrap
 {
 

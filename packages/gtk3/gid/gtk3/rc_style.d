@@ -17,6 +17,7 @@ import gid.gtk3.types;
     This can later be composited together with other
     #GtkRcStyle-struct<!-- -->s to form a #GtkStyle.
 */
+@gidGir("RcStyle", "RcStyleClass")
 class RcStyle : gid.gobject2.object.ObjectWrap
 {
 

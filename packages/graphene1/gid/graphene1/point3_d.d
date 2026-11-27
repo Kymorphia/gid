@@ -12,6 +12,7 @@ import gid.graphene1.vec3;
 /**
     A point with three components: X, Y, and Z.
 */
+@gidGir("Point3D")
 struct Point3D
 {
   /**

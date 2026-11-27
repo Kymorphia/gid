@@ -50,6 +50,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.tab_button.TabButton] uses the [gid.gtk4.types.AccessibleRole.Button] role.
 */
+@gidGir("TabButton", "TabButtonClass")
 class TabButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

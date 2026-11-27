@@ -17,6 +17,7 @@ import gid.pango1.types;
     The [gid.gtksource5.style.Style] structure is used to describe text attributes
     which are set when given style is used.
 */
+@gidGir("Style", "StyleClass")
 class Style : gid.gobject2.object.ObjectWrap
 {
 

@@ -16,6 +16,7 @@ import gid.gtk3.widget;
     2-finger rotations, whenever the angle between both handled sequences
     changes, the #GtkGestureRotate::angle-changed signal is emitted.
 */
+@gidGir("GestureRotate", "GestureRotateClass")
 class GestureRotate : gid.gtk3.gesture.Gesture
 {
 

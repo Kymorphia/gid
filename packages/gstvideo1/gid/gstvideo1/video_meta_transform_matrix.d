@@ -20,6 +20,7 @@ import gid.gstvideo1.video_info;
     
     It's a programming error to have a singular matrix.
 */
+@gidGir("VideoMetaTransformMatrix")
 class VideoMetaTransformMatrix : StructWrap!(GstVideoMetaTransformMatrix)
 {
   /**

@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     An RFC 2822 Group address.
 */
+@gidGir("InternetAddressGroup", "InternetAddressGroupClass")
 class InternetAddressGroup : gid.gmime3.internet_address.InternetAddress
 {
 

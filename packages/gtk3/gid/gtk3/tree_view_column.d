@@ -30,6 +30,7 @@ import gid.gtk3.widget;
     for an overview of all the objects and data types related to the tree widget and how
     they work together.
 */
+@gidGir("TreeViewColumn", "TreeViewColumnClass")
 class TreeViewColumn : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.buildable.Buildable, gid.gtk3.cell_layout.CellLayout
 {
 

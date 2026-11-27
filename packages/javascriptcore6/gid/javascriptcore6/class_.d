@@ -31,6 +31,7 @@ immutable Quark jscObjectQuark;
     It's possible to add constructors, properties and methods for a JSSClass by providing
     #GCallback<!-- -->s to implement them.
 */
+@gidGir("Class", "ClassClass")
 class Class : gid.gobject2.object.ObjectWrap
 {
 

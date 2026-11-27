@@ -6,9 +6,16 @@ public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Gio";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     Flags used when creating a #GAppInfo.
 */
+@gidGir("AppInfoCreateFlags")
 enum GAppInfoCreateFlags : uint
 {
   /**
@@ -35,6 +42,7 @@ enum GAppInfoCreateFlags : uint
 /**
     Flags used to define the behaviour of a #GApplication.
 */
+@gidGir("ApplicationFlags")
 enum GApplicationFlags : uint
 {
   /**
@@ -127,6 +135,7 @@ enum GApplicationFlags : uint
     user, or to notify the user of their choices in an authentication
     situation.
 */
+@gidGir("AskPasswordFlags")
 enum GAskPasswordFlags : uint
 {
   /**
@@ -163,6 +172,7 @@ enum GAskPasswordFlags : uint
 /**
     Flags used in [gid.gio2.global.busOwnName].
 */
+@gidGir("BusNameOwnerFlags")
 enum GBusNameOwnerFlags : uint
 {
   /**
@@ -192,6 +202,7 @@ enum GBusNameOwnerFlags : uint
 /**
     Flags used in [gid.gio2.global.busWatchName].
 */
+@gidGir("BusNameWatcherFlags")
 enum GBusNameWatcherFlags : uint
 {
   /**
@@ -210,6 +221,7 @@ enum GBusNameWatcherFlags : uint
 /**
     An enumeration for well-known message buses.
 */
+@gidGir("BusType")
 enum GBusType
 {
   /**
@@ -236,6 +248,7 @@ enum GBusType
 /**
     Flags used when calling a [gid.gio2.converter.Converter.convert].
 */
+@gidGir("ConverterFlags")
 enum GConverterFlags : uint
 {
   /**
@@ -257,6 +270,7 @@ enum GConverterFlags : uint
 /**
     Results returned from [gid.gio2.converter.Converter.convert].
 */
+@gidGir("ConverterResult")
 enum GConverterResult
 {
   /**
@@ -283,6 +297,7 @@ enum GConverterResult
 /**
     Enumeration describing different kinds of native credential types.
 */
+@gidGir("CredentialsType")
 enum GCredentialsType
 {
   /**
@@ -329,6 +344,7 @@ enum GCredentialsType
 /**
     Flags used in [gid.gio2.dbus_connection.DBusConnection.call] and similar APIs.
 */
+@gidGir("DBusCallFlags")
 enum GDBusCallFlags : uint
 {
   /**
@@ -353,6 +369,7 @@ enum GDBusCallFlags : uint
 /**
     Capabilities negotiated with the remote peer.
 */
+@gidGir("DBusCapabilityFlags")
 enum GDBusCapabilityFlags : uint
 {
   /**
@@ -370,6 +387,7 @@ enum GDBusCapabilityFlags : uint
 /**
     Flags used when creating a new #GDBusConnection.
 */
+@gidGir("DBusConnectionFlags")
 enum GDBusConnectionFlags : uint
 {
   /**
@@ -426,6 +444,7 @@ enum GDBusConnectionFlags : uint
 /**
     Error codes for the `G_DBUS_ERROR` error domain.
 */
+@gidGir("DBusError")
 enum GDBusError
 {
   /**
@@ -667,6 +686,7 @@ enum GDBusError
 /**
     Flags describing the behavior of a #GDBusInterfaceSkeleton instance.
 */
+@gidGir("DBusInterfaceSkeletonFlags")
 enum GDBusInterfaceSkeletonFlags : uint
 {
   /**
@@ -686,6 +706,7 @@ enum GDBusInterfaceSkeletonFlags : uint
 /**
     Enumeration used to describe the byte order of a D-Bus message.
 */
+@gidGir("DBusMessageByteOrder")
 enum GDBusMessageByteOrder
 {
   /**
@@ -702,6 +723,7 @@ enum GDBusMessageByteOrder
 /**
     Message flags used in #GDBusMessage.
 */
+@gidGir("DBusMessageFlags")
 enum GDBusMessageFlags : uint
 {
   /**
@@ -731,6 +753,7 @@ enum GDBusMessageFlags : uint
 /**
     Header fields used in #GDBusMessage.
 */
+@gidGir("DBusMessageHeaderField")
 enum GDBusMessageHeaderField
 {
   /**
@@ -787,6 +810,7 @@ enum GDBusMessageHeaderField
 /**
     Message types used in #GDBusMessage.
 */
+@gidGir("DBusMessageType")
 enum GDBusMessageType
 {
   /**
@@ -818,6 +842,7 @@ enum GDBusMessageType
 /**
     Flags used when constructing a #GDBusObjectManagerClient.
 */
+@gidGir("DBusObjectManagerClientFlags")
 enum GDBusObjectManagerClientFlags : uint
 {
   /**
@@ -837,6 +862,7 @@ enum GDBusObjectManagerClientFlags : uint
 /**
     Flags describing the access control of a D-Bus property.
 */
+@gidGir("DBusPropertyInfoFlags")
 enum GDBusPropertyInfoFlags : uint
 {
   /**
@@ -858,6 +884,7 @@ enum GDBusPropertyInfoFlags : uint
 /**
     Flags used when constructing an instance of a #GDBusProxy derived class.
 */
+@gidGir("DBusProxyFlags")
 enum GDBusProxyFlags : uint
 {
   /**
@@ -906,6 +933,7 @@ enum GDBusProxyFlags : uint
 /**
     Flags used when sending #GDBusMessages on a #GDBusConnection.
 */
+@gidGir("DBusSendMessageFlags")
 enum GDBusSendMessageFlags : uint
 {
   /**
@@ -924,6 +952,7 @@ enum GDBusSendMessageFlags : uint
 /**
     Flags used when creating a #GDBusServer.
 */
+@gidGir("DBusServerFlags")
 enum GDBusServerFlags : uint
 {
   /**
@@ -954,6 +983,7 @@ enum GDBusServerFlags : uint
 /**
     Flags used when subscribing to signals via [gid.gio2.dbus_connection.DBusConnection.signalSubscribe].
 */
+@gidGir("DBusSignalFlags")
 enum GDBusSignalFlags : uint
 {
   /**
@@ -985,6 +1015,7 @@ enum GDBusSignalFlags : uint
 /**
     Flags passed to [gid.gio2.dbus_connection.DBusConnection.registerSubtree].
 */
+@gidGir("DBusSubtreeFlags")
 enum GDBusSubtreeFlags : uint
 {
   /**
@@ -1004,6 +1035,7 @@ enum GDBusSubtreeFlags : uint
     #GDataStreamByteOrder is used to ensure proper endianness of streaming data sources
     across various machine architectures.
 */
+@gidGir("DataStreamByteOrder")
 enum GDataStreamByteOrder
 {
   /**
@@ -1025,6 +1057,7 @@ enum GDataStreamByteOrder
 /**
     #GDataStreamNewlineType is used when checking for or setting the line endings for a given file.
 */
+@gidGir("DataStreamNewlineType")
 enum GDataStreamNewlineType
 {
   /**
@@ -1051,6 +1084,7 @@ enum GDataStreamNewlineType
 /**
     Flags used when starting a drive.
 */
+@gidGir("DriveStartFlags")
 enum GDriveStartFlags : uint
 {
   /**
@@ -1062,6 +1096,7 @@ enum GDriveStartFlags : uint
 /**
     Enumeration describing how a drive can be started/stopped.
 */
+@gidGir("DriveStartStopType")
 enum GDriveStartStopType
 {
   /**
@@ -1104,6 +1139,7 @@ enum GDriveStartStopType
     These appear in `TOS` (IPv4) or `TCLASS` (IPv6) packet headers and
     are described in [RFC 3168](https://www.rfc-editor.org/rfc/rfc3168#section-5).
 */
+@gidGir("EcnCodePoint")
 enum GEcnCodePoint
 {
   /**
@@ -1131,6 +1167,7 @@ enum GEcnCodePoint
     GEmblemOrigin is used to add information about the origin of the emblem
     to #GEmblem.
 */
+@gidGir("EmblemOrigin")
 enum GEmblemOrigin
 {
   /**
@@ -1157,6 +1194,7 @@ enum GEmblemOrigin
 /**
     Flags specifying the behaviour of an attribute.
 */
+@gidGir("FileAttributeInfoFlags")
 enum GFileAttributeInfoFlags : uint
 {
   /**
@@ -1178,6 +1216,7 @@ enum GFileAttributeInfoFlags : uint
 /**
     Used by [gid.gio2.file.File.setAttributesFromInfo] when setting file attributes.
 */
+@gidGir("FileAttributeStatus")
 enum GFileAttributeStatus
 {
   /**
@@ -1199,6 +1238,7 @@ enum GFileAttributeStatus
 /**
     The data types for file attributes.
 */
+@gidGir("FileAttributeType")
 enum GFileAttributeType
 {
   /**
@@ -1255,6 +1295,7 @@ enum GFileAttributeType
 /**
     Flags used when copying or moving files.
 */
+@gidGir("FileCopyFlags")
 enum GFileCopyFlags : uint
 {
   /**
@@ -1302,6 +1343,7 @@ enum GFileCopyFlags : uint
 /**
     Flags used when an operation may create a file.
 */
+@gidGir("FileCreateFlags")
 enum GFileCreateFlags : uint
 {
   /**
@@ -1333,6 +1375,7 @@ enum GFileCreateFlags : uint
 /**
     Flags that can be used with [gid.gio2.file.File.measureDiskUsage].
 */
+@gidGir("FileMeasureFlags")
 enum GFileMeasureFlags : uint
 {
   /**
@@ -1368,6 +1411,7 @@ enum GFileMeasureFlags : uint
 /**
     Specifies what type of event a monitor event is.
 */
+@gidGir("FileMonitorEvent")
 enum GFileMonitorEvent
 {
   /**
@@ -1436,6 +1480,7 @@ enum GFileMonitorEvent
 /**
     Flags used to set what a #GFileMonitor will watch for.
 */
+@gidGir("FileMonitorFlags")
 enum GFileMonitorFlags : uint
 {
   /**
@@ -1476,6 +1521,7 @@ enum GFileMonitorFlags : uint
 /**
     Flags used when querying a #GFileInfo.
 */
+@gidGir("FileQueryInfoFlags")
 enum GFileQueryInfoFlags : uint
 {
   /**
@@ -1501,6 +1547,7 @@ enum GFileQueryInfoFlags : uint
     which is why all Windows symlinks will continue to be reported as
     [gid.gio2.types.FileType.Regular] or [gid.gio2.types.FileType.Directory].
 */
+@gidGir("FileType")
 enum GFileType
 {
   /**
@@ -1546,6 +1593,7 @@ enum GFileType
     previewed in a file manager. Returned as the value of the key
     [gid.gio2.types.FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW].
 */
+@gidGir("FilesystemPreviewType")
 enum GFilesystemPreviewType
 {
   /**
@@ -1584,6 +1632,7 @@ enum GFilesystemPreviewType
     See also #GPollableReturn for a cheaper way of returning
     [gid.gio2.types.IOErrorEnum.WouldBlock] to callers without allocating a #GError.
 */
+@gidGir("IOErrorEnum")
 enum GIOErrorEnum
 {
   /**
@@ -1853,6 +1902,7 @@ enum GIOErrorEnum
 /**
     Flags for use with [gid.gio2.iomodule_scope.IOModuleScope.new_].
 */
+@gidGir("IOModuleScopeFlags")
 enum GIOModuleScopeFlags : uint
 {
   /**
@@ -1871,6 +1921,7 @@ enum GIOModuleScopeFlags : uint
 /**
     GIOStreamSpliceFlags determine how streams should be spliced.
 */
+@gidGir("IOStreamSpliceFlags")
 enum GIOStreamSpliceFlags : uint
 {
   /**
@@ -1907,6 +1958,7 @@ enum GIOStreamSpliceFlags : uint
       drop_caches ();
     ```
 */
+@gidGir("MemoryMonitorWarningLevel")
 enum GMemoryMonitorWarningLevel
 {
   /**
@@ -1934,6 +1986,7 @@ enum GMemoryMonitorWarningLevel
 /**
     Flags used when mounting a mount.
 */
+@gidGir("MountMountFlags")
 enum GMountMountFlags : uint
 {
   /**
@@ -1946,6 +1999,7 @@ enum GMountMountFlags : uint
     #GMountOperationResult is returned as a result when a request for
     information is send by the mounting operation.
 */
+@gidGir("MountOperationResult")
 enum GMountOperationResult
 {
   /**
@@ -1970,6 +2024,7 @@ enum GMountOperationResult
 /**
     Flags used when an unmounting a mount.
 */
+@gidGir("MountUnmountFlags")
 enum GMountUnmountFlags : uint
 {
   /**
@@ -1987,6 +2042,7 @@ enum GMountUnmountFlags : uint
 /**
     The host's network connectivity state, as reported by #GNetworkMonitor.
 */
+@gidGir("NetworkConnectivity")
 enum GNetworkConnectivity
 {
   /**
@@ -2019,6 +2075,7 @@ enum GNetworkConnectivity
 /**
     Priority levels for #GNotifications.
 */
+@gidGir("NotificationPriority")
 enum GNotificationPriority
 {
   /**
@@ -2053,6 +2110,7 @@ enum GNotificationPriority
 /**
     GOutputStreamSpliceFlags determine how streams should be spliced.
 */
+@gidGir("OutputStreamSpliceFlags")
 enum GOutputStreamSpliceFlags : uint
 {
   /**
@@ -2079,6 +2137,7 @@ enum GOutputStreamSpliceFlags : uint
     #Gvfs stores passwords in the Gnome keyring when this flag allows it
     to, and later retrieves it again from there.
 */
+@gidGir("PasswordSave")
 enum GPasswordSave
 {
   /**
@@ -2108,6 +2167,7 @@ enum GPasswordSave
     In case of [gid.gio2.types.PollableReturn.Failed] a #GError should be set for the
     operation to give details about the error that happened.
 */
+@gidGir("PollableReturn")
 enum GPollableReturn
 {
   /**
@@ -2130,6 +2190,7 @@ enum GPollableReturn
     An error code used with `G_RESOLVER_ERROR` in a #GError returned
     from a #GResolver routine.
 */
+@gidGir("ResolverError")
 enum GResolverError
 {
   /**
@@ -2153,6 +2214,7 @@ enum GResolverError
 /**
     Flags to modify lookup behavior.
 */
+@gidGir("ResolverNameLookupFlags")
 enum GResolverNameLookupFlags : uint
 {
   /**
@@ -2203,6 +2265,7 @@ enum GResolverNameLookupFlags : uint
     [gid.gio2.types.ResolverRecordType.Ns] records are returned as variants with the signature
     `(s)`, representing a string of the hostname of the name server.
 */
+@gidGir("ResolverRecordType")
 enum GResolverRecordType
 {
   /**
@@ -2235,6 +2298,7 @@ enum GResolverRecordType
     An error code used with `G_RESOURCE_ERROR` in a #GError returned
     from a #GResource routine.
 */
+@gidGir("ResourceError")
 enum GResourceError
 {
   /**
@@ -2252,6 +2316,7 @@ enum GResourceError
     GResourceFlags give information about a particular file inside a resource
     bundle.
 */
+@gidGir("ResourceFlags")
 enum GResourceFlags : uint
 {
   /**
@@ -2268,6 +2333,7 @@ enum GResourceFlags : uint
 /**
     GResourceLookupFlags determine how resource path lookups are handled.
 */
+@gidGir("ResourceLookupFlags")
 enum GResourceLookupFlags : uint
 {
   /**
@@ -2282,6 +2348,7 @@ enum GResourceLookupFlags : uint
     These flags determine in which direction the binding works. The default is to
     synchronize in both directions.
 */
+@gidGir("SettingsBindFlags")
 enum GSettingsBindFlags : uint
 {
   /**
@@ -2328,6 +2395,7 @@ enum GSettingsBindFlags : uint
     
     Additional values may be added to this type in the future.
 */
+@gidGir("SocketClientEvent")
 enum GSocketClientEvent
 {
   /**
@@ -2388,6 +2456,7 @@ enum GSocketClientEvent
     identical to the system defines `AF_INET`, `AF_INET6` and `AF_UNIX`,
     if available.)
 */
+@gidGir("SocketFamily")
 enum GSocketFamily
 {
   /**
@@ -2417,6 +2486,7 @@ enum GSocketFamily
     
     Additional values may be added to this type in the future.
 */
+@gidGir("SocketListenerEvent")
 enum GSocketListenerEvent
 {
   /**
@@ -2449,6 +2519,7 @@ enum GSocketListenerEvent
     are passed in/out as is. So to use a platform specific flag, just include
     the right system header and pass in the flag.
 */
+@gidGir("SocketMsgFlags")
 enum GSocketMsgFlags : uint
 {
   /**
@@ -2483,6 +2554,7 @@ enum GSocketMsgFlags : uint
     can also pass any other identifiers handled by the platform in order to
     use protocols not listed here.
 */
+@gidGir("SocketProtocol")
 enum GSocketProtocol
 {
   /**
@@ -2515,6 +2587,7 @@ enum GSocketProtocol
     Flags used when creating a #GSocket. Some protocols may not implement
     all the socket types.
 */
+@gidGir("SocketType")
 enum GSocketType
 {
   /**
@@ -2551,6 +2624,7 @@ enum GSocketType
     example, you may not request both [gid.gio2.types.SubprocessFlags.StdoutPipe] and
     [gid.gio2.types.SubprocessFlags.StdoutSilence].
 */
+@gidGir("SubprocessFlags")
 enum GSubprocessFlags : uint
 {
   /**
@@ -2623,6 +2697,7 @@ enum GSubprocessFlags : uint
 /**
     Flags to define future #GTestDBus behaviour.
 */
+@gidGir("TestDBusFlags")
 enum GTestDBusFlags : uint
 {
   /**
@@ -2634,6 +2709,7 @@ enum GTestDBusFlags : uint
 /**
     The client authentication mode for a #GTlsServerConnection.
 */
+@gidGir("TlsAuthenticationMode")
 enum GTlsAuthenticationMode
 {
   /**
@@ -2665,6 +2741,7 @@ enum GTlsAuthenticationMode
     because this could potentially be the only error flag set even if
     other problems exist with the certificate.
 */
+@gidGir("TlsCertificateFlags")
 enum GTlsCertificateFlags : uint
 {
   /**
@@ -2725,6 +2802,7 @@ enum GTlsCertificateFlags : uint
     [gid.gio2.tls_interaction.TlsInteraction.requestCertificateAsync], and
     [gid.gio2.tls_interaction.TlsInteraction.invokeRequestCertificate].
 */
+@gidGir("TlsCertificateRequestFlags")
 enum GTlsCertificateRequestFlags : uint
 {
   /**
@@ -2737,6 +2815,7 @@ enum GTlsCertificateRequestFlags : uint
     An error code used with `G_TLS_CHANNEL_BINDING_ERROR` in a #GError to
     indicate a TLS channel binding retrieval error.
 */
+@gidGir("TlsChannelBindingError")
 enum GTlsChannelBindingError
 {
   /**
@@ -2782,6 +2861,7 @@ enum GTlsChannelBindingError
     [`tls-unique-for-telnet`](https://tools.ietf.org/html/rfc5929#section-5)
     binding type is not currently implemented.
 */
+@gidGir("TlsChannelBindingType")
 enum GTlsChannelBindingType
 {
   /**
@@ -2808,6 +2888,7 @@ enum GTlsChannelBindingType
     [gid.gio2.tls_database.TlsDatabase.lookupCertificateIssuer],
     and [gid.gio2.tls_database.TlsDatabase.lookupCertificatesIssuedBy].
 */
+@gidGir("TlsDatabaseLookupFlags")
 enum GTlsDatabaseLookupFlags : uint
 {
   /**
@@ -2825,6 +2906,7 @@ enum GTlsDatabaseLookupFlags : uint
 /**
     Flags for [gid.gio2.tls_database.TlsDatabase.verifyChain].
 */
+@gidGir("TlsDatabaseVerifyFlags")
 enum GTlsDatabaseVerifyFlags : uint
 {
   /**
@@ -2837,6 +2919,7 @@ enum GTlsDatabaseVerifyFlags : uint
     An error code used with `G_TLS_ERROR` in a #GError returned from a
     TLS-related routine.
 */
+@gidGir("TlsError")
 enum GTlsError
 {
   /**
@@ -2899,6 +2982,7 @@ enum GTlsError
     #GTlsInteractionResult is returned by various functions in #GTlsInteraction
     when finishing an interaction request.
 */
+@gidGir("TlsInteractionResult")
 enum GTlsInteractionResult
 {
   /**
@@ -2923,6 +3007,7 @@ enum GTlsInteractionResult
 /**
     Various flags for the password.
 */
+@gidGir("TlsPasswordFlags")
 enum GTlsPasswordFlags : uint
 {
   /**
@@ -2977,6 +3062,7 @@ enum GTlsPasswordFlags : uint
     it's possible for an unknown DTLS protocol version to compare less
     than the TLS protocol versions.
 */
+@gidGir("TlsProtocolVersion")
 enum GTlsProtocolVersion
 {
   /**
@@ -3028,6 +3114,7 @@ enum GTlsProtocolVersion
         required for compatibility. Also, rehandshaking has been removed
         from the TLS protocol in TLS 1.3.
 */
+@gidGir("TlsRehandshakeMode")
 enum GTlsRehandshakeMode
 {
   /**
@@ -3061,6 +3148,7 @@ enum GTlsRehandshakeMode
     pass an appropriate smaller length to bind() or connect(). This is
     [gid.gio2.types.UnixSocketAddressType.Abstract].
 */
+@gidGir("UnixSocketAddressType")
 enum GUnixSocketAddressType
 {
   /**
@@ -3094,6 +3182,7 @@ enum GUnixSocketAddressType
     Used to select the type of data format to use for #GZlibDecompressor
     and #GZlibCompressor.
 */
+@gidGir("ZlibCompressorFormat")
 enum GZlibCompressorFormat
 {
   /**
@@ -3719,6 +3808,7 @@ struct GAppLaunchContextClass
 }
 
 /** */
+@gidGir("AppLaunchContextPrivate")
 struct GAppLaunchContextPrivate;
 
 /**
@@ -4172,9 +4262,11 @@ struct GApplicationCommandLineClass
 }
 
 /** */
+@gidGir("ApplicationCommandLinePrivate")
 struct GApplicationCommandLinePrivate;
 
 /** */
+@gidGir("ApplicationPrivate")
 struct GApplicationPrivate;
 
 /**
@@ -4475,6 +4567,7 @@ struct GBufferedInputStreamClass
 }
 
 /** */
+@gidGir("BufferedInputStreamPrivate")
 struct GBufferedInputStreamPrivate;
 
 /**
@@ -4515,6 +4608,7 @@ struct GBufferedOutputStreamClass
 }
 
 /** */
+@gidGir("BufferedOutputStreamPrivate")
 struct GBufferedOutputStreamPrivate;
 
 /**
@@ -4565,6 +4659,7 @@ struct GCancellableClass
 }
 
 /** */
+@gidGir("CancellablePrivate")
 struct GCancellablePrivate;
 
 /**
@@ -4655,6 +4750,7 @@ struct GConverterInputStreamClass
 }
 
 /** */
+@gidGir("ConverterInputStreamPrivate")
 struct GConverterInputStreamPrivate;
 
 /**
@@ -4696,6 +4792,7 @@ struct GConverterOutputStreamClass
 }
 
 /** */
+@gidGir("ConverterOutputStreamPrivate")
 struct GConverterOutputStreamPrivate;
 
 /**
@@ -4740,6 +4837,7 @@ struct GCredentials;
 /**
     Class structure for #GCredentials.
 */
+@gidGir("CredentialsClass")
 struct GCredentialsClass;
 
 /**
@@ -5078,6 +5176,7 @@ struct GDBusInterfaceSkeletonClass
 }
 
 /** */
+@gidGir("DBusInterfaceSkeletonPrivate")
 struct GDBusInterfaceSkeletonPrivate;
 
 /**
@@ -5123,6 +5222,7 @@ struct GDBusInterfaceSkeletonPrivate;
     function or provide an implementation of the `Set` call. If implementing
     the call, you must return the value of type `G_VARIANT_TYPE_UNIT`.
 */
+@gidGir("DBusInterfaceVTable")
 struct GDBusInterfaceVTable
 {
   /**
@@ -5400,6 +5500,7 @@ struct GDBusObjectManagerClientClass
 }
 
 /** */
+@gidGir("DBusObjectManagerClientPrivate")
 struct GDBusObjectManagerClientPrivate;
 
 /**
@@ -5500,6 +5601,7 @@ struct GDBusObjectManagerServerClass
 }
 
 /** */
+@gidGir("DBusObjectManagerServerPrivate")
 struct GDBusObjectManagerServerPrivate;
 
 /**
@@ -5532,6 +5634,7 @@ struct GDBusObjectProxyClass
 }
 
 /** */
+@gidGir("DBusObjectProxyPrivate")
 struct GDBusObjectProxyPrivate;
 
 /**
@@ -5570,6 +5673,7 @@ struct GDBusObjectSkeletonClass
 }
 
 /** */
+@gidGir("DBusObjectSkeletonPrivate")
 struct GDBusObjectSkeletonPrivate;
 
 /**
@@ -5685,6 +5789,7 @@ struct GDBusProxyClass
 }
 
 /** */
+@gidGir("DBusProxyPrivate")
 struct GDBusProxyPrivate;
 
 /**
@@ -5740,6 +5845,7 @@ struct GDBusSignalInfo
 /**
     Virtual table for handling subtrees registered with [gid.gio2.dbus_connection.DBusConnection.registerSubtree].
 */
+@gidGir("DBusSubtreeVTable")
 struct GDBusSubtreeVTable
 {
   /**
@@ -5797,6 +5903,7 @@ struct GDataInputStreamClass
 }
 
 /** */
+@gidGir("DataInputStreamPrivate")
 struct GDataInputStreamPrivate;
 
 /**
@@ -5835,6 +5942,7 @@ struct GDataOutputStreamClass
 }
 
 /** */
+@gidGir("DataOutputStreamPrivate")
 struct GDataOutputStreamPrivate;
 
 /**
@@ -6433,6 +6541,7 @@ struct GDtlsServerConnectionInterface
 struct GEmblem;
 
 /** */
+@gidGir("EmblemClass")
 struct GEmblemClass;
 
 /**
@@ -6460,6 +6569,7 @@ struct GEmblemedIconClass
 }
 
 /** */
+@gidGir("EmblemedIconPrivate")
 struct GEmblemedIconPrivate;
 
 /**
@@ -6684,6 +6794,7 @@ struct GFileEnumeratorClass
 }
 
 /** */
+@gidGir("FileEnumeratorPrivate")
 struct GFileEnumeratorPrivate;
 
 /**
@@ -6766,6 +6877,7 @@ struct GFileIOStreamClass
 }
 
 /** */
+@gidGir("FileIOStreamPrivate")
 struct GFileIOStreamPrivate;
 
 /**
@@ -6777,6 +6889,7 @@ struct GFileIOStreamPrivate;
 struct GFileIcon;
 
 /** */
+@gidGir("FileIconClass")
 struct GFileIconClass;
 
 /**
@@ -7354,6 +7467,7 @@ struct GFileIface
 struct GFileInfo;
 
 /** */
+@gidGir("FileInfoClass")
 struct GFileInfoClass;
 
 /**
@@ -7417,6 +7531,7 @@ struct GFileInputStreamClass
 }
 
 /** */
+@gidGir("FileInputStreamPrivate")
 struct GFileInputStreamPrivate;
 
 /**
@@ -7472,6 +7587,7 @@ struct GFileMonitorClass
 }
 
 /** */
+@gidGir("FileMonitorPrivate")
 struct GFileMonitorPrivate;
 
 /**
@@ -7549,6 +7665,7 @@ struct GFileOutputStreamClass
 }
 
 /** */
+@gidGir("FileOutputStreamPrivate")
 struct GFileOutputStreamPrivate;
 
 /**
@@ -7708,6 +7825,7 @@ struct GIOExtensionPoint;
 struct GIOModule;
 
 /** */
+@gidGir("IOModuleClass")
 struct GIOModuleClass;
 
 /**
@@ -7787,6 +7905,7 @@ struct GIOStream
 }
 
 /** */
+@gidGir("IOStreamAdapter")
 struct GIOStreamAdapter;
 
 /** */
@@ -7842,6 +7961,7 @@ struct GIOStreamClass
 }
 
 /** */
+@gidGir("IOStreamPrivate")
 struct GIOStreamPrivate;
 
 /**
@@ -8027,9 +8147,11 @@ struct GInetAddressMaskClass
 }
 
 /** */
+@gidGir("InetAddressMaskPrivate")
 struct GInetAddressMaskPrivate;
 
 /** */
+@gidGir("InetAddressPrivate")
 struct GInetAddressPrivate;
 
 /**
@@ -8056,6 +8178,7 @@ struct GInetSocketAddressClass
 }
 
 /** */
+@gidGir("InetSocketAddressPrivate")
 struct GInetSocketAddressPrivate;
 
 /**
@@ -8242,6 +8365,7 @@ struct GInputStreamClass
 }
 
 /** */
+@gidGir("InputStreamPrivate")
 struct GInputStreamPrivate;
 
 /**
@@ -8250,6 +8374,7 @@ struct GInputStreamPrivate;
     and the operation will store the read data starting in the
     first buffer, switching to the next as needed.
 */
+@gidGir("InputVector")
 struct GInputVector
 {
   /**
@@ -8444,6 +8569,7 @@ struct GMemoryInputStreamClass
 }
 
 /** */
+@gidGir("MemoryInputStreamPrivate")
 struct GMemoryInputStreamPrivate;
 
 /**
@@ -8554,6 +8680,7 @@ struct GMemoryOutputStreamClass
 }
 
 /** */
+@gidGir("MemoryOutputStreamPrivate")
 struct GMemoryOutputStreamPrivate;
 
 /**
@@ -8592,6 +8719,7 @@ struct GMenuAttributeIterClass
 }
 
 /** */
+@gidGir("MenuAttributeIterPrivate")
 struct GMenuAttributeIterPrivate;
 
 /**
@@ -8624,6 +8752,7 @@ struct GMenuLinkIterClass
 }
 
 /** */
+@gidGir("MenuLinkIterPrivate")
 struct GMenuLinkIterPrivate;
 
 /**
@@ -8788,6 +8917,7 @@ struct GMenuModelClass
 }
 
 /** */
+@gidGir("MenuModelPrivate")
 struct GMenuModelPrivate;
 
 /**
@@ -9053,6 +9183,7 @@ struct GMountOperationClass
 }
 
 /** */
+@gidGir("MountOperationPrivate")
 struct GMountOperationPrivate;
 
 /**
@@ -9078,6 +9209,7 @@ struct GNativeSocketAddressClass
 }
 
 /** */
+@gidGir("NativeSocketAddressPrivate")
 struct GNativeSocketAddressPrivate;
 
 /** */
@@ -9126,6 +9258,7 @@ struct GNetworkAddressClass
 }
 
 /** */
+@gidGir("NetworkAddressPrivate")
 struct GNetworkAddressPrivate;
 
 /**
@@ -9200,6 +9333,7 @@ struct GNetworkServiceClass
 }
 
 /** */
+@gidGir("NetworkServicePrivate")
 struct GNetworkServicePrivate;
 
 /**
@@ -9394,6 +9528,7 @@ struct GOutputStreamClass
 }
 
 /** */
+@gidGir("OutputStreamPrivate")
 struct GOutputStreamPrivate;
 
 /**
@@ -9402,6 +9537,7 @@ struct GOutputStreamPrivate;
     and the operation will use all the buffers as if they were
     one buffer.
 */
+@gidGir("OutputVector")
 struct GOutputVector
 {
   /**
@@ -9470,6 +9606,7 @@ struct GPermissionClass
 }
 
 /** */
+@gidGir("PermissionPrivate")
 struct GPermissionPrivate;
 
 /**
@@ -9770,9 +9907,11 @@ struct GProxyAddressEnumeratorClass
 }
 
 /** */
+@gidGir("ProxyAddressEnumeratorPrivate")
 struct GProxyAddressEnumeratorPrivate;
 
 /** */
+@gidGir("ProxyAddressPrivate")
 struct GProxyAddressPrivate;
 
 /**
@@ -9982,6 +10121,7 @@ struct GResolverClass
 }
 
 /** */
+@gidGir("ResolverPrivate")
 struct GResolverPrivate;
 
 /**
@@ -10692,6 +10832,7 @@ struct GSettingsBackendClass
 }
 
 /** */
+@gidGir("SettingsBackendPrivate")
 struct GSettingsBackendPrivate;
 
 /** */
@@ -10717,6 +10858,7 @@ struct GSettingsClass
 }
 
 /** */
+@gidGir("SettingsPrivate")
 struct GSettingsPrivate;
 
 /**
@@ -10856,6 +10998,7 @@ struct GSimpleActionGroupClass
 }
 
 /** */
+@gidGir("SimpleActionGroupPrivate")
 struct GSimpleActionGroupPrivate;
 
 /**
@@ -11029,6 +11172,7 @@ struct GSimpleActionGroupPrivate;
 struct GSimpleAsyncResult;
 
 /** */
+@gidGir("SimpleAsyncResultClass")
 struct GSimpleAsyncResultClass;
 
 /**
@@ -11097,6 +11241,7 @@ struct GSimpleProxyResolverClass
 }
 
 /** */
+@gidGir("SimpleProxyResolverPrivate")
 struct GSimpleProxyResolverPrivate;
 
 /**
@@ -11339,6 +11484,7 @@ struct GSocketClientClass
 }
 
 /** */
+@gidGir("SocketClientPrivate")
 struct GSocketClientPrivate;
 
 /**
@@ -11483,6 +11629,7 @@ struct GSocketConnectionClass
 }
 
 /** */
+@gidGir("SocketConnectionPrivate")
 struct GSocketConnectionPrivate;
 
 /**
@@ -11566,6 +11713,7 @@ struct GSocketControlMessageClass
 }
 
 /** */
+@gidGir("SocketControlMessagePrivate")
 struct GSocketControlMessagePrivate;
 
 /**
@@ -11627,9 +11775,11 @@ struct GSocketListenerClass
 }
 
 /** */
+@gidGir("SocketListenerPrivate")
 struct GSocketListenerPrivate;
 
 /** */
+@gidGir("SocketPrivate")
 struct GSocketPrivate;
 
 /**
@@ -11702,6 +11852,7 @@ struct GSocketServiceClass
 }
 
 /** */
+@gidGir("SocketServicePrivate")
 struct GSocketServicePrivate;
 
 /**
@@ -12352,6 +12503,7 @@ struct GSubprocessLauncher;
 struct GTask;
 
 /** */
+@gidGir("TaskClass")
 struct GTaskClass;
 
 /**
@@ -12375,6 +12527,7 @@ struct GTcpConnectionClass
 }
 
 /** */
+@gidGir("TcpConnectionPrivate")
 struct GTcpConnectionPrivate;
 
 /**
@@ -12402,6 +12555,7 @@ struct GTcpWrapperConnectionClass
 }
 
 /** */
+@gidGir("TcpWrapperConnectionPrivate")
 struct GTcpWrapperConnectionPrivate;
 
 /**
@@ -12501,6 +12655,7 @@ struct GTestDBus;
 struct GThemedIcon;
 
 /** */
+@gidGir("ThemedIconClass")
 struct GThemedIconClass;
 
 /**
@@ -12569,6 +12724,7 @@ struct GThreadedSocketServiceClass
 }
 
 /** */
+@gidGir("ThreadedSocketServicePrivate")
 struct GThreadedSocketServicePrivate;
 
 /**
@@ -12664,6 +12820,7 @@ struct GTlsCertificateClass
 }
 
 /** */
+@gidGir("TlsCertificatePrivate")
 struct GTlsCertificatePrivate;
 
 /**
@@ -12751,6 +12908,7 @@ struct GTlsConnectionClass
 }
 
 /** */
+@gidGir("TlsConnectionPrivate")
 struct GTlsConnectionPrivate;
 
 /**
@@ -12866,6 +13024,7 @@ struct GTlsDatabaseClass
 }
 
 /** */
+@gidGir("TlsDatabasePrivate")
 struct GTlsDatabasePrivate;
 
 /**
@@ -12988,6 +13147,7 @@ struct GTlsInteractionClass
 }
 
 /** */
+@gidGir("TlsInteractionPrivate")
 struct GTlsInteractionPrivate;
 
 /**
@@ -13032,6 +13192,7 @@ struct GTlsPasswordClass
 }
 
 /** */
+@gidGir("TlsPasswordPrivate")
 struct GTlsPasswordPrivate;
 
 /**
@@ -13082,6 +13243,7 @@ struct GUnixConnectionClass
 }
 
 /** */
+@gidGir("UnixConnectionPrivate")
 struct GUnixConnectionPrivate;
 
 /**
@@ -13130,6 +13292,7 @@ struct GUnixCredentialsMessageClass
 }
 
 /** */
+@gidGir("UnixCredentialsMessagePrivate")
 struct GUnixCredentialsMessagePrivate;
 
 /**
@@ -13180,6 +13343,7 @@ struct GUnixFDListClass
 }
 
 /** */
+@gidGir("UnixFDListPrivate")
 struct GUnixFDListPrivate;
 
 /**
@@ -13220,6 +13384,7 @@ struct GUnixSocketAddressClass
 }
 
 /** */
+@gidGir("UnixSocketAddressPrivate")
 struct GUnixSocketAddressPrivate;
 
 /**

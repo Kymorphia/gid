@@ -14,6 +14,7 @@ import gid.gobject2.object;
     A #GdkVisual contains information about
     a particular visual.
 */
+@gidGir("Visual")
 class Visual : gid.gobject2.object.ObjectWrap
 {
 

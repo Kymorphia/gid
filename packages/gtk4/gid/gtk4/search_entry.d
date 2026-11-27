@@ -76,6 +76,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.search_entry.SearchEntry] uses the [gid.gtk4.types.AccessibleRole.SearchBox] role.
 */
+@gidGir("SearchEntry")
 class SearchEntry : gid.gtk4.widget.Widget, gid.gtk4.editable.Editable
 {
 

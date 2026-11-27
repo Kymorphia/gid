@@ -71,6 +71,7 @@ import gid.core.utils;
     iterate over the path data, instead of hardcoding the number of
     elements for each element type.
 */
+@gidGir("PathData")
 class PathData : StructWrap!(cairo_path_data_t)
 {
   /**

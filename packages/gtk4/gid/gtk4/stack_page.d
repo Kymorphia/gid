@@ -15,6 +15,7 @@ import gid.gtk4.widget;
 /**
     An auxiliary class used by [gid.gtk4.stack.Stack].
 */
+@gidGir("StackPage")
 class StackPage : gid.gobject2.object.ObjectWrap, gid.gtk4.accessible.Accessible
 {
 

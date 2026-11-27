@@ -14,6 +14,7 @@ import gid.gtk3.print_context;
 import gid.gtk3.types;
 
 /** */
+@gidGir("PrintOperationPreview", "PrintOperationPreviewIface")
 interface PrintOperationPreview : GidWrap
 {
 

@@ -85,6 +85,7 @@ import gid.gtksource5.view;
     )
     ```
 */
+@gidGir("VimIMContext", "VimIMContextClass")
 class VimIMContext : gid.gtk4.imcontext.IMContext
 {
 

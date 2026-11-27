@@ -25,6 +25,7 @@ import gid.gtk4.types;
     button being currently pressed can be known through
     [gid.gtk4.gesture_single.GestureSingle.getCurrentButton].
 */
+@gidGir("GestureSingle", "GestureSingleClass")
 class GestureSingle : gid.gtk4.gesture.Gesture
 {
 

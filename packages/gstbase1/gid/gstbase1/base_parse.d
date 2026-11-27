@@ -154,6 +154,7 @@ import gid.gstbase1.types;
       These rates are also used to update (estimated) duration at regular
       frame intervals.
 */
+@gidGir("BaseParse", "BaseParseClass")
 class BaseParse : gid.gst1.element.Element
 {
 

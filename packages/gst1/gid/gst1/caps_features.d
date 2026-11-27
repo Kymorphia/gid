@@ -30,6 +30,7 @@ import gid.gst1.types;
     are given as a string of the format `memory:GstMemoryTypeName` or
     `meta:GstMetaAPIName`.
 */
+@gidGir("CapsFeatures")
 class CapsFeatures : gid.gobject2.boxed.BoxedWrap!(gst_caps_features_get_type)
 {
 

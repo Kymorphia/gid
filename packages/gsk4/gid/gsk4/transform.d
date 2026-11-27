@@ -25,6 +25,7 @@ import gid.gsk4.types;
     This means code can safely expose them as properties of objects without
     having to worry about others changing them.
 */
+@gidGir("Transform")
 class Transform : gid.gobject2.boxed.BoxedWrap!(gsk_transform_get_type)
 {
 

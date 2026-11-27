@@ -12,6 +12,7 @@ import gid.gstaudio1.types;
     #GstAudioResampler is a structure which holds the information
     required to perform various kinds of resampling filtering.
 */
+@gidGir("AudioResampler")
 class AudioResampler : OpaqueWrap!(GstAudioResampler*, void, void)
 {
 

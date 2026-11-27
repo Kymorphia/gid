@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     A message/partial MIME part.
 */
+@gidGir("MessagePartial", "MessagePartialClass")
 class MessagePartial : gid.gmime3.part.Part
 {
 

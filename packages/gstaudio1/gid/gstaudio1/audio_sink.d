@@ -35,6 +35,7 @@ import gid.gstbase1.base_sink;
     together with #GstAudioBaseSink using a default implementation of a
     #GstAudioRingBuffer that uses threads.
 */
+@gidGir("AudioSink", "AudioSinkClass")
 class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
 {
 

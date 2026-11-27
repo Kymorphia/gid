@@ -13,6 +13,7 @@ import gid.gstvideo1.types;
     #GstMeta for carrying SMPTE-291M Ancillary data. Note that all the ADF fields
        (@DID to @checksum) are 10bit values with parity/non-parity high-bits set.
 */
+@gidGir("AncillaryMeta")
 class AncillaryMeta : StructWrap!(GstAncillaryMeta)
 {
   /**

@@ -19,6 +19,7 @@ import gid.gtk3.types;
     
     #GtkOrientable was introduced in GTK+ 2.16.
 */
+@gidGir("Orientable", "OrientableIface")
 interface Orientable : GidWrap
 {
 

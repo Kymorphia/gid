@@ -57,6 +57,7 @@ import gid.gstbase1.base_sink;
     The eos signal can also be used to be informed when the EOS state is reached
     to avoid polling.
 */
+@gidGir("AppSink", "AppSinkClass")
 class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
 {
 

@@ -13,6 +13,7 @@ import gid.gstpbutils1.types;
 /**
     Encoding profiles for containers. Keeps track of a list of #GstEncodingProfile
 */
+@gidGir("EncodingContainerProfile", "EncodingContainerProfileClass")
 class EncodingContainerProfile : gid.gstpbutils1.encoding_profile.EncodingProfile
 {
 

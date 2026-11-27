@@ -36,6 +36,7 @@ import gid.gobject2.object;
     [gid.gio2.types.TlsInteractionResult.Unhandled]. If a derived class implements an async method,
     it must also implement the corresponding finish method.
 */
+@gidGir("TlsInteraction", "TlsInteractionClass")
 class TlsInteraction : gid.gobject2.object.ObjectWrap
 {
 

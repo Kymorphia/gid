@@ -34,6 +34,7 @@ import gid.gst1.types;
     descriptor, and [gid.gst1.poll.Poll.fdCanWrite] to see if it is possible to
     write to it.
 */
+@gidGir("Poll")
 class Poll : OpaqueWrap!(GstPoll*, void, void)
 {
 

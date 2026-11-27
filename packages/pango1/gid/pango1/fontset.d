@@ -20,6 +20,7 @@ import gid.pango1.types;
     component font for a particular Unicode character, and for finding a
     composite set of metrics for the entire fontset.
 */
+@gidGir("Fontset", "FontsetClass")
 class Fontset : gid.gobject2.object.ObjectWrap
 {
 

@@ -13,6 +13,7 @@ import gid.gstvideo1.types;
     An opaque video overlay rectangle object. A rectangle contains a single
     overlay rectangle which can be added to a composition.
 */
+@gidGir("VideoOverlayRectangle")
 class VideoOverlayRectangle : gid.gobject2.boxed.BoxedWrap!(gst_video_overlay_rectangle_get_type)
 {
 

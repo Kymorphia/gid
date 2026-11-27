@@ -25,6 +25,7 @@ import gid.gobject2.object;
     This is the motivation for the ‘Map’ part of the interface
     name.
 */
+@gidGir("ActionMap", "ActionMapInterface")
 interface ActionMap : GidWrap
 {
 

@@ -44,6 +44,7 @@ import gid.vte3.types;
 import gid.vte3.uuid;
 
 /** */
+@gidGir("Terminal", "TerminalClass")
 class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText, gid.gtk4.scrollable.Scrollable
 {
 

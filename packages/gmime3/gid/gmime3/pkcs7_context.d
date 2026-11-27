@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A PKCS7 crypto context.
 */
+@gidGir("Pkcs7Context", "Pkcs7ContextClass")
 class Pkcs7Context : gid.gmime3.crypto_context.CryptoContext
 {
 

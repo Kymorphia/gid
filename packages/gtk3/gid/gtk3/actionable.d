@@ -24,6 +24,7 @@ import gid.gtk3.types;
     or #GtkApplication, but other action groups that are added with
     [gid.gtk4.widget.Widget.insertActionGroup] will be consulted as well.
 */
+@gidGir("Actionable", "ActionableInterface")
 interface Actionable : GidWrap
 {
 

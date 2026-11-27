@@ -42,6 +42,7 @@ import gid.gst1.types;
       gst_query_unref (query);
     ```
 */
+@gidGir("Query")
 class Query : gid.gobject2.boxed.BoxedWrap!(gst_query_get_type)
 {
   /**

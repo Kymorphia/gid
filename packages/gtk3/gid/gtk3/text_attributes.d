@@ -18,6 +18,7 @@ import gid.pango1.tab_array;
     As with most GTK+ structs, the fields in this struct should only
     be read, never modified directly.
 */
+@gidGir("TextAttributes")
 class TextAttributes : gid.gobject2.boxed.BoxedWrap!(gtk_text_attributes_get_type)
 {
 

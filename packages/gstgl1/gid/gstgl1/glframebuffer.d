@@ -25,6 +25,7 @@ import gid.gstgl1.types;
     Note: OpenGL framebuffers are not shareable resources so cannot be used
     between multiple OpenGL contexts.
 */
+@gidGir("GLFramebuffer", "GLFramebufferClass")
 class GLFramebuffer : gid.gst1.object.ObjectWrap
 {
 

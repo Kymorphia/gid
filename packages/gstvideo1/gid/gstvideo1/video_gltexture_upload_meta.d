@@ -15,6 +15,7 @@ import gid.gstvideo1.types;
     have OpenGL set up and call this from a thread where it is valid
     to upload something to an OpenGL texture.
 */
+@gidGir("VideoGLTextureUploadMeta")
 class VideoGLTextureUploadMeta : StructWrap!(GstVideoGLTextureUploadMeta)
 {
   /**

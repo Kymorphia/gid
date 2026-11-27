@@ -12,6 +12,7 @@ import gid.gobject2.types;
     A #GParamSpec derived structure that contains the meta data for enum
     properties.
 */
+@gidGir("ParamSpecEnum")
 class ParamSpecEnum : gid.gobject2.param_spec.ParamSpec
 {
 

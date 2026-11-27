@@ -13,6 +13,7 @@ import gid.gtk3.types;
     an argument for a key binding signal emission as
     stored in #GtkBindingSignal.
 */
+@gidGir("BindingArg")
 class BindingArg : StructWrap!(GtkBindingArg)
 {
   /**

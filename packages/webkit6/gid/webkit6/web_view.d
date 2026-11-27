@@ -74,6 +74,7 @@ import gid.webkit6.window_properties;
     Note that in WebKitGTK, #WebKitWebView is scrollable by itself, so
     you don't need to embed it in a #GtkScrolledWindow.
 */
+@gidGir("WebView", "WebViewClass")
 class WebView : gid.webkit6.web_view_base.WebViewBase
 {
 

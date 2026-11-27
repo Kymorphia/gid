@@ -18,6 +18,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("LinkButtonAccessible", "LinkButtonAccessibleClass")
 class LinkButtonAccessible : gid.gtk3.button_accessible.ButtonAccessible, gid.atk1.hyperlink_impl.HyperlinkImpl
 {
 

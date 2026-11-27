@@ -10,6 +10,7 @@ import gid.gstvideo1.c.types;
 import gid.gstvideo1.types;
 
 /** */
+@gidGir("VideoBufferPool", "VideoBufferPoolClass")
 class VideoBufferPool : gid.gst1.buffer_pool.BufferPool
 {
 

@@ -23,6 +23,7 @@ import gid.gstaudio1.types;
     Note: If clipping of the start is done by adjusting the segment, this meta
     has to be dropped from buffers as otherwise clipping could happen twice.
 */
+@gidGir("AudioClippingMeta")
 class AudioClippingMeta : StructWrap!(GstAudioClippingMeta)
 {
   /**

@@ -13,6 +13,7 @@ import gid.gsk4.types;
 /**
     A render node controlling the color matrix of its single child node.
 */
+@gidGir("ColorMatrixNode")
 class ColorMatrixNode : gid.gsk4.render_node.RenderNode
 {
 

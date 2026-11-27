@@ -20,6 +20,7 @@ import gid.gst1.types;
     buffer from being returned to a buffer pool until the #GstMemory is available
     for re-use.
 */
+@gidGir("ParentBufferMeta")
 class ParentBufferMeta : StructWrap!(GstParentBufferMeta)
 {
   /**

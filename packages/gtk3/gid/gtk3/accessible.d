@@ -24,6 +24,7 @@ import gid.gtk3.widget;
     acccessible implementation, override the get_accessible vfunc
     in #GtkWidgetClass.
 */
+@gidGir("Accessible", "AccessibleClass")
 class Accessible : gid.atk1.object.ObjectWrap
 {
 

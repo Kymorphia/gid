@@ -116,6 +116,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.toolbar_view.ToolbarView] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("ToolbarView", "ToolbarViewClass")
 class ToolbarView : gid.gtk4.widget.Widget
 {
 

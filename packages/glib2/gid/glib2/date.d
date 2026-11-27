@@ -49,6 +49,7 @@ import gid.glib2.types;
     
     GLib also features [gid.glib2.date_time.DateTime] which represents a precise time.
 */
+@gidGir("Date")
 struct Date
 {
   /**

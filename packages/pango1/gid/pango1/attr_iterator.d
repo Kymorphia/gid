@@ -20,6 +20,7 @@ import gid.pango1.types;
     style change, the range of the current style segment and the attributes
     currently in effect can be queried.
 */
+@gidGir("AttrIterator")
 class AttrIterator : gid.gobject2.boxed.BoxedWrap!(pango_attr_iterator_get_type)
 {
 

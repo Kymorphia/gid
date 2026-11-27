@@ -24,6 +24,7 @@ import gid.webkit6.types;
     When a WebKitXRPermissionRequest is not handled by the user,
     it is denied by default.
 */
+@gidGir("XRPermissionRequest", "XRPermissionRequestClass")
 class XRPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

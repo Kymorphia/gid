@@ -45,6 +45,7 @@ import gid.gtk3.widget;
     </object>
     ```
 */
+@gidGir("MenuToolButton", "MenuToolButtonClass")
 class MenuToolButton : gid.gtk3.tool_button.ToolButton
 {
 

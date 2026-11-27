@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A render node that isolates its child from surrounding rendernodes.
 */
+@gidGir("IsolationNode")
 class IsolationNode : gid.gsk4.render_node.RenderNode
 {
 

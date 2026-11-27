@@ -150,6 +150,7 @@ import gid.gobject2.object;
     For an example of using extra D-Bus hooks with [gid.gio2.application.Application], see
     [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
 */
+@gidGir("Application", "ApplicationClass")
 class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.ActionGroup, gid.gio2.action_map.ActionMap
 {
 

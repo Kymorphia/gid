@@ -14,6 +14,7 @@ import gid.gobject2.object;
     Defines a Unix mount entry (e.g. `/media/cdrom`).
     This corresponds roughly to a mtab entry.
 */
+@gidGir("MountEntry")
 class MountEntry : gid.gobject2.boxed.BoxedWrap!(g_unix_mount_entry_get_type)
 {
 

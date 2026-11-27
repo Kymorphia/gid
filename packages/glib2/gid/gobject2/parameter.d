@@ -14,6 +14,7 @@ import gid.gobject2.value;
 
     Deprecated: This type is not introspectable.
 */
+@gidGir("Parameter")
 class Parameter : StructWrap!(GParameter)
 {
   /**

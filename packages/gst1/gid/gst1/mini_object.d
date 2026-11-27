@@ -38,6 +38,7 @@ import gid.gst1.types;
     A weak reference can be added and remove with [gid.gst1.mini_object.MiniObject.weakRef]
     and [gid.gst1.mini_object.MiniObject.weakUnref] respectively.
 */
+@gidGir("MiniObject")
 class MiniObject : gid.gobject2.boxed.BoxedWrap!(gst_mini_object_get_type)
 {
   /**

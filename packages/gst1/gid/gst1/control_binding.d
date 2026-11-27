@@ -17,6 +17,7 @@ import gid.gst1.types;
     combines them and maps the resulting value to the type and value range of the
     bound property.
 */
+@gidGir("ControlBinding", "ControlBindingClass")
 class ControlBinding : gid.gst1.object.ObjectWrap
 {
 

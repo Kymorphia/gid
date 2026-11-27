@@ -14,6 +14,7 @@ import gid.gstvideo1.video_aggregator_convert_pad;
     
     See #GstVideoAggregator for more details.
 */
+@gidGir("VideoAggregatorParallelConvertPad", "VideoAggregatorParallelConvertPadClass")
 class VideoAggregatorParallelConvertPad : gid.gstvideo1.video_aggregator_convert_pad.VideoAggregatorConvertPad
 {
 

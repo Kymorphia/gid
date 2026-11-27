@@ -29,6 +29,7 @@ import gid.gtk4.types;
     called for all signal callbacks which are referenced by the loaded XML,
     this functionality will require that [gid.gmodule2.module_.Module] be supported on the platform.
 */
+@gidGir("BuilderCScope", "BuilderCScopeClass")
 class BuilderCScope : gid.gobject2.object.ObjectWrap, gid.gtk4.builder_scope.BuilderScope
 {
 

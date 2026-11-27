@@ -84,6 +84,7 @@ import gid.gtk3.types;
     </object>
     ```
 */
+@gidGir("IconFactory", "IconFactoryClass")
 class IconFactory : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 {
 

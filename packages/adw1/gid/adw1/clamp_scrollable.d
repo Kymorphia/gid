@@ -31,6 +31,7 @@ import gid.gtk4.widget;
     
     See also: [gid.adw1.clamp_layout.ClampLayout].
 */
+@gidGir("ClampScrollable", "ClampScrollableClass")
 class ClampScrollable : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable, gid.gtk4.scrollable.Scrollable
 {
 

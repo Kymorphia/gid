@@ -30,6 +30,7 @@ import gid.gtk3.types;
     [gid.gtk4.label.Label.newWithMnemonic]. Menu items can have both accelerators
     and mnemonics, of course.
 */
+@gidGir("AccelGroup", "AccelGroupClass")
 class AccelGroup : gid.gobject2.object.ObjectWrap
 {
 

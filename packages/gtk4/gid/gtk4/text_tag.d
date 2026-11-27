@@ -33,6 +33,7 @@ import gid.pango1.types;
     
     They are maintained by GTK and you should not set them independently.
 */
+@gidGir("TextTag", "TextTagClass")
 class TextTag : gid.gobject2.object.ObjectWrap
 {
 

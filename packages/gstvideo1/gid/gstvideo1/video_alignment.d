@@ -12,6 +12,7 @@ import gid.gstvideo1.types;
     structure is usually used to configure the bufferpool if it supports the
     #GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT.
 */
+@gidGir("VideoAlignment")
 struct VideoAlignment
 {
   /**

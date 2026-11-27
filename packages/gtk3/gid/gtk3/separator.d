@@ -26,6 +26,7 @@ import gid.gtk3.widget;
     GtkSeparator has a single CSS node with name separator. The node
     gets one of the .horizontal or .vertical style classes.
 */
+@gidGir("Separator", "SeparatorClass")
 class Separator : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
 {
 

@@ -14,6 +14,7 @@ import gid.gdk3.window;
     Generated when all or part of a window becomes visible and needs to be
     redrawn.
 */
+@gidGir("EventExpose")
 class EventExpose : StructWrap!(GdkEventExpose, gdk_event_copy, gdk_event_free)
 {
   /**

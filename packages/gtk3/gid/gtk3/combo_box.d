@@ -81,6 +81,7 @@ import gid.gtk3.types;
     button, both with the .combo class added.
     The button also contains another node with name arrow.
 */
+@gidGir("ComboBox", "ComboBoxClass")
 class ComboBox : gid.gtk3.bin.Bin, gid.gtk3.cell_editable.CellEditable, gid.gtk3.cell_layout.CellLayout
 {
 

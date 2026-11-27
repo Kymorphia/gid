@@ -58,6 +58,7 @@ import gid.gtk3.window;
     of type `G_VARIANT_TYPE_DOUBLE` bearing the value of the given axis, it
     is required that those are made stateful and accepting this #GVariantType.
 */
+@gidGir("PadController", "PadControllerClass")
 class PadController : gid.gtk3.event_controller.EventController
 {
 

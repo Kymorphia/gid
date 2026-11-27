@@ -16,6 +16,7 @@ import gid.gobject2.object;
     [gid.gio2.zlib_decompressor.ZlibDecompressor] is an implementation of [gid.gio2.converter.Converter] that
     decompresses data compressed with zlib.
 */
+@gidGir("ZlibDecompressor", "ZlibDecompressorClass")
 class ZlibDecompressor : gid.gobject2.object.ObjectWrap, gid.gio2.converter.Converter
 {
 

@@ -81,6 +81,7 @@ import gid.gtk4.widget;
     
     See also: [gid.adw1.shortcuts_dialog.ShortcutsDialog].
 */
+@gidGir("ShortcutLabel", "ShortcutLabelClass")
 class ShortcutLabel : gid.gtk4.widget.Widget
 {
 

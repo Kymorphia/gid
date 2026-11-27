@@ -18,6 +18,7 @@ import gid.gtk3.widget;
     #GtkGestureStylus is a #GtkGesture implementation specific to stylus
     input. The provided signals just provide the basic information
 */
+@gidGir("GestureStylus", "GestureStylusClass")
 class GestureStylus : gid.gtk3.gesture_single.GestureSingle
 {
 

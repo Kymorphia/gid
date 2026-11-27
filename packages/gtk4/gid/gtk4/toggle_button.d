@@ -97,6 +97,7 @@ import gid.gtk4.types;
     }
     ```
 */
+@gidGir("ToggleButton", "ToggleButtonClass")
 class ToggleButton : gid.gtk4.button.Button
 {
 

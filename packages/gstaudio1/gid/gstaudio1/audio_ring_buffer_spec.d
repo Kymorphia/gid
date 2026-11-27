@@ -16,6 +16,7 @@ import gid.gstaudio1.types;
     is valid (otherwise it is unused). Also, when DSD is the sample type,
     only the rate, channels, position, and bpf fields in @info are populated.
 */
+@gidGir("AudioRingBufferSpec")
 class AudioRingBufferSpec : StructWrap!(GstAudioRingBufferSpec)
 {
   /**

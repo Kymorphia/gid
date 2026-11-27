@@ -16,6 +16,7 @@ import gid.gtk3.renderer_cell_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("BooleanCellAccessible", "BooleanCellAccessibleClass")
 class BooleanCellAccessible : gid.gtk3.renderer_cell_accessible.RendererCellAccessible
 {
 

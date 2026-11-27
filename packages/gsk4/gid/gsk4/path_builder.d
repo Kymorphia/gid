@@ -55,6 +55,7 @@ import gid.pango1.layout;
     Note that [gid.gsk4.path_builder.PathBuilder] will reduce the degree of added Bézier
     curves as much as possible, to simplify rendering.
 */
+@gidGir("PathBuilder")
 class PathBuilder : gid.gobject2.boxed.BoxedWrap!(gsk_path_builder_get_type)
 {
 

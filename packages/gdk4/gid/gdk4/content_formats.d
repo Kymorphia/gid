@@ -43,6 +43,7 @@ import gid.gobject2.types;
     The [gid.gdk4.content_formats_builder.ContentFormatsBuilder] structure is meant to help in this
     endeavor.
 */
+@gidGir("ContentFormats")
 class ContentFormats : gid.gobject2.boxed.BoxedWrap!(gdk_content_formats_get_type)
 {
 

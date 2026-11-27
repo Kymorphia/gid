@@ -14,6 +14,7 @@ import gid.gdk3.window;
     information is only available if the X server supports the XFIXES
     extension.
 */
+@gidGir("EventOwnerChange")
 class EventOwnerChange : StructWrap!(GdkEventOwnerChange, gdk_event_copy, gdk_event_free)
 {
   /**

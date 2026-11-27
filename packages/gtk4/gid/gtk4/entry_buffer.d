@@ -22,6 +22,7 @@ import gid.gtk4.types;
     useful in the case of important passwords. Or a derived class could
     integrate with an application’s concept of undo/redo.
 */
+@gidGir("EntryBuffer", "EntryBufferClass")
 class EntryBuffer : gid.gobject2.object.ObjectWrap
 {
 

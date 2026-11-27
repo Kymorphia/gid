@@ -12,6 +12,7 @@ import gid.gobject2.object;
 /**
     A physical tool associated to a [gid.gdk4.device.Device].
 */
+@gidGir("DeviceTool")
 class DeviceTool : gid.gobject2.object.ObjectWrap
 {
 

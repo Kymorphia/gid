@@ -7,6 +7,12 @@ public import gid.gstaudio1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstvideo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstPbutils";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /** */
 alias GstDiscovererAudioInfoClass = GObjectClass;
 
@@ -31,6 +37,7 @@ alias GstEncodingTargetClass = GObjectClass;
 /**
     Different types of supported background shading functions.
 */
+@gidGir("AudioVisualizerShader")
 enum GstAudioVisualizerShader
 {
   /**
@@ -87,6 +94,7 @@ enum GstAudioVisualizerShader
 /**
     Result values for the discovery process.
 */
+@gidGir("DiscovererResult")
 enum GstDiscovererResult
 {
   /**
@@ -124,6 +132,7 @@ enum GstDiscovererResult
     You can use these flags to control what is serialized by
     [gid.gstpbutils1.discoverer_info.DiscovererInfo.toVariant]
 */
+@gidGir("DiscovererSerializeFlags")
 enum GstDiscovererSerializeFlags : uint
 {
   /**
@@ -162,6 +171,7 @@ enum GstDiscovererSerializeFlags : uint
     These codes indicate success or failure of starting an external installer
     program and to what extent the requested plugins could be installed.
 */
+@gidGir("InstallPluginsReturn")
 enum GstInstallPluginsReturn
 {
   /**
@@ -237,6 +247,7 @@ enum GstInstallPluginsReturn
     Flags that are returned by [gid.gstpbutils1.global.pbUtilsGetCapsDescriptionFlags] and
     describe the format of the caps.
 */
+@gidGir("PbUtilsCapsDescriptionFlags")
 enum GstPbUtilsCapsDescriptionFlags : uint
 {
   /**
@@ -330,6 +341,7 @@ struct GstAudioVisualizerClass
 }
 
 /** */
+@gidGir("AudioVisualizerPrivate")
 struct GstAudioVisualizerPrivate;
 
 /**
@@ -403,6 +415,7 @@ struct GstDiscovererContainerInfo;
 struct GstDiscovererInfo;
 
 /** */
+@gidGir("DiscovererPrivate")
 struct GstDiscovererPrivate;
 
 /**
@@ -441,6 +454,7 @@ struct GstDiscovererVideoInfo;
 struct GstEncodingAudioProfile;
 
 /** */
+@gidGir("EncodingAudioProfileClass")
 struct GstEncodingAudioProfileClass;
 
 /**
@@ -449,6 +463,7 @@ struct GstEncodingAudioProfileClass;
 struct GstEncodingContainerProfile;
 
 /** */
+@gidGir("EncodingContainerProfileClass")
 struct GstEncodingContainerProfileClass;
 
 /**
@@ -458,6 +473,7 @@ struct GstEncodingContainerProfileClass;
 struct GstEncodingProfile;
 
 /** */
+@gidGir("EncodingProfileClass")
 struct GstEncodingProfileClass;
 
 /**
@@ -474,6 +490,7 @@ struct GstEncodingTarget;
 struct GstEncodingVideoProfile;
 
 /** */
+@gidGir("EncodingVideoProfileClass")
 struct GstEncodingVideoProfileClass;
 
 /**

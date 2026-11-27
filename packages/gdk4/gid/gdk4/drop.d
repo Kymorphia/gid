@@ -37,6 +37,7 @@ import gid.gobject2.value;
     and so they are not normally needed in GTK applications. See the
     "Drag and Drop" section of the GTK documentation for more information.
 */
+@gidGir("Drop")
 class Drop : gid.gobject2.object.ObjectWrap
 {
 

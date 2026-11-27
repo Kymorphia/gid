@@ -69,6 +69,7 @@ import gid.gtk3.widget;
     The GtkMessageDialog implementation of the GtkBuildable interface exposes
     the message area as an internal child with the name “message_area”.
 */
+@gidGir("MessageDialog", "MessageDialogClass")
 class MessageDialog : gid.gtk3.dialog.Dialog
 {
 

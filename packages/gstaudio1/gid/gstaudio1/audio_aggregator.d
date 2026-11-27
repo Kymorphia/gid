@@ -61,6 +61,7 @@ import gid.gst1.types;
     - "position"  G_TYPE_UINT   current position in the input buffer in samples
     - "size"  G_TYPE_UINT   size of the input buffer in samples
 */
+@gidGir("AudioAggregator", "AudioAggregatorClass")
 class AudioAggregator : gid.gstbase1.aggregator.Aggregator
 {
 

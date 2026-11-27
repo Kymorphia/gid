@@ -16,6 +16,7 @@ import gid.harfbuzz0.types;
     #hb_draw_quadratic_to_func_t calls to #hb_draw_cubic_to_func_t if the
     callback isn't defined.
 */
+@gidGir("draw_funcs_t")
 class DrawFuncs : gid.gobject2.boxed.BoxedWrap!(hb_gobject_draw_funcs_get_type)
 {
 

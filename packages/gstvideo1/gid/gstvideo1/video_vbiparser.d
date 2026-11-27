@@ -15,6 +15,7 @@ import gid.gstvideo1.video_vbiencoder : _vbiLineSize;
     A parser for detecting and extracting @GstVideoAncillary data from
     Vertical Blanking Interval lines of component signals.
 */
+@gidGir("VideoVBIParser")
 class VideoVBIParser : gid.gobject2.boxed.BoxedWrap!(gst_video_vbi_parser_get_type)
 {
 

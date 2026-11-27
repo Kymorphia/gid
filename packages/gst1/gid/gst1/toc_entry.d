@@ -11,6 +11,7 @@ import gid.gst1.toc;
 import gid.gst1.types;
 
 /** */
+@gidGir("TocEntry")
 class TocEntry : gid.gobject2.boxed.BoxedWrap!(gst_toc_entry_get_type)
 {
 

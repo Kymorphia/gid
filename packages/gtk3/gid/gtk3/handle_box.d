@@ -44,6 +44,7 @@ import gid.gtk3.widget;
     > to make it useful and most importantly does not fit well into modern
     > application design. Do not use it. There is no replacement.
 */
+@gidGir("HandleBox", "HandleBoxClass")
 class HandleBox : gid.gtk3.bin.Bin
 {
 

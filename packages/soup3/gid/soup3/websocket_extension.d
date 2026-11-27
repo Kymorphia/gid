@@ -16,6 +16,7 @@ import gid.soup3.types;
     
     [gid.soup3.websocket_extension.WebsocketExtension] is the base class for WebSocket extension objects.
 */
+@gidGir("WebsocketExtension", "WebsocketExtensionClass")
 class WebsocketExtension : gid.gobject2.object.ObjectWrap
 {
 

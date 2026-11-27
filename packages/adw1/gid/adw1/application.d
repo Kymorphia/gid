@@ -63,6 +63,7 @@ import gid.gtk4.application;
         - `prefers-contrast: more` for styles used only when the system high
           contrast preference is enabled.
 */
+@gidGir("Application", "ApplicationClass")
 class Application : gid.gtk4.application.Application
 {
 

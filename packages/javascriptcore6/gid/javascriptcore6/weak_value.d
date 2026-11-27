@@ -16,6 +16,7 @@ import gid.javascriptcore6.value;
     to keep a reference to a JavaScript value without protecting it from being garbage
     collected and without referencing the #JSCContext either.
 */
+@gidGir("WeakValue", "WeakValueClass")
 class WeakValue : gid.gobject2.object.ObjectWrap
 {
 

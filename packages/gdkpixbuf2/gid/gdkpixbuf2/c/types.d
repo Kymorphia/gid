@@ -5,12 +5,19 @@ public import gid.core.basictypes;
 public import gid.gmodule2.c.types;
 public import gid.gio2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GdkPixbuf";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     This enumeration defines the color spaces that are supported by
     the gdk-pixbuf library.
     
     Currently only RGB is supported.
 */
+@gidGir("Colorspace")
 enum GdkColorspace
 {
   /**
@@ -30,6 +37,7 @@ enum GdkColorspace
     **Note**: Cubic filtering is missing from the list; hyperbolic
     interpolation is just as fast and results in higher quality.
 */
+@gidGir("InterpType")
 enum GdkInterpType
 {
   /**
@@ -88,6 +96,7 @@ enum GdkInterpType
         and the Xlib utility functions have been split out to their own
         library, gdk-pixbuf-xlib
 */
+@gidGir("PixbufAlphaMode")
 enum GdkPixbufAlphaMode
 {
   /**
@@ -111,6 +120,7 @@ enum GdkPixbufAlphaMode
     Many gdk-pixbuf operations can cause errors in this domain, or in
     the `G_FILE_ERROR` domain.
 */
+@gidGir("PixbufError")
 enum GdkPixbufError
 {
   /**
@@ -154,6 +164,7 @@ enum GdkPixbufError
     Flags which allow a module to specify further details about the supported
     operations.
 */
+@gidGir("PixbufFormatFlags")
 enum GdkPixbufFormatFlags : uint
 {
   /**
@@ -178,6 +189,7 @@ enum GdkPixbufFormatFlags : uint
     
     To make them easier to use, their numerical values are the actual degrees.
 */
+@gidGir("PixbufRotation")
 enum GdkPixbufRotation
 {
   /**
@@ -765,6 +777,7 @@ struct GdkPixbufNonAnim;
 struct GdkPixbufSimpleAnim;
 
 /** */
+@gidGir("PixbufSimpleAnimClass")
 struct GdkPixbufSimpleAnimClass;
 
 /** */

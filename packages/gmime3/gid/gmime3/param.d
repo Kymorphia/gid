@@ -12,6 +12,7 @@ import gid.gobject2.object;
 /**
     A parameter name/value pair as used in the Content-Type and Content-Disposition headers.
 */
+@gidGir("Param", "ParamClass")
 class Param : gid.gobject2.object.ObjectWrap
 {
 

@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A MIME part iterator.
 */
+@gidGir("PartIter")
 class PartIter : gid.gobject2.boxed.BoxedWrap!(g_mime_part_iter_get_type)
 {
 

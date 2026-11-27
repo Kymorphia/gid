@@ -16,6 +16,7 @@ import gid.gstaudio1.types;
     
     See #GstAudioAggregator for more details.
 */
+@gidGir("AudioAggregatorConvertPad", "AudioAggregatorConvertPadClass")
 class AudioAggregatorConvertPad : gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad
 {
 

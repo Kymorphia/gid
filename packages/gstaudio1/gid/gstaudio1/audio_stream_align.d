@@ -17,6 +17,7 @@ import gid.gstaudio1.types;
     See [gid.gstaudio1.audio_stream_align.AudioStreamAlign.new_] for a description of its parameters and
     [gid.gstaudio1.audio_stream_align.AudioStreamAlign.process] for the details of the processing.
 */
+@gidGir("AudioStreamAlign")
 class AudioStreamAlign : gid.gobject2.boxed.BoxedWrap!(gst_audio_stream_align_get_type)
 {
 

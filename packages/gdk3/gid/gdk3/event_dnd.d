@@ -12,6 +12,7 @@ import gid.gdk3.window;
 /**
     Generated during DND operations.
 */
+@gidGir("EventDND")
 class EventDND : StructWrap!(GdkEventDND, gdk_event_copy, gdk_event_free)
 {
   /**

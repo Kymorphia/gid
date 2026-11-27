@@ -10,6 +10,7 @@ import gid.gstgl1.glbase_mixer_pad;
 import gid.gstgl1.types;
 
 /** */
+@gidGir("GLMixerPad", "GLMixerPadClass")
 class GLMixerPad : gid.gstgl1.glbase_mixer_pad.GLBaseMixerPad
 {
 

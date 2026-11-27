@@ -23,6 +23,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.slice_list_model.SliceListModel] passes through sections from the underlying model.
 */
+@gidGir("SliceListModel", "SliceListModelClass")
 class SliceListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel
 {
 

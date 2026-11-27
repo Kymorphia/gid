@@ -14,6 +14,7 @@ import gid.gtk3.text_buffer;
 import gid.gtk3.types;
 
 /** */
+@gidGir("SelectionData")
 class SelectionData : gid.gobject2.boxed.BoxedWrap!(gtk_selection_data_get_type)
 {
 

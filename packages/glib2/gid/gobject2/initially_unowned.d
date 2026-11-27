@@ -15,6 +15,7 @@ import gid.gobject2.types;
     All the fields in the [gid.gobject2.initially_unowned.InitiallyUnowned] structure are private to the
     implementation and should never be accessed directly.
 */
+@gidGir("InitiallyUnowned", "InitiallyUnownedClass")
 class InitiallyUnowned : gid.gobject2.object.ObjectWrap
 {
 

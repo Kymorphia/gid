@@ -13,6 +13,7 @@ import gid.gobject2.boxed;
 /**
     Information about a method on a D-Bus interface.
 */
+@gidGir("DBusMethodInfo")
 class DBusMethodInfo : gid.gobject2.boxed.BoxedWrap!(g_dbus_method_info_get_type)
 {
   /**

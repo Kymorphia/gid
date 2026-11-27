@@ -37,6 +37,7 @@ import gid.gstgl1.types;
     > result in sudden application abortion during execution.  The most notably
     > example of such a function is X11's XInitThreads\().
 */
+@gidGir("GLDisplay", "GLDisplayClass")
 class GLDisplay : gid.gst1.object.ObjectWrap
 {
 

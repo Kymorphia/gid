@@ -9,6 +9,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget;
 
 /** */
+@gidGir("FixedChild")
 class FixedChild : StructWrap!(GtkFixedChild)
 {
   /**

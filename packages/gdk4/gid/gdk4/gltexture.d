@@ -20,6 +20,7 @@ import gid.gobject2.gid_builder;
 /**
     A [gid.gdk4.texture.Texture] representing a GL texture object.
 */
+@gidGir("GLTexture", "GLTextureClass")
 class GLTexture : gid.gdk4.texture.Texture
 {
 

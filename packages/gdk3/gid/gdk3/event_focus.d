@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Describes a change of keyboard focus.
 */
+@gidGir("EventFocus")
 class EventFocus : StructWrap!(GdkEventFocus, gdk_event_copy, gdk_event_free)
 {
   /**

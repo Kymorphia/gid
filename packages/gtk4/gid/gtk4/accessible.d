@@ -44,6 +44,7 @@ import gid.gtk4.types;
     by calling [gid.gtk4.accessible.Accessible.setAccessibleParent] and
     updating the sibling by [gid.gtk4.accessible.Accessible.updateNextAccessibleSibling].
 */
+@gidGir("Accessible", "AccessibleInterface")
 interface Accessible : GidWrap
 {
 

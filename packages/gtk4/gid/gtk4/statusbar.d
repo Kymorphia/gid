@@ -59,6 +59,7 @@ import gid.gtk4.widget;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("Statusbar")
 class Statusbar : gid.gtk4.widget.Widget
 {
 

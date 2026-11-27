@@ -28,6 +28,7 @@ import gid.gtksource5.types;
     may take additional time should use `vfunc@HoverProvider.populate_async`
     to avoid blocking the main loop.
 */
+@gidGir("HoverProvider", "HoverProviderInterface")
 interface HoverProvider : GidWrap
 {
 

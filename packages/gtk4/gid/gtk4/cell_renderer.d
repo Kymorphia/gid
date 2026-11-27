@@ -60,6 +60,7 @@ import gid.gtk4.widget;
     Deprecated: List views use widgets for displaying their
         contents
 */
+@gidGir("CellRenderer", "CellRendererClass")
 class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

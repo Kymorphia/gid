@@ -19,6 +19,7 @@ import gid.glib2.types;
     [gid.glib2.uri_params_iter.UriParamsIter.init_]. See the documentation for [gid.glib2.uri_params_iter.UriParamsIter.init_]
     for a usage example.
 */
+@gidGir("UriParamsIter")
 class UriParamsIter : StructWrap!(GUriParamsIter)
 {
   /**

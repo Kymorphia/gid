@@ -15,6 +15,7 @@ import gid.panel1.c.types;
 import gid.panel1.types;
 
 /** */
+@gidGir("Application", "ApplicationClass")
 class Application : gid.adw1.application.Application
 {
 

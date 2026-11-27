@@ -11,6 +11,7 @@ import gid.harfbuzz0.types;
 /**
     A struct containing color information for a gradient.
 */
+@gidGir("color_line_t")
 class ColorLine : gid.gobject2.boxed.BoxedWrap!(hb_gobject_color_line_get_type)
 {
   /**

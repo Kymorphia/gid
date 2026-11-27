@@ -4,10 +4,17 @@ module gid.soup3.c.types;
 public import gid.core.basictypes;
 public import gid.gio2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Soup";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "3.0";
+
 /**
     The type of cache; this affects what kinds of responses will be
     saved.
 */
+@gidGir("CacheType")
 enum SoupCacheType
 {
   /**
@@ -24,6 +31,7 @@ enum SoupCacheType
 /**
     Indicates if a message should or shouldn't be cached.
 */
+@gidGir("Cacheability")
 enum SoupCacheability : uint
 {
   /**
@@ -51,6 +59,7 @@ enum SoupCacheability : uint
     The policy for accepting or rejecting cookies returned in
     responses.
 */
+@gidGir("CookieJarAcceptPolicy")
 enum SoupCookieJarAcceptPolicy
 {
   /**
@@ -104,6 +113,7 @@ enum SoupCookieJarAcceptPolicy
     
     This enum may be extended with more values in future releases.
 */
+@gidGir("DateFormat")
 enum SoupDateFormat
 {
   /**
@@ -122,6 +132,7 @@ enum SoupDateFormat
 /**
     How a message body is encoded for transport
 */
+@gidGir("Encoding")
 enum SoupEncoding
 {
   /**
@@ -161,6 +172,7 @@ enum SoupEncoding
 /**
     Represents the parsed value of the "Expect" header.
 */
+@gidGir("Expectation")
 enum SoupExpectation : uint
 {
   /**
@@ -177,6 +189,7 @@ enum SoupExpectation : uint
 /**
     Indicates the HTTP protocol version being used.
 */
+@gidGir("HTTPVersion")
 enum SoupHTTPVersion
 {
   /**
@@ -198,6 +211,7 @@ enum SoupHTTPVersion
 /**
     Describes the level of logging output to provide.
 */
+@gidGir("LoggerLogLevel")
 enum SoupLoggerLogLevel
 {
   /**
@@ -225,6 +239,7 @@ enum SoupLoggerLogLevel
 /**
     The lifetime of the memory being passed.
 */
+@gidGir("MemoryUse")
 enum SoupMemoryUse
 {
   /**
@@ -251,6 +266,7 @@ enum SoupMemoryUse
 /**
     Various flags that can be set on a [gid.soup3.message.Message] to alter its behavior.
 */
+@gidGir("MessageFlags")
 enum SoupMessageFlags : uint
 {
   /**
@@ -297,6 +313,7 @@ enum SoupMessageFlags : uint
     Value passed to [gid.soup3.message_headers.MessageHeaders.new_] to set certain default
     behaviors.
 */
+@gidGir("MessageHeadersType")
 enum SoupMessageHeadersType
 {
   /**
@@ -319,6 +336,7 @@ enum SoupMessageHeadersType
     Priorities that can be set on a [gid.soup3.message.Message] to instruct the message queue
     to process it before any other message with lower priority.
 */
+@gidGir("MessagePriority")
 enum SoupMessagePriority
 {
   /**
@@ -357,6 +375,7 @@ enum SoupMessagePriority
 /**
     Represents the same-site policies of a cookie.
 */
+@gidGir("SameSitePolicy")
 enum SoupSameSitePolicy
 {
   /**
@@ -384,6 +403,7 @@ enum SoupSameSitePolicy
     simply listens on whatever kind of socket you give it). And you
     cannot specify both of them in a single call.
 */
+@gidGir("ServerListenOptions")
 enum SoupServerListenOptions : uint
 {
   /**
@@ -406,6 +426,7 @@ enum SoupServerListenOptions : uint
 /**
     A [gid.soup3.session.Session] error.
 */
+@gidGir("SessionError")
 enum SoupSessionError
 {
   /**
@@ -459,6 +480,7 @@ enum SoupSessionError
     any function that works with status codes will accept unrecognized
     status codes as well.
 */
+@gidGir("Status")
 enum SoupStatus
 {
   /**
@@ -749,6 +771,7 @@ enum SoupStatus
 /**
     Error codes for `SOUP_TLD_ERROR`.
 */
+@gidGir("TLDError")
 enum SoupTLDError
 {
   /**
@@ -788,6 +811,7 @@ enum SoupTLDError
     Enum values passed to `func@uri_copy` to indicate the components of
     the URI that should be updated with the given values.
 */
+@gidGir("URIComponent")
 enum SoupURIComponent
 {
   /**
@@ -848,6 +872,7 @@ enum SoupURIComponent
     
     However, other codes are also allowed.
 */
+@gidGir("WebsocketCloseCode")
 enum SoupWebsocketCloseCode
 {
   /**
@@ -924,6 +949,7 @@ enum SoupWebsocketCloseCode
 /**
     The type of a [gid.soup3.websocket_connection.WebsocketConnection].
 */
+@gidGir("WebsocketConnectionType")
 enum SoupWebsocketConnectionType
 {
   /**
@@ -945,6 +971,7 @@ enum SoupWebsocketConnectionType
 /**
     The type of data contained in a [gid.soup3.websocket_connection.WebsocketConnection.message] signal.
 */
+@gidGir("WebsocketDataType")
 enum SoupWebsocketDataType
 {
   /**
@@ -961,6 +988,7 @@ enum SoupWebsocketDataType
 /**
     WebSocket-related errors.
 */
+@gidGir("WebsocketError")
 enum SoupWebsocketError
 {
   /**
@@ -990,6 +1018,7 @@ enum SoupWebsocketError
 /**
     The state of the WebSocket connection.
 */
+@gidGir("WebsocketState")
 enum SoupWebsocketState
 {
   /**
@@ -1700,6 +1729,7 @@ struct SoupMultipartInputStreamClass
     range", referring to the last -@start bytes of the resource body.
     (Eg, the last 500 bytes would be @start = -500 and @end = -1.)
 */
+@gidGir("Range")
 struct SoupRange
 {
   /**
@@ -1947,6 +1977,7 @@ struct SoupSessionFeature;
 /**
     The interface implemented by [gid.soup3.session_feature.SessionFeature]s.
 */
+@gidGir("SessionFeatureInterface")
 struct SoupSessionFeatureInterface;
 
 /**

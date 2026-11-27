@@ -18,6 +18,7 @@ import gid.gobject2.object;
     AtkHyperlink in that AtkHyperlink is an object type, rather than an
     interface, and thus cannot be directly queried. FTW
 */
+@gidGir("HyperlinkImpl", "HyperlinkImplIface")
 interface HyperlinkImpl : GidWrap
 {
 

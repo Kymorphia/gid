@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A concatenation of other #GMimeStream objects.
 */
+@gidGir("StreamCat", "StreamCatClass")
 class StreamCat : gid.gmime3.stream.Stream
 {
 

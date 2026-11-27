@@ -48,6 +48,7 @@ import gid.secret1.value;
     
     Items can be created with [gid.secret1.item.Item.create] or [gid.secret1.service.Service.store].
 */
+@gidGir("Item", "ItemClass")
 class Item : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.retrievable.Retrievable
 {
 

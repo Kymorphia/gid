@@ -23,6 +23,7 @@ import gid.gobject2.gid_builder;
     Deprecated: GTK does not expose any Vulkan internals. This
         struct is a leftover that was accidentally exposed.
 */
+@gidGir("VulkanContext")
 class VulkanContext : gid.gdk4.draw_context.DrawContext
 {
 

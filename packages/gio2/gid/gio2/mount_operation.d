@@ -35,6 +35,7 @@ import gid.gobject2.object;
     [VeraCrypt](https://www.veracrypt.fr/) is a maintained fork of TrueCrypt with various
     improvements and auditing fixes.
 */
+@gidGir("MountOperation", "MountOperationClass")
 class MountOperation : gid.gobject2.object.ObjectWrap
 {
 

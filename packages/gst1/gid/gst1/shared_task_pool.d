@@ -12,6 +12,7 @@ import gid.gst1.types;
 /**
     The #GstSharedTaskPool object.
 */
+@gidGir("SharedTaskPool", "SharedTaskPoolClass")
 class SharedTaskPool : gid.gst1.task_pool.TaskPool
 {
 

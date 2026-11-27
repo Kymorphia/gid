@@ -18,6 +18,7 @@ import gid.gtk3.types;
     actions can be linked together so that only one may be active at any
     one time.
 */
+@gidGir("RadioAction", "RadioActionClass")
 class RadioAction : gid.gtk3.toggle_action.ToggleAction
 {
 

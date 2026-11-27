@@ -21,6 +21,7 @@ import gid.webkit6.types;
     updated by calling [gid.webkit6.geolocation_manager.GeolocationManager.updatePosition]. The signal #WebKitGeolocationManager::stop
     will be emitted when location updates are no longer needed.
 */
+@gidGir("GeolocationManager", "GeolocationManagerClass")
 class GeolocationManager : gid.gobject2.object.ObjectWrap
 {
 

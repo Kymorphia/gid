@@ -180,6 +180,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.navigation_view.NavigationView] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("NavigationView", "NavigationViewClass")
 class NavigationView : gid.gtk4.widget.Widget, gid.adw1.swipeable.Swipeable
 {
 

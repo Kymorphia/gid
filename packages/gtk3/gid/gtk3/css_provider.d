@@ -40,6 +40,7 @@ import gid.gtk3.types;
     In the same way, GTK+ tries to load a gtk-keys.css file for the current
     key theme, as defined by #GtkSettings:gtk-key-theme-name.
 */
+@gidGir("CssProvider", "CssProviderClass")
 class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.StyleProvider
 {
 

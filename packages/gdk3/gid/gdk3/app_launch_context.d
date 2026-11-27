@@ -35,6 +35,7 @@ import gid.gobject2.object;
     g_object_unref (context);
     ```
 */
+@gidGir("AppLaunchContext")
 class AppLaunchContext : gid.gio2.app_launch_context.AppLaunchContext
 {
 

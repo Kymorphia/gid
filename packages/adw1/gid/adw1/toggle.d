@@ -17,6 +17,7 @@ import gid.gtk4.widget;
     If the name is set, [gid.adw1.toggle_group.ToggleGroup.activeName] can be used to access
     toggles instead of index.
 */
+@gidGir("Toggle", "ToggleClass")
 class Toggle : gid.gobject2.object.ObjectWrap
 {
 

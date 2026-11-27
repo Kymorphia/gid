@@ -27,6 +27,7 @@ import gid.gtk4.types;
     If you want to specify the amount of space placed between each child,
     you can use the [gid.gtk4.box_layout.BoxLayout.spacing] property.
 */
+@gidGir("BoxLayout", "BoxLayoutClass")
 class BoxLayout : gid.gtk4.layout_manager.LayoutManager, gid.gtk4.orientable.Orientable
 {
 

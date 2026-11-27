@@ -16,6 +16,7 @@ import gid.gtk3.menu_item_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("CheckMenuItemAccessible", "CheckMenuItemAccessibleClass")
 class CheckMenuItemAccessible : gid.gtk3.menu_item_accessible.MenuItemAccessible
 {
 

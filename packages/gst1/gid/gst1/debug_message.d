@@ -8,6 +8,7 @@ import gid.gst1.c.types;
 import gid.gst1.types;
 
 /** */
+@gidGir("DebugMessage")
 class DebugMessage : OpaqueWrap!(GstDebugMessage*, void, void)
 {
 

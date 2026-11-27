@@ -10,6 +10,7 @@ import gid.glib2.types;
 /**
     A union holding the value of the token.
 */
+@gidGir("TokenValue")
 class TokenValue : StructWrap!(GTokenValue)
 {
   /**

@@ -39,6 +39,7 @@ import gid.gobject2.value;
     [gid.gdk4.clipboard.Clipboard.readTextureAsync]. For other data, use
     [gid.gdk4.clipboard.Clipboard.readAsync], which provides a [gid.gio2.input_stream.InputStream] object.
 */
+@gidGir("Clipboard")
 class Clipboard : gid.gobject2.object.ObjectWrap
 {
 

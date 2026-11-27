@@ -21,6 +21,7 @@ import gid.soup3.types;
     support; you can check [gid.soup3.auth_negotiate.AuthNegotiate.supported] to see if it
     was.
 */
+@gidGir("AuthNegotiate")
 class AuthNegotiate : gid.soup3.auth.Auth
 {
 

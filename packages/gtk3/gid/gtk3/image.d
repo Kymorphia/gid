@@ -105,6 +105,7 @@ import gid.gtk3.types;
     GtkImage has a single CSS node with the name image. The style classes
     may appear on image CSS nodes: .icon-dropshadow, .lowres-icon.
 */
+@gidGir("Image", "ImageClass")
 class Image : gid.gtk3.misc.Misc
 {
 

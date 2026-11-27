@@ -44,6 +44,7 @@ import gid.gobject2.boxed;
     accordingly. But you have to be careful avoid changing the size of the popover,
     or it has to be presented again.
 */
+@gidGir("PopupLayout")
 class PopupLayout : gid.gobject2.boxed.BoxedWrap!(gdk_popup_layout_get_type)
 {
 

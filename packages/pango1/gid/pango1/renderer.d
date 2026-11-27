@@ -25,6 +25,7 @@ import gid.pango1.types;
     @draw_glyphs and @draw_rectangle, renderers for particular font
     backends and destinations can be created.
 */
+@gidGir("Renderer", "RendererClass")
 class Renderer : gid.gobject2.object.ObjectWrap
 {
 

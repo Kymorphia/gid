@@ -17,6 +17,7 @@ import gid.gobject2.boxed;
     getting a [gid.glib2.option_group.OptionGroup] holding their options, which
     the application can then add to its #GOptionContext.
 */
+@gidGir("OptionGroup")
 class OptionGroup : gid.gobject2.boxed.BoxedWrap!(g_option_group_get_type)
 {
 

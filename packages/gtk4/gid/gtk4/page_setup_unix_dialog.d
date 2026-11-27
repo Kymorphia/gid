@@ -43,6 +43,7 @@ import gid.gtk4.window;
     [gid.gtk4.page_setup_unix_dialog.PageSetupUnixDialog] has a single CSS node with the name `window` and
     style class `.pagesetup`.
 */
+@gidGir("PageSetupUnixDialog")
 class PageSetupUnixDialog : gid.gtk4.dialog.Dialog
 {
 

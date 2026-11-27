@@ -104,6 +104,7 @@ import gid.gtk4.widget;
     gtk_widget_set_size_request (frame2, 50, -1);
     ```
 */
+@gidGir("Paned")
 class Paned : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange, gid.gtk4.orientable.Orientable
 {
 

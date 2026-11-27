@@ -17,6 +17,7 @@ import gid.gobject2.object;
     of a process and information about the current ATK implementation
     and toolkit version.
 */
+@gidGir("Util", "UtilClass")
 class Util : gid.gobject2.object.ObjectWrap
 {
 

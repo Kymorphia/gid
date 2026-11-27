@@ -14,6 +14,7 @@ import gid.gstvideo1.types;
 /**
     Extra buffer metadata describing an image region of interest
 */
+@gidGir("VideoRegionOfInterestMeta")
 class VideoRegionOfInterestMeta : StructWrap!(GstVideoRegionOfInterestMeta)
 {
   /**

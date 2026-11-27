@@ -13,6 +13,7 @@ import gid.panel1.position;
 import gid.panel1.types;
 
 /** */
+@gidGir("SessionItem", "SessionItemClass")
 class SessionItem : gid.gobject2.object.ObjectWrap
 {
 

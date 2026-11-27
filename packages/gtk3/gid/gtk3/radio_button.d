@@ -105,6 +105,7 @@ import gid.gtk3.types;
     Inside the #GtkToggleButton::toggled handler, [gid.gtk4.toggle_button.ToggleButton.getActive]
     can be used to determine if the button has been selected or deselected.
 */
+@gidGir("RadioButton", "RadioButtonClass")
 class RadioButton : gid.gtk3.check_button.CheckButton
 {
 

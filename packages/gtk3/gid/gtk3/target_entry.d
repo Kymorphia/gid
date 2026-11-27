@@ -13,6 +13,7 @@ import gid.gtk3.types;
     data than can be supplied for by a widget for a selection
     or for supplied or received during drag-and-drop.
 */
+@gidGir("TargetEntry")
 class TargetEntry : gid.gobject2.boxed.BoxedWrap!(gtk_target_entry_get_type)
 {
 

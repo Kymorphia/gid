@@ -116,6 +116,7 @@ import gid.pango1.layout;
     
     [gid.gtk4.scale.Scale] uses the [gid.gtk4.types.AccessibleRole.Slider] role.
 */
+@gidGir("Scale", "ScaleClass")
 class Scale : gid.gtk4.range.Range
 {
 

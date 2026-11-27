@@ -42,6 +42,7 @@ import gid.gstrtp1.types;
     class. The child element does not need to override any other functions
     specific to GstRTPBaseAudioPayload.
 */
+@gidGir("RTPBaseAudioPayload", "RTPBaseAudioPayloadClass")
 class RTPBaseAudioPayload : gid.gstrtp1.rtpbase_payload.RTPBasePayload
 {
 

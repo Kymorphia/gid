@@ -15,6 +15,7 @@ import gid.gstrtp1.types;
 /**
     Instance struct for a RTP Audio/Video header extension.
 */
+@gidGir("RTPHeaderExtension", "RTPHeaderExtensionClass")
 class RTPHeaderExtension : gid.gst1.element.Element
 {
 

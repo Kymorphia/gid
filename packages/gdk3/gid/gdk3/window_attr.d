@@ -12,6 +12,7 @@ import gid.gdk3.visual;
 /**
     Attributes to use for a newly-created window.
 */
+@gidGir("WindowAttr")
 class WindowAttr : StructWrap!(GdkWindowAttr)
 {
   /**

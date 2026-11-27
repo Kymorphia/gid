@@ -48,6 +48,7 @@ import gid.gtk4.types;
     current drop target, and will receive the [gid.gtk4.types.StateFlags.DropActive]
     state, which can be used by themes to style the widget as a drop target.
 */
+@gidGir("DropTargetAsync", "DropTargetAsyncClass")
 class DropTargetAsync : gid.gtk4.event_controller.EventController
 {
 

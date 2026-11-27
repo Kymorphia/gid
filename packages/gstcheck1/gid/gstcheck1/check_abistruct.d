@@ -8,6 +8,7 @@ import gid.gstcheck1.c.types;
 import gid.gstcheck1.types;
 
 /** */
+@gidGir("CheckABIStruct")
 class CheckABIStruct : StructWrap!(GstCheckABIStruct)
 {
   /**

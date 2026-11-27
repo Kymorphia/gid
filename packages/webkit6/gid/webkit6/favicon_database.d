@@ -28,6 +28,7 @@ import gid.webkit6.types;
     be deleted from it. Nevertheless, WebKit will still store them in
     the in-memory cache during the current execution.
 */
+@gidGir("FaviconDatabase", "FaviconDatabaseClass")
 class FaviconDatabase : gid.gobject2.object.ObjectWrap
 {
 

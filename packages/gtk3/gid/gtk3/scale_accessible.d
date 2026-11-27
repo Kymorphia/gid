@@ -14,6 +14,7 @@ import gid.gtk3.range_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ScaleAccessible", "ScaleAccessibleClass")
 class ScaleAccessible : gid.gtk3.range_accessible.RangeAccessible
 {
 

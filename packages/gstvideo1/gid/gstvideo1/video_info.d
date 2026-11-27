@@ -21,6 +21,7 @@ import gid.gstvideo1.video_format_info;
     
     Use the provided macros to access the info in this structure.
 */
+@gidGir("VideoInfo")
 class VideoInfo : gid.gobject2.boxed.BoxedWrap!(gst_video_info_get_type)
 {
 

@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     Format options for serializing various GMime objects.
 */
+@gidGir("FormatOptions")
 class FormatOptions : gid.gobject2.boxed.BoxedWrap!(g_mime_format_options_get_type)
 {
 

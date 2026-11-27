@@ -18,6 +18,7 @@ import gid.webkit6.types;
     URI scheme with a certain security level, or to check if it already
     has it.
 */
+@gidGir("SecurityManager", "SecurityManagerClass")
 class SecurityManager : gid.gobject2.object.ObjectWrap
 {
 

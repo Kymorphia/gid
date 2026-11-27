@@ -40,6 +40,7 @@ import gid.gtk4.widget;
        [gid.gtk4.widget.Widget.activateAction]
      - [gid.gtk4.nothing_action.NothingAction]: a shortcut action that does nothing
 */
+@gidGir("ShortcutAction", "ShortcutActionClass")
 class ShortcutAction : gid.gobject2.object.ObjectWrap
 {
 

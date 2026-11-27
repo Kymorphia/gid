@@ -38,6 +38,7 @@ import gid.xlib2.types;
     They can only be used on a #GdkX11Display. To use #GtkPlug and
     #GtkSocket, you need to include the `gtk/gtkx.h` header.
 */
+@gidGir("Plug", "PlugClass")
 class Plug : gid.gtk3.window.Window
 {
 

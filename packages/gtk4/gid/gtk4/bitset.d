@@ -25,6 +25,7 @@ import gid.gtk4.types;
     The main use case for [gid.gtk4.bitset.Bitset] is implementing complex selections for
     [gid.gtk4.selection_model.SelectionModel].
 */
+@gidGir("Bitset")
 class Bitset : gid.gobject2.boxed.BoxedWrap!(gtk_bitset_get_type)
 {
 

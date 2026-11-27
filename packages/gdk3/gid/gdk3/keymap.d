@@ -20,6 +20,7 @@ import gid.pango1.types;
     state; the second phase is to look up the keycode/group/level triplet
     in the keymap and see what keyval it corresponds to.
 */
+@gidGir("Keymap")
 class Keymap : gid.gobject2.object.ObjectWrap
 {
 

@@ -15,6 +15,7 @@ import gid.webkit6.types;
     to a #WebKitNetworkSession. You need to call webkit_network_session_set_network_proxy_settings()
     with [gid.webkit6.types.NetworkProxyMode.Custom] and a WebKitNetworkProxySettings.
 */
+@gidGir("NetworkProxySettings")
 class NetworkProxySettings : gid.gobject2.boxed.BoxedWrap!(webkit_network_proxy_settings_get_type)
 {
 

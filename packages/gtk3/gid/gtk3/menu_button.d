@@ -108,6 +108,7 @@ import gid.gtk3.widget;
     GtkMenuButton has a single CSS node with name button. To differentiate
     it from a plain #GtkButton, it gets the .popup style class.
 */
+@gidGir("MenuButton", "MenuButtonClass")
 class MenuButton : gid.gtk3.toggle_button.ToggleButton
 {
 

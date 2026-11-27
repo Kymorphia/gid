@@ -155,6 +155,7 @@ import gid.gtk4.widget;
     </object>
     ```
 */
+@gidGir("AlertDialog", "AlertDialogClass")
 class AlertDialog : gid.adw1.dialog.Dialog
 {
 

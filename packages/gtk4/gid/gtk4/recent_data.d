@@ -11,6 +11,7 @@ import gid.gtk4.types;
     Meta-data to be passed to [gid.gtk4.recent_manager.RecentManager.addFull] when
     registering a recently used resource.
 */
+@gidGir("RecentData")
 class RecentData : StructWrap!(GtkRecentData)
 {
   /**

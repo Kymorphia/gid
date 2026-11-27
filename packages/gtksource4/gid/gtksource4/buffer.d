@@ -19,6 +19,7 @@ import gid.gtksource4.types;
 import gid.gtksource4.undo_manager;
 
 /** */
+@gidGir("Buffer", "BufferClass")
 class Buffer : gid.gtk3.text_buffer.TextBuffer
 {
 

@@ -24,6 +24,7 @@ import gid.gtk4.types;
     The [gid.gtk4.adjustment.Adjustment] object does not update the value itself. Instead
     it is left up to the owner of the [gid.gtk4.adjustment.Adjustment] to control the value.
 */
+@gidGir("Adjustment", "AdjustmentClass")
 class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

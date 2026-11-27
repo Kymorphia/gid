@@ -39,6 +39,7 @@ import gid.gobject2.object;
     device manager, which you can obtain using
     [gid.gdk3.display.Display.getDeviceManager].
 */
+@gidGir("Display")
 class Display : gid.gobject2.object.ObjectWrap
 {
 

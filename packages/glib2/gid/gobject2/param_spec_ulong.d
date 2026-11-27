@@ -11,6 +11,7 @@ import gid.gobject2.types;
 /**
     A #GParamSpec derived structure that contains the meta data for unsigned long integer properties.
 */
+@gidGir("ParamSpecULong")
 class ParamSpecULong : gid.gobject2.param_spec.ParamSpec
 {
 

@@ -17,6 +17,7 @@ import gid.pangocairo1.types;
     The actual type of the font will depend on the particular
     font technology Cairo was compiled to use.
 */
+@gidGir("Font")
 interface Font : GidWrap
 {
 

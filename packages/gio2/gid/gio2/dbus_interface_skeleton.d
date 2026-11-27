@@ -20,6 +20,7 @@ import gid.gobject2.object;
 /**
     Abstract base class for D-Bus interfaces on the service side.
 */
+@gidGir("DBusInterfaceSkeleton", "DBusInterfaceSkeletonClass")
 class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_interface.DBusInterface
 {
 

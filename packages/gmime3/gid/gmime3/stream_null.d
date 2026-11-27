@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A #GMimeStream which has no backing store.
 */
+@gidGir("StreamNull", "StreamNullClass")
 class StreamNull : gid.gmime3.stream.Stream
 {
 

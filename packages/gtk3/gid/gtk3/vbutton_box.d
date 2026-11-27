@@ -16,6 +16,7 @@ import gid.gtk3.orientable_mixin;
 import gid.gtk3.types;
 
 /** */
+@gidGir("VButtonBox", "VButtonBoxClass")
 class VButtonBox : gid.gtk3.button_box.ButtonBox
 {
 

@@ -25,6 +25,7 @@ import gid.gst1.types;
     Elements can subclass a #GstStream for internal usage (to contain information
     pertinent to streams of data).
 */
+@gidGir("Stream", "StreamClass")
 class Stream : gid.gst1.object.ObjectWrap
 {
 

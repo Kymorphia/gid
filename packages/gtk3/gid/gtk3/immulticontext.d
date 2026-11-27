@@ -11,6 +11,7 @@ import gid.gtk3.menu_shell;
 import gid.gtk3.types;
 
 /** */
+@gidGir("IMMulticontext", "IMMulticontextClass")
 class IMMulticontext : gid.gtk3.imcontext.IMContext
 {
 

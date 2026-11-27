@@ -63,6 +63,7 @@ import gid.gtk4.orientable_mixin;
     
     See [gid.adw1.wrap_box.WrapBox].
 */
+@gidGir("WrapLayout", "WrapLayoutClass")
 class WrapLayout : gid.gtk4.layout_manager.LayoutManager, gid.gtk4.orientable.Orientable
 {
 

@@ -106,6 +106,7 @@ import gid.gtk4.widget;
     
     Starting from GTK 4.12, [gid.gtk4.grid.Grid] uses the [gid.gtk4.types.AccessibleRole.Generic] role.
 */
+@gidGir("Grid", "GridClass")
 class Grid : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

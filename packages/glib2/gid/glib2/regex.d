@@ -141,6 +141,7 @@ import gid.gobject2.boxed;
     The regular expression low-level functionalities are obtained through
     the excellent [PCRE](http://www.pcre.org/) library written by Philip Hazel.
 */
+@gidGir("Regex")
 class Regex : gid.gobject2.boxed.BoxedWrap!(g_regex_get_type)
 {
 

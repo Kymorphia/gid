@@ -20,6 +20,7 @@ import gid.gtk4.types;
     defaults, [gid.gtk4.gesture_click.GestureClick.stopped] is emitted, and the
     click counter is reset.
 */
+@gidGir("GestureClick", "GestureClickClass")
 class GestureClick : gid.gtk4.gesture_single.GestureSingle
 {
 

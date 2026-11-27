@@ -27,6 +27,7 @@ import gid.webkit6.types;
     webkit_settings_set_enable_javascript (settings, FALSE);
     ```
 */
+@gidGir("Settings", "SettingsClass")
 class Settings : gid.gobject2.object.ObjectWrap
 {
 

@@ -6,9 +6,16 @@ public import gid.gtk4.c.types;
 public import gid.javascriptcore6.c.types;
 public import gid.soup3.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "WebKitWebProcessExtension";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "6.0";
+
 /**
     Enum values used to denote the various levels of console messages.
 */
+@gidGir("ConsoleMessageLevel")
 enum WebKitConsoleMessageLevel
 {
   /**
@@ -40,6 +47,7 @@ enum WebKitConsoleMessageLevel
 /**
     Enum values used to denote the various sources of console messages.
 */
+@gidGir("ConsoleMessageSource")
 enum WebKitConsoleMessageSource
 {
   /**
@@ -72,6 +80,7 @@ enum WebKitConsoleMessageSource
     Enum values used to denote the stock actions for
     #WebKitContextMenuItem<!-- -->s
 */
+@gidGir("ContextMenuAction")
 enum WebKitContextMenuAction
 {
   /**
@@ -313,6 +322,7 @@ enum WebKitContextMenuAction
 /**
     Enum values with flags representing the context of a #WebKitHitTestResult.
 */
+@gidGir("HitTestResultContext")
 enum WebKitHitTestResultContext : uint
 {
   /**
@@ -354,6 +364,7 @@ enum WebKitHitTestResultContext : uint
 /**
     Enum values used to denote errors happening when sending user messages.
 */
+@gidGir("UserMessageError")
 enum WebKitUserMessageError
 {
   /**

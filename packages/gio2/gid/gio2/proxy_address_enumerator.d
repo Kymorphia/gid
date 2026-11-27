@@ -24,6 +24,7 @@ import gid.gobject2.object;
     configured; there should be no need to manually wrap a
     [gid.gio2.socket_address_enumerator.SocketAddressEnumerator] instance with one.
 */
+@gidGir("ProxyAddressEnumerator", "ProxyAddressEnumeratorClass")
 class ProxyAddressEnumerator : gid.gio2.socket_address_enumerator.SocketAddressEnumerator
 {
 

@@ -48,6 +48,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.banner.Banner] has a main CSS node with the name `banner`.
 */
+@gidGir("Banner", "BannerClass")
 class Banner : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

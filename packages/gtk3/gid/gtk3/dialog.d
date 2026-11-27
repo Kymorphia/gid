@@ -138,6 +138,7 @@ import gid.gtk3.window;
     </object>
     ```
 */
+@gidGir("Dialog", "DialogClass")
 class Dialog : gid.gtk3.window.Window
 {
 

@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A render node controlling the opacity of its single child node.
 */
+@gidGir("OpacityNode")
 class OpacityNode : gid.gsk4.render_node.RenderNode
 {
 

@@ -30,6 +30,7 @@ import gid.gobject2.value;
     [gid.gdk4.content_serializer.ContentSerializer] and [gid.gdk4.content_deserializer.ContentDeserializer] if you want
     to add support for application-specific data formats.
 */
+@gidGir("ContentProvider", "ContentProviderClass")
 class ContentProvider : gid.gobject2.object.ObjectWrap
 {
 

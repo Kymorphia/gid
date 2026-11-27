@@ -48,6 +48,7 @@ import gid.gtk3.types;
     }
     ```
 */
+@gidGir("Editable", "EditableInterface")
 interface Editable : GidWrap
 {
 

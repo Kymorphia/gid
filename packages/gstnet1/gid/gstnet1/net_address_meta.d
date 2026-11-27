@@ -15,6 +15,7 @@ import gid.gstnet1.types;
     in a #GstBuffer so that it network elements can track the to and from address
     of the buffer.
 */
+@gidGir("NetAddressMeta")
 class NetAddressMeta : StructWrap!(GstNetAddressMeta)
 {
   /**

@@ -24,6 +24,7 @@ import gid.gobject2.object;
     
     #GdkDrawingContext is available since GDK 3.22
 */
+@gidGir("DrawingContext", "DrawingContextClass")
 class DrawingContext : gid.gobject2.object.ObjectWrap
 {
 

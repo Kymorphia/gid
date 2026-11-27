@@ -18,6 +18,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget;
 
 /** */
+@gidGir("ButtonBox", "ButtonBoxClass")
 class ButtonBox : gid.gtk3.box.Box
 {
 

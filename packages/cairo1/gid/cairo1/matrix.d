@@ -16,6 +16,7 @@ import gid.core.utils;
         y_new = yx * x + yy * y + y0;
     </programlisting>
 */
+@gidGir("Matrix")
 struct Matrix
 {
   /**

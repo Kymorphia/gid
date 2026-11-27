@@ -13,6 +13,7 @@ import gid.gstvideo1.video_info;
 /**
     A video frame obtained from [gid.gstvideo1.video_frame.VideoFrame.map]
 */
+@gidGir("VideoFrame")
 class VideoFrame : StructWrap!(GstVideoFrame)
 {
   /**

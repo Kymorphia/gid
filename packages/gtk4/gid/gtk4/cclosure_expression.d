@@ -11,6 +11,7 @@ import gid.gtk4.types;
 /**
     A variant of [gid.gtk4.closure_expression.ClosureExpression] using a C closure.
 */
+@gidGir("CClosureExpression")
 class CClosureExpression : gid.gtk4.expression.Expression
 {
 

@@ -16,6 +16,7 @@ import gid.gtk4.types;
     [gid.gtk4.widget.Widget.insertActionGroup] for ways
     to associate named actions with widgets.
 */
+@gidGir("NamedAction", "NamedActionClass")
 class NamedAction : gid.gtk4.shortcut_action.ShortcutAction
 {
 

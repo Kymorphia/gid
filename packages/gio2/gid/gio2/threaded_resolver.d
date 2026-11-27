@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
     #GThreadedResolver is an implementation of #GResolver which calls the libc
     lookup functions in threads to allow them to run asynchronously.
 */
+@gidGir("ThreadedResolver", "ThreadedResolverClass")
 class ThreadedResolver : gid.gio2.resolver.Resolver
 {
 

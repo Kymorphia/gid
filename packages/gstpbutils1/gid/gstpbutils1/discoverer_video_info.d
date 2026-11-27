@@ -12,6 +12,7 @@ import gid.gstpbutils1.types;
 /**
     #GstDiscovererStreamInfo specific to video streams (this includes images).
 */
+@gidGir("DiscovererVideoInfo")
 class DiscovererVideoInfo : gid.gstpbutils1.discoverer_stream_info.DiscovererStreamInfo
 {
 

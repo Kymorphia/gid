@@ -6,9 +6,16 @@ public import gid.gtk4.c.types;
 public import gid.javascriptcore6.c.types;
 public import gid.soup3.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "WebKit";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "6.0";
+
 /**
     Enum values representing the authentication scheme.
 */
+@gidGir("AuthenticationScheme")
 enum WebKitAuthenticationScheme
 {
   /**
@@ -65,6 +72,7 @@ enum WebKitAuthenticationScheme
 /**
     Enum values used for determining the automation browsing context presentation.
 */
+@gidGir("AutomationBrowsingContextPresentation")
 enum WebKitAutomationBrowsingContextPresentation
 {
   /**
@@ -81,6 +89,7 @@ enum WebKitAutomationBrowsingContextPresentation
 /**
     Enum values used to specify autoplay policies.
 */
+@gidGir("AutoplayPolicy")
 enum WebKitAutoplayPolicy
 {
   /**
@@ -103,6 +112,7 @@ enum WebKitAutoplayPolicy
 /**
     Enum values used for determining the #WebKitWebContext cache model.
 */
+@gidGir("CacheModel")
 enum WebKitCacheModel
 {
   /**
@@ -131,6 +141,7 @@ enum WebKitCacheModel
     Enum values used to denote the stock actions for
     #WebKitContextMenuItem<!-- -->s
 */
+@gidGir("ContextMenuAction")
 enum WebKitContextMenuAction
 {
   /**
@@ -372,6 +383,7 @@ enum WebKitContextMenuAction
 /**
     Enum values used to denote the cookie acceptance policies.
 */
+@gidGir("CookieAcceptPolicy")
 enum WebKitCookieAcceptPolicy
 {
   /**
@@ -393,6 +405,7 @@ enum WebKitCookieAcceptPolicy
 /**
     Enum values used to denote the cookie persistent storage types.
 */
+@gidGir("CookiePersistentStorage")
 enum WebKitCookiePersistentStorage
 {
   /**
@@ -411,6 +424,7 @@ enum WebKitCookiePersistentStorage
 /**
     Enum values representing the duration for which a credential persists.
 */
+@gidGir("CredentialPersistence")
 enum WebKitCredentialPersistence
 {
   /**
@@ -432,6 +446,7 @@ enum WebKitCredentialPersistence
 /**
     Enum values used to denote the various download errors.
 */
+@gidGir("DownloadError")
 enum WebKitDownloadError
 {
   /**
@@ -453,6 +468,7 @@ enum WebKitDownloadError
 /**
     Enum values with flags representing typing attributes.
 */
+@gidGir("EditorTypingAttributes")
 enum WebKitEditorTypingAttributes : uint
 {
   /**
@@ -484,6 +500,7 @@ enum WebKitEditorTypingAttributes : uint
 /**
     Enum values used to denote the various errors related to the #WebKitFaviconDatabase.
 */
+@gidGir("FaviconDatabaseError")
 enum WebKitFaviconDatabaseError
 {
   /**
@@ -508,6 +525,7 @@ enum WebKitFaviconDatabaseError
     The status for a given feature can be obtained with
     `id@webkit_feature_get_status`.
 */
+@gidGir("FeatureStatus")
 enum WebKitFeatureStatus
 {
   /**
@@ -569,6 +587,7 @@ enum WebKitFeatureStatus
 /**
     Enum values used to specify search options.
 */
+@gidGir("FindOptions")
 enum WebKitFindOptions : uint
 {
   /**
@@ -609,6 +628,7 @@ enum WebKitFindOptions : uint
 /**
     Enum values used for determining the hardware acceleration policy.
 */
+@gidGir("HardwareAccelerationPolicy")
 enum WebKitHardwareAccelerationPolicy
 {
   /**
@@ -625,6 +645,7 @@ enum WebKitHardwareAccelerationPolicy
 /**
     Enum values with flags representing the context of a #WebKitHitTestResult.
 */
+@gidGir("HitTestResultContext")
 enum WebKitHitTestResultContext : uint
 {
   /**
@@ -666,6 +687,7 @@ enum WebKitHitTestResultContext : uint
 /**
     Enum values used to describe hints that might be taken into account by input methods.
 */
+@gidGir("InputHints")
 enum WebKitInputHints : uint
 {
   /**
@@ -707,6 +729,7 @@ enum WebKitInputHints : uint
 /**
     Enum values used to describe the primary purpose of the active editable element.
 */
+@gidGir("InputPurpose")
 enum WebKitInputPurpose
 {
   /**
@@ -750,6 +773,7 @@ enum WebKitInputPurpose
     the detection of insecure content. Since 2.46, WebKit generally no longer
     loads insecure content in secure contexts.
 */
+@gidGir("InsecureContentEvent")
 enum WebKitInsecureContentEvent
 {
   /**
@@ -770,6 +794,7 @@ enum WebKitInsecureContentEvent
 /**
     Enum values used to denote errors happening when executing JavaScript
 */
+@gidGir("JavascriptError")
 enum WebKitJavascriptError
 {
   /**
@@ -792,6 +817,7 @@ enum WebKitJavascriptError
     Enum values used to denote the different events that happen during a
     #WebKitWebView load operation.
 */
+@gidGir("LoadEvent")
 enum WebKitLoadEvent
 {
   /**
@@ -826,6 +852,7 @@ enum WebKitLoadEvent
 /**
     Enum values used to specify the capture state of a media device.
 */
+@gidGir("MediaCaptureState")
 enum WebKitMediaCaptureState
 {
   /**
@@ -847,6 +874,7 @@ enum WebKitMediaCaptureState
 /**
     Enum values used to denote the various media errors.
 */
+@gidGir("MediaError")
 enum WebKitMediaError
 {
   /**
@@ -858,6 +886,7 @@ enum WebKitMediaError
 /**
     Enum values used to denote the various navigation types.
 */
+@gidGir("NavigationType")
 enum WebKitNavigationType
 {
   /**
@@ -894,6 +923,7 @@ enum WebKitNavigationType
 /**
     Enum values used to denote the various network errors.
 */
+@gidGir("NetworkError")
 enum WebKitNetworkError
 {
   /**
@@ -925,6 +955,7 @@ enum WebKitNetworkError
 /**
     Enum values used to set the network proxy mode.
 */
+@gidGir("NetworkProxyMode")
 enum WebKitNetworkProxyMode
 {
   /**
@@ -946,6 +977,7 @@ enum WebKitNetworkProxyMode
 /**
     Enum values representing query permission results.
 */
+@gidGir("PermissionState")
 enum WebKitPermissionState
 {
   /**
@@ -968,6 +1000,7 @@ enum WebKitPermissionState
     Enum values used for determining the type of a policy decision during
     #WebKitWebView::decide-policy.
 */
+@gidGir("PolicyDecisionType")
 enum WebKitPolicyDecisionType
 {
   /**
@@ -1008,6 +1041,7 @@ enum WebKitPolicyDecisionType
 /**
     Enum values used to denote the various policy errors.
 */
+@gidGir("PolicyError")
 enum WebKitPolicyError
 {
   /**
@@ -1039,6 +1073,7 @@ enum WebKitPolicyError
 /**
     Enum values used to denote the various print errors.
 */
+@gidGir("PrintError")
 enum WebKitPrintError
 {
   /**
@@ -1061,6 +1096,7 @@ enum WebKitPrintError
     Enum values representing the response of the print dialog shown with
     [gid.webkit6.print_operation.PrintOperation.runDialog].
 */
+@gidGir("PrintOperationResponse")
 enum WebKitPrintOperationResponse
 {
   /**
@@ -1078,6 +1114,7 @@ enum WebKitPrintOperationResponse
     Enum values to specify the different ways in which a #WebKitWebView
     can save its current web page into a self-contained file.
 */
+@gidGir("SaveMode")
 enum WebKitSaveMode
 {
   /**
@@ -1089,6 +1126,7 @@ enum WebKitSaveMode
 /**
     Enum values used for determining the type of #WebKitScriptDialog
 */
+@gidGir("ScriptDialogType")
 enum WebKitScriptDialogType
 {
   /**
@@ -1119,6 +1157,7 @@ enum WebKitScriptDialogType
 /**
     Enum values used to denote errors happening when creating snapshots of #WebKitWebView
 */
+@gidGir("SnapshotError")
 enum WebKitSnapshotError
 {
   /**
@@ -1131,6 +1170,7 @@ enum WebKitSnapshotError
     Enum values used to specify options when taking a snapshot
     from a #WebKitWebView.
 */
+@gidGir("SnapshotOptions")
 enum WebKitSnapshotOptions : uint
 {
   /**
@@ -1155,6 +1195,7 @@ enum WebKitSnapshotOptions : uint
     Enum values used to specify the region from which to get a #WebKitWebView
     snapshot
 */
+@gidGir("SnapshotRegion")
 enum WebKitSnapshotRegion
 {
   /**
@@ -1172,6 +1213,7 @@ enum WebKitSnapshotRegion
 /**
     Enum values used to denote the TLS errors policy.
 */
+@gidGir("TLSErrorsPolicy")
 enum WebKitTLSErrorsPolicy
 {
   /**
@@ -1191,6 +1233,7 @@ enum WebKitTLSErrorsPolicy
 /**
     Errors that can occur while compiling content filters.
 */
+@gidGir("UserContentFilterError")
 enum WebKitUserContentFilterError
 {
   /**
@@ -1207,6 +1250,7 @@ enum WebKitUserContentFilterError
 /**
     Specifies in which frames user style sheets are to be inserted in.
 */
+@gidGir("UserContentInjectedFrames")
 enum WebKitUserContentInjectedFrames
 {
   /**
@@ -1227,6 +1271,7 @@ enum WebKitUserContentInjectedFrames
 /**
     Enum values used to denote errors happening when sending user messages.
 */
+@gidGir("UserMessageError")
 enum WebKitUserMessageError
 {
   /**
@@ -1238,6 +1283,7 @@ enum WebKitUserMessageError
 /**
     Specifies at which place of documents an user script will be inserted.
 */
+@gidGir("UserScriptInjectionTime")
 enum WebKitUserScriptInjectionTime
 {
   /**
@@ -1256,6 +1302,7 @@ enum WebKitUserScriptInjectionTime
 /**
     Specifies how to treat an user style sheet.
 */
+@gidGir("UserStyleLevel")
 enum WebKitUserStyleLevel
 {
   /**
@@ -1275,6 +1322,7 @@ enum WebKitUserStyleLevel
 /**
     Enum values used to denote errors happening when parsing a #WebKitWebExtension
 */
+@gidGir("WebExtensionError")
 enum WebKitWebExtensionError
 {
   /**
@@ -1326,6 +1374,7 @@ enum WebKitWebExtensionError
 /**
     Enum values used to denote errors happening when creating a #WebKitWebExtensionMatchPattern
 */
+@gidGir("WebExtensionMatchPatternError")
 enum WebKitWebExtensionMatchPatternError
 {
   /**
@@ -1352,6 +1401,7 @@ enum WebKitWebExtensionMatchPatternError
 /**
     Enum values representing matching options.
 */
+@gidGir("WebExtensionMatchPatternOptions")
 enum WebKitWebExtensionMatchPatternOptions : uint
 {
   /**
@@ -1379,6 +1429,7 @@ enum WebKitWebExtensionMatchPatternOptions : uint
     Enum values used for setting if a #WebKitWebView is intended for
     WebExtensions.
 */
+@gidGir("WebExtensionMode")
 enum WebKitWebExtensionMode
 {
   /**
@@ -1400,6 +1451,7 @@ enum WebKitWebExtensionMode
 /**
     Enum values used to specify the reason why the web process terminated abnormally.
 */
+@gidGir("WebProcessTerminationReason")
 enum WebKitWebProcessTerminationReason
 {
   /**
@@ -1421,6 +1473,7 @@ enum WebKitWebProcessTerminationReason
 /**
     Enum values with flags representing types of Website data.
 */
+@gidGir("WebsiteDataTypes")
 enum WebKitWebsiteDataTypes : uint
 {
   /**
@@ -1495,6 +1548,7 @@ enum WebKitWebsiteDataTypes : uint
     See <https://immersive-web.github.io/webxr/#xrreferencespace-interface>.
     And, see <https://immersive-web.github.io/webxr-hand-input/> for hand tracking.
 */
+@gidGir("XRSessionFeatures")
 enum WebKitXRSessionFeatures : uint
 {
   /**
@@ -1543,6 +1597,7 @@ enum WebKitXRSessionFeatures : uint
     
     See <https://immersive-web.github.io/webxr/#xrsessionmode-enum>
 */
+@gidGir("XRSessionMode")
 enum WebKitXRSessionMode
 {
   /**
@@ -2220,6 +2275,7 @@ struct WebKitInputMethodContextClass
 }
 
 /** */
+@gidGir("InputMethodContextPrivate")
 struct WebKitInputMethodContextPrivate;
 
 /**
@@ -2484,6 +2540,7 @@ struct WebKitPolicyDecisionClass
 }
 
 /** */
+@gidGir("PolicyDecisionPrivate")
 struct WebKitPolicyDecisionPrivate;
 
 /**
@@ -2937,6 +2994,7 @@ struct WebKitWebViewBaseClass
 }
 
 /** */
+@gidGir("WebViewBasePrivate")
 struct WebKitWebViewBasePrivate;
 
 /** */
@@ -3124,6 +3182,7 @@ struct WebKitWebViewClass
 }
 
 /** */
+@gidGir("WebViewPrivate")
 struct WebKitWebViewPrivate;
 
 /**

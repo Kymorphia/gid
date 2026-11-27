@@ -24,6 +24,7 @@ import gid.gtk4.types;
     gtk_column_view_set_model (view, G_LIST_MODEL (selection));
     ```
 */
+@gidGir("TreeListRowSorter", "TreeListRowSorterClass")
 class TreeListRowSorter : gid.gtk4.sorter.Sorter
 {
 

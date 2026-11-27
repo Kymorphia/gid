@@ -56,6 +56,7 @@ import gid.gobject2.value;
     - [gid.gobject2.closure.Closure.invalidate] and invalidation notifiers allow callbacks to be
       automatically removed when the objects they point to go away.
 */
+@gidGir("Closure")
 class Closure : gid.gobject2.boxed.BoxedWrap!(g_closure_get_type)
 {
   /**

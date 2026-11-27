@@ -97,6 +97,7 @@ import gid.gtk3.widget;
     If both scrollbars are visible, the area where they meet is drawn
     with a subnode named junction.
 */
+@gidGir("ScrolledWindow", "ScrolledWindowClass")
 class ScrolledWindow : gid.gtk3.bin.Bin
 {
 

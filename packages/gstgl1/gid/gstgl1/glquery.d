@@ -15,6 +15,7 @@ import gid.gstgl1.types;
     A #GstGLQuery represents and holds an OpenGL query object.  Various types of
     queries can be run or counters retrieved.
 */
+@gidGir("GLQuery")
 class GLQuery : StructWrap!(GstGLQuery)
 {
   /**

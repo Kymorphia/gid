@@ -10,6 +10,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("Language", "LanguageClass")
 class Language : gid.gobject2.object.ObjectWrap
 {
 

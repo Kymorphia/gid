@@ -17,6 +17,7 @@ import gid.gtk4.types;
     ease the porting towards the corresponding [gid.gtk4.layout_manager.LayoutManager]
     virtual functions.
 */
+@gidGir("CustomLayout", "CustomLayoutClass")
 class CustomLayout : gid.gtk4.layout_manager.LayoutManager
 {
 

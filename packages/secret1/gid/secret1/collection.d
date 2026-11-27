@@ -37,6 +37,7 @@ import gid.secret1.types;
     `method@SecretCollection.get_items` to lookup the items in the collection.
     There may not be any items exposed when the collection is locked.
 */
+@gidGir("Collection", "CollectionClass")
 class Collection : gid.gio2.dbus_proxy.DBusProxy
 {
 

@@ -90,6 +90,7 @@ import gid.gobject2.object;
         CLEANFILES += gschemas.compiled
     ```
 */
+@gidGir("TestDBus")
 class TestDBus : gid.gobject2.object.ObjectWrap
 {
 

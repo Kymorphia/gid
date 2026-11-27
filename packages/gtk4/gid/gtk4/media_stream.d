@@ -32,6 +32,7 @@ import gid.gtk4.types;
     [gid.gtk4.media_stream.MediaStream.error],
     [gid.gtk4.media_stream.MediaStream.errorValist].
 */
+@gidGir("MediaStream", "MediaStreamClass")
 class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
 {
 

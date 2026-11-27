@@ -53,6 +53,7 @@ import gid.gtk3.types;
     
     GtkStatusbar has a single CSS node with name statusbar.
 */
+@gidGir("Statusbar", "StatusbarClass")
 class Statusbar : gid.gtk3.box.Box
 {
 

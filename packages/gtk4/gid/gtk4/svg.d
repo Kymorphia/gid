@@ -157,6 +157,7 @@ import gid.gtk4.types;
     In contrast to SVG 1.1 and 2.0, we allow the `transform` attribute
     to be animated with `<animate>`.
 */
+@gidGir("Svg", "SvgClass")
 class Svg : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable, gid.gtk4.symbolic_paintable.SymbolicPaintable
 {
 

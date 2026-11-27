@@ -12,6 +12,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_float.AttrFloat] structure is used to represent attributes with
     a float or double value.
 */
+@gidGir("AttrFloat")
 class AttrFloat : StructWrap!(PangoAttrFloat)
 {
   /**

@@ -19,6 +19,7 @@ import gid.gstaudio1.types;
     the input channels with the coefficients in @matrix[i] and taking the sum
     of the results.
 */
+@gidGir("AudioDownmixMeta")
 class AudioDownmixMeta : StructWrap!(GstAudioDownmixMeta)
 {
   /**

@@ -10,6 +10,7 @@ import gid.gio2.volume_monitor;
 import gid.gobject2.gid_builder;
 
 /** */
+@gidGir("NativeVolumeMonitor", "NativeVolumeMonitorClass")
 class NativeVolumeMonitor : gid.gio2.volume_monitor.VolumeMonitor
 {
 

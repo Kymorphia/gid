@@ -20,6 +20,7 @@ import gid.gtk4.types;
     [gid.gtk4.flatten_list_model.FlattenListModel] takes a list model containing list models, and flattens
     it into a single model. Each list model becomes a section in the single model.
 */
+@gidGir("FlattenListModel", "FlattenListModelClass")
 class FlattenListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel
 {
 

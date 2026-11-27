@@ -18,6 +18,7 @@ import gid.gtk4.types;
     [gid.gtk4.bitset_iter.BitsetIter.initFirst], [gid.gtk4.bitset_iter.BitsetIter.initLast]
     or [gid.gtk4.bitset_iter.BitsetIter.initAt].
 */
+@gidGir("BitsetIter")
 class BitsetIter : gid.gobject2.boxed.BoxedWrap!(gtk_bitset_iter_get_type)
 {
   /**

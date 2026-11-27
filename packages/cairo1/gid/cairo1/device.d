@@ -18,6 +18,7 @@ import gid.gobject2.boxed;
     Memory management of #cairo_device_t is done with
     [gid.cairo1.device.Device.reference] and [gid.cairo1.device.Device.destroy].
 */
+@gidGir("Device")
 class Device : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_device_get_type)
 {
 

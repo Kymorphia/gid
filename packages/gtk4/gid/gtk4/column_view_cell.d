@@ -28,6 +28,7 @@ import gid.gtk4.widget;
     2. The bound stage where the listitem references an item from the list.
        The [gid.gtk4.column_view_cell.ColumnViewCell.item] property is not null.
 */
+@gidGir("ColumnViewCell", "ColumnViewCellClass")
 class ColumnViewCell : gid.gtk4.list_item.ListItem
 {
 

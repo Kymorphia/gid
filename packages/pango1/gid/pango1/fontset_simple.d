@@ -18,6 +18,7 @@ import gid.pango1.types;
     When creating a [gid.pango1.fontset_simple.FontsetSimple], you have to provide
     the array of fonts that make up the fontset.
 */
+@gidGir("FontsetSimple", "FontsetSimpleClass")
 class FontsetSimple : gid.pango1.fontset.Fontset
 {
 

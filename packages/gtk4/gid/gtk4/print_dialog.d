@@ -32,6 +32,7 @@ import gid.gtk4.window;
     [gid.gtk4.print_dialog.PrintDialog.printFile]. These APIs follows the GIO async pattern,
     and the results can be obtained by calling the corresponding finish methods.
 */
+@gidGir("PrintDialog", "PrintDialogClass")
 class PrintDialog : gid.gobject2.object.ObjectWrap
 {
 

@@ -20,6 +20,7 @@ import gid.gobject2.object;
     connection it has actually created is not directly a
     [gid.gio2.socket_connection.SocketConnection].
 */
+@gidGir("TcpWrapperConnection", "TcpWrapperConnectionClass")
 class TcpWrapperConnection : gid.gio2.tcp_connection.TcpConnection
 {
 

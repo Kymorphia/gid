@@ -62,6 +62,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.frame.Frame] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("Frame", "FrameClass")
 class Frame : gid.gtk4.widget.Widget
 {
 

@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter for converting text/plain into text/html.
 */
+@gidGir("FilterHTML", "FilterHTMLClass")
 class FilterHTML : gid.gmime3.filter.Filter
 {
 

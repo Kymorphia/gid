@@ -13,6 +13,7 @@ import gid.webkit6.types;
 /**
     Holds information about a notification that should be shown to the user.
 */
+@gidGir("Notification", "NotificationClass")
 class Notification : gid.gobject2.object.ObjectWrap
 {
 

@@ -271,6 +271,7 @@ import gid.gstvideo1.types;
     }
     ```
 */
+@gidGir("VideoOverlay", "VideoOverlayInterface")
 interface VideoOverlay : GidWrap
 {
 

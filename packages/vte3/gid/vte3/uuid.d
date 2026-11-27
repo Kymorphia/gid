@@ -11,6 +11,7 @@ import gid.vte3.types;
 /**
     An object representing an UUID.
 */
+@gidGir("Uuid")
 class Uuid : gid.gobject2.boxed.BoxedWrap!(vte_uuid_get_type)
 {
 

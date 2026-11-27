@@ -15,6 +15,7 @@ import gid.gtk4.types;
     Mnemonics require a *mnemonic modifier* (typically <kbd>Alt</kbd>) to be
     pressed together with the mnemonic key.
 */
+@gidGir("MnemonicTrigger", "MnemonicTriggerClass")
 class MnemonicTrigger : gid.gtk4.shortcut_trigger.ShortcutTrigger
 {
 

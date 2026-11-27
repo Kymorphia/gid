@@ -4,9 +4,16 @@ module gid.gstallocators1.c.types;
 public import gid.core.basictypes;
 public import gid.gst1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstAllocators";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Various flags to control the operation of the fd backed memory.
 */
+@gidGir("FdMemoryFlags")
 enum GstFdMemoryFlags : uint
 {
   /**

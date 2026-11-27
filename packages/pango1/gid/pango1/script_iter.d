@@ -12,6 +12,7 @@ import gid.pango1.types;
     A [gid.pango1.script_iter.ScriptIter] is used to iterate through a string
     and identify ranges in different scripts.
 */
+@gidGir("ScriptIter")
 class ScriptIter : gid.gobject2.boxed.BoxedWrap!(pango_script_iter_get_type)
 {
 

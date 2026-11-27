@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     A set of parser options used by #GMimeParser and various other parsing functions.
 */
+@gidGir("ParserOptions")
 class ParserOptions : gid.gobject2.boxed.BoxedWrap!(g_mime_parser_options_get_type)
 {
 

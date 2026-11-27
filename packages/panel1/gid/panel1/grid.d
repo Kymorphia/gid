@@ -28,6 +28,7 @@ import gid.panel1.widget;
     The #PanelGrid is a widget used to layout the dock item in the
     center area.
 */
+@gidGir("Grid", "GridClass")
 class Grid : gid.gtk4.widget.Widget
 {
 

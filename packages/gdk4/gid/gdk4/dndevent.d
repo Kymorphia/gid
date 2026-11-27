@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     An event related to drag and drop operations.
 */
+@gidGir("DNDEvent")
 class DNDEvent : gid.gdk4.event.Event
 {
 

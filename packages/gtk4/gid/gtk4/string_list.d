@@ -43,6 +43,7 @@ import gid.gtk4.types;
     </object>
     ```
 */
+@gidGir("StringList", "StringListClass")
 class StringList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.buildable.Buildable
 {
 

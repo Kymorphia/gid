@@ -15,6 +15,7 @@ import gid.gtk4.widget;
 /**
     An individual layout in [gid.adw1.multi_layout_view.MultiLayoutView].
 */
+@gidGir("Layout", "LayoutClass")
 class Layout : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable
 {
 

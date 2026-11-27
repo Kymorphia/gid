@@ -33,6 +33,7 @@ import gid.soup3.types;
     Response. In libsoup, a [gid.soup3.server_message.ServerMessage] combines both the request and the
     response.
 */
+@gidGir("ServerMessage", "ServerMessageClass")
 class ServerMessage : gid.gobject2.object.ObjectWrap
 {
 

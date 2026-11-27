@@ -21,6 +21,7 @@ import gid.gsk4.types;
     A [gid.gsk4.path_measure.PathMeasure] struct is a reference counted struct
     and should be treated as opaque.
 */
+@gidGir("PathMeasure")
 class PathMeasure : gid.gobject2.boxed.BoxedWrap!(gsk_path_measure_get_type)
 {
 

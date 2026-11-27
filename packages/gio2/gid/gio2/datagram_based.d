@@ -70,6 +70,7 @@ import gid.gobject2.object;
     To use a [gid.gio2.datagram_based.DatagramBased] concurrently from multiple threads, you must
     implement your own locking.
 */
+@gidGir("DatagramBased", "DatagramBasedInterface")
 interface DatagramBased : GidWrap
 {
 

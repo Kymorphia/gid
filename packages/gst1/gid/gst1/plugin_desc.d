@@ -14,6 +14,7 @@ import gid.gst1.types;
     The @licence parameter must be one of: LGPL, GPL, QPL, GPL/QPL, MPL,
     BSD, MIT/X11, Proprietary, unknown.
 */
+@gidGir("PluginDesc")
 class PluginDesc : StructWrap!(GstPluginDesc)
 {
   /**

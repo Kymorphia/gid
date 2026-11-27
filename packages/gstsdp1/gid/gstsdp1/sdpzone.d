@@ -12,6 +12,7 @@ import gid.gstsdp1.types;
     specify a list of time zone adjustments and offsets from the base
     time.
 */
+@gidGir("SDPZone")
 class SDPZone : StructWrap!(GstSDPZone)
 {
   /**

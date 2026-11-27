@@ -12,6 +12,7 @@ import gid.webkit6.types;
 /**
     Describes a first party origin.
 */
+@gidGir("ITPFirstParty")
 class ITPFirstParty : gid.gobject2.boxed.BoxedWrap!(webkit_itp_first_party_get_type)
 {
 

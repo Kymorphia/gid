@@ -63,6 +63,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.link_button.LinkButton] uses the [gid.gtk4.types.AccessibleRole.Link] role.
 */
+@gidGir("LinkButton")
 class LinkButton : gid.gtk4.button.Button
 {
 

@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to a pointer or touch device motion.
 */
+@gidGir("MotionEvent")
 class MotionEvent : gid.gdk4.event.Event
 {
 

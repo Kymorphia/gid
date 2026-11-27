@@ -19,6 +19,7 @@ import gid.gstbase1.base_sink;
     ::create_ringbuffer vmethod. This base class will then take care of
     writing samples to the ringbuffer, synchronisation, clipping and flushing.
 */
+@gidGir("AudioBaseSink", "AudioBaseSinkClass")
 class AudioBaseSink : gid.gstbase1.base_sink.BaseSink
 {
 

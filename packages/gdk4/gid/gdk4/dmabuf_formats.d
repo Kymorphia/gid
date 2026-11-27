@@ -29,6 +29,7 @@ import gid.gobject2.boxed;
     
     Note that DMA buffers only exist on Linux.
 */
+@gidGir("DmabufFormats")
 class DmabufFormats : gid.gobject2.boxed.BoxedWrap!(gdk_dmabuf_formats_get_type)
 {
 

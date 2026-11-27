@@ -21,6 +21,7 @@ import gid.gobject2.boxed;
     [gid.glib2.string_.String] is like a [gid.glib2.byte_array.ByteArray] with the addition of many convenience methods for
     text, and a guaranteed nul terminator.
 */
+@gidGir("String")
 class String : gid.gobject2.boxed.BoxedWrap!(g_gstring_get_type)
 {
 

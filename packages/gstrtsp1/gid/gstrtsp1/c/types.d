@@ -7,9 +7,16 @@ public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstsdp1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstRtsp";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Authentication methods, ordered by strength
 */
+@gidGir("RTSPAuthMethod")
 enum GstRTSPAuthMethod
 {
   /**
@@ -31,6 +38,7 @@ enum GstRTSPAuthMethod
 /**
     The possible events for the connection.
 */
+@gidGir("RTSPEvent")
 enum GstRTSPEvent : uint
 {
   /**
@@ -47,6 +55,7 @@ enum GstRTSPEvent : uint
 /**
     The possible network families.
 */
+@gidGir("RTSPFamily")
 enum GstRTSPFamily
 {
   /**
@@ -68,6 +77,7 @@ enum GstRTSPFamily
 /**
     Enumeration of rtsp header fields
 */
+@gidGir("RTSPHeaderField")
 enum GstRTSPHeaderField
 {
   /** */
@@ -344,6 +354,7 @@ enum GstRTSPHeaderField
 /**
     The different transport methods.
 */
+@gidGir("RTSPLowerTrans")
 enum GstRTSPLowerTrans : uint
 {
   /**
@@ -380,6 +391,7 @@ enum GstRTSPLowerTrans : uint
 /**
     The different supported RTSP methods.
 */
+@gidGir("RTSPMethod")
 enum GstRTSPMethod : uint
 {
   /**
@@ -456,6 +468,7 @@ enum GstRTSPMethod : uint
 /**
     The type of a message.
 */
+@gidGir("RTSPMsgType")
 enum GstRTSPMsgType
 {
   /**
@@ -492,6 +505,7 @@ enum GstRTSPMsgType
 /**
     The transfer profile to use.
 */
+@gidGir("RTSPProfile")
 enum GstRTSPProfile : uint
 {
   /**
@@ -523,6 +537,7 @@ enum GstRTSPProfile : uint
 /**
     Different possible time range units.
 */
+@gidGir("RTSPRangeUnit")
 enum GstRTSPRangeUnit
 {
   /**
@@ -554,6 +569,7 @@ enum GstRTSPRangeUnit
 /**
     Result codes from the RTSP functions.
 */
+@gidGir("RTSPResult")
 enum GstRTSPResult
 {
   /**
@@ -655,6 +671,7 @@ enum GstRTSPResult
 /**
     The different RTSP states.
 */
+@gidGir("RTSPState")
 enum GstRTSPState
 {
   /**
@@ -691,6 +708,7 @@ enum GstRTSPState
 /**
     Enumeration of rtsp status codes
 */
+@gidGir("RTSPStatusCode")
 enum GstRTSPStatusCode
 {
   /** */
@@ -845,6 +863,7 @@ enum GstRTSPStatusCode
 /**
     Possible time types.
 */
+@gidGir("RTSPTimeType")
 enum GstRTSPTimeType
 {
   /**
@@ -876,6 +895,7 @@ enum GstRTSPTimeType
 /**
     The transfer mode to use.
 */
+@gidGir("RTSPTransMode")
 enum GstRTSPTransMode : uint
 {
   /**
@@ -897,6 +917,7 @@ enum GstRTSPTransMode : uint
 /**
     The supported RTSP versions.
 */
+@gidGir("RTSPVersion")
 enum GstRTSPVersion
 {
   /**
@@ -1105,6 +1126,7 @@ struct GstRTSPRange
 /**
     A time indication.
 */
+@gidGir("RTSPTime")
 struct GstRTSPTime
 {
   /**
@@ -1122,6 +1144,7 @@ struct GstRTSPTime
 /**
     Extra fields for a time indication.
 */
+@gidGir("RTSPTime2")
 struct GstRTSPTime2
 {
   /**
@@ -1320,6 +1343,7 @@ struct GstRTSPWatch;
 /**
     Callback functions from a #GstRTSPWatch.
 */
+@gidGir("RTSPWatchFuncs")
 struct GstRTSPWatchFuncs
 {
   /**

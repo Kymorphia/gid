@@ -10,6 +10,7 @@ import gid.gmime3.types;
 /**
     A context used for encoding or decoding data.
 */
+@gidGir("Encoding")
 struct Encoding
 {
   /**

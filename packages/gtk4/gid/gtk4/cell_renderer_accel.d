@@ -23,6 +23,7 @@ import gid.gtk4.types;
         provide their own implementation according to platform design
         guidelines
 */
+@gidGir("CellRendererAccel")
 class CellRendererAccel : gid.gtk4.cell_renderer_text.CellRendererText
 {
 

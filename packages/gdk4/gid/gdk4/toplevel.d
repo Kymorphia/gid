@@ -24,6 +24,7 @@ import gid.gobject2.object;
     the windowing system, such as controlling maximization and size of the
     surface, setting icons and transient parents for dialogs.
 */
+@gidGir("Toplevel", "ToplevelInterface")
 interface Toplevel : GidWrap
 {
 

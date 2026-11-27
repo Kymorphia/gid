@@ -22,6 +22,7 @@ import gid.gtk3.types;
     A GtkShortcutsShortcut represents a single keyboard shortcut or gesture
     with a short text. This widget is only meant to be used with #GtkShortcutsWindow.
 */
+@gidGir("ShortcutsShortcut", "ShortcutsShortcutClass")
 class ShortcutsShortcut : gid.gtk3.box.Box
 {
 

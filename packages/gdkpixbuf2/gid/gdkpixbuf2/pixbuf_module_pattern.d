@@ -39,6 +39,7 @@ import gid.gdkpixbuf2.types;
     In the example above, the signature matches e.g. "auud\0" with
     relevance 100, and "blau" with relevance 90.
 */
+@gidGir("PixbufModulePattern")
 class PixbufModulePattern : StructWrap!(GdkPixbufModulePattern)
 {
   /**

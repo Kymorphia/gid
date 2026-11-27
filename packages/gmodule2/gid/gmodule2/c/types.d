@@ -4,9 +4,16 @@ module gid.gmodule2.c.types;
 public import gid.core.basictypes;
 public import gid.glib2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GModule";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     Errors returned by [gid.gmodule2.module_.Module.openFull].
 */
+@gidGir("ModuleError")
 enum GModuleError
 {
   /**
@@ -24,6 +31,7 @@ enum GModuleError
     Flags passed to [gid.gmodule2.module_.Module.open].
     Note that these flags are not supported on all platforms.
 */
+@gidGir("ModuleFlags")
 enum GModuleFlags : uint
 {
   /**

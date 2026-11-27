@@ -21,6 +21,7 @@ import gid.gtk4.widget;
     A [gid.gtk4.layout_child.LayoutChild] instance is only ever valid while a widget is part
     of a layout.
 */
+@gidGir("LayoutChild", "LayoutChildClass")
 class LayoutChild : gid.gobject2.object.ObjectWrap
 {
 

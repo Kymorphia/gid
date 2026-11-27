@@ -19,6 +19,7 @@ import gid.gtksource5.types;
     the [gid.gtksource5.completion_provider.CompletionProvider] interface. The proposals are words
     appearing in the registered [gid.gtk4.text_buffer.TextBuffer]s.
 */
+@gidGir("CompletionWords", "CompletionWordsClass")
 class CompletionWords : gid.gobject2.object.ObjectWrap, gid.gtksource5.completion_provider.CompletionProvider
 {
 

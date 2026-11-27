@@ -12,6 +12,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("UndoManager", "UndoManagerIface")
 interface UndoManager : GidWrap
 {
 

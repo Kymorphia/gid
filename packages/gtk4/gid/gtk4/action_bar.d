@@ -59,6 +59,7 @@ import gid.gtk4.widget;
     
     Each of the boxes contains children packed for that side.
 */
+@gidGir("ActionBar")
 class ActionBar : gid.gtk4.widget.Widget
 {
 

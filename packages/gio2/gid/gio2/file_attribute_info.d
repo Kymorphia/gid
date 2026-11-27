@@ -10,6 +10,7 @@ import gid.gio2.types;
 /**
     Information about a specific attribute.
 */
+@gidGir("FileAttributeInfo")
 class FileAttributeInfo : StructWrap!(GFileAttributeInfo)
 {
   /**

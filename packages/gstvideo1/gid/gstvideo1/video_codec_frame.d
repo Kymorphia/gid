@@ -15,6 +15,7 @@ import gid.gstvideo1.types;
     A #GstVideoCodecFrame represents a video frame both in raw and
     encoded form.
 */
+@gidGir("VideoCodecFrame")
 class VideoCodecFrame : gid.gobject2.boxed.BoxedWrap!(gst_video_codec_frame_get_type)
 {
   /**

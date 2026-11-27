@@ -13,6 +13,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_language.AttrLanguage] structure is used to represent attributes that
     are languages.
 */
+@gidGir("AttrLanguage")
 class AttrLanguage : StructWrap!(PangoAttrLanguage)
 {
   /**

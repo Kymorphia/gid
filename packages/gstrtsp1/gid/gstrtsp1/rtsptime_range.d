@@ -10,6 +10,7 @@ import gid.gstrtsp1.types;
 /**
     A time range.
 */
+@gidGir("RTSPTimeRange")
 class RTSPTimeRange : StructWrap!(GstRTSPTimeRange)
 {
   /**

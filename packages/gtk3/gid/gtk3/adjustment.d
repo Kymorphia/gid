@@ -20,6 +20,7 @@ import gid.gtk3.types;
     The #GtkAdjustment object does not update the value itself. Instead
     it is left up to the owner of the #GtkAdjustment to control the value.
 */
+@gidGir("Adjustment", "AdjustmentClass")
 class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

@@ -11,6 +11,7 @@ import gid.webkit6.types;
 /**
     A compiled set of rules which applied to resource loads.
 */
+@gidGir("UserContentFilter")
 class UserContentFilter : gid.gobject2.boxed.BoxedWrap!(webkit_user_content_filter_get_type)
 {
 

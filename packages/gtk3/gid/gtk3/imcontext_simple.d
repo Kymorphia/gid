@@ -27,6 +27,7 @@ import gid.gtk3.types;
     For example, Ctrl-Shift-u 1 2 3 Enter yields U+0123 LATIN SMALL LETTER
     G WITH CEDILLA, i.e. ģ.
 */
+@gidGir("IMContextSimple", "IMContextSimpleClass")
 class IMContextSimple : gid.gtk3.imcontext.IMContext
 {
 

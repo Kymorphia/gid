@@ -16,6 +16,7 @@ import gid.gobject2.object;
     that apply to an object at a given time. This set is not meant to be
     modified, but rather created when #[gid.atk1.object.ObjectWrap.refStateSet] is called.
 */
+@gidGir("StateSet", "StateSetClass")
 class StateSet : gid.gobject2.object.ObjectWrap
 {
 

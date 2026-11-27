@@ -46,6 +46,7 @@ import gid.gtk3.types;
     To track changes in the selected application, use the
     #GtkComboBox::changed signal.
 */
+@gidGir("AppChooserButton", "AppChooserButtonClass")
 class AppChooserButton : gid.gtk3.combo_box.ComboBox, gid.gtk3.app_chooser.AppChooser
 {
 

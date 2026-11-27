@@ -18,6 +18,7 @@ import gid.gobject2.object;
     not derived from GtkWidget. One example of its use is in providing
     an accessible object for GnomeCanvasItem in the GAIL library.
 */
+@gidGir("GObjectAccessible", "GObjectAccessibleClass")
 class GObjectAccessible : gid.atk1.object.ObjectWrap
 {
 

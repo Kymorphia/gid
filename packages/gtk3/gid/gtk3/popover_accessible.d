@@ -12,6 +12,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("PopoverAccessible", "PopoverAccessibleClass")
 class PopoverAccessible : gid.gtk3.container_accessible.ContainerAccessible
 {
 

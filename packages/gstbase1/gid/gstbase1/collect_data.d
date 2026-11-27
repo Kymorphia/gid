@@ -14,6 +14,7 @@ import gid.gstbase1.types;
 /**
     Structure used by the collect_pads.
 */
+@gidGir("CollectData")
 class CollectData : StructWrap!(GstCollectData)
 {
   /**

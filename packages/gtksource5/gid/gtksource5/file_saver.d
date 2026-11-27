@@ -27,6 +27,7 @@ import gid.gtksource5.types;
     handling. If an error occurs, you can reconfigure the saver and relaunch the
     operation with [gid.gtksource5.file_saver.FileSaver.saveAsync].
 */
+@gidGir("FileSaver", "FileSaverClass")
 class FileSaver : gid.gobject2.object.ObjectWrap
 {
 

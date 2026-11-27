@@ -8,10 +8,17 @@ public import gid.gobject2.c.types;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstAudio";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Different possible reasons for discontinuities. This enum is useful for the custom
     slave method.
 */
+@gidGir("AudioBaseSinkDiscontReason")
 enum GstAudioBaseSinkDiscontReason
 {
   /**
@@ -49,6 +56,7 @@ enum GstAudioBaseSinkDiscontReason
     Different possible clock slaving algorithms used when the internal audio
     clock is not selected as the pipeline master clock.
 */
+@gidGir("AudioBaseSinkSlaveMethod")
 enum GstAudioBaseSinkSlaveMethod
 {
   /**
@@ -77,6 +85,7 @@ enum GstAudioBaseSinkSlaveMethod
     Different possible clock slaving algorithms when the internal audio clock was
     not selected as the pipeline clock.
 */
+@gidGir("AudioBaseSrcSlaveMethod")
 enum GstAudioBaseSrcSlaveMethod
 {
   /**
@@ -106,6 +115,7 @@ enum GstAudioBaseSrcSlaveMethod
     Mode in which the CD audio source operates. Influences timestamping,
     EOS handling and seeking.
 */
+@gidGir("AudioCdSrcMode")
 enum GstAudioCdSrcMode
 {
   /**
@@ -122,6 +132,7 @@ enum GstAudioCdSrcMode
 /**
     Flags passed to [gid.gstaudio1.audio_channel_mixer.AudioChannelMixer.new_]
 */
+@gidGir("AudioChannelMixerFlags")
 enum GstAudioChannelMixerFlags : uint
 {
   /**
@@ -176,6 +187,7 @@ enum GstAudioChannelMixerFlags : uint
     This implicitly means that this is a stereo stream with a front left and front right
     channel.
 */
+@gidGir("AudioChannelPosition")
 enum GstAudioChannelPosition
 {
   /**
@@ -350,6 +362,7 @@ enum GstAudioChannelPosition
 /**
     Extra flags passed to [gid.gstaudio1.audio_converter.AudioConverter.new_] and [gid.gstaudio1.audio_converter.AudioConverter.samples].
 */
+@gidGir("AudioConverterFlags")
 enum GstAudioConverterFlags : uint
 {
   /**
@@ -373,6 +386,7 @@ enum GstAudioConverterFlags : uint
 /**
     Set of available dithering methods.
 */
+@gidGir("AudioDitherMethod")
 enum GstAudioDitherMethod
 {
   /**
@@ -399,6 +413,7 @@ enum GstAudioDitherMethod
 /**
     Extra audio flags
 */
+@gidGir("AudioFlags")
 enum GstAudioFlags : uint
 {
   /**
@@ -416,6 +431,7 @@ enum GstAudioFlags : uint
 /**
     Enum value describing the most common audio formats.
 */
+@gidGir("AudioFormat")
 enum GstAudioFormat
 {
   /**
@@ -682,6 +698,7 @@ enum GstAudioFormat
 /**
     The different audio flags that a format info can have.
 */
+@gidGir("AudioFormatFlags")
 enum GstAudioFormatFlags : uint
 {
   /**
@@ -714,6 +731,7 @@ enum GstAudioFormatFlags : uint
 /**
     Layout of the audio samples for the different channels.
 */
+@gidGir("AudioLayout")
 enum GstAudioLayout
 {
   /**
@@ -730,6 +748,7 @@ enum GstAudioLayout
 /**
     Set of available noise shaping methods
 */
+@gidGir("AudioNoiseShapingMethod")
 enum GstAudioNoiseShapingMethod
 {
   /**
@@ -761,6 +780,7 @@ enum GstAudioNoiseShapingMethod
 /**
     The different flags that can be used when packing and unpacking.
 */
+@gidGir("AudioPackFlags")
 enum GstAudioPackFlags : uint
 {
   /**
@@ -781,6 +801,7 @@ enum GstAudioPackFlags : uint
 /**
     Extra flags that can be passed to [gid.gstaudio1.audio_quantize.AudioQuantize.new_]
 */
+@gidGir("AudioQuantizeFlags")
 enum GstAudioQuantizeFlags : uint
 {
   /**
@@ -797,6 +818,7 @@ enum GstAudioQuantizeFlags : uint
 /**
     The different filter interpolation methods.
 */
+@gidGir("AudioResamplerFilterInterpolation")
 enum GstAudioResamplerFilterInterpolation
 {
   /**
@@ -820,6 +842,7 @@ enum GstAudioResamplerFilterInterpolation
 /**
     Select for the filter tables should be set up.
 */
+@gidGir("AudioResamplerFilterMode")
 enum GstAudioResamplerFilterMode
 {
   /**
@@ -845,6 +868,7 @@ enum GstAudioResamplerFilterMode
 /**
     Different resampler flags.
 */
+@gidGir("AudioResamplerFlags")
 enum GstAudioResamplerFlags : uint
 {
   /**
@@ -877,6 +901,7 @@ enum GstAudioResamplerFlags : uint
 /**
     Different subsampling and upsampling methods
 */
+@gidGir("AudioResamplerMethod")
 enum GstAudioResamplerMethod
 {
   /**
@@ -910,6 +935,7 @@ enum GstAudioResamplerMethod
 /**
     The format of the samples in the ringbuffer.
 */
+@gidGir("AudioRingBufferFormatType")
 enum GstAudioRingBufferFormatType
 {
   /**
@@ -996,6 +1022,7 @@ enum GstAudioRingBufferFormatType
 /**
     The state of the ringbuffer.
 */
+@gidGir("AudioRingBufferState")
 enum GstAudioRingBufferState
 {
   /**
@@ -1024,6 +1051,7 @@ enum GstAudioRingBufferState
 /**
     Enum value describing how DSD bits are grouped.
 */
+@gidGir("DsdFormat")
 enum GstDsdFormat
 {
   /**
@@ -1079,6 +1107,7 @@ enum GstDsdFormat
     Formulas to convert from a linear to a cubic or dB volume are
     cbrt(val) and 20 * log10 (val).
 */
+@gidGir("StreamVolumeFormat")
 enum GstStreamVolumeFormat
 {
   /**
@@ -1211,6 +1240,7 @@ struct GstAudioAggregatorConvertPadClass
 }
 
 /** */
+@gidGir("AudioAggregatorConvertPadPrivate")
 struct GstAudioAggregatorConvertPadPrivate;
 
 /**
@@ -1255,9 +1285,11 @@ struct GstAudioAggregatorPadClass
 }
 
 /** */
+@gidGir("AudioAggregatorPadPrivate")
 struct GstAudioAggregatorPadPrivate;
 
 /** */
+@gidGir("AudioAggregatorPrivate")
 struct GstAudioAggregatorPrivate;
 
 /**
@@ -1324,6 +1356,7 @@ struct GstAudioBaseSinkClass
 }
 
 /** */
+@gidGir("AudioBaseSinkPrivate")
 struct GstAudioBaseSinkPrivate;
 
 /**
@@ -1379,6 +1412,7 @@ struct GstAudioBaseSrcClass
 }
 
 /** */
+@gidGir("AudioBaseSrcPrivate")
 struct GstAudioBaseSrcPrivate;
 
 /**
@@ -1525,6 +1559,7 @@ struct GstAudioCdSrcClass
 }
 
 /** */
+@gidGir("AudioCdSrcPrivate")
 struct GstAudioCdSrcPrivate;
 
 /**
@@ -1940,6 +1975,7 @@ struct GstAudioDecoderClass
 }
 
 /** */
+@gidGir("AudioDecoderPrivate")
 struct GstAudioDecoderPrivate;
 
 /**
@@ -2257,6 +2293,7 @@ struct GstAudioEncoderClass
 }
 
 /** */
+@gidGir("AudioEncoderPrivate")
 struct GstAudioEncoderPrivate;
 
 /**
@@ -2673,6 +2710,7 @@ struct GstAudioRingBufferClass
 }
 
 /** */
+@gidGir("AudioRingBufferPrivate")
 struct GstAudioRingBufferPrivate;
 
 /**
@@ -2858,6 +2896,7 @@ struct GstAudioSinkClass
 }
 
 /** */
+@gidGir("AudioSinkClassExtension")
 struct GstAudioSinkClassExtension
 {
   /** */

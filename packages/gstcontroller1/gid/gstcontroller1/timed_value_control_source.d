@@ -21,6 +21,7 @@ import gid.gstcontroller1.types;
     
     All functions are MT-safe.
 */
+@gidGir("TimedValueControlSource", "TimedValueControlSourceClass")
 class TimedValueControlSource : gid.gst1.control_source.ControlSource
 {
 

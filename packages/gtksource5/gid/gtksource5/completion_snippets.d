@@ -18,6 +18,7 @@ import gid.gtksource5.types;
     the [gid.gtksource5.completion_provider.CompletionProvider] interface. The proposals are snippets
     registered with the [gid.gtksource5.snippet_manager.SnippetManager].
 */
+@gidGir("CompletionSnippets", "CompletionSnippetsClass")
 class CompletionSnippets : gid.gobject2.object.ObjectWrap, gid.gtksource5.completion_provider.CompletionProvider
 {
 

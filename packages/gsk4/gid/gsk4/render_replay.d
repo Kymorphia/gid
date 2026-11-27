@@ -96,6 +96,7 @@ import gid.pango1.font;
     }
     ```
 */
+@gidGir("RenderReplay")
 class RenderReplay : gid.gobject2.boxed.BoxedWrap!(gsk_render_replay_get_type)
 {
 

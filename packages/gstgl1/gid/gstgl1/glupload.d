@@ -19,6 +19,7 @@ import gid.gstgl1.types;
     
     A #GstGLUpload can be created with [gid.gstgl1.glupload.GLUpload.new_]
 */
+@gidGir("GLUpload", "GLUploadClass")
 class GLUpload : gid.gst1.object.ObjectWrap
 {
 

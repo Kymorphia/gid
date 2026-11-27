@@ -21,6 +21,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("GutterRenderer", "GutterRendererClass")
 class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

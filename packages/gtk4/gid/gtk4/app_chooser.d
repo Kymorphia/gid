@@ -36,6 +36,7 @@ import gid.gtk4.types;
         implemented according to the design of each platform and/or
         application requiring them.
 */
+@gidGir("AppChooser")
 interface AppChooser : GidWrap
 {
 

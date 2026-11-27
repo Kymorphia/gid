@@ -12,6 +12,7 @@ import gid.gsk4.types;
 /**
     A render node applying a rectangular clip to its single child node.
 */
+@gidGir("ClipNode")
 class ClipNode : gid.gsk4.render_node.RenderNode
 {
 

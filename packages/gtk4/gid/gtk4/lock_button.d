@@ -72,6 +72,7 @@ import gid.gtk4.types;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("LockButton")
 class LockButton : gid.gtk4.button.Button
 {
 

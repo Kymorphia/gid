@@ -39,6 +39,7 @@ import gid.gtk3.types;
     when nothing has happened (mostly as a result of programmers calling
     select_row on an already selected row).
 */
+@gidGir("TreeSelection", "TreeSelectionClass")
 class TreeSelection : gid.gobject2.object.ObjectWrap
 {
 

@@ -21,6 +21,7 @@ import gid.core.utils;
     See [gid.cairo1.context.Context.showTextGlyphs] for how clusters are used in advanced
     text operations.
 */
+@gidGir("TextCluster")
 struct TextCluster
 {
   /**

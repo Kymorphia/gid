@@ -46,6 +46,7 @@ import gid.gtk4.types;
     of scrolling with two X/Y velocity arguments that are consistent with the
     motion that was received.
 */
+@gidGir("EventControllerScroll", "EventControllerScrollClass")
 class EventControllerScroll : gid.gtk4.event_controller.EventController
 {
 

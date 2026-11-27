@@ -13,6 +13,7 @@ import gid.gstvideo1.video_overlay_composition;
 /**
     Extra buffer metadata describing image overlay data.
 */
+@gidGir("VideoOverlayCompositionMeta")
 class VideoOverlayCompositionMeta : StructWrap!(GstVideoOverlayCompositionMeta)
 {
   /**

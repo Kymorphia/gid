@@ -46,6 +46,7 @@ import gid.pango1.font_description;
     When FontConfig is available, [gid.gtksource5.map.Map] will try to use a bundled
     "block" font to make the map more legible.
 */
+@gidGir("Map", "MapClass")
 class Map : gid.gtksource5.view.View
 {
 

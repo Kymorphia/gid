@@ -26,6 +26,7 @@ import gid.gobject2.boxed;
     [gid.gio2.socket_connectable.SocketConnectable] interface and not need to worry about
     [gid.gio2.srv_target.SrvTarget] at all.
 */
+@gidGir("SrvTarget")
 class SrvTarget : gid.gobject2.boxed.BoxedWrap!(g_srv_target_get_type)
 {
 

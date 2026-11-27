@@ -19,6 +19,7 @@ import gid.gstgl1.types;
     #GstGLFilter helps to implement simple OpenGL filter elements taking a
     single input and producing a single output with a #GstGLFramebuffer
 */
+@gidGir("GLFilter", "GLFilterClass")
 class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
 {
 

@@ -215,6 +215,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gio2.list_model.ListModel] instead
 */
+@gidGir("TreeModel", "TreeModelIface")
 interface TreeModel : GidWrap
 {
 

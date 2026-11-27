@@ -33,6 +33,7 @@ import gid.gstbase1.types;
     Seeking, flushing, scheduling and sync is all handled by this
     base class.
 */
+@gidGir("PushSrc", "PushSrcClass")
 class PushSrc : gid.gstbase1.base_src.BaseSrc
 {
 

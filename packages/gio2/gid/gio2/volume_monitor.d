@@ -26,6 +26,7 @@ import gid.gobject2.object;
     In order to receive updates about volumes and mounts monitored through GVFS,
     a main loop must be running.
 */
+@gidGir("VolumeMonitor", "VolumeMonitorClass")
 class VolumeMonitor : gid.gobject2.object.ObjectWrap
 {
 

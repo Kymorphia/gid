@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A basic encoder/decoder filter for the MIME encodings.
 */
+@gidGir("FilterBasic", "FilterBasicClass")
 class FilterBasic : gid.gmime3.filter.Filter
 {
 

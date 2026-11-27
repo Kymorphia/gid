@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated during [gid.gdk4.types.InputSource.TabletPad] button presses and releases.
 */
+@gidGir("EventPadButton")
 class EventPadButton : StructWrap!(GdkEventPadButton, gdk_event_copy, gdk_event_free)
 {
   /**

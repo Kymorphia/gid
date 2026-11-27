@@ -73,6 +73,7 @@ import gid.gtk3.types;
     the style class .combo to the main CSS nodes of its entry and button
     children, and the .linked class to the node of its internal box.
 */
+@gidGir("ComboBoxText", "ComboBoxTextClass")
 class ComboBoxText : gid.gtk3.combo_box.ComboBox
 {
 

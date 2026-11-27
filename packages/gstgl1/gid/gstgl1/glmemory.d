@@ -26,6 +26,7 @@ import gid.gstvideo1.video_info;
     as a string, i.e. some combination of 'texture-target=(string){2D,
     rectangle, external-oes}'.
 */
+@gidGir("GLMemory")
 class GLMemory : gid.gobject2.boxed.BoxedWrap!(gst_gl_memory_get_type)
 {
   /**

@@ -135,6 +135,7 @@ import gid.gobject2.object;
     be rendered as ‘selected’ when the state of the action is equal to the
     target value of the menu item.
 */
+@gidGir("MenuModel", "MenuModelClass")
 class MenuModel : gid.gobject2.object.ObjectWrap
 {
 

@@ -20,6 +20,7 @@ import gid.gtk4.types;
     which are updated to reflect focus changes inside the widget hierarchy
     that is rooted at the controllers widget.
 */
+@gidGir("EventControllerFocus", "EventControllerFocusClass")
 class EventControllerFocus : gid.gtk4.event_controller.EventController
 {
 

@@ -21,6 +21,7 @@ import gid.webkit6.types;
     When a WebKitClipboardPermissionRequest is not handled by the user,
     it is denied by default.
 */
+@gidGir("ClipboardPermissionRequest", "ClipboardPermissionRequestClass")
 class ClipboardPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

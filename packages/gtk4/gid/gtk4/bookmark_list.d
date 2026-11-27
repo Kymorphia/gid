@@ -22,6 +22,7 @@ import gid.gtk4.types;
     namespace added: `recent::private` (boolean) and `recent:applications`
     (stringv).
 */
+@gidGir("BookmarkList", "BookmarkListClass")
 class BookmarkList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

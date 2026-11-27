@@ -9,6 +9,7 @@ import gid.gdk3.types;
 import gid.gobject2.boxed;
 
 /** */
+@gidGir("EventSequence")
 class EventSequence : gid.gobject2.boxed.BoxedWrap!(gdk_event_sequence_get_type)
 {
 

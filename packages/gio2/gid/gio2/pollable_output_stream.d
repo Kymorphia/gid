@@ -23,6 +23,7 @@ import gid.gobject2.gid_builder;
     returns false, then the behavior of other [gid.gio2.pollable_output_stream.PollableOutputStream] methods is
     undefined.
 */
+@gidGir("PollableOutputStream", "PollableOutputStreamInterface")
 interface PollableOutputStream : GidWrap
 {
 

@@ -20,6 +20,7 @@ import gid.json1.types;
     to be serialized or deserialized by `func@Json.construct_gobject` and
     `func@Json.serialize_gobject`, respectively.
 */
+@gidGir("Serializable", "SerializableIface")
 interface Serializable : GidWrap
 {
 

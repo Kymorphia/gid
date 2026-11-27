@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated during touchpad swipe gestures.
 */
+@gidGir("EventTouchpadSwipe")
 class EventTouchpadSwipe : StructWrap!(GdkEventTouchpadSwipe, gdk_event_copy, gdk_event_free)
 {
   /**

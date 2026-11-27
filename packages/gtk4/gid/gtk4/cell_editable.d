@@ -22,6 +22,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets for displaying their
         contents. See [gid.gtk4.editable.Editable] for editable text widgets
 */
+@gidGir("CellEditable", "CellEditableIface")
 interface CellEditable : GidWrap
 {
 

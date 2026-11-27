@@ -4,7 +4,14 @@ module gid.gtksource5.c.types;
 public import gid.core.basictypes;
 public import gid.gtk4.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GtkSource";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "5";
+
 /** */
+@gidGir("AnnotationStyle")
 enum GtkSourceAnnotationStyle
 {
   /**
@@ -29,6 +36,7 @@ enum GtkSourceAnnotationStyle
 }
 
 /** */
+@gidGir("BackgroundPatternType")
 enum GtkSourceBackgroundPatternType
 {
   /**
@@ -43,6 +51,7 @@ enum GtkSourceBackgroundPatternType
 }
 
 /** */
+@gidGir("BracketMatchType")
 enum GtkSourceBracketMatchType
 {
   /**
@@ -68,6 +77,7 @@ enum GtkSourceBracketMatchType
 }
 
 /** */
+@gidGir("ChangeCaseType")
 enum GtkSourceChangeCaseType
 {
   /**
@@ -92,6 +102,7 @@ enum GtkSourceChangeCaseType
 }
 
 /** */
+@gidGir("CompletionActivation")
 enum GtkSourceCompletionActivation
 {
   /** */
@@ -105,6 +116,7 @@ enum GtkSourceCompletionActivation
 }
 
 /** */
+@gidGir("CompletionColumn")
 enum GtkSourceCompletionColumn
 {
   /** */
@@ -127,6 +139,7 @@ enum GtkSourceCompletionColumn
 }
 
 /** */
+@gidGir("CompressionType")
 enum GtkSourceCompressionType
 {
   /**
@@ -143,6 +156,7 @@ enum GtkSourceCompressionType
 /**
     An error code used with the `GTK_SOURCE_FILE_LOADER_ERROR` domain.
 */
+@gidGir("FileLoaderError")
 enum GtkSourceFileLoaderError
 {
   /**
@@ -166,6 +180,7 @@ enum GtkSourceFileLoaderError
 /**
     An error code used with the `GTK_SOURCE_FILE_SAVER_ERROR` domain.
 */
+@gidGir("FileSaverError")
 enum GtkSourceFileSaverError
 {
   /**
@@ -184,6 +199,7 @@ enum GtkSourceFileSaverError
 /**
     Flags to define the behavior of a [gid.gtksource5.types.FileSaverFlags].
 */
+@gidGir("FileSaverFlags")
 enum GtkSourceFileSaverFlags : uint
 {
   /**
@@ -211,6 +227,7 @@ enum GtkSourceFileSaverFlags : uint
     The alignment mode of the renderer, when a cell spans multiple lines (due to
     text wrapping).
 */
+@gidGir("GutterRendererAlignmentMode")
 enum GtkSourceGutterRendererAlignmentMode
 {
   /**
@@ -230,6 +247,7 @@ enum GtkSourceGutterRendererAlignmentMode
 }
 
 /** */
+@gidGir("NewlineType")
 enum GtkSourceNewlineType
 {
   /**
@@ -250,6 +268,7 @@ enum GtkSourceNewlineType
 }
 
 /** */
+@gidGir("SmartHomeEndType")
 enum GtkSourceSmartHomeEndType
 {
   /**
@@ -279,6 +298,7 @@ enum GtkSourceSmartHomeEndType
 }
 
 /** */
+@gidGir("SortFlags")
 enum GtkSourceSortFlags : uint
 {
   /**
@@ -315,6 +335,7 @@ enum GtkSourceSortFlags : uint
     If a line contains only white spaces (no text), the white spaces match both
     [gid.gtksource5.types.SpaceLocationFlags.Leading] and [gid.gtksource5.types.SpaceLocationFlags.Trailing].
 */
+@gidGir("SpaceLocationFlags")
 enum GtkSourceSpaceLocationFlags : uint
 {
   /**
@@ -347,6 +368,7 @@ enum GtkSourceSpaceLocationFlags : uint
 /**
     #GtkSourceSpaceTypeFlags contains flags for white space types.
 */
+@gidGir("SpaceTypeFlags")
 enum GtkSourceSpaceTypeFlags : uint
 {
   /**
@@ -383,6 +405,7 @@ enum GtkSourceSpaceTypeFlags : uint
 }
 
 /** */
+@gidGir("ViewGutterPosition")
 enum GtkSourceViewGutterPosition
 {
   /**

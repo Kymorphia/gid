@@ -30,6 +30,7 @@ import gid.webkit6.uriresponse;
     [gid.webkit6.web_resource.WebResource.getResponse], as well as the raw data, using
     [gid.webkit6.web_resource.WebResource.getData].
 */
+@gidGir("WebResource", "WebResourceClass")
 class WebResource : gid.gobject2.object.ObjectWrap
 {
 

@@ -12,6 +12,7 @@ import gid.gobject2.object;
 /**
     Abstract I/O stream class.
 */
+@gidGir("Stream", "StreamClass")
 class Stream : gid.gobject2.object.ObjectWrap
 {
 

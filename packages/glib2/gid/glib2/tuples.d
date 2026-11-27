@@ -15,6 +15,7 @@ import gid.glib2.types;
 
     Deprecated: Rarely used API
 */
+@gidGir("Tuples")
 struct Tuples
 {
   /**

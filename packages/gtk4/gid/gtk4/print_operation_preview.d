@@ -20,6 +20,7 @@ import gid.gtk4.types;
     [gid.gtk4.print_operation.PrintOperation.preview] signal by
     [gid.gtk4.print_operation.PrintOperation].
 */
+@gidGir("PrintOperationPreview", "PrintOperationPreviewIface")
 interface PrintOperationPreview : GidWrap
 {
 

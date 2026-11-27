@@ -5,9 +5,16 @@ public import gid.core.basictypes;
 public import gid.gio2.c.types;
 public import gid.gtk4.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Adw";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1";
+
 /**
     Describes the available system accent colors.
 */
+@gidGir("AccentColor")
 enum AdwAccentColor
 {
   /**
@@ -66,6 +73,7 @@ enum AdwAccentColor
     [gid.adw1.animation.Animation.pause], [gid.adw1.animation.Animation.resume],
     [gid.adw1.animation.Animation.reset] and [gid.adw1.animation.Animation.skip].
 */
+@gidGir("AnimationState")
 enum AdwAnimationState
 {
   /**
@@ -96,6 +104,7 @@ enum AdwAnimationState
     
     See [gid.adw1.banner.Banner.buttonStyle].
 */
+@gidGir("BannerButtonStyle")
 enum AdwBannerButtonStyle
 {
   /**
@@ -116,6 +125,7 @@ enum AdwBannerButtonStyle
     
     New values may be added to this enumeration over time.
 */
+@gidGir("BreakpointConditionLengthType")
 enum AdwBreakpointConditionLengthType
 {
   /**
@@ -150,6 +160,7 @@ enum AdwBreakpointConditionLengthType
     
     New values may be added to this enumeration over time.
 */
+@gidGir("BreakpointConditionRatioType")
 enum AdwBreakpointConditionRatioType
 {
   /**
@@ -168,6 +179,7 @@ enum AdwBreakpointConditionRatioType
 /**
     Describes title centering behavior of a [gid.adw1.header_bar.HeaderBar] widget.
 */
+@gidGir("CenteringPolicy")
 enum AdwCenteringPolicy
 {
   /**
@@ -184,6 +196,7 @@ enum AdwCenteringPolicy
 /**
     Application color schemes for [gid.adw1.style_manager.StyleManager.colorScheme].
 */
+@gidGir("ColorScheme")
 enum AdwColorScheme
 {
   /**
@@ -223,6 +236,7 @@ enum AdwColorScheme
     
     See [gid.adw1.dialog.Dialog.presentationMode].
 */
+@gidGir("DialogPresentationMode")
 enum AdwDialogPresentationMode
 {
   /**
@@ -249,6 +263,7 @@ enum AdwDialogPresentationMode
     
     New values may be added to this enumeration over time.
 */
+@gidGir("Easing")
 enum AdwEasing
 {
   /**
@@ -465,6 +480,7 @@ enum AdwEasing
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
 */
+@gidGir("FlapFoldPolicy")
 enum AdwFlapFoldPolicy
 {
   /**
@@ -494,6 +510,7 @@ enum AdwFlapFoldPolicy
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
 */
+@gidGir("FlapTransitionType")
 enum AdwFlapTransitionType
 {
   /**
@@ -521,6 +538,7 @@ enum AdwFlapTransitionType
 
     Deprecated: Stop using [gid.adw1.leaflet.Leaflet] and [gid.adw1.flap.Flap]
 */
+@gidGir("FoldThresholdPolicy")
 enum AdwFoldThresholdPolicy
 {
   /**
@@ -542,6 +560,7 @@ enum AdwFoldThresholdPolicy
       <img src="inline-view-switcher-display-modes.png" alt="inline-view-switcher-display-modes">
     </picture>
 */
+@gidGir("InlineViewSwitcherDisplayMode")
 enum AdwInlineViewSwitcherDisplayMode
 {
   /**
@@ -565,6 +584,7 @@ enum AdwInlineViewSwitcherDisplayMode
     
     See [gid.adw1.wrap_layout.WrapLayout.justify] and [gid.adw1.wrap_box.WrapBox.justify].
 */
+@gidGir("JustifyMode")
 enum AdwJustifyMode
 {
   /**
@@ -594,6 +614,7 @@ enum AdwJustifyMode
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
 */
+@gidGir("LeafletTransitionType")
 enum AdwLeafletTransitionType
 {
   /**
@@ -623,6 +644,7 @@ enum AdwLeafletTransitionType
     
     New values may be added to this enumeration over time.
 */
+@gidGir("LengthUnit")
 enum AdwLengthUnit
 {
   /**
@@ -644,6 +666,7 @@ enum AdwLengthUnit
 /**
     Describes the direction of a swipe navigation gesture.
 */
+@gidGir("NavigationDirection")
 enum AdwNavigationDirection
 {
   /**
@@ -663,6 +686,7 @@ enum AdwNavigationDirection
     See [gid.adw1.wrap_layout.WrapLayout.packDirection] and
     [gid.adw1.wrap_box.WrapBox.packDirection].
 */
+@gidGir("PackDirection")
 enum AdwPackDirection
 {
   /**
@@ -683,6 +707,7 @@ enum AdwPackDirection
     
     See [gid.adw1.alert_dialog.AlertDialog.setResponseAppearance].
 */
+@gidGir("ResponseAppearance")
 enum AdwResponseAppearance
 {
   /**
@@ -709,6 +734,7 @@ enum AdwResponseAppearance
     
     See [gid.adw1.sidebar.Sidebar.mode] and [gid.adw1.view_switcher_sidebar.ViewSwitcherSidebar.mode].
 */
+@gidGir("SidebarMode")
 enum AdwSidebarMode
 {
   /**
@@ -727,6 +753,7 @@ enum AdwSidebarMode
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
 */
+@gidGir("SqueezerTransitionType")
 enum AdwSqueezerTransitionType
 {
   /**
@@ -749,6 +776,7 @@ enum AdwSqueezerTransitionType
     
     New values may be added to this enumeration over time.
 */
+@gidGir("TabViewShortcuts")
 enum AdwTabViewShortcuts : uint
 {
   /**
@@ -830,6 +858,7 @@ enum AdwTabViewShortcuts : uint
 /**
     [gid.adw1.toast.Toast] behavior when another toast is already displayed.
 */
+@gidGir("ToastPriority")
 enum AdwToastPriority
 {
   /**
@@ -887,6 +916,7 @@ enum AdwToastPriority
     
     New values may be added to this enumeration over time.
 */
+@gidGir("ToolbarStyle")
 enum AdwToolbarStyle
 {
   /**
@@ -908,6 +938,7 @@ enum AdwToolbarStyle
 /**
     Describes the adaptive modes of [gid.adw1.view_switcher.ViewSwitcher].
 */
+@gidGir("ViewSwitcherPolicy")
 enum AdwViewSwitcherPolicy
 {
   /**
@@ -926,6 +957,7 @@ enum AdwViewSwitcherPolicy
     
     See [gid.adw1.wrap_layout.WrapLayout.wrapPolicy] and [gid.adw1.wrap_box.WrapBox.wrapPolicy].
 */
+@gidGir("WrapPolicy")
 enum AdwWrapPolicy
 {
   /**
@@ -1578,6 +1610,7 @@ struct AdwAnimation
 }
 
 /** */
+@gidGir("AnimationClass")
 struct AdwAnimationClass;
 
 /**
@@ -1586,6 +1619,7 @@ struct AdwAnimationClass;
 struct AdwAnimationTarget;
 
 /** */
+@gidGir("AnimationTargetClass")
 struct AdwAnimationTargetClass;
 
 /**
@@ -2200,6 +2234,7 @@ struct AdwButtonRowClass
 struct AdwCallbackAnimationTarget;
 
 /** */
+@gidGir("CallbackAnimationTargetClass")
 struct AdwCallbackAnimationTargetClass;
 
 /**
@@ -3589,6 +3624,7 @@ struct AdwNavigationViewClass
 struct AdwNoneAnimationTarget;
 
 /** */
+@gidGir("NoneAnimationTargetClass")
 struct AdwNoneAnimationTargetClass;
 
 /**
@@ -3968,6 +4004,7 @@ struct AdwPreferencesWindowClass
 struct AdwPropertyAnimationTarget;
 
 /** */
+@gidGir("PropertyAnimationTargetClass")
 struct AdwPropertyAnimationTargetClass;
 
 /**
@@ -4773,6 +4810,7 @@ struct AdwSplitButtonClass
 struct AdwSpringAnimation;
 
 /** */
+@gidGir("SpringAnimationClass")
 struct AdwSpringAnimationClass;
 
 /**
@@ -5303,6 +5341,7 @@ struct AdwTabViewClass
 struct AdwTimedAnimation;
 
 /** */
+@gidGir("TimedAnimationClass")
 struct AdwTimedAnimationClass;
 
 /**

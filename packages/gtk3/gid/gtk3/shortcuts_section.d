@@ -29,6 +29,7 @@ import gid.gtk3.types;
     
     This widget is only meant to be used with #GtkShortcutsWindow.
 */
+@gidGir("ShortcutsSection", "ShortcutsSectionClass")
 class ShortcutsSection : gid.gtk3.box.Box
 {
 

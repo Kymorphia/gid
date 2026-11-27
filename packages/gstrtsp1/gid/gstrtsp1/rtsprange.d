@@ -12,6 +12,7 @@ import gid.gstrtsp1.types;
 /**
     Provides helper functions to deal with time ranges.
 */
+@gidGir("RTSPRange")
 struct RTSPRange
 {
   /**

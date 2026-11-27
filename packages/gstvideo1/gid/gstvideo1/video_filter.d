@@ -20,6 +20,7 @@ import gid.gstvideo1.video_info;
     The videofilter will by default enable QoS on the parent GstBaseTransform
     to implement frame dropping.
 */
+@gidGir("VideoFilter", "VideoFilterClass")
 class VideoFilter : gid.gstbase1.base_transform.BaseTransform
 {
 

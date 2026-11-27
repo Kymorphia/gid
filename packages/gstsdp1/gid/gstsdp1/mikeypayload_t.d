@@ -11,6 +11,7 @@ import gid.gstsdp1.types;
 /**
     The timestamp payload carries the timestamp information
 */
+@gidGir("MIKEYPayloadT")
 class MIKEYPayloadT : StructWrap!(GstMIKEYPayloadT)
 {
   /**

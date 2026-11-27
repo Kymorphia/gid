@@ -22,6 +22,7 @@ import gid.gtk3.types;
     for each cell is to bind them to columns in your tree model using e.g.
     [gid.gtk4.tree_view_column.TreeViewColumn.addAttribute].
 */
+@gidGir("CellRendererSpinner", "CellRendererSpinnerClass")
 class CellRendererSpinner : gid.gtk3.cell_renderer.CellRenderer
 {
 

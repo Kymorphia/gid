@@ -23,6 +23,7 @@ import gid.pango1.types;
       <img alt="Font metrics" src="fontmetrics-light.png">
     </picture>
 */
+@gidGir("FontMetrics")
 struct FontMetrics
 {
   /** */

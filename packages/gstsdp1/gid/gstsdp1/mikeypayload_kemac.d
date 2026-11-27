@@ -11,6 +11,7 @@ import gid.gstsdp1.types;
 /**
     A structure holding the KEMAC payload
 */
+@gidGir("MIKEYPayloadKEMAC")
 class MIKEYPayloadKEMAC : StructWrap!(GstMIKEYPayloadKEMAC)
 {
   /**

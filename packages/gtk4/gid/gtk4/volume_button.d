@@ -31,6 +31,7 @@ import gid.gtk4.types;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("VolumeButton")
 class VolumeButton : gid.gtk4.scale_button.ScaleButton
 {
 

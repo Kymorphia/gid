@@ -12,6 +12,7 @@ import gid.gtk4.types;
 /**
     A [gid.gobject2.object.ObjectWrap] value in a [gid.gtk4.expression.Expression].
 */
+@gidGir("ObjectExpression")
 class ObjectExpression : gid.gtk4.expression.Expression
 {
 

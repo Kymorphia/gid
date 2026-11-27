@@ -26,6 +26,7 @@ import gid.gobject2.object;
     
     Since 2.74, the API is available for Windows.
 */
+@gidGir("UnixFDList", "UnixFDListClass")
 class UnixFDList : gid.gobject2.object.ObjectWrap
 {
 

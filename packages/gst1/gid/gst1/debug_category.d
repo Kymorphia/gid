@@ -11,6 +11,7 @@ import gid.gst1.types;
     This is the struct that describes the categories. Once initialized with
     #GST_DEBUG_CATEGORY_INIT, its values can't be changed anymore.
 */
+@gidGir("DebugCategory")
 class DebugCategory : StructWrap!(GstDebugCategory)
 {
   /**

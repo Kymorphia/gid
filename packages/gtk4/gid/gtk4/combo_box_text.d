@@ -83,6 +83,7 @@ import gid.gtk4.types;
     Deprecated: Use [gid.gtk4.drop_down.DropDown] with a [gid.gtk4.string_list.StringList]
         instead
 */
+@gidGir("ComboBoxText")
 class ComboBoxText : gid.gtk4.combo_box.ComboBox
 {
 

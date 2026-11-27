@@ -46,6 +46,7 @@ import gid.gobject2.object;
     Note, when [porting from GnomeVFS](migrating-gnome-vfs.html), [gid.gio2.mount.Mount] is the
     moral equivalent of `GnomeVFSVolume`.
 */
+@gidGir("Mount", "MountIface")
 interface Mount : GidWrap
 {
 

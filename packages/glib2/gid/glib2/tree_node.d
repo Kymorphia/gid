@@ -10,6 +10,7 @@ import gid.glib2.types;
 /**
     An opaque type which identifies a specific node in a #GTree.
 */
+@gidGir("TreeNode")
 class TreeNode : OpaqueWrap!(GTreeNode*, void, void)
 {
 

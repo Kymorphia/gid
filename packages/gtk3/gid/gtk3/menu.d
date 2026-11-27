@@ -97,6 +97,7 @@ import gid.gtk3.widget;
     with name arrow, for scrolling menu arrows. These subnodes get the
     .top and .bottom style classes.
 */
+@gidGir("Menu", "MenuClass")
 class Menu : gid.gtk3.menu_shell.MenuShell
 {
 

@@ -123,6 +123,7 @@ import gid.gst1.types;
     is returned. If no elements of the required type are in the bin, the event
     handler will return true.
 */
+@gidGir("Bin", "BinClass")
 class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
 {
 

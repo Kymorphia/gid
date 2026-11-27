@@ -32,6 +32,7 @@ import gid.gtk4.types;
     Of course, in particular for large lists, it is also possible to subclass
     [gid.gtk4.sorter.Sorter] and provide one's own sorter.
 */
+@gidGir("Sorter", "SorterClass")
 class Sorter : gid.gobject2.object.ObjectWrap
 {
 

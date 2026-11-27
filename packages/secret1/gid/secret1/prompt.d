@@ -38,6 +38,7 @@ import gid.secret1.types;
     `vfunc@Service.prompt_async` and `vfunc@Service.prompt_finish` virtual
     methods of the [gid.secret1.service.Service] class.
 */
+@gidGir("Prompt", "PromptClass")
 class Prompt : gid.gio2.dbus_proxy.DBusProxy
 {
 

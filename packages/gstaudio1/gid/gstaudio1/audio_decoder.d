@@ -112,6 +112,7 @@ import gid.gstbase1.adapter;
          PLC, it should also accept NULL data in @handle_frame and provide for
          data for indicated duration.
 */
+@gidGir("AudioDecoder", "AudioDecoderClass")
 class AudioDecoder : gid.gst1.element.Element
 {
 

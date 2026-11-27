@@ -89,6 +89,7 @@ import gid.webkitwebprocessextension6.web_page;
     }
     ```
 */
+@gidGir("WebProcessExtension", "WebProcessExtensionClass")
 class WebProcessExtension : gid.gobject2.object.ObjectWrap
 {
 

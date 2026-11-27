@@ -23,6 +23,7 @@ import gid.gobject2.types;
     atk_registry_set_factory_type call, passing the appropriate GType
     for application custom widget classes.
 */
+@gidGir("Registry", "RegistryClass")
 class Registry : gid.gobject2.object.ObjectWrap
 {
 

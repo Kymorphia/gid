@@ -12,6 +12,7 @@ import gid.gobject2.boxed;
 /**
     An opaque structure representing an opened directory.
 */
+@gidGir("Dir")
 class Dir : gid.gobject2.boxed.BoxedWrap!(g_dir_get_type)
 {
 

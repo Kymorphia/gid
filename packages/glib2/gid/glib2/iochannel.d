@@ -48,6 +48,7 @@ import gid.gobject2.boxed;
     [gid.glib2.iochannel.IOChannel.read], [gid.glib2.iochannel.IOChannel.write], and
     [gid.glib2.iochannel.IOChannel.seek] on the same channel.
 */
+@gidGir("IOChannel")
 class IOChannel : gid.gobject2.boxed.BoxedWrap!(g_io_channel_get_type)
 {
 

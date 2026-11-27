@@ -71,6 +71,7 @@ import gid.secret1.value;
     `vfunc@Service.prompt_async` and `vfunc@Service.prompt_finish` virtual
     methods of the #SecretService class.
 */
+@gidGir("Service", "ServiceClass")
 class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
 {
 

@@ -77,6 +77,7 @@ import gid.gobject2.object;
     }
     ```
 */
+@gidGir("DBusAuthObserver")
 class DBusAuthObserver : gid.gobject2.object.ObjectWrap
 {
 

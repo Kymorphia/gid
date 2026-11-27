@@ -62,6 +62,7 @@ import gid.gtk4.buildable_mixin;
     </object>
     ```
 */
+@gidGir("Breakpoint", "BreakpointClass")
 class Breakpoint : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable
 {
 

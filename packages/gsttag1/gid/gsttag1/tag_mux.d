@@ -30,6 +30,7 @@ import gid.gsttag1.types;
        GST_TAG_MUX_CLASS(mux_klass)->render_end_tag vfuncs and set up a render
        function.
 */
+@gidGir("TagMux", "TagMuxClass")
 class TagMux : gid.gst1.element.Element, gid.gst1.tag_setter.TagSetter
 {
 

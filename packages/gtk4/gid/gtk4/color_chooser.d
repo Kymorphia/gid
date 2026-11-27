@@ -25,6 +25,7 @@ import gid.gtk4.types;
     Deprecated: Use [gid.gtk4.color_dialog.ColorDialog] and [gid.gtk4.color_dialog_button.ColorDialogButton]
         instead of widgets implementing [gid.gtk4.color_chooser.ColorChooser]
 */
+@gidGir("ColorChooser", "ColorChooserInterface")
 interface ColorChooser : GidWrap
 {
 

@@ -22,6 +22,7 @@ import gid.gobject2.object;
     GdkMonitor was introduced in GTK+ 3.22 and supersedes earlier
     APIs in GdkScreen to obtain monitor-related information.
 */
+@gidGir("Monitor", "MonitorClass")
 class MonitorWrap : gid.gobject2.object.ObjectWrap
 {
 

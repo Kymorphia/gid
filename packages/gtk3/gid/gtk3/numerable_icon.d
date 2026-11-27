@@ -26,6 +26,7 @@ import gid.gtk3.types;
     ![](numerableicon.png)
     ![](numerableicon2.png)
 */
+@gidGir("NumerableIcon", "NumerableIconClass")
 class NumerableIcon : gid.gio2.emblemed_icon.EmblemedIcon
 {
 

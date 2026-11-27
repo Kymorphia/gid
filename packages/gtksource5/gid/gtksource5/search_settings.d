@@ -16,6 +16,7 @@ import gid.gtksource5.types;
     search settings can be associated with one or several
     [gid.gtksource5.search_context.SearchContext]s.
 */
+@gidGir("SearchSettings", "SearchSettingsClass")
 class SearchSettings : gid.gobject2.object.ObjectWrap
 {
 

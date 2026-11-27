@@ -33,6 +33,7 @@ import gid.gobject2.object;
     Flags relevant to this message will be returned in @flags. For example,
     `MSG_EOR` or `MSG_TRUNC`.
 */
+@gidGir("InputMessage")
 class InputMessage : StructWrap!(GInputMessage)
 {
   /**

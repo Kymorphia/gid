@@ -8,6 +8,7 @@ import gid.gstaudio1.c.types;
 import gid.gstaudio1.types;
 
 /** */
+@gidGir("AudioChannelMixer")
 class AudioChannelMixer : OpaqueWrap!(GstAudioChannelMixer*, void, void)
 {
 

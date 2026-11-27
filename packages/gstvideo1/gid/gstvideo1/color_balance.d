@@ -19,6 +19,7 @@ import gid.gstvideo1.types;
     
     Example elements are 'xvimagesink' and 'colorbalance'
 */
+@gidGir("ColorBalance", "ColorBalanceInterface")
 interface ColorBalance : GidWrap
 {
 

@@ -134,6 +134,7 @@ import gid.gstbase1.types;
     an EOS message to be posted on the pipeline's bus. Once this EOS message is
     received, it may safely shut down the entire pipeline.
 */
+@gidGir("BaseSrc", "BaseSrcClass")
 class BaseSrc : gid.gst1.element.Element
 {
 

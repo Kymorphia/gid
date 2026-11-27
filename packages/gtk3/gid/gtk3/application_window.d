@@ -125,6 +125,7 @@ import gid.gtk3.window;
     - "label": a user-visible string to display
     - "icon": icon name to display
 */
+@gidGir("ApplicationWindow", "ApplicationWindowClass")
 class ApplicationWindow : gid.gtk3.window.Window, gid.gio2.action_group.ActionGroup, gid.gio2.action_map.ActionMap
 {
 

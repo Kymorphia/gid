@@ -24,6 +24,7 @@ import gid.gstnet1.types;
     
     The #GstNetTimeProvider typically wraps the clock used by a #GstPipeline.
 */
+@gidGir("NetTimeProvider", "NetTimeProviderClass")
 class NetTimeProvider : gid.gst1.object.ObjectWrap, gid.gio2.initable.Initable
 {
 

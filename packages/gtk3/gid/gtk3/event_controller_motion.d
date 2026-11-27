@@ -17,6 +17,7 @@ import gid.gtk3.widget;
     
     This object was added in 3.24.
 */
+@gidGir("EventControllerMotion", "EventControllerMotionClass")
 class EventControllerMotion : gid.gtk3.event_controller.EventController
 {
 

@@ -36,6 +36,7 @@ import gid.webkit6.web_view_base;
     webkit_web_inspector_show (WEBKIT_WEB_INSPECTOR(inspector));
     ```
 */
+@gidGir("WebInspector", "WebInspectorClass")
 class WebInspector : gid.gobject2.object.ObjectWrap
 {
 

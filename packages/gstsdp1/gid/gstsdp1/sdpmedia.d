@@ -25,6 +25,7 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
 /**
     The contents of the SDP "m=" field with all related fields.
 */
+@gidGir("SDPMedia")
 class SDPMedia : StructWrap!(GstSDPMedia, sdpMediaCopy, gst_sdp_media_free)
 {
   /**

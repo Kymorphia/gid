@@ -13,6 +13,7 @@ import gid.gstcontroller1.types;
 /**
     A #GstControlBinding that forwards requests to another #GstControlBinding
 */
+@gidGir("ProxyControlBinding", "ProxyControlBindingClass")
 class ProxyControlBinding : gid.gst1.control_binding.ControlBinding
 {
 

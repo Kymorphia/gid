@@ -8,6 +8,7 @@ import gid.vte3.c.types;
 import gid.vte3.types;
 
 /** */
+@gidGir("CharAttributes")
 class CharAttributes : StructWrap!(VteCharAttributes)
 {
   /**

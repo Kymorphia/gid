@@ -39,6 +39,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.spinner.Spinner] uses the [gid.gtk4.types.AccessibleRole.ProgressBar] role.
 */
+@gidGir("Spinner")
 class Spinner : gid.gtk4.widget.Widget
 {
 

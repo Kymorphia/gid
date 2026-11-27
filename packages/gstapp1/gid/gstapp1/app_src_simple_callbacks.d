@@ -16,6 +16,7 @@ import gid.gstapp1.types;
     
     Unlike GstAppSrcCallbacks this can also be used from bindings.
 */
+@gidGir("AppSrcSimpleCallbacks")
 class AppSrcSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_src_simple_callbacks_get_type)
 {
 

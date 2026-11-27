@@ -41,6 +41,7 @@ import gid.gtk4.types;
     elements, since you have to reposition all the other  elements. This is a
     long-term maintenance problem for your application.
 */
+@gidGir("FixedLayout", "FixedLayoutClass")
 class FixedLayout : gid.gtk4.layout_manager.LayoutManager
 {
 

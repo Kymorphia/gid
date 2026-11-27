@@ -5,7 +5,14 @@ public import gid.core.basictypes;
 public import gid.gdk3.c.types;
 public import gid.gtk3.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GtkSource";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "4";
+
 /** */
+@gidGir("BackgroundPatternType")
 enum GtkSourceBackgroundPatternType
 {
   /**
@@ -20,6 +27,7 @@ enum GtkSourceBackgroundPatternType
 }
 
 /** */
+@gidGir("BracketMatchType")
 enum GtkSourceBracketMatchType
 {
   /**
@@ -45,6 +53,7 @@ enum GtkSourceBracketMatchType
 }
 
 /** */
+@gidGir("ChangeCaseType")
 enum GtkSourceChangeCaseType
 {
   /**
@@ -69,6 +78,7 @@ enum GtkSourceChangeCaseType
 }
 
 /** */
+@gidGir("CompletionActivation")
 enum GtkSourceCompletionActivation : uint
 {
   /**
@@ -95,6 +105,7 @@ enum GtkSourceCompletionActivation : uint
     An error code used with `GTK_SOURCE_COMPLETION_ERROR` in a #GError returned
     from a completion-related function.
 */
+@gidGir("CompletionError")
 enum GtkSourceCompletionError
 {
   /**
@@ -111,6 +122,7 @@ enum GtkSourceCompletionError
 }
 
 /** */
+@gidGir("CompressionType")
 enum GtkSourceCompressionType
 {
   /**
@@ -127,6 +139,7 @@ enum GtkSourceCompressionType
 /**
     An error code used with the `GTK_SOURCE_FILE_LOADER_ERROR` domain.
 */
+@gidGir("FileLoaderError")
 enum GtkSourceFileLoaderError
 {
   /**
@@ -150,6 +163,7 @@ enum GtkSourceFileLoaderError
 /**
     An error code used with the `GTK_SOURCE_FILE_SAVER_ERROR` domain.
 */
+@gidGir("FileSaverError")
 enum GtkSourceFileSaverError
 {
   /**
@@ -168,6 +182,7 @@ enum GtkSourceFileSaverError
 /**
     Flags to define the behavior of a #GtkSourceFileSaver.
 */
+@gidGir("FileSaverFlags")
 enum GtkSourceFileSaverFlags : uint
 {
   /**
@@ -195,6 +210,7 @@ enum GtkSourceFileSaverFlags : uint
     The alignment mode of the renderer, when a cell spans multiple lines (due to
     text wrapping).
 */
+@gidGir("GutterRendererAlignmentMode")
 enum GtkSourceGutterRendererAlignmentMode
 {
   /**
@@ -214,6 +230,7 @@ enum GtkSourceGutterRendererAlignmentMode
 }
 
 /** */
+@gidGir("GutterRendererState")
 enum GtkSourceGutterRendererState : uint
 {
   /**
@@ -241,6 +258,7 @@ enum GtkSourceGutterRendererState : uint
 }
 
 /** */
+@gidGir("NewlineType")
 enum GtkSourceNewlineType
 {
   /**
@@ -261,6 +279,7 @@ enum GtkSourceNewlineType
 }
 
 /** */
+@gidGir("SmartHomeEndType")
 enum GtkSourceSmartHomeEndType
 {
   /**
@@ -290,6 +309,7 @@ enum GtkSourceSmartHomeEndType
 }
 
 /** */
+@gidGir("SortFlags")
 enum GtkSourceSortFlags : uint
 {
   /**
@@ -319,6 +339,7 @@ enum GtkSourceSortFlags : uint
     If a line contains only white spaces (no text), the white spaces match both
     [gid.gtksource5.types.SpaceLocationFlags.Leading] and [gid.gtksource5.types.SpaceLocationFlags.Trailing].
 */
+@gidGir("SpaceLocationFlags")
 enum GtkSourceSpaceLocationFlags : uint
 {
   /**
@@ -351,6 +372,7 @@ enum GtkSourceSpaceLocationFlags : uint
 /**
     #GtkSourceSpaceTypeFlags contains flags for white space types.
 */
+@gidGir("SpaceTypeFlags")
 enum GtkSourceSpaceTypeFlags : uint
 {
   /**
@@ -387,6 +409,7 @@ enum GtkSourceSpaceTypeFlags : uint
 }
 
 /** */
+@gidGir("ViewGutterPosition")
 enum GtkSourceViewGutterPosition
 {
   /**
@@ -432,6 +455,7 @@ struct GtkSourceBufferClass
 }
 
 /** */
+@gidGir("BufferPrivate")
 struct GtkSourceBufferPrivate;
 
 /** */
@@ -499,6 +523,7 @@ struct GtkSourceCompletionContextClass
 }
 
 /** */
+@gidGir("CompletionContextPrivate")
 struct GtkSourceCompletionContextPrivate;
 
 /** */
@@ -522,6 +547,7 @@ struct GtkSourceCompletionInfoClass
 }
 
 /** */
+@gidGir("CompletionInfoPrivate")
 struct GtkSourceCompletionInfoPrivate;
 
 /** */
@@ -545,9 +571,11 @@ struct GtkSourceCompletionItemClass
 }
 
 /** */
+@gidGir("CompletionItemPrivate")
 struct GtkSourceCompletionItemPrivate;
 
 /** */
+@gidGir("CompletionPrivate")
 struct GtkSourceCompletionPrivate;
 
 /** */
@@ -733,6 +761,7 @@ struct GtkSourceCompletionWordsClass
 }
 
 /** */
+@gidGir("CompletionWordsPrivate")
 struct GtkSourceCompletionWordsPrivate;
 
 /** */
@@ -779,9 +808,11 @@ struct GtkSourceFileLoaderClass
 }
 
 /** */
+@gidGir("FileLoaderPrivate")
 struct GtkSourceFileLoaderPrivate;
 
 /** */
+@gidGir("FilePrivate")
 struct GtkSourceFilePrivate;
 
 /** */
@@ -805,6 +836,7 @@ struct GtkSourceFileSaverClass
 }
 
 /** */
+@gidGir("FileSaverPrivate")
 struct GtkSourceFileSaverPrivate;
 
 /** */
@@ -828,6 +860,7 @@ struct GtkSourceGutterClass
 }
 
 /** */
+@gidGir("GutterPrivate")
 struct GtkSourceGutterPrivate;
 
 /** */
@@ -901,9 +934,11 @@ struct GtkSourceGutterRendererPixbufClass
 }
 
 /** */
+@gidGir("GutterRendererPixbufPrivate")
 struct GtkSourceGutterRendererPixbufPrivate;
 
 /** */
+@gidGir("GutterRendererPrivate")
 struct GtkSourceGutterRendererPrivate;
 
 /** */
@@ -927,6 +962,7 @@ struct GtkSourceGutterRendererTextClass
 }
 
 /** */
+@gidGir("GutterRendererTextPrivate")
 struct GtkSourceGutterRendererTextPrivate;
 
 /** */
@@ -970,9 +1006,11 @@ struct GtkSourceLanguageManagerClass
 }
 
 /** */
+@gidGir("LanguageManagerPrivate")
 struct GtkSourceLanguageManagerPrivate;
 
 /** */
+@gidGir("LanguagePrivate")
 struct GtkSourceLanguagePrivate;
 
 /** */
@@ -1023,6 +1061,7 @@ struct GtkSourceMarkAttributesClass
 }
 
 /** */
+@gidGir("MarkAttributesPrivate")
 struct GtkSourceMarkAttributesPrivate;
 
 /** */
@@ -1036,6 +1075,7 @@ struct GtkSourceMarkClass
 }
 
 /** */
+@gidGir("MarkPrivate")
 struct GtkSourceMarkPrivate;
 
 /** */
@@ -1059,6 +1099,7 @@ struct GtkSourcePrintCompositorClass
 }
 
 /** */
+@gidGir("PrintCompositorPrivate")
 struct GtkSourcePrintCompositorPrivate;
 
 /** */
@@ -1115,6 +1156,7 @@ struct GtkSourceSearchContextClass
 }
 
 /** */
+@gidGir("SearchContextPrivate")
 struct GtkSourceSearchContextPrivate;
 
 /** */
@@ -1138,6 +1180,7 @@ struct GtkSourceSearchSettingsClass
 }
 
 /** */
+@gidGir("SearchSettingsPrivate")
 struct GtkSourceSearchSettingsPrivate;
 
 /** */
@@ -1161,12 +1204,14 @@ struct GtkSourceSpaceDrawerClass
 }
 
 /** */
+@gidGir("SpaceDrawerPrivate")
 struct GtkSourceSpaceDrawerPrivate;
 
 /** */
 struct GtkSourceStyle;
 
 /** */
+@gidGir("StyleClass")
 struct GtkSourceStyleClass;
 
 /** */
@@ -1263,9 +1308,11 @@ struct GtkSourceStyleSchemeManagerClass
 }
 
 /** */
+@gidGir("StyleSchemeManagerPrivate")
 struct GtkSourceStyleSchemeManagerPrivate;
 
 /** */
+@gidGir("StyleSchemePrivate")
 struct GtkSourceStyleSchemePrivate;
 
 /** */
@@ -1358,6 +1405,7 @@ struct GtkSourceViewClass
 }
 
 /** */
+@gidGir("ViewPrivate")
 struct GtkSourceViewPrivate;
 
 alias extern(C) GMountOperation* function(GtkSourceFile* file, void* userdata) GtkSourceMountOperationFactory;

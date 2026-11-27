@@ -64,6 +64,7 @@ import gid.gtk4.widget;
     See also: [gid.adw1.view_switcher.ViewSwitcher], [gid.adw1.view_switcher_bar.ViewSwitcherBar],
     [gid.adw1.inline_view_switcher.InlineViewSwitcher].
 */
+@gidGir("ViewSwitcherSidebar", "ViewSwitcherSidebarClass")
 class ViewSwitcherSidebar : gid.gtk4.widget.Widget
 {
 

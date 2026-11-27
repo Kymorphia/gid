@@ -6,7 +6,14 @@ public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstvideo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstGL";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /** */
+@gidGir("GLAPI")
 enum GstGLAPI : uint
 {
   /**
@@ -42,6 +49,7 @@ enum GstGLAPI : uint
 }
 
 /** */
+@gidGir("GLBaseMemoryError")
 enum GstGLBaseMemoryError
 {
   /**
@@ -62,6 +70,7 @@ enum GstGLBaseMemoryError
 }
 
 /** */
+@gidGir("GLBaseMemoryTransfer")
 enum GstGLBaseMemoryTransfer : uint
 {
   /**
@@ -78,6 +87,7 @@ enum GstGLBaseMemoryTransfer : uint
 }
 
 /** */
+@gidGir("GLConfigCaveat")
 enum GstGLConfigCaveat
 {
   /**
@@ -97,6 +107,7 @@ enum GstGLConfigCaveat
 }
 
 /** */
+@gidGir("GLConfigSurfaceType")
 enum GstGLConfigSurfaceType : uint
 {
   /**
@@ -123,6 +134,7 @@ enum GstGLConfigSurfaceType : uint
 /**
     OpenGL context errors.
 */
+@gidGir("GLContextError")
 enum GstGLContextError
 {
   /**
@@ -157,6 +169,7 @@ enum GstGLContextError
 }
 
 /** */
+@gidGir("GLDisplayType")
 enum GstGLDisplayType : uint
 {
   /**
@@ -237,6 +250,7 @@ enum GstGLDisplayType : uint
 }
 
 /** */
+@gidGir("GLDrmFormatFlags")
 enum GstGLDrmFormatFlags : uint
 {
   /**
@@ -262,6 +276,7 @@ enum GstGLDrmFormatFlags : uint
 }
 
 /** */
+@gidGir("GLFormat")
 enum GstGLFormat
 {
   /**
@@ -367,6 +382,7 @@ enum GstGLFormat
 }
 
 /** */
+@gidGir("GLPlatform")
 enum GstGLPlatform : uint
 {
   /**
@@ -407,6 +423,7 @@ enum GstGLPlatform : uint
 }
 
 /** */
+@gidGir("GLQueryType")
 enum GstGLQueryType
 {
   /**
@@ -428,6 +445,7 @@ enum GstGLQueryType
 /**
     Compilation stage that caused an error
 */
+@gidGir("GLSLError")
 enum GstGLSLError
 {
   /**
@@ -449,6 +467,7 @@ enum GstGLSLError
 /**
     GLSL profiles
 */
+@gidGir("GLSLProfile")
 enum GstGLSLProfile : uint
 {
   /**
@@ -480,6 +499,7 @@ enum GstGLSLProfile : uint
 /**
     GLSL version list
 */
+@gidGir("GLSLVersion")
 enum GstGLSLVersion
 {
   /**
@@ -571,6 +591,7 @@ enum GstGLSLVersion
 /**
     Output anaglyph type to generate when downmixing to mono
 */
+@gidGir("GLStereoDownmix")
 enum GstGLStereoDownmix
 {
   /**
@@ -596,6 +617,7 @@ enum GstGLStereoDownmix
     [gid.gstgl1.global.glValueSetTextureTarget] functions can be used for handling texture
     targets with #GValue's when e.g. dealing with #GstCaps.
 */
+@gidGir("GLTextureTarget")
 enum GstGLTextureTarget
 {
   /**
@@ -622,6 +644,7 @@ enum GstGLTextureTarget
 }
 
 /** */
+@gidGir("GLUploadReturn")
 enum GstGLUploadReturn
 {
   /**
@@ -651,6 +674,7 @@ enum GstGLUploadReturn
 }
 
 /** */
+@gidGir("GLWindowError")
 enum GstGLWindowError
 {
   /**
@@ -847,6 +871,7 @@ struct GstGLBaseFilterClass
 }
 
 /** */
+@gidGir("GLBaseFilterPrivate")
 struct GstGLBaseFilterPrivate;
 
 /**
@@ -1035,6 +1060,7 @@ struct GstGLBaseMixerPadClass
 }
 
 /** */
+@gidGir("GLBaseMixerPrivate")
 struct GstGLBaseMixerPrivate;
 
 /**
@@ -1113,6 +1139,7 @@ struct GstGLBaseSrcClass
 }
 
 /** */
+@gidGir("GLBaseSrcPrivate")
 struct GstGLBaseSrcPrivate;
 
 /**
@@ -1228,6 +1255,7 @@ struct GstGLBufferPoolClass
 }
 
 /** */
+@gidGir("GLBufferPoolPrivate")
 struct GstGLBufferPoolPrivate;
 
 /**
@@ -1293,6 +1321,7 @@ struct GstGLColorConvertClass
 }
 
 /** */
+@gidGir("GLColorConvertPrivate")
 struct GstGLColorConvertPrivate;
 
 /**
@@ -1408,6 +1437,7 @@ struct GstGLContextClass
 }
 
 /** */
+@gidGir("GLContextPrivate")
 struct GstGLContextPrivate;
 
 /**
@@ -1473,6 +1503,7 @@ struct GstGLDisplayClass
 }
 
 /** */
+@gidGir("GLDisplayPrivate")
 struct GstGLDisplayPrivate;
 
 /**
@@ -1634,6 +1665,7 @@ struct GstGLFramebufferClass
 }
 
 /** */
+@gidGir("GLFramebufferPrivate")
 struct GstGLFramebufferPrivate;
 
 /**
@@ -1642,6 +1674,7 @@ struct GstGLFramebufferPrivate;
     Each field is named exactly the same as the OpenGL function without the
     `gl` prefix.
 */
+@gidGir("GLFuncs")
 struct GstGLFuncs;
 
 /**
@@ -1859,6 +1892,7 @@ struct GstGLMixerPadClass
 }
 
 /** */
+@gidGir("GLMixerPrivate")
 struct GstGLMixerPrivate;
 
 /**
@@ -2053,6 +2087,7 @@ struct GstGLSLStageClass
 }
 
 /** */
+@gidGir("GLSLStagePrivate")
 struct GstGLSLStagePrivate;
 
 /** */
@@ -2079,6 +2114,7 @@ struct GstGLShaderClass
 }
 
 /** */
+@gidGir("GLShaderPrivate")
 struct GstGLShaderPrivate;
 
 /**
@@ -2181,6 +2217,7 @@ struct GstGLUploadClass
 }
 
 /** */
+@gidGir("GLUploadPrivate")
 struct GstGLUploadPrivate;
 
 /** */
@@ -2293,6 +2330,7 @@ struct GstGLViewConvertClass
 }
 
 /** */
+@gidGir("GLViewConvertPrivate")
 struct GstGLViewConvertPrivate;
 
 /**
@@ -2461,6 +2499,7 @@ struct GstGLWindowClass
 }
 
 /** */
+@gidGir("GLWindowPrivate")
 struct GstGLWindowPrivate;
 
 alias extern(C) void function(GstGLAllocationParams* src, GstGLAllocationParams* dest) GstGLAllocationParamsCopyFunc;

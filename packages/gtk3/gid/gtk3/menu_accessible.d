@@ -14,6 +14,7 @@ import gid.gtk3.menu_shell_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("MenuAccessible", "MenuAccessibleClass")
 class MenuAccessible : gid.gtk3.menu_shell_accessible.MenuShellAccessible
 {
 

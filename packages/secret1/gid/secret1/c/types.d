@@ -5,9 +5,16 @@ public import gid.core.basictypes;
 public import gid.gobject2.c.types;
 public import gid.gio2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Secret";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1";
+
 /**
     Flags which determine which parts of the #SecretBackend are initialized.
 */
+@gidGir("BackendFlags")
 enum SecretBackendFlags
 {
   /**
@@ -31,6 +38,7 @@ enum SecretBackendFlags
 /**
     Flags for [gid.secret1.collection.Collection.create].
 */
+@gidGir("CollectionCreateFlags")
 enum SecretCollectionCreateFlags : uint
 {
   /**
@@ -42,6 +50,7 @@ enum SecretCollectionCreateFlags : uint
 /**
     Flags which determine which parts of the #SecretCollection proxy are initialized.
 */
+@gidGir("CollectionFlags")
 enum SecretCollectionFlags : uint
 {
   /**
@@ -61,6 +70,7 @@ enum SecretCollectionFlags : uint
     None of the errors are appropriate for display to the user. It is up to the
     application to handle them appropriately.
 */
+@gidGir("Error")
 enum SecretError
 {
   /**
@@ -117,6 +127,7 @@ enum SecretError
 /**
     Flags for [gid.secret1.item.Item.create].
 */
+@gidGir("ItemCreateFlags")
 enum SecretItemCreateFlags : uint
 {
   /**
@@ -133,6 +144,7 @@ enum SecretItemCreateFlags : uint
 /**
     Flags which determine which parts of the #SecretItem proxy are initialized.
 */
+@gidGir("ItemFlags")
 enum SecretItemFlags : uint
 {
   /**
@@ -153,6 +165,7 @@ enum SecretItemFlags : uint
     types simply define standard ways to store integer and boolean values as
     strings.
 */
+@gidGir("SchemaAttributeType")
 enum SecretSchemaAttributeType
 {
   /**
@@ -174,6 +187,7 @@ enum SecretSchemaAttributeType
 /**
     Flags for a #SecretSchema definition.
 */
+@gidGir("SchemaFlags")
 enum SecretSchemaFlags : uint
 {
   /**
@@ -247,6 +261,7 @@ enum SecretSchemaFlags : uint
         </tr>
     </table>
 */
+@gidGir("SchemaType")
 enum SecretSchemaType
 {
   /**
@@ -264,6 +279,7 @@ enum SecretSchemaType
 /**
     Various flags to be used with [gid.secret1.service.Service.search] and [gid.secret1.service.Service.searchSync].
 */
+@gidGir("SearchFlags")
 enum SecretSearchFlags : uint
 {
   /**
@@ -291,6 +307,7 @@ enum SecretSearchFlags : uint
     Flags which determine which parts of the #SecretService proxy are initialized
     during a [gid.secret1.service.Service.get] or [gid.secret1.service.Service.open] operation.
 */
+@gidGir("ServiceFlags")
 enum SecretServiceFlags : uint
 {
   /**
@@ -416,6 +433,7 @@ struct SecretCollectionClass
 }
 
 /** */
+@gidGir("CollectionPrivate")
 struct SecretCollectionPrivate;
 
 /**
@@ -464,6 +482,7 @@ struct SecretItemClass
 }
 
 /** */
+@gidGir("ItemPrivate")
 struct SecretItemPrivate;
 
 /**
@@ -506,6 +525,7 @@ struct SecretPromptClass
 }
 
 /** */
+@gidGir("PromptPrivate")
 struct SecretPromptPrivate;
 
 /**
@@ -760,6 +780,7 @@ struct SecretServiceClass
 }
 
 /** */
+@gidGir("ServicePrivate")
 struct SecretServicePrivate;
 
 /**

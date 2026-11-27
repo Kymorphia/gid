@@ -40,6 +40,7 @@ import gid.gtk4.widget;
     
     Starting from GTK 4.12, [gid.gtk4.viewport.Viewport] uses the [gid.gtk4.types.AccessibleRole.Generic] role.
 */
+@gidGir("Viewport")
 class Viewport : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
 {
 

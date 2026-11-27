@@ -11,6 +11,7 @@ import gid.gst1.types;
 /**
     Opaque structure.
 */
+@gidGir("ParseContext")
 class ParseContext : gid.gobject2.boxed.BoxedWrap!(gst_parse_context_get_type)
 {
 

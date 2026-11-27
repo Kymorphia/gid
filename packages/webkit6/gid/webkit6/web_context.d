@@ -46,6 +46,7 @@ import gid.webkit6.user_message;
     to set the policy [gid.webkit6.types.TLSErrorsPolicy.Ignore]; however, this is
     not appropriate for Internet applications.
 */
+@gidGir("WebContext", "WebContextClass")
 class WebContext : gid.gobject2.object.ObjectWrap
 {
 

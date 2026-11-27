@@ -17,6 +17,7 @@ import gid.gobject2.types;
     internal type used to coordinate the different classes implemented
     by a TLS backend.
 */
+@gidGir("TlsBackend", "TlsBackendInterface")
 interface TlsBackend : GidWrap
 {
 

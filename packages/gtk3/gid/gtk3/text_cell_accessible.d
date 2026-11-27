@@ -18,6 +18,7 @@ import gid.gtk3.renderer_cell_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("TextCellAccessible", "TextCellAccessibleClass")
 class TextCellAccessible : gid.gtk3.renderer_cell_accessible.RendererCellAccessible, gid.atk1.text.Text
 {
 

@@ -113,6 +113,7 @@ import gid.gstcheck1.types;
     gst_harness_push_from_src (h);
     ```
 */
+@gidGir("Harness")
 class Harness : StructWrap!(GstHarness)
 {
   /**

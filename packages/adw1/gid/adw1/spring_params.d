@@ -40,6 +40,7 @@ import gid.gobject2.boxed;
     
     As such
 */
+@gidGir("SpringParams")
 class SpringParams : gid.gobject2.boxed.BoxedWrap!(adw_spring_params_get_type)
 {
 

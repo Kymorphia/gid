@@ -59,6 +59,7 @@ import gid.gtksource5.view;
     [gid.gtksource5.gutter_renderer.GutterRenderer.alignCell] for a given line number with the
     width and height measurement of the content they width to render.
 */
+@gidGir("GutterRenderer", "GutterRendererClass")
 class GutterRenderer : gid.gtk4.widget.Widget
 {
 

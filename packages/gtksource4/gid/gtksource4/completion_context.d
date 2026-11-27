@@ -16,6 +16,7 @@ import gid.gtksource4.completion_provider;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("CompletionContext", "CompletionContextClass")
 class CompletionContext : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

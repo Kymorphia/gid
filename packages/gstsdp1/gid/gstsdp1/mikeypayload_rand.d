@@ -11,6 +11,7 @@ import gid.gstsdp1.types;
 /**
     The RAND payload consists of a (pseudo-)random bit-string
 */
+@gidGir("MIKEYPayloadRAND")
 class MIKEYPayloadRAND : StructWrap!(GstMIKEYPayloadRAND)
 {
   /**

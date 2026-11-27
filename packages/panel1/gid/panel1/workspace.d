@@ -32,6 +32,7 @@ import gid.panel1.types;
 import gid.panel1.workbench;
 
 /** */
+@gidGir("Workspace", "WorkspaceClass")
 class Workspace : gid.adw1.application_window.ApplicationWindow
 {
 

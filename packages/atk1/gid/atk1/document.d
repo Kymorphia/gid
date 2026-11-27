@@ -24,6 +24,7 @@ import gid.gobject2.object;
     cases where one document contains "embedded content" which can
     reasonably be considered a document in its own right.
 */
+@gidGir("Document", "DocumentIface")
 interface Document : GidWrap
 {
 

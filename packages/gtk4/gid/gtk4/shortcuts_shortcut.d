@@ -26,6 +26,7 @@ import gid.gtk4.widget;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("ShortcutsShortcut", "ShortcutsShortcutClass")
 class ShortcutsShortcut : gid.gtk4.widget.Widget
 {
 

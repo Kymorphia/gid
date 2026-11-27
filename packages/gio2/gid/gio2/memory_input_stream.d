@@ -22,6 +22,7 @@ import gid.gobject2.object;
     As of GLib 2.34, [gid.gio2.memory_input_stream.MemoryInputStream] implements
     [gid.gio2.pollable_input_stream.PollableInputStream].
 */
+@gidGir("MemoryInputStream", "MemoryInputStreamClass")
 class MemoryInputStream : gid.gio2.input_stream.InputStream, gid.gio2.pollable_input_stream.PollableInputStream, gid.gio2.seekable.Seekable
 {
 

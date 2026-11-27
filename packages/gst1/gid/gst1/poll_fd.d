@@ -10,6 +10,7 @@ import gid.gst1.types;
 /**
     A file descriptor object.
 */
+@gidGir("PollFD")
 struct PollFD
 {
   /**

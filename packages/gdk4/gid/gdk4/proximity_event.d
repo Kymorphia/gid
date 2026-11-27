@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to the proximity of a tool to a device.
 */
+@gidGir("ProximityEvent")
 class ProximityEvent : gid.gdk4.event.Event
 {
 

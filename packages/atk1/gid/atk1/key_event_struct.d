@@ -10,6 +10,7 @@ import gid.core.utils;
 /**
     Encapsulates information about a key event.
 */
+@gidGir("KeyEventStruct")
 class KeyEventStruct : StructWrap!(AtkKeyEventStruct)
 {
   /**

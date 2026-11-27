@@ -27,6 +27,7 @@ import gid.gobject2.object;
     interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
     file or the `GioUnix-2.0` GIR namespace when using it.
 */
+@gidGir("FDMessage", "FDMessageClass")
 class FDMessage : gid.gio2.socket_control_message.SocketControlMessage
 {
 

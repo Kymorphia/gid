@@ -63,6 +63,7 @@ import gid.gtk4.widget;
 
     Deprecated: Use [gid.gtk4.grid_view.GridView] instead
 */
+@gidGir("IconView")
 class IconView : gid.gtk4.widget.Widget, gid.gtk4.cell_layout.CellLayout, gid.gtk4.scrollable.Scrollable
 {
 

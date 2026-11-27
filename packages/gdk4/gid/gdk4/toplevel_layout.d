@@ -21,6 +21,7 @@ import gid.gobject2.object;
     to the user in various states (maximized, on all workspaces,
     etc).
 */
+@gidGir("ToplevelLayout")
 class ToplevelLayout : gid.gobject2.boxed.BoxedWrap!(gdk_toplevel_layout_get_type)
 {
 

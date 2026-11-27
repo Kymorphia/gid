@@ -148,6 +148,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.spin_button.SpinButton] uses the [gid.gtk4.types.AccessibleRole.SpinButton] role.
 */
+@gidGir("SpinButton")
 class SpinButton : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange, gid.gtk4.cell_editable.CellEditable, gid.gtk4.editable.Editable, gid.gtk4.orientable.Orientable
 {
 

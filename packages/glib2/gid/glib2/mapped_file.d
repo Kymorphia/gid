@@ -15,6 +15,7 @@ import gid.gobject2.boxed;
     [gid.glib2.mapped_file.MappedFile.new_]. It has only private members and should
     not be accessed directly.
 */
+@gidGir("MappedFile")
 class MappedFile : gid.gobject2.boxed.BoxedWrap!(g_mapped_file_get_type)
 {
 

@@ -16,6 +16,7 @@ import gid.gtk3.types;
     of #GtkTargetPair and should be treated as
     opaque.
 */
+@gidGir("TargetList")
 class TargetList : gid.gobject2.boxed.BoxedWrap!(gtk_target_list_get_type)
 {
 

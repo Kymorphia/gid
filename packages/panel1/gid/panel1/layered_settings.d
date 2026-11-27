@@ -19,6 +19,7 @@ import gid.glib2.variant_type;
 import gid.gobject2.value;
 
 /** */
+@gidGir("LayeredSettings", "LayeredSettingsClass")
 class LayeredSettings : gid.gobject2.object.ObjectWrap
 {
 

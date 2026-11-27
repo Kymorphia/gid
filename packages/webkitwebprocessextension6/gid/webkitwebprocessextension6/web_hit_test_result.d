@@ -17,6 +17,7 @@ import gid.webkitwebprocessextension6.types;
     WebKitWebHitTestResult extends #WebKitHitTestResult to provide information
     about the #WebKitDOMNode in the coordinates of the Hit Test.
 */
+@gidGir("WebHitTestResult", "WebHitTestResultClass")
 class WebHitTestResult : gid.gobject2.object.ObjectWrap
 {
 

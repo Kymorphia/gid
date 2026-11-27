@@ -19,6 +19,7 @@ import gid.gobject2.object;
     [gid.gio2.action.Action] interface. This is the easiest way to create an action for
     purposes of adding it to a [gid.gio2.simple_action_group.SimpleActionGroup].
 */
+@gidGir("SimpleAction")
 class SimpleAction : gid.gobject2.object.ObjectWrap, gid.gio2.action.Action
 {
 

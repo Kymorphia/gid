@@ -12,6 +12,7 @@ import gid.gdk3.window;
 /**
     Generated when the pointer moves.
 */
+@gidGir("EventMotion")
 class EventMotion : StructWrap!(GdkEventMotion, gdk_event_copy, gdk_event_free)
 {
   /**

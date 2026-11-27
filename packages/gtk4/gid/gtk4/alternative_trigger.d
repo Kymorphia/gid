@@ -17,6 +17,7 @@ import gid.gtk4.types;
     
     This can be cascaded to combine more than two triggers.
 */
+@gidGir("AlternativeTrigger", "AlternativeTriggerClass")
 class AlternativeTrigger : gid.gtk4.shortcut_trigger.ShortcutTrigger
 {
 

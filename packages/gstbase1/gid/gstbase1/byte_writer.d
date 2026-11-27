@@ -17,6 +17,7 @@ import gid.gstbase1.types;
     32 and 64 bits. It also provides functions to write/read NUL-terminated strings
     in various character encodings.
 */
+@gidGir("ByteWriter")
 class ByteWriter : StructWrap!(GstByteWriter)
 {
   /**

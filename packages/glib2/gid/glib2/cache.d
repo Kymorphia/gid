@@ -19,6 +19,7 @@ import gid.glib2.types;
 
     Deprecated: Use a #GHashTable instead
 */
+@gidGir("Cache")
 class Cache : OpaqueWrap!(GCache*, void, void)
 {
 

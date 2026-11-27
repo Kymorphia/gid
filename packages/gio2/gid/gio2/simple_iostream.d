@@ -24,6 +24,7 @@ import gid.gobject2.object;
     (from `gio-unix-2.0.pc` / `GioUnix-2.0`), and you want to
     take advantage of the methods provided by [gid.gio2.iostream.IOStream].
 */
+@gidGir("SimpleIOStream")
 class SimpleIOStream : gid.gio2.iostream.IOStream
 {
 

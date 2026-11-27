@@ -106,6 +106,7 @@ import gid.gtk4.types;
     - If the gesture has [gid.gtk4.types.PropagationPhase.None], ensuring events of type
       [gid.gdk4.types.EventType.TouchpadSwipe] and [gid.gdk4.types.EventType.TouchpadPinch] are handled by the [gid.gtk4.gesture.Gesture]
 */
+@gidGir("Gesture", "GestureClass")
 class Gesture : gid.gtk4.event_controller.EventController
 {
 

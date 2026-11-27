@@ -11,6 +11,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("Mark", "MarkClass")
 class Mark : gid.gtk3.text_mark.TextMark
 {
 

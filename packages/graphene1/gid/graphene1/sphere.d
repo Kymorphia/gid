@@ -14,6 +14,7 @@ import gid.graphene1.vec3;
 /**
     A sphere, represented by its center and radius.
 */
+@gidGir("Sphere")
 class Sphere : gid.gobject2.boxed.BoxedWrap!(graphene_sphere_get_type)
 {
   /**

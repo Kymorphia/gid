@@ -71,6 +71,7 @@ import gid.gtk4.types;
     controllable through the [gid.gtk4.settings.Settings.gtkRecentFilesMaxAge]
     property.
 */
+@gidGir("RecentManager", "RecentManagerClass")
 class RecentManager : gid.gobject2.object.ObjectWrap
 {
 

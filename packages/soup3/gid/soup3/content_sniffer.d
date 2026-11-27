@@ -23,6 +23,7 @@ import gid.soup3.types;
     content sniffing to a session with [gid.soup3.session.Session.addFeature] or
     [gid.soup3.session.Session.addFeatureByType].
 */
+@gidGir("ContentSniffer", "ContentSnifferClass")
 class ContentSniffer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

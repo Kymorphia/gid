@@ -13,6 +13,7 @@ import gid.webkitwebprocessextension6.types;
 import gid.webkitwebprocessextension6.web_page;
 
 /** */
+@gidGir("ScriptWorld", "ScriptWorldClass")
 class ScriptWorld : gid.gobject2.object.ObjectWrap
 {
 

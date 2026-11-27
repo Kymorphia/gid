@@ -13,6 +13,7 @@ import gid.gobject2.boxed;
     A List of references, as per the References or In-Reply-To header
     fields.
 */
+@gidGir("References")
 class References : gid.gobject2.boxed.BoxedWrap!(g_mime_references_get_type)
 {
 

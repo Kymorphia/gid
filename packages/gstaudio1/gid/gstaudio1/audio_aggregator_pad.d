@@ -15,6 +15,7 @@ import gid.gstbase1.aggregator_pad;
 /**
     The default implementation of GstPad used with #GstAudioAggregator
 */
+@gidGir("AudioAggregatorPad", "AudioAggregatorPadClass")
 class AudioAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
 {
 

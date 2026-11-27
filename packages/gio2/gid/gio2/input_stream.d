@@ -28,6 +28,7 @@ import gid.gobject2.object;
     
     All of these functions have async variants too.
 */
+@gidGir("InputStream", "InputStreamClass")
 class InputStream : gid.gobject2.object.ObjectWrap
 {
 

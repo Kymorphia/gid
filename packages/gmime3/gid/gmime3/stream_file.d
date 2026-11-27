@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     A #GMimeStream wrapper around standard-c FILE pointers.
 */
+@gidGir("StreamFile", "StreamFileClass")
 class StreamFile : gid.gmime3.stream.Stream
 {
 

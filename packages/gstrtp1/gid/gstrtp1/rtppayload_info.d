@@ -10,6 +10,7 @@ import gid.gstrtp1.types;
 /**
     Structure holding default payload type information.
 */
+@gidGir("RTPPayloadInfo")
 class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
 {
   /**

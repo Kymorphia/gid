@@ -27,6 +27,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.filter_list_model.FilterListModel] passes through sections from the underlying model.
 */
+@gidGir("FilterListModel", "FilterListModelClass")
 class FilterListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel
 {
 

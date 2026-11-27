@@ -23,6 +23,7 @@ import gid.gtk4.types;
     an icon to expand or collapse a row or [gid.gtk4.tree_list_row_sorter.TreeListRowSorter] that
     makes it possible to sort trees properly.
 */
+@gidGir("TreeListRow", "TreeListRowClass")
 class TreeListRow : gid.gobject2.object.ObjectWrap
 {
 

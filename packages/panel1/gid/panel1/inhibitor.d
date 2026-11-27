@@ -10,6 +10,7 @@ import gid.panel1.c.types;
 import gid.panel1.types;
 
 /** */
+@gidGir("Inhibitor", "InhibitorClass")
 class Inhibitor : gid.gobject2.object.ObjectWrap
 {
 

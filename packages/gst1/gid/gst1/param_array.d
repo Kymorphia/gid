@@ -12,6 +12,7 @@ import gid.gst1.types;
     A fundamental type that describes a #GParamSpec for arrays of
     values
 */
+@gidGir("ParamArray")
 class ParamArray : gid.gobject2.param_spec.ParamSpec
 {
 

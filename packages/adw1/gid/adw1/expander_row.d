@@ -57,6 +57,7 @@ import gid.gtk4.widget;
     When used together with the `.monospace` style class, only the subtitle
     becomes monospace, not the title or any extra widgets.
 */
+@gidGir("ExpanderRow", "ExpanderRowClass")
 class ExpanderRow : gid.adw1.preferences_row.PreferencesRow
 {
 

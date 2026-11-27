@@ -14,6 +14,7 @@ import gid.gtksource4.types;
 import gid.gtksource4.view;
 
 /** */
+@gidGir("PrintCompositor", "PrintCompositorClass")
 class PrintCompositor : gid.gobject2.object.ObjectWrap
 {
 

@@ -11,6 +11,7 @@ import gid.gst1.types;
 /**
     A format definition
 */
+@gidGir("FormatDefinition")
 class FormatDefinition : StructWrap!(GstFormatDefinition)
 {
   /**

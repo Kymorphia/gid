@@ -47,6 +47,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.clamp.Clamp] has a single CSS node with name `clamp`.
 */
+@gidGir("Clamp", "ClampClass")
 class Clamp : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

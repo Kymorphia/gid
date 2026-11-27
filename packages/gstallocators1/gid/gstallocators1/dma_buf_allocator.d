@@ -14,6 +14,7 @@ import gid.gstallocators1.types;
 /**
     Base class for allocators with dmabuf-backed memory
 */
+@gidGir("DmaBufAllocator", "DmaBufAllocatorClass")
 class DmaBufAllocator : gid.gstallocators1.fd_allocator.FdAllocator
 {
 

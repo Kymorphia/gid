@@ -15,6 +15,7 @@ import gid.gtk4.widget;
 /**
     Invokes a callback.
 */
+@gidGir("CallbackAction", "CallbackActionClass")
 class CallbackAction : gid.gtk4.shortcut_action.ShortcutAction
 {
 

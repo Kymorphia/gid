@@ -13,6 +13,7 @@ import gid.javascriptcore6.types;
 /**
     JSCException represents a JavaScript exception.
 */
+@gidGir("Exception", "ExceptionClass")
 class ExceptionWrap : gid.gobject2.object.ObjectWrap
 {
 

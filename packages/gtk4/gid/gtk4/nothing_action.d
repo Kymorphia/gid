@@ -13,6 +13,7 @@ import gid.gtk4.types;
 /**
     Does nothing.
 */
+@gidGir("NothingAction", "NothingActionClass")
 class NothingAction : gid.gtk4.shortcut_action.ShortcutAction
 {
 

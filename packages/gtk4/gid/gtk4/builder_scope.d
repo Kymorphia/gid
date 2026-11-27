@@ -28,6 +28,7 @@ import gid.gtk4.types;
     may want to (partially) derive from or fall back to a [gid.gtk4.builder_cscope.BuilderCScope],
     as that class implements support for automatic lookups from C symbols.
 */
+@gidGir("BuilderScope", "BuilderScopeInterface")
 interface BuilderScope : GidWrap
 {
 

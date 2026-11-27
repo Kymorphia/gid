@@ -173,6 +173,7 @@ import gid.gobject2.boxed;
     thing according to the `data:` URI specification which GLib does not
     handle.
 */
+@gidGir("Uri")
 class Uri : gid.gobject2.boxed.BoxedWrap!(g_uri_get_type)
 {
 

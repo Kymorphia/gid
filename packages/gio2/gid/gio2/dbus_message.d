@@ -16,6 +16,7 @@ import gid.gobject2.object;
     A type for representing D-Bus messages that can be sent or received
     on a [gid.gio2.dbus_connection.DBusConnection].
 */
+@gidGir("DBusMessage")
 class DBusMessage : gid.gobject2.object.ObjectWrap
 {
 

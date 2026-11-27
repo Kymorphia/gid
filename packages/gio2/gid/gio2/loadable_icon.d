@@ -19,6 +19,7 @@ import gid.gobject2.object;
     [gid.gio2.loadable_icon.LoadableIcon] extends the [gid.gio2.icon.Icon] interface and adds the ability
     to load icons from streams.
 */
+@gidGir("LoadableIcon", "LoadableIconIface")
 interface LoadableIcon : gid.gio2.icon.Icon
 {
 

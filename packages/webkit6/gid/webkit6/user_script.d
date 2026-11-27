@@ -11,6 +11,7 @@ import gid.webkit6.types;
 /**
     A JavaScript snippet which can be injected in loaded pages.
 */
+@gidGir("UserScript")
 class UserScript : gid.gobject2.boxed.BoxedWrap!(webkit_user_script_get_type)
 {
 

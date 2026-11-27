@@ -34,6 +34,7 @@ import gid.gst1.types;
     See #GstBuffer for how the metadata can be added, retrieved and removed from
     buffers.
 */
+@gidGir("Meta")
 class Meta : StructWrap!(GstMeta)
 {
   /**

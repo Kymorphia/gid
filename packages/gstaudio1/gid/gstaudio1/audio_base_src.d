@@ -17,6 +17,7 @@ import gid.gstbase1.push_src;
     ::create_ringbuffer vmethod. This base class will then take care of
     reading samples from the ringbuffer, synchronisation and flushing.
 */
+@gidGir("AudioBaseSrc", "AudioBaseSrcClass")
 class AudioBaseSrc : gid.gstbase1.push_src.PushSrc
 {
 

@@ -17,6 +17,7 @@ import gid.gst1.types;
     A #GstSample is a small object containing data, a type, timing and
     extra arbitrary information.
 */
+@gidGir("Sample")
 class Sample : gid.gobject2.boxed.BoxedWrap!(gst_sample_get_type)
 {
 

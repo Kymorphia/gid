@@ -179,6 +179,7 @@ import std.typecons : isTuple;
     that, due to the restriction that the key of a dictionary entry must
     be a basic type, `{**}` is not a valid type string.
 */
+@gidGir("VariantType")
 class VariantType : BoxedWrap!g_variant_type_get_gtype
 {
 

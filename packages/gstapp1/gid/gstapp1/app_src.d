@@ -86,6 +86,7 @@ import gid.gstbase1.base_src;
     this call, no more buffers can be pushed into appsrc until a flushing seek
     occurs or the state of the appsrc has gone through READY.
 */
+@gidGir("AppSrc", "AppSrcClass")
 class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
 {
 

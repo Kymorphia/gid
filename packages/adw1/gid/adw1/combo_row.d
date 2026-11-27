@@ -71,6 +71,7 @@ import gid.gtk4.types;
     
     [gid.adw1.combo_row.ComboRow] uses the `enum@Gtk.AccessibleRole.combo-box` role.
 */
+@gidGir("ComboRow", "ComboRowClass")
 class ComboRow : gid.adw1.action_row.ActionRow
 {
 

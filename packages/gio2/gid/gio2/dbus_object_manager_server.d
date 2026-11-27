@@ -36,6 +36,7 @@ import gid.gobject2.object;
     intended to be used with [gid.gio2.dbus_object_manager_server.DBusObjectManagerServer] or any D-Bus
     object implementing the `org.freedesktop.DBus.ObjectManager` interface.
 */
+@gidGir("DBusObjectManagerServer", "DBusObjectManagerServerClass")
 class DBusObjectManagerServer : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object_manager.DBusObjectManager
 {
 

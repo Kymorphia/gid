@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     Contains information that is useful to compute the size of a toplevel.
 */
+@gidGir("ToplevelSize")
 class ToplevelSize : gid.gobject2.boxed.BoxedWrap!(gdk_toplevel_size_get_type)
 {
 

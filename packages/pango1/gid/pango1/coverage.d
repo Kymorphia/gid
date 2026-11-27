@@ -19,6 +19,7 @@ import gid.pango1.types;
     structure that is used to represent that information. It is an
     opaque structure with no public fields.
 */
+@gidGir("Coverage")
 class Coverage : gid.gobject2.object.ObjectWrap
 {
 

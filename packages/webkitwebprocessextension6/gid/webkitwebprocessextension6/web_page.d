@@ -27,6 +27,7 @@ import gid.webkitwebprocessextension6.web_hit_test_result;
 /**
     A loaded web page.
 */
+@gidGir("WebPage", "WebPageClass")
 class WebPage : gid.gobject2.object.ObjectWrap
 {
 

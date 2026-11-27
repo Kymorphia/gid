@@ -123,6 +123,7 @@ import gid.pango1.tab_array;
     
     [gid.gtk4.entry.Entry] uses the [gid.gtk4.types.AccessibleRole.TextBox] role.
 */
+@gidGir("Entry", "EntryClass")
 class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.gtk4.editable.Editable
 {
 

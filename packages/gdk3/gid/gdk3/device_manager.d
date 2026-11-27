@@ -128,6 +128,7 @@ import gid.gobject2.object;
     supersedes #GdkDeviceManager and should be preferred in newly
     written code.
 */
+@gidGir("DeviceManager")
 class DeviceManager : gid.gobject2.object.ObjectWrap
 {
 

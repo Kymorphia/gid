@@ -33,6 +33,7 @@ import gid.pango1.language;
     See [gid.gtk4.font_dialog_button.FontDialogButton] for a convenient control
     that uses [gid.gtk4.font_dialog.FontDialog] and presents the results.
 */
+@gidGir("FontDialog", "FontDialogClass")
 class FontDialog : gid.gobject2.object.ObjectWrap
 {
 

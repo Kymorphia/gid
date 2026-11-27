@@ -12,6 +12,7 @@ import gid.gstvideo1.types;
     #GstVideoResampler is a structure which holds the information
     required to perform various kinds of resampling filtering.
 */
+@gidGir("VideoResampler")
 class VideoResampler : StructWrap!(GstVideoResampler)
 {
   /**

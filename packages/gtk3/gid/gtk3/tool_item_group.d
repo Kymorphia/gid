@@ -28,6 +28,7 @@ import gid.pango1.types;
     
     GtkToolItemGroup has a single CSS node named toolitemgroup.
 */
+@gidGir("ToolItemGroup", "ToolItemGroupClass")
 class ToolItemGroup : gid.gtk3.container.Container, gid.gtk3.tool_shell.ToolShell
 {
 

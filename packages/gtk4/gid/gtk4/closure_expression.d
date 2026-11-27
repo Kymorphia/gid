@@ -14,6 +14,7 @@ import gid.gtk4.types;
     An expression using a custom [gid.gobject2.closure.Closure] to compute the value from
     its parameters.
 */
+@gidGir("ClosureExpression")
 class ClosureExpression : gid.gtk4.expression.Expression
 {
 

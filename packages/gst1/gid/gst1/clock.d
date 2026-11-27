@@ -86,6 +86,7 @@ import gid.gst1.types;
     number of samples to use when calibrating and #GstClock:window-threshold
     defines the minimum number of samples before the calibration is performed.
 */
+@gidGir("Clock", "ClockClass")
 class Clock : gid.gst1.object.ObjectWrap
 {
 

@@ -50,6 +50,7 @@ import gid.gtk3.widget;
       the return value are exactly as before, return true to show the window,
       false to not show it.
 */
+@gidGir("Tooltip")
 class Tooltip : gid.gobject2.object.ObjectWrap
 {
 

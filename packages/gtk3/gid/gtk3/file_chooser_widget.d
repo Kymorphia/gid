@@ -29,6 +29,7 @@ import gid.gtk3.types;
     
     GtkFileChooserWidget has a single CSS node with name filechooser.
 */
+@gidGir("FileChooserWidget", "FileChooserWidgetClass")
 class FileChooserWidget : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
 {
 

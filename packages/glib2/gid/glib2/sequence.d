@@ -12,6 +12,7 @@ import gid.glib2.types;
     The #GSequence struct is an opaque data type representing a
     [sequence](data-structures.html#scalable-lists) data type.
 */
+@gidGir("Sequence")
 class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
 {
 

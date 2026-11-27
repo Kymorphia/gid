@@ -87,6 +87,7 @@ import gid.gtk3.types;
       }
     ```
 */
+@gidGir("IconTheme", "IconThemeClass")
 class IconTheme : gid.gobject2.object.ObjectWrap
 {
 

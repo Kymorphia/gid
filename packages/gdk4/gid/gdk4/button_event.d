@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to a button on a pointer device.
 */
+@gidGir("ButtonEvent")
 class ButtonEvent : gid.gdk4.event.Event
 {
 

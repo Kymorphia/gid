@@ -18,6 +18,7 @@ import gid.gstvideo1.types;
 /**
     Convert stereoscopic/multiview video using fragment shaders.
 */
+@gidGir("GLViewConvert", "GLViewConvertClass")
 class GLViewConvert : gid.gst1.object.ObjectWrap
 {
 

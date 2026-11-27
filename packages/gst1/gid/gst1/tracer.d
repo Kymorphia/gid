@@ -18,6 +18,7 @@ import gid.gst1.types;
     [gid.gst1.global.tracingRegisterHook]. When invoked they receive hook specific
     contextual data, which they must not modify.
 */
+@gidGir("Tracer", "TracerClass")
 class Tracer : gid.gst1.object.ObjectWrap
 {
 

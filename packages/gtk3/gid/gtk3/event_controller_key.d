@@ -20,6 +20,7 @@ import gid.gtk3.widget;
     
     This object was added in 3.24.
 */
+@gidGir("EventControllerKey", "EventControllerKeyClass")
 class EventControllerKey : gid.gtk3.event_controller.EventController
 {
 

@@ -4,6 +4,12 @@ module gid.atk1.c.types;
 public import gid.core.basictypes;
 public import gid.gobject2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Atk";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     This is a singly-linked list (a #GSList) of #AtkAttribute. It is
     used by [gid.atk1.text.Text.getRunAttributes],
@@ -27,6 +33,7 @@ alias AtkState = ulong;
     Specifies how xy coordinates are to be interpreted. Used by functions such
     as [gid.atk1.component.Component.getPosition] and [gid.atk1.text.Text.getCharacterExtents]
 */
+@gidGir("CoordType")
 enum AtkCoordType
 {
   /**
@@ -50,6 +57,7 @@ enum AtkCoordType
 /**
     Describes the type of link
 */
+@gidGir("HyperlinkStateFlags")
 enum AtkHyperlinkStateFlags : uint
 {
   /**
@@ -61,6 +69,7 @@ enum AtkHyperlinkStateFlags : uint
 /**
     Specifies the type of a keyboard evemt.
 */
+@gidGir("KeyEventType")
 enum AtkKeyEventType
 {
   /**
@@ -86,6 +95,7 @@ enum AtkKeyEventType
     rendering layer a component is drawn into, which can help in making
     determinations of when components occlude one another.
 */
+@gidGir("Layer")
 enum AtkLayer
 {
   /**
@@ -135,6 +145,7 @@ enum AtkLayer
     for "notification" events, but it may be used for additional purposes
     in the future.
 */
+@gidGir("Live")
 enum AtkLive
 {
   /**
@@ -156,6 +167,7 @@ enum AtkLive
 /**
     Describes the type of the relation
 */
+@gidGir("RelationType")
 enum AtkRelationType
 {
   /**
@@ -308,6 +320,7 @@ enum AtkRelationType
     in ATK.  Other roles may be added at runtime, so an AtkRole >=
     [gid.atk1.types.Role.LastDefined] is not necessarily an error.
 */
+@gidGir("Role")
 enum AtkRole
 {
   /**
@@ -1058,6 +1071,7 @@ enum AtkRole
 /**
     Specifies where an object should be placed on the screen when using scroll_to.
 */
+@gidGir("ScrollType")
 enum AtkScrollType
 {
   /**
@@ -1107,6 +1121,7 @@ enum AtkScrollType
 /**
     The possible types of states of an object
 */
+@gidGir("StateType")
 enum AtkStateType
 {
   /**
@@ -1403,6 +1418,7 @@ enum AtkStateType
 /**
     Describes the text attributes supported
 */
+@gidGir("TextAttribute")
 enum AtkTextAttribute
 {
   /**
@@ -1570,6 +1586,7 @@ enum AtkTextAttribute
     This enumeration is deprecated since 2.9.4 and should not be used. Use
     AtkTextGranularity with #atk_text_get_string_at_offset instead.
 */
+@gidGir("TextBoundary")
 enum AtkTextBoundary
 {
   /**
@@ -1618,6 +1635,7 @@ enum AtkTextBoundary
 /**
     Describes the type of clipping required.
 */
+@gidGir("TextClipType")
 enum AtkTextClipType
 {
   /**
@@ -1645,6 +1663,7 @@ enum AtkTextClipType
     Text granularity types used for specifying the granularity of the region of
     text we are interested in.
 */
+@gidGir("TextGranularity")
 enum AtkTextGranularity
 {
   /**
@@ -1687,6 +1706,7 @@ enum AtkTextGranularity
     easily get localized strings to describe a given value or a given
     subrange, using [gid.atk1.global.valueTypeGetLocalizedName].
 */
+@gidGir("ValueType")
 enum AtkValueType
 {
   /** */
@@ -2593,6 +2613,7 @@ struct AtkRange;
     A data structure for holding a rectangle. Those coordinates are
     relative to the component top-level parent.
 */
+@gidGir("Rectangle")
 struct AtkRectangle
 {
   /**
@@ -3242,6 +3263,7 @@ struct AtkTextRange
 /**
     A structure used to store a rectangle used by AtkText.
 */
+@gidGir("TextRectangle")
 struct AtkTextRectangle
 {
   /**

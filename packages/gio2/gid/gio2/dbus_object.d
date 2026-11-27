@@ -18,6 +18,7 @@ import gid.gobject2.object;
     (see [gid.gio2.dbus_object_proxy.DBusObjectProxy]). It is essentially just a container of
     interfaces.
 */
+@gidGir("DBusObject", "DBusObjectIface")
 interface DBusObject : GidWrap
 {
 

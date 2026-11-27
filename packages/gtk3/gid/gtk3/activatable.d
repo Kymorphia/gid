@@ -247,6 +247,7 @@ import gid.gtk3.types;
     }
     ```
 */
+@gidGir("Activatable", "ActivatableIface")
 interface Activatable : GidWrap
 {
 

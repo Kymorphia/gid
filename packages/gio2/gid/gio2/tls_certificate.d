@@ -21,6 +21,7 @@ import gid.gobject2.object;
     a certificate and a private key (which is needed when acting as a
     [gid.gio2.tls_server_connection.TlsServerConnection]).
 */
+@gidGir("TlsCertificate", "TlsCertificateClass")
 class TlsCertificate : gid.gobject2.object.ObjectWrap
 {
 

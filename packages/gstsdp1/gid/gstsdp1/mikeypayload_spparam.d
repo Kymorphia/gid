@@ -10,6 +10,7 @@ import gid.gstsdp1.types;
 /**
     A Type/Length/Value field for security parameters
 */
+@gidGir("MIKEYPayloadSPParam")
 class MIKEYPayloadSPParam : StructWrap!(GstMIKEYPayloadSPParam)
 {
   /**

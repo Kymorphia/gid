@@ -14,6 +14,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget_accessible;
 
 /** */
+@gidGir("SpinnerAccessible", "SpinnerAccessibleClass")
 class SpinnerAccessible : gid.gtk3.widget_accessible.WidgetAccessible, gid.atk1.image.Image
 {
 

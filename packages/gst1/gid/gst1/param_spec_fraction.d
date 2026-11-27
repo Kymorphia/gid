@@ -12,6 +12,7 @@ import gid.gst1.types;
     A GParamSpec derived structure that contains the meta data for fractional
     properties.
 */
+@gidGir("ParamSpecFraction")
 class ParamSpecFraction : StructWrap!(GstParamSpecFraction)
 {
   /**

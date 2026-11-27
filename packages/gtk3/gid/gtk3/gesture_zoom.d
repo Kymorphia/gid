@@ -17,6 +17,7 @@ import gid.gtk3.widget;
     sequences changes, the #GtkGestureZoom::scale-changed signal is
     emitted to report the scale factor.
 */
+@gidGir("GestureZoom", "GestureZoomClass")
 class GestureZoom : gid.gtk3.gesture.Gesture
 {
 

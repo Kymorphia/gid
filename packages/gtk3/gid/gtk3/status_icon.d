@@ -53,6 +53,7 @@ import gid.gtk3.types;
     the users of transient status updates. See this [HowDoI](https://wiki.gnome.org/HowDoI/GNotification)
     for code examples.
 */
+@gidGir("StatusIcon", "StatusIconClass")
 class StatusIcon : gid.gobject2.object.ObjectWrap
 {
 

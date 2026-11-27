@@ -16,6 +16,7 @@ import gid.gobject2.gid_builder;
     this is created by an AtkRegistry if no factory type has not been
     specified to create an accessible object of a particular type.
 */
+@gidGir("NoOpObjectFactory", "NoOpObjectFactoryClass")
 class NoOpObjectFactory : gid.atk1.object_factory.ObjectFactory
 {
 

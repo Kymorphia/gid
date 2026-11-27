@@ -16,6 +16,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget;
 
 /** */
+@gidGir("ColorSelectionDialog", "ColorSelectionDialogClass")
 class ColorSelectionDialog : gid.gtk3.dialog.Dialog
 {
 

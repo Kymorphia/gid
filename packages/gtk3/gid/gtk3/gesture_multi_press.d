@@ -24,6 +24,7 @@ import gid.gtk3.widget;
     click happening outside that area is considered to be a first click of
     its own.
 */
+@gidGir("GestureMultiPress", "GestureMultiPressClass")
 class GestureMultiPress : gid.gtk3.gesture_single.GestureSingle
 {
 

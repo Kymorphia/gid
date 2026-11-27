@@ -12,6 +12,7 @@ import gid.webkit6.types;
 /**
     Range of text in an preedit string to be shown underlined.
 */
+@gidGir("InputMethodUnderline")
 class InputMethodUnderline : gid.gobject2.boxed.BoxedWrap!(webkit_input_method_underline_get_type)
 {
 

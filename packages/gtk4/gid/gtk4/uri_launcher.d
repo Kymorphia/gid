@@ -27,6 +27,7 @@ import gid.gtk4.window;
     
     To launch a file, use [gid.gtk4.file_launcher.FileLauncher].
 */
+@gidGir("UriLauncher", "UriLauncherClass")
 class UriLauncher : gid.gobject2.object.ObjectWrap
 {
 

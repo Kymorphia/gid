@@ -38,6 +38,7 @@ import gid.gobject2.object;
     and the implementation of [gid.gio2.seekable.Seekable] just call into the same
     operations on the output stream.
 */
+@gidGir("FileIOStream", "FileIOStreamClass")
 class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
 {
 

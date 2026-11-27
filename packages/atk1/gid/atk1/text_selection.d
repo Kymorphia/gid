@@ -29,6 +29,7 @@ import gid.core.utils;
     the start of the range is the active point, as the user moves this to
     manipulate the selection.
 */
+@gidGir("TextSelection")
 class TextSelection : StructWrap!(AtkTextSelection)
 {
   /**

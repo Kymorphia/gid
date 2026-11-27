@@ -17,6 +17,7 @@ import gid.graphene1.vec4;
     The contents of the #graphene_quaternion_t structure are private
     and should never be accessed directly.
 */
+@gidGir("Quaternion")
 struct Quaternion
 {
   /** */

@@ -15,6 +15,7 @@ import gid.gobject2.object;
     looking in the file system for clues. Can return a list of possible
     completion strings for widget implementations.
 */
+@gidGir("FilenameCompleter", "FilenameCompleterClass")
 class FilenameCompleter : gid.gobject2.object.ObjectWrap
 {
 

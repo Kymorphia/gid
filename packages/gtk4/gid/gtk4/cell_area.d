@@ -344,6 +344,7 @@ import gid.gtk4.widget;
     Deprecated: List views use widgets for displaying their
         contents
 */
+@gidGir("CellArea", "CellAreaClass")
 class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.buildable.Buildable, gid.gtk4.cell_layout.CellLayout
 {
 

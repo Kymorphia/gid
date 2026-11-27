@@ -38,6 +38,7 @@ import gid.gtksource5.types;
     probably call [gid.gtk4.text_buffer.TextBuffer.setModified] with true after calling
     [gid.gtksource5.file_loader.FileLoader.loadFinish].
 */
+@gidGir("FileLoader", "FileLoaderClass")
 class FileLoader : gid.gobject2.object.ObjectWrap
 {
 

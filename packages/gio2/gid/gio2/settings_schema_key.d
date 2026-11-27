@@ -14,6 +14,7 @@ import gid.gobject2.boxed;
     #GSettingsSchemaKey is an opaque data structure and can only be accessed
     using the following functions.
 */
+@gidGir("SettingsSchemaKey")
 class SettingsSchemaKey : gid.gobject2.boxed.BoxedWrap!(g_settings_schema_key_get_type)
 {
 

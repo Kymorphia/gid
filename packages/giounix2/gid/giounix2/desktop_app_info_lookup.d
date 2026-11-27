@@ -18,6 +18,7 @@ import gid.gobject2.object;
     Deprecated: The [gid.giounix2.desktop_app_info_lookup.DesktopAppInfoLookup] interface is
         deprecated and unused by GIO.
 */
+@gidGir("DesktopAppInfoLookup", "DesktopAppInfoLookupIface")
 interface DesktopAppInfoLookup : GidWrap
 {
 

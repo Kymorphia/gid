@@ -20,6 +20,7 @@ import gid.gstcontroller1.types;
     
     All functions are MT-safe.
 */
+@gidGir("LFOControlSource", "LFOControlSourceClass")
 class LFOControlSource : gid.gst1.control_source.ControlSource
 {
 

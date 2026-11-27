@@ -16,6 +16,7 @@ import gid.gobject2.object;
 /**
     A list of message or mime-part headers.
 */
+@gidGir("HeaderList", "HeaderListClass")
 class HeaderList : gid.gobject2.object.ObjectWrap
 {
 

@@ -11,6 +11,7 @@ import gid.soup3.types;
 /**
     The HTTP message headers associated with a request or response.
 */
+@gidGir("MessageHeaders")
 class MessageHeaders : gid.gobject2.boxed.BoxedWrap!(soup_message_headers_get_type)
 {
 

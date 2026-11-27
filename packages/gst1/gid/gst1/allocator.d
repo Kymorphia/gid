@@ -25,6 +25,7 @@ import gid.gst1.types;
     New memory can be created with [gid.gst1.memory.Memory.newWrapped] that wraps the memory
     allocated elsewhere.
 */
+@gidGir("Allocator", "AllocatorClass")
 class Allocator : gid.gst1.object.ObjectWrap
 {
 

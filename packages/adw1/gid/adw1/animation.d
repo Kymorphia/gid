@@ -59,6 +59,7 @@ import gid.gtk4.widget;
     finished, the previous animation should be stopped first, or the existing
     [gid.adw1.animation.Animation] object can be reused.
 */
+@gidGir("Animation", "AnimationClass")
 class Animation : gid.gobject2.object.ObjectWrap
 {
 

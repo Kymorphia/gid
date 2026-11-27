@@ -12,6 +12,7 @@ import gid.gstpbutils1.types;
 /**
     #GstDiscovererStreamInfo specific to audio streams.
 */
+@gidGir("DiscovererAudioInfo")
 class DiscovererAudioInfo : gid.gstpbutils1.discoverer_stream_info.DiscovererStreamInfo
 {
 

@@ -13,6 +13,7 @@ import gid.gobject2.object;
     An abstract interface representing a password used in TLS. Often used in
     user interaction such as unlocking a key storage token.
 */
+@gidGir("TlsPassword", "TlsPasswordClass")
 class TlsPassword : gid.gobject2.object.ObjectWrap
 {
 

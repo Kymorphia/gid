@@ -15,6 +15,7 @@ import gid.graphene1.vec3;
     A 3D box, described as the volume between a minimum and
     a maximum vertices.
 */
+@gidGir("Box")
 class Box : gid.gobject2.boxed.BoxedWrap!(graphene_box_get_type)
 {
   /**

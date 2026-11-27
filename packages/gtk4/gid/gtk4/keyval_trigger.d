@@ -13,6 +13,7 @@ import gid.gtk4.types;
 /**
     Triggers when a specific keyval and modifiers are pressed.
 */
+@gidGir("KeyvalTrigger", "KeyvalTriggerClass")
 class KeyvalTrigger : gid.gtk4.shortcut_trigger.ShortcutTrigger
 {
 

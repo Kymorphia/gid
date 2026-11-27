@@ -75,6 +75,7 @@ import gid.gobject2.object;
     
     * The header file [drm_fourcc.h](https://gitlab.freedesktop.org/mesa/drm/-/blob/main/include/drm/drm_fourcc.h)
 */
+@gidGir("DmabufTextureBuilder", "DmabufTextureBuilderClass")
 class DmabufTextureBuilder : gid.gobject2.object.ObjectWrap
 {
 

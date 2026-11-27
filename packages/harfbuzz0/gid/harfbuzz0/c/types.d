@@ -5,6 +5,12 @@ public import gid.core.basictypes;
 public import gid.gobject2.c.types;
 public import gid.freetype2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "HarfBuzz";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "0.0";
+
 /**
     Data type for booleans.
 */
@@ -158,6 +164,7 @@ alias hb_tag_t = uint;
 /**
     The selectors defined for specifying AAT feature settings.
 */
+@gidGir("aat_layout_feature_selector_t")
 enum hb_aat_layout_feature_selector_t
 {
   /**
@@ -1419,6 +1426,7 @@ enum hb_aat_layout_feature_selector_t
 /**
     The possible feature types defined for AAT shaping, from Apple [Font Feature Registry](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html).
 */
+@gidGir("aat_layout_feature_type_t")
 enum hb_aat_layout_feature_type_t
 {
   /**
@@ -1655,6 +1663,7 @@ enum hb_aat_layout_feature_type_t
     do not need to maintain such backward compatibility are recommended to use
     @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS instead of the default.
 */
+@gidGir("buffer_cluster_level_t")
 enum hb_buffer_cluster_level_t
 {
   /**
@@ -1688,6 +1697,7 @@ enum hb_buffer_cluster_level_t
 /**
     The type of #hb_buffer_t contents.
 */
+@gidGir("buffer_content_type_t")
 enum hb_buffer_content_type_t
 {
   /**
@@ -1719,6 +1729,7 @@ enum hb_buffer_content_type_t
     If the buffers have the same length, we compare them glyph-by-glyph and
     report which aspect(s) of the glyph info/position are different.
 */
+@gidGir("buffer_diff_flags_t")
 enum hb_buffer_diff_flags_t : uint
 {
   /**
@@ -1773,6 +1784,7 @@ enum hb_buffer_diff_flags_t : uint
 /**
     Flags for #hb_buffer_t.
 */
+@gidGir("buffer_flags_t")
 enum hb_buffer_flags_t : uint
 {
   /**
@@ -1856,6 +1868,7 @@ enum hb_buffer_flags_t : uint
 /**
     Flags that control what glyph information are serialized in [gid.harfbuzz0.global.bufferSerializeGlyphs].
 */
+@gidGir("buffer_serialize_flags_t")
 enum hb_buffer_serialize_flags_t : uint
 {
   /**
@@ -1904,6 +1917,7 @@ enum hb_buffer_serialize_flags_t : uint
     The buffer serialization and de-serialization format used in
     [gid.harfbuzz0.global.bufferSerializeGlyphs] and [gid.harfbuzz0.global.bufferDeserializeGlyphs].
 */
+@gidGir("buffer_serialize_format_t")
 enum hb_buffer_serialize_format_t
 {
   /**
@@ -1929,6 +1943,7 @@ enum hb_buffer_serialize_format_t
     orientation (irrespective of specific direction) with
     HB_DIRECTION_IS_HORIZONTAL() or HB_DIRECTION_IS_VERTICAL().
 */
+@gidGir("direction_t")
 enum hb_direction_t
 {
   /**
@@ -1960,6 +1975,7 @@ enum hb_direction_t
 /**
     Flags for #hb_glyph_info_t.
 */
+@gidGir("glyph_flags_t")
 enum hb_glyph_flags_t : uint
 {
   /**
@@ -2080,6 +2096,7 @@ enum hb_glyph_flags_t : uint
       @HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE, however, using that mode
       correctly is very tricky.  Use @HB_MEMORY_MODE_READONLY instead.
 */
+@gidGir("memory_mode_t")
 enum hb_memory_mode_t
 {
   /**
@@ -2108,6 +2125,7 @@ enum hb_memory_mode_t
 /**
     Flags that describe the properties of color palette.
 */
+@gidGir("ot_color_palette_flags_t")
 enum hb_ot_color_palette_flags_t : uint
 {
   /**
@@ -2132,6 +2150,7 @@ enum hb_ot_color_palette_flags_t : uint
 /**
     Baseline tags from [Baseline Tags](https://docs.microsoft.com/en-us/typography/opentype/spec/baselinetags) registry.
 */
+@gidGir("ot_layout_baseline_tag_t")
 enum hb_ot_layout_baseline_tag_t
 {
   /**
@@ -2193,6 +2212,7 @@ enum hb_ot_layout_baseline_tag_t
 /**
     The GDEF classes defined for glyphs.
 */
+@gidGir("ot_layout_glyph_class_t")
 enum hb_ot_layout_glyph_class_t
 {
   /**
@@ -2226,6 +2246,7 @@ enum hb_ot_layout_glyph_class_t
     [OpenType documentation](https://docs.microsoft.com/en-us/typography/opentype/spec/math#mathconstants-table)
     For more explanations.
 */
+@gidGir("ot_math_constant_t")
 enum hb_ot_math_constant_t
 {
   /**
@@ -2512,6 +2533,7 @@ enum hb_ot_math_constant_t
 /**
     Flags for math glyph parts.
 */
+@gidGir("ot_math_glyph_part_flags_t")
 enum hb_ot_math_glyph_part_flags_t : uint
 {
   /**
@@ -2525,6 +2547,7 @@ enum hb_ot_math_glyph_part_flags_t : uint
     The math kerning-table types defined for the four corners
     of a glyph.
 */
+@gidGir("ot_math_kern_t")
 enum hb_ot_math_kern_t
 {
   /**
@@ -2551,6 +2574,7 @@ enum hb_ot_math_kern_t
 /**
     Known metadata tags from https://docs.microsoft.com/en-us/typography/opentype/spec/meta
 */
+@gidGir("ot_meta_tag_t")
 enum hb_ot_meta_tag_t
 {
   /**
@@ -2572,6 +2596,7 @@ enum hb_ot_meta_tag_t
     Metric tags corresponding to [MVAR Value
     Tags](https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags)
 */
+@gidGir("ot_metrics_tag_t")
 enum hb_ot_metrics_tag_t
 {
   /**
@@ -2721,6 +2746,7 @@ enum hb_ot_metrics_tag_t
     For more information on these fields, see the
     [OpenType spec](https://docs.microsoft.com/en-us/typography/opentype/spec/name#name-ids).
 */
+@gidGir("ot_name_id_predefined_t")
 enum hb_ot_name_id_predefined_t
 {
   /**
@@ -2859,6 +2885,7 @@ enum hb_ot_name_id_predefined_t
 /**
     Flags for #hb_ot_var_axis_info_t.
 */
+@gidGir("ot_var_axis_flags_t")
 enum hb_ot_var_axis_flags_t : uint
 {
   /**
@@ -2875,6 +2902,7 @@ enum hb_ot_var_axis_flags_t : uint
     See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
     section for details.
 */
+@gidGir("paint_composite_mode_t")
 enum hb_paint_composite_mode_t
 {
   /**
@@ -3054,6 +3082,7 @@ enum hb_paint_composite_mode_t
     See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
     section for details.
 */
+@gidGir("paint_extend_t")
 enum hb_paint_extend_t
 {
   /**
@@ -3083,6 +3112,7 @@ enum hb_paint_extend_t
     
     See also the Script (sc) property of the Unicode Character Database.
 */
+@gidGir("script_t")
 enum hb_script_t
 {
   /**
@@ -3974,6 +4004,7 @@ enum hb_script_t
 /**
     Defined by [OpenType Design-Variation Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
 */
+@gidGir("style_tag_t")
 enum hb_style_tag_t
 {
   /**
@@ -4028,6 +4059,7 @@ enum hb_style_tag_t
     Client programs should be ready to handle any value in the 0..254 range
     being returned from [gid.harfbuzz0.global.unicodeCombiningClass].</note>
 */
+@gidGir("unicode_combining_class_t")
 enum hb_unicode_combining_class_t
 {
   /**
@@ -4320,6 +4352,7 @@ enum hb_unicode_combining_class_t
     Data type for the "General_Category" (gc) property from
     the Unicode Character Database.
 */
+@gidGir("unicode_general_category_t")
 enum hb_unicode_general_category_t
 {
   /**
@@ -4476,6 +4509,7 @@ enum hb_unicode_general_category_t
 /**
     Structure representing a setting for an #hb_aat_layout_feature_type_t.
 */
+@gidGir("aat_layout_feature_selector_info_t")
 struct hb_aat_layout_feature_selector_info_t
 {
   /**
@@ -4566,6 +4600,7 @@ struct hb_color_line_t
     [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
     section for details.
 */
+@gidGir("color_stop_t")
 struct hb_color_stop_t
 {
   /**
@@ -4642,6 +4677,7 @@ struct hb_font_t;
     Note that typically @ascender is positive and @descender
     negative, in coordinate systems that grow up.
 */
+@gidGir("font_extents_t")
 struct hb_font_extents_t
 {
   /**
@@ -4704,6 +4740,7 @@ struct hb_font_funcs_t;
     
     Note that @height is negative, in coordinate systems that grow up.
 */
+@gidGir("glyph_extents_t")
 struct hb_glyph_extents_t
 {
   /**
@@ -4747,6 +4784,7 @@ struct hb_map_t;
     color, but indicates that the foreground color should
     be used.
 */
+@gidGir("ot_color_layer_t")
 struct hb_ot_color_layer_t
 {
   /**
@@ -4765,6 +4803,7 @@ struct hb_ot_color_layer_t
     Large variants for stretchable math glyphs (such as parentheses) can be constructed
     on the fly from parts.
 */
+@gidGir("ot_math_glyph_part_t")
 struct hb_ot_math_glyph_part_t
 {
   /**
@@ -4796,6 +4835,7 @@ struct hb_ot_math_glyph_part_t
 /**
     Data type to hold math-variant information for a glyph.
 */
+@gidGir("ot_math_glyph_variant_t")
 struct hb_ot_math_glyph_variant_t
 {
   /**
@@ -4812,6 +4852,7 @@ struct hb_ot_math_glyph_variant_t
 /**
     Data type to hold math kerning (cut-in) information for a glyph.
 */
+@gidGir("ot_math_kern_entry_t")
 struct hb_ot_math_kern_entry_t
 {
   /**
@@ -4847,6 +4888,7 @@ struct hb_ot_name_entry_t
 /**
     Use #hb_ot_var_axis_info_t instead.
 */
+@gidGir("ot_var_axis_t")
 struct hb_ot_var_axis_t
 {
   /**
@@ -4883,6 +4925,7 @@ struct hb_ot_var_axis_t
     <note>Note: at present, the only flag defined for @flags is
     #HB_OT_VAR_AXIS_FLAG_HIDDEN.</note>
 */
+@gidGir("ot_var_axis_info_t")
 struct hb_ot_var_axis_info_t
 {
   /**
@@ -5013,6 +5056,7 @@ struct hb_unicode_funcs_t;
 /**
     Data structure for holding user-data keys.
 */
+@gidGir("user_data_key_t")
 struct hb_user_data_key_t
 {
   /** */
@@ -5020,6 +5064,7 @@ struct hb_user_data_key_t
 }
 
 /** */
+@gidGir("var_int_t")
 union hb_var_int_t
 {
   /** */
@@ -5042,6 +5087,7 @@ union hb_var_int_t
 }
 
 /** */
+@gidGir("var_num_t")
 union hb_var_num_t
 {
   /** */

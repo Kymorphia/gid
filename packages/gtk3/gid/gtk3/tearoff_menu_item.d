@@ -34,6 +34,7 @@ import gid.gtk3.types;
     > #GtkTearoffMenuItem is deprecated and should not be used in newly
     > written code. Menus are not meant to be torn around.
 */
+@gidGir("TearoffMenuItem", "TearoffMenuItemClass")
 class TearoffMenuItem : gid.gtk3.menu_item.MenuItem
 {
 

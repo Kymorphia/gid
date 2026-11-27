@@ -28,6 +28,7 @@ import gid.gtk4.widget;
     [gid.gtk4.root.Root] also maintains the location of keyboard focus inside its widget
     hierarchy, with [gid.gtk4.root.Root.setFocus] and [gid.gtk4.root.Root.getFocus].
 */
+@gidGir("Root", "RootInterface")
 interface Root : gid.gtk4.native.Native
 {
 

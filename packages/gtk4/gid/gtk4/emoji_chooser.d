@@ -65,6 +65,7 @@ import gid.gtk4.types;
     consists of buttons with the .emoji-section style class and gets the
     .emoji-toolbar style class itself.
 */
+@gidGir("EmojiChooser", "EmojiChooserClass")
 class EmojiChooser : gid.gtk4.popover.Popover
 {
 

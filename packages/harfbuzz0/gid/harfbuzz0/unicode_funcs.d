@@ -18,6 +18,7 @@ import gid.harfbuzz0.types;
     needed, and replace the default by calling the setter for a
     method.
 */
+@gidGir("unicode_funcs_t")
 class UnicodeFuncs : gid.gobject2.boxed.BoxedWrap!(hb_gobject_unicode_funcs_get_type)
 {
 

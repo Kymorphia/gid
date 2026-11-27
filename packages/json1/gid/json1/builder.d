@@ -48,6 +48,7 @@ import gid.json1.types;
     // { "url" : "http://www.gnome.org/img/flash/two-thirty.png", "size" : [ 652, 242 ] }
     ```
 */
+@gidGir("Builder", "BuilderClass")
 class Builder : gid.gobject2.object.ObjectWrap
 {
 

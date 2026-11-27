@@ -45,6 +45,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.navigation_page.NavigationPage] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("NavigationPage", "NavigationPageClass")
 class NavigationPage : gid.gtk4.widget.Widget
 {
 

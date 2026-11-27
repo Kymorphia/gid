@@ -30,6 +30,7 @@ import gid.webkit6.user_style_sheet;
     User style sheets can be added and removed at any time, but
     they will affect the web pages loaded afterwards.
 */
+@gidGir("UserContentManager", "UserContentManagerClass")
 class UserContentManager : gid.gobject2.object.ObjectWrap
 {
 

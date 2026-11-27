@@ -26,6 +26,7 @@ import gid.gtk3.types;
     Contains information found when looking up an icon in
     an icon theme.
 */
+@gidGir("IconInfo", "IconInfoClass")
 class IconInfo : gid.gobject2.object.ObjectWrap
 {
 

@@ -21,6 +21,7 @@ import gid.webkit6.types;
     When a WebKitPointerLockPermissionRequest is not handled by the user,
     it is allowed by default.
 */
+@gidGir("PointerLockPermissionRequest", "PointerLockPermissionRequestClass")
 class PointerLockPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

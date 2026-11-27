@@ -24,6 +24,7 @@ import gid.gtk4.types;
     stays selected. In particular, this means that changing the sort order of an
     underlying sort model will preserve the selection.
 */
+@gidGir("SingleSelection", "SingleSelectionClass")
 class SingleSelection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel, gid.gtk4.selection_model.SelectionModel
 {
 

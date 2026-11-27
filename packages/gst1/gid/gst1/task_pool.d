@@ -17,6 +17,7 @@ import gid.gst1.types;
     
     Subclasses can be made to create custom threads.
 */
+@gidGir("TaskPool", "TaskPoolClass")
 class TaskPool : gid.gst1.object.ObjectWrap
 {
 

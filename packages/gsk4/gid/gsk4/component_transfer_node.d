@@ -14,6 +14,7 @@ import gid.gsk4.types;
     A render node for applying a [gid.gsk4.component_transfer.ComponentTransfer] for each color
     component of the child node.
 */
+@gidGir("ComponentTransferNode")
 class ComponentTransferNode : gid.gsk4.render_node.RenderNode
 {
 

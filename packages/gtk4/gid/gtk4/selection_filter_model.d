@@ -16,6 +16,7 @@ import gid.gtk4.types;
 /**
     A list model that presents the selection from a [gid.gtk4.selection_model.SelectionModel].
 */
+@gidGir("SelectionFilterModel", "SelectionFilterModelClass")
 class SelectionFilterModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

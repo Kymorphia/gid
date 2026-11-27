@@ -7,10 +7,17 @@ public import gid.gtk3.c.types;
 public import gid.pango1.c.types;
 public import gid.cairo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Vte";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.91";
+
 /**
     An enumeration type that can be used to specify how the terminal
     uses extra allocated space.
 */
+@gidGir("Align")
 enum VteAlign
 {
   /**
@@ -33,6 +40,7 @@ enum VteAlign
     An enumerated type which can be used to indicate the cursor blink mode
     for the terminal.
 */
+@gidGir("CursorBlinkMode")
 enum VteCursorBlinkMode
 {
   /**
@@ -55,6 +63,7 @@ enum VteCursorBlinkMode
     An enumerated type which can be used to indicate what should the terminal
     draw at the cursor position.
 */
+@gidGir("CursorShape")
 enum VteCursorShape
 {
   /**
@@ -79,6 +88,7 @@ enum VteCursorShape
     should send to an application when the user presses the Delete or Backspace
     keys.
 */
+@gidGir("EraseBinding")
 enum VteEraseBinding
 {
   /**
@@ -110,6 +120,7 @@ enum VteEraseBinding
 /**
     An enumeration type for features.
 */
+@gidGir("FeatureFlags")
 enum VteFeatureFlags : uint
 {
   /**
@@ -142,6 +153,7 @@ enum VteFeatureFlags : uint
     An enumeration type that can be used to specify the format the selection
     should be copied to the clipboard in.
 */
+@gidGir("Format")
 enum VteFormat
 {
   /**
@@ -159,6 +171,7 @@ enum VteFormat
     An enum describing how to interpret progress state, for the
     [gid.vte3.types.TERMPROP_PROGRESS_HINT] termprop.
 */
+@gidGir("ProgressHint")
 enum VteProgressHint
 {
   /**
@@ -190,6 +203,7 @@ enum VteProgressHint
 /**
     A flags type.
 */
+@gidGir("PropertyFlags")
 enum VtePropertyFlags : uint
 {
   /**
@@ -206,6 +220,7 @@ enum VtePropertyFlags : uint
 /**
     An enum containing the IDs of the always-installed termprops.
 */
+@gidGir("PropertyId")
 enum VtePropertyId
 {
   /**
@@ -277,6 +292,7 @@ enum VtePropertyId
 /**
     An enumeration type describing types of properties.
 */
+@gidGir("PropertyType")
 enum VtePropertyType
 {
   /**
@@ -341,6 +357,7 @@ enum VtePropertyType
 }
 
 /** */
+@gidGir("PtyError")
 enum VtePtyError
 {
   /**
@@ -355,6 +372,7 @@ enum VtePtyError
 }
 
 /** */
+@gidGir("PtyFlags")
 enum VtePtyFlags : uint
 {
   /**
@@ -404,6 +422,7 @@ enum VtePtyFlags : uint
     An enum type for regex errors. In addition to the values listed above,
     any PCRE2 error values may occur.
 */
+@gidGir("RegexError")
 enum VteRegexError
 {
   /**
@@ -423,6 +442,7 @@ enum VteRegexError
     An enumerated type which can be used to indicate whether the terminal allows
     the text contents to be blinked.
 */
+@gidGir("TextBlinkMode")
 enum VteTextBlinkMode
 {
   /**
@@ -447,6 +467,7 @@ enum VteTextBlinkMode
 }
 
 /** */
+@gidGir("UuidFormat")
 enum VteUuidFormat : uint
 {
   /** */
@@ -466,6 +487,7 @@ enum VteUuidFormat : uint
     A flag type to determine how terminal contents should be written
     to an output stream.
 */
+@gidGir("WriteFlags")
 enum VteWriteFlags
 {
   /**
@@ -506,6 +528,7 @@ struct VteEventContext;
 struct VtePty;
 
 /** */
+@gidGir("PtyClass")
 struct VtePtyClass;
 
 /** */
@@ -633,6 +656,7 @@ struct VteTerminalClass
 }
 
 /** */
+@gidGir("TerminalClassPrivate")
 struct VteTerminalClassPrivate;
 
 /**

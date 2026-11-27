@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A collection of #GMimeCertificate objects.
 */
+@gidGir("CertificateList", "CertificateListClass")
 class CertificateList : gid.gobject2.object.ObjectWrap
 {
 

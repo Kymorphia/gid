@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter to detect OpenPGP markers.
 */
+@gidGir("FilterOpenPGP", "FilterOpenPGPClass")
 class FilterOpenPGP : gid.gmime3.filter.Filter
 {
 

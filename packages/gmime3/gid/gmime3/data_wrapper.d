@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A wrapper for a stream which may be encoded.
 */
+@gidGir("DataWrapper", "DataWrapperClass")
 class DataWrapper : gid.gobject2.object.ObjectWrap
 {
 

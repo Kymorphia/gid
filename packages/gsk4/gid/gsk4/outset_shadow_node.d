@@ -13,6 +13,7 @@ import gid.gsk4.types;
 /**
     A render node for an outset shadow.
 */
+@gidGir("OutsetShadowNode")
 class OutsetShadowNode : gid.gsk4.render_node.RenderNode
 {
 

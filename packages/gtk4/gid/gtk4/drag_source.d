@@ -93,6 +93,7 @@ import gid.gtk4.types;
     [gid.gtk4.drag_source.DragSource.dragEnd] signal and delete the
     data after it has been transferred.
 */
+@gidGir("DragSource", "DragSourceClass")
 class DragSource : gid.gtk4.gesture_single.GestureSingle
 {
 

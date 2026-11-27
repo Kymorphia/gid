@@ -28,6 +28,7 @@ import gid.gst1.types;
     
     Note that GhostPads add overhead to the data processing of a pipeline.
 */
+@gidGir("GhostPad", "GhostPadClass")
 class GhostPad : gid.gst1.proxy_pad.ProxyPad
 {
 

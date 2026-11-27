@@ -27,6 +27,7 @@ import gid.pango1.types;
     be initialized using [gid.pango1.attribute.Attribute.init_]. By default, an attribute
     will have an all-inclusive range of [0,`G_MAXUINT`].
 */
+@gidGir("Attribute")
 class Attribute : gid.gobject2.boxed.BoxedWrap!(pango_attribute_get_type)
 {
   /**

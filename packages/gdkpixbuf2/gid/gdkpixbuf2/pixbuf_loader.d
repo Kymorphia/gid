@@ -62,6 +62,7 @@ import gid.gobject2.object;
     [gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter] to retrieve the pixbuf for the
     desired time stamp.
 */
+@gidGir("PixbufLoader", "PixbufLoaderClass")
 class PixbufLoader : gid.gobject2.object.ObjectWrap
 {
 

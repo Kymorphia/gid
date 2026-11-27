@@ -19,6 +19,7 @@ import gid.gtk4.types;
 /**
     A selection model that allows selecting multiple elements.
 */
+@gidGir("MultiSelection", "MultiSelectionClass")
 class MultiSelection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel, gid.gtk4.selection_model.SelectionModel
 {
 

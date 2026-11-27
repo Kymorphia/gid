@@ -14,6 +14,7 @@ import gid.gobject2.object;
     #GMenuAttributeIter is an opaque structure type.  You must access it
     using the functions below.
 */
+@gidGir("MenuAttributeIter", "MenuAttributeIterClass")
 class MenuAttributeIter : gid.gobject2.object.ObjectWrap
 {
 

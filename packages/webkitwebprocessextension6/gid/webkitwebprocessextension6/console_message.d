@@ -9,6 +9,7 @@ import gid.webkitwebprocessextension6.c.types;
 import gid.webkitwebprocessextension6.types;
 
 /** */
+@gidGir("ConsoleMessage")
 class ConsoleMessage : gid.gobject2.boxed.BoxedWrap!(webkit_console_message_get_type)
 {
 

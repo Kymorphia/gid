@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     Contains information that is useful to compute the size of a drag surface.
 */
+@gidGir("DragSurfaceSize")
 class DragSurfaceSize : gid.gobject2.boxed.BoxedWrap!(gdk_drag_surface_size_get_type)
 {
 

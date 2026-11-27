@@ -16,6 +16,7 @@ import gid.graphene1.vec3;
 /**
     A triangle.
 */
+@gidGir("Triangle")
 class Triangle : gid.gobject2.boxed.BoxedWrap!(graphene_triangle_get_type)
 {
   /**

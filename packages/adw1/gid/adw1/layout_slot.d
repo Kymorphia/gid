@@ -23,6 +23,7 @@ import gid.gtk4.widget;
     
     See [gid.adw1.multi_layout_view.MultiLayoutView].
 */
+@gidGir("LayoutSlot", "LayoutSlotClass")
 class LayoutSlot : gid.gtk4.widget.Widget
 {
 

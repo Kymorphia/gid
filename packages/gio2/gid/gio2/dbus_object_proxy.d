@@ -18,6 +18,7 @@ import gid.gobject2.object;
     a [gid.gio2.dbus_object_proxy.DBusObjectProxy] yourself — typically [gid.gio2.dbus_object_manager_client.DBusObjectManagerClient]
     is used to obtain it.
 */
+@gidGir("DBusObjectProxy", "DBusObjectProxyClass")
 class DBusObjectProxy : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.DBusObject
 {
 

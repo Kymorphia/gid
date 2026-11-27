@@ -127,6 +127,7 @@ import gid.gstbase1.types;
       * Implied true if no transform function is implemented.
       * Implied false if ONLY transform function is implemented.
 */
+@gidGir("BaseTransform", "BaseTransformClass")
 class BaseTransform : gid.gst1.element.Element
 {
 

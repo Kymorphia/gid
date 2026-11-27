@@ -12,6 +12,7 @@ import gid.gobject2.boxed;
 /**
     Information about an argument for a method or a signal.
 */
+@gidGir("DBusArgInfo")
 class DBusArgInfo : gid.gobject2.boxed.BoxedWrap!(g_dbus_arg_info_get_type)
 {
   /**

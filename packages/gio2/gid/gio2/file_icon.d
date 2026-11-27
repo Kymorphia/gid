@@ -20,6 +20,7 @@ import gid.gobject2.object;
     
     It implements [gid.gio2.loadable_icon.LoadableIcon].
 */
+@gidGir("FileIcon", "FileIconClass")
 class FileIcon : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.loadable_icon.LoadableIcon
 {
 

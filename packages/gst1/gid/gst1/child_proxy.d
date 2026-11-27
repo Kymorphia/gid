@@ -28,6 +28,7 @@ import gid.gst1.types;
     scheme is recursive. Thus `child1::child2::property` is valid too, if
     `child1` and `child2` implement the #GstChildProxy interface.
 */
+@gidGir("ChildProxy", "ChildProxyInterface")
 interface ChildProxy : GidWrap
 {
 

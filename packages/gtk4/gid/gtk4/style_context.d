@@ -56,6 +56,7 @@ import gid.gtk4.types;
         where applicable; otherwise, there is no replacement for querying the
         style machinery. Stylable UI elements should use widgets.
 */
+@gidGir("StyleContext", "StyleContextClass")
 class StyleContext : gid.gobject2.object.ObjectWrap
 {
 

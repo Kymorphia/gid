@@ -46,6 +46,7 @@ import gid.gtk4.widget;
     [gid.adw1.sidebar_item.SidebarItem] is derivable, and applications that need to associate each
     page with data can store it in the items themselves  this way.
 */
+@gidGir("SidebarItem", "SidebarItemClass")
 class SidebarItem : gid.gobject2.object.ObjectWrap
 {
 

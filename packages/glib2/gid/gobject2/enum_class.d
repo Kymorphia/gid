@@ -12,6 +12,7 @@ import gid.gobject2.types;
     The class of an enumeration type holds information about its
     possible values.
 */
+@gidGir("EnumClass")
 struct EnumClass
 {
   /**

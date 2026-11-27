@@ -17,6 +17,7 @@ import gid.gtk4.types;
     [gid.gtk4.widget.Widget.halign], and [gid.gtk4.widget.Widget.valign] properties
     of each child to determine where they should be positioned.
 */
+@gidGir("BinLayout", "BinLayoutClass")
 class BinLayout : gid.gtk4.layout_manager.LayoutManager
 {
 

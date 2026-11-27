@@ -31,6 +31,7 @@ import gid.gst1.types;
     Applications can activate streams from a collection by using the
     #GST_EVENT_SELECT_STREAMS event on a pipeline, bin or element.
 */
+@gidGir("StreamCollection", "StreamCollectionClass")
 class StreamCollection : gid.gst1.object.ObjectWrap
 {
 

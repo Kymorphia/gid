@@ -21,6 +21,7 @@ import gid.gtk3.window;
     The #GtkColorChooserDialog widget is a dialog for choosing
     a color. It implements the #GtkColorChooser interface.
 */
+@gidGir("ColorChooserDialog", "ColorChooserDialogClass")
 class ColorChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.color_chooser.ColorChooser
 {
 

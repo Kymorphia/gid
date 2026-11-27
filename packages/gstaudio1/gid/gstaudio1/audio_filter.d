@@ -26,6 +26,7 @@ import gid.gstbase1.base_transform;
     #GstBaseTransformClass.transform()
     virtual functions in their class_init function.
 */
+@gidGir("AudioFilter", "AudioFilterClass")
 class AudioFilter : gid.gstbase1.base_transform.BaseTransform
 {
 

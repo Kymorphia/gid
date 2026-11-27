@@ -80,6 +80,7 @@ import gid.gtk4.widget;
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
 */
+@gidGir("ViewSwitcherTitle", "ViewSwitcherTitleClass")
 class ViewSwitcherTitle : gid.gtk4.widget.Widget
 {
 

@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
     An [gid.adw1.animation_target.AnimationTarget] that calls a given callback during the
     animation.
 */
+@gidGir("CallbackAnimationTarget", "CallbackAnimationTargetClass")
 class CallbackAnimationTarget : gid.adw1.animation_target.AnimationTarget
 {
 

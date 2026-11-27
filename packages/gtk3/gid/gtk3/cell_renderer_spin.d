@@ -26,6 +26,7 @@ import gid.gtk3.types;
     
     The #GtkCellRendererSpin cell renderer was added in GTK+ 2.10.
 */
+@gidGir("CellRendererSpin", "CellRendererSpinClass")
 class CellRendererSpin : gid.gtk3.cell_renderer_text.CellRendererText
 {
 

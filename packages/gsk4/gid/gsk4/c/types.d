@@ -5,6 +5,12 @@ public import gid.core.basictypes;
 public import gid.gdk4.c.types;
 public import gid.graphene1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Gsk";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "4.0";
+
 /**
     The blend modes available for render nodes.
     
@@ -14,6 +20,7 @@ public import gid.graphene1.c.types;
     See <https://www.w3.org/TR/compositing-1/#blending> for more information
     on blending and blend modes.
 */
+@gidGir("BlendMode")
 enum GskBlendMode
 {
   /**
@@ -103,6 +110,7 @@ enum GskBlendMode
 /**
     The corner indices used by [gid.gsk4.rounded_rect.RoundedRect].
 */
+@gidGir("Corner")
 enum GskCorner
 {
   /**
@@ -140,6 +148,7 @@ enum GskCorner
     
     New entries may be added in future versions.
 */
+@gidGir("FillRule")
 enum GskFillRule
 {
   /**
@@ -166,6 +175,7 @@ enum GskFillRule
     It defines both what the type is called in the GLSL shader
     code, and what the corresponding C type is on the Gtk side.
 */
+@gidGir("GLUniformType")
 enum GskGLUniformType
 {
   /**
@@ -215,6 +225,7 @@ enum GskGLUniformType
     
     More isolation options may be added in the future.
 */
+@gidGir("Isolation")
 enum GskIsolation : uint
 {
   /**
@@ -259,6 +270,7 @@ enum GskIsolation : uint
       <figcaption>GSK_LINE_CAP_BUTT, GSK_LINE_CAP_ROUND, GSK_LINE_CAP_SQUARE</figcaption>
     </figure>
 */
+@gidGir("LineCap")
 enum GskLineCap
 {
   /**
@@ -295,6 +307,7 @@ enum GskLineCap
       <figcaption>GSK_LINE_JOINT_MITER, GSK_LINE_JOINT_ROUND, GSK_LINE_JOIN_BEVEL</figcaption>
     </figure>
 */
+@gidGir("LineJoin")
 enum GskLineJoin
 {
   /**
@@ -318,6 +331,7 @@ enum GskLineJoin
 /**
     The mask modes available for mask nodes.
 */
+@gidGir("MaskMode")
 enum GskMaskMode
 {
   /**
@@ -355,6 +369,7 @@ enum GskMaskMode
       <img alt="Path Tangents" src="directions-light.png">
     </picture>
 */
+@gidGir("PathDirection")
 enum GskPathDirection
 {
   /**
@@ -391,6 +406,7 @@ enum GskPathDirection
     The only operations emitted will be [gid.gsk4.types.PathOperation.Move], [gid.gsk4.types.PathOperation.Line] and
     [gid.gsk4.types.PathOperation.Close].
 */
+@gidGir("PathForeachFlags")
 enum GskPathForeachFlags : uint
 {
   /**
@@ -418,6 +434,7 @@ enum GskPathForeachFlags : uint
     The values of this enumeration classify intersections
     between paths.
 */
+@gidGir("PathIntersection")
 enum GskPathIntersection
 {
   /**
@@ -447,6 +464,7 @@ enum GskPathIntersection
     
     More values may be added in the future.
 */
+@gidGir("PathOperation")
 enum GskPathOperation
 {
   /**
@@ -506,6 +524,7 @@ enum GskPathOperation
     
     They are used in SVG, PDF and in Cairo with [gid.cairo1.types.Operator].
 */
+@gidGir("PorterDuff")
 enum GskPorterDuff
 {
   /** */
@@ -548,6 +567,7 @@ enum GskPorterDuff
 /**
     The type of a node determines what the node is rendering.
 */
+@gidGir("RenderNodeType")
 enum GskRenderNodeType
 {
   /**
@@ -748,6 +768,7 @@ enum GskRenderNodeType
     The actual implementation of each filter is deferred to the
     rendering pipeline.
 */
+@gidGir("ScalingFilter")
 enum GskScalingFilter
 {
   /**
@@ -771,6 +792,7 @@ enum GskScalingFilter
 /**
     Errors that can happen during (de)serialization.
 */
+@gidGir("SerializationError")
 enum GskSerializationError
 {
   /**
@@ -803,6 +825,7 @@ enum GskSerializationError
     multiplication will not worsen categories. So for the matrix
     multiplication `C = A * B`, `category(C) = MIN (category(A), category(B))`.
 */
+@gidGir("TransformCategory")
 enum GskTransformCategory
 {
   /**
@@ -871,6 +894,7 @@ struct GskBorderNode;
 struct GskBroadwayRenderer;
 
 /** */
+@gidGir("BroadwayRendererClass")
 struct GskBroadwayRendererClass;
 
 /**
@@ -887,6 +911,7 @@ struct GskCairoNode;
 struct GskCairoRenderer;
 
 /** */
+@gidGir("CairoRendererClass")
 struct GskCairoRendererClass;
 
 /**
@@ -985,6 +1010,7 @@ struct GskFillNode;
 struct GskGLRenderer;
 
 /** */
+@gidGir("GLRendererClass")
 struct GskGLRendererClass;
 
 /**
@@ -1162,6 +1188,7 @@ struct GskOutsetShadowNode;
 /**
     A location in a parse buffer.
 */
+@gidGir("ParseLocation")
 struct GskParseLocation
 {
   /**
@@ -1439,6 +1466,7 @@ struct GskRenderReplay;
 struct GskRenderer;
 
 /** */
+@gidGir("RendererClass")
 struct GskRendererClass;
 
 /**
@@ -1582,6 +1610,7 @@ struct GskTransformNode;
 struct GskVulkanRenderer;
 
 /** */
+@gidGir("VulkanRendererClass")
 struct GskVulkanRendererClass;
 
 alias extern(C) void function(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData) GskParseErrorFunc;

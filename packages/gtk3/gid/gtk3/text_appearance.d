@@ -9,6 +9,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("TextAppearance")
 class TextAppearance : StructWrap!(GtkTextAppearance)
 {
   /**

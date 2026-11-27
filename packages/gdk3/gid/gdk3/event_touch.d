@@ -22,6 +22,7 @@ import gid.gdk3.window;
     (or [gid.gdk4.types.EventType.TouchCancel]) event. With multitouch devices, there may be
     several active sequences at the same time.
 */
+@gidGir("EventTouch")
 class EventTouch : StructWrap!(GdkEventTouch, gdk_event_copy, gdk_event_free)
 {
   /**

@@ -182,6 +182,7 @@ import gid.gtk4.types;
       [button1(button2 / 2 + 12)]
     ```
 */
+@gidGir("ConstraintLayout", "ConstraintLayoutClass")
 class ConstraintLayout : gid.gtk4.layout_manager.LayoutManager, gid.gtk4.buildable.Buildable
 {
 

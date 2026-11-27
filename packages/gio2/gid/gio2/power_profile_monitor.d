@@ -37,6 +37,7 @@ import gid.gobject2.object;
     [gid.gio2.power_profile_monitor.PowerProfileMonitor.powerSaverEnabled], and unref the
     [gid.gio2.power_profile_monitor.PowerProfileMonitor] itself when exiting.
 */
+@gidGir("PowerProfileMonitor", "PowerProfileMonitorInterface")
 interface PowerProfileMonitor : gid.gio2.initable.Initable
 {
 

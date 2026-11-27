@@ -98,6 +98,7 @@ import gid.gtk3.widget;
     handler to decide whether to draw the focus indicator. See
     [gid.gtk4.global.renderFocus] for one way to draw focus.
 */
+@gidGir("DrawingArea", "DrawingAreaClass")
 class DrawingArea : gid.gtk3.widget.Widget
 {
 

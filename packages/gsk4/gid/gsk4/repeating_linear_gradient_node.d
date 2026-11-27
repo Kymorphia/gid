@@ -14,6 +14,7 @@ import gid.gsk4.types;
 /**
     A render node for a repeating linear gradient.
 */
+@gidGir("RepeatingLinearGradientNode")
 class RepeatingLinearGradientNode : gid.gsk4.render_node.RenderNode
 {
 

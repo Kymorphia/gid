@@ -192,6 +192,7 @@ import gid.gtk4.types;
     [gid.adw1.about_dialog.AboutDialog] has a main CSS node with the name `dialog` and the
     style class `.about`.
 */
+@gidGir("AboutDialog", "AboutDialogClass")
 class AboutDialog : gid.adw1.dialog.Dialog
 {
 

@@ -89,6 +89,7 @@ import gid.gtk4.widget;
     [gid.gtk4.list_box.ListBox] uses the [gid.gtk4.types.AccessibleRole.List] role and [gid.gtk4.list_box_row.ListBoxRow] uses
     the [gid.gtk4.types.AccessibleRole.ListItem] role.
 */
+@gidGir("ListBox")
 class ListBox : gid.gtk4.widget.Widget
 {
 

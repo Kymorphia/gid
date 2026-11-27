@@ -34,6 +34,7 @@ import gid.gobject2.types;
     substreams of the [gid.gio2.iostream.IOStream] separately will not close the
     underlying [gid.gio2.socket.Socket].
 */
+@gidGir("SocketConnection", "SocketConnectionClass")
 class SocketConnection : gid.gio2.iostream.IOStream
 {
 

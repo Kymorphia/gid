@@ -28,6 +28,7 @@ import gid.gobject2.object;
     transparent background, in which case text glyph bounding box
     information is provided by #AtkText.
 */
+@gidGir("Component", "ComponentIface")
 interface Component : GidWrap
 {
 

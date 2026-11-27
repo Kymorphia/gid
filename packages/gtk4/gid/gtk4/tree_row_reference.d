@@ -18,6 +18,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gio2.list_model.ListModel] instead
 */
+@gidGir("TreeRowReference")
 class TreeRowReference : gid.gobject2.boxed.BoxedWrap!(gtk_tree_row_reference_get_type)
 {
 

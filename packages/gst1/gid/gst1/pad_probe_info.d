@@ -14,6 +14,7 @@ import gid.gst1.types;
 /**
     Info passed in the #GstPadProbeCallback.
 */
+@gidGir("PadProbeInfo")
 class PadProbeInfo : StructWrap!(GstPadProbeInfo)
 {
   /**

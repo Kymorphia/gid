@@ -38,6 +38,7 @@ import gid.gtk4.types;
     the [gid.gio2.file.File] directly from the [gid.gio2.file_info.FileInfo] when operating with a [gid.gtk4.list_view.ListView]
     or similar.
 */
+@gidGir("DirectoryList", "DirectoryListClass")
 class DirectoryList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

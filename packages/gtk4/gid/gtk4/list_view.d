@@ -130,6 +130,7 @@ import gid.gtk4.types;
     [gid.gtk4.list_view.ListView] uses the [gid.gtk4.types.AccessibleRole.List] role, and the list
     items use the [gid.gtk4.types.AccessibleRole.ListItem] role.
 */
+@gidGir("ListView", "ListViewClass")
 class ListView : gid.gtk4.list_base.ListBase
 {
 

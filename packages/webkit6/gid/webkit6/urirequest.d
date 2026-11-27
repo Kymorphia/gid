@@ -17,6 +17,7 @@ import gid.webkit6.types;
     [gid.webkitwebprocessextension6.urirequest.URIRequest.new_] method, and you can get the URI of an
     existing request with the [gid.webkitwebprocessextension6.urirequest.URIRequest.getUri] one.
 */
+@gidGir("URIRequest", "URIRequestClass")
 class URIRequest : gid.gobject2.object.ObjectWrap
 {
 

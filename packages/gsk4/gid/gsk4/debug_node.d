@@ -12,6 +12,7 @@ import gid.gsk4.types;
     A render node that emits a debugging message when drawing its
     child node.
 */
+@gidGir("DebugNode")
 class DebugNode : gid.gsk4.render_node.RenderNode
 {
 

@@ -47,6 +47,7 @@ import gid.gtk3.widget;
     contains the current menu item. It will always have a GTK
     grab and receive all key presses.
 */
+@gidGir("MenuShell", "MenuShellClass")
 class MenuShell : gid.gtk3.container.Container
 {
 

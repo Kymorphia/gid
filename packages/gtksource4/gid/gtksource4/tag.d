@@ -11,6 +11,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("Tag", "TagClass")
 class Tag : gid.gtk3.text_tag.TextTag
 {
 

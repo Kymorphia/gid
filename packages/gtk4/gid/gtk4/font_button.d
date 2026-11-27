@@ -43,6 +43,7 @@ import gid.gtk4.widget;
 
     Deprecated: Use [gid.gtk4.font_dialog_button.FontDialogButton] instead
 */
+@gidGir("FontButton")
 class FontButton : gid.gtk4.widget.Widget, gid.gtk4.font_chooser.FontChooser
 {
 

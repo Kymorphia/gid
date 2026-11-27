@@ -11,6 +11,7 @@ import gid.gstrtsp1.types;
 /**
     RTSP Authentication parameter
 */
+@gidGir("RTSPAuthParam")
 class RTSPAuthParam : gid.gobject2.boxed.BoxedWrap!(gst_rtsp_auth_param_get_type)
 {
   /**

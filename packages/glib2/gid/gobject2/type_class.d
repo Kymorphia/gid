@@ -10,6 +10,7 @@ import gid.gobject2.types;
 /**
     An opaque structure used as the base of all classes.
 */
+@gidGir("TypeClass")
 struct TypeClass
 {
   /** */

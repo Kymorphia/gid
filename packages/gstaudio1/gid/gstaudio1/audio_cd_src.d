@@ -59,6 +59,7 @@ import gid.gstbase1.push_src;
     tag list, or calculated via [gid.gst1.toc_entry.TocEntry.getStartStopTimes].
     The track entries in the TOC will be sorted by track number.
 */
+@gidGir("AudioCdSrc", "AudioCdSrcClass")
 class AudioCdSrc : gid.gstbase1.push_src.PushSrc, gid.gst1.urihandler.URIHandler
 {
 

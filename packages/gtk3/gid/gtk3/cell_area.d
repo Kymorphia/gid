@@ -341,6 +341,7 @@ import gid.gtk3.widget;
     the value of a cell property, use [gid.gtk4.cell_area.CellArea.cellGetProperty],
     [gid.gtk4.cell_area.CellArea.cellGet] or [gid.gtk4.cell_area.CellArea.cellGetValist].
 */
+@gidGir("CellArea", "CellAreaClass")
 class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.buildable.Buildable, gid.gtk3.cell_layout.CellLayout
 {
 

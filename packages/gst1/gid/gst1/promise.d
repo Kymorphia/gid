@@ -65,6 +65,7 @@ import gid.gst1.types;
     a single thread or a subset of threads but that is entirely up to the API
     that uses #GstPromise.
 */
+@gidGir("Promise")
 class Promise : gid.gobject2.boxed.BoxedWrap!(gst_promise_get_type)
 {
 

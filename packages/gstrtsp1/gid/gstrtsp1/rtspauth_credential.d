@@ -12,6 +12,7 @@ import gid.gstrtsp1.types;
 /**
     RTSP Authentication credentials
 */
+@gidGir("RTSPAuthCredential")
 class RTSPAuthCredential : gid.gobject2.boxed.BoxedWrap!(gst_rtsp_auth_credential_get_type)
 {
   /**

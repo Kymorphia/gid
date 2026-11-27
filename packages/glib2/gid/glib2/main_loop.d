@@ -13,6 +13,7 @@ import gid.gobject2.boxed;
     The [gid.glib2.main_loop.MainLoop] struct is an opaque data type
     representing the main event loop of a GLib or GTK application.
 */
+@gidGir("MainLoop")
 class MainLoop : gid.gobject2.boxed.BoxedWrap!(g_main_loop_get_type)
 {
 

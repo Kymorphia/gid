@@ -4,12 +4,19 @@ module gid.graphene1.c.types;
 public import gid.core.basictypes;
 public import gid.gobject2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Graphene";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Specify the order of the rotations on each axis.
     
     The [gid.graphene1.types.EulerOrder.Default] value is special, and is used
     as an alias for one of the other orders.
 */
+@gidGir("EulerOrder")
 enum graphene_euler_order_t
 {
   /**
@@ -178,6 +185,7 @@ enum graphene_euler_order_t
 /**
     The type of intersection.
 */
+@gidGir("RayIntersectionKind")
 enum graphene_ray_intersection_kind_t
 {
   /**
@@ -378,6 +386,7 @@ struct graphene_rect_t
 }
 
 /** */
+@gidGir("Simd4F")
 align(16) struct graphene_simd4f_t
 {
   /** */

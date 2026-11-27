@@ -9,6 +9,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("TreePath")
 class TreePath : gid.gobject2.boxed.BoxedWrap!(gtk_tree_path_get_type)
 {
 

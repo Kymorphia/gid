@@ -23,6 +23,7 @@ import gid.gobject2.boxed;
       g_assert_true (g_strv_equal (array, (const char *[]) { "hello", "world", NULL }));
     ```
 */
+@gidGir("StrvBuilder")
 class StrvBuilder : gid.gobject2.boxed.BoxedWrap!(g_strv_builder_get_type)
 {
 

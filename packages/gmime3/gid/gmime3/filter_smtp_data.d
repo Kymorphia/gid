@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter to byte-stuff SMTP DATA.
 */
+@gidGir("FilterSmtpData", "FilterSmtpDataClass")
 class FilterSmtpData : gid.gmime3.filter.Filter
 {
 

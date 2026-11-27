@@ -14,6 +14,7 @@ import gid.webkit6.types;
     WebKitGeolocationPosition is an opaque struct used to provide position updates to a
     #WebKitGeolocationManager using [gid.webkit6.geolocation_manager.GeolocationManager.updatePosition].
 */
+@gidGir("GeolocationPosition")
 class GeolocationPosition : gid.gobject2.boxed.BoxedWrap!(webkit_geolocation_position_get_type)
 {
 

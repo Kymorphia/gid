@@ -53,6 +53,7 @@ import gid.gst1.types;
     GST_LOG_OBJECT (tagsetter, "final tags: %" GST_PTR_FORMAT, result);
     ```
 */
+@gidGir("TagSetter", "TagSetterInterface")
 interface TagSetter : GidWrap
 {
 

@@ -108,6 +108,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.expander.Expander] uses the [gid.gtk4.types.AccessibleRole.Button] role.
 */
+@gidGir("Expander")
 class Expander : gid.gtk4.widget.Widget
 {
 

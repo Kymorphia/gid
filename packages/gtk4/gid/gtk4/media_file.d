@@ -24,6 +24,7 @@ import gid.gtk4.types;
     
     GTK itself includes an implementation using GStreamer.
 */
+@gidGir("MediaFile", "MediaFileClass")
 class MediaFile : gid.gtk4.media_stream.MediaStream
 {
 

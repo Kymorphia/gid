@@ -13,6 +13,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_color.AttrColor] structure is used to represent attributes that
     are colors.
 */
+@gidGir("AttrColor")
 class AttrColor : StructWrap!(PangoAttrColor)
 {
   /**

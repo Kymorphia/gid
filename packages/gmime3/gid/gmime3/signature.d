@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     An object containing useful information about a signature.
 */
+@gidGir("Signature", "SignatureClass")
 class Signature : gid.gobject2.object.ObjectWrap
 {
 

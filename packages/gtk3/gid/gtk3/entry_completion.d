@@ -60,6 +60,7 @@ import gid.gtk3.widget;
     [gid.gtk4.tree_model_filter.TreeModelFilter.convertIterToChildIter] to obtain a
     matching iter.
 */
+@gidGir("EntryCompletion", "EntryCompletionClass")
 class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable, gid.gtk3.cell_layout.CellLayout
 {
 

@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     A #GMimeStream wrapper around POSIX file descriptors.
 */
+@gidGir("StreamFs", "StreamFsClass")
 class StreamFs : gid.gmime3.stream.Stream
 {
 

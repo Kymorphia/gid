@@ -50,6 +50,7 @@ import gid.gtk3.types;
     </object>
     ```
 */
+@gidGir("TreeStore", "TreeStoreClass")
 class TreeStore : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable, gid.gtk3.tree_drag_dest.TreeDragDest, gid.gtk3.tree_drag_source.TreeDragSource, gid.gtk3.tree_model.TreeModel, gid.gtk3.tree_sortable.TreeSortable
 {
 

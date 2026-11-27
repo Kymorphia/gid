@@ -25,6 +25,7 @@ import gid.gsk4.types;
     The algorithm used for normalizing corner sizes is described in
     [the CSS specification](https://drafts.csswg.org/css-backgrounds-3/#border-radius).
 */
+@gidGir("RoundedRect")
 class RoundedRect : StructWrap!(GskRoundedRect)
 {
   /**

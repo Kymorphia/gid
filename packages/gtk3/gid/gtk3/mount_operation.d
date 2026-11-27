@@ -15,6 +15,7 @@ import gid.gtk3.window;
 /**
     This should not be accessed directly. Use the accessor functions below.
 */
+@gidGir("MountOperation", "MountOperationClass")
 class MountOperation : gid.gio2.mount_operation.MountOperation
 {
 

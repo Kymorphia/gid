@@ -193,6 +193,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.adw1.about_dialog.AboutDialog].
 */
+@gidGir("AboutWindow", "AboutWindowClass")
 class AboutWindow : gid.adw1.window.Window
 {
 

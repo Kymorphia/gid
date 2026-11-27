@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A render node that potentially diverts a part of the scene graph to a subsurface.
 */
+@gidGir("SubsurfaceNode")
 class SubsurfaceNode : gid.gsk4.render_node.RenderNode
 {
 

@@ -11,6 +11,7 @@ import gid.pango1.types;
     The [gid.pango1.color.Color] structure is used to
     represent a color in an uncalibrated RGB color-space.
 */
+@gidGir("Color")
 struct Color
 {
   /**

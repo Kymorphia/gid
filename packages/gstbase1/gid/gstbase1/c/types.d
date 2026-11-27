@@ -7,7 +7,14 @@ public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 public import gid.gst1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstBase";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /** */
+@gidGir("AggregatorStartTimeSelection")
 enum GstAggregatorStartTimeSelection
 {
   /**
@@ -36,6 +43,7 @@ enum GstAggregatorStartTimeSelection
 /**
     Flags to be used in a #GstBaseParseFrame.
 */
+@gidGir("BaseParseFrameFlags")
 enum GstBaseParseFrameFlags : uint
 {
   /**
@@ -82,6 +90,7 @@ enum GstBaseParseFrameFlags : uint
 /**
     The #GstElement flags that a basesrc element may have.
 */
+@gidGir("BaseSrcFlags")
 enum GstBaseSrcFlags : uint
 {
   /**
@@ -101,6 +110,7 @@ enum GstBaseSrcFlags : uint
 }
 
 /** */
+@gidGir("CollectPadsStateFlags")
 enum GstCollectPadsStateFlags : uint
 {
   /**
@@ -237,6 +247,7 @@ enum GstCollectPadsStateFlags : uint
 struct GstAdapter;
 
 /** */
+@gidGir("AdapterClass")
 struct GstAdapterClass;
 
 /**
@@ -562,9 +573,11 @@ struct GstAggregatorPadClass
 }
 
 /** */
+@gidGir("AggregatorPadPrivate")
 struct GstAggregatorPadPrivate;
 
 /** */
+@gidGir("AggregatorPrivate")
 struct GstAggregatorPrivate;
 
 /**
@@ -895,6 +908,7 @@ struct GstBaseParseFrame
 }
 
 /** */
+@gidGir("BaseParsePrivate")
 struct GstBaseParsePrivate;
 
 /**
@@ -1202,6 +1216,7 @@ struct GstBaseSinkClass
 }
 
 /** */
+@gidGir("BaseSinkPrivate")
 struct GstBaseSinkPrivate;
 
 /**
@@ -1517,6 +1532,7 @@ struct GstBaseSrcClass
 }
 
 /** */
+@gidGir("BaseSrcPrivate")
 struct GstBaseSrcPrivate;
 
 /**
@@ -1871,6 +1887,7 @@ struct GstBaseTransformClass
 }
 
 /** */
+@gidGir("BaseTransformPrivate")
 struct GstBaseTransformPrivate;
 
 /**
@@ -2057,6 +2074,7 @@ struct GstCollectData
 }
 
 /** */
+@gidGir("CollectDataPrivate")
 struct GstCollectDataPrivate;
 
 /**
@@ -2129,6 +2147,7 @@ struct GstCollectPadsClass
 }
 
 /** */
+@gidGir("CollectPadsPrivate")
 struct GstCollectPadsPrivate;
 
 /**
@@ -2205,11 +2224,13 @@ struct GstDataQueueItem
 }
 
 /** */
+@gidGir("DataQueuePrivate")
 struct GstDataQueuePrivate;
 
 /**
     Structure describing the size of a queue.
 */
+@gidGir("DataQueueSize")
 struct GstDataQueueSize
 {
   /**
@@ -2341,6 +2362,7 @@ struct GstQueueArray;
 /**
     The opaque #GstTypeFindData structure.
 */
+@gidGir("TypeFindData")
 struct GstTypeFindData;
 
 alias extern(C) void function(GstCollectData* data) GstCollectDataDestroyNotify;

@@ -75,6 +75,7 @@ import gid.gtk3.types;
     
     Recently used files are supported since GTK+ 2.10.
 */
+@gidGir("RecentManager", "RecentManagerClass")
 class RecentManager : gid.gobject2.object.ObjectWrap
 {
 

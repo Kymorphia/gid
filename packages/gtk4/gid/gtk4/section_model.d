@@ -29,6 +29,7 @@ import gid.gtk4.types;
     The [gid.gio2.list_model.ListModel.itemsChanged] signal has the same effect, all sections in
     that range are invalidated, too.
 */
+@gidGir("SectionModel", "SectionModelInterface")
 interface SectionModel : gid.gio2.list_model.ListModel
 {
 

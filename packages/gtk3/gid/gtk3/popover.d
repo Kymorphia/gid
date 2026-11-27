@@ -82,6 +82,7 @@ import gid.gtk3.widget;
     like .touch-selection or .magnifier to differentiate from
     plain popovers.
 */
+@gidGir("Popover", "PopoverClass")
 class Popover : gid.gtk3.bin.Bin
 {
 

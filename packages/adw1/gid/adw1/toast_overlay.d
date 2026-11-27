@@ -61,6 +61,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.toast_overlay.ToastOverlay] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("ToastOverlay", "ToastOverlayClass")
 class ToastOverlay : gid.gtk4.widget.Widget
 {
 

@@ -27,6 +27,7 @@ import gid.gtk4.window;
     When necessary, [gid.gtk4.mount_operation.MountOperation] shows dialogs to let the user
     enter passwords, ask questions or show processes blocking unmount.
 */
+@gidGir("MountOperation", "MountOperationClass")
 class MountOperation : gid.gio2.mount_operation.MountOperation
 {
 

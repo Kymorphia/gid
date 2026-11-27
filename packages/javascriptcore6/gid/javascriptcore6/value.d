@@ -25,6 +25,7 @@ import gid.gobject2.c.functions : g_object_ref, g_object_unref;
     JSCValue represents a reference to a value in a #JSCContext. The JSCValue
     protects the referenced value from being garbage collected.
 */
+@gidGir("Value", "ValueClass")
 class Value : gid.gobject2.object.ObjectWrap
 {
 

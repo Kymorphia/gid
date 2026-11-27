@@ -19,6 +19,7 @@ import gid.gst1.types;
     
     [proleptic Gregorian calendar]: https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar
 */
+@gidGir("DateTime")
 class DateTime : gid.gobject2.boxed.BoxedWrap!(gst_date_time_get_type)
 {
 

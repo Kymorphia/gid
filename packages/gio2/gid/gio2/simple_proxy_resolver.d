@@ -21,6 +21,7 @@ import gid.gobject2.object;
     implementation, or it can be created and used manually, such as
     with [gid.gio2.socket_client.SocketClient.setProxyResolver].
 */
+@gidGir("SimpleProxyResolver", "SimpleProxyResolverClass")
 class SimpleProxyResolver : gid.gobject2.object.ObjectWrap, gid.gio2.proxy_resolver.ProxyResolver
 {
 

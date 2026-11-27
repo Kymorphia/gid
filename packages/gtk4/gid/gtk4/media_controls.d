@@ -27,6 +27,7 @@ import gid.gtk4.widget;
     
     Usually, [gid.gtk4.media_controls.MediaControls] is used as part of [gid.gtk4.video.Video].
 */
+@gidGir("MediaControls", "MediaControlsClass")
 class MediaControls : gid.gtk4.widget.Widget
 {
 

@@ -12,6 +12,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("SocketAccessible", "SocketAccessibleClass")
 class SocketAccessible : gid.gtk3.container_accessible.ContainerAccessible
 {
 

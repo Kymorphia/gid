@@ -28,6 +28,7 @@ import gid.gsk4.types;
     in order to create the appropriate windowing system resources needed
     to render the scene.
 */
+@gidGir("Renderer", "RendererClass")
 class Renderer : gid.gobject2.object.ObjectWrap
 {
 

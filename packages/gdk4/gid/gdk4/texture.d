@@ -48,6 +48,7 @@ import gid.gobject2.object;
     [glycin](https://lib.rs/crates/glycin), if you need to load untrusted image
     data.
 */
+@gidGir("Texture", "TextureClass")
 class Texture : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable, gid.gio2.icon.Icon, gid.gio2.loadable_icon.LoadableIcon
 {
 

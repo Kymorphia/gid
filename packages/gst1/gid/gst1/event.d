@@ -63,6 +63,7 @@ import gid.gst1.types;
       ...
     ```
 */
+@gidGir("Event")
 class Event : gid.gobject2.boxed.BoxedWrap!(gst_event_get_type)
 {
   /**

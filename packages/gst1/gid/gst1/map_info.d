@@ -16,6 +16,7 @@ import gid.gst1.types;
     needs to be unmapped using [gid.gst1.buffer.Buffer.unmap] or [gid.gst1.memory.Memory.unmap]. Instead,
     #GstBufferMapInfo and #GstMemoryMapInfo can be used in that case.
 */
+@gidGir("MapInfo")
 class MapInfo : StructWrap!(GstMapInfo)
 {
   /**

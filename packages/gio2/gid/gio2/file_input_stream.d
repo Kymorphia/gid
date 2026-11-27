@@ -28,6 +28,7 @@ import gid.gobject2.object;
     stream supports seeking, use `vfunc@Gio.Seekable.can_seek`.
     To position a file input stream, use `vfunc@Gio.Seekable.seek`.
 */
+@gidGir("FileInputStream", "FileInputStreamClass")
 class FileInputStream : gid.gio2.input_stream.InputStream, gid.gio2.seekable.Seekable
 {
 

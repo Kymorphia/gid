@@ -17,6 +17,7 @@ import gid.gobject2.gid_builder;
     This corresponds to a general `struct sockaddr` of a type not otherwise
     handled by GLib.
 */
+@gidGir("NativeSocketAddress", "NativeSocketAddressClass")
 class NativeSocketAddress : gid.gio2.socket_address.SocketAddress
 {
 

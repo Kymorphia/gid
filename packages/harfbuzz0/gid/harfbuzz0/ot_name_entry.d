@@ -10,6 +10,7 @@ import gid.harfbuzz0.types;
 /**
     Structure representing a name ID in a particular language.
 */
+@gidGir("ot_name_entry_t")
 class OtNameEntry : StructWrap!(hb_ot_name_entry_t)
 {
   /**

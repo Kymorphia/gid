@@ -76,6 +76,7 @@ import gid.gtk3.types;
     and converting the results into the UTF-8 encoding. (The standard
     form for representing strings in GTK+.)
 */
+@gidGir("Clipboard")
 class Clipboard : gid.gobject2.object.ObjectWrap
 {
 

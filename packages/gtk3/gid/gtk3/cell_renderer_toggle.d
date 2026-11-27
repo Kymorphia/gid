@@ -17,6 +17,7 @@ import gid.gtk3.types;
     #GtkCellRendererToggle:radio property.
     When activated, it emits the #GtkCellRendererToggle::toggled signal.
 */
+@gidGir("CellRendererToggle", "CellRendererToggleClass")
 class CellRendererToggle : gid.gtk3.cell_renderer.CellRenderer
 {
 

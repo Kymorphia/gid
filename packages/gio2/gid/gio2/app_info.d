@@ -73,6 +73,7 @@ import gid.gobject2.object;
     Different launcher applications (e.g. file managers) may have
     different ideas of what a given URI means.
 */
+@gidGir("AppInfo", "AppInfoIface")
 interface AppInfo : GidWrap
 {
 

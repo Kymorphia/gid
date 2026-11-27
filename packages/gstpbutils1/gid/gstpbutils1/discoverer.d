@@ -32,6 +32,7 @@ import gid.gstpbutils1.types;
     
     All the information is returned in a #GstDiscovererInfo structure.
 */
+@gidGir("Discoverer", "DiscovererClass")
 class Discoverer : gid.gobject2.object.ObjectWrap
 {
 

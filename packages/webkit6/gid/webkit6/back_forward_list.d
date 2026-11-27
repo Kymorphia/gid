@@ -28,6 +28,7 @@ import gid.webkit6.types;
     do not change the value of the current item, they just return the requested
     item or items.
 */
+@gidGir("BackForwardList", "BackForwardListClass")
 class BackForwardList : gid.gobject2.object.ObjectWrap
 {
 

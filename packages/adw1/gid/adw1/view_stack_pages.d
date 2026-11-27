@@ -22,6 +22,7 @@ import gid.gtk4.selection_model_mixin;
     
     See [gid.adw1.view_stack.ViewStack.pages].
 */
+@gidGir("ViewStackPages", "ViewStackPagesClass")
 class ViewStackPages : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel, gid.gtk4.selection_model.SelectionModel
 {
 

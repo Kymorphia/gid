@@ -18,6 +18,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ScaleButtonAccessible", "ScaleButtonAccessibleClass")
 class ScaleButtonAccessible : gid.gtk3.button_accessible.ButtonAccessible, gid.atk1.value.Value
 {
 

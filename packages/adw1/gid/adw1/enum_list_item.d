@@ -12,6 +12,7 @@ import gid.gobject2.object;
 /**
     [gid.adw1.enum_list_item.EnumListItem] is the type of items in a [gid.adw1.enum_list_model.EnumListModel].
 */
+@gidGir("EnumListItem", "EnumListItemClass")
 class EnumListItem : gid.gobject2.object.ObjectWrap
 {
 

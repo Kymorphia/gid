@@ -127,6 +127,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents.
         See [gid.gtk4.layout_manager.LayoutManager] for layout manager delegate objects
 */
+@gidGir("CellLayout", "CellLayoutIface")
 interface CellLayout : GidWrap
 {
 

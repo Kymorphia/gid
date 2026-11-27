@@ -11,6 +11,7 @@ import gid.gtk4.types;
 /**
     An opaque structure representing a path to a row in a model.
 */
+@gidGir("TreePath")
 class TreePath : gid.gobject2.boxed.BoxedWrap!(gtk_tree_path_get_type)
 {
 

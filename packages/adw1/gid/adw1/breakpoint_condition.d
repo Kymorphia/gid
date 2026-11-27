@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     Describes condition for an [gid.adw1.breakpoint.Breakpoint].
 */
+@gidGir("BreakpointCondition")
 class BreakpointCondition : gid.gobject2.boxed.BoxedWrap!(adw_breakpoint_condition_get_type)
 {
 

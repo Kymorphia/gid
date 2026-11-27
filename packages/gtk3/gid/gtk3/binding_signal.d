@@ -13,6 +13,7 @@ import gid.gtk3.types;
     activate a widget in response to a key press via a signal
     emission.
 */
+@gidGir("BindingSignal")
 class BindingSignal : StructWrap!(GtkBindingSignal)
 {
   /**

@@ -33,6 +33,7 @@ import gid.gobject2.object;
     writing, splicing, flushing and closing streams, but *may* implement
     asynchronous versions.
 */
+@gidGir("OutputStream", "OutputStreamClass")
 class OutputStream : gid.gobject2.object.ObjectWrap
 {
 

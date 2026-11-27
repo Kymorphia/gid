@@ -19,6 +19,7 @@ import gid.gtk3.types;
     
     The #GtkCellRendererAccel cell renderer was added in GTK+ 2.10.
 */
+@gidGir("CellRendererAccel", "CellRendererAccelClass")
 class CellRendererAccel : gid.gtk3.cell_renderer_text.CellRendererText
 {
 

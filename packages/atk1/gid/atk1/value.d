@@ -157,6 +157,7 @@ import gid.gobject2.value;
     </para>
     </refsect1>
 */
+@gidGir("Value", "ValueIface")
 interface Value : GidWrap
 {
 

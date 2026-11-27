@@ -14,6 +14,7 @@ import gid.glib2.types;
     are accepted by the commandline option parser. The struct has only private
     fields and should not be directly accessed.
 */
+@gidGir("OptionContext")
 class OptionContext : OpaqueWrap!(GOptionContext*, g_option_context_free, void)
 {
 

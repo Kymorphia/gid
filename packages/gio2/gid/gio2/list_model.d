@@ -78,6 +78,7 @@ import gid.gobject2.types;
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
     ```
 */
+@gidGir("ListModel", "ListModelInterface")
 interface ListModel : GidWrap
 {
 

@@ -45,6 +45,7 @@ import gid.gtk4.widget;
     </object>
     ```
 */
+@gidGir("SpinnerPaintable", "SpinnerPaintableClass")
 class SpinnerPaintable : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable, gid.gtk4.symbolic_paintable.SymbolicPaintable
 {
 

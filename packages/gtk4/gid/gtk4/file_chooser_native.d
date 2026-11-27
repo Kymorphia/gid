@@ -162,6 +162,7 @@ import gid.gtk4.window;
 
     Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
 */
+@gidGir("FileChooserNative", "FileChooserNativeClass")
 class FileChooserNative : gid.gtk4.native_dialog.NativeDialog, gid.gtk4.file_chooser.FileChooser
 {
 

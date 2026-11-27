@@ -41,6 +41,7 @@ import gid.gobject2.object;
     [gid.gio2.dtls_connection.DtlsConnection] will not raise a [gid.gio2.types.IOErrorEnum.NotConnected] error on
     further I/O.
 */
+@gidGir("DtlsConnection", "DtlsConnectionInterface")
 interface DtlsConnection : gid.gio2.datagram_based.DatagramBased
 {
 

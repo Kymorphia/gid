@@ -26,6 +26,7 @@ import gid.pango1.font_map;
     Deprecated: Use [gid.gtk4.font_dialog.FontDialog] and [gid.gtk4.font_dialog_button.FontDialogButton]
       instead
 */
+@gidGir("FontChooser", "FontChooserIface")
 interface FontChooser : GidWrap
 {
 

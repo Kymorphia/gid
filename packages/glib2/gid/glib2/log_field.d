@@ -16,6 +16,7 @@ import gid.glib2.types;
     have a trailing nul byte. Otherwise, @length must be set to a non-negative
     value.
 */
+@gidGir("LogField")
 class LogField : StructWrap!(GLogField)
 {
   /**

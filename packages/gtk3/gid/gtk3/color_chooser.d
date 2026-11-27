@@ -20,6 +20,7 @@ import gid.gtk3.types;
     In GTK+, the main widgets that implement this interface are
     #GtkColorChooserWidget, #GtkColorChooserDialog and #GtkColorButton.
 */
+@gidGir("ColorChooser", "ColorChooserInterface")
 interface ColorChooser : GidWrap
 {
 

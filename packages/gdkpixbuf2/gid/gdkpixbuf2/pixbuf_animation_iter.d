@@ -17,6 +17,7 @@ import gid.gobject2.object;
 
     Deprecated: Use a different image loading library for animatable assets
 */
+@gidGir("PixbufAnimationIter", "PixbufAnimationIterClass")
 class PixbufAnimationIter : gid.gobject2.object.ObjectWrap
 {
 

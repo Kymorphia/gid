@@ -37,6 +37,7 @@ import gid.webkit6.types;
     during initialization is needed when the name of the executable on disk
     does not match the name of a valid `.desktop` file.
 */
+@gidGir("GeolocationPermissionRequest", "GeolocationPermissionRequestClass")
 class GeolocationPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

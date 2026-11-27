@@ -20,6 +20,7 @@ import gid.gtk4.widget;
     
     The center widget is centered regarding the full width of the layout's.
 */
+@gidGir("CenterLayout", "CenterLayoutClass")
 class CenterLayout : gid.gtk4.layout_manager.LayoutManager
 {
 

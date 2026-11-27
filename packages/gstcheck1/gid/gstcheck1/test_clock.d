@@ -157,6 +157,7 @@ import gid.gstcheck1.types;
     g_assert(), g_assert_cmpint() or g_assert_cmpuint() to validate all function
     arguments. This will highlight any issues with the unit test code itself.
 */
+@gidGir("TestClock", "TestClockClass")
 class TestClock : gid.gst1.clock.Clock
 {
 

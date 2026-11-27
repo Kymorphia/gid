@@ -27,6 +27,7 @@ import gid.gstaudio1.types;
     "mute" #GObject properties and handle setting and getting of them properly.
     The volume property is defined to be a linear volume factor.
 */
+@gidGir("StreamVolume", "StreamVolumeInterface")
 interface StreamVolume : GidWrap
 {
 

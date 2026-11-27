@@ -32,6 +32,7 @@ import gid.glib2.types;
     To free the entire [gid.glib2.string_chunk.StringChunk] use [gid.glib2.string_chunk.StringChunk.free].
     It is not possible to free individual strings.
 */
+@gidGir("StringChunk")
 class StringChunk : OpaqueWrap!(GStringChunk*, g_string_chunk_free, void)
 {
 

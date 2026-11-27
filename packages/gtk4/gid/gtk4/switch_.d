@@ -63,6 +63,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.switch_.Switch] uses the [gid.gtk4.types.AccessibleRole.Switch] role.
 */
+@gidGir("Switch")
 class Switch : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

@@ -18,6 +18,7 @@ import gid.gmodule2.types;
     global constructors (for example, those using GCC’s
     `__attribute__((constructor))` attribute).
 */
+@gidGir("Module")
 class Module : OpaqueWrap!(ModuleC*, void, void)
 {
 

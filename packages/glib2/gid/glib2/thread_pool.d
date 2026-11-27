@@ -43,6 +43,7 @@ private extern(C) void freePool(GThreadPool* pool) nothrow
     [gid.glib2.thread_pool.ThreadPool.setMaxUnusedThreads]. All currently unused threads
     can be stopped by calling [gid.glib2.thread_pool.ThreadPool.stopUnusedThreads].
 */
+@gidGir("ThreadPool")
 class ThreadPool : OpaqueWrap!(GThreadPool*, freePool, void)
 {
 

@@ -199,6 +199,7 @@ import gid.gtk3.widget;
     to the format allowing one to define a widget class’s components.
     See the [GtkWidget documentation][composite-templates] for details.
 */
+@gidGir("Builder", "BuilderClass")
 class Builder : gid.gobject2.object.ObjectWrap
 {
 

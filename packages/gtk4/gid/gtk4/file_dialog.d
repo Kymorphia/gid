@@ -27,6 +27,7 @@ import gid.gtk4.window;
     The dialog is shown with [gid.gtk4.file_dialog.FileDialog.open],
     [gid.gtk4.file_dialog.FileDialog.save], etc.
 */
+@gidGir("FileDialog", "FileDialogClass")
 class FileDialog : gid.gobject2.object.ObjectWrap
 {
 

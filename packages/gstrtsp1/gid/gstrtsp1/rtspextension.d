@@ -21,6 +21,7 @@ import gid.gstsdp1.sdpmessage;
     This interface is implemented e.g. by the Windows Media Streaming RTSP
      exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
 */
+@gidGir("RTSPExtension", "RTSPExtensionInterface")
 interface RTSPExtension : GidWrap
 {
 

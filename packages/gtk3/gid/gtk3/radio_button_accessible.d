@@ -16,6 +16,7 @@ import gid.gtk3.toggle_button_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("RadioButtonAccessible", "RadioButtonAccessibleClass")
 class RadioButtonAccessible : gid.gtk3.toggle_button_accessible.ToggleButtonAccessible
 {
 

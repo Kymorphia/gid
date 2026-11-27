@@ -9,6 +9,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget;
 
 /** */
+@gidGir("TableChild")
 class TableChild : StructWrap!(GtkTableChild)
 {
   /**

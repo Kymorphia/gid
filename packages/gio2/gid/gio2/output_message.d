@@ -19,6 +19,7 @@ import gid.gobject2.object;
     If @address is null then the message is sent to the default receiver
     (as previously set by [gid.gio2.socket.Socket.connect]).
 */
+@gidGir("OutputMessage")
 class OutputMessage : StructWrap!(GOutputMessage)
 {
   /**

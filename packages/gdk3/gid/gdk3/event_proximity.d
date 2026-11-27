@@ -20,6 +20,7 @@ import gid.gdk3.window;
     This event type will be used pretty rarely. It only is important for
     XInput aware programs that are drawing their own cursor.
 */
+@gidGir("EventProximity")
 class EventProximity : StructWrap!(GdkEventProximity, gdk_event_copy, gdk_event_free)
 {
   /**

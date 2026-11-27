@@ -11,6 +11,7 @@ import gid.harfbuzz0.types;
 /**
     Data type for holding integer-to-integer hash maps.
 */
+@gidGir("map_t")
 class Map : gid.gobject2.boxed.BoxedWrap!(hb_gobject_map_get_type)
 {
 

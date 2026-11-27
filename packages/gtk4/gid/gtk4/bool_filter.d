@@ -13,6 +13,7 @@ import gid.gtk4.types;
 /**
     Evaluates a boolean expression to determine whether to include items.
 */
+@gidGir("BoolFilter", "BoolFilterClass")
 class BoolFilter : gid.gtk4.filter.Filter
 {
 

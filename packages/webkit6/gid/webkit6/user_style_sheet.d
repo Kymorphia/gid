@@ -11,6 +11,7 @@ import gid.webkit6.types;
 /**
     A CSS style sheet which can be injected in loaded pages.
 */
+@gidGir("UserStyleSheet")
 class UserStyleSheet : gid.gobject2.boxed.BoxedWrap!(webkit_user_style_sheet_get_type)
 {
 

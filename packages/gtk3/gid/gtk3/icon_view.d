@@ -52,6 +52,7 @@ import gid.gtk3.types;
     GtkIconView has a single CSS node with name iconview and style class .view.
     For rubberband selection, a subnode with name rubberband is used.
 */
+@gidGir("IconView", "IconViewClass")
 class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, gid.gtk3.scrollable.Scrollable
 {
 

@@ -13,6 +13,7 @@ import gid.gstallocators1.types;
 /**
     Base class for allocators with fd-backed memory
 */
+@gidGir("FdAllocator", "FdAllocatorClass")
 class FdAllocator : gid.gst1.allocator.Allocator
 {
 

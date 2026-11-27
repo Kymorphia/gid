@@ -24,6 +24,7 @@ import gid.gobject2.object;
     content which "flows" between them, among other types of possible
     relationships.
 */
+@gidGir("RelationSet", "RelationSetClass")
 class RelationSet : gid.gobject2.object.ObjectWrap
 {
 

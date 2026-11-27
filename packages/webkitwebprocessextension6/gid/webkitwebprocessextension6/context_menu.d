@@ -27,6 +27,7 @@ import gid.webkitwebprocessextension6.types;
     [gid.webkitwebprocessextension6.context_menu.ContextMenu.insert], maybe after having removed the
     existing ones with [gid.webkitwebprocessextension6.context_menu.ContextMenu.removeAll].
 */
+@gidGir("ContextMenu", "ContextMenuClass")
 class ContextMenu : gid.gobject2.object.ObjectWrap
 {
 

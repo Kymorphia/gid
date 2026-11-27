@@ -37,6 +37,7 @@ import gid.gtk4.widget;
     you may want to use the [gid.gdk4.paintable.Paintable] API and a media framework
     such as Gstreamer directly.
 */
+@gidGir("Video", "VideoClass")
 class Video : gid.gtk4.widget.Widget
 {
 

@@ -19,6 +19,7 @@ import gid.gtksource5.types;
     If, for a certain tag, [gid.gtk4.text_tag.TextTag] is sufficient, it's better that you create
     a [gid.gtk4.text_tag.TextTag], not a [gid.gtksource5.tag.Tag].
 */
+@gidGir("Tag", "TagClass")
 class Tag : gid.gtk4.text_tag.TextTag
 {
 

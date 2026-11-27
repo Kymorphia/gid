@@ -16,6 +16,7 @@ import gid.gobject2.object;
     load their certificate information from a file. It is an interface which
     TLS library specific subtypes implement.
 */
+@gidGir("TlsFileDatabase", "TlsFileDatabaseInterface")
 interface TlsFileDatabase : GidWrap
 {
 

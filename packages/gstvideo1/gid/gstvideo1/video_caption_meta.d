@@ -12,6 +12,7 @@ import gid.gstvideo1.types;
 /**
     Extra buffer metadata providing Closed Caption.
 */
+@gidGir("VideoCaptionMeta")
 class VideoCaptionMeta : StructWrap!(GstVideoCaptionMeta)
 {
   /**

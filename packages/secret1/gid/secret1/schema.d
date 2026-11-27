@@ -64,6 +64,7 @@ import gid.secret1.types;
     }
     ```
 */
+@gidGir("Schema")
 class Schema : gid.gobject2.boxed.BoxedWrap!(secret_schema_get_type)
 {
 

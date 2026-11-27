@@ -20,6 +20,7 @@ import gid.gobject2.object;
     
     See `class@AtkObject`
 */
+@gidGir("Window", "WindowIface")
 interface Window : GidWrap
 {
 

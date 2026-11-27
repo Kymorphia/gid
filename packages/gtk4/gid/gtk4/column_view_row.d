@@ -15,6 +15,7 @@ import gid.gtk4.types;
     It is not used to set the widgets displayed in the individual cells. For that
     see `method@GtkColumnViewColumn.set_factory` and `class@GtkColumnViewCell`.
 */
+@gidGir("ColumnViewRow", "ColumnViewRowClass")
 class ColumnViewRow : gid.gobject2.object.ObjectWrap
 {
 

@@ -26,6 +26,7 @@ import gid.gobject2.object;
     about the various kinds of master and slave devices, and their
     relationships.
 */
+@gidGir("Device")
 class Device : gid.gobject2.object.ObjectWrap
 {
 

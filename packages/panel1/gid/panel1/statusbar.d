@@ -19,6 +19,7 @@ import gid.panel1.types;
     A panel status bar is meant to be displayed at the bottom of the
     window. It can contain widgets in the prefix and in the suffix.
 */
+@gidGir("Statusbar", "StatusbarClass")
 class Statusbar : gid.gtk4.widget.Widget
 {
 

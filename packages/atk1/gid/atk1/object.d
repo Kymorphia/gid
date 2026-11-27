@@ -37,6 +37,7 @@ import gid.gobject2.object;
     See `class@AtkObjectFactory`, `class@AtkRegistry`.  (GTK+ users see also
     #GtkAccessible).
 */
+@gidGir("Object", "ObjectClass")
 class ObjectWrap : gid.gobject2.object.ObjectWrap
 {
 

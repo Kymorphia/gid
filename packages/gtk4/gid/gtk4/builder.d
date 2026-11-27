@@ -374,6 +374,7 @@ import gid.gtk4.types;
     For more information, see the [[gid.gtk4.widget.Widget] documentation](class.Widget.html#building-composite-widgets-from-template-xml)
     for details.
 */
+@gidGir("Builder", "BuilderClass")
 class Builder : gid.gobject2.object.ObjectWrap
 {
 

@@ -24,6 +24,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.no_selection.NoSelection] passes through sections from the underlying model.
 */
+@gidGir("NoSelection", "NoSelectionClass")
 class NoSelection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel, gid.gtk4.selection_model.SelectionModel
 {
 

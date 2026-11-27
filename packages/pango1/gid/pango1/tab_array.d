@@ -15,6 +15,7 @@ import gid.pango1.types;
     Each tab stop has an alignment, a position, and optionally
     a character to use as decimal point.
 */
+@gidGir("TabArray")
 class TabArray : gid.gobject2.boxed.BoxedWrap!(pango_tab_array_get_type)
 {
 

@@ -10,6 +10,7 @@ import gid.gstvideo1.types;
 /**
     Information for a video format.
 */
+@gidGir("VideoFormatInfo")
 class VideoFormatInfo : StructWrap!(GstVideoFormatInfo)
 {
   /**

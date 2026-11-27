@@ -17,6 +17,7 @@ import gid.gobject2.object;
     [gid.gio2.tls_client_connection.TlsClientConnection] is the client-side subclass of
     [gid.gio2.tls_connection.TlsConnection], representing a client-side TLS connection.
 */
+@gidGir("TlsClientConnection", "TlsClientConnectionInterface")
 interface TlsClientConnection : GidWrap
 {
 

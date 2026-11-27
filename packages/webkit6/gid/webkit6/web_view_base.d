@@ -16,6 +16,7 @@ import gid.webkit6.c.types;
 import gid.webkit6.types;
 
 /** */
+@gidGir("WebViewBase", "WebViewBaseClass")
 class WebViewBase : gid.gtk4.widget.Widget
 {
 

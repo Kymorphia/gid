@@ -56,6 +56,7 @@ import gid.gtk4.widget;
     the stack switcher to be made vertical with
     `[gid.gtk4.orientable.Orientable.setOrientation]`.
 */
+@gidGir("StackSwitcher")
 class StackSwitcher : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

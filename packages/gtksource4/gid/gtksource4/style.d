@@ -12,6 +12,7 @@ import gid.gtksource4.types;
 import gid.pango1.types;
 
 /** */
+@gidGir("Style", "StyleClass")
 class Style : gid.gobject2.object.ObjectWrap
 {
 

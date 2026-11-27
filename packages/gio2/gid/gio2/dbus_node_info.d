@@ -15,6 +15,7 @@ import gid.gobject2.boxed;
 /**
     Information about nodes in a remote object hierarchy.
 */
+@gidGir("DBusNodeInfo")
 class DBusNodeInfo : gid.gobject2.boxed.BoxedWrap!(g_dbus_node_info_get_type)
 {
   /**

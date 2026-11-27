@@ -14,6 +14,7 @@ import gid.gsk4.types;
     A render node that will fill the area determined by stroking the the given
     [gid.gsk4.path.Path] using the [gid.gsk4.stroke.Stroke] attributes.
 */
+@gidGir("StrokeNode")
 class StrokeNode : gid.gsk4.render_node.RenderNode
 {
 

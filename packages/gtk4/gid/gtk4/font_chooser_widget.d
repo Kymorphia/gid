@@ -40,6 +40,7 @@ import gid.gtk4.widget;
 
     Deprecated: Direct use of [gid.gtk4.font_chooser_widget.FontChooserWidget] is deprecated.
 */
+@gidGir("FontChooserWidget")
 class FontChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.font_chooser.FontChooser
 {
 

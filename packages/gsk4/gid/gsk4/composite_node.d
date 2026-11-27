@@ -12,6 +12,7 @@ import gid.gsk4.types;
     A render node that uses Porter/Duff compositing operators to combine
     its child with the background.
 */
+@gidGir("CompositeNode")
 class CompositeNode : gid.gsk4.render_node.RenderNode
 {
 

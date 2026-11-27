@@ -18,6 +18,7 @@ import gid.gobject2.object;
     [gid.gio2.dtls_server_connection.DtlsServerConnection] is the server-side subclass of
     [gid.gio2.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
 */
+@gidGir("DtlsServerConnection", "DtlsServerConnectionInterface")
 interface DtlsServerConnection : gid.gio2.datagram_based.DatagramBased, gid.gio2.dtls_connection.DtlsConnection
 {
 

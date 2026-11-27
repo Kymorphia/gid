@@ -15,6 +15,7 @@ import gid.gtk4.widget;
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
 */
+@gidGir("SqueezerPage", "SqueezerPageClass")
 class SqueezerPage : gid.gobject2.object.ObjectWrap
 {
 

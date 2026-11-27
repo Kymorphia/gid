@@ -183,6 +183,7 @@ import gid.gobject2.object;
     The complete example can be found here:
     [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
 */
+@gidGir("ApplicationCommandLine", "ApplicationCommandLineClass")
 class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
 {
 

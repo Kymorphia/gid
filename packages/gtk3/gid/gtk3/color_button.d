@@ -33,6 +33,7 @@ import gid.gtk3.types;
     GtkColorButton has a single CSS node with name button. To differentiate
     it from a plain #GtkButton, it gets the .color style class.
 */
+@gidGir("ColorButton", "ColorButtonClass")
 class ColorButton : gid.gtk3.button.Button, gid.gtk3.color_chooser.ColorChooser
 {
 

@@ -24,6 +24,7 @@ import gid.gtk4.types;
     It is also possible to make case-insensitive comparisons, with
     [gid.gtk4.string_filter.StringFilter.setIgnoreCase].
 */
+@gidGir("StringFilter", "StringFilterClass")
 class StringFilter : gid.gtk4.filter.Filter
 {
 

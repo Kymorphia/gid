@@ -15,6 +15,7 @@ import gid.gtk4.widget;
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
 */
+@gidGir("LeafletPage", "LeafletPageClass")
 class LeafletPage : gid.gobject2.object.ObjectWrap
 {
 

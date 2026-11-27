@@ -20,6 +20,7 @@ import gid.pango1.types;
     The font faces in a family share a common design, but differ in
     slant, weight, width or other aspects.
 */
+@gidGir("FontFamily", "FontFamilyClass")
 class FontFamily : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

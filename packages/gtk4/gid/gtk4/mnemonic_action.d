@@ -15,6 +15,7 @@ import gid.gtk4.types;
     
     This means that [gid.gtk4.widget.Widget.mnemonicActivate] is called.
 */
+@gidGir("MnemonicAction", "MnemonicActionClass")
 class MnemonicAction : gid.gtk4.shortcut_action.ShortcutAction
 {
 

@@ -16,6 +16,7 @@ import gid.gobject2.object;
 /**
     A collection of #InternetAddress objects.
 */
+@gidGir("InternetAddressList", "InternetAddressListClass")
 class InternetAddressList : gid.gobject2.object.ObjectWrap
 {
 

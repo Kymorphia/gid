@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A render node masking one child node with another.
 */
+@gidGir("MaskNode")
 class MaskNode : gid.gsk4.render_node.RenderNode
 {
 

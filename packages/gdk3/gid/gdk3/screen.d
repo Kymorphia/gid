@@ -29,6 +29,7 @@ import gid.gobject2.value;
     the default visual ([gid.gdk3.screen.Screen.getSystemVisual]), the dimensions
     of the physical monitors ([gid.gdk3.screen.Screen.getMonitorGeometry]), etc.
 */
+@gidGir("Screen")
 class Screen : gid.gobject2.object.ObjectWrap
 {
 

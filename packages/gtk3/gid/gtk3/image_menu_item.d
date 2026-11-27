@@ -83,6 +83,7 @@ import gid.gtk3.widget;
       gtk_widget_show_all (menu_item);
     ```
 */
+@gidGir("ImageMenuItem", "ImageMenuItemClass")
 class ImageMenuItem : gid.gtk3.menu_item.MenuItem
 {
 

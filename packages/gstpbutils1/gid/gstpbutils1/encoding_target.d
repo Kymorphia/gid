@@ -17,6 +17,7 @@ import gid.gstpbutils1.types;
     When being stored/loaded, targets come from a specific category, like
     #GST_ENCODING_CATEGORY_DEVICE.
 */
+@gidGir("EncodingTarget")
 class EncodingTarget : gid.gobject2.object.ObjectWrap
 {
 

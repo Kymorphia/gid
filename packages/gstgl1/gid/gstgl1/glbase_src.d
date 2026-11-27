@@ -18,6 +18,7 @@ import gid.gstgl1.types;
     `stop()` virtual methods that ensure an OpenGL context is available and
     current in the calling thread.
 */
+@gidGir("GLBaseSrc", "GLBaseSrcClass")
 class GLBaseSrc : gid.gstbase1.push_src.PushSrc
 {
 

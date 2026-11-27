@@ -53,6 +53,7 @@ import gid.gtk4.widget;
 
     Deprecated: Direct use of [gid.gtk4.file_chooser_widget.FileChooserWidget] is deprecated
 */
+@gidGir("FileChooserWidget")
 class FileChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.file_chooser.FileChooser
 {
 

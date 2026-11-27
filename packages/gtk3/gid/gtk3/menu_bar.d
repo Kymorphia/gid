@@ -24,6 +24,7 @@ import gid.gtk3.types;
     
     GtkMenuBar has a single CSS node with name menubar.
 */
+@gidGir("MenuBar", "MenuBarClass")
 class MenuBar : gid.gtk3.menu_shell.MenuShell
 {
 

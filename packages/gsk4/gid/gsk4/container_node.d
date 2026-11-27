@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A render node that can contain other render nodes.
 */
+@gidGir("ContainerNode")
 class ContainerNode : gid.gsk4.render_node.RenderNode
 {
 

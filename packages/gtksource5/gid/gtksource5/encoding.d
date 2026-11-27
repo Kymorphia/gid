@@ -15,6 +15,7 @@ import gid.gtksource5.types;
     for example by #GtkSourceFile. Note that the text in GTK widgets is always
     encoded in UTF-8.
 */
+@gidGir("Encoding")
 class Encoding : gid.gobject2.boxed.BoxedWrap!(gtk_source_encoding_get_type)
 {
 

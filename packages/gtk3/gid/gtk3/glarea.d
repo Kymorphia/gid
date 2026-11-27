@@ -118,6 +118,7 @@ import gid.gtk3.widget;
     If you need to change the options for creating the #GdkGLContext
     you should use the #GtkGLArea::create-context signal.
 */
+@gidGir("GLArea", "GLAreaClass")
 class GLArea : gid.gtk3.widget.Widget
 {
 

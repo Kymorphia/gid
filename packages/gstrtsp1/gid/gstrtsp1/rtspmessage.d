@@ -14,6 +14,7 @@ import gid.gstrtsp1.types;
 /**
     Provides methods for creating and parsing request, response and data messages.
 */
+@gidGir("RTSPMessage")
 class RTSPMessage : gid.gobject2.boxed.BoxedWrap!(gst_rtsp_msg_get_type)
 {
   /**

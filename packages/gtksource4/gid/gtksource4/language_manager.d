@@ -11,6 +11,7 @@ import gid.gtksource4.language;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("LanguageManager", "LanguageManagerClass")
 class LanguageManager : gid.gobject2.object.ObjectWrap
 {
 

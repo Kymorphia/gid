@@ -14,6 +14,7 @@ import gid.gstgl1.types;
     #GstGLSyncMeta provides the ability to synchronize the OpenGL command stream
     with the CPU or with other OpenGL contexts.
 */
+@gidGir("GLSyncMeta")
 class GLSyncMeta : StructWrap!(GstGLSyncMeta)
 {
   /**

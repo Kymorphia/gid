@@ -26,6 +26,7 @@ import gid.pango1.types;
     This is a virtual object with implementations being specific to
     particular rendering systems.
 */
+@gidGir("FontMap", "FontMapClass")
 class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

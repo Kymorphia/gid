@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter for calculating the checksum of a stream.
 */
+@gidGir("FilterChecksum", "FilterChecksumClass")
 class FilterChecksum : gid.gmime3.filter.Filter
 {
 

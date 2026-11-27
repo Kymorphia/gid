@@ -7,6 +7,12 @@ public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 public import gid.gio2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GioUnix";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     [gid.giounix2.desktop_app_info.DesktopAppInfo] is an implementation of [gid.gio2.app_info.AppInfo] based on
     desktop files.
@@ -87,6 +93,7 @@ struct GUnixFDMessageClass
 }
 
 /** */
+@gidGir("FDMessagePrivate")
 struct GUnixFDMessagePrivate;
 
 /**
@@ -160,6 +167,7 @@ struct GUnixInputStreamClass
 }
 
 /** */
+@gidGir("InputStreamPrivate")
 struct GUnixInputStreamPrivate;
 
 /**
@@ -181,6 +189,7 @@ struct GUnixMountEntry;
 struct GUnixMountMonitor;
 
 /** */
+@gidGir("MountMonitorClass")
 struct GUnixMountMonitorClass;
 
 /**
@@ -232,6 +241,7 @@ struct GUnixOutputStreamClass
 }
 
 /** */
+@gidGir("OutputStreamPrivate")
 struct GUnixOutputStreamPrivate;
 
 alias extern(C) void function(GDesktopAppInfo* appinfo, GPid pid, void* userData) GDesktopAppLaunchCallback;

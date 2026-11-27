@@ -16,6 +16,7 @@ import gid.gtk3.check_menu_item_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("RadioMenuItemAccessible", "RadioMenuItemAccessibleClass")
 class RadioMenuItemAccessible : gid.gtk3.check_menu_item_accessible.CheckMenuItemAccessible
 {
 

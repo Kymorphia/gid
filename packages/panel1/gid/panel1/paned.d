@@ -21,6 +21,7 @@ import gid.panel1.types;
 /**
     A #PanelPaned is the concrete widget for a panel area.
 */
+@gidGir("Paned", "PanedClass")
 class Paned : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

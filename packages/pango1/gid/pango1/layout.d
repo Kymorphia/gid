@@ -57,6 +57,7 @@ import gid.pango1.types;
     It is possible, as well, to ignore the 2-D setup,
     and simply treat the results of a [gid.pango1.layout.Layout] as a list of lines.
 */
+@gidGir("Layout", "LayoutClass")
 class Layout : gid.gobject2.object.ObjectWrap
 {
 

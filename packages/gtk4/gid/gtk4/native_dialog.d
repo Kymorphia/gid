@@ -30,6 +30,7 @@ import gid.gtk4.window;
     responsibility to keep a reference until you are done with the
     object.
 */
+@gidGir("NativeDialog", "NativeDialogClass")
 class NativeDialog : gid.gobject2.object.ObjectWrap
 {
 

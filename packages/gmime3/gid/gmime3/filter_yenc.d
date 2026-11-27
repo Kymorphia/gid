@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter for yEncoding or yDecoding a stream.
 */
+@gidGir("FilterYenc", "FilterYencClass")
 class FilterYenc : gid.gmime3.filter.Filter
 {
 

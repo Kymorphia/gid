@@ -21,6 +21,7 @@ import gid.gobject2.types;
     registry the factory type to be used to create an accessible of a
     particular GType.
 */
+@gidGir("ObjectFactory", "ObjectFactoryClass")
 class ObjectFactory : gid.gobject2.object.ObjectWrap
 {
 

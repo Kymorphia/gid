@@ -15,6 +15,7 @@ import gid.gtk4.types;
     model-specific data in the three @user_data
     members.
 */
+@gidGir("TreeIter")
 class TreeIter : gid.gobject2.boxed.BoxedWrap!(gtk_tree_iter_get_type)
 {
   /**

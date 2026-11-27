@@ -14,6 +14,7 @@ import gid.gtksource4.completion_proposal_mixin;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("CompletionItem", "CompletionItemClass")
 class CompletionItem : gid.gobject2.object.ObjectWrap, gid.gtksource4.completion_proposal.CompletionProposal
 {
 

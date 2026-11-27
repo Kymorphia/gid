@@ -21,6 +21,7 @@ import gid.gstvideo1.types;
     the y-axis moving vertically (positive values up the screen) and the z-axis
     perpendicular to the screen (positive values into the screen).
 */
+@gidGir("VideoAffineTransformationMeta")
 class VideoAffineTransformationMeta : StructWrap!(GstVideoAffineTransformationMeta)
 {
   /**

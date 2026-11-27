@@ -24,6 +24,7 @@ import gid.webkit6.website_data_manager;
 /**
     Manages network configuration.
 */
+@gidGir("NetworkSession", "NetworkSessionClass")
 class NetworkSession : gid.gobject2.object.ObjectWrap
 {
 

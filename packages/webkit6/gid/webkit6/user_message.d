@@ -22,6 +22,7 @@ import gid.webkit6.types;
     corresponding #WebKitWebPage (and vice versa). One to one messages can be replied to directly with
     [gid.webkitwebprocessextension6.user_message.UserMessage.sendReply].
 */
+@gidGir("UserMessage", "UserMessageClass")
 class UserMessage : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

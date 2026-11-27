@@ -37,6 +37,7 @@ import gid.gobject2.boxed;
     always the same as adding one day (since days containing daylight
     savings time transitions are either 23 or 25 hours in length).
 */
+@gidGir("DateTime")
 class DateTime : gid.gobject2.boxed.BoxedWrap!(g_date_time_get_type)
 {
 

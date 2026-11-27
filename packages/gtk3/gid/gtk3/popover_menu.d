@@ -88,6 +88,7 @@ import gid.gtk3.types;
     #GtkPopoverMenu instances have a single css node called "popover"
     and get the .menu style class.
 */
+@gidGir("PopoverMenu", "PopoverMenuClass")
 class PopoverMenu : gid.gtk3.popover.Popover
 {
 

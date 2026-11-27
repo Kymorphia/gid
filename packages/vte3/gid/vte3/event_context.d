@@ -11,6 +11,7 @@ import gid.vte3.types;
 /**
     Provides context information for a context menu event.
 */
+@gidGir("EventContext")
 class EventContext : gid.gobject2.boxed.BoxedWrap!(vte_event_context_get_type)
 {
 

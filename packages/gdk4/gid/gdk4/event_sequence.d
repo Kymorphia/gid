@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     An opaque type representing a sequence of related events.
 */
+@gidGir("EventSequence")
 class EventSequence : gid.gobject2.boxed.BoxedWrap!(gdk_event_sequence_get_type)
 {
 

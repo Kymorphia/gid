@@ -5,9 +5,16 @@ public import gid.core.basictypes;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstTag";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Result values from the parse_tag virtual function.
 */
+@gidGir("TagDemuxResult")
 enum GstTagDemuxResult
 {
   /**
@@ -30,6 +37,7 @@ enum GstTagDemuxResult
     Type of image contained in an image tag (specified as "image-type" field in
     the info structure in the image's #GstSample)
 */
+@gidGir("TagImageType")
 enum GstTagImageType
 {
   /**
@@ -138,6 +146,7 @@ enum GstTagImageType
 /**
     See http://creativecommons.org/ns for more information.
 */
+@gidGir("TagLicenseFlags")
 enum GstTagLicenseFlags : uint
 {
   /**
@@ -329,6 +338,7 @@ struct GstTagDemuxClass
 }
 
 /** */
+@gidGir("TagDemuxPrivate")
 struct GstTagDemuxPrivate;
 
 /**
@@ -389,6 +399,7 @@ struct GstTagMuxClass
 }
 
 /** */
+@gidGir("TagMuxPrivate")
 struct GstTagMuxPrivate;
 
 /**

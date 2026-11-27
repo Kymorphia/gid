@@ -13,6 +13,7 @@ import gid.gtk4.types;
     
     If all expressions fail to evaluate, the [gid.gtk4.try_expression.TryExpression]'s evaluation fails as well.
 */
+@gidGir("TryExpression")
 class TryExpression : gid.gtk4.expression.Expression
 {
 

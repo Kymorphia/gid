@@ -23,6 +23,7 @@ import gid.webkit6.web_extension_match_pattern;
     This class handles the reading and parsing of the manifest file
     along with the supporting resources like icons and localizations.
 */
+@gidGir("WebExtension", "WebExtensionClass")
 class WebExtension : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
 {
 

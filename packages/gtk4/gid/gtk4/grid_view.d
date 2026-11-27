@@ -68,6 +68,7 @@ import gid.gtk4.types;
     [gid.gtk4.grid_view.GridView] uses the [gid.gtk4.types.AccessibleRole.Grid] role, and the items
     use the [gid.gtk4.types.AccessibleRole.GridCell] role.
 */
+@gidGir("GridView", "GridViewClass")
 class GridView : gid.gtk4.list_base.ListBase
 {
 

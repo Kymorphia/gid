@@ -16,6 +16,7 @@ import gid.gobject2.boxed;
     of video with the event or audio streams, and for measuring
     quality metrics for the application’s display, such as latency and jitter.
 */
+@gidGir("FrameTimings")
 class FrameTimings : gid.gobject2.boxed.BoxedWrap!(gdk_frame_timings_get_type)
 {
 

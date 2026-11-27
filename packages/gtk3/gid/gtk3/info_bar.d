@@ -92,6 +92,7 @@ import gid.gtk3.widget;
     one of the style classes .info, .warning, .error or .question, depending
     on the message type.
 */
+@gidGir("InfoBar", "InfoBarClass")
 class InfoBar : gid.gtk3.box.Box
 {
 

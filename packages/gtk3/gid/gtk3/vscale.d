@@ -26,6 +26,7 @@ import gid.gtk3.types;
     
     GtkVScale has been deprecated, use #GtkScale instead.
 */
+@gidGir("VScale", "VScaleClass")
 class VScale : gid.gtk3.scale.Scale
 {
 

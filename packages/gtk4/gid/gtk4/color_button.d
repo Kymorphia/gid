@@ -45,6 +45,7 @@ import gid.gtk4.widget;
 
     Deprecated: Use [gid.gtk4.color_dialog_button.ColorDialogButton] instead
 */
+@gidGir("ColorButton")
 class ColorButton : gid.gtk4.widget.Widget, gid.gtk4.color_chooser.ColorChooser
 {
 

@@ -17,6 +17,7 @@ import gid.gst1.types;
     [gid.gst1.meta.Meta.deserialize], but only if the #GstStructure does not contain any
     fields that cannot be serialized, see [gid.gst1.types.SerializeFlags.Strict].
 */
+@gidGir("CustomMeta")
 class CustomMeta : StructWrap!(GstCustomMeta)
 {
   /**

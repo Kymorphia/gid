@@ -66,6 +66,7 @@ import gid.gtk3.widget;
     
     When the proxy is activated, it should activate its action.
 */
+@gidGir("Action", "ActionClass")
 class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 {
 

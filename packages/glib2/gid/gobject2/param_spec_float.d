@@ -11,6 +11,7 @@ import gid.gobject2.types;
 /**
     A #GParamSpec derived structure that contains the meta data for float properties.
 */
+@gidGir("ParamSpecFloat")
 class ParamSpecFloat : gid.gobject2.param_spec.ParamSpec
 {
 

@@ -64,6 +64,7 @@ import gid.gtk4.widget;
     [gid.adw1.tab_view.TabView] uses the `enum@Gtk.AccessibleRole.tab-panel` role for the tab
     pages which are the accessible parent objects of the child widgets.
 */
+@gidGir("TabView", "TabViewClass")
 class TabView : gid.gtk4.widget.Widget
 {
 

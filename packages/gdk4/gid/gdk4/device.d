@@ -21,6 +21,7 @@ import gid.pango1.types;
     See the [gid.gdk4.seat.Seat] documentation for more information
     about the various kinds of devices, and their relationships.
 */
+@gidGir("Device")
 class Device : gid.gobject2.object.ObjectWrap
 {
 

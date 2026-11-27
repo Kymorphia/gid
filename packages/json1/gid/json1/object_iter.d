@@ -21,6 +21,7 @@ import gid.json1.types;
     All the fields in the [gid.json1.object_iter.ObjectIter] structure are private and should
     never be accessed directly.
 */
+@gidGir("ObjectIter")
 class ObjectIter : StructWrap!(JsonObjectIter)
 {
   /**

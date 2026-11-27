@@ -17,6 +17,7 @@ import gid.soup3.types;
     [gid.soup3.auth_domain_digest.AuthDomainDigest] handles the server side of HTTP "Digest"
     authentication.
 */
+@gidGir("AuthDomainDigest", "AuthDomainDigestClass")
 class AuthDomainDigest : gid.soup3.auth_domain.AuthDomain
 {
 

@@ -10,6 +10,7 @@ import gid.glib2.types;
 /**
     The #GNode struct represents one node in a [n-ary tree](data-structures.html#n-ary-trees).
 */
+@gidGir("Node")
 class Node : StructWrap!(GNode)
 {
   /**

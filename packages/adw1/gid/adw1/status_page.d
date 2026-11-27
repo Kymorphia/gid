@@ -48,6 +48,7 @@ import gid.gtk4.widget;
       <img src="status-page-compact.png" alt="status-page-compact">
     </picture>
 */
+@gidGir("StatusPage", "StatusPageClass")
 class StatusPage : gid.gtk4.widget.Widget
 {
 

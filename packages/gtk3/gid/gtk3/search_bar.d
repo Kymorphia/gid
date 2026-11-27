@@ -41,6 +41,7 @@ import gid.gtk3.types;
     
     [A simple example](https://gitlab.gnome.org/GNOME/gtk/blob/gtk-3-24/examples/search-bar.c)
 */
+@gidGir("SearchBar", "SearchBarClass")
 class SearchBar : gid.gtk3.bin.Bin
 {
 

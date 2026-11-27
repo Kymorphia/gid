@@ -15,6 +15,7 @@ import gid.gsk4.types;
     Since it is using cairo, this renderer cannot support
     3D transformations.
 */
+@gidGir("CairoRenderer", "CairoRendererClass")
 class CairoRenderer : gid.gsk4.renderer.Renderer
 {
 

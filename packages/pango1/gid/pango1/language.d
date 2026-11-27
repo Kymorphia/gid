@@ -15,6 +15,7 @@ import gid.pango1.types;
     [gid.pango1.language.Language] pointers can be efficiently
     copied and compared with each other.
 */
+@gidGir("Language")
 class Language : gid.gobject2.boxed.BoxedWrap!(pango_language_get_type)
 {
 

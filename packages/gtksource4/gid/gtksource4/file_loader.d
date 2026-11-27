@@ -19,6 +19,7 @@ import gid.gtksource4.file;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("FileLoader", "FileLoaderClass")
 class FileLoader : gid.gobject2.object.ObjectWrap
 {
 

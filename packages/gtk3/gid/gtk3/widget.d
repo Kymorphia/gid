@@ -458,6 +458,7 @@ import gid.pango1.layout;
     }
     ```
 */
+@gidGir("Widget", "WidgetClass")
 class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.implementor_iface.ImplementorIface, gid.gtk3.buildable.Buildable
 {
 

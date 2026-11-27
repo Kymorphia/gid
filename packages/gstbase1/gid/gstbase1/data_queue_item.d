@@ -13,6 +13,7 @@ import gid.gstbase1.types;
     Structure used by #GstDataQueue. You can supply a different structure, as
     long as the top of the structure is identical to this structure.
 */
+@gidGir("DataQueueItem")
 class DataQueueItem : StructWrap!(GstDataQueueItem)
 {
   /**

@@ -24,6 +24,7 @@ import gid.webkit6.web_view;
     #WebKitFindController::failed-to-find-text or
     #WebKitFindController::counted-matches<!-- -->.
 */
+@gidGir("FindController", "FindControllerClass")
 class FindController : gid.gobject2.object.ObjectWrap
 {
 

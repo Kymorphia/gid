@@ -13,6 +13,7 @@ import gid.gtksource4.types;
 import gid.gtksource4.view;
 
 /** */
+@gidGir("Gutter", "GutterClass")
 class Gutter : gid.gobject2.object.ObjectWrap
 {
 

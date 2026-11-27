@@ -25,6 +25,7 @@ import gid.gtk3.types;
     been tailored for use as a volume control widget with suitable
     icons, tooltips and accessible labels.
 */
+@gidGir("VolumeButton", "VolumeButtonClass")
 class VolumeButton : gid.gtk3.scale_button.ScaleButton
 {
 

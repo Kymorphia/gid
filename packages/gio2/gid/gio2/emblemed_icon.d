@@ -20,6 +20,7 @@ import gid.gobject2.object;
     Note that [gid.gio2.emblemed_icon.EmblemedIcon] allows no control over the position
     of the emblems. See also [gid.gio2.emblem.Emblem] for more information.
 */
+@gidGir("EmblemedIcon", "EmblemedIconClass")
 class EmblemedIcon : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon
 {
 

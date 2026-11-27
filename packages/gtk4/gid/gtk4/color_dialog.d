@@ -28,6 +28,7 @@ import gid.gtk4.window;
     See [gid.gtk4.color_dialog_button.ColorDialogButton] for a convenient control
     that uses [gid.gtk4.color_dialog.ColorDialog] and presents the results.
 */
+@gidGir("ColorDialog", "ColorDialogClass")
 class ColorDialog : gid.gobject2.object.ObjectWrap
 {
 

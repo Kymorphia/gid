@@ -114,6 +114,7 @@ import gid.gstbase1.types;
     access the buffer later. The adapter will never modify the data in the
     buffer pushed in it.
 */
+@gidGir("Adapter", "AdapterClass")
 class Adapter : gid.gobject2.object.ObjectWrap
 {
 

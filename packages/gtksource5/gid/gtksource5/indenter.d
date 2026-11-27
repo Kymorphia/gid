@@ -42,6 +42,7 @@ import gid.gtksource5.view;
     All changes are encapsulated within a single user action so that the
     user may undo them using standard undo/redo accelerators.
 */
+@gidGir("Indenter", "IndenterInterface")
 interface Indenter : GidWrap
 {
 

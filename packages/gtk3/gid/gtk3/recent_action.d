@@ -25,6 +25,7 @@ import gid.gtk3.types;
     the recently used files in the popup menu, use a #GtkRecentAction as the
     action for a `<toolitem>` element.
 */
+@gidGir("RecentAction", "RecentActionClass")
 class RecentAction : gid.gtk3.action.Action, gid.gtk3.recent_chooser.RecentChooser
 {
 

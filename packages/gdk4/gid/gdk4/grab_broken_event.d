@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     An event related to a broken windowing system grab.
 */
+@gidGir("GrabBrokenEvent")
 class GrabBrokenEvent : gid.gdk4.event.Event
 {
 

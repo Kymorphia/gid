@@ -46,6 +46,7 @@ import gid.gtk3.widget;
     
     GtkToolbar has a single CSS node with name toolbar.
 */
+@gidGir("Toolbar", "ToolbarClass")
 class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gid.gtk3.tool_shell.ToolShell
 {
 

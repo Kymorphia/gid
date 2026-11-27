@@ -10,6 +10,7 @@ import gid.gmime3.types;
 /**
     State used by [gid.gmime3.charset.Charset.best] and [gid.gmime3.charset.Charset.bestName].
 */
+@gidGir("Charset")
 struct Charset
 {
   /**

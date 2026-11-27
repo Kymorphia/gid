@@ -98,6 +98,7 @@ import gid.gtk3.window;
     [HowDoI: Using GtkApplication](https://wiki.gnome.org/HowDoI/GtkApplication),
     [Getting Started with GTK+: Basics](https://developer.gnome.org/gtk3/stable/gtk-getting-started.html#id-1.2.3.3)
 */
+@gidGir("Application", "ApplicationClass")
 class Application : gid.gio2.application.Application
 {
 

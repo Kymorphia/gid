@@ -13,6 +13,7 @@ import gid.gdk3.types;
 
     Deprecated: Use #GdkRGBA
 */
+@gidGir("Color")
 struct Color
 {
   /**

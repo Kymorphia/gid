@@ -16,6 +16,7 @@ import gid.panel1.widget;
 /**
     An interface implemented by the header of a #PanelFrame.
 */
+@gidGir("FrameHeader", "FrameHeaderInterface")
 interface FrameHeader : GidWrap
 {
 

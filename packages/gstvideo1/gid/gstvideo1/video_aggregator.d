@@ -26,6 +26,7 @@ import gid.gstvideo1.video_info;
     Zorder for each input stream can be configured on the
     #GstVideoAggregatorPad.
 */
+@gidGir("VideoAggregator", "VideoAggregatorClass")
 class VideoAggregator : gid.gstbase1.aggregator.Aggregator
 {
 

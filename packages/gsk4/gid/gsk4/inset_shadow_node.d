@@ -13,6 +13,7 @@ import gid.gsk4.types;
 /**
     A render node for an inset shadow.
 */
+@gidGir("InsetShadowNode")
 class InsetShadowNode : gid.gsk4.render_node.RenderNode
 {
 

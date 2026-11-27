@@ -16,6 +16,7 @@ import gid.soup3.types;
     enable support for it, call [gid.soup3.session.Session.addFeatureByType],
     passing `SOUP_TYPE_AUTH_NTLM`.
 */
+@gidGir("AuthNTLM")
 class AuthNTLM : gid.soup3.auth.Auth
 {
 

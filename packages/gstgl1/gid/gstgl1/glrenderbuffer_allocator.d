@@ -12,6 +12,7 @@ import gid.gstgl1.types;
 /**
     Opaque #GstGLRenderbufferAllocator struct
 */
+@gidGir("GLRenderbufferAllocator", "GLRenderbufferAllocatorClass")
 class GLRenderbufferAllocator : gid.gstgl1.glbase_memory_allocator.GLBaseMemoryAllocator
 {
 

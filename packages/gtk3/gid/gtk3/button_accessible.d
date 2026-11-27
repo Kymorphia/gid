@@ -17,6 +17,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ButtonAccessible", "ButtonAccessibleClass")
 class ButtonAccessible : gid.gtk3.container_accessible.ContainerAccessible, gid.atk1.action.Action, gid.atk1.image.Image
 {
 

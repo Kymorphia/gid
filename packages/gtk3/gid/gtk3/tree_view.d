@@ -108,6 +108,7 @@ import gid.gtk3.widget;
     header widgets' CSS nodes.
     For rubberband selection, a subnode with name rubberband is used.
 */
+@gidGir("TreeView", "TreeViewClass")
 class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
 {
 

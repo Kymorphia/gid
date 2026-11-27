@@ -12,6 +12,7 @@ import gid.gtk4.types;
 /**
     A constant value in a [gid.gtk4.expression.Expression].
 */
+@gidGir("ConstantExpression")
 class ConstantExpression : gid.gtk4.expression.Expression
 {
 

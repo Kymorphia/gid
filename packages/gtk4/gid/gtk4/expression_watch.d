@@ -15,6 +15,7 @@ import gid.gtk4.types;
     The contents of [gid.gtk4.expression_watch.ExpressionWatch] should only be accessed through the
     provided API.
 */
+@gidGir("ExpressionWatch")
 class ExpressionWatch : gid.gobject2.boxed.BoxedWrap!(gtk_expression_watch_get_type)
 {
 

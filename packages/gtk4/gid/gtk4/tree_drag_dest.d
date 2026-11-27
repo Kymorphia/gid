@@ -17,6 +17,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents.
         You can use [gid.gtk4.drop_target.DropTarget] to implement a drop destination
 */
+@gidGir("TreeDragDest", "TreeDragDestIface")
 interface TreeDragDest : GidWrap
 {
 

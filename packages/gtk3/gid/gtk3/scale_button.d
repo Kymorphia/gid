@@ -36,6 +36,7 @@ import gid.gtk3.widget;
     
     The popup widget that contains the scale has a .scale-popup style class.
 */
+@gidGir("ScaleButton", "ScaleButtonClass")
 class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
 {
 

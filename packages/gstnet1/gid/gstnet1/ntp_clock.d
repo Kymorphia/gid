@@ -11,6 +11,7 @@ import gid.gstnet1.net_client_clock;
 import gid.gstnet1.types;
 
 /** */
+@gidGir("NtpClock", "NtpClockClass")
 class NtpClock : gid.gstnet1.net_client_clock.NetClientClock
 {
 

@@ -86,6 +86,7 @@ import gid.gtk4.widget;
 
     Deprecated: Use [gid.gtk4.alert_dialog.AlertDialog] instead
 */
+@gidGir("MessageDialog", "MessageDialogClass")
 class MessageDialog : gid.gtk4.dialog.Dialog
 {
 

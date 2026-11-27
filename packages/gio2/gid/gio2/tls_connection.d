@@ -26,6 +26,7 @@ import gid.gobject2.object;
     
     For DTLS (Datagram TLS) support, see [gid.gio2.dtls_connection.DtlsConnection].
 */
+@gidGir("TlsConnection", "TlsConnectionClass")
 class TlsConnection : gid.gio2.iostream.IOStream
 {
 

@@ -70,6 +70,7 @@ import gid.gobject2.object;
     }
     ```
 */
+@gidGir("SocketConnectable", "SocketConnectableIface")
 interface SocketConnectable : GidWrap
 {
 

@@ -17,6 +17,7 @@ import gid.gobject2.object;
     
     See `class@AtkSocket`
 */
+@gidGir("Plug", "PlugClass")
 class Plug : gid.atk1.object.ObjectWrap, gid.atk1.component.Component
 {
 

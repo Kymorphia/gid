@@ -56,6 +56,7 @@ import gid.gtk3.widget;
     See also #GtkLayout, which shares the ability to perform fixed positioning
     of child widgets and additionally adds custom drawing and scrollability.
 */
+@gidGir("Fixed", "FixedClass")
 class Fixed : gid.gtk3.container.Container
 {
 

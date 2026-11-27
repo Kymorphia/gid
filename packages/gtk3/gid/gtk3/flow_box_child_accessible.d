@@ -12,6 +12,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("FlowBoxChildAccessible", "FlowBoxChildAccessibleClass")
 class FlowBoxChildAccessible : gid.gtk3.container_accessible.ContainerAccessible
 {
 

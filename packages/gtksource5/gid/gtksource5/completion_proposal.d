@@ -20,6 +20,7 @@ import gid.gtksource5.types;
     #GtkSourceCompletionProvider can use `func@GObject.IMPLEMENT_INTERFACE` to
     implement this with null for the interface init function.
 */
+@gidGir("CompletionProposal", "CompletionProposalInterface")
 interface CompletionProposal : GidWrap
 {
 

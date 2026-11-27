@@ -11,6 +11,7 @@ import gid.gobject2.types;
 /**
     A #GParamSpec derived structure that contains the meta data for unsigned 64bit integer properties.
 */
+@gidGir("ParamSpecUInt64")
 class ParamSpecUInt64 : gid.gobject2.param_spec.ParamSpec
 {
 

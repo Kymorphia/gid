@@ -26,6 +26,7 @@ import gid.gobject2.object;
     Most common client applications will not directly interact with
     [gid.gio2.tls_database.TlsDatabase]. It is used internally by [gid.gio2.tls_connection.TlsConnection].
 */
+@gidGir("TlsDatabase", "TlsDatabaseClass")
 class TlsDatabase : gid.gobject2.object.ObjectWrap
 {
 

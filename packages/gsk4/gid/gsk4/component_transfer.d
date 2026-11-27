@@ -18,6 +18,7 @@ import gid.gsk4.types;
     Note that the transfer function is applied to un-premultiplied
     values, and all results are clamped to the [0, 1] range.
 */
+@gidGir("ComponentTransfer")
 class ComponentTransfer : gid.gobject2.boxed.BoxedWrap!(gsk_component_transfer_get_type)
 {
 

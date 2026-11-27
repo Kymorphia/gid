@@ -12,6 +12,7 @@ import gid.gobject2.boxed;
     The GRand struct is an opaque data structure. It should only be
     accessed through the g_rand_* functions.
 */
+@gidGir("Rand")
 class Rand : gid.gobject2.boxed.BoxedWrap!(g_rand_get_type)
 {
 

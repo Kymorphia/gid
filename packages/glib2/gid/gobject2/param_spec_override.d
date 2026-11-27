@@ -21,6 +21,7 @@ import gid.gobject2.types;
     [gid.gobject2.object_class.ObjectClass.overrideProperty], and will not be directly useful
     unless you are implementing a new base type similar to GObject.
 */
+@gidGir("ParamSpecOverride")
 class ParamSpecOverride : gid.gobject2.param_spec.ParamSpec
 {
 

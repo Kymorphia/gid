@@ -33,6 +33,7 @@ import gid.gtk4.widget;
     [gid.gtk4.picture.Picture.canShrink] property is set to true or you might
     end up with an infinitely growing widget.
 */
+@gidGir("WidgetPaintable", "WidgetPaintableClass")
 class WidgetPaintable : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
 {
 

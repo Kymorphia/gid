@@ -12,6 +12,7 @@ import gid.gsk4.types;
 /**
     A render node repeating its single child node.
 */
+@gidGir("RepeatNode")
 class RepeatNode : gid.gsk4.render_node.RenderNode
 {
 

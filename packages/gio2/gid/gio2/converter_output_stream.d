@@ -21,6 +21,7 @@ import gid.gobject2.object;
     As of GLib 2.34, [gid.gio2.converter_output_stream.ConverterOutputStream] implements
     [gid.gio2.pollable_output_stream.PollableOutputStream].
 */
+@gidGir("ConverterOutputStream", "ConverterOutputStreamClass")
 class ConverterOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, gid.gio2.pollable_output_stream.PollableOutputStream
 {
 

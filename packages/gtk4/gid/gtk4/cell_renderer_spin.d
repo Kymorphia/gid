@@ -29,6 +29,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents.
         You should use [gid.gtk4.spin_button.SpinButton] instead
 */
+@gidGir("CellRendererSpin")
 class CellRendererSpin : gid.gtk4.cell_renderer_text.CellRendererText
 {
 

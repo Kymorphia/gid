@@ -14,6 +14,7 @@ import gid.glib2.types;
     This is done somewhat differently on different platforms, and can be
     tricky to get exactly right, so [gid.glib2.timer.Timer] provides a portable/convenient interface.
 */
+@gidGir("Timer")
 class Timer : OpaqueWrap!(GTimer*, void, void)
 {
 

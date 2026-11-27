@@ -23,6 +23,7 @@ import gid.gobject2.object;
     Create a [gid.gdk4.texture.Texture] for the existing format and then download it in a
     different format.
 */
+@gidGir("TextureDownloader")
 class TextureDownloader : gid.gobject2.boxed.BoxedWrap!(gdk_texture_downloader_get_type)
 {
 

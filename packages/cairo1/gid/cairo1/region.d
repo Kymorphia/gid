@@ -17,6 +17,7 @@ import gid.gobject2.boxed;
     Memory management of #cairo_region_t is done with
     [gid.cairo1.region.Region.reference] and [gid.cairo1.region.Region.destroy].
 */
+@gidGir("Region")
 class Region : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_region_get_type)
 {
 

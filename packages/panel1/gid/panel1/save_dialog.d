@@ -28,6 +28,7 @@ import gid.panel1.save_delegate;
 import gid.panel1.types;
 
 /** */
+@gidGir("SaveDialog", "SaveDialogClass")
 class SaveDialog : gid.adw1.message_dialog.MessageDialog
 {
 

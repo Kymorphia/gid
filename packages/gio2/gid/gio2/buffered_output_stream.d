@@ -28,6 +28,7 @@ import gid.gobject2.object;
     buffered output stream's buffer, use [gid.gio2.buffered_output_stream.BufferedOutputStream.setBufferSize].
     Note that the buffer's size cannot be reduced below the size of the data within the buffer.
 */
+@gidGir("BufferedOutputStream", "BufferedOutputStreamClass")
 class BufferedOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, gid.gio2.seekable.Seekable
 {
 

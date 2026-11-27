@@ -7,6 +7,12 @@ public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 public import gid.gst1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstCheck";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /** */
 struct GstCheckABIStruct
 {
@@ -30,6 +36,7 @@ struct GstCheckABIStruct
     Opaque structure containing data about a log filter
     function.
 */
+@gidGir("CheckLogFilter")
 struct GstCheckLogFilter;
 
 /**
@@ -156,16 +163,19 @@ struct GstHarness
 }
 
 /** */
+@gidGir("HarnessPrivate")
 struct GstHarnessPrivate;
 
 /**
     Opaque handle representing a GstHarness stress testing thread.
 */
+@gidGir("HarnessThread")
 struct GstHarnessThread;
 
 /**
     Opaque consistency checker handle.
 */
+@gidGir("StreamConsistency")
 struct GstStreamConsistency;
 
 /**
@@ -335,6 +345,7 @@ struct GstTestClockClass
 }
 
 /** */
+@gidGir("TestClockPrivate")
 struct GstTestClockPrivate;
 
 alias extern(C) gboolean function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) GstCheckLogFilterFunc;

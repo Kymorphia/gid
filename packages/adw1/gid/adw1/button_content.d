@@ -64,6 +64,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.button_content.ButtonContent] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("ButtonContent", "ButtonContentClass")
 class ButtonContent : gid.gtk4.widget.Widget
 {
 

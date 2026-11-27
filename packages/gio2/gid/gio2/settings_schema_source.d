@@ -13,6 +13,7 @@ import gid.gobject2.boxed;
 /**
     This is an opaque structure type.  You may not access it directly.
 */
+@gidGir("SettingsSchemaSource")
 class SettingsSchemaSource : gid.gobject2.boxed.BoxedWrap!(g_settings_schema_source_get_type)
 {
 

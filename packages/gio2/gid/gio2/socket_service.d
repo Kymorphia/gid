@@ -40,6 +40,7 @@ import gid.gobject2.object;
     stop the service are thread-safe so these can be used from threads that
     handle incoming clients.
 */
+@gidGir("SocketService", "SocketServiceClass")
 class SocketService : gid.gio2.socket_listener.SocketListener
 {
 

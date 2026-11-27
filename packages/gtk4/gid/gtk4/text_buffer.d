@@ -29,6 +29,7 @@ import gid.gtk4.types;
     GtkTextBuffer can support undoing changes to the buffer
     content, see [gid.gtk4.text_buffer.TextBuffer.setEnableUndo].
 */
+@gidGir("TextBuffer", "TextBufferClass")
 class TextBuffer : gid.gobject2.object.ObjectWrap
 {
 

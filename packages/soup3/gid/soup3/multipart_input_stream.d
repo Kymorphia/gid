@@ -32,6 +32,7 @@ import gid.soup3.types;
     you should not read directly from it, and the results are undefined
     if you do.
 */
+@gidGir("MultipartInputStream", "MultipartInputStreamClass")
 class MultipartInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.gio2.pollable_input_stream.PollableInputStream
 {
 

@@ -18,6 +18,7 @@ import gid.gobject2.object;
     API. This is an abstract class; use [gid.gio2.inet_socket_address.InetSocketAddress] for
     internet sockets, or [gid.gio2.unix_socket_address.UnixSocketAddress] for UNIX domain sockets.
 */
+@gidGir("SocketAddress", "SocketAddressClass")
 class SocketAddress : gid.gobject2.object.ObjectWrap, gid.gio2.socket_connectable.SocketConnectable
 {
 

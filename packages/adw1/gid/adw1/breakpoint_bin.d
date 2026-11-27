@@ -130,6 +130,7 @@ import gid.gtk4.widget;
     
     See [gid.adw1.breakpoint.Breakpoint] documentation for details.
 */
+@gidGir("BreakpointBin", "BreakpointBinClass")
 class BreakpointBin : gid.gtk4.widget.Widget
 {
 

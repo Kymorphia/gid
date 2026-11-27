@@ -26,6 +26,7 @@ import gid.gobject2.boxed;
     one go, use the convenience functions `func@GLib.compute_checksum_for_data`
     and `func@GLib.compute_checksum_for_string`, respectively.
 */
+@gidGir("Checksum")
 class Checksum : gid.gobject2.boxed.BoxedWrap!(g_checksum_get_type)
 {
 

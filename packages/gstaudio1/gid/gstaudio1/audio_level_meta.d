@@ -12,6 +12,7 @@ import gid.gstaudio1.types;
 /**
     Meta containing Audio Level Indication: https://tools.ietf.org/html/rfc6464
 */
+@gidGir("AudioLevelMeta")
 class AudioLevelMeta : StructWrap!(GstAudioLevelMeta)
 {
   /**

@@ -24,6 +24,7 @@ package uint _vbiLineSize(gid.gstvideo1.types.VideoFormat format, uint pixelWidt
     An encoder for writing ancillary data to the
     Vertical Blanking Interval lines of component signals.
 */
+@gidGir("VideoVBIEncoder")
 class VideoVBIEncoder : gid.gobject2.boxed.BoxedWrap!(gst_video_vbi_encoder_get_type)
 {
 

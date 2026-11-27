@@ -12,6 +12,7 @@ import gid.gobject2.boxed;
 /**
     Information about a D-Bus property on a D-Bus interface.
 */
+@gidGir("DBusPropertyInfo")
 class DBusPropertyInfo : gid.gobject2.boxed.BoxedWrap!(g_dbus_property_info_get_type)
 {
   /**

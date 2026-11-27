@@ -83,6 +83,7 @@ import gid.gstvideo1.video_codec_state;
     are already late and drop them right away to give a chance to the
     pipeline to catch up.
 */
+@gidGir("VideoEncoder", "VideoEncoderClass")
 class VideoEncoder : gid.gst1.element.Element, gid.gst1.preset.Preset
 {
 

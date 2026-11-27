@@ -13,6 +13,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_font_desc.AttrFontDesc] structure is used to store an attribute that
     sets all aspects of the font description at once.
 */
+@gidGir("AttrFontDesc")
 class AttrFontDesc : StructWrap!(PangoAttrFontDesc)
 {
   /**

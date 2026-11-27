@@ -15,6 +15,7 @@ import gid.webkitwebprocessextension6.types;
 /**
     Form manager of a #WebKitWebPage in a #WebKitScriptWorld
 */
+@gidGir("WebFormManager", "WebFormManagerClass")
 class WebFormManager : gid.gobject2.object.ObjectWrap
 {
 

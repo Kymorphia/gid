@@ -33,6 +33,7 @@ import gid.panel1.types;
       <img src="omni-bar.png" alt="omni-bar">
     </picture>
 */
+@gidGir("OmniBar", "OmniBarClass")
 class OmniBar : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

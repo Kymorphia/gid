@@ -25,6 +25,7 @@ import gid.gobject2.gid_builder;
     g_socket_set_option (socket, IPPROTO_IPV6, IPV6_TCLASS, <TC value>, &error);
     ```
 */
+@gidGir("IPv6TclassMessage", "IPv6TclassMessageClass")
 class IPv6TclassMessage : gid.gio2.socket_control_message.SocketControlMessage
 {
 

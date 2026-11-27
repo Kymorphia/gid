@@ -37,6 +37,7 @@ import gid.gobject2.object;
     This is an abstract type; subclasses of it implement different resolvers for
     different platforms and situations.
 */
+@gidGir("Resolver", "ResolverClass")
 class Resolver : gid.gobject2.object.ObjectWrap
 {
 

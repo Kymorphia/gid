@@ -12,6 +12,7 @@ import gid.gobject2.types;
     The class of a flags type holds information about its
     possible values.
 */
+@gidGir("FlagsClass")
 struct FlagsClass
 {
   /**

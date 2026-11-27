@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to a keyboard focus change.
 */
+@gidGir("FocusEvent")
 class FocusEvent : gid.gdk4.event.Event
 {
 

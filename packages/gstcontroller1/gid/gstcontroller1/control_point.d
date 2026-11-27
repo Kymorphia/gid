@@ -14,6 +14,7 @@ import gid.gstcontroller1.types;
     values used for interpolation. This "inherits" from
     GstTimedValue.
 */
+@gidGir("ControlPoint")
 class ControlPoint : gid.gobject2.boxed.BoxedWrap!(gst_control_point_get_type)
 {
   /**

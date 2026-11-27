@@ -19,6 +19,7 @@ import gid.webkit6.types;
     [gid.webkit6.form_submission_request.FormSubmissionRequest.listTextFields]. You can submit the
     form with [gid.webkit6.form_submission_request.FormSubmissionRequest.submit].
 */
+@gidGir("FormSubmissionRequest", "FormSubmissionRequestClass")
 class FormSubmissionRequest : gid.gobject2.object.ObjectWrap
 {
 

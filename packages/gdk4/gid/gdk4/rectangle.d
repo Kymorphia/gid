@@ -24,6 +24,7 @@ import gid.gdk4.types;
     The Graphene library has a number of other data types for regions and
     volumes in 2D and 3D.
 */
+@gidGir("Rectangle")
 struct Rectangle
 {
   /**

@@ -12,6 +12,7 @@ import gid.gstsdp1.types;
     (their username and the address of the user's host) plus a session id and
     session version number.
 */
+@gidGir("SDPOrigin")
 class SDPOrigin : StructWrap!(GstSDPOrigin)
 {
   /**

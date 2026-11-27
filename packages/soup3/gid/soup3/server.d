@@ -110,6 +110,7 @@ import gid.soup3.websocket_connection;
     to (or start) the main loop for the current thread-default
     [gid.glib2.main_context.MainContext].
 */
+@gidGir("Server", "ServerClass")
 class Server : gid.gobject2.object.ObjectWrap
 {
 

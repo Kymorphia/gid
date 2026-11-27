@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A buffered stream wrapper around any #GMimeStream object.
 */
+@gidGir("StreamBuffer", "StreamBufferClass")
 class StreamBuffer : gid.gmime3.stream.Stream
 {
 

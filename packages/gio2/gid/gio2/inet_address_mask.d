@@ -19,6 +19,7 @@ import gid.gobject2.object;
     of the base address are relevant for matching purposes. These are
     often given in string form. For example, `10.0.0.0/8`, or `fe80::/10`.
 */
+@gidGir("InetAddressMask", "InetAddressMaskClass")
 class InetAddressMask : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
 {
 

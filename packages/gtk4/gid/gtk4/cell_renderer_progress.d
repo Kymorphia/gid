@@ -21,6 +21,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents.
         You should use [gid.gtk4.progress_bar.ProgressBar] instead
 */
+@gidGir("CellRendererProgress")
 class CellRendererProgress : gid.gtk4.cell_renderer.CellRenderer, gid.gtk4.orientable.Orientable
 {
 

@@ -51,6 +51,7 @@ import gid.pango1.types;
     
     None of the members of a [gid.pango1.glyph_item_iter.GlyphItemIter] should be modified manually.
 */
+@gidGir("GlyphItemIter")
 class GlyphItemIter : gid.gobject2.boxed.BoxedWrap!(pango_glyph_item_iter_get_type)
 {
   /**

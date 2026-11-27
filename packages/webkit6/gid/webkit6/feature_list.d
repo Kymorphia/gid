@@ -28,6 +28,7 @@ import gid.webkit6.types;
     [gid.webkit6.settings.Settings.getDevelopmentFeatures], and
     [gid.webkit6.settings.Settings.getAllFeatures].
 */
+@gidGir("FeatureList")
 class FeatureList : gid.gobject2.boxed.BoxedWrap!(webkit_feature_list_get_type)
 {
 

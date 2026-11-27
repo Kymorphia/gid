@@ -29,6 +29,7 @@ import gid.gtk4.widget;
     [gid.adw1.timed_animation.TimedAnimation.alternate] is set to `TRUE`, it will also change the
     direction every other iteration.
 */
+@gidGir("TimedAnimation", "TimedAnimationClass")
 class TimedAnimation : gid.adw1.animation.Animation
 {
 

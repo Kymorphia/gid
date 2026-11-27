@@ -12,6 +12,7 @@ import gid.gobject2.object;
 /**
     Base class for filters used by #GMimeStreamFilter.
 */
+@gidGir("Filter", "FilterClass")
 class Filter : gid.gobject2.object.ObjectWrap
 {
 

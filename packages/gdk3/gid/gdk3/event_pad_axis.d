@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated during [gid.gdk4.types.InputSource.TabletPad] interaction with tactile sensors.
 */
+@gidGir("EventPadAxis")
 class EventPadAxis : StructWrap!(GdkEventPadAxis, gdk_event_copy, gdk_event_free)
 {
   /**

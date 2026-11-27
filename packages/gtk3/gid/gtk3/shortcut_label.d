@@ -19,6 +19,7 @@ import gid.gtk3.types;
     #GtkShortcutLabel is a widget that represents a single keyboard shortcut or gesture
     in the user interface.
 */
+@gidGir("ShortcutLabel", "ShortcutLabelClass")
 class ShortcutLabel : gid.gtk3.box.Box
 {
 

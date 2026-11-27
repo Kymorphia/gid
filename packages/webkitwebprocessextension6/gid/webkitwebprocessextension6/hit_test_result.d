@@ -31,6 +31,7 @@ import gid.webkitwebprocessextension6.types;
     for the mouse coordinates and #WebKitWebView::mouse-target-changed
     signal is emitted with a #WebKitHitTestResult.
 */
+@gidGir("HitTestResult", "HitTestResultClass")
 class HitTestResult : gid.gobject2.object.ObjectWrap
 {
 

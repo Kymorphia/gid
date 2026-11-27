@@ -24,6 +24,7 @@ import gid.soup3.types;
     being loaded. You can connect to different [gid.soup3.message.Message] signals to get the
     final result of every value.
 */
+@gidGir("MessageMetrics")
 class MessageMetrics : gid.gobject2.boxed.BoxedWrap!(soup_message_metrics_get_type)
 {
 

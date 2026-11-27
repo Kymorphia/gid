@@ -38,6 +38,7 @@ import gid.gtk4.widget;
     [gid.adw1.carousel_indicator_lines.CarouselIndicatorLines] has a single CSS node with name
     `carouselindicatorlines`.
 */
+@gidGir("CarouselIndicatorLines", "CarouselIndicatorLinesClass")
 class CarouselIndicatorLines : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

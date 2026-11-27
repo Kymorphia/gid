@@ -19,6 +19,7 @@ import gid.pango1.types;
     of shaping text with [gid.pango1.layout.Layout] is a list of [gid.pango1.layout_line.LayoutLine],
     each of which contains a list of [gid.pango1.glyph_item.GlyphItem].
 */
+@gidGir("GlyphItem")
 class GlyphItem : gid.gobject2.boxed.BoxedWrap!(pango_glyph_item_get_type)
 {
   /**

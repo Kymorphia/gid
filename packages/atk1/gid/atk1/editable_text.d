@@ -22,6 +22,7 @@ import gid.gobject2.gid_builder;
     
     See `iface@AtkText`
 */
+@gidGir("EditableText", "EditableTextIface")
 interface EditableText : GidWrap
 {
 

@@ -52,6 +52,7 @@ import gid.gtk4.types;
     Selections may happen asynchronously, so the only reliable way to find out
     when an item was selected is to listen to the signals that indicate selection.
 */
+@gidGir("SelectionModel", "SelectionModelInterface")
 interface SelectionModel : gid.gio2.list_model.ListModel
 {
 

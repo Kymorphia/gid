@@ -23,6 +23,7 @@ import gid.gtksource5.types;
     A [gid.gtksource5.gutter_renderer_text.GutterRendererText] can be used to render text in a cell of
     [gid.gtksource5.gutter.Gutter].
 */
+@gidGir("GutterRendererText", "GutterRendererTextClass")
 class GutterRendererText : gid.gtksource5.gutter_renderer.GutterRenderer
 {
 

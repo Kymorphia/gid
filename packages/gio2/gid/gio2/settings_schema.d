@@ -101,6 +101,7 @@ import gid.gobject2.boxed;
     In that case, the plugin loading system must compile the schemas for
     itself before attempting to create the settings source.
 */
+@gidGir("SettingsSchema")
 class SettingsSchema : gid.gobject2.boxed.BoxedWrap!(g_settings_schema_get_type)
 {
 

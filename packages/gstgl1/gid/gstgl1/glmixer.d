@@ -16,6 +16,7 @@ import gid.gstgl1.types;
 /**
     #GstGLMixer helps implement an element that operates on RGBA textures.
 */
+@gidGir("GLMixer", "GLMixerClass")
 class GLMixer : gid.gstgl1.glbase_mixer.GLBaseMixer
 {
 

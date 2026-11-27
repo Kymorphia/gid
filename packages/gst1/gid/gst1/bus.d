@@ -55,6 +55,7 @@ import gid.gst1.types;
     Note that a #GstPipeline will set its bus into flushing state when changing
     from READY to NULL state.
 */
+@gidGir("Bus", "BusClass")
 class Bus : gid.gst1.object.ObjectWrap
 {
 

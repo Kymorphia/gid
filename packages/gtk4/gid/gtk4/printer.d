@@ -23,6 +23,7 @@ import gid.gtk4.types;
     etc. Most importantly, a [gid.gtk4.printer.Printer] object can be used to create
     a [gid.gtk4.print_job.PrintJob] object, which lets you print to the printer.
 */
+@gidGir("Printer")
 class Printer : gid.gobject2.object.ObjectWrap
 {
 

@@ -14,6 +14,7 @@ import gid.gstallocators1.types;
 /**
     Private intance object for #GstDRMDumbAllocator.
 */
+@gidGir("DRMDumbAllocator", "DRMDumbAllocatorClass")
 class DRMDumbAllocator : gid.gst1.allocator.Allocator
 {
 

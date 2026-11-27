@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated when the state of a toplevel window changes.
 */
+@gidGir("EventWindowState")
 class EventWindowState : StructWrap!(GdkEventWindowState, gdk_event_copy, gdk_event_free)
 {
   /**

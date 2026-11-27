@@ -22,6 +22,7 @@ import gid.gobject2.object;
     As of GLib 2.34, [gid.gio2.memory_output_stream.MemoryOutputStream] trivially implements
     [gid.gio2.pollable_output_stream.PollableOutputStream]: it always polls as ready.
 */
+@gidGir("MemoryOutputStream", "MemoryOutputStreamClass")
 class MemoryOutputStream : gid.gio2.output_stream.OutputStream, gid.gio2.pollable_output_stream.PollableOutputStream, gid.gio2.seekable.Seekable
 {
 

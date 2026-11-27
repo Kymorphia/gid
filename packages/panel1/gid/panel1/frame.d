@@ -31,6 +31,7 @@ import gid.panel1.widget;
     A #PanelFrame can also have a header widget that will be displayed
     above the panels.
 */
+@gidGir("Frame", "FrameClass")
 class Frame : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

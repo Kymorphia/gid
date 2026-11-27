@@ -22,6 +22,7 @@ import gid.gstsdp1.types;
     The GstSDPMessage helper functions makes it easy to parse and create SDP
     messages.
 */
+@gidGir("SDPMessage")
 class SDPMessage : gid.gobject2.boxed.BoxedWrap!(gst_sdp_message_get_type)
 {
   /**

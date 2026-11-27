@@ -10,6 +10,7 @@ import gid.gstallocators1.c.types;
 import gid.gstallocators1.types;
 
 /** */
+@gidGir("PhysMemoryAllocator", "PhysMemoryAllocatorInterface")
 interface PhysMemoryAllocator : GidWrap
 {
 

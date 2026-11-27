@@ -9,6 +9,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("Encoding")
 class Encoding : gid.gobject2.boxed.BoxedWrap!(gtk_source_encoding_get_type)
 {
 

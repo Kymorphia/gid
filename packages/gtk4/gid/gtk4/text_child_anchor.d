@@ -15,6 +15,7 @@ import gid.gtk4.widget;
     
     The anchor can have multiple widgets anchored, to allow for multiple views.
 */
+@gidGir("TextChildAnchor", "TextChildAnchorClass")
 class TextChildAnchor : gid.gobject2.object.ObjectWrap
 {
 

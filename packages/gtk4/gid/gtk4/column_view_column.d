@@ -27,6 +27,7 @@ import gid.gtk4.types;
     [gid.gtk4.column_view_column.ColumnViewColumn.setSorter], to let users influence sorting
     by clicking on the column header.
 */
+@gidGir("ColumnViewColumn", "ColumnViewColumnClass")
 class ColumnViewColumn : gid.gobject2.object.ObjectWrap
 {
 

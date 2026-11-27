@@ -23,6 +23,7 @@ import gid.gobject2.object;
     
     A [gid.gdk4.draw_context.DrawContext] is always associated with a single toplevel surface.
 */
+@gidGir("DrawContext")
 class DrawContext : gid.gobject2.object.ObjectWrap
 {
 

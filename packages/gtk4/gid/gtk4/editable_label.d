@@ -64,6 +64,7 @@ import gid.gtk4.widget;
     For all the subnodes added to the text node in various situations,
     see [gid.gtk4.text.Text].
 */
+@gidGir("EditableLabel", "EditableLabelClass")
 class EditableLabel : gid.gtk4.widget.Widget, gid.gtk4.editable.Editable
 {
 

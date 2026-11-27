@@ -26,6 +26,7 @@ import gid.gtk3.types;
     
     GtkHScrollbar has been deprecated, use #GtkScrollbar instead.
 */
+@gidGir("HScrollbar", "HScrollbarClass")
 class HScrollbar : gid.gtk3.scrollbar.Scrollbar
 {
 

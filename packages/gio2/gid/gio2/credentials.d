@@ -47,6 +47,7 @@ import gid.gobject2.object;
     Since GLib 2.72, on Windows, the native credentials may contain the PID of a
     process. This corresponds to [gid.gio2.types.CredentialsType.Win32Pid].
 */
+@gidGir("Credentials", "CredentialsClass")
 class Credentials : gid.gobject2.object.ObjectWrap
 {
 

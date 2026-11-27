@@ -34,6 +34,7 @@ import gid.gobject2.object;
     API to interact with these surfaces. Other, more specialized surface
     types exist, but you will rarely interact with them directly.
 */
+@gidGir("Surface", "SurfaceClass")
 class Surface : gid.gobject2.object.ObjectWrap
 {
 

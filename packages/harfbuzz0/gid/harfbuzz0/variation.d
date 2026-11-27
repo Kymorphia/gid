@@ -12,6 +12,7 @@ import gid.harfbuzz0.types;
     variation-axis tags are listed in
     [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
 */
+@gidGir("variation_t")
 struct Variation
 {
   /**

@@ -18,6 +18,7 @@ import gid.gtk3.types;
     support sorting. The #GtkTreeView uses the methods provided by this interface
     to sort the model.
 */
+@gidGir("TreeSortable", "TreeSortableIface")
 interface TreeSortable : gid.gtk3.tree_model.TreeModel
 {
 

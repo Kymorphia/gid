@@ -18,6 +18,7 @@ import gid.gtk4.types;
 /**
     Base class for filters that combine multiple filters.
 */
+@gidGir("MultiFilter", "MultiFilterClass")
 class MultiFilter : gid.gtk4.filter.Filter, gid.gio2.list_model.ListModel, gid.gtk4.buildable.Buildable
 {
 

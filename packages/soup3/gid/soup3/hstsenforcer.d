@@ -37,6 +37,7 @@ import gid.soup3.types;
     HSTS policy persistence. See [gid.soup3.hstsenforcer_db.HSTSEnforcerDB] for a persistent
     enforcer.
 */
+@gidGir("HSTSEnforcer", "HSTSEnforcerClass")
 class HSTSEnforcer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

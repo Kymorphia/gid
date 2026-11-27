@@ -36,6 +36,7 @@ import gid.soup3.types;
     code (eg, javascript), so as to minimize the danger posed by
     cross-site scripting attacks.
 */
+@gidGir("Cookie")
 class Cookie : gid.gobject2.boxed.BoxedWrap!(soup_cookie_get_type)
 {
 

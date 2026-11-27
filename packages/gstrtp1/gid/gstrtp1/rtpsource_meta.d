@@ -12,6 +12,7 @@ import gid.gstrtp1.types;
 /**
     Meta describing the source(s) of the buffer.
 */
+@gidGir("RTPSourceMeta")
 class RTPSourceMeta : StructWrap!(GstRTPSourceMeta)
 {
   /**

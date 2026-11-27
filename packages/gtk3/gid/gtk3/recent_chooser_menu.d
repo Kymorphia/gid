@@ -39,6 +39,7 @@ import gid.gtk3.types;
     
     Recently used files are supported since GTK+ 2.10.
 */
+@gidGir("RecentChooserMenu", "RecentChooserMenuClass")
 class RecentChooserMenu : gid.gtk3.menu.Menu, gid.gtk3.activatable.Activatable, gid.gtk3.recent_chooser.RecentChooser
 {
 

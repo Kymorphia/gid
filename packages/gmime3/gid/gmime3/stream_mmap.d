@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A memory-mapped #GMimeStream.
 */
+@gidGir("StreamMmap", "StreamMmapClass")
 class StreamMmap : gid.gmime3.stream.Stream
 {
 

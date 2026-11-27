@@ -83,6 +83,7 @@ import gid.gtk4.widget;
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
 */
+@gidGir("Flap", "FlapClass")
 class Flap : gid.gtk4.widget.Widget, gid.adw1.swipeable.Swipeable, gid.gtk4.orientable.Orientable
 {
 

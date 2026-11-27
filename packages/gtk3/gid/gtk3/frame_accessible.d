@@ -12,6 +12,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("FrameAccessible", "FrameAccessibleClass")
 class FrameAccessible : gid.gtk3.container_accessible.ContainerAccessible
 {
 

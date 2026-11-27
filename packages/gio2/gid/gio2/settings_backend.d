@@ -36,6 +36,7 @@ import gid.gobject2.object;
     C preprocessor symbol `G_SETTINGS_ENABLE_BACKEND` before including
     `gio/gsettingsbackend.h`.
 */
+@gidGir("SettingsBackend", "SettingsBackendClass")
 class SettingsBackend : gid.gobject2.object.ObjectWrap
 {
 

@@ -47,6 +47,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.avatar.Avatar] uses the [gid.gtk4.types.AccessibleRole.Img] role.
 */
+@gidGir("Avatar", "AvatarClass")
 class Avatar : gid.gtk4.widget.Widget
 {
 

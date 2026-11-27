@@ -29,6 +29,7 @@ import gid.gtk3.widget;
     of the “steppers”. It also provides properties and methods for setting a
     “fill level” on range widgets. See [gid.gtk4.range.Range.setFillLevel].
 */
+@gidGir("Range", "RangeClass")
 class Range : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
 {
 

@@ -32,6 +32,7 @@ import gid.gtk3.types;
     
     GtkRadioToolButton has a single CSS node with name toolbutton.
 */
+@gidGir("RadioToolButton", "RadioToolButtonClass")
 class RadioToolButton : gid.gtk3.toggle_tool_button.ToggleToolButton
 {
 

@@ -85,6 +85,7 @@ import gid.gtk3.widget;
     gtk_widget_set_size_request (frame2, 50, -1);
     ```
 */
+@gidGir("Paned", "PanedClass")
 class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
 {
 

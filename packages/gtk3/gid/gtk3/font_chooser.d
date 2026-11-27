@@ -22,6 +22,7 @@ import gid.pango1.font_map;
     #GtkFontChooserDialog and #GtkFontButton. The GtkFontChooser interface
     has been introducted in GTK+ 3.2.
 */
+@gidGir("FontChooser", "FontChooserIface")
 interface FontChooser : GidWrap
 {
 

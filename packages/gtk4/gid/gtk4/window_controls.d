@@ -70,6 +70,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.window_controls.WindowControls] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("WindowControls", "WindowControlsClass")
 class WindowControls : gid.gtk4.widget.Widget
 {
 

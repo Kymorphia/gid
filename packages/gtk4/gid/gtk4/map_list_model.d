@@ -45,6 +45,7 @@ import gid.gtk4.types;
     
     [gid.gtk4.map_list_model.MapListModel] passes through sections from the underlying model.
 */
+@gidGir("MapListModel", "MapListModelClass")
 class MapListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel
 {
 

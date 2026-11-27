@@ -17,6 +17,7 @@ import gid.gobject2.types;
     
     [gid.adw1.enum_list_model.EnumListModel] contains objects of type [gid.adw1.enum_list_item.EnumListItem].
 */
+@gidGir("EnumListModel", "EnumListModelClass")
 class EnumListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

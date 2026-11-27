@@ -15,6 +15,7 @@ import gid.gobject2.types;
     The implementation of the #GObject property system uses such a pool to
     store the #GParamSpecs of the properties all object types.
 */
+@gidGir("ParamSpecPool")
 class ParamSpecPool : OpaqueWrap!(GParamSpecPool*, void, void)
 {
 

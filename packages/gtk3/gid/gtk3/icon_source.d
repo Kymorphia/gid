@@ -11,6 +11,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("IconSource")
 class IconSource : gid.gobject2.boxed.BoxedWrap!(gtk_icon_source_get_type)
 {
 

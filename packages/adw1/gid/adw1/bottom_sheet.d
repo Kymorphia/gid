@@ -93,6 +93,7 @@ import gid.gtk4.widget;
     “bottom-bar”. Specifying “content” or omitting the child type results in
     setting the content child.
 */
+@gidGir("BottomSheet", "BottomSheetClass")
 class BottomSheet : gid.gtk4.widget.Widget, gid.adw1.swipeable.Swipeable
 {
 

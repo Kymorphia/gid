@@ -26,6 +26,7 @@ import gid.gst1.types;
     by getting extend UID for that (you can use [gid.gst1.toc.Toc.findEntry] to retrieve it)
     with any TOC entries received from downstream.
 */
+@gidGir("TocSetter", "TocSetterInterface")
 interface TocSetter : GidWrap
 {
 

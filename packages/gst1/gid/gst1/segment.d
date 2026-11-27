@@ -55,6 +55,7 @@ import gid.gst1.types;
     [gid.gst1.segment.Segment.toStreamTime] can be used to convert a timestamp and the segment
     info to stream time (which is always between 0 and the duration of the stream).
 */
+@gidGir("Segment")
 struct Segment
 {
   /**

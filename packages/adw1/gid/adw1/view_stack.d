@@ -82,6 +82,7 @@ import gid.gtk4.widget;
     [gid.adw1.view_stack.ViewStack] uses the `enum@Gtk.AccessibleRole.tab-panel` for the stack
     pages which are the accessible parent objects of the child widgets.
 */
+@gidGir("ViewStack", "ViewStackClass")
 class ViewStack : gid.gtk4.widget.Widget
 {
 

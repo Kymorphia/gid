@@ -15,6 +15,7 @@ import gid.gstgl1.types;
 /**
     #GstGLSLStage holds and represents a single OpenGL shader stage.
 */
+@gidGir("GLSLStage", "GLSLStageClass")
 class GLSLStage : gid.gst1.object.ObjectWrap
 {
 

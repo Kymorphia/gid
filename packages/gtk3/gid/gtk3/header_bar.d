@@ -32,6 +32,7 @@ import gid.gtk3.widget;
     titlebar widget of a #GtkWindow (see [gid.gtk4.window.Window.setTitlebar]), as it gives
     features typical of titlebars while allowing the addition of child widgets.
 */
+@gidGir("HeaderBar", "HeaderBarClass")
 class HeaderBar : gid.gtk3.container.Container
 {
 

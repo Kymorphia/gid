@@ -18,6 +18,7 @@ import gid.gtk3.types;
     
     The #GtkCellRendererProgress cell renderer was added in GTK+ 2.6.
 */
+@gidGir("CellRendererProgress", "CellRendererProgressClass")
 class CellRendererProgress : gid.gtk3.cell_renderer.CellRenderer, gid.gtk3.orientable.Orientable
 {
 

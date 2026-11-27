@@ -11,6 +11,7 @@ import gid.gobject2.types;
 /**
     A #GParamSpec derived structure that contains the meta data for #GValueArray properties.
 */
+@gidGir("ParamSpecValueArray")
 class ParamSpecValueArray : gid.gobject2.param_spec.ParamSpec
 {
 

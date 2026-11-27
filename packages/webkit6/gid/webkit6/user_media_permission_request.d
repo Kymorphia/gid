@@ -21,6 +21,7 @@ import gid.webkit6.types;
     When a WebKitUserMediaPermissionRequest is not handled by the user,
     it is denied by default.
 */
+@gidGir("UserMediaPermissionRequest", "UserMediaPermissionRequestClass")
 class UserMediaPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

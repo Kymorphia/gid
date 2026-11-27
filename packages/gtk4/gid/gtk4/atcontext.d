@@ -19,6 +19,7 @@ import gid.gtk4.types;
     is responsible for updating the accessible state in response to state
     changes in [gid.gtk4.accessible.Accessible].
 */
+@gidGir("ATContext", "ATContextClass")
 class ATContext : gid.gobject2.object.ObjectWrap
 {
 

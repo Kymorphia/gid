@@ -33,6 +33,7 @@ import gid.gobject2.types;
     It is invalid to take a #GWeakRef on an object during #GObjectClass.dispose
     without first having or creating a strong reference to the object.
 */
+@gidGir("WeakRef")
 class WeakRef : StructWrap!(GWeakRef)
 {
   /**

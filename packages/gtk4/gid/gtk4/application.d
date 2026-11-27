@@ -113,6 +113,7 @@ import gid.gtk4.window;
     - [Using GtkApplication](https://developer.gnome.org/documentation/tutorials/application.html)
     - [Getting Started with GTK: Basics](getting_started.html#basics)
 */
+@gidGir("Application", "ApplicationClass")
 class Application : gid.gio2.application.Application
 {
 

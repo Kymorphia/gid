@@ -16,6 +16,7 @@ import gid.graphene1.types;
     The contents of a #graphene_quad_t are private and should never be
     accessed directly.
 */
+@gidGir("Quad")
 class Quad : gid.gobject2.boxed.BoxedWrap!(graphene_quad_get_type)
 {
   /**

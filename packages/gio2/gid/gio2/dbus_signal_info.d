@@ -13,6 +13,7 @@ import gid.gobject2.boxed;
 /**
     Information about a signal on a D-Bus interface.
 */
+@gidGir("DBusSignalInfo")
 class DBusSignalInfo : gid.gobject2.boxed.BoxedWrap!(g_dbus_signal_info_get_type)
 {
   /**

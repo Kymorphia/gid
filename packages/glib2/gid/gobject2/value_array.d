@@ -38,6 +38,7 @@ import gid.gobject2.value;
     Deprecated: Use [gid.glib2.array.Array] instead, if possible for the given use case,
          as described above.
 */
+@gidGir("ValueArray")
 class ValueArray : gid.gobject2.boxed.BoxedWrap!(g_value_array_get_type)
 {
 

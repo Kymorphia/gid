@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated during [gid.gdk4.types.InputSource.TabletPad] mode switches in a group.
 */
+@gidGir("EventPadGroupMode")
 class EventPadGroupMode : StructWrap!(GdkEventPadGroupMode, gdk_event_copy, gdk_event_free)
 {
   /**

@@ -16,6 +16,7 @@ import gid.gobject2.object;
 /**
     A [gid.gio2.inet_socket_address.InetSocketAddress] representing a connection via a proxy server.
 */
+@gidGir("ProxyAddress", "ProxyAddressClass")
 class ProxyAddress : gid.gio2.inet_socket_address.InetSocketAddress
 {
 

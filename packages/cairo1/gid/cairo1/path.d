@@ -23,6 +23,7 @@ import gid.gobject2.boxed;
     portions (defined in #cairo_path_data_type_t), since the data
     includes both headers and coordinates for each portion.
 */
+@gidGir("Path")
 class Path : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_path_get_type)
 {
   /**

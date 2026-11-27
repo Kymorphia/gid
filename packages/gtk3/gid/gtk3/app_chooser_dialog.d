@@ -30,6 +30,7 @@ import gid.gtk3.window;
     To set the heading that is shown above the #GtkAppChooserWidget,
     use [gid.gtk4.app_chooser_dialog.AppChooserDialog.setHeading].
 */
+@gidGir("AppChooserDialog", "AppChooserDialogClass")
 class AppChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.app_chooser.AppChooser
 {
 

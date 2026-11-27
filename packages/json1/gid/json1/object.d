@@ -30,6 +30,7 @@ import gid.json1.types;
     To retrieve the size of the object (that is, the number of members it has),
     use [gid.json1.object.ObjectWrap.getSize].
 */
+@gidGir("Object")
 class ObjectWrap : gid.gobject2.boxed.BoxedWrap!(json_object_get_type)
 {
 

@@ -123,6 +123,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.level_bar.LevelBar] uses the [gid.gtk4.types.AccessibleRole.Meter] role.
 */
+@gidGir("LevelBar")
 class LevelBar : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange, gid.gtk4.orientable.Orientable
 {
 

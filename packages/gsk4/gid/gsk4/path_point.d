@@ -27,6 +27,7 @@ import gid.gsk4.types;
     It is the callers responsibility to keep a reference to the path
     as long as the [gid.gsk4.path_point.PathPoint] is used.
 */
+@gidGir("PathPoint")
 class PathPoint : gid.gobject2.boxed.BoxedWrap!(gsk_path_point_get_type)
 {
 

@@ -76,6 +76,7 @@ import gid.pango1.font_description;
     still take precedence over your changes, as it uses the
     [gid.gtk4.types.STYLE_PROVIDER_PRIORITY_USER] priority.
 */
+@gidGir("StyleContext", "StyleContextClass")
 class StyleContext : gid.gobject2.object.ObjectWrap
 {
 

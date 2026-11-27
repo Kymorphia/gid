@@ -38,6 +38,7 @@ import gid.gobject2.value;
     Output devices are represented by [gid.gdk4.monitor.MonitorWrap] objects, which can
     be accessed with [gid.gdk4.display.Display.getMonitorAtSurface] and similar APIs.
 */
+@gidGir("Display")
 class Display : gid.gobject2.object.ObjectWrap
 {
 

@@ -24,6 +24,7 @@ import gid.gobject2.gid_builder;
     interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config file
     file or the `GioUnix-2.0` GIR namespace when using it.
 */
+@gidGir("OutputStream", "OutputStreamClass")
 class OutputStream : gid.gio2.output_stream.OutputStream, gid.gio2.pollable_output_stream.PollableOutputStream, gid.giounix2.file_descriptor_based.FileDescriptorBased
 {
 

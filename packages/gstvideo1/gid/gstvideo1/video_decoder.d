@@ -143,6 +143,7 @@ import gid.gstvideo1.video_codec_state;
       * Accept data in @handle_frame and provide decoded results to
          @gst_video_decoder_finish_frame, or call @gst_video_decoder_drop_frame.
 */
+@gidGir("VideoDecoder", "VideoDecoderClass")
 class VideoDecoder : gid.gst1.element.Element
 {
 

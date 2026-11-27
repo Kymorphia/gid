@@ -15,6 +15,7 @@ import gid.gstgl1.types;
     
     Data is uploaded or downloaded from the GPU as is necessary.
 */
+@gidGir("GLBuffer")
 class GLBuffer : gid.gobject2.boxed.BoxedWrap!(gst_gl_buffer_get_type)
 {
   /**

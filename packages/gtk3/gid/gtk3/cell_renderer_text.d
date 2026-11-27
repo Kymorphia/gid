@@ -24,6 +24,7 @@ import gid.pango1.types;
     If the #GtkCellRenderer:mode is [gid.gtk4.types.CellRendererMode.Editable],
     the #GtkCellRendererText allows to edit its text using an entry.
 */
+@gidGir("CellRendererText", "CellRendererTextClass")
 class CellRendererText : gid.gtk3.cell_renderer.CellRenderer
 {
 

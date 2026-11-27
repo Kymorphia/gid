@@ -12,6 +12,7 @@ import gid.gsk4.types;
 /**
     A render node drawing one or more shadows behind its single child node.
 */
+@gidGir("ShadowNode")
 class ShadowNode : gid.gsk4.render_node.RenderNode
 {
 

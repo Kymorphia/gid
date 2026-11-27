@@ -14,6 +14,7 @@ import gid.gsk4.types;
     
     This renderer will fail to realize if Vulkan is not supported.
 */
+@gidGir("VulkanRenderer", "VulkanRendererClass")
 class VulkanRenderer : gid.gsk4.renderer.Renderer
 {
 

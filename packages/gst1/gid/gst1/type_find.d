@@ -14,6 +14,7 @@ import gid.gst1.types;
     The following functions allow you to detect the media type of an unknown
     stream.
 */
+@gidGir("TypeFind")
 class TypeFind : gid.gobject2.boxed.BoxedWrap!(gst_type_find_get_type)
 {
   /**

@@ -20,6 +20,7 @@ import gid.soup3.types;
     
     See [gid.soup3.session.Session.addFeature], etc, to add a feature to a session.
 */
+@gidGir("SessionFeature", "SessionFeatureInterface")
 interface SessionFeature : GidWrap
 {
 

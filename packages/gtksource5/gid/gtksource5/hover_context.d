@@ -25,6 +25,7 @@ import gid.gtksource5.view;
     requested. [gid.gtksource5.hover_context.HoverContext.getIter] will get you the location
     of the pointer when the request was made.
 */
+@gidGir("HoverContext", "HoverContextClass")
 class HoverContext : gid.gobject2.object.ObjectWrap
 {
 

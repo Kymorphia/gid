@@ -15,6 +15,7 @@ import gid.gtk3.cell_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("CellAccessibleParent", "CellAccessibleParentIface")
 interface CellAccessibleParent : GidWrap
 {
 

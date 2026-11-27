@@ -13,6 +13,7 @@ import gid.glib2.types;
     
     It should only be accessed through the `g_async_queue_*` functions.
 */
+@gidGir("AsyncQueue")
 class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_ref)
 {
 

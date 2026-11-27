@@ -30,6 +30,7 @@ import gid.javascriptcore6.class_;
     the context by using [gid.javascriptcore6.context.Context.evaluate] or [gid.javascriptcore6.context.Context.evaluateWithSourceUri].
     It's also possible to register custom objects in the context with [gid.javascriptcore6.context.Context.registerClass].
 */
+@gidGir("Context", "ContextClass")
 class Context : gid.gobject2.object.ObjectWrap
 {
 

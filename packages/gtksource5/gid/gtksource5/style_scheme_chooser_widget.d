@@ -29,6 +29,7 @@ import gid.gtksource5.types;
     To get the selected style scheme
     use [gid.gtksource5.style_scheme_chooser.StyleSchemeChooser.getStyleScheme].
 */
+@gidGir("StyleSchemeChooserWidget", "StyleSchemeChooserWidgetClass")
 class StyleSchemeChooserWidget : gid.gtk4.widget.Widget, gid.gtksource5.style_scheme_chooser.StyleSchemeChooser
 {
 

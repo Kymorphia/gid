@@ -11,6 +11,7 @@ import gid.gobject2.types;
     A structure which contains a single flags value, its name, and its
     nickname.
 */
+@gidGir("FlagsValue")
 struct FlagsValue
 {
   /**

@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
     A filter for calculating the best encoding and/or charset to encode
     the data passed through it.
 */
+@gidGir("FilterBest", "FilterBestClass")
 class FilterBest : gid.gmime3.filter.Filter
 {
 

@@ -71,6 +71,7 @@ import gid.gtk4.widget;
     [gid.gtk4.stack.Stack] uses the [gid.gtk4.types.AccessibleRole.TabPanel] role for the stack
     pages, which are the accessible parent objects of the child widgets.
 */
+@gidGir("Stack")
 class Stack : gid.gtk4.widget.Widget
 {
 

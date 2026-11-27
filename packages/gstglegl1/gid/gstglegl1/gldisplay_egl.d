@@ -15,6 +15,7 @@ import gid.gstglegl1.types;
     the contents of a #GstGLDisplayEGL are private and should only be accessed
     through the provided API
 */
+@gidGir("GLDisplayEGL", "GLDisplayEGLClass")
 class GLDisplayEGL : gid.gstgl1.gldisplay.GLDisplay
 {
 

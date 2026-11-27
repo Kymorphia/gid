@@ -15,6 +15,7 @@ import gid.gst1.pad;
 import gid.gst1.types;
 
 /** */
+@gidGir("ProxyPad", "ProxyPadClass")
 class ProxyPad : gid.gst1.pad.Pad
 {
 

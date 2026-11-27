@@ -21,6 +21,7 @@ import gid.gtksource4.types;
 import gid.gtksource4.view;
 
 /** */
+@gidGir("Completion", "CompletionClass")
 class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 {
 

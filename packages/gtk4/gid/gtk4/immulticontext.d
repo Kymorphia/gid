@@ -16,6 +16,7 @@ import gid.gtk4.types;
     to implement their `im-module` property for switching between different
     input methods.
 */
+@gidGir("IMMulticontext", "IMMulticontextClass")
 class IMMulticontext : gid.gtk4.imcontext.IMContext
 {
 

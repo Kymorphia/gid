@@ -16,6 +16,7 @@ import gid.gobject2.object;
     of filtering operations are character set conversion, compression
     and byte order flipping.
 */
+@gidGir("FilterOutputStream", "FilterOutputStreamClass")
 class FilterOutputStream : gid.gio2.output_stream.OutputStream
 {
 

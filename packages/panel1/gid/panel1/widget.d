@@ -26,6 +26,7 @@ import gid.panel1.types;
     PanelWidget is the base widget class for widgets added to a
     #PanelFrame. It can be use as-is or you can subclass it.
 */
+@gidGir("Widget", "WidgetClass")
 class Widget : gid.gtk4.widget.Widget
 {
 

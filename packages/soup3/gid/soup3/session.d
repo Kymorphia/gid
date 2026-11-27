@@ -62,6 +62,7 @@ import gid.soup3.websocket_connection;
     Note that all async methods will invoke their callbacks on the thread-default
     context at the time of the function call.
 */
+@gidGir("Session", "SessionClass")
 class Session : gid.gobject2.object.ObjectWrap
 {
 

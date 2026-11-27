@@ -60,6 +60,7 @@ import gid.gtk3.widget;
     [gid.gtk3.frame.Frame.setShadowType] with [gid.gtk3.types.ShadowType.None] to add the “.flat” class or
     any other shadow type to remove it.
 */
+@gidGir("Frame", "FrameClass")
 class Frame : gid.gtk3.bin.Bin
 {
 

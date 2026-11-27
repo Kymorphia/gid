@@ -22,6 +22,7 @@ import gid.gstvideo1.video_frame;
     applied to a previous picture before the `render()` implementation can draw a
     new frame.
 */
+@gidGir("AudioVisualizer", "AudioVisualizerClass")
 class AudioVisualizer : gid.gst1.element.Element
 {
 

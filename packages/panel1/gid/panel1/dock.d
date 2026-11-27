@@ -33,6 +33,7 @@ import gid.panel1.widget;
     It will contain a #PanelDockChild for each of the areas in use,
     albeit this is done by the widget.
 */
+@gidGir("Dock", "DockClass")
 class Dock : gid.gtk4.widget.Widget
 {
 

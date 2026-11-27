@@ -16,6 +16,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("CompletionInfo", "CompletionInfoClass")
 class CompletionInfo : gid.gtk3.window.Window
 {
 

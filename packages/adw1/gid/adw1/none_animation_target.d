@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     An [gid.adw1.animation_target.AnimationTarget] that doesn't do anything.
 */
+@gidGir("NoneAnimationTarget", "NoneAnimationTargetClass")
 class NoneAnimationTarget : gid.adw1.animation_target.AnimationTarget
 {
 

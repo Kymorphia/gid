@@ -40,6 +40,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets for displaying their
         contents
 */
+@gidGir("CellAreaBox")
 class CellAreaBox : gid.gtk4.cell_area.CellArea, gid.gtk4.orientable.Orientable
 {
 

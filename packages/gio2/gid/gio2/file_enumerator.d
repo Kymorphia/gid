@@ -42,6 +42,7 @@ import gid.gobject2.object;
     a [gid.gio2.file_enumerator.FileEnumerator] is closed, no further actions may be performed
     on it, and it should be freed with [gid.gobject2.object.ObjectWrap.unref].
 */
+@gidGir("FileEnumerator", "FileEnumeratorClass")
 class FileEnumerator : gid.gobject2.object.ObjectWrap
 {
 

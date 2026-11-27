@@ -10,6 +10,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("SearchSettings", "SearchSettingsClass")
 class SearchSettings : gid.gobject2.object.ObjectWrap
 {
 

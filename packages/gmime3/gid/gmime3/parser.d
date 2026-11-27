@@ -16,6 +16,7 @@ import gid.gobject2.object;
 /**
     A MIME parser context.
 */
+@gidGir("Parser", "ParserClass")
 class Parser : gid.gobject2.object.ObjectWrap
 {
 

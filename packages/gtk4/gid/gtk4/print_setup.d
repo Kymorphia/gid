@@ -22,6 +22,7 @@ import gid.gtk4.types;
     Applications may wish to store the page_setup and print_settings from the print setup
     and copy them to the PrintDialog if they want to keep using them.
 */
+@gidGir("PrintSetup")
 class PrintSetup : gid.gobject2.boxed.BoxedWrap!(gtk_print_setup_get_type)
 {
 

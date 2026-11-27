@@ -17,6 +17,7 @@ import gid.gstaudio1.types;
     
     Use the provided macros to access the info in this structure.
 */
+@gidGir("AudioInfo")
 class AudioInfo : gid.gobject2.boxed.BoxedWrap!(gst_audio_info_get_type)
 {
 

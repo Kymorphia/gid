@@ -24,6 +24,7 @@ import gid.soup3.types;
     explicitly state otherwise. In other words, don't try to use
     [gid.soup3.multipart.Multipart] for handling real MIME multiparts.
 */
+@gidGir("Multipart")
 class Multipart : gid.gobject2.boxed.BoxedWrap!(soup_multipart_get_type)
 {
 

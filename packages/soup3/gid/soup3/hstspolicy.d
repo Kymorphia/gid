@@ -29,6 +29,7 @@ import gid.soup3.types;
     If @include_subdomains is true, the Strict Transport Security policy
     must also be enforced on subdomains of @domain.
 */
+@gidGir("HSTSPolicy")
 class HSTSPolicy : gid.gobject2.boxed.BoxedWrap!(soup_hsts_policy_get_type)
 {
 

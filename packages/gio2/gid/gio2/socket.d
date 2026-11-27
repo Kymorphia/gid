@@ -98,6 +98,7 @@ import gid.gio2.input_message;
       }
     ```
 */
+@gidGir("Socket", "SocketClass")
 class Socket : gid.gobject2.object.ObjectWrap, gid.gio2.datagram_based.DatagramBased, gid.gio2.initable.Initable
 {
 

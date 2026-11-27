@@ -135,6 +135,7 @@ import gid.gtk4.widget;
       <img src="toast-undo.png" alt="toast-undo">
     </picture>
 */
+@gidGir("Toast", "ToastClass")
 class Toast : gid.gobject2.object.ObjectWrap
 {
 

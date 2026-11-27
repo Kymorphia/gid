@@ -13,6 +13,7 @@ import gid.gtk4.types;
 /**
     Determines whether to include items with a callback.
 */
+@gidGir("CustomFilter", "CustomFilterClass")
 class CustomFilter : gid.gtk4.filter.Filter
 {
 

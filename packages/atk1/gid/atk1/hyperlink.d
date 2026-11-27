@@ -23,6 +23,7 @@ import gid.gobject2.object;
     allows specification of a start and end offset within the host
     AtkHypertext object.
 */
+@gidGir("Hyperlink", "HyperlinkClass")
 class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
 {
 

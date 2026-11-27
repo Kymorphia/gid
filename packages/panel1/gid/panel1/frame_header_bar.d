@@ -26,6 +26,7 @@ import gid.panel1.types;
     
     It is an implementation of #PanelFrameHeader
 */
+@gidGir("FrameHeaderBar", "FrameHeaderBarClass")
 class FrameHeaderBar : gid.gtk4.widget.Widget, gid.panel1.frame_header.FrameHeader
 {
 

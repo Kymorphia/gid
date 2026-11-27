@@ -28,6 +28,7 @@ import gid.gtksource5.types;
     The [gid.gtksource5.style_scheme_preview.StyleSchemePreview.selected] property can be used to manage
     the selection state of a single preview widget.
 */
+@gidGir("StyleSchemePreview", "StyleSchemePreviewClass")
 class StyleSchemePreview : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

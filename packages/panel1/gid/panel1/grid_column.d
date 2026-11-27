@@ -18,6 +18,7 @@ import gid.panel1.frame;
 import gid.panel1.types;
 
 /** */
+@gidGir("GridColumn", "GridColumnClass")
 class GridColumn : gid.gtk4.widget.Widget
 {
 

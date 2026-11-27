@@ -19,6 +19,7 @@ import gid.graphene1.types;
     The contents of the [gid.graphene1.frustum.Frustum] are private, and should not be
     modified directly.
 */
+@gidGir("Frustum")
 class Frustum : gid.gobject2.boxed.BoxedWrap!(graphene_frustum_get_type)
 {
   /**

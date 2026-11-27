@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to a touch-based device.
 */
+@gidGir("TouchEvent")
 class TouchEvent : gid.gdk4.event.Event
 {
 

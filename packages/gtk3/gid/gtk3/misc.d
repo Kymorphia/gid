@@ -31,6 +31,7 @@ import gid.gtk3.widget;
     on the child widget, so GtkMisc should not be used in new code. To reflect
     this fact, all #GtkMisc API has been deprecated.
 */
+@gidGir("Misc", "MiscClass")
 class Misc : gid.gtk3.widget.Widget
 {
 

@@ -25,6 +25,7 @@ import gid.graphene1.vec4;
     The contents of the #graphene_matrix_t structure are private and
     should never be accessed directly.
 */
+@gidGir("Matrix")
 class Matrix : gid.gobject2.boxed.BoxedWrap!(graphene_matrix_get_type)
 {
   /**

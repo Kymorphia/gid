@@ -14,6 +14,7 @@ import gid.gsk4.types;
 /**
     A render node for a Cairo surface.
 */
+@gidGir("CairoNode")
 class CairoNode : gid.gsk4.render_node.RenderNode
 {
 

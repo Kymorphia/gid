@@ -21,6 +21,7 @@ import gid.gstgl1.types;
     [gid.gstvideo1.types.BUFFER_POOL_OPTION_VIDEO_ALIGNMENT] as well as the OpenGL specific
     [gid.gstgl1.types.BUFFER_POOL_OPTION_GL_SYNC_META] buffer pool option.
 */
+@gidGir("GLBufferPool", "GLBufferPoolClass")
 class GLBufferPool : gid.gst1.buffer_pool.BufferPool
 {
 

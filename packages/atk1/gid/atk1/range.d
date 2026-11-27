@@ -17,6 +17,7 @@ import gid.gobject2.boxed;
     splitted if available. See #AtkValue documentation for further
     details.
 */
+@gidGir("Range")
 class Range : gid.gobject2.boxed.BoxedWrap!(atk_range_get_type)
 {
 

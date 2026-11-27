@@ -23,6 +23,7 @@ import gid.gobject2.object;
     appearance, as well as whether a system-wide color scheme and accent color
     preferences exists.
 */
+@gidGir("StyleManager", "StyleManagerClass")
 class StyleManager : gid.gobject2.object.ObjectWrap
 {
 

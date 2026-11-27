@@ -33,6 +33,7 @@ import gid.gobject2.object;
     truncating, use [gid.gio2.seekable.Seekable.canTruncate]. To truncate a file output
     stream, use [gid.gio2.seekable.Seekable.truncate].
 */
+@gidGir("FileOutputStream", "FileOutputStreamClass")
 class FileOutputStream : gid.gio2.output_stream.OutputStream, gid.gio2.seekable.Seekable
 {
 

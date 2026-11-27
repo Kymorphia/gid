@@ -44,6 +44,7 @@ import gid.gtk4.widget;
     [gid.adw1.preferences_dialog.PreferencesDialog] has a main CSS node with the name `dialog` and the
     style class `.preferences`.
 */
+@gidGir("PreferencesDialog", "PreferencesDialogClass")
 class PreferencesDialog : gid.adw1.dialog.Dialog
 {
 

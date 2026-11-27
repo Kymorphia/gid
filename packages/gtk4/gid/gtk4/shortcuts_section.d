@@ -54,6 +54,7 @@ import gid.gtk4.types;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("ShortcutsSection", "ShortcutsSectionClass")
 class ShortcutsSection : gid.gtk4.box.Box
 {
 

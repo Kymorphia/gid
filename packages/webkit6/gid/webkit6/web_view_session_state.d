@@ -12,6 +12,7 @@ import gid.webkit6.types;
 /**
     Handles serialization of a web view's browsing state.
 */
+@gidGir("WebViewSessionState")
 class WebViewSessionState : gid.gobject2.boxed.BoxedWrap!(webkit_web_view_session_state_get_type)
 {
 

@@ -15,6 +15,7 @@ import gid.gstsdp1.types;
 /**
     Structure holding the information of the MIKEY message
 */
+@gidGir("MIKEYMessage")
 class MIKEYMessage : gid.gobject2.boxed.BoxedWrap!(gst_mikey_message_get_type)
 {
 

@@ -24,6 +24,7 @@ import gid.webkit6.types;
     When handling this permission request the application may perform additional installation of the
     requested CDM, unless it is already present on the host system.
 */
+@gidGir("MediaKeySystemPermissionRequest", "MediaKeySystemPermissionRequestClass")
 class MediaKeySystemPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

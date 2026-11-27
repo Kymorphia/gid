@@ -18,6 +18,7 @@ import gid.gtk3.renderer_cell_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ImageCellAccessible", "ImageCellAccessibleClass")
 class ImageCellAccessible : gid.gtk3.renderer_cell_accessible.RendererCellAccessible, gid.atk1.image.Image
 {
 

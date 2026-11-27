@@ -30,6 +30,7 @@ import gid.gtk4.widget;
     It is useful for deriving subclasses, since it provides common code needed
     for handling a single child widget.
 */
+@gidGir("Bin", "BinClass")
 class Bin : gid.gtk4.widget.Widget
 {
 

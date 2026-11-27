@@ -16,6 +16,7 @@ import gid.glib2.types;
     The [gid.glib2.error.ErrorWrap] structure contains information about
     an error that has occurred.
 */
+@gidGir("Error")
 class ErrorWrap : Exception
 {
   private GError* _cInstancePtr;

@@ -12,6 +12,7 @@ import gid.gtk4.types;
 /**
     [gid.gtk4.layout_child.LayoutChild] subclass for children in a [gid.gtk4.grid_layout.GridLayout].
 */
+@gidGir("GridLayoutChild", "GridLayoutChildClass")
 class GridLayoutChild : gid.gtk4.layout_child.LayoutChild
 {
 

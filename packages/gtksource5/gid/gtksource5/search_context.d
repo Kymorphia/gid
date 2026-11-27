@@ -72,6 +72,7 @@ import gid.gtksource5.types;
     search and replace API: see the tests/test-search.c file. It is a mini
     application for the search and replace, with a basic user interface.
 */
+@gidGir("SearchContext", "SearchContextClass")
 class SearchContext : gid.gobject2.object.ObjectWrap
 {
 

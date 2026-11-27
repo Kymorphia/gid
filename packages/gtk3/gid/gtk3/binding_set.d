@@ -18,6 +18,7 @@ import gid.gtk3.types;
     activation, an action signal is emitted on the target widget to carry out
     the actual activation.
 */
+@gidGir("BindingSet")
 class BindingSet : StructWrap!(GtkBindingSet)
 {
   /**

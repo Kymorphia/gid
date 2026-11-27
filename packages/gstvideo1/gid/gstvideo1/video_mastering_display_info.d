@@ -12,6 +12,7 @@ import gid.gstvideo1.types;
     Mastering display color volume information defined by SMPTE ST 2086
     (a.k.a static HDR metadata).
 */
+@gidGir("VideoMasteringDisplayInfo")
 class VideoMasteringDisplayInfo : StructWrap!(GstVideoMasteringDisplayInfo)
 {
   /**

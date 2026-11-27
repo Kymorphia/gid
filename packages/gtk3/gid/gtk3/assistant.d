@@ -47,6 +47,7 @@ import gid.gtk3.window;
     
     GtkAssistant has a single CSS node with the name assistant.
 */
+@gidGir("Assistant", "AssistantClass")
 class Assistant : gid.gtk3.window.Window
 {
 

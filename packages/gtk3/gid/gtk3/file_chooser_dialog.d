@@ -172,6 +172,7 @@ import gid.gtk3.types;
     [stock response code][gtkfilechooserdialog-responses]
     when you use #GtkFileChooserDialog to ensure proper operation.
 */
+@gidGir("FileChooserDialog", "FileChooserDialogClass")
 class FileChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.file_chooser.FileChooser
 {
 

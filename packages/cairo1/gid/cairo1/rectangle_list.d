@@ -12,6 +12,7 @@ import gid.gobject2.boxed;
     A data structure for holding a dynamically allocated
     array of rectangles.
 */
+@gidGir("RectangleList")
 class RectangleList : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_rectangle_list_get_type)
 {
   /**

@@ -20,6 +20,7 @@ import gid.gobject2.object;
     In UNIX terms, [gid.gio2.inet_socket_address.InetSocketAddress] corresponds to a
     [`struct sockaddr_in` or `struct sockaddr_in6`](man:sockaddr(3type)).
 */
+@gidGir("InetSocketAddress", "InetSocketAddressClass")
 class InetSocketAddress : gid.gio2.socket_address.SocketAddress
 {
 

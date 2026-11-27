@@ -23,6 +23,7 @@ import gid.gtk4.types;
     An object only needs to implement this interface if it needs to extend the
     [gid.gtk4.builder.Builder] XML format or run any extra routines at deserialization time.
 */
+@gidGir("Buildable", "BuildableIface")
 interface Buildable : GidWrap
 {
 

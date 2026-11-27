@@ -24,6 +24,7 @@ import gid.webkit6.types;
     store cookies with [gid.webkit6.cookie_manager.CookieManager.setPersistentStorage],
     or to set the acceptance policy, with [gid.webkit6.cookie_manager.CookieManager.getAcceptPolicy].
 */
+@gidGir("CookieManager", "CookieManagerClass")
 class CookieManager : gid.gobject2.object.ObjectWrap
 {
 

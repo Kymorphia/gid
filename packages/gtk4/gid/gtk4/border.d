@@ -12,6 +12,7 @@ import gid.gtk4.types;
     
     Each side can have a different width.
 */
+@gidGir("Border")
 struct Border
 {
   /**

@@ -25,6 +25,7 @@ import gid.gtksource5.types;
     there are multiple marks in the same line, the pixbufs will be drawn on top
     of each other. The mark with the highest priority will be drawn on top.
 */
+@gidGir("Mark", "MarkClass")
 class Mark : gid.gtk4.text_mark.TextMark
 {
 

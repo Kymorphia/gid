@@ -21,6 +21,7 @@ import gid.gstvideo1.video_info;
     arrive later than 20ms as this is considered the default threshold for
     observing out-of-sync frames.
 */
+@gidGir("VideoSink", "VideoSinkClass")
 class VideoSink : gid.gstbase1.base_sink.BaseSink
 {
 

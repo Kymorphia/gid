@@ -31,6 +31,7 @@ import gid.gtk3.types;
     machinery does not use it anymore and all users of this object
     have been deprecated.
 */
+@gidGir("StyleProperties", "StylePropertiesClass")
 class StyleProperties : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.StyleProvider
 {
 

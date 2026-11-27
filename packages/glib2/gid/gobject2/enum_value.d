@@ -11,6 +11,7 @@ import gid.gobject2.types;
     A structure which contains a single enum value, its name, and its
     nickname.
 */
+@gidGir("EnumValue")
 struct EnumValue
 {
   /**

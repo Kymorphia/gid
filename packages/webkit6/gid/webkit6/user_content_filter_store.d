@@ -32,6 +32,7 @@ import gid.webkit6.user_content_filter;
     [gid.webkit6.user_content_filter_store.UserContentFilterStore.load] can be used to retrieve a previously saved
     filter, and removed from the store with [gid.webkit6.user_content_filter_store.UserContentFilterStore.remove].
 */
+@gidGir("UserContentFilterStore", "UserContentFilterStoreClass")
 class UserContentFilterStore : gid.gobject2.object.ObjectWrap
 {
 

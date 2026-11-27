@@ -14,6 +14,7 @@ import gid.gstgl1.glslstage;
 import gid.gstgl1.types;
 
 /** */
+@gidGir("GLShader", "GLShaderClass")
 class GLShader : gid.gst1.object.ObjectWrap
 {
 

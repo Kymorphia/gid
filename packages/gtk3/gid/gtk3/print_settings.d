@@ -27,6 +27,7 @@ import gid.gtk3.types;
     
     Printing support was added in GTK+ 2.10.
 */
+@gidGir("PrintSettings")
 class PrintSettings : gid.gobject2.object.ObjectWrap
 {
 

@@ -11,6 +11,7 @@ import gid.gstgl1.types;
     #GstGLAsyncDebug an opaque structure and should only be accessed through the
     provided API.
 */
+@gidGir("GLAsyncDebug")
 class GLAsyncDebug : StructWrap!(GstGLAsyncDebug)
 {
   /**

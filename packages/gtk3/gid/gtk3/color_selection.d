@@ -21,6 +21,7 @@ import gid.gtk3.orientable_mixin;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ColorSelection", "ColorSelectionClass")
 class ColorSelection : gid.gtk3.box.Box
 {
 

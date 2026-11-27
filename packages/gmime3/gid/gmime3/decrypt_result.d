@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     An object containing the results from decrypting an encrypted stream.
 */
+@gidGir("DecryptResult", "DecryptResultClass")
 class DecryptResult : gid.gobject2.object.ObjectWrap
 {
 

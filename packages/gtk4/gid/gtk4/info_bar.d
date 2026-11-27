@@ -101,6 +101,7 @@ import gid.gtk4.widget;
         [gid.gtk4.label.Label] and an optional [gid.gtk4.button.Button], according to
         your application's design.
 */
+@gidGir("InfoBar")
 class InfoBar : gid.gtk4.widget.Widget
 {
 

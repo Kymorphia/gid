@@ -42,6 +42,7 @@ import gid.gtk4.widget;
     - Return true from your ::query-tooltip handler. This causes the tooltip
       to be show. If you return false, it will not be shown.
 */
+@gidGir("Tooltip")
 class Tooltip : gid.gobject2.object.ObjectWrap
 {
 

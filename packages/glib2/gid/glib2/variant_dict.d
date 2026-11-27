@@ -101,6 +101,7 @@ import gid.gobject2.boxed;
       }
     ```
 */
+@gidGir("VariantDict")
 class VariantDict : gid.gobject2.boxed.BoxedWrap!(g_variant_dict_get_type)
 {
 

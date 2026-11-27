@@ -15,6 +15,7 @@ import gid.soup3.types;
 /**
     File-based cache for HTTP resources.
 */
+@gidGir("Cache", "CacheClass")
 class Cache : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

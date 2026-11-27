@@ -11,6 +11,7 @@ import gid.gdk3.types;
     An opaque type representing a string as an index into a table
     of strings on the X server.
 */
+@gidGir("Atom")
 class Atom : OpaqueWrap!(GdkAtom, void, void)
 {
 

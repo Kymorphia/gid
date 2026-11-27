@@ -13,6 +13,7 @@ import gid.gstbase1.types;
     bits into a memory buffer. It provides functions for writing any
     number of bits into 8, 16, 32 and 64 bit variables.
 */
+@gidGir("BitWriter")
 class BitWriter : StructWrap!(GstBitWriter)
 {
   /**

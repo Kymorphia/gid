@@ -48,6 +48,7 @@ import gid.gtk3.types;
     to button and adds a .check style class to it. The subnode is invisible
     in this case.
 */
+@gidGir("CheckButton", "CheckButtonClass")
 class CheckButton : gid.gtk3.toggle_button.ToggleButton
 {
 

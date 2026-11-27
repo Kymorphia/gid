@@ -70,6 +70,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.picture.Picture] uses the [gid.gtk4.types.AccessibleRole.Img] role.
 */
+@gidGir("Picture", "PictureClass")
 class Picture : gid.gtk4.widget.Widget
 {
 

@@ -55,6 +55,7 @@ import gid.gtk3.types;
     e.g. using [gid.gtk3.dialog.Dialog.run]. In this case, you might need to know that
     the “Close” button returns the #GTK_RESPONSE_CANCEL response id.
 */
+@gidGir("AboutDialog", "AboutDialogClass")
 class AboutDialog : gid.gtk3.dialog.Dialog
 {
 

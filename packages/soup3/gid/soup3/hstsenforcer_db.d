@@ -18,6 +18,7 @@ import gid.soup3.types;
     [gid.soup3.hstsenforcer_db.HSTSEnforcerDB] is a [gid.soup3.hstsenforcer.HSTSEnforcer] that uses a SQLite
     database as a backend for persistency.
 */
+@gidGir("HSTSEnforcerDB", "HSTSEnforcerDBClass")
 class HSTSEnforcerDB : gid.soup3.hstsenforcer.HSTSEnforcer
 {
 

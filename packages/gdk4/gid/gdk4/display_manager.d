@@ -56,6 +56,7 @@ import gid.gobject2.object;
       g_error ("Unsupported GDK backend");
     ```
 */
+@gidGir("DisplayManager")
 class DisplayManager : gid.gobject2.object.ObjectWrap
 {
 

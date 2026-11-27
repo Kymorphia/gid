@@ -107,6 +107,7 @@ import gid.gtk4.window;
     GTK Inspector or by pressing <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>,
     and controlled via the [gid.adw1.window.Window.adaptivePreview] property.
 */
+@gidGir("Window", "WindowClass")
 class Window : gid.gtk4.window.Window
 {
 

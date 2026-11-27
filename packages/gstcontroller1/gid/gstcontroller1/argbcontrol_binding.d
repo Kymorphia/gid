@@ -17,6 +17,7 @@ import gid.gstcontroller1.types;
     gobject properties representing a color. A control value of 0.0 will turn the
     color component off and a value of 1.0 will be the color level.
 */
+@gidGir("ARGBControlBinding", "ARGBControlBindingClass")
 class ARGBControlBinding : gid.gst1.control_binding.ControlBinding
 {
 

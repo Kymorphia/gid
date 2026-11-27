@@ -14,6 +14,7 @@ import gid.gtksource4.c.types;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("CompletionProposal", "CompletionProposalIface")
 interface CompletionProposal : GidWrap
 {
 

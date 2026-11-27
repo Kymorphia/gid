@@ -49,6 +49,7 @@ import gid.gtk4.constraint_target_mixin;
     
     [gid.adw1.switch_row.SwitchRow] uses the [gid.gtk4.types.AccessibleRole.Switch] role.
 */
+@gidGir("SwitchRow", "SwitchRowClass")
 class SwitchRow : gid.adw1.action_row.ActionRow
 {
 

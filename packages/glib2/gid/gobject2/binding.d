@@ -86,6 +86,7 @@ import gid.gobject2.types;
     and target properties, instead of relying on the last reference on the
     binding, source, and target instances to drop.
 */
+@gidGir("Binding")
 class Binding : gid.gobject2.object.ObjectWrap
 {
 

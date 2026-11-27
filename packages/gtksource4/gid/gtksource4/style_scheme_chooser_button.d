@@ -20,6 +20,7 @@ import gid.gtksource4.style_scheme_chooser_mixin;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("StyleSchemeChooserButton", "StyleSchemeChooserButtonClass")
 class StyleSchemeChooserButton : gid.gtk3.button.Button, gid.gtksource4.style_scheme_chooser.StyleSchemeChooser
 {
 

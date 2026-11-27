@@ -25,6 +25,7 @@ import gid.secret1.value;
     retrieved by [gid.secret1.retrievable.Retrievable.retrieveSecret] and
     [gid.secret1.retrievable.Retrievable.retrieveSecretFinish].
 */
+@gidGir("Retrievable", "RetrievableInterface")
 interface Retrievable : GidWrap
 {
 

@@ -8,6 +8,12 @@ public import gid.pango1.c.types;
 public import gid.pangocairo1.c.types;
 public import gid.cairo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Gdk";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "4.0";
+
 /**
     Positioning hints for aligning a surface relative to a rectangle.
     
@@ -25,6 +31,7 @@ public import gid.cairo1.c.types;
     In general, when multiple flags are set, flipping should take precedence over
     sliding, which should take precedence over resizing.
 */
+@gidGir("AnchorHints")
 enum GdkAnchorHints : uint
 {
   /**
@@ -76,6 +83,7 @@ enum GdkAnchorHints : uint
 /**
     Flags describing the current capabilities of a device/tool.
 */
+@gidGir("AxisFlags")
 enum GdkAxisFlags : uint
 {
   /**
@@ -141,6 +149,7 @@ enum GdkAxisFlags : uint
     report their location via the x/y members of events regardless. Whether
     X and Y are present as axes depends on the GDK backend.
 */
+@gidGir("AxisUse")
 enum GdkAxisUse
 {
   /**
@@ -217,6 +226,7 @@ enum GdkAxisUse
     highest values. Typically the allowed values for the narrow range
     are 16-235 for Y and 16-240 for u,v (when dealing with YUV data).
 */
+@gidGir("CicpRange")
 enum GdkCicpRange
 {
   /**
@@ -237,6 +247,7 @@ enum GdkCicpRange
     Note that this is not the order of pixel values in Cairo
     and [gid.gdk4.types.MemoryFormat] can have many different orders.
 */
+@gidGir("ColorChannel")
 enum GdkColorChannel
 {
   /**
@@ -263,6 +274,7 @@ enum GdkColorChannel
 /**
     Specifies the crossing mode for enter and leave events.
 */
+@gidGir("CrossingMode")
 enum GdkCrossingMode
 {
   /**
@@ -319,6 +331,7 @@ enum GdkCrossingMode
 /**
     A pad feature.
 */
+@gidGir("DevicePadFeature")
 enum GdkDevicePadFeature
 {
   /**
@@ -341,6 +354,7 @@ enum GdkDevicePadFeature
     Indicates the specific type of tool being used being a tablet. Such as an
     airbrush, pencil, etc.
 */
+@gidGir("DeviceToolType")
 enum GdkDeviceToolType
 {
   /**
@@ -387,6 +401,7 @@ enum GdkDeviceToolType
 /**
     Error enumeration for [gid.gdk4.dmabuf_texture.DmabufTexture].
 */
+@gidGir("DmabufError")
 enum GdkDmabufError
 {
   /**
@@ -411,6 +426,7 @@ enum GdkDmabufError
     Used in [gid.gdk4.drop.Drop] and [gid.gdk4.drag.Drag] to indicate the actions that the
     destination can and should do with the dropped data.
 */
+@gidGir("DragAction")
 enum GdkDragAction : uint
 {
   /**
@@ -445,6 +461,7 @@ enum GdkDragAction : uint
 /**
     Used in [gid.gdk4.drag.Drag] to the reason of a cancelled DND operation.
 */
+@gidGir("DragCancelReason")
 enum GdkDragCancelReason
 {
   /**
@@ -466,6 +483,7 @@ enum GdkDragCancelReason
 /**
     Specifies the type of the event.
 */
+@gidGir("EventType")
 enum GdkEventType
 {
   /**
@@ -637,6 +655,7 @@ enum GdkEventType
     
     The elements of the enumeration correspond to the signals of [gid.gdk4.frame_clock.FrameClock].
 */
+@gidGir("FrameClockPhase")
 enum GdkFrameClockPhase : uint
 {
   /**
@@ -683,6 +702,7 @@ enum GdkFrameClockPhase : uint
 /**
     Indicates which monitor a surface should span over when in fullscreen mode.
 */
+@gidGir("FullscreenMode")
 enum GdkFullscreenMode
 {
   /**
@@ -699,6 +719,7 @@ enum GdkFullscreenMode
 /**
     The list of the different APIs that GdkGLContext can potentially support.
 */
+@gidGir("GLAPI")
 enum GdkGLAPI : uint
 {
   /**
@@ -715,6 +736,7 @@ enum GdkGLAPI : uint
 /**
     Error enumeration for [gid.gdk4.glcontext.GLContext].
 */
+@gidGir("GLError")
 enum GdkGLError
 {
   /**
@@ -746,6 +768,7 @@ enum GdkGLError
 /**
     Defines the reference point of a surface and is used in [gid.gdk4.popup_layout.PopupLayout].
 */
+@gidGir("Gravity")
 enum GdkGravity
 {
   /**
@@ -803,6 +826,7 @@ enum GdkGravity
 /**
     An enumeration describing the type of an input device in general terms.
 */
+@gidGir("InputSource")
 enum GdkInputSource
 {
   /**
@@ -850,6 +874,7 @@ enum GdkInputSource
     
     [gid.gdk4.types.KeyMatch] values are returned by [gid.gdk4.key_event.KeyEvent.matches].
 */
+@gidGir("KeyMatch")
 enum GdkKeyMatch
 {
   /**
@@ -882,6 +907,7 @@ enum GdkKeyMatch
     [VkFormat](https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#VkFormat)
     for details).
 */
+@gidGir("MemoryFormat")
 enum GdkMemoryFormat
 {
   /**
@@ -1620,6 +1646,7 @@ enum GdkMemoryFormat
     of this enumeration. Your code should preserve and ignore them. You can use
     [gid.gdk4.types.MODIFIER_MASK] to remove all private values.
 */
+@gidGir("ModifierType")
 enum GdkModifierType : uint
 {
   /**
@@ -1697,6 +1724,7 @@ enum GdkModifierType : uint
     See the X11 protocol specification of LeaveNotify for
     full details of crossing event generation.
 */
+@gidGir("NotifyType")
 enum GdkNotifyType
 {
   /**
@@ -1742,6 +1770,7 @@ enum GdkNotifyType
     
     Implementations use these for optimizations such as caching.
 */
+@gidGir("PaintableFlags")
 enum GdkPaintableFlags : uint
 {
   /**
@@ -1762,6 +1791,7 @@ enum GdkPaintableFlags : uint
 /**
     Specifies the direction for scroll events.
 */
+@gidGir("ScrollDirection")
 enum GdkScrollDirection
 {
   /**
@@ -1795,6 +1825,7 @@ enum GdkScrollDirection
     Used in scroll events, to announce the direction relative
     to physical motion.
 */
+@gidGir("ScrollRelativeDirection")
 enum GdkScrollRelativeDirection
 {
   /**
@@ -1831,6 +1862,7 @@ enum GdkScrollRelativeDirection
     final scale factor of your graphical interface (the product of the desktop
     scale factor and eventually a custom scale factor in your app).
 */
+@gidGir("ScrollUnit")
 enum GdkScrollUnit
 {
   /**
@@ -1848,6 +1880,7 @@ enum GdkScrollUnit
 /**
     Flags describing the seat capabilities.
 */
+@gidGir("SeatCapabilities")
 enum GdkSeatCapabilities : uint
 {
   /**
@@ -1895,6 +1928,7 @@ enum GdkSeatCapabilities : uint
     This enumeration describes how the red, green and blue components
     of physical pixels on an output device are laid out.
 */
+@gidGir("SubpixelLayout")
 enum GdkSubpixelLayout
 {
   /**
@@ -1931,6 +1965,7 @@ enum GdkSubpixelLayout
 /**
     Determines a surface edge or corner.
 */
+@gidGir("SurfaceEdge")
 enum GdkSurfaceEdge
 {
   /**
@@ -1977,6 +2012,7 @@ enum GdkSurfaceEdge
 /**
     Possible errors that can be returned by [gid.gdk4.texture.Texture] constructors.
 */
+@gidGir("TextureError")
 enum GdkTextureError
 {
   /**
@@ -2005,6 +2041,7 @@ enum GdkTextureError
     The kind of title bar gesture to emit with
     [gid.gdk4.toplevel.Toplevel.titlebarGesture].
 */
+@gidGir("TitlebarGesture")
 enum GdkTitlebarGesture
 {
   /**
@@ -2026,6 +2063,7 @@ enum GdkTitlebarGesture
 /**
     Reflects what features a [gid.gdk4.toplevel.Toplevel] supports.
 */
+@gidGir("ToplevelCapabilities")
 enum GdkToplevelCapabilities : uint
 {
   /**
@@ -2083,6 +2121,7 @@ enum GdkToplevelCapabilities : uint
     will give an indication of tiledness without any of the per-edge states
     being set.
 */
+@gidGir("ToplevelState")
 enum GdkToplevelState : uint
 {
   /**
@@ -2191,6 +2230,7 @@ enum GdkToplevelState : uint
     to undo any visible/permanent changes that were done throughout the
     progress of the gesture.
 */
+@gidGir("TouchpadGesturePhase")
 enum GdkTouchpadGesturePhase
 {
   /**
@@ -2219,6 +2259,7 @@ enum GdkTouchpadGesturePhase
 /**
     Error enumeration for [gid.gdk4.vulkan_context.VulkanContext].
 */
+@gidGir("VulkanError")
 enum GdkVulkanError
 {
   /**
@@ -2294,6 +2335,7 @@ struct GdkCairoContext;
 struct GdkCicpParams;
 
 /** */
+@gidGir("CicpParamsClass")
 struct GdkCicpParamsClass;
 
 /**
@@ -2535,6 +2577,7 @@ struct GdkDevice;
 struct GdkDevicePad;
 
 /** */
+@gidGir("DevicePadInterface")
 struct GdkDevicePadInterface;
 
 /**
@@ -2703,9 +2746,11 @@ struct GdkDmabufTexture;
 struct GdkDmabufTextureBuilder;
 
 /** */
+@gidGir("DmabufTextureBuilderClass")
 struct GdkDmabufTextureBuilderClass;
 
 /** */
+@gidGir("DmabufTextureClass")
 struct GdkDmabufTextureClass;
 
 /**
@@ -2730,6 +2775,7 @@ struct GdkDragSurface;
 /**
     The [gid.gdk4.types.DragSurfaceInterface] implementation is private to GDK.
 */
+@gidGir("DragSurfaceInterface")
 struct GdkDragSurfaceInterface;
 
 /**
@@ -2831,9 +2877,11 @@ struct GdkFocusEvent;
 struct GdkFrameClock;
 
 /** */
+@gidGir("FrameClockClass")
 struct GdkFrameClockClass;
 
 /** */
+@gidGir("FrameClockPrivate")
 struct GdkFrameClockPrivate;
 
 /**
@@ -2919,9 +2967,11 @@ struct GdkGLTexture;
 struct GdkGLTextureBuilder;
 
 /** */
+@gidGir("GLTextureBuilderClass")
 struct GdkGLTextureBuilderClass;
 
 /** */
+@gidGir("GLTextureClass")
 struct GdkGLTextureClass;
 
 /**
@@ -2937,6 +2987,7 @@ struct GdkKeyEvent;
 /**
     Represents a hardware key that can be mapped to a keyval.
 */
+@gidGir("KeymapKey")
 struct GdkKeymapKey
 {
   /**
@@ -2985,12 +3036,15 @@ struct GdkMemoryTexture;
 struct GdkMemoryTextureBuilder;
 
 /** */
+@gidGir("MemoryTextureBuilderClass")
 struct GdkMemoryTextureBuilderClass;
 
 /** */
+@gidGir("MemoryTextureClass")
 struct GdkMemoryTextureClass;
 
 /** */
+@gidGir("MonitorClass")
 struct GdkMonitorClass;
 
 /**
@@ -3133,6 +3187,7 @@ struct GdkPaintableInterface
 struct GdkPopup;
 
 /** */
+@gidGir("PopupInterface")
 struct GdkPopupInterface;
 
 /**
@@ -3273,6 +3328,7 @@ struct GdkSeat
 struct GdkSnapshot;
 
 /** */
+@gidGir("SnapshotClass")
 struct GdkSnapshotClass;
 
 /**
@@ -3289,6 +3345,7 @@ struct GdkSnapshotClass;
 struct GdkSurface;
 
 /** */
+@gidGir("SurfaceClass")
 struct GdkSurfaceClass;
 
 /**
@@ -3322,6 +3379,7 @@ struct GdkSurfaceClass;
 struct GdkTexture;
 
 /** */
+@gidGir("TextureClass")
 struct GdkTextureClass;
 
 /**
@@ -3345,6 +3403,7 @@ struct GdkTextureDownloader;
     To access individual axis values, use the values of the values of
     the [gid.gdk4.types.AxisUse] enumerations as indices.
 */
+@gidGir("TimeCoord")
 struct GdkTimeCoord
 {
   /**
@@ -3373,6 +3432,7 @@ struct GdkTimeCoord
 struct GdkToplevel;
 
 /** */
+@gidGir("ToplevelInterface")
 struct GdkToplevelInterface;
 
 /**

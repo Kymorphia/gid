@@ -8,6 +8,7 @@ import gid.gstaudio1.c.types;
 import gid.gstaudio1.types;
 
 /** */
+@gidGir("AudioQuantize")
 class AudioQuantize : OpaqueWrap!(GstAudioQuantize*, void, void)
 {
 

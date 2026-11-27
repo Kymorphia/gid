@@ -18,6 +18,7 @@ import gid.gtksource4.style;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("SearchContext", "SearchContextClass")
 class SearchContext : gid.gobject2.object.ObjectWrap
 {
 

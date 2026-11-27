@@ -29,6 +29,7 @@ import gid.gobject2.boxed;
     Memory management of #cairo_t is done with
     [gid.cairo1.global.reference] and [gid.cairo1.global.destroy].
 */
+@gidGir("Context")
 class Context : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_context_get_type)
 {
 

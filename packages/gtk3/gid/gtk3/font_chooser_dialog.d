@@ -26,6 +26,7 @@ import gid.gtk3.window;
     interface exposes the buttons with the names “select_button”
     and “cancel_button”.
 */
+@gidGir("FontChooserDialog", "FontChooserDialogClass")
 class FontChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.font_chooser.FontChooser
 {
 

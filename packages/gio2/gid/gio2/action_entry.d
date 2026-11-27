@@ -19,6 +19,7 @@ import gid.gio2.types;
     
     See [gid.gio2.action_map.ActionMap.addActionEntries] for an example.
 */
+@gidGir("ActionEntry")
 class ActionEntry : StructWrap!(GActionEntry)
 {
   /**

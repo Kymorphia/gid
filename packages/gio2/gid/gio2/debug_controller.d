@@ -28,6 +28,7 @@ import gid.gobject2.gid_builder;
     creating one of the built-in implementations of [gid.gio2.debug_controller.DebugController] should be
     all that’s needed to dynamically enable or disable debug output.
 */
+@gidGir("DebugController", "DebugControllerInterface")
 interface DebugController : gid.gio2.initable.Initable
 {
 

@@ -18,6 +18,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("CellAccessible", "CellAccessibleClass")
 class CellAccessible : gid.gtk3.accessible.Accessible, gid.atk1.action.Action, gid.atk1.component.Component, gid.atk1.table_cell.TableCell
 {
 

@@ -169,6 +169,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gio2.list_store.ListStore] instead
 */
+@gidGir("ListStore", "ListStoreClass")
 class ListStore : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable, gid.gtk4.tree_drag_dest.TreeDragDest, gid.gtk4.tree_drag_source.TreeDragSource, gid.gtk4.tree_model.TreeModel, gid.gtk4.tree_sortable.TreeSortable
 {
 

@@ -11,6 +11,7 @@ import gid.gdk3.window;
 /**
     Generated when a window size or position has changed.
 */
+@gidGir("EventConfigure")
 class EventConfigure : StructWrap!(GdkEventConfigure, gdk_event_copy, gdk_event_free)
 {
   /**

@@ -57,6 +57,7 @@ import gid.gst1.types;
     each with track entries underneath, in case the source file has extracted
     a track listing from different sources).
 */
+@gidGir("Toc")
 class Toc : gid.gobject2.boxed.BoxedWrap!(gst_toc_get_type)
 {
 

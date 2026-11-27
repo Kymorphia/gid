@@ -11,6 +11,7 @@ import gid.gstvideo1.types;
     A representation of a difference between two #GstVideoTimeCode instances.
     Will not necessarily correspond to a real timecode (e.g. 00:00:10;00)
 */
+@gidGir("VideoTimeCodeInterval")
 struct VideoTimeCodeInterval
 {
   /**

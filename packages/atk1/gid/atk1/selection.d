@@ -26,6 +26,7 @@ import gid.gobject2.object;
     are accomplished a other ATK interfaces - #AtkSelection is limited
     to the selection/deselection of children.
 */
+@gidGir("Selection", "SelectionIface")
 interface Selection : GidWrap
 {
 

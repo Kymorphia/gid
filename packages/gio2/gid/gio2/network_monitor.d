@@ -24,6 +24,7 @@ import gid.gobject2.object;
     
     There is also an implementation for use inside Flatpak sandboxes.
 */
+@gidGir("NetworkMonitor", "NetworkMonitorInterface")
 interface NetworkMonitor : gid.gio2.initable.Initable
 {
 

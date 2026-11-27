@@ -16,6 +16,7 @@ import gid.gobject2.object;
 /**
     Represents a collection of input devices that belong to a user.
 */
+@gidGir("Seat")
 class Seat : gid.gobject2.object.ObjectWrap
 {
 

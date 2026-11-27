@@ -16,6 +16,7 @@ import gid.gtk4.types;
     Whenever the angle between both handled sequences changes, the
     [gid.gtk4.gesture_rotate.GestureRotate.angleChanged] signal is emitted.
 */
+@gidGir("GestureRotate", "GestureRotateClass")
 class GestureRotate : gid.gtk4.gesture.Gesture
 {
 

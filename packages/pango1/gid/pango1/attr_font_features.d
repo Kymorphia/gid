@@ -12,6 +12,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_font_features.AttrFontFeatures] structure is used to represent OpenType
     font features as an attribute.
 */
+@gidGir("AttrFontFeatures")
 class AttrFontFeatures : StructWrap!(PangoAttrFontFeatures)
 {
   /**

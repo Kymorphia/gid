@@ -55,6 +55,7 @@ import gid.gtk3.widget;
     - .sidebar-placeholder-row for a row that is a placeholder
     - .has-open-popup when a popup is open for a row
 */
+@gidGir("PlacesSidebar", "PlacesSidebarClass")
 class PlacesSidebar : gid.gtk3.scrolled_window.ScrolledWindow
 {
 

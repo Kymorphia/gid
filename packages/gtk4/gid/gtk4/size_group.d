@@ -118,6 +118,7 @@ import gid.gtk4.widget;
     </object>
     ```
 */
+@gidGir("SizeGroup")
 class SizeGroup : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable
 {
 

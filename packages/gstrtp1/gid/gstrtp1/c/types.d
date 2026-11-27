@@ -5,9 +5,16 @@ public import gid.core.basictypes;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstRtp";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Different types of feedback messages.
 */
+@gidGir("RTCPFBType")
 enum GstRTCPFBType
 {
   /**
@@ -84,6 +91,7 @@ enum GstRTCPFBType
 /**
     Different types of SDES content.
 */
+@gidGir("RTCPSDESType")
 enum GstRTCPSDESType
 {
   /**
@@ -175,6 +183,7 @@ enum GstRTCPSDESType
 /**
     Different RTCP packet types.
 */
+@gidGir("RTCPType")
 enum GstRTCPType
 {
   /**
@@ -227,6 +236,7 @@ enum GstRTCPType
     Types of RTCP Extended Reports, those are defined in RFC 3611 and other RFCs
     according to the [IANA registry](https://www.iana.org/assignments/rtcp-xr-block-types/rtcp-xr-block-types.xhtml).
 */
+@gidGir("RTCPXRType")
 enum GstRTCPXRType
 {
   /**
@@ -277,6 +287,7 @@ enum GstRTCPXRType
     Note that these are only valid for #GstCaps of type: application/x-rtp (x-rtcp).
     They can conflict with other extended buffer flags.
 */
+@gidGir("RTPBufferFlags")
 enum GstRTPBufferFlags : uint
 {
   /**
@@ -302,6 +313,7 @@ enum GstRTPBufferFlags : uint
 /**
     Additional mapping flags for [gid.gstrtp1.rtpbuffer.RTPBuffer.map].
 */
+@gidGir("RTPBufferMapFlags")
 enum GstRTPBufferMapFlags : uint
 {
   /**
@@ -320,6 +332,7 @@ enum GstRTPBufferMapFlags : uint
 /**
     Direction to which to apply the RTP Header Extension
 */
+@gidGir("RTPHeaderExtensionDirection")
 enum GstRTPHeaderExtensionDirection : uint
 {
   /**
@@ -354,6 +367,7 @@ enum GstRTPHeaderExtensionDirection : uint
 /**
     Flags that apply to a RTP Audio/Video header extension.
 */
+@gidGir("RTPHeaderExtensionFlags")
 enum GstRTPHeaderExtensionFlags : uint
 {
   /**
@@ -385,6 +399,7 @@ enum GstRTPHeaderExtensionFlags : uint
     unassigned: 24, 27, 29, 30, 35-71, 77-95
     Reserved for RTCP conflict avoidance: 72-76
 */
+@gidGir("RTPPayload")
 enum GstRTPPayload
 {
   /**
@@ -521,6 +536,7 @@ enum GstRTPPayload
 /**
     The transfer profile to use.
 */
+@gidGir("RTPProfile")
 enum GstRTPProfile
 {
   /**
@@ -677,6 +693,7 @@ struct GstRTPBaseAudioPayloadClass
 }
 
 /** */
+@gidGir("RTPBaseAudioPayloadPrivate")
 struct GstRTPBaseAudioPayloadPrivate;
 
 /**
@@ -792,6 +809,7 @@ struct GstRTPBaseDepayloadClass
 }
 
 /** */
+@gidGir("RTPBaseDepayloadPrivate")
 struct GstRTPBaseDepayloadPrivate;
 
 /**
@@ -917,6 +935,7 @@ struct GstRTPBasePayloadClass
 }
 
 /** */
+@gidGir("RTPBasePayloadPrivate")
 struct GstRTPBasePayloadPrivate;
 
 /**

@@ -12,6 +12,7 @@ import gid.gtksource4.encoding;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("File", "FileClass")
 class File : gid.gobject2.object.ObjectWrap
 {
 

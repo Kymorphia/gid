@@ -21,6 +21,7 @@ import gid.glib2.types;
 
     Deprecated: Use #GDateTime or #guint64 instead.
 */
+@gidGir("TimeVal")
 struct TimeVal
 {
   /**

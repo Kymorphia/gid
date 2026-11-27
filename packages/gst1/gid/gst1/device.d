@@ -22,6 +22,7 @@ import gid.gst1.types;
     #GstDevice are created by #GstDeviceProvider objects which can be
     aggregated by #GstDeviceMonitor objects.
 */
+@gidGir("Device", "DeviceClass")
 class Device : gid.gst1.object.ObjectWrap
 {
 

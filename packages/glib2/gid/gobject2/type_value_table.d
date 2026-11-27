@@ -20,6 +20,7 @@ import gid.gobject2.types;
     The #GTypeValueTable provides the functions required by the #GValue
     implementation, to serve as a container for values of a type.
 */
+@gidGir("TypeValueTable")
 class TypeValueTable : StructWrap!(GTypeValueTable)
 {
   /**

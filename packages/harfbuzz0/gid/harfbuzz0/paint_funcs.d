@@ -30,6 +30,7 @@ import gid.harfbuzz0.types;
     you want to override colors from the font palette with
     custom colors.
 */
+@gidGir("paint_funcs_t")
 class PaintFuncs : gid.gobject2.boxed.BoxedWrap!(hb_gobject_paint_funcs_get_type)
 {
 

@@ -22,6 +22,7 @@ import gid.webkit6.types;
     When a WebKitDeviceInfoPermissionRequest is not handled by the user,
     it is denied by default.
 */
+@gidGir("DeviceInfoPermissionRequest", "DeviceInfoPermissionRequestClass")
 class DeviceInfoPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

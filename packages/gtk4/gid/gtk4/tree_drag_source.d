@@ -18,6 +18,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents.
         You can use [gid.gtk4.drag_source.DragSource] to implement a drag source
 */
+@gidGir("TreeDragSource", "TreeDragSourceIface")
 interface TreeDragSource : GidWrap
 {
 

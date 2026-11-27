@@ -56,6 +56,7 @@ import gid.gmodule2.module_;
        `$libdir/gdk-pixbuf-2.0/$version/loaders.cache`, unless overridden
        by the environment variable `GDK_PIXBUF_MODULE_FILE`)
 */
+@gidGir("PixbufModule")
 class PixbufModule : StructWrap!(GdkPixbufModule)
 {
   /**

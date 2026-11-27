@@ -28,6 +28,7 @@ import gid.gobject2.boxed;
     Memory management of #cairo_pattern_t is done with
     [gid.cairo1.pattern.Pattern.reference] and [gid.cairo1.pattern.Pattern.destroy].
 */
+@gidGir("Pattern")
 class Pattern : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_pattern_get_type)
 {
 

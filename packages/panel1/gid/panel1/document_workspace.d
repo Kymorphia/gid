@@ -36,6 +36,7 @@ import gid.panel1.widget;
 import gid.panel1.workspace;
 
 /** */
+@gidGir("DocumentWorkspace", "DocumentWorkspaceClass")
 class DocumentWorkspace : gid.panel1.workspace.Workspace
 {
 

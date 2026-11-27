@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     Information about an annotation.
 */
+@gidGir("DBusAnnotationInfo")
 class DBusAnnotationInfo : gid.gobject2.boxed.BoxedWrap!(g_dbus_annotation_info_get_type)
 {
   /**

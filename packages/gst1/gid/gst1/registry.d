@@ -74,6 +74,7 @@ import gid.gst1.types;
     process are marked with the [gid.gst1.types.PluginFlags.Cached] bit. These plugins are
     removed at the end of initialization.
 */
+@gidGir("Registry", "RegistryClass")
 class Registry : gid.gst1.object.ObjectWrap
 {
 

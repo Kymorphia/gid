@@ -17,6 +17,7 @@ import gid.webkit6.types;
     
     Generally, match patterns are returned from a #WebKitWebExtension.
 */
+@gidGir("WebExtensionMatchPattern")
 class WebExtensionMatchPattern : gid.gobject2.boxed.BoxedWrap!(webkit_web_extension_match_pattern_get_type)
 {
 

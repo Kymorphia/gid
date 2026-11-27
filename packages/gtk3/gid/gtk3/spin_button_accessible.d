@@ -20,6 +20,7 @@ import gid.gtk3.entry_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("SpinButtonAccessible", "SpinButtonAccessibleClass")
 class SpinButtonAccessible : gid.gtk3.entry_accessible.EntryAccessible, gid.atk1.value.Value
 {
 

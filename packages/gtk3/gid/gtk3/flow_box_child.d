@@ -17,6 +17,7 @@ import gid.gtk3.container;
 import gid.gtk3.types;
 
 /** */
+@gidGir("FlowBoxChild", "FlowBoxChildClass")
 class FlowBoxChild : gid.gtk3.bin.Bin
 {
 

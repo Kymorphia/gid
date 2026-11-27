@@ -43,6 +43,7 @@ import gid.gobject2.gid_builder;
     Probably the only useful thing to do with a [gid.gio2.action.Action] is to put it
     inside of a [gid.gio2.simple_action_group.SimpleActionGroup].
 */
+@gidGir("Action", "ActionInterface")
 interface Action : GidWrap
 {
 

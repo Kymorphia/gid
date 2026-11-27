@@ -15,6 +15,7 @@ import gid.gtk4.types;
     Signals that are used in this way are referred to as keybinding signals,
     and they are expected to be defined with the [gid.gobject2.types.SignalFlags.Action] flag.
 */
+@gidGir("SignalAction", "SignalActionClass")
 class SignalAction : gid.gtk4.shortcut_action.ShortcutAction
 {
 

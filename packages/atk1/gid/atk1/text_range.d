@@ -11,6 +11,7 @@ import gid.gobject2.boxed;
 /**
     A structure used to describe a text range.
 */
+@gidGir("TextRange")
 class TextRange : gid.gobject2.boxed.BoxedWrap!(atk_text_range_get_type)
 {
   /**

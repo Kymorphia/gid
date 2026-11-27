@@ -11,6 +11,7 @@ import gid.glib2.types;
     Contains the public fields of a
     [Queue](data-structures.html#double-ended-queues).
 */
+@gidGir("Queue")
 class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
 {
 

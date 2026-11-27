@@ -29,6 +29,7 @@ import gid.gtk3.types;
     
     GtkToggleToolButton has a single CSS node with name togglebutton.
 */
+@gidGir("ToggleToolButton", "ToggleToolButtonClass")
 class ToggleToolButton : gid.gtk3.tool_button.ToolButton
 {
 

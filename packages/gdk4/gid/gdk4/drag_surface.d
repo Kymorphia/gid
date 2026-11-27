@@ -15,6 +15,7 @@ import gid.gobject2.object;
 /**
     A surface that is used during DND.
 */
+@gidGir("DragSurface", "DragSurfaceInterface")
 interface DragSurface : GidWrap
 {
 

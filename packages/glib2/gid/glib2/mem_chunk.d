@@ -8,6 +8,7 @@ import gid.glib2.c.types;
 import gid.glib2.types;
 
 /** */
+@gidGir("MemChunk")
 class MemChunk : OpaqueWrap!(GMemChunk*, void, void)
 {
 

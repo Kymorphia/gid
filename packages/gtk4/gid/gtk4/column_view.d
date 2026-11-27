@@ -91,6 +91,7 @@ import gid.gtk4.widget;
     are using the [gid.gtk4.types.AccessibleRole.Row] role, and individual cells are using
     the [gid.gtk4.types.AccessibleRole.GridCell] role
 */
+@gidGir("ColumnView", "ColumnViewClass")
 class ColumnView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
 {
 

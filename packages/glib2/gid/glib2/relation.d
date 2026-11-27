@@ -50,6 +50,7 @@ import gid.glib2.types;
 
     Deprecated: Rarely used API
 */
+@gidGir("Relation")
 class Relation : OpaqueWrap!(GRelation*, void, void)
 {
 

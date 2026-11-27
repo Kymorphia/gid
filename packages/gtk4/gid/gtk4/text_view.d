@@ -109,6 +109,7 @@ import gid.pango1.tab_array;
     
     [gid.gtk4.text_view.TextView] uses the [gid.gtk4.types.AccessibleRole.TextBox] role.
 */
+@gidGir("TextView", "TextViewClass")
 class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText, gid.gtk4.scrollable.Scrollable
 {
 

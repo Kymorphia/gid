@@ -40,6 +40,7 @@ import gid.gtk4.editable_mixin;
     [gid.adw1.password_entry_row.PasswordEntryRow] has a single CSS node with name `row` that carries
     `.entry` and `.password` style classes.
 */
+@gidGir("PasswordEntryRow", "PasswordEntryRowClass")
 class PasswordEntryRow : gid.adw1.entry_row.EntryRow
 {
 

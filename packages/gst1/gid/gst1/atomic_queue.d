@@ -12,6 +12,7 @@ import gid.gst1.types;
     The #GstAtomicQueue object implements a queue that can be used from multiple
     threads without performing any blocking operations.
 */
+@gidGir("AtomicQueue")
 class AtomicQueue : gid.gobject2.boxed.BoxedWrap!(gst_atomic_queue_get_type)
 {
 

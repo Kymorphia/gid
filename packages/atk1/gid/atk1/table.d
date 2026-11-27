@@ -44,6 +44,7 @@ import gid.gobject2.object;
     expose other kind of children, like rows or captions. Right now,
     index-based methods are deprecated.
 */
+@gidGir("Table", "TableIface")
 interface Table : GidWrap
 {
 

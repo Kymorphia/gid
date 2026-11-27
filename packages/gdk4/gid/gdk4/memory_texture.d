@@ -19,6 +19,7 @@ import gid.gobject2.gid_builder;
 /**
     A [gid.gdk4.texture.Texture] representing image data in memory.
 */
+@gidGir("MemoryTexture", "MemoryTextureClass")
 class MemoryTexture : gid.gdk4.texture.Texture
 {
 

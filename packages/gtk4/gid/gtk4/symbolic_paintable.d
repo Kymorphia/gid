@@ -26,6 +26,7 @@ import gid.gtk4.types;
     The system accent color has been added in GTK 4.22.
     More colors may be added in the future.
 */
+@gidGir("SymbolicPaintable", "SymbolicPaintableInterface")
 interface SymbolicPaintable : gid.gdk4.paintable.Paintable
 {
 

@@ -22,6 +22,7 @@ import gid.gstrtp1.types;
     into the RTCP buffer; you can move to the next packet with
     [gid.gstrtp1.rtcppacket.RTCPPacket.moveToNext].
 */
+@gidGir("RTCPBuffer")
 class RTCPBuffer : StructWrap!(GstRTCPBuffer)
 {
   /**

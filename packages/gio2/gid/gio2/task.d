@@ -540,6 +540,7 @@ import gid.gobject2.value;
       dropping the reference to the source object to that main
       context when the task is finalized
 */
+@gidGir("Task", "TaskClass")
 class Task : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.AsyncResult
 {
 

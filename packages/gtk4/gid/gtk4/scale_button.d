@@ -47,6 +47,7 @@ import gid.gtk4.widget;
     [gid.gtk4.scale_button.ScaleButton] has a single CSS node with name scalebutton and `.scale`
     style class, and contains a `button` node with a `.toggle` style class.
 */
+@gidGir("ScaleButton", "ScaleButtonClass")
 class ScaleButton : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange, gid.gtk4.orientable.Orientable
 {
 

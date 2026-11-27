@@ -27,6 +27,7 @@ import gid.pango1.types;
     
     To obtain a [gid.pango1.context.Context], use [gid.pango1.font_map.FontMap.createContext].
 */
+@gidGir("Context", "ContextClass")
 class Context : gid.gobject2.object.ObjectWrap
 {
 

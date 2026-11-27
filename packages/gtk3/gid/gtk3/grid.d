@@ -35,6 +35,7 @@ import gid.gtk3.widget;
     
     GtkGrid uses a single CSS node with name grid.
 */
+@gidGir("Grid", "GridClass")
 class Grid : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
 {
 

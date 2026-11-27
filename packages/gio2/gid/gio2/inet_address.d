@@ -21,6 +21,7 @@ import gid.gobject2.object;
     [gid.gio2.inet_socket_address.InetSocketAddress] (which includes a [gid.gio2.inet_address.InetAddress] as well as a
     port number).
 */
+@gidGir("InetAddress", "InetAddressClass")
 class InetAddress : gid.gobject2.object.ObjectWrap
 {
 

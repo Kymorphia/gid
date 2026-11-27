@@ -15,6 +15,7 @@ import gid.gobject2.object;
 /**
     A list of Autocrypt headers, typically extracted from a GMimeMessage.
 */
+@gidGir("AutocryptHeaderList", "AutocryptHeaderListClass")
 class AutocryptHeaderList : gid.gobject2.object.ObjectWrap
 {
 

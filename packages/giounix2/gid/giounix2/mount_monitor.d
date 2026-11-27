@@ -20,6 +20,7 @@ import gid.gobject2.object;
     Connect to the [gid.giounix2.mount_monitor.MountMonitor.mountpointsChanged] signal to
     be notified of changes to the [gid.giounix2.mount_point.MountPoint] list.
 */
+@gidGir("MountMonitor", "MountMonitorClass")
 class MountMonitor : gid.gobject2.object.ObjectWrap
 {
 

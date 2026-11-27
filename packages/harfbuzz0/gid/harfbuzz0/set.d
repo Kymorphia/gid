@@ -14,6 +14,7 @@ import gid.harfbuzz0.types;
     points, and various other collections of discrete
     values.
 */
+@gidGir("set_t")
 class Set : gid.gobject2.boxed.BoxedWrap!(hb_gobject_set_get_type)
 {
 

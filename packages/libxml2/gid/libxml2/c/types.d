@@ -4,10 +4,18 @@ module gid.libxml2.c.types;
 public import gid.core.basictypes;
 public import gid.glib2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "libxml2";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /** */
+@gidGir("Char")
 struct xmlChar;
 
 /** */
+@gidGir("Doc")
 struct xmlDoc;
 
 /** */
@@ -16,6 +24,7 @@ alias xmlDocPtr = xmlDocPtr_st*;
 struct xmlDocPtr_st;
 
 /** */
+@gidGir("Node")
 struct xmlNode;
 
 /** */

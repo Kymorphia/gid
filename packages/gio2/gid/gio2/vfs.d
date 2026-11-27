@@ -17,6 +17,7 @@ import gid.gobject2.object;
 /**
     Entry point for using GIO functionality.
 */
+@gidGir("Vfs", "VfsClass")
 class Vfs : gid.gobject2.object.ObjectWrap
 {
 

@@ -10,6 +10,7 @@ import gid.vte2.c.types;
 import gid.vte2.types;
 
 /** */
+@gidGir("Regex")
 class Regex : gid.gobject2.boxed.BoxedWrap!(vte_regex_get_type)
 {
 

@@ -13,6 +13,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_shape.AttrShape] structure is used to represent attributes which
     impose shape restrictions.
 */
+@gidGir("AttrShape")
 class AttrShape : StructWrap!(PangoAttrShape)
 {
   /**

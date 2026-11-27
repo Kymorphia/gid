@@ -170,6 +170,7 @@ import gid.gtk3.window;
     
     * Shortcut folders.
 */
+@gidGir("FileChooserNative", "FileChooserNativeClass")
 class FileChooserNative : gid.gtk3.native_dialog.NativeDialog, gid.gtk3.file_chooser.FileChooser
 {
 

@@ -14,6 +14,7 @@ import gid.gst1.types;
     Use [gid.gst1.tracer_factory.TracerFactory.getList] to get a list of tracer factories known to
     GStreamer.
 */
+@gidGir("TracerFactory", "TracerFactoryClass")
 class TracerFactory : gid.gst1.plugin_feature.PluginFeature
 {
 

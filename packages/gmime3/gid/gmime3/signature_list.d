@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A collection of #GMimeSignature objects.
 */
+@gidGir("SignatureList", "SignatureListClass")
 class SignatureList : gid.gobject2.object.ObjectWrap
 {
 

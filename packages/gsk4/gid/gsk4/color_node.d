@@ -13,6 +13,7 @@ import gid.gsk4.types;
 /**
     A render node for a solid color.
 */
+@gidGir("ColorNode")
 class ColorNode : gid.gsk4.render_node.RenderNode
 {
 

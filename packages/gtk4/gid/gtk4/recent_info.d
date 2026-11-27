@@ -17,6 +17,7 @@ import gid.gtk4.types;
     Contains the metadata associated with an item in the
     recently used files list.
 */
+@gidGir("RecentInfo")
 class RecentInfo : gid.gobject2.boxed.BoxedWrap!(gtk_recent_info_get_type)
 {
 

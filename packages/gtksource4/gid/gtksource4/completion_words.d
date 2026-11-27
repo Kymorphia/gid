@@ -14,6 +14,7 @@ import gid.gtksource4.completion_provider_mixin;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("CompletionWords", "CompletionWordsClass")
 class CompletionWords : gid.gobject2.object.ObjectWrap, gid.gtksource4.completion_provider.CompletionProvider
 {
 

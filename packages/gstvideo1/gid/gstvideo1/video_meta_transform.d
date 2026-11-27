@@ -16,6 +16,7 @@ import gid.gstvideo1.video_info;
     This transformation can not express letterbox, cropping, or rotations,
     use #GstVideoMetaTransformMatrix instead
 */
+@gidGir("VideoMetaTransform")
 class VideoMetaTransform : StructWrap!(GstVideoMetaTransform)
 {
   /**

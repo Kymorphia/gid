@@ -30,6 +30,7 @@ import gid.gtksource5.types;
     In [gid.gtksource5.style_scheme_chooser_button.StyleSchemeChooserButton], a [gid.gtksource5.style_scheme_chooser_widget.StyleSchemeChooserWidget]
     is used to provide a dialog for selecting style schemes.
 */
+@gidGir("StyleSchemeChooserButton", "StyleSchemeChooserButtonClass")
 class StyleSchemeChooserButton : gid.gtk4.button.Button, gid.gtksource5.style_scheme_chooser.StyleSchemeChooser
 {
 

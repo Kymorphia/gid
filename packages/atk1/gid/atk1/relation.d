@@ -20,6 +20,7 @@ import gid.gobject2.value_array;
     other objects are defined as an AtkRelationSet, which is a set of
     AtkRelations.
 */
+@gidGir("Relation", "RelationClass")
 class Relation : gid.gobject2.object.ObjectWrap
 {
 

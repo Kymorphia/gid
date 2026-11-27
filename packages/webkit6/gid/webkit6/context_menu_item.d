@@ -22,6 +22,7 @@ import gid.webkit6.types;
     label. These #WebKitContextMenuAction<!-- -->s denote stock actions
     for the items. You can also create separators and submenus.
 */
+@gidGir("ContextMenuItem", "ContextMenuItemClass")
 class ContextMenuItem : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

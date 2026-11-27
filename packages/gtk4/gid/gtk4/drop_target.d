@@ -89,6 +89,7 @@ import gid.gtk4.types;
     UI state during a Drag-and-Drop operation (e.g. switching tabs), you can
     use [gid.gtk4.drop_controller_motion.DropControllerMotion].
 */
+@gidGir("DropTarget", "DropTargetClass")
 class DropTarget : gid.gtk4.event_controller.EventController
 {
 

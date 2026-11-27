@@ -28,6 +28,7 @@ import gid.gtk4.types;
     displayed for the specified text direction. This allows to display different
     shortcuts for different text directions.
 */
+@gidGir("ShortcutsItem", "ShortcutsItemClass")
 class ShortcutsItem : gid.gobject2.object.ObjectWrap
 {
 

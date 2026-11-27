@@ -23,6 +23,7 @@ import gid.gstrtsp1.types;
     This object manages the RTSP connection to the server. It provides function
     to receive and send bytes and messages.
 */
+@gidGir("RTSPConnection")
 class RTSPConnection : OpaqueWrap!(GstRTSPConnection*, void, void)
 {
 

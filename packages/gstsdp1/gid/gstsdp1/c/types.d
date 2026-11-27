@@ -4,9 +4,16 @@ module gid.gstsdp1.c.types;
 public import gid.core.basictypes;
 public import gid.gst1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstSdp";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     The different cache types
 */
+@gidGir("MIKEYCacheType")
 enum GstMIKEYCacheType
 {
   /**
@@ -29,6 +36,7 @@ enum GstMIKEYCacheType
 /**
     The encryption algorithm used to encrypt the Encr data field
 */
+@gidGir("MIKEYEncAlg")
 enum GstMIKEYEncAlg
 {
   /**
@@ -55,6 +63,7 @@ enum GstMIKEYEncAlg
 /**
     The key validity type
 */
+@gidGir("MIKEYKVType")
 enum GstMIKEYKVType
 {
   /**
@@ -76,6 +85,7 @@ enum GstMIKEYKVType
 /**
     The type of key.
 */
+@gidGir("MIKEYKeyDataType")
 enum GstMIKEYKeyDataType
 {
   /**
@@ -92,6 +102,7 @@ enum GstMIKEYKeyDataType
 /**
     Specifies the authentication algorithm used
 */
+@gidGir("MIKEYMacAlg")
 enum GstMIKEYMacAlg
 {
   /**
@@ -109,6 +120,7 @@ enum GstMIKEYMacAlg
     Specifies the method of uniquely mapping Crypto Sessions to the security
     protocol sessions.
 */
+@gidGir("MIKEYMapType")
 enum GstMIKEYMapType
 {
   /**
@@ -120,6 +132,7 @@ enum GstMIKEYMapType
 /**
     The PRF function that has been/will be used for key derivation
 */
+@gidGir("MIKEYPRFFunc")
 enum GstMIKEYPRFFunc
 {
   /**
@@ -131,6 +144,7 @@ enum GstMIKEYPRFFunc
 /**
     Different MIKEY Payload types.
 */
+@gidGir("MIKEYPayloadType")
 enum GstMIKEYPayloadType
 {
   /**
@@ -212,6 +226,7 @@ enum GstMIKEYPayloadType
 /**
     Specifies the security protocol
 */
+@gidGir("MIKEYSecProto")
 enum GstMIKEYSecProto
 {
   /**
@@ -223,6 +238,7 @@ enum GstMIKEYSecProto
 /**
     This policy specifies the parameters for SRTP and SRTCP
 */
+@gidGir("MIKEYSecSRTP")
 enum GstMIKEYSecSRTP
 {
   /**
@@ -299,6 +315,7 @@ enum GstMIKEYSecSRTP
 /**
     Specifies the timestamp type.
 */
+@gidGir("MIKEYTSType")
 enum GstMIKEYTSType
 {
   /**
@@ -320,6 +337,7 @@ enum GstMIKEYTSType
 /**
     Different MIKEY data types.
 */
+@gidGir("MIKEYType")
 enum GstMIKEYType
 {
   /**
@@ -366,6 +384,7 @@ enum GstMIKEYType
 /**
     Return values for the SDP functions.
 */
+@gidGir("SDPResult")
 enum GstSDPResult
 {
   /**
@@ -380,14 +399,17 @@ enum GstSDPResult
 }
 
 /** */
+@gidGir("MIKEYDecryptInfo")
 struct GstMIKEYDecryptInfo;
 
 /** */
+@gidGir("MIKEYEncryptInfo")
 struct GstMIKEYEncryptInfo;
 
 /**
     The Security policy Map item for SRTP
 */
+@gidGir("MIKEYMapSRTP")
 struct GstMIKEYMapSRTP
 {
   /**

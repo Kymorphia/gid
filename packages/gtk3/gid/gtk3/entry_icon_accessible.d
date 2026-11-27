@@ -14,6 +14,7 @@ import gid.gtk3.c.types;
 import gid.gtk3.types;
 
 /** */
+@gidGir("EntryIconAccessible")
 class EntryIconAccessible : gid.atk1.object.ObjectWrap, gid.atk1.action.Action, gid.atk1.component.Component
 {
 

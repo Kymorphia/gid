@@ -30,6 +30,7 @@ import gid.gobject2.object;
     [gid.gio2.threaded_socket_service.ThreadedSocketService.run], or subclass and override the default
     handler.
 */
+@gidGir("ThreadedSocketService", "ThreadedSocketServiceClass")
 class ThreadedSocketService : gid.gio2.socket_service.SocketService
 {
 

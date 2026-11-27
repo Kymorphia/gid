@@ -16,6 +16,7 @@ import gid.gobject2.object;
 /**
     A list of Content-Type or Content-Disposition parameters.
 */
+@gidGir("ParamList", "ParamListClass")
 class ParamList : gid.gobject2.object.ObjectWrap
 {
 

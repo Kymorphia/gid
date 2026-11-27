@@ -17,6 +17,7 @@ import gid.graphene1.vec3;
     The contents of the #graphene_euler_t structure are private
     and should never be accessed directly.
 */
+@gidGir("Euler")
 class Euler : gid.gobject2.boxed.BoxedWrap!(graphene_euler_get_type)
 {
   /**

@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     An RFC 2822 Address object.
 */
+@gidGir("InternetAddress", "InternetAddressClass")
 class InternetAddress : gid.gobject2.object.ObjectWrap
 {
 

@@ -18,6 +18,7 @@ import gid.gobject2.object;
     [gid.gio2.bytes_icon.BytesIcon] specifies an image held in memory in a common format (usually
     PNG) to be used as icon.
 */
+@gidGir("BytesIcon")
 class BytesIcon : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.loadable_icon.LoadableIcon
 {
 

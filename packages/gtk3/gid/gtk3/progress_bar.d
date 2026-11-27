@@ -57,6 +57,7 @@ import gid.pango1.types;
     end of the GtkProgressBar. The .osd class on the progressbar node is for use
     in overlays like the one Epiphany has for page loading progress.
 */
+@gidGir("ProgressBar", "ProgressBarClass")
 class ProgressBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
 {
 

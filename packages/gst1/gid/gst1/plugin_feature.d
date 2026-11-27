@@ -14,6 +14,7 @@ import gid.gst1.types;
 /**
     This is a base class for anything that can be added to a #GstPlugin.
 */
+@gidGir("PluginFeature", "PluginFeatureClass")
 class PluginFeature : gid.gst1.object.ObjectWrap
 {
 

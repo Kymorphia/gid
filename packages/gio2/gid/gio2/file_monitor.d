@@ -26,6 +26,7 @@ import gid.gobject2.object;
     may cause notifications to be blocked even if the thread-default
     context is still running).
 */
+@gidGir("FileMonitor", "FileMonitorClass")
 class FileMonitor : gid.gobject2.object.ObjectWrap
 {
 

@@ -59,6 +59,7 @@ import gid.pango1.attr_list;
     [gid.adw1.entry_row.EntryRow] has a single CSS node with name `row` and the `.entry` style
     class.
 */
+@gidGir("EntryRow", "EntryRowClass")
 class EntryRow : gid.adw1.preferences_row.PreferencesRow, gid.gtk4.editable.Editable
 {
 

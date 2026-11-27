@@ -47,6 +47,7 @@ import gid.gtk4.types;
     g_object_unref (icon);
     ```
 */
+@gidGir("IconTheme")
 class IconTheme : gid.gobject2.object.ObjectWrap
 {
 

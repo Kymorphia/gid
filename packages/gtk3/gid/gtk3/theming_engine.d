@@ -30,6 +30,7 @@ import gid.pango1.layout;
     enough to allow themers to achieve their goals without the need
     to modify source code.
 */
+@gidGir("ThemingEngine", "ThemingEngineClass")
 class ThemingEngine : gid.gobject2.object.ObjectWrap
 {
 

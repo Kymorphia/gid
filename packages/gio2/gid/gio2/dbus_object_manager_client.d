@@ -104,6 +104,7 @@ import gid.gobject2.types;
     the same context and, consequently, will deliver signals in the
     same main loop.
 */
+@gidGir("DBusObjectManagerClient", "DBusObjectManagerClientClass")
 class DBusObjectManagerClient : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncInitable, gid.gio2.dbus_object_manager.DBusObjectManager, gid.gio2.initable.Initable
 {
 

@@ -15,6 +15,7 @@ import gid.gstrtp1.types;
     #GstBuffer objects that contain RTP payloads. These buffers are typically of
     'application/x-rtp' #GstCaps.
 */
+@gidGir("RTPBuffer")
 class RTPBuffer : StructWrap!(GstRTPBuffer)
 {
   /**

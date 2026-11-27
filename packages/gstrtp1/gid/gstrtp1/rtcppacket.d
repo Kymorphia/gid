@@ -12,6 +12,7 @@ import gid.gstrtp1.types;
     Data structure that points to a packet at @offset in @buffer.
     The size of the structure is made public to allow stack allocations.
 */
+@gidGir("RTCPPacket")
 class RTCPPacket : StructWrap!(GstRTCPPacket)
 {
   /**

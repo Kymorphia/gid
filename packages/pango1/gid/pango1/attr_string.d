@@ -12,6 +12,7 @@ import gid.pango1.types;
     The [gid.pango1.attr_string.AttrString] structure is used to represent attributes with
     a string value.
 */
+@gidGir("AttrString")
 class AttrString : StructWrap!(PangoAttrString)
 {
   /**

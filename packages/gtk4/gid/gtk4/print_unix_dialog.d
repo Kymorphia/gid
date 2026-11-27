@@ -88,6 +88,7 @@ import gid.gtk4.window;
     [gid.gtk4.print_unix_dialog.PrintUnixDialog] has a single CSS node with name window. The style classes
     dialog and print are added.
 */
+@gidGir("PrintUnixDialog")
 class PrintUnixDialog : gid.gtk4.dialog.Dialog
 {
 

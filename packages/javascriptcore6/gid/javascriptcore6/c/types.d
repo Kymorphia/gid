@@ -4,9 +4,16 @@ module gid.javascriptcore6.c.types;
 public import gid.core.basictypes;
 public import gid.gobject2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "JavaScriptCore";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "6.0";
+
 /**
     Enum values to specify a mode to check for syntax errors in [gid.javascriptcore6.context.Context.checkSyntax].
 */
+@gidGir("CheckSyntaxMode")
 enum JSCCheckSyntaxMode
 {
   /**
@@ -23,6 +30,7 @@ enum JSCCheckSyntaxMode
 /**
     Enum values to specify the result of [gid.javascriptcore6.context.Context.checkSyntax].
 */
+@gidGir("CheckSyntaxResult")
 enum JSCCheckSyntaxResult
 {
   /**
@@ -59,6 +67,7 @@ enum JSCCheckSyntaxResult
 /**
     Enum values for options types.
 */
+@gidGir("OptionType")
 enum JSCOptionType
 {
   /**
@@ -100,6 +109,7 @@ enum JSCOptionType
 /**
     Possible types of the elements contained in a typed array.
 */
+@gidGir("TypedArrayType")
 enum JSCTypedArrayType
 {
   /**
@@ -167,6 +177,7 @@ enum JSCTypedArrayType
     Flags used when defining properties with [gid.javascriptcore6.value.Value.objectDefinePropertyData] and
     [gid.javascriptcore6.value.Value.objectDefinePropertyAccessor].
 */
+@gidGir("ValuePropertyFlags")
 enum JSCValuePropertyFlags : uint
 {
   /**
@@ -209,6 +220,7 @@ struct JSCClassClass
     to provide a custom implementation for the class. All virtual functions are optional and can be set to
     null to fallback to the default implementation.
 */
+@gidGir("ClassVTable")
 struct JSCClassVTable
 {
   /**

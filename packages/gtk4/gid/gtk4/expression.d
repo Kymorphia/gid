@@ -196,6 +196,7 @@ import gid.gtk4.types;
       </object>
     ```
 */
+@gidGir("Expression")
 class Expression : ReffedWrap!(GtkExpression*, gtk_expression_ref, gtk_expression_unref)
 {
 

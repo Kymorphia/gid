@@ -244,6 +244,7 @@ import gid.pango1.types;
     with the [gid.gtk4.label.Label.activateLink] signal and the
     [gid.gtk4.label.Label.getCurrentUri] function.
 */
+@gidGir("Label")
 class Label : gid.gtk4.widget.Widget, gid.gtk4.accessible_hypertext.AccessibleHypertext, gid.gtk4.accessible_text.AccessibleText
 {
 

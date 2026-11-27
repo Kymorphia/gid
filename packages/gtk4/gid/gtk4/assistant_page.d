@@ -15,6 +15,7 @@ import gid.gtk4.widget;
 
     Deprecated: This object will be removed in GTK 5
 */
+@gidGir("AssistantPage")
 class AssistantPage : gid.gobject2.object.ObjectWrap
 {
 

@@ -16,6 +16,7 @@ import gid.gsk4.types;
 /**
     Builds the uniforms data for a [gid.gsk4.glshader.GLShader].
 */
+@gidGir("ShaderArgsBuilder")
 class ShaderArgsBuilder : gid.gobject2.boxed.BoxedWrap!(gsk_shader_args_builder_get_type)
 {
 

@@ -4,6 +4,12 @@ module gid.gobject2.c.types;
 public import gid.core.basictypes;
 public import gid.glib2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GObject";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "2.0";
+
 /**
     This is the signature of marshaller functions, required to marshall
     arrays of parameter values to signal emissions into C language callback
@@ -34,6 +40,7 @@ alias GType = size_t;
     
     This enumeration can be extended at later date.
 */
+@gidGir("BindingFlags")
 enum GBindingFlags : uint
 {
   /**
@@ -70,6 +77,7 @@ enum GBindingFlags : uint
     The connection flags are used to specify the behaviour of a signal's
     connection.
 */
+@gidGir("ConnectFlags")
 enum GConnectFlags : uint
 {
   /**
@@ -97,6 +105,7 @@ enum GConnectFlags : uint
     
     See also: [gid.gobject2.types.PARAM_STATIC_STRINGS]
 */
+@gidGir("ParamFlags")
 enum GParamFlags : uint
 {
   /**
@@ -181,6 +190,7 @@ enum GParamFlags : uint
 /**
     The signal flags are used to specify a signal's behaviour.
 */
+@gidGir("SignalFlags")
 enum GSignalFlags : uint
 {
   /**
@@ -255,6 +265,7 @@ enum GSignalFlags : uint
     [gid.gobject2.global.signalHandlersUnblockMatched] and [gid.gobject2.global.signalHandlersDisconnectMatched]
     match signals by.
 */
+@gidGir("SignalMatchType")
 enum GSignalMatchType : uint
 {
   /**
@@ -297,6 +308,7 @@ enum GSignalMatchType : uint
 
     Deprecated: [gid.gobject2.global.typeInit] is now done automatically
 */
+@gidGir("TypeDebugFlags")
 enum GTypeDebugFlags : uint
 {
   /**
@@ -328,6 +340,7 @@ enum GTypeDebugFlags : uint
 /**
     Bit masks used to check or determine characteristics of a type.
 */
+@gidGir("TypeFlags")
 enum GTypeFlags : uint
 {
   /**
@@ -366,6 +379,7 @@ enum GTypeFlags : uint
     Bit masks used to check or determine specific characteristics of a
     fundamental type.
 */
+@gidGir("TypeFundamentalFlags")
 enum GTypeFundamentalFlags : uint
 {
   /**
@@ -574,6 +588,7 @@ struct GClosure
 }
 
 /** */
+@gidGir("ClosureNotifyData")
 struct GClosureNotifyData
 {
   /** */
@@ -1475,6 +1490,7 @@ struct GParamSpecString
     does not need to be persistent across invocation of
     [gid.gobject2.global.paramTypeRegisterStatic].
 */
+@gidGir("ParamSpecTypeInfo")
 struct GParamSpecTypeInfo
 {
   /**
@@ -1740,6 +1756,7 @@ struct GSignalGroup;
     The #GSignalInvocationHint structure is used to pass on additional information
     to callbacks during a signal emission.
 */
+@gidGir("SignalInvocationHint")
 struct GSignalInvocationHint
 {
   /**
@@ -1856,6 +1873,7 @@ struct GTypeClass
     A structure that provides information to the type system which is
     used specifically for managing fundamental types.
 */
+@gidGir("TypeFundamentalInfo")
 struct GTypeFundamentalInfo
 {
   /**

@@ -13,6 +13,7 @@ import gid.gst1.types;
     constituent parts. Two #GstUri objects can be joined to make a new #GstUri
     using the algorithm described in RFC3986.
 */
+@gidGir("Uri")
 class Uri : gid.gobject2.boxed.BoxedWrap!(gst_uri_get_type)
 {
 

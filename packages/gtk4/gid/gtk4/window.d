@@ -104,6 +104,7 @@ import gid.gtk4.window_group;
     
     From GTK 4.12 to 4.18, it used the [gid.gtk4.types.AccessibleRole.Application] role.
 */
+@gidGir("Window", "WindowClass")
 class Window : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.root.Root, gid.gtk4.shortcut_manager.ShortcutManager
 {
 

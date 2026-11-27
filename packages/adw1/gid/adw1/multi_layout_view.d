@@ -99,6 +99,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.multi_layout_view.MultiLayoutView] has a single CSS node with name `multi-layout-view`.
 */
+@gidGir("MultiLayoutView", "MultiLayoutViewClass")
 class MultiLayoutView : gid.gtk4.widget.Widget
 {
 

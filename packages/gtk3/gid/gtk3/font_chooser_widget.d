@@ -38,6 +38,7 @@ import gid.gtk3.types;
     
     GtkFontChooserWidget has a single CSS node with name fontchooser.
 */
+@gidGir("FontChooserWidget", "FontChooserWidgetClass")
 class FontChooserWidget : gid.gtk3.box.Box, gid.gtk3.font_chooser.FontChooser
 {
 

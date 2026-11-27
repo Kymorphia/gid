@@ -13,6 +13,7 @@ import gid.harfbuzz0.types;
     set and retrieved using [gid.harfbuzz0.global.bufferSetSegmentProperties] and
     [gid.harfbuzz0.global.bufferGetSegmentProperties], respectively.
 */
+@gidGir("segment_properties_t")
 class SegmentProperties : gid.gobject2.boxed.BoxedWrap!(hb_gobject_segment_properties_get_type)
 {
   /**

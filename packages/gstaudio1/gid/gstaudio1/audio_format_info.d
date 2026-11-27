@@ -11,6 +11,7 @@ import gid.gstaudio1.types;
 /**
     Information for an audio format.
 */
+@gidGir("AudioFormatInfo")
 class AudioFormatInfo : gid.gobject2.boxed.BoxedWrap!(gst_audio_format_info_get_type)
 {
   /**

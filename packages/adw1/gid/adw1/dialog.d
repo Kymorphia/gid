@@ -79,6 +79,7 @@ import gid.gtk4.widget;
     minimum size, and [gid.gtk4.widget.Widget.widthRequest] and
     [gid.gtk4.widget.Widget.heightRequest] properties must be set manually.
 */
+@gidGir("Dialog", "DialogClass")
 class Dialog : gid.gtk4.widget.Widget, gid.gtk4.shortcut_manager.ShortcutManager
 {
 

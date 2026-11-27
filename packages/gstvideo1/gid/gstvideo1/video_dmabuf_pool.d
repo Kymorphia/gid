@@ -12,6 +12,7 @@ import gid.gstvideo1.video_buffer_pool;
 /**
     Using #GstUdmabufAllocator, setting defaults and implementing implicit sync.
 */
+@gidGir("VideoDmabufPool", "VideoDmabufPoolClass")
 class VideoDmabufPool : gid.gstvideo1.video_buffer_pool.VideoBufferPool
 {
 

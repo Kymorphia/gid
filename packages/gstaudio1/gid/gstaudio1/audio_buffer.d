@@ -21,6 +21,7 @@ import gid.gstaudio1.types;
     
     The different channels in @planes are always in the GStreamer channel order.
 */
+@gidGir("AudioBuffer")
 class AudioBuffer : StructWrap!(GstAudioBuffer)
 {
   /**

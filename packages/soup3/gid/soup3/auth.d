@@ -22,6 +22,7 @@ import gid.soup3.types;
     [gid.soup3.auth.Auth] objects store the authentication data associated with a given bit
     of web space. They are created automatically by [gid.soup3.session.Session].
 */
+@gidGir("Auth", "AuthClass")
 class Auth : gid.gobject2.object.ObjectWrap
 {
 

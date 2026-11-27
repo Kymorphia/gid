@@ -17,6 +17,7 @@ import gid.webkitwebprocessextension6.types;
     Each [gid.webkitwebprocessextension6.web_page.WebPage] has at least one main frame, and can have any number
     of subframes.
 */
+@gidGir("Frame", "FrameClass")
 class Frame : gid.gobject2.object.ObjectWrap
 {
 

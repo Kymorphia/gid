@@ -10,6 +10,7 @@ import gid.gdkpixbuf2.types;
 import gid.gobject2.gid_builder;
 
 /** */
+@gidGir("PixbufSimpleAnimIter")
 class PixbufSimpleAnimIter : gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter
 {
 

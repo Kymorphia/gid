@@ -16,6 +16,7 @@ import gid.gtk3.types;
     same row (a #GtkTreePath refers to a position, not a fixed row). Create a
     new GtkTreeRowReference with [gid.gtk4.tree_row_reference.TreeRowReference.new_].
 */
+@gidGir("TreeRowReference")
 class TreeRowReference : gid.gobject2.boxed.BoxedWrap!(gtk_tree_row_reference_get_type)
 {
 

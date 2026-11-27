@@ -140,6 +140,7 @@ import gid.gtk4.widget;
      - [gid.gtk4.types.AccessibleRole.Tab] role for each tab
      - [gid.gtk4.types.AccessibleRole.TabPanel] for each page
 */
+@gidGir("Notebook")
 class Notebook : gid.gtk4.widget.Widget
 {
 

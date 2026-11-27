@@ -41,6 +41,7 @@ import gid.gtk3.widget;
     > capabilities as GtkTable for arranging widgets in a rectangular grid, but
     > does support height-for-width geometry management.
 */
+@gidGir("Table", "TableClass")
 class Table : gid.gtk3.container.Container
 {
 

@@ -18,6 +18,7 @@ import gid.gstgl1.types;
     `start()`, `stop()` and `set_caps()` virtual methods that ensure an OpenGL
     context is available and current in the calling thread.
 */
+@gidGir("GLBaseFilter", "GLBaseFilterClass")
 class GLBaseFilter : gid.gstbase1.base_transform.BaseTransform
 {
 

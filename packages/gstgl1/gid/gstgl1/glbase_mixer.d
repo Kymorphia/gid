@@ -16,6 +16,7 @@ import gid.gstvideo1.video_aggregator;
     context.  It provides some virtual methods to know when the OpenGL context
     is available and is not available within this element.
 */
+@gidGir("GLBaseMixer", "GLBaseMixerClass")
 class GLBaseMixer : gid.gstvideo1.video_aggregator.VideoAggregator
 {
 

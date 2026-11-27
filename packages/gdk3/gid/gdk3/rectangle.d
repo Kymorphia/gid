@@ -11,6 +11,7 @@ import gid.gdk3.types;
     Defines the position and size of a rectangle. It is identical to
     #cairo_rectangle_int_t.
 */
+@gidGir("Rectangle")
 struct Rectangle
 {
   /** */

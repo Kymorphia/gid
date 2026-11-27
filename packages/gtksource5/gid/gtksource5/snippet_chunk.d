@@ -19,6 +19,7 @@ import gid.gtksource5.types;
     an edit point (also called a tab stop) have the
     [gid.gtksource5.snippet_chunk.SnippetChunk.focusPosition] property set.
 */
+@gidGir("SnippetChunk", "SnippetChunkClass")
 class SnippetChunk : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

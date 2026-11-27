@@ -12,6 +12,7 @@ import gid.gstsdp1.types;
     The Security Policy payload defines a set of policies that apply to a
     specific security protocol
 */
+@gidGir("MIKEYPayloadSP")
 class MIKEYPayloadSP : StructWrap!(GstMIKEYPayloadSP)
 {
   /**

@@ -138,6 +138,7 @@ import gid.pango1.tab_array;
     as a delegate for a [gid.gtk4.editable.Editable] implementation that will be represented
     to accessibility.
 */
+@gidGir("Text")
 class Text : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText, gid.gtk4.editable.Editable
 {
 

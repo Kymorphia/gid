@@ -20,6 +20,7 @@ import gid.gstgl1.types;
     
     Data is uploaded or downloaded from the GPU as is necessary.
 */
+@gidGir("GLBaseMemory")
 class GLBaseMemory : gid.gobject2.boxed.BoxedWrap!(gst_gl_base_memory_get_type)
 {
   /**

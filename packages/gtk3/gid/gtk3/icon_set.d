@@ -17,6 +17,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget;
 
 /** */
+@gidGir("IconSet")
 class IconSet : gid.gobject2.boxed.BoxedWrap!(gtk_icon_set_get_type)
 {
 

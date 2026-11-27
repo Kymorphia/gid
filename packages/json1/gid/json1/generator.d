@@ -19,6 +19,7 @@ import gid.json1.types;
     from a tree of [gid.json1.node.Node] instances, and put it into a buffer
     or a file.
 */
+@gidGir("Generator", "GeneratorClass")
 class Generator : gid.gobject2.object.ObjectWrap
 {
 

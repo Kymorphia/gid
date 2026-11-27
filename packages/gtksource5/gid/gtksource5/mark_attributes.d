@@ -49,6 +49,7 @@ import gid.gtksource5.types;
     [gid.gtksource5.mark_attributes.MarkAttributes.queryTooltipMarkup] where the latter
     takes precedence.
 */
+@gidGir("MarkAttributes", "MarkAttributesClass")
 class MarkAttributes : gid.gobject2.object.ObjectWrap
 {
 

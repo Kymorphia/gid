@@ -14,6 +14,7 @@ import gid.gsk4.types;
 /**
     A render node for a conic gradient.
 */
+@gidGir("ConicGradientNode")
 class ConicGradientNode : gid.gsk4.render_node.RenderNode
 {
 

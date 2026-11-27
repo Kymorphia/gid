@@ -11,6 +11,7 @@ import gid.gstsdp1.types;
     The contents of the SDP "b=" field which specifies the proposed bandwidth to
     be used by the session or media.
 */
+@gidGir("SDPBandwidth")
 class SDPBandwidth : StructWrap!(GstSDPBandwidth)
 {
   /**

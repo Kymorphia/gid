@@ -38,6 +38,7 @@ import gid.gtk3.widget;
     between 1582 and 1929. Display before these dates is likely to be
     historically incorrect.
 */
+@gidGir("Calendar", "CalendarClass")
 class Calendar : gid.gtk3.widget.Widget
 {
 

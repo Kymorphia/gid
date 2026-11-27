@@ -140,6 +140,7 @@ import gid.json1.types;
     ["Nigel Rees","Evelyn Waugh","Herman Melville","J. R. R. Tolkien"]
     ```
 */
+@gidGir("Path", "PathClass")
 class Path : gid.gobject2.object.ObjectWrap
 {
 

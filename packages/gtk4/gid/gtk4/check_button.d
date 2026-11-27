@@ -90,6 +90,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.check_button.CheckButton] uses the [gid.gtk4.types.AccessibleRole.Checkbox] role.
 */
+@gidGir("CheckButton", "CheckButtonClass")
 class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 {
 

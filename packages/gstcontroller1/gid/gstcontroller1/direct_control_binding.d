@@ -20,6 +20,7 @@ import gid.gstcontroller1.types;
     will be clipped. An absolute control binding will not do any value
     transformations.
 */
+@gidGir("DirectControlBinding", "DirectControlBindingClass")
 class DirectControlBinding : gid.gst1.control_binding.ControlBinding
 {
 

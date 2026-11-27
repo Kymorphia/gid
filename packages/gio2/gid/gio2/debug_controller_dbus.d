@@ -130,6 +130,7 @@ import gid.gobject2.object;
       }
     ```
 */
+@gidGir("DebugControllerDBus", "DebugControllerDBusClass")
 class DebugControllerDBus : gid.gobject2.object.ObjectWrap, gid.gio2.debug_controller.DebugController, gid.gio2.initable.Initable
 {
 

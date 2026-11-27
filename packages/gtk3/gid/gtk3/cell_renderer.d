@@ -56,6 +56,7 @@ import gid.gtk3.widget;
     to “cell-background”. These “set” properties reflect whether a property
     has been set or not. You should not set them independently.
 */
+@gidGir("CellRenderer", "CellRendererClass")
 class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
 {
 

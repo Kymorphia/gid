@@ -16,6 +16,7 @@ import gid.gtk3.cell_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ContainerCellAccessible", "ContainerCellAccessibleClass")
 class ContainerCellAccessible : gid.gtk3.cell_accessible.CellAccessible
 {
 

@@ -111,6 +111,7 @@ struct GidIfaceVfunc {}
     struct, the [gid.gstpbutils1.types.ObjectClass] (or derived) struct, and any private data allocated
     by `G_ADD_PRIVATE()`.
 */
+@gidGir("Object", "ObjectClass")
 class ObjectWrap : GidWrap
 {
   protected GObject* _cInstancePtr; // Pointer to wrapped C GObject

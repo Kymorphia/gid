@@ -136,6 +136,7 @@ import gid.gsk4.types;
       [GtkGLArea](../gtk4/class.GLArea.html), which uses a different approach
       and is still well-supported.
 */
+@gidGir("GLShader", "GLShaderClass")
 class GLShader : gid.gobject2.object.ObjectWrap
 {
 

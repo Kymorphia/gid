@@ -14,6 +14,7 @@ import gid.gobject2.object;
     Defines a Unix mount point (e.g. `/dev`).
     This corresponds roughly to a fstab entry.
 */
+@gidGir("MountPoint")
 class MountPoint : gid.gobject2.boxed.BoxedWrap!(g_unix_mount_point_get_type)
 {
 

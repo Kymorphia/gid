@@ -8,6 +8,7 @@ import gid.javascriptcore6.c.types;
 import gid.javascriptcore6.types;
 
 /** */
+@gidGir("ClassClass")
 class ClassClass : StructWrap!(JSCClassClass)
 {
   /**

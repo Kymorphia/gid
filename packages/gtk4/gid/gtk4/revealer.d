@@ -39,6 +39,7 @@ import gid.gtk4.widget;
     The child of [gid.gtk4.revealer.Revealer], if set, is always available in the accessibility
     tree, regardless of the state of the revealer widget.
 */
+@gidGir("Revealer")
 class Revealer : gid.gtk4.widget.Widget
 {
 

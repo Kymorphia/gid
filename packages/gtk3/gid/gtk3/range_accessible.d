@@ -14,6 +14,7 @@ import gid.gtk3.types;
 import gid.gtk3.widget_accessible;
 
 /** */
+@gidGir("RangeAccessible", "RangeAccessibleClass")
 class RangeAccessible : gid.gtk3.widget_accessible.WidgetAccessible, gid.atk1.value.Value
 {
 

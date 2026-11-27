@@ -211,6 +211,7 @@ import gid.gtk3.types;
       however, signals must be emitted at all times (however the root level
       is always referenced when any view is attached).
 */
+@gidGir("TreeModel", "TreeModelIface")
 interface TreeModel : GidWrap
 {
 

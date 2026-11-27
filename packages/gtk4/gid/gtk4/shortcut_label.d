@@ -22,6 +22,7 @@ import gid.gtk4.widget;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("ShortcutLabel", "ShortcutLabelClass")
 class ShortcutLabel : gid.gtk4.widget.Widget
 {
 

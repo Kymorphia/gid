@@ -27,6 +27,7 @@ import gid.gtk4.types;
     [gid.gtk4.print_job.PrintJob] also supports printing of manually generated PostScript,
     via [gid.gtk4.print_job.PrintJob.setSourceFile].
 */
+@gidGir("PrintJob")
 class PrintJob : gid.gobject2.object.ObjectWrap
 {
 

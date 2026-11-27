@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter for compresing or decompressing a gzip stream.
 */
+@gidGir("FilterGZip", "FilterGZipClass")
 class FilterGZip : gid.gmime3.filter.Filter
 {
 

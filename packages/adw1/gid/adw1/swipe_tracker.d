@@ -26,6 +26,7 @@ import gid.gtk4.orientable_mixin;
     [gid.adw1.swipe_tracker.SwipeTracker.reversed] can be used for supporting RTL text
     direction.
 */
+@gidGir("SwipeTracker", "SwipeTrackerClass")
 class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orientable
 {
 

@@ -33,6 +33,7 @@ import gid.gtk3.widget;
     returned by [gid.gtk3.layout.Layout.getBinWindow], rather than to the one returned by
     [gid.gtk3.widget.Widget.getWindow] as you would for a #GtkDrawingArea.
 */
+@gidGir("Layout", "LayoutClass")
 class Layout : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
 {
 

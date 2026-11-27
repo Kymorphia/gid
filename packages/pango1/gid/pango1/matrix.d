@@ -18,6 +18,7 @@ import gid.pango1.types;
     y_device = x_user * matrix->yx + y_user * matrix->yy + matrix->y0;
     ```
 */
+@gidGir("Matrix")
 struct Matrix
 {
   /**

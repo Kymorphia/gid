@@ -14,6 +14,7 @@ import gid.gsk4.types;
     
     See [gid.gsk4.renderer.Renderer].
 */
+@gidGir("NglRenderer")
 class NglRenderer : gid.gsk4.renderer.Renderer
 {
 

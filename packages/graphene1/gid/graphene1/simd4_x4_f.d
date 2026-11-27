@@ -8,6 +8,7 @@ import gid.graphene1.c.types;
 import gid.graphene1.types;
 
 /** */
+@gidGir("Simd4X4F")
 class Simd4X4F : StructWrap!(graphene_simd4x4f_t)
 {
   /**

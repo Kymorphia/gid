@@ -41,6 +41,7 @@ import gid.pango1.language;
     [gid.gtk4.font_dialog_button.FontDialogButton] has a single CSS node with name fontbutton which
     contains a button node with the .font style class.
 */
+@gidGir("FontDialogButton", "FontDialogButtonClass")
 class FontDialogButton : gid.gtk4.widget.Widget
 {
 

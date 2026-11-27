@@ -21,6 +21,7 @@ import gid.gtk4.types;
     If the first sorter compares two items as equal,
     the second is tried next, and so on.
 */
+@gidGir("MultiSorter", "MultiSorterClass")
 class MultiSorter : gid.gtk4.sorter.Sorter, gid.gio2.list_model.ListModel, gid.gtk4.buildable.Buildable
 {
 

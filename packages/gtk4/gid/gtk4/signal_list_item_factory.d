@@ -52,6 +52,7 @@ import gid.gtk4.types;
     [gid.gtk4.signal_list_item_factory.SignalListItemFactory.setup] signal and removed again during
     [gid.gtk4.signal_list_item_factory.SignalListItemFactory.teardown].
 */
+@gidGir("SignalListItemFactory", "SignalListItemFactoryClass")
 class SignalListItemFactory : gid.gtk4.list_item_factory.ListItemFactory
 {
 

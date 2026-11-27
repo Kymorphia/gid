@@ -15,6 +15,7 @@ import gid.gstvideo1.video_alignment;
 import gid.gstvideo1.video_info;
 
 /** */
+@gidGir("GLVideoAllocationParams")
 class GLVideoAllocationParams : gid.gobject2.boxed.BoxedWrap!(gst_gl_video_allocation_params_get_type)
 {
 

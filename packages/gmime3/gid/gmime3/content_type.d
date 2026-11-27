@@ -15,6 +15,7 @@ import gid.gobject2.object;
 /**
     A data structure representing a Content-Type.
 */
+@gidGir("ContentType", "ContentTypeClass")
 class ContentType : gid.gobject2.object.ObjectWrap
 {
 

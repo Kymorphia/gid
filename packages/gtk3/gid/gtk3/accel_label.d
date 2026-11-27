@@ -79,6 +79,7 @@ import gid.gtk3.widget;
     Like #GtkLabel, GtkAccelLabel has a main CSS node with the name label.
     It adds a subnode with name accelerator.
 */
+@gidGir("AccelLabel", "AccelLabelClass")
 class AccelLabel : gid.gtk3.label.Label
 {
 

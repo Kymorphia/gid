@@ -20,6 +20,7 @@ import gid.gobject2.object;
     [gid.gdk4.display.Display.getMonitorAtSurface] to find a particular
     monitor.
 */
+@gidGir("Monitor", "MonitorClass")
 class MonitorWrap : gid.gobject2.object.ObjectWrap
 {
 

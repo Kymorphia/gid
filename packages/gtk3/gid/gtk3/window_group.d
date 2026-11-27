@@ -29,6 +29,7 @@ import gid.gtk3.window;
     group; when all window have been removed, the window group will be
     freed.
 */
+@gidGir("WindowGroup", "WindowGroupClass")
 class WindowGroup : gid.gobject2.object.ObjectWrap
 {
 

@@ -21,6 +21,7 @@ import gid.panel1.types;
     A #PanelFrameHeader that implements switching between tab views in
     a #PanelFrame.
 */
+@gidGir("FrameTabBar", "FrameTabBarClass")
 class FrameTabBar : gid.gtk4.widget.Widget, gid.panel1.frame_header.FrameHeader
 {
 

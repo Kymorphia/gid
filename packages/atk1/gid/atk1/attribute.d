@@ -20,6 +20,7 @@ import gid.core.utils;
     
     A string name/value pair representing a generic attribute.
 */
+@gidGir("Attribute")
 class Attribute : StructWrap!(AtkAttribute)
 {
   /**

@@ -27,6 +27,7 @@ import gid.gtk4.types;
     The source and target, as well as their attributes, of a [gid.gtk4.constraint.Constraint]
     instance are immutable after creation.
 */
+@gidGir("Constraint", "ConstraintClass")
 class Constraint : gid.gobject2.object.ObjectWrap
 {
 

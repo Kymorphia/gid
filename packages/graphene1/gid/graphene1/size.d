@@ -10,6 +10,7 @@ import gid.graphene1.types;
 /**
     A size.
 */
+@gidGir("Size")
 struct Size
 {
   /**

@@ -58,6 +58,7 @@ import gid.gtk3.types;
     
     Recently used files are supported since GTK+ 2.10.
 */
+@gidGir("RecentChooserDialog", "RecentChooserDialogClass")
 class RecentChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.recent_chooser.RecentChooser
 {
 

@@ -16,6 +16,7 @@ import gid.gstnet1.types;
     Various functions for receiving, sending an serializing #GstNetTimePacket
     structures.
 */
+@gidGir("NetTimePacket")
 struct NetTimePacket
 {
   /**

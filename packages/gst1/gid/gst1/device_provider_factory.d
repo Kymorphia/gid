@@ -22,6 +22,7 @@ import gid.gst1.types;
     provider instances or use [gid.gst1.device_provider_factory.DeviceProviderFactory.getByName] as a
     convenient shortcut.
 */
+@gidGir("DeviceProviderFactory", "DeviceProviderFactoryClass")
 class DeviceProviderFactory : gid.gst1.plugin_feature.PluginFeature
 {
 

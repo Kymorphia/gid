@@ -98,6 +98,7 @@ import gid.gobject2.object;
     [gid.glib2.types.PRIORITY_LOW] and [gid.glib2.types.PRIORITY_HIGH], with [gid.glib2.types.PRIORITY_DEFAULT]
     as a default.
 */
+@gidGir("AsyncResult", "AsyncResultIface")
 interface AsyncResult : GidWrap
 {
 

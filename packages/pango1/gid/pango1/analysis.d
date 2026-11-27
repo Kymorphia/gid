@@ -13,6 +13,7 @@ import gid.pango1.types;
     The [gid.pango1.analysis.Analysis] structure stores information about
     the properties of a segment of text.
 */
+@gidGir("Analysis")
 class Analysis : StructWrap!(PangoAnalysis)
 {
   /**

@@ -131,6 +131,7 @@ import gid.gtk3.types;
     }
     ```
 */
+@gidGir("SpinButton", "SpinButtonClass")
 class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
 {
 

@@ -33,6 +33,7 @@ import gid.gst1.types;
     repository in which case [gid.gst1.plugin.Plugin.load] can be needed to bring the plugin
     into memory.
 */
+@gidGir("Plugin", "PluginClass")
 class Plugin : gid.gst1.object.ObjectWrap
 {
 

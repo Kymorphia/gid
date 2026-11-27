@@ -16,6 +16,7 @@ import gid.gtk4.widget;
 /**
     An auxiliary class used by [gid.adw1.tab_view.TabView].
 */
+@gidGir("TabPage", "TabPageClass")
 class TabPage : gid.gobject2.object.ObjectWrap, gid.gtk4.accessible.Accessible
 {
 

@@ -46,6 +46,7 @@ import gid.gtk4.types;
     To track errors while loading CSS, connect to the
     [gid.gtk4.css_provider.CssProvider.parsingError] signal.
 */
+@gidGir("CssProvider", "CssProviderClass")
 class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk4.style_provider.StyleProvider
 {
 

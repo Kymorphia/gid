@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event caused by a pointing device moving between surfaces.
 */
+@gidGir("CrossingEvent")
 class CrossingEvent : gid.gdk4.event.Event
 {
 

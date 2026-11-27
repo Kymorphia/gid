@@ -18,6 +18,7 @@ import gid.gstgl1.types;
     GstGLWindow represents a window that elements can render into.  A window can
     either be a user visible window (onscreen) or hidden (offscreen).
 */
+@gidGir("GLWindow", "GLWindowClass")
 class GLWindow : gid.gst1.object.ObjectWrap
 {
 

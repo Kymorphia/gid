@@ -15,6 +15,7 @@ import gid.gtk4.types;
     
     Besides [gid.gtk4.widget.Widget], it is also implemented by [gid.gtk4.constraint_guide.ConstraintGuide].
 */
+@gidGir("ConstraintTarget", "ConstraintTargetInterface")
 interface ConstraintTarget : GidWrap
 {
 

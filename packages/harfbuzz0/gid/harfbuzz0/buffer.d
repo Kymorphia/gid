@@ -12,6 +12,7 @@ import gid.harfbuzz0.types;
     The main structure holding the input text and its properties before shaping,
     and output glyphs and their information after shaping.
 */
+@gidGir("buffer_t")
 class Buffer : gid.gobject2.boxed.BoxedWrap!(hb_gobject_buffer_get_type)
 {
 

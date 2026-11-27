@@ -25,6 +25,7 @@ import gid.gstgl1.types;
     The glcolorconvertelement provides a GStreamer element that uses
     #GstGLColorConvert to convert between video formats and color spaces.
 */
+@gidGir("GLColorConvert", "GLColorConvertClass")
 class GLColorConvert : gid.gst1.object.ObjectWrap
 {
 

@@ -16,6 +16,7 @@ import gid.gtk3.types;
     Each key binding element of a binding sets binding list is
     represented by a GtkBindingEntry.
 */
+@gidGir("BindingEntry")
 class BindingEntry : StructWrap!(GtkBindingEntry)
 {
   /**

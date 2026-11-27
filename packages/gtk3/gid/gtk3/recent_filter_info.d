@@ -11,6 +11,7 @@ import gid.gtk3.types;
     A GtkRecentFilterInfo struct is used
     to pass information about the tested file to [gid.gtk3.recent_filter.RecentFilter.filter].
 */
+@gidGir("RecentFilterInfo")
 class RecentFilterInfo : StructWrap!(GtkRecentFilterInfo)
 {
   /**

@@ -22,6 +22,7 @@ import gid.pango1.language;
     which gives an overview of all the objects and data
     types related to the text widget and how they work together.
 */
+@gidGir("TextIter")
 class TextIter : gid.gobject2.boxed.BoxedWrap!(gtk_text_iter_get_type)
 {
   /**

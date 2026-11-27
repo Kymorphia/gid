@@ -12,6 +12,7 @@ import gid.gstsdp1.types;
     The Key data payload contains key material. It should be added as sub
     payload to the KEMAC.
 */
+@gidGir("MIKEYPayloadKeyData")
 class MIKEYPayloadKeyData : StructWrap!(GstMIKEYPayloadKeyData)
 {
   /**

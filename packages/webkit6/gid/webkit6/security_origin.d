@@ -20,6 +20,7 @@ import gid.webkit6.types;
     origins, beware that if both protocol and host are null, the origins
     should not be treated as equal.
 */
+@gidGir("SecurityOrigin")
 class SecurityOrigin : gid.gobject2.boxed.BoxedWrap!(webkit_security_origin_get_type)
 {
 

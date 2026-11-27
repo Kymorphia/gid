@@ -27,6 +27,7 @@ import gid.cairo1.text_cluster;
     Memory management of #cairo_scaled_font_t is done with
     [gid.cairo1.scaled_font.ScaledFont.reference] and [gid.cairo1.scaled_font.ScaledFont.destroy].
 */
+@gidGir("ScaledFont")
 class ScaledFont : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_scaled_font_get_type)
 {
 

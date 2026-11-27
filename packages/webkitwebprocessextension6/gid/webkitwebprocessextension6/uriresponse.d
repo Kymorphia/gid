@@ -17,6 +17,7 @@ import gid.webkitwebprocessextension6.types;
     status code, the content length, the mime type, the HTTP status or
     the suggested filename.
 */
+@gidGir("URIResponse", "URIResponseClass")
 class URIResponse : gid.gobject2.object.ObjectWrap
 {
 

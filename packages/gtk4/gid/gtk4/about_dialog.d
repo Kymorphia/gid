@@ -81,6 +81,7 @@ import gid.gtk4.window;
     [gid.gtk4.about_dialog.AboutDialog] has a single CSS node with the name `window` and style
     class `.aboutdialog`.
 */
+@gidGir("AboutDialog")
 class AboutDialog : gid.gtk4.window.Window
 {
 

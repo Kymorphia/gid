@@ -51,6 +51,7 @@ import gid.gtk3.types;
     #GtkLockButton:tooltip-lock, #GtkLockButton:tooltip-unlock and
     #GtkLockButton:tooltip-not-authorized properties.
 */
+@gidGir("LockButton", "LockButtonClass")
 class LockButton : gid.gtk3.button.Button
 {
 

@@ -24,6 +24,7 @@ import gid.gtksource5.types;
     [gid.gtksource5.annotation_provider.AnnotationProvider.populateHoverFinish] or connect to `signal@AnnotationProvider::populate`
     and call `method@AnnotationProvider.populate` or do it asynchronously.
 */
+@gidGir("AnnotationProvider", "AnnotationProviderClass")
 class AnnotationProvider : gid.gobject2.object.ObjectWrap
 {
 

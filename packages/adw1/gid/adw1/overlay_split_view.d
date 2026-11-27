@@ -152,6 +152,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.overlay_split_view.OverlaySplitView] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("OverlaySplitView", "OverlaySplitViewClass")
 class OverlaySplitView : gid.gtk4.widget.Widget, gid.adw1.swipeable.Swipeable
 {
 

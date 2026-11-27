@@ -15,6 +15,7 @@ import gid.pango1.types;
     A [gid.pango1.font_face.FontFace] is used to represent a group of fonts with
     the same family, slant, weight, and width, but varying sizes.
 */
+@gidGir("FontFace", "FontFaceClass")
 class FontFace : gid.gobject2.object.ObjectWrap
 {
 

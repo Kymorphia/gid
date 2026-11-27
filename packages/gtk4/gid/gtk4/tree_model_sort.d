@@ -117,6 +117,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gtk4.sort_list_model.SortListModel] instead
 */
+@gidGir("TreeModelSort", "TreeModelSortClass")
 class TreeModelSort : gid.gobject2.object.ObjectWrap, gid.gtk4.tree_drag_source.TreeDragSource, gid.gtk4.tree_model.TreeModel, gid.gtk4.tree_sortable.TreeSortable
 {
 

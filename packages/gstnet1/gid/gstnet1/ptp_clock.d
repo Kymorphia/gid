@@ -34,6 +34,7 @@ import gid.gstnet1.types;
     the possibility to collect all kinds of statistics from the clock
     synchronization.
 */
+@gidGir("PtpClock", "PtpClockClass")
 class PtpClock : gid.gst1.system_clock.SystemClock
 {
 

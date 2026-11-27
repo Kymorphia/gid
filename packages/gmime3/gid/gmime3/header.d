@@ -14,6 +14,7 @@ import gid.gobject2.object;
 /**
     A message or mime-part header.
 */
+@gidGir("Header", "HeaderClass")
 class Header : gid.gobject2.object.ObjectWrap
 {
 

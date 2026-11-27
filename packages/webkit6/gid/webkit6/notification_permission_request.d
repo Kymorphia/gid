@@ -21,6 +21,7 @@ import gid.webkit6.types;
     When a WebKitNotificationPermissionRequest is not handled by the user,
     it is denied by default.
 */
+@gidGir("NotificationPermissionRequest", "NotificationPermissionRequestClass")
 class NotificationPermissionRequest : gid.gobject2.object.ObjectWrap, gid.webkit6.permission_request.PermissionRequest
 {
 

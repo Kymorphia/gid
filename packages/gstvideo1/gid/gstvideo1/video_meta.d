@@ -38,6 +38,7 @@ import gid.gstvideo1.video_alignment;
     Since 1.24 it can be serialized using [gid.gst1.meta.Meta.serialize] and
     [gid.gst1.meta.Meta.deserialize].
 */
+@gidGir("VideoMeta")
 class VideoMeta : StructWrap!(GstVideoMeta)
 {
   /**

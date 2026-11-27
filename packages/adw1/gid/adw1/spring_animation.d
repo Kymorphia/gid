@@ -45,6 +45,7 @@ import gid.gtk4.widget;
     If the initial and final values are equal, and the initial velocity is not 0,
     the animation value will bounce and return to its resting position.
 */
+@gidGir("SpringAnimation", "SpringAnimationClass")
 class SpringAnimation : gid.adw1.animation.Animation
 {
 

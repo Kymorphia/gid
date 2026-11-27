@@ -13,6 +13,7 @@ import gid.webkit6.urirequest;
 /**
     Provides details about interaction resulting in a resource load.
 */
+@gidGir("NavigationAction")
 class NavigationAction : gid.gobject2.boxed.BoxedWrap!(webkit_navigation_action_get_type)
 {
 

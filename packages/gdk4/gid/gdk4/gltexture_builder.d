@@ -26,6 +26,7 @@ import gid.gobject2.object;
     [gid.gdk4.gltexture_builder.GLTextureBuilder] can be used for quick one-shot construction of
     textures as well as kept around and reused to construct multiple textures.
 */
+@gidGir("GLTextureBuilder", "GLTextureBuilderClass")
 class GLTextureBuilder : gid.gobject2.object.ObjectWrap
 {
 

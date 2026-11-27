@@ -23,6 +23,7 @@ import gid.gtk3.widget;
     Many GTK+ widgets are subclasses of #GtkBin, including #GtkWindow,
     #GtkButton, #GtkFrame, #GtkHandleBox or #GtkScrolledWindow.
 */
+@gidGir("Bin", "BinClass")
 class Bin : gid.gtk3.container.Container
 {
 

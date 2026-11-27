@@ -16,6 +16,7 @@ import gid.gobject2.boxed;
     Only modules should access the fields directly, applications should
     use the `gdk_pixbuf_format_*` family of functions.
 */
+@gidGir("PixbufFormat")
 class PixbufFormat : gid.gobject2.boxed.BoxedWrap!(gdk_pixbuf_format_get_type)
 {
   /**

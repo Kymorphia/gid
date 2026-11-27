@@ -80,6 +80,7 @@ import gid.gtk4.widget;
     
     [gid.gtk4.drop_down.DropDown] uses the [gid.gtk4.types.AccessibleRole.ComboBox] role.
 */
+@gidGir("DropDown", "DropDownClass")
 class DropDown : gid.gtk4.widget.Widget
 {
 

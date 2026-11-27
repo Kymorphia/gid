@@ -58,6 +58,7 @@ import gid.gtk4.types;
 
     Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
 */
+@gidGir("FileChooser")
 interface FileChooser : GidWrap
 {
 

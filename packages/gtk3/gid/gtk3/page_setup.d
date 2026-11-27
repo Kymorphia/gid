@@ -58,6 +58,7 @@ import gid.gtk3.types;
     
     Printing support was added in GTK+ 2.10.
 */
+@gidGir("PageSetup")
 class PageSetup : gid.gobject2.object.ObjectWrap
 {
 

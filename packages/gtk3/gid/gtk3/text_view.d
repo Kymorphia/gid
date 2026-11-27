@@ -58,6 +58,7 @@ import gid.pango1.tab_array;
     If a context menu is opened, the window node will appear as a subnode
     of the main node.
 */
+@gidGir("TextView", "TextViewClass")
 class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
 {
 

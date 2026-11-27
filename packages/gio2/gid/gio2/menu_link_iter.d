@@ -14,6 +14,7 @@ import gid.gobject2.object;
     #GMenuLinkIter is an opaque structure type.  You must access it using
     the functions below.
 */
+@gidGir("MenuLinkIter", "MenuLinkIterClass")
 class MenuLinkIter : gid.gobject2.object.ObjectWrap
 {
 

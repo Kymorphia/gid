@@ -5,6 +5,12 @@ public import gid.core.basictypes;
 public import gid.gdk4.c.types;
 public import gid.gsk4.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Gtk";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "4.0";
+
 /**
     The rectangle representing the area allocated for a widget by its parent.
 */
@@ -13,6 +19,7 @@ alias GtkAllocation = GdkRectangle;
 /**
     The priority of an accessibility announcement.
 */
+@gidGir("AccessibleAnnouncementPriority")
 enum GtkAccessibleAnnouncementPriority
 {
   /**
@@ -43,6 +50,7 @@ enum GtkAccessibleAnnouncementPriority
     The possible values for the [gid.gtk4.types.AccessibleProperty.Autocomplete]
     accessible property.
 */
+@gidGir("AccessibleAutocomplete")
 enum GtkAccessibleAutocomplete
 {
   /**
@@ -82,6 +90,7 @@ enum GtkAccessibleAutocomplete
     [gid.gtk4.types.AccessibleInvalidState.True] have the same values
     as false and true.
 */
+@gidGir("AccessibleInvalidState")
 enum GtkAccessibleInvalidState
 {
   /**
@@ -109,6 +118,7 @@ enum GtkAccessibleInvalidState
     The various platform states which can be queried
     using [gid.gtk4.accessible.Accessible.getPlatformState].
 */
+@gidGir("AccessiblePlatformState")
 enum GtkAccessiblePlatformState
 {
   /**
@@ -130,6 +140,7 @@ enum GtkAccessiblePlatformState
 /**
     The possible accessible properties of a [gid.gtk4.accessible.Accessible].
 */
+@gidGir("AccessibleProperty")
 enum GtkAccessibleProperty
 {
   /**
@@ -278,6 +289,7 @@ enum GtkAccessibleProperty
     Accessible relations can be references to other widgets,
     integers or strings.
 */
+@gidGir("AccessibleRelation")
 enum GtkAccessibleRelation
 {
   /**
@@ -452,6 +464,7 @@ enum GtkAccessibleRelation
     Abstract roles are only used as part of the ontology; application
     developers must not use abstract roles in their code.
 */
+@gidGir("AccessibleRole")
 enum GtkAccessibleRole
 {
   /**
@@ -912,6 +925,7 @@ enum GtkAccessibleRole
     The possible values for the [gid.gtk4.types.AccessibleProperty.Sort]
     accessible property.
 */
+@gidGir("AccessibleSort")
 enum GtkAccessibleSort
 {
   /**
@@ -939,6 +953,7 @@ enum GtkAccessibleSort
 /**
     The possible accessible states of a [gid.gtk4.accessible.Accessible].
 */
+@gidGir("AccessibleState")
 enum GtkAccessibleState
 {
   /**
@@ -1004,6 +1019,7 @@ enum GtkAccessibleState
 /**
     The type of contents change operation.
 */
+@gidGir("AccessibleTextContentChange")
 enum GtkAccessibleTextContentChange
 {
   /**
@@ -1023,6 +1039,7 @@ enum GtkAccessibleTextContentChange
     The granularity for queries about the text contents of a [gid.gtk4.accessible_text.AccessibleText]
     implementation.
 */
+@gidGir("AccessibleTextGranularity")
 enum GtkAccessibleTextGranularity
 {
   /**
@@ -1068,6 +1085,7 @@ enum GtkAccessibleTextGranularity
     [gid.gtk4.types.AccessibleTristate.True] have the same values
     as false and true.
 */
+@gidGir("AccessibleTristate")
 enum GtkAccessibleTristate
 {
   /**
@@ -1104,6 +1122,7 @@ enum GtkAccessibleTristate
     are treated similar to [gid.gtk4.types.Align.Center] and [gid.gtk4.types.Align.Fill], except that it
     positions the widget to line up the baselines, where that is supported.
 */
+@gidGir("Align")
 enum GtkAlign
 {
   /**
@@ -1150,6 +1169,7 @@ enum GtkAlign
     
     See [gid.gtk4.application.Application.inhibit].
 */
+@gidGir("ApplicationInhibitFlags")
 enum GtkApplicationInhibitFlags : uint
 {
   /**
@@ -1179,6 +1199,7 @@ enum GtkApplicationInhibitFlags : uint
 /**
     Indicates the direction in which an arrow should point.
 */
+@gidGir("ArrowType")
 enum GtkArrowType
 {
   /**
@@ -1221,6 +1242,7 @@ enum GtkArrowType
 
     Deprecated: [gid.gtk4.assistant.Assistant] will be removed in GTK 5
 */
+@gidGir("AssistantPageType")
 enum GtkAssistantPageType
 {
   /**
@@ -1273,6 +1295,7 @@ enum GtkAssistantPageType
     [gid.gtk4.types.BaselinePosition] to select where to put the baseline inside the
     extra available space.
 */
+@gidGir("BaselinePosition")
 enum GtkBaselinePosition
 {
   /**
@@ -1294,6 +1317,7 @@ enum GtkBaselinePosition
 /**
     Describes how the border of a UI element should be rendered.
 */
+@gidGir("BorderStyle")
 enum GtkBorderStyle
 {
   /**
@@ -1355,6 +1379,7 @@ enum GtkBorderStyle
     for unknown values and raise a [gid.gtk4.types.BuilderError.InvalidAttribute] error
     when they encounter one.
 */
+@gidGir("BuilderClosureFlags")
 enum GtkBuilderClosureFlags : uint
 {
   /**
@@ -1368,6 +1393,7 @@ enum GtkBuilderClosureFlags : uint
     Error codes that identify various errors that can occur while using
     [gid.gtk4.builder.Builder].
 */
+@gidGir("BuilderError")
 enum GtkBuilderError
 {
   /**
@@ -1467,6 +1493,7 @@ enum GtkBuilderError
     > and [gid.gtk4.types.ButtonsType.OkCancel] are discouraged by the
     > [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/).
 */
+@gidGir("ButtonsType")
 enum GtkButtonsType
 {
   /**
@@ -1505,6 +1532,7 @@ enum GtkButtonsType
 
     Deprecated: There is no replacement
 */
+@gidGir("CellRendererAccelMode")
 enum GtkCellRendererAccelMode
 {
   /**
@@ -1523,6 +1551,7 @@ enum GtkCellRendererAccelMode
 
     Deprecated: There is no replacement.
 */
+@gidGir("CellRendererMode")
 enum GtkCellRendererMode
 {
   /**
@@ -1549,6 +1578,7 @@ enum GtkCellRendererMode
 
     Deprecated: There is no replacement.
 */
+@gidGir("CellRendererState")
 enum GtkCellRendererState : uint
 {
   /**
@@ -1595,6 +1625,7 @@ enum GtkCellRendererState : uint
     Note that the result of sorting will in general depend on the current locale
     unless the mode is @GTK_COLLATION_NONE.
 */
+@gidGir("Collation")
 enum GtkCollation
 {
   /**
@@ -1616,6 +1647,7 @@ enum GtkCollation
 /**
     The widget attributes that can be used when creating a [gid.gtk4.constraint.Constraint].
 */
+@gidGir("ConstraintAttribute")
 enum GtkConstraintAttribute
 {
   /**
@@ -1691,6 +1723,7 @@ enum GtkConstraintAttribute
 /**
     The relation between two terms of a constraint.
 */
+@gidGir("ConstraintRelation")
 enum GtkConstraintRelation
 {
   /**
@@ -1715,6 +1748,7 @@ enum GtkConstraintRelation
     The strength of a [gid.gtk4.constraint.Constraint] can be expressed with any positive
     integer; the values of this enumeration can be used for readability.
 */
+@gidGir("ConstraintStrength")
 enum GtkConstraintStrength
 {
   /**
@@ -1741,6 +1775,7 @@ enum GtkConstraintStrength
 /**
     Domain for VFL parsing errors.
 */
+@gidGir("ConstraintVflParserError")
 enum GtkConstraintVflParserError
 {
   /**
@@ -1777,6 +1812,7 @@ enum GtkConstraintVflParserError
 /**
     Controls how a content should be made to fit inside an allocation.
 */
+@gidGir("ContentFit")
 enum GtkContentFit
 {
   /**
@@ -1816,6 +1852,7 @@ enum GtkContentFit
     
     This is effectively the opposite of where the scroll bars are placed.
 */
+@gidGir("CornerType")
 enum GtkCornerType
 {
   /**
@@ -1849,6 +1886,7 @@ enum GtkCornerType
     These errors are unexpected and will cause parts of the given CSS
     to be ignored.
 */
+@gidGir("CssParserError")
 enum GtkCssParserError
 {
   /**
@@ -1883,6 +1921,7 @@ enum GtkCssParserError
     Unlike [gid.gtk4.types.CssParserError]s, warnings do not cause the parser to
     skip any input, but they indicate issues that should be fixed.
 */
+@gidGir("CssParserWarning")
 enum GtkCssParserWarning
 {
   /**
@@ -1910,6 +1949,7 @@ enum GtkCssParserWarning
     types of debugging information. Some of these flags are
     only available when GTK has been configured with `-Ddebug=true`.
 */
+@gidGir("DebugFlags")
 enum GtkDebugFlags : uint
 {
   /**
@@ -2031,6 +2071,7 @@ enum GtkDebugFlags : uint
 /**
     Passed to various keybinding signals for deleting text.
 */
+@gidGir("DeleteType")
 enum GtkDeleteType
 {
   /**
@@ -2084,6 +2125,7 @@ enum GtkDeleteType
     Error codes in the `GTK_DIALOG_ERROR` domain that can be returned
     by async dialog functions.
 */
+@gidGir("DialogError")
 enum GtkDialogError
 {
   /**
@@ -2110,6 +2152,7 @@ enum GtkDialogError
 
     Deprecated: There is no replacement.
 */
+@gidGir("DialogFlags")
 enum GtkDialogFlags : uint
 {
   /**
@@ -2132,6 +2175,7 @@ enum GtkDialogFlags : uint
 /**
     Focus movement types.
 */
+@gidGir("DirectionType")
 enum GtkDirectionType
 {
   /**
@@ -2171,6 +2215,7 @@ enum GtkDirectionType
     See [gid.gtk4.editable.Editable.installProperties] for details on how to
     implement the [gid.gtk4.editable.Editable] interface.
 */
+@gidGir("EditableProperties")
 enum GtkEditableProperties
 {
   /**
@@ -2222,6 +2267,7 @@ enum GtkEditableProperties
 /**
     Specifies the side of the entry at which an icon is placed.
 */
+@gidGir("EntryIconPosition")
 enum GtkEntryIconPosition
 {
   /**
@@ -2238,6 +2284,7 @@ enum GtkEntryIconPosition
 /**
     Describes the behavior of a [gid.gtk4.event_controller_scroll.EventControllerScroll].
 */
+@gidGir("EventControllerScrollFlags")
 enum GtkEventControllerScrollFlags : uint
 {
   /**
@@ -2280,6 +2327,7 @@ enum GtkEventControllerScrollFlags : uint
 /**
     Describes the state of a [gid.gdk4.event_sequence.EventSequence] in a [gid.gtk4.gesture.Gesture].
 */
+@gidGir("EventSequenceState")
 enum GtkEventSequenceState
 {
   /**
@@ -2302,6 +2350,7 @@ enum GtkEventSequenceState
     Describes whether a [gid.gtk4.file_chooser.FileChooser] is being used to open existing files
     or to save to a possibly new file.
 */
+@gidGir("FileChooserAction")
 enum GtkFileChooserAction
 {
   /**
@@ -2331,6 +2380,7 @@ enum GtkFileChooserAction
 
     Deprecated: There is no replacement
 */
+@gidGir("FileChooserError")
 enum GtkFileChooserError
 {
   /**
@@ -2366,6 +2416,7 @@ enum GtkFileChooserError
     
     New values may be added in the future.
 */
+@gidGir("FilterChange")
 enum GtkFilterChange
 {
   /**
@@ -2420,6 +2471,7 @@ enum GtkFilterChange
     [gid.gtk4.types.FilterMatch.Some] is always an acceptable value,
     even if a filter does match all or no items.
 */
+@gidGir("FilterMatch")
 enum GtkFilterMatch
 {
   /**
@@ -2450,6 +2502,7 @@ enum GtkFilterMatch
 
     Deprecated: There is no replacement.
 */
+@gidGir("FontChooserLevel")
 enum GtkFontChooserLevel : uint
 {
   /**
@@ -2485,6 +2538,7 @@ enum GtkFontChooserLevel : uint
     is returned by [gid.gtk4.font_dialog_button.FontDialogButton.getFontDesc]
     will have more or less fields set.
 */
+@gidGir("FontLevel")
 enum GtkFontLevel
 {
   /**
@@ -2512,6 +2566,7 @@ enum GtkFontLevel
     Values for the [gid.gtk4.settings.Settings.gtkFontRendering] setting
     that influence how GTK renders fonts.
 */
+@gidGir("FontRendering")
 enum GtkFontRendering
 {
   /**
@@ -2530,6 +2585,7 @@ enum GtkFontRendering
 /**
     Represents the state of graphics offloading.
 */
+@gidGir("GraphicsOffloadEnabled")
 enum GtkGraphicsOffloadEnabled
 {
   /**
@@ -2546,6 +2602,7 @@ enum GtkGraphicsOffloadEnabled
 /**
     Used to specify options for [gid.gtk4.icon_theme.IconTheme.lookupIcon].
 */
+@gidGir("IconLookupFlags")
 enum GtkIconLookupFlags : uint
 {
   /**
@@ -2583,6 +2640,7 @@ enum GtkIconLookupFlags : uint
     determine the actual size to be used with the
     `-gtk-icon-size` CSS property.
 */
+@gidGir("IconSize")
 enum GtkIconSize
 {
   /**
@@ -2604,6 +2662,7 @@ enum GtkIconSize
 /**
     Error codes for [gid.gtk4.icon_theme.IconTheme] operations.
 */
+@gidGir("IconThemeError")
 enum GtkIconThemeError
 {
   /**
@@ -2622,6 +2681,7 @@ enum GtkIconThemeError
 
     Deprecated: There is no replacement.
 */
+@gidGir("IconViewDropPosition")
 enum GtkIconViewDropPosition
 {
   /**
@@ -2665,6 +2725,7 @@ enum GtkIconViewDropPosition
     For empty images, you can request any storage type (call any of the "get"
     functions), but they will all return null values.
 */
+@gidGir("ImageType")
 enum GtkImageType
 {
   /**
@@ -2701,6 +2762,7 @@ enum GtkImageType
     This enumeration may be extended in the future; input methods should
     ignore unknown values.
 */
+@gidGir("InputHints")
 enum GtkInputHints : uint
 {
   /**
@@ -2794,6 +2856,7 @@ enum GtkInputHints : uint
     This enumeration may be extended in the future; input methods should
     interpret unknown values as “free form”.
 */
+@gidGir("InputPurpose")
 enum GtkInputPurpose
 {
   /**
@@ -2856,6 +2919,7 @@ enum GtkInputPurpose
     The different methods to handle text in #GtkInscription when it doesn't
     fit the available space.
 */
+@gidGir("InscriptionOverflow")
 enum GtkInscriptionOverflow
 {
   /**
@@ -2889,6 +2953,7 @@ enum GtkInscriptionOverflow
     More values may be added to this enumeration. Unknown values
     should be treated the same as [gid.gtk4.types.InterfaceColorScheme.Default].
 */
+@gidGir("InterfaceColorScheme")
 enum GtkInterfaceColorScheme
 {
   /**
@@ -2922,6 +2987,7 @@ enum GtkInterfaceColorScheme
     More values may be added to this enumeration. Unknown values
     should be treated the same as [gid.gtk4.types.InterfaceContrast.NoPreference].
 */
+@gidGir("InterfaceContrast")
 enum GtkInterfaceContrast
 {
   /**
@@ -2948,6 +3014,7 @@ enum GtkInterfaceContrast
 /**
     Used for justifying the text inside a [gid.gtk4.label.Label] widget.
 */
+@gidGir("Justification")
 enum GtkJustification
 {
   /**
@@ -2977,6 +3044,7 @@ enum GtkJustification
     Note that this enumeration could be extended with additional modes
     in the future.
 */
+@gidGir("LevelBarMode")
 enum GtkLevelBarMode
 {
   /**
@@ -2995,6 +3063,7 @@ enum GtkLevelBarMode
     
     This enumeration can be expanded at later date.
 */
+@gidGir("License")
 enum GtkLicense
 {
   /**
@@ -3098,6 +3167,7 @@ enum GtkLicense
     List of actions to perform when scrolling to items in
     a list widget.
 */
+@gidGir("ListScrollFlags")
 enum GtkListScrollFlags : uint
 {
   /**
@@ -3122,6 +3192,7 @@ enum GtkListScrollFlags : uint
     and [gid.gtk4.types.DirectionType.TabBackward] direction, like the <kbd>Tab</kbd> key
     in a [gid.gtk4.list_view.ListView].
 */
+@gidGir("ListTabBehavior")
 enum GtkListTabBehavior
 {
   /**
@@ -3149,6 +3220,7 @@ enum GtkListTabBehavior
 /**
     The type of message being displayed in a [gid.gtk4.message_dialog.MessageDialog].
 */
+@gidGir("MessageType")
 enum GtkMessageType
 {
   /**
@@ -3181,6 +3253,7 @@ enum GtkMessageType
     Passed as argument to various keybinding signals for moving the
     cursor position.
 */
+@gidGir("MovementStep")
 enum GtkMovementStep
 {
   /**
@@ -3240,6 +3313,7 @@ enum GtkMovementStep
     
     See for example the [gid.gtk4.label.Label.naturalWrapMode] property.
 */
+@gidGir("NaturalWrapMode")
 enum GtkNaturalWrapMode
 {
   /**
@@ -3266,6 +3340,7 @@ enum GtkNaturalWrapMode
 /**
     The parameter used in the action signals of [gid.gtk4.notebook.Notebook].
 */
+@gidGir("NotebookTab")
 enum GtkNotebookTab
 {
   /**
@@ -3283,6 +3358,7 @@ enum GtkNotebookTab
     Used to determine the layout of pages on a sheet when printing
     multiple pages per sheet.
 */
+@gidGir("NumberUpLayout")
 enum GtkNumberUpLayout
 {
   /**
@@ -3334,6 +3410,7 @@ enum GtkNumberUpLayout
     For converting such a value to a [gid.gtk4.types.Ordering] value, use
     `func@Gtk.Ordering.from_cmpfunc`.
 */
+@gidGir("Ordering")
 enum GtkOrdering
 {
   /**
@@ -3357,6 +3434,7 @@ enum GtkOrdering
     
     Typical examples are [gid.gtk4.box.Box] or [gid.gtk4.gesture_pan.GesturePan].
 */
+@gidGir("Orientation")
 enum GtkOrientation
 {
   /**
@@ -3377,6 +3455,7 @@ enum GtkOrientation
     [gid.gtk4.widget.Widget.overflow] property is modeled after the
     CSS overflow property, but implements it only partially.
 */
+@gidGir("Overflow")
 enum GtkOverflow
 {
   /**
@@ -3397,6 +3476,7 @@ enum GtkOverflow
     
     See [gid.gtk4.window_controls.WindowControls] for example.
 */
+@gidGir("PackType")
 enum GtkPackType
 {
   /**
@@ -3413,6 +3493,7 @@ enum GtkPackType
 /**
     The type of a pad action.
 */
+@gidGir("PadActionType")
 enum GtkPadActionType
 {
   /**
@@ -3439,6 +3520,7 @@ enum GtkPadActionType
 /**
     See also [gid.gtk4.print_settings.PrintSettings.setOrientation].
 */
+@gidGir("PageOrientation")
 enum GtkPageOrientation
 {
   /**
@@ -3465,6 +3547,7 @@ enum GtkPageOrientation
 /**
     See also [gid.gtk4.print_job.PrintJob.setPageSet].
 */
+@gidGir("PageSet")
 enum GtkPageSet
 {
   /**
@@ -3486,6 +3569,7 @@ enum GtkPageSet
 /**
     Describes the panning direction of a [gid.gtk4.gesture_pan.GesturePan].
 */
+@gidGir("PanDirection")
 enum GtkPanDirection
 {
   /**
@@ -3512,6 +3596,7 @@ enum GtkPanDirection
 /**
     Flags that influence the behavior of [gid.gtk4.widget.Widget.pick].
 */
+@gidGir("PickFlags")
 enum GtkPickFlags : uint
 {
   /**
@@ -3534,6 +3619,7 @@ enum GtkPickFlags : uint
     Determines how the size should be computed to achieve the one of the
     visibility mode for the scrollbars.
 */
+@gidGir("PolicyType")
 enum GtkPolicyType
 {
   /**
@@ -3566,6 +3652,7 @@ enum GtkPolicyType
     Flags that affect how [gid.gtk4.popover_menu.PopoverMenu] widgets built from
     a [gid.gio2.menu_model.MenuModel] are created and displayed.
 */
+@gidGir("PopoverMenuFlags")
 enum GtkPopoverMenuFlags : uint
 {
   /**
@@ -3586,6 +3673,7 @@ enum GtkPopoverMenuFlags : uint
     For examples, see the tabs of a [gid.gtk4.notebook.Notebook], or the label
     of a [gid.gtk4.scale.Scale].
 */
+@gidGir("PositionType")
 enum GtkPositionType
 {
   /**
@@ -3616,6 +3704,7 @@ enum GtkPositionType
     [gid.gtk4.types.PrintCapabilities.GeneratePs] is specified, GTK assumes that all
     formats are supported.
 */
+@gidGir("PrintCapabilities")
 enum GtkPrintCapabilities : uint
 {
   /**
@@ -3676,6 +3765,7 @@ enum GtkPrintCapabilities : uint
 /**
     See also [gid.gtk4.print_settings.PrintSettings.setDuplex].
 */
+@gidGir("PrintDuplex")
 enum GtkPrintDuplex
 {
   /**
@@ -3698,6 +3788,7 @@ enum GtkPrintDuplex
     Error codes that identify various errors that can occur while
     using the GTK printing support.
 */
+@gidGir("PrintError")
 enum GtkPrintError
 {
   /**
@@ -3727,6 +3818,7 @@ enum GtkPrintError
     
     A parameter of this typs is passed to [gid.gtk4.print_operation.PrintOperation.run].
 */
+@gidGir("PrintOperationAction")
 enum GtkPrintOperationAction
 {
   /**
@@ -3758,6 +3850,7 @@ enum GtkPrintOperationAction
     
     A value of this type is returned by [gid.gtk4.print_operation.PrintOperation.run].
 */
+@gidGir("PrintOperationResult")
 enum GtkPrintOperationResult
 {
   /**
@@ -3786,6 +3879,7 @@ enum GtkPrintOperationResult
 /**
     See also [gid.gtk4.print_job.PrintJob.setPages]
 */
+@gidGir("PrintPages")
 enum GtkPrintPages
 {
   /**
@@ -3812,6 +3906,7 @@ enum GtkPrintPages
 /**
     See also [gid.gtk4.print_settings.PrintSettings.setQuality].
 */
+@gidGir("PrintQuality")
 enum GtkPrintQuality
 {
   /**
@@ -3839,6 +3934,7 @@ enum GtkPrintQuality
     The status gives a rough indication of the completion of a running
     print operation.
 */
+@gidGir("PrintStatus")
 enum GtkPrintStatus
 {
   /**
@@ -3897,6 +3993,7 @@ enum GtkPrintStatus
     Describes limits of a [gid.gtk4.event_controller.EventController] for handling events
     targeting other widgets.
 */
+@gidGir("PropagationLimit")
 enum GtkPropagationLimit
 {
   /**
@@ -3917,6 +4014,7 @@ enum GtkPropagationLimit
 /**
     Describes the stage at which events are fed into a [gid.gtk4.event_controller.EventController].
 */
+@gidGir("PropagationPhase")
 enum GtkPropagationPhase
 {
   /**
@@ -3950,6 +4048,7 @@ enum GtkPropagationPhase
 /**
     Error codes for [gid.gtk4.recent_manager.RecentManager] operations
 */
+@gidGir("RecentManagerError")
 enum GtkRecentManagerError
 {
   /**
@@ -4000,6 +4099,7 @@ enum GtkRecentManagerError
     
     This information can be used inside CSS via media queries.
 */
+@gidGir("ReducedMotion")
 enum GtkReducedMotion
 {
   /**
@@ -4024,6 +4124,7 @@ enum GtkReducedMotion
 
     Deprecated: There is no replacement.
 */
+@gidGir("ResponseType")
 enum GtkResponseType
 {
   /**
@@ -4087,6 +4188,7 @@ enum GtkResponseType
     These enumeration values describe the possible transitions
     when the child of a [gid.gtk4.revealer.Revealer] widget is shown or hidden.
 */
+@gidGir("RevealerTransitionType")
 enum GtkRevealerTransitionType
 {
   /**
@@ -4167,6 +4269,7 @@ enum GtkRevealerTransitionType
 /**
     Passed as argument to various keybinding signals.
 */
+@gidGir("ScrollStep")
 enum GtkScrollStep
 {
   /**
@@ -4203,6 +4306,7 @@ enum GtkScrollStep
 /**
     Scrolling types.
 */
+@gidGir("ScrollType")
 enum GtkScrollType
 {
   /**
@@ -4290,6 +4394,7 @@ enum GtkScrollType
     Defines the policy to be used in a scrollable widget when updating
     the scrolled window adjustments in a given orientation.
 */
+@gidGir("ScrollablePolicy")
 enum GtkScrollablePolicy
 {
   /**
@@ -4306,6 +4411,7 @@ enum GtkScrollablePolicy
 /**
     Used to control what selections users are allowed to make.
 */
+@gidGir("SelectionMode")
 enum GtkSelectionMode
 {
   /**
@@ -4341,6 +4447,7 @@ enum GtkSelectionMode
     Determines how GTK handles the sensitivity of various controls,
     such as combo box buttons.
 */
+@gidGir("SensitivityType")
 enum GtkSensitivityType
 {
   /**
@@ -4365,6 +4472,7 @@ enum GtkSensitivityType
     
     More flags may be added in the future.
 */
+@gidGir("ShortcutActionFlags")
 enum GtkShortcutActionFlags : uint
 {
   /**
@@ -4379,6 +4487,7 @@ enum GtkShortcutActionFlags : uint
     Describes where [gid.gtk4.shortcut.Shortcut]s added to a
     [gid.gtk4.shortcut_controller.ShortcutController] get handled.
 */
+@gidGir("ShortcutScope")
 enum GtkShortcutScope
 {
   /**
@@ -4405,6 +4514,7 @@ enum GtkShortcutScope
     
     More values may be added to this enumeration over time.
 */
+@gidGir("ShortcutType")
 enum GtkShortcutType
 {
   /**
@@ -4464,6 +4574,7 @@ enum GtkShortcutType
     The mode of the size group determines the directions in which the size
     group affects the requested sizes of its component widgets.
 */
+@gidGir("SizeGroupMode")
 enum GtkSizeGroupMode
 {
   /**
@@ -4491,6 +4602,7 @@ enum GtkSizeGroupMode
     Specifies a preference for height-for-width or
     width-for-height geometry management.
 */
+@gidGir("SizeRequestMode")
 enum GtkSizeRequestMode
 {
   /**
@@ -4512,6 +4624,7 @@ enum GtkSizeRequestMode
 /**
     Determines the direction of a sort.
 */
+@gidGir("SortType")
 enum GtkSortType
 {
   /**
@@ -4529,6 +4642,7 @@ enum GtkSortType
     Describes changes in a sorter in more detail and allows users
     to optimize resorting.
 */
+@gidGir("SorterChange")
 enum GtkSorterChange
 {
   /**
@@ -4560,6 +4674,7 @@ enum GtkSorterChange
 /**
     Describes the type of order that a [gid.gtk4.sorter.Sorter] may produce.
 */
+@gidGir("SorterOrder")
 enum GtkSorterOrder
 {
   /**
@@ -4587,6 +4702,7 @@ enum GtkSorterOrder
     
     See [gid.gtk4.spin_button.SpinButton.setUpdatePolicy].
 */
+@gidGir("SpinButtonUpdatePolicy")
 enum GtkSpinButtonUpdatePolicy
 {
   /**
@@ -4607,6 +4723,7 @@ enum GtkSpinButtonUpdatePolicy
     The values of the GtkSpinType enumeration are used to specify the
     change to make in [gid.gtk4.spin_button.SpinButton.spin].
 */
+@gidGir("SpinType")
 enum GtkSpinType
 {
   /**
@@ -4650,6 +4767,7 @@ enum GtkSpinType
     
     New values may be added to this enumeration over time.
 */
+@gidGir("StackTransitionType")
 enum GtkStackTransitionType
 {
   /**
@@ -4775,6 +4893,7 @@ enum GtkStackTransitionType
     Note that GTK extends the regular CSS classes and sometimes uses
     different names.
 */
+@gidGir("StateFlags")
 enum GtkStateFlags : uint
 {
   /**
@@ -4861,6 +4980,7 @@ enum GtkStateFlags : uint
 /**
     Specifies how search strings are matched inside text.
 */
+@gidGir("StringFilterMatchMode")
 enum GtkStringFilterMatchMode
 {
   /**
@@ -4887,6 +5007,7 @@ enum GtkStringFilterMatchMode
     
     New values may be added to this enumeration.
 */
+@gidGir("StyleContextPrintFlags")
 enum GtkStyleContextPrintFlags : uint
 {
   /**
@@ -4917,6 +5038,7 @@ enum GtkStyleContextPrintFlags : uint
     Error codes in the `GTK_SVG_ERROR` domain for errors
     that happen during parsing or rendering of SVG.
 */
+@gidGir("SvgError")
 enum GtkSvgError
 {
   /**
@@ -4990,6 +5112,7 @@ enum GtkSvgError
     
     New values may be added in the future.
 */
+@gidGir("SvgFeatures")
 enum GtkSvgFeatures : uint
 {
   /**
@@ -5033,6 +5156,7 @@ enum GtkSvgFeatures : uint
     
     More values may be added over time.
 */
+@gidGir("SymbolicColor")
 enum GtkSymbolicColor
 {
   /**
@@ -5072,6 +5196,7 @@ enum GtkSymbolicColor
     
     More values may be added over time.
 */
+@gidGir("SystemSetting")
 enum GtkSystemSetting
 {
   /**
@@ -5111,6 +5236,7 @@ enum GtkSystemSetting
     Values for [gid.gtk4.types.TextBufferCommitNotify] to denote the
     point of the notification.
 */
+@gidGir("TextBufferNotifyFlags")
 enum GtkTextBufferNotifyFlags : uint
 {
   /**
@@ -5141,6 +5267,7 @@ enum GtkTextBufferNotifyFlags : uint
 /**
     Reading directions for text.
 */
+@gidGir("TextDirection")
 enum GtkTextDirection
 {
   /**
@@ -5163,6 +5290,7 @@ enum GtkTextDirection
     Granularity types that extend the text selection. Use the
     `GtkTextView::extend-selection` signal to customize the selection.
 */
+@gidGir("TextExtendSelection")
 enum GtkTextExtendSelection
 {
   /**
@@ -5185,6 +5313,7 @@ enum GtkTextExtendSelection
     are enabled, the match must be exact; the special 0xFFFC character will
     match embedded paintables or child widgets.
 */
+@gidGir("TextSearchFlags")
 enum GtkTextSearchFlags : uint
 {
   /**
@@ -5210,6 +5339,7 @@ enum GtkTextSearchFlags : uint
     Used to reference the layers of [gid.gtk4.text_view.TextView] for the purpose of customized
     drawing with the ::snapshot_layer vfunc.
 */
+@gidGir("TextViewLayer")
 enum GtkTextViewLayer
 {
   /**
@@ -5226,6 +5356,7 @@ enum GtkTextViewLayer
 /**
     Used to reference the parts of [gid.gtk4.text_view.TextView].
 */
+@gidGir("TextWindowType")
 enum GtkTextWindowType
 {
   /**
@@ -5269,6 +5400,7 @@ enum GtkTextWindowType
 
     Deprecated: There is no replacement
 */
+@gidGir("TreeModelFlags")
 enum GtkTreeModelFlags : uint
 {
   /**
@@ -5291,6 +5423,7 @@ enum GtkTreeModelFlags : uint
 
     Deprecated: There is no replacement.
 */
+@gidGir("TreeViewColumnSizing")
 enum GtkTreeViewColumnSizing
 {
   /**
@@ -5314,6 +5447,7 @@ enum GtkTreeViewColumnSizing
 
     Deprecated: There is no replacement.
 */
+@gidGir("TreeViewDropPosition")
 enum GtkTreeViewDropPosition
 {
   /**
@@ -5342,6 +5476,7 @@ enum GtkTreeViewDropPosition
 
     Deprecated: There is no replacement
 */
+@gidGir("TreeViewGridLines")
 enum GtkTreeViewGridLines
 {
   /**
@@ -5368,6 +5503,7 @@ enum GtkTreeViewGridLines
 /**
     See also [gid.gtk4.print_settings.PrintSettings.setPaperWidth].
 */
+@gidGir("Unit")
 enum GtkUnit
 {
   /**
@@ -5395,6 +5531,7 @@ enum GtkUnit
     Determines which point or edge of a window is meant to remain fixed
     when a window changes size.
 */
+@gidGir("WindowGravity")
 enum GtkWindowGravity
 {
   /**
@@ -5482,6 +5619,7 @@ enum GtkWindowGravity
 /**
     Describes a type of line wrapping.
 */
+@gidGir("WrapMode")
 enum GtkWrapMode
 {
   /**
@@ -5518,6 +5656,7 @@ enum GtkWrapMode
 struct GtkATContext;
 
 /** */
+@gidGir("ATContextClass")
 struct GtkATContextClass;
 
 /**
@@ -5789,6 +5928,7 @@ struct GtkAccessibleTextInterface
 /**
     A range inside the text of an accessible object.
 */
+@gidGir("AccessibleTextRange")
 struct GtkAccessibleTextRange
 {
   /**
@@ -5900,6 +6040,7 @@ struct GtkActionableInterface
 struct GtkActivateAction;
 
 /** */
+@gidGir("ActivateActionClass")
 struct GtkActivateActionClass;
 
 /**
@@ -5974,6 +6115,7 @@ struct GtkAlertDialogClass
 struct GtkAlternativeTrigger;
 
 /** */
+@gidGir("AlternativeTriggerClass")
 struct GtkAlternativeTriggerClass;
 
 /**
@@ -5984,6 +6126,7 @@ struct GtkAlternativeTriggerClass;
 struct GtkAnyFilter;
 
 /** */
+@gidGir("AnyFilterClass")
 struct GtkAnyFilterClass;
 
 /**
@@ -6703,6 +6846,7 @@ struct GtkBuildableParseContext;
 /**
     A sub-parser for [gid.gtk4.buildable.Buildable] implementations.
 */
+@gidGir("BuildableParser")
 struct GtkBuildableParser
 {
   /**
@@ -7122,6 +7266,7 @@ struct GtkBuilderCScopeClass
 }
 
 /** */
+@gidGir("BuilderClass")
 struct GtkBuilderClass;
 
 /**
@@ -7160,6 +7305,7 @@ struct GtkBuilderClass;
 struct GtkBuilderListItemFactory;
 
 /** */
+@gidGir("BuilderListItemFactoryClass")
 struct GtkBuilderListItemFactoryClass;
 
 /**
@@ -7292,6 +7438,7 @@ struct GtkButtonClass
 }
 
 /** */
+@gidGir("ButtonPrivate")
 struct GtkButtonPrivate;
 
 /**
@@ -7365,6 +7512,7 @@ struct GtkCalendar;
 struct GtkCallbackAction;
 
 /** */
+@gidGir("CallbackActionClass")
 struct GtkCallbackActionClass;
 
 /**
@@ -7929,6 +8077,7 @@ struct GtkCellAreaContextClass
 }
 
 /** */
+@gidGir("CellAreaContextPrivate")
 struct GtkCellAreaContextPrivate;
 
 /**
@@ -8272,6 +8421,7 @@ struct GtkCellRendererClass
 }
 
 /** */
+@gidGir("CellRendererClassPrivate")
 struct GtkCellRendererClassPrivate;
 
 /**
@@ -8315,6 +8465,7 @@ struct GtkCellRendererCombo;
 struct GtkCellRendererPixbuf;
 
 /** */
+@gidGir("CellRendererPrivate")
 struct GtkCellRendererPrivate;
 
 /**
@@ -8481,6 +8632,7 @@ struct GtkCellView;
 struct GtkCenterBox;
 
 /** */
+@gidGir("CenterBoxClass")
 struct GtkCenterBoxClass;
 
 /**
@@ -8871,9 +9023,11 @@ struct GtkColumnView;
 struct GtkColumnViewCell;
 
 /** */
+@gidGir("ColumnViewCellClass")
 struct GtkColumnViewCellClass;
 
 /** */
+@gidGir("ColumnViewClass")
 struct GtkColumnViewClass;
 
 /**
@@ -8893,6 +9047,7 @@ struct GtkColumnViewClass;
 struct GtkColumnViewColumn;
 
 /** */
+@gidGir("ColumnViewColumnClass")
 struct GtkColumnViewColumnClass;
 
 /**
@@ -8904,6 +9059,7 @@ struct GtkColumnViewColumnClass;
 struct GtkColumnViewRow;
 
 /** */
+@gidGir("ColumnViewRowClass")
 struct GtkColumnViewRowClass;
 
 /**
@@ -9360,11 +9516,13 @@ struct GtkConstraintLayoutClass
 struct GtkConstraintTarget;
 
 /** */
+@gidGir("ConstraintTargetInterface")
 struct GtkConstraintTargetInterface;
 
 /**
     Points at a location inside a CSS stream.
 */
+@gidGir("CssLocation")
 struct GtkCssLocation
 {
   /** */
@@ -9420,9 +9578,11 @@ struct GtkCssProvider
 }
 
 /** */
+@gidGir("CssProviderClass")
 struct GtkCssProviderClass;
 
 /** */
+@gidGir("CssProviderPrivate")
 struct GtkCssProviderPrivate;
 
 /**
@@ -9436,6 +9596,7 @@ struct GtkCssSection;
 /**
     A CSS style change.
 */
+@gidGir("CssStyleChange")
 struct GtkCssStyleChange;
 
 /**
@@ -9771,6 +9932,7 @@ struct GtkDragIconClass
 struct GtkDragSource;
 
 /** */
+@gidGir("DragSourceClass")
 struct GtkDragSourceClass;
 
 /**
@@ -9887,6 +10049,7 @@ struct GtkDrawingAreaClass
 struct GtkDropControllerMotion;
 
 /** */
+@gidGir("DropControllerMotionClass")
 struct GtkDropControllerMotionClass;
 
 /**
@@ -10071,9 +10234,11 @@ struct GtkDropTarget;
 struct GtkDropTargetAsync;
 
 /** */
+@gidGir("DropTargetAsyncClass")
 struct GtkDropTargetAsyncClass;
 
 /** */
+@gidGir("DropTargetClass")
 struct GtkDropTargetClass;
 
 /**
@@ -10345,6 +10510,7 @@ struct GtkEditableLabelClass
 struct GtkEmojiChooser;
 
 /** */
+@gidGir("EmojiChooserClass")
 struct GtkEmojiChooserClass;
 
 /**
@@ -10595,6 +10761,7 @@ struct GtkEntryCompletion;
 struct GtkEventController;
 
 /** */
+@gidGir("EventControllerClass")
 struct GtkEventControllerClass;
 
 /**
@@ -10610,6 +10777,7 @@ struct GtkEventControllerClass;
 struct GtkEventControllerFocus;
 
 /** */
+@gidGir("EventControllerFocusClass")
 struct GtkEventControllerFocusClass;
 
 /**
@@ -10618,6 +10786,7 @@ struct GtkEventControllerFocusClass;
 struct GtkEventControllerKey;
 
 /** */
+@gidGir("EventControllerKeyClass")
 struct GtkEventControllerKeyClass;
 
 /**
@@ -10629,6 +10798,7 @@ struct GtkEventControllerKeyClass;
 struct GtkEventControllerLegacy;
 
 /** */
+@gidGir("EventControllerLegacyClass")
 struct GtkEventControllerLegacyClass;
 
 /**
@@ -10644,6 +10814,7 @@ struct GtkEventControllerLegacyClass;
 struct GtkEventControllerMotion;
 
 /** */
+@gidGir("EventControllerMotionClass")
 struct GtkEventControllerMotionClass;
 
 /**
@@ -10684,6 +10855,7 @@ struct GtkEventControllerMotionClass;
 struct GtkEventControllerScroll;
 
 /** */
+@gidGir("EventControllerScrollClass")
 struct GtkEventControllerScrollClass;
 
 /**
@@ -10694,6 +10866,7 @@ struct GtkEventControllerScrollClass;
 struct GtkEveryFilter;
 
 /** */
+@gidGir("EveryFilterClass")
 struct GtkEveryFilterClass;
 
 /**
@@ -12274,6 +12447,7 @@ struct GtkGLAreaClass
 struct GtkGesture;
 
 /** */
+@gidGir("GestureClass")
 struct GtkGestureClass;
 
 /**
@@ -12288,6 +12462,7 @@ struct GtkGestureClass;
 struct GtkGestureClick;
 
 /** */
+@gidGir("GestureClickClass")
 struct GtkGestureClickClass;
 
 /**
@@ -12304,6 +12479,7 @@ struct GtkGestureClickClass;
 struct GtkGestureDrag;
 
 /** */
+@gidGir("GestureDragClass")
 struct GtkGestureDragClass;
 
 /**
@@ -12326,6 +12502,7 @@ struct GtkGestureDragClass;
 struct GtkGestureLongPress;
 
 /** */
+@gidGir("GestureLongPressClass")
 struct GtkGestureLongPressClass;
 
 /**
@@ -12347,6 +12524,7 @@ struct GtkGestureLongPressClass;
 struct GtkGesturePan;
 
 /** */
+@gidGir("GesturePanClass")
 struct GtkGesturePanClass;
 
 /**
@@ -12358,6 +12536,7 @@ struct GtkGesturePanClass;
 struct GtkGestureRotate;
 
 /** */
+@gidGir("GestureRotateClass")
 struct GtkGestureRotateClass;
 
 /**
@@ -12378,6 +12557,7 @@ struct GtkGestureRotateClass;
 struct GtkGestureSingle;
 
 /** */
+@gidGir("GestureSingleClass")
 struct GtkGestureSingleClass;
 
 /**
@@ -12389,6 +12569,7 @@ struct GtkGestureSingleClass;
 struct GtkGestureStylus;
 
 /** */
+@gidGir("GestureStylusClass")
 struct GtkGestureStylusClass;
 
 /**
@@ -12408,6 +12589,7 @@ struct GtkGestureStylusClass;
 struct GtkGestureSwipe;
 
 /** */
+@gidGir("GestureSwipeClass")
 struct GtkGestureSwipeClass;
 
 /**
@@ -12420,6 +12602,7 @@ struct GtkGestureSwipeClass;
 struct GtkGestureZoom;
 
 /** */
+@gidGir("GestureZoomClass")
 struct GtkGestureZoomClass;
 
 /**
@@ -12657,6 +12840,7 @@ struct GtkGridLayoutClass
 struct GtkGridView;
 
 /** */
+@gidGir("GridViewClass")
 struct GtkGridViewClass;
 
 /**
@@ -12996,6 +13180,7 @@ struct GtkIMContextSimpleClass
 }
 
 /** */
+@gidGir("IMContextSimplePrivate")
 struct GtkIMContextSimplePrivate;
 
 /**
@@ -13034,6 +13219,7 @@ struct GtkIMMulticontextClass
 }
 
 /** */
+@gidGir("IMMulticontextPrivate")
 struct GtkIMMulticontextPrivate;
 
 /**
@@ -13285,6 +13471,7 @@ struct GtkInscriptionClass
 struct GtkKeyvalTrigger;
 
 /** */
+@gidGir("KeyvalTriggerClass")
 struct GtkKeyvalTriggerClass;
 
 /**
@@ -13840,6 +14027,7 @@ struct GtkLinkButton;
 struct GtkListBase;
 
 /** */
+@gidGir("ListBaseClass")
 struct GtkListBaseClass;
 
 /**
@@ -13950,6 +14138,7 @@ struct GtkListBoxRowClass
 struct GtkListHeader;
 
 /** */
+@gidGir("ListHeaderClass")
 struct GtkListHeaderClass;
 
 /**
@@ -13971,6 +14160,7 @@ struct GtkListHeaderClass;
 struct GtkListItem;
 
 /** */
+@gidGir("ListItemClass")
 struct GtkListItemClass;
 
 /**
@@ -14025,6 +14215,7 @@ struct GtkListItemClass;
 struct GtkListItemFactory;
 
 /** */
+@gidGir("ListItemFactoryClass")
 struct GtkListItemFactoryClass;
 
 /**
@@ -14194,6 +14385,7 @@ struct GtkListStoreClass
 }
 
 /** */
+@gidGir("ListStorePrivate")
 struct GtkListStorePrivate;
 
 /**
@@ -14305,6 +14497,7 @@ struct GtkListStorePrivate;
 struct GtkListView;
 
 /** */
+@gidGir("ListViewClass")
 struct GtkListViewClass;
 
 /**
@@ -14675,6 +14868,7 @@ struct GtkMessageDialog
 }
 
 /** */
+@gidGir("MessageDialogClass")
 struct GtkMessageDialogClass;
 
 /**
@@ -14685,6 +14879,7 @@ struct GtkMessageDialogClass;
 struct GtkMnemonicAction;
 
 /** */
+@gidGir("MnemonicActionClass")
 struct GtkMnemonicActionClass;
 
 /**
@@ -14696,6 +14891,7 @@ struct GtkMnemonicActionClass;
 struct GtkMnemonicTrigger;
 
 /** */
+@gidGir("MnemonicTriggerClass")
 struct GtkMnemonicTriggerClass;
 
 /**
@@ -14744,6 +14940,7 @@ struct GtkMountOperationClass
 }
 
 /** */
+@gidGir("MountOperationPrivate")
 struct GtkMountOperationPrivate;
 
 /**
@@ -14752,6 +14949,7 @@ struct GtkMountOperationPrivate;
 struct GtkMultiFilter;
 
 /** */
+@gidGir("MultiFilterClass")
 struct GtkMultiFilterClass;
 
 /**
@@ -14791,6 +14989,7 @@ struct GtkMultiSorterClass
 struct GtkNamedAction;
 
 /** */
+@gidGir("NamedActionClass")
 struct GtkNamedActionClass;
 
 /**
@@ -14869,6 +15068,7 @@ struct GtkNativeDialogClass
 }
 
 /** */
+@gidGir("NativeInterface")
 struct GtkNativeInterface;
 
 /**
@@ -14877,6 +15077,7 @@ struct GtkNativeInterface;
 struct GtkNeverTrigger;
 
 /** */
+@gidGir("NeverTriggerClass")
 struct GtkNeverTriggerClass;
 
 /**
@@ -15030,6 +15231,7 @@ struct GtkNotebookPage;
 struct GtkNothingAction;
 
 /** */
+@gidGir("NothingActionClass")
 struct GtkNothingActionClass;
 
 /**
@@ -15232,6 +15434,7 @@ struct GtkPadActionEntry
 struct GtkPadController;
 
 /** */
+@gidGir("PadControllerClass")
 struct GtkPadControllerClass;
 
 /**
@@ -15239,6 +15442,7 @@ struct GtkPadControllerClass;
     
     See also [gid.gtk4.print_settings.PrintSettings.setPageRanges].
 */
+@gidGir("PageRange")
 struct GtkPageRange
 {
   /**
@@ -15482,6 +15686,7 @@ struct GtkPasswordEntryBufferClass
 }
 
 /** */
+@gidGir("PasswordEntryClass")
 struct GtkPasswordEntryClass;
 
 /**
@@ -15849,6 +16054,7 @@ struct GtkPopoverMenuBar;
 /**
     A print backend.
 */
+@gidGir("PrintBackend")
 struct GtkPrintBackend;
 
 /**
@@ -16163,6 +16369,7 @@ struct GtkPrintOperationPreviewIface
 }
 
 /** */
+@gidGir("PrintOperationPrivate")
 struct GtkPrintOperationPrivate;
 
 /**
@@ -16523,6 +16730,7 @@ struct GtkRecentManagerClass
 }
 
 /** */
+@gidGir("RecentManagerPrivate")
 struct GtkRecentManagerPrivate;
 
 /**
@@ -16531,6 +16739,7 @@ struct GtkRecentManagerPrivate;
     These are primarily used in container implementations when allocating
     a natural size for children. See `func@distribute_natural_allocation`.
 */
+@gidGir("RequestedSize")
 struct GtkRequestedSize
 {
   /**
@@ -16611,6 +16820,7 @@ struct GtkRevealer;
 struct GtkRoot;
 
 /** */
+@gidGir("RootInterface")
 struct GtkRootInterface;
 
 /**
@@ -17340,6 +17550,7 @@ struct GtkShortcut;
 struct GtkShortcutAction;
 
 /** */
+@gidGir("ShortcutActionClass")
 struct GtkShortcutActionClass;
 
 /** */
@@ -17394,6 +17605,7 @@ struct GtkShortcutClass
 struct GtkShortcutController;
 
 /** */
+@gidGir("ShortcutControllerClass")
 struct GtkShortcutControllerClass;
 
 /**
@@ -17406,6 +17618,7 @@ struct GtkShortcutControllerClass;
 struct GtkShortcutLabel;
 
 /** */
+@gidGir("ShortcutLabelClass")
 struct GtkShortcutLabelClass;
 
 /**
@@ -17463,6 +17676,7 @@ struct GtkShortcutManagerInterface
 struct GtkShortcutTrigger;
 
 /** */
+@gidGir("ShortcutTriggerClass")
 struct GtkShortcutTriggerClass;
 
 /**
@@ -17488,6 +17702,7 @@ struct GtkShortcutTriggerClass;
 struct GtkShortcutsGroup;
 
 /** */
+@gidGir("ShortcutsGroupClass")
 struct GtkShortcutsGroupClass;
 
 /**
@@ -17527,6 +17742,7 @@ struct GtkShortcutsGroupClass;
 struct GtkShortcutsSection;
 
 /** */
+@gidGir("ShortcutsSectionClass")
 struct GtkShortcutsSectionClass;
 
 /**
@@ -17540,6 +17756,7 @@ struct GtkShortcutsSectionClass;
 struct GtkShortcutsShortcut;
 
 /** */
+@gidGir("ShortcutsShortcutClass")
 struct GtkShortcutsShortcutClass;
 
 /**
@@ -17624,6 +17841,7 @@ struct GtkShortcutsWindow;
 struct GtkSignalAction;
 
 /** */
+@gidGir("SignalActionClass")
 struct GtkSignalActionClass;
 
 /**
@@ -17670,6 +17888,7 @@ struct GtkSignalActionClass;
 struct GtkSignalListItemFactory;
 
 /** */
+@gidGir("SignalListItemFactoryClass")
 struct GtkSignalListItemFactoryClass;
 
 /**
@@ -17841,6 +18060,7 @@ struct GtkSliceListModelClass
 struct GtkSnapshot;
 
 /** */
+@gidGir("SnapshotClass")
 struct GtkSnapshotClass;
 
 /**
@@ -18606,6 +18826,7 @@ struct GtkSvgClass
     The information should be considered approximate; it is
     meant to provide feedback for errors in an editor.
 */
+@gidGir("SvgLocation")
 struct GtkSvgLocation
 {
   /**
@@ -18950,6 +19171,7 @@ struct GtkTextBufferClass
 }
 
 /** */
+@gidGir("TextBufferPrivate")
 struct GtkTextBufferPrivate;
 
 /**
@@ -19132,6 +19354,7 @@ struct GtkTextTagClass
 }
 
 /** */
+@gidGir("TextTagPrivate")
 struct GtkTextTagPrivate;
 
 /**
@@ -19339,6 +19562,7 @@ struct GtkTextViewClass
 }
 
 /** */
+@gidGir("TextViewPrivate")
 struct GtkTextViewPrivate;
 
 /**
@@ -20003,6 +20227,7 @@ struct GtkTreeModelFilterClass
 }
 
 /** */
+@gidGir("TreeModelFilterPrivate")
 struct GtkTreeModelFilterPrivate;
 
 /** */
@@ -20238,6 +20463,7 @@ struct GtkTreeModelSortClass
 }
 
 /** */
+@gidGir("TreeModelSortPrivate")
 struct GtkTreeModelSortPrivate;
 
 /**
@@ -20395,6 +20621,7 @@ struct GtkTreeStoreClass
 }
 
 /** */
+@gidGir("TreeStorePrivate")
 struct GtkTreeStorePrivate;
 
 /**
@@ -21255,6 +21482,7 @@ struct GtkWidgetClass
 }
 
 /** */
+@gidGir("WidgetClassPrivate")
 struct GtkWidgetClassPrivate;
 
 /**
@@ -21288,6 +21516,7 @@ struct GtkWidgetPaintableClass
 }
 
 /** */
+@gidGir("WidgetPrivate")
 struct GtkWidgetPrivate;
 
 /**
@@ -21520,6 +21749,7 @@ struct GtkWindowGroupClass
 }
 
 /** */
+@gidGir("WindowGroupPrivate")
 struct GtkWindowGroupPrivate;
 
 /**

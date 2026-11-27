@@ -89,6 +89,7 @@ import gid.gtksource5.types;
     GtkSourceView library (for example for a spell-checking library that wants to
     read the no-spell-check region).
 */
+@gidGir("Buffer", "BufferClass")
 class Buffer : gid.gtk4.text_buffer.TextBuffer
 {
 

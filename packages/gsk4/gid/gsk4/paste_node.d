@@ -12,6 +12,7 @@ import gid.gsk4.types;
 /**
     A render node for a paste.
 */
+@gidGir("PasteNode")
 class PasteNode : gid.gsk4.render_node.RenderNode
 {
 

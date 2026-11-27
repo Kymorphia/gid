@@ -56,6 +56,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.preferences_group.PreferencesGroup] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("PreferencesGroup", "PreferencesGroupClass")
 class PreferencesGroup : gid.gtk4.widget.Widget
 {
 

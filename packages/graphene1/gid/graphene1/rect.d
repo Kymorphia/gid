@@ -25,6 +25,7 @@ import gid.graphene1.vec2;
     will internally operate on a normalized copy; all functions returning a
     #graphene_rect_t will always return a normalized rectangle.
 */
+@gidGir("Rect")
 class Rect : gid.gobject2.boxed.BoxedWrap!(graphene_rect_get_type)
 {
   /**

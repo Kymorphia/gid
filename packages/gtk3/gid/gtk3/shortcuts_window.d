@@ -57,6 +57,7 @@ import gid.gtk3.window;
     
     The .ui file for this example can be found [here](https://git.gnome.org/browse/gtk+/tree/demos/gtk-demo/shortcuts-builder.ui).
 */
+@gidGir("ShortcutsWindow", "ShortcutsWindowClass")
 class ShortcutsWindow : gid.gtk3.window.Window
 {
 

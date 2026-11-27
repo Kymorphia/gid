@@ -55,6 +55,7 @@ import gid.gtk3.types;
     </object>
     ```
 */
+@gidGir("FileFilter")
 class FileFilter : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.buildable.Buildable
 {
 

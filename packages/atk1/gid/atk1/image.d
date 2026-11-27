@@ -27,6 +27,7 @@ import gid.gobject2.gid_builder;
     presentation of the most significant information present in the
     image.
 */
+@gidGir("Image", "ImageIface")
 interface Image : GidWrap
 {
 

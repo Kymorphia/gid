@@ -50,6 +50,7 @@ import gid.gtk4.window;
 
     Deprecated: Use [gid.gtk4.font_dialog.FontDialog] instead
 */
+@gidGir("FontChooserDialog")
 class FontChooserDialog : gid.gtk4.dialog.Dialog, gid.gtk4.font_chooser.FontChooser
 {
 

@@ -39,6 +39,7 @@ import gid.gtk3.types;
     
     GtkViewport has a single CSS node with name viewport.
 */
+@gidGir("Viewport", "ViewportClass")
 class Viewport : gid.gtk3.bin.Bin, gid.gtk3.scrollable.Scrollable
 {
 

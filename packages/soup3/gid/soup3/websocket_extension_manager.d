@@ -21,6 +21,7 @@ import gid.soup3.types;
     session with [gid.soup3.session.Session.removeFeatureByType] or disable it on
     individual requests with [gid.soup3.message.Message.disableFeature].
 */
+@gidGir("WebsocketExtensionManager", "WebsocketExtensionManagerClass")
 class WebsocketExtensionManager : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

@@ -84,6 +84,7 @@ import gid.gtk3.types;
     do implement reference counting, obtain references on these child levels
     yourself.
 */
+@gidGir("TreeModelFilter", "TreeModelFilterClass")
 class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_source.TreeDragSource, gid.gtk3.tree_model.TreeModel
 {
 

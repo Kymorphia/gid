@@ -17,6 +17,7 @@ import gid.gobject2.object;
 /**
     An application/pkcs7-mime MIME part.
 */
+@gidGir("ApplicationPkcs7Mime", "ApplicationPkcs7MimeClass")
 class ApplicationPkcs7Mime : gid.gmime3.part.Part
 {
 

@@ -17,6 +17,7 @@ import gid.gtk4.types;
     objects that contain links. Those links don't necessarily have to be part
     of text, they can be associated with images and other things.
 */
+@gidGir("AccessibleHypertext", "AccessibleHypertextInterface")
 interface AccessibleHypertext : gid.gtk4.accessible.Accessible
 {
 

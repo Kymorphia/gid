@@ -19,6 +19,7 @@ import gid.gsttag1.types;
     tags into XMP. Schemas are represented by their names, a full list of the supported schemas can be
     obtained from [gid.gsttag1.global.tagXmpListSchemas]. By default, all schemas are used.
 */
+@gidGir("TagXmpWriter", "TagXmpWriterInterface")
 interface TagXmpWriter : GidWrap
 {
 

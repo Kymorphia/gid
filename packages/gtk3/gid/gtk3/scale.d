@@ -93,6 +93,7 @@ import gid.pango1.layout;
     If the scale is displaying the value (see #GtkScale:draw-value), there is
     subnode with name value.
 */
+@gidGir("Scale", "ScaleClass")
 class Scale : gid.gtk3.range.Range
 {
 

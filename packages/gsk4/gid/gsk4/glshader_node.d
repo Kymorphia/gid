@@ -15,6 +15,7 @@ import gid.gsk4.types;
 /**
     A render node using a GL shader when drawing its children nodes.
 */
+@gidGir("GLShaderNode")
 class GLShaderNode : gid.gsk4.render_node.RenderNode
 {
 

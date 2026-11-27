@@ -14,6 +14,7 @@ import gid.gstvideo1.types;
     
     The configuration of the time code.
 */
+@gidGir("VideoTimeCodeConfig")
 class VideoTimeCodeConfig : StructWrap!(GstVideoTimeCodeConfig)
 {
   /**

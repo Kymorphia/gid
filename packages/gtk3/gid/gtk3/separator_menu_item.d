@@ -26,6 +26,7 @@ import gid.gtk3.types;
     
     GtkSeparatorMenuItem has a single CSS node with name separator.
 */
+@gidGir("SeparatorMenuItem", "SeparatorMenuItemClass")
 class SeparatorMenuItem : gid.gtk3.menu_item.MenuItem
 {
 

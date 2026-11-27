@@ -57,6 +57,7 @@ import gid.gtk3.types;
     include the positional classes (.left, .right, .top, .bottom) and style
     classes related to overlay scrolling (.overlay-indicator, .dragging, .hovering).
 */
+@gidGir("Scrollbar", "ScrollbarClass")
 class Scrollbar : gid.gtk3.range.Range
 {
 

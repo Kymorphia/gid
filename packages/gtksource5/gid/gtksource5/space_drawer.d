@@ -75,6 +75,7 @@ import gid.gtksource5.types;
     And non-breaking spaces can always be drawn, everywhere, to distinguish them
     from normal spaces.
 */
+@gidGir("SpaceDrawer", "SpaceDrawerClass")
 class SpaceDrawer : gid.gobject2.object.ObjectWrap
 {
 

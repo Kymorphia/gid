@@ -12,6 +12,7 @@ import gid.gio2.types;
     [gid.gio2.static_resource.StaticResource] is an opaque data structure and can only be accessed
     using the following functions.
 */
+@gidGir("StaticResource")
 class StaticResource : StructWrap!(GStaticResource)
 {
   /**

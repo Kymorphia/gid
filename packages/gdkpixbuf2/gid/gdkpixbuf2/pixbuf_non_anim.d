@@ -11,6 +11,7 @@ import gid.gdkpixbuf2.types;
 import gid.gobject2.gid_builder;
 
 /** */
+@gidGir("PixbufNonAnim")
 class PixbufNonAnim : gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation
 {
 

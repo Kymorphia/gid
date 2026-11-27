@@ -19,6 +19,7 @@ import gid.gobject2.object;
     on the service side (see [gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton]) and client side
     (see [gid.gio2.dbus_proxy.DBusProxy]).
 */
+@gidGir("DBusInterface", "DBusInterfaceIface")
 interface DBusInterface : GidWrap
 {
 

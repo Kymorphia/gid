@@ -30,6 +30,7 @@ import gid.gtksource5.view;
     ones are used as a fallback by the [gid.gtksource5.print_compositor.PrintCompositor] object, so that
     the printed area is not clipped.
 */
+@gidGir("PrintCompositor", "PrintCompositorClass")
 class PrintCompositor : gid.gobject2.object.ObjectWrap
 {
 

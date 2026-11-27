@@ -27,6 +27,7 @@ import gid.panel1.types;
     Upon activation it will activate the named action in
     #PanelThemeSelector:action-name.
 */
+@gidGir("ThemeSelector", "ThemeSelectorClass")
 class ThemeSelector : gid.gtk4.widget.Widget
 {
 

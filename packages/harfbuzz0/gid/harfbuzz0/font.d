@@ -11,6 +11,7 @@ import gid.harfbuzz0.types;
 /**
     Data type for holding fonts.
 */
+@gidGir("font_t")
 class Font : gid.gobject2.boxed.BoxedWrap!(hb_gobject_font_get_type)
 {
 

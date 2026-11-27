@@ -16,6 +16,7 @@ import gid.gtk4.types;
 /**
     A list model that can create child models on demand.
 */
+@gidGir("TreeListModel", "TreeListModelClass")
 class TreeListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

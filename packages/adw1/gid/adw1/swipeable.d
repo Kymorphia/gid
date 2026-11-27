@@ -17,6 +17,7 @@ import gid.gobject2.gid_builder;
     
     See [gid.adw1.swipe_tracker.SwipeTracker] for details about implementing it.
 */
+@gidGir("Swipeable", "SwipeableInterface")
 interface Swipeable : GidWrap
 {
 

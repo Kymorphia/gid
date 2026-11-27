@@ -5,9 +5,16 @@ public import gid.core.basictypes;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstVideo";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Location of a @GstAncillaryMeta.
 */
+@gidGir("AncillaryMetaField")
 enum GstAncillaryMetaField
 {
   /**
@@ -32,6 +39,7 @@ enum GstAncillaryMetaField
     hardware implementations (such as those provided by xvimagesink) are
     preferred.
 */
+@gidGir("ColorBalanceType")
 enum GstColorBalanceType
 {
   /**
@@ -61,6 +69,7 @@ enum GstColorBalanceType
        GST_NAVIGATION_COMMAND_DVD_ANGLE_MENU      = @GST_NAVIGATION_COMMAND_MENU6
        GST_NAVIGATION_COMMAND_DVD_CHAPTER_MENU    = @GST_NAVIGATION_COMMAND_MENU7
 */
+@gidGir("NavigationCommand")
 enum GstNavigationCommand
 {
   /**
@@ -158,6 +167,7 @@ enum GstNavigationCommand
     GstNavigation interface might send up the pipeline. Touch events have been
     inspired by the libinput API, and have the same meaning here.
 */
+@gidGir("NavigationEventType")
 enum GstNavigationEventType
 {
   /**
@@ -256,6 +266,7 @@ enum GstNavigationEventType
     A set of notifications that may be received on the bus when navigation
     related status changes.
 */
+@gidGir("NavigationMessageType")
 enum GstNavigationMessageType
 {
   /**
@@ -298,6 +309,7 @@ enum GstNavigationMessageType
     Typical modifier keys are Shift, Control, Meta, Super, Hyper, Alt, Compose,
     Apple, CapsLock or ShiftLock.
 */
+@gidGir("NavigationModifierType")
 enum GstNavigationModifierType : uint
 {
   /** */
@@ -390,6 +402,7 @@ enum GstNavigationModifierType : uint
 /**
     Types of navigation interface queries.
 */
+@gidGir("NavigationQueryType")
 enum GstNavigationQueryType
 {
   /**
@@ -419,6 +432,7 @@ enum GstNavigationQueryType
     
     2) SMPTE ST2016-1:
 */
+@gidGir("VideoAFDSpec")
 enum GstVideoAFDSpec
 {
   /**
@@ -469,6 +483,7 @@ enum GstVideoAFDSpec
     3) values 1, 5, 6, 7, and 12 are reserved for both ATSC and DVB/ETSI
     4) values 2 and 3 are not recommended for ATSC, but are valid for DVB/ETSI
 */
+@gidGir("VideoAFDValue")
 enum GstVideoAFDValue
 {
   /**
@@ -547,6 +562,7 @@ enum GstVideoAFDValue
 /**
     Different alpha modes.
 */
+@gidGir("VideoAlphaMode")
 enum GstVideoAlphaMode
 {
   /**
@@ -572,6 +588,7 @@ enum GstVideoAlphaMode
 }
 
 /** */
+@gidGir("VideoAncillaryDID")
 enum GstVideoAncillaryDID
 {
   /** */
@@ -614,6 +631,7 @@ enum GstVideoAncillaryDID
 /**
     Some know types of Ancillary Data identifiers.
 */
+@gidGir("VideoAncillaryDID16")
 enum GstVideoAncillaryDID16
 {
   /**
@@ -639,6 +657,7 @@ enum GstVideoAncillaryDID16
     Note that these are only valid for #GstCaps of type: video/... and caption/...
     They can conflict with other extended buffer flags.
 */
+@gidGir("VideoBufferFlags")
 enum GstVideoBufferFlags : uint
 {
   /**
@@ -717,6 +736,7 @@ enum GstVideoBufferFlags : uint
 /**
     The various known types of Closed Caption (CC).
 */
+@gidGir("VideoCaptionType")
 enum GstVideoCaptionType
 {
   /**
@@ -765,6 +785,7 @@ enum GstVideoCaptionType
 /**
     Extra flags that influence the result from [gid.gstvideo1.video_chroma_resample.VideoChromaResample.new_].
 */
+@gidGir("VideoChromaFlags")
 enum GstVideoChromaFlags : uint
 {
   /**
@@ -781,6 +802,7 @@ enum GstVideoChromaFlags : uint
 /**
     Different subsampling and upsampling methods
 */
+@gidGir("VideoChromaMethod")
 enum GstVideoChromaMethod
 {
   /**
@@ -799,6 +821,7 @@ enum GstVideoChromaMethod
 /**
     Different chroma downsampling and upsampling modes
 */
+@gidGir("VideoChromaMode")
 enum GstVideoChromaMode
 {
   /**
@@ -825,6 +848,7 @@ enum GstVideoChromaMode
 /**
     Various Chroma sitings.
 */
+@gidGir("VideoChromaSite")
 enum GstVideoChromaSite : uint
 {
   /**
@@ -876,6 +900,7 @@ enum GstVideoChromaSite : uint
 /**
     Flags for #GstVideoCodecFrame
 */
+@gidGir("VideoCodecFrameFlags")
 enum GstVideoCodecFrameFlags : uint
 {
   /**
@@ -908,6 +933,7 @@ enum GstVideoCodecFrameFlags : uint
     The color matrix is used to convert between Y'PbPr and
     non-linear RGB (R'G'B')
 */
+@gidGir("VideoColorMatrix")
 enum GstVideoColorMatrix
 {
   /**
@@ -952,6 +978,7 @@ enum GstVideoColorMatrix
     The color primaries define the how to transform linear RGB values to and from
     the CIE XYZ colorspace.
 */
+@gidGir("VideoColorPrimaries")
 enum GstVideoColorPrimaries
 {
   /**
@@ -1033,6 +1060,7 @@ enum GstVideoColorPrimaries
     Possible color range values. These constants are defined for 8 bit color
     values and can be scaled for other bit depths.
 */
+@gidGir("VideoColorRange")
 enum GstVideoColorRange
 {
   /**
@@ -1056,6 +1084,7 @@ enum GstVideoColorRange
     Flags to be used in combination with [gid.gstvideo1.video_decoder.VideoDecoder.requestSyncPoint].
     See the function documentation for more details.
 */
+@gidGir("VideoDecoderRequestSyncPointFlags")
 enum GstVideoDecoderRequestSyncPointFlags : uint
 {
   /**
@@ -1074,6 +1103,7 @@ enum GstVideoDecoderRequestSyncPointFlags : uint
 /**
     Extra flags that influence the result from [gid.gstvideo1.video_chroma_resample.VideoChromaResample.new_].
 */
+@gidGir("VideoDitherFlags")
 enum GstVideoDitherFlags : uint
 {
   /**
@@ -1095,6 +1125,7 @@ enum GstVideoDitherFlags : uint
 /**
     Different dithering methods to use.
 */
+@gidGir("VideoDitherMethod")
 enum GstVideoDitherMethod
 {
   /**
@@ -1129,6 +1160,7 @@ enum GstVideoDitherMethod
     mixed or GST_VIDEO_FIELD_ORDER_UNKOWN, the field order is signalled via
     buffer flags.
 */
+@gidGir("VideoFieldOrder")
 enum GstVideoFieldOrder
 {
   /**
@@ -1151,6 +1183,7 @@ enum GstVideoFieldOrder
 /**
     Extra video flags
 */
+@gidGir("VideoFlags")
 enum GstVideoFlags : uint
 {
   /**
@@ -1177,6 +1210,7 @@ enum GstVideoFlags : uint
     See the [GStreamer raw video format design document](https://gstreamer.freedesktop.org/documentation/additional/design/mediatype-video-raw.html#formats)
     for details about the layout and packing of these formats in memory.
 */
+@gidGir("VideoFormat")
 enum GstVideoFormat
 {
   /**
@@ -1911,6 +1945,7 @@ enum GstVideoFormat
 /**
     The different video flags that a format info can have.
 */
+@gidGir("VideoFormatFlags")
 enum GstVideoFormatFlags : uint
 {
   /**
@@ -1976,6 +2011,7 @@ enum GstVideoFormatFlags : uint
 /**
     Extra video frame flags
 */
+@gidGir("VideoFrameFlags")
 enum GstVideoFrameFlags : uint
 {
   /**
@@ -2035,6 +2071,7 @@ enum GstVideoFrameFlags : uint
 /**
     Additional mapping flags for [gid.gstvideo1.video_frame.VideoFrame.map].
 */
+@gidGir("VideoFrameMapFlags")
 enum GstVideoFrameMapFlags : uint
 {
   /**
@@ -2054,6 +2091,7 @@ enum GstVideoFrameMapFlags : uint
 /**
     The orientation of the GL texture.
 */
+@gidGir("VideoGLTextureOrientation")
 enum GstVideoGLTextureOrientation
 {
   /**
@@ -2080,6 +2118,7 @@ enum GstVideoGLTextureOrientation
 /**
     The GL texture type.
 */
+@gidGir("VideoGLTextureType")
 enum GstVideoGLTextureType
 {
   /**
@@ -2119,6 +2158,7 @@ enum GstVideoGLTextureType
 }
 
 /** */
+@gidGir("VideoGammaMode")
 enum GstVideoGammaMode
 {
   /**
@@ -2137,6 +2177,7 @@ enum GstVideoGammaMode
     The possible values of the #GstVideoInterlaceMode describing the interlace
     mode of the stream.
 */
+@gidGir("VideoInterlaceMode")
 enum GstVideoInterlaceMode
 {
   /**
@@ -2180,6 +2221,7 @@ enum GstVideoInterlaceMode
 /**
     Different color matrix conversion modes
 */
+@gidGir("VideoMatrixMode")
 enum GstVideoMatrixMode
 {
   /**
@@ -2210,6 +2252,7 @@ enum GstVideoMatrixMode
     stereo/multiview stream beyond the frame layout and buffer mapping
     that is conveyed in the #GstVideoMultiviewMode.
 */
+@gidGir("VideoMultiviewFlags")
 enum GstVideoMultiviewFlags : uint
 {
   /**
@@ -2280,6 +2323,7 @@ enum GstVideoMultiviewFlags : uint
     video stream as a stereoscopic video. The individual enum values are
     equivalent to and have the same value as the matching #GstVideoMultiviewMode.
 */
+@gidGir("VideoMultiviewFramePacking")
 enum GstVideoMultiviewFramePacking
 {
   /**
@@ -2348,6 +2392,7 @@ enum GstVideoMultiviewFramePacking
     In conjunction with #GstVideoMultiviewFlags, describes how
     multiview content is being transported in the stream.
 */
+@gidGir("VideoMultiviewMode")
 enum GstVideoMultiviewMode
 {
   /**
@@ -2439,6 +2484,7 @@ enum GstVideoMultiviewMode
 /**
     The different video orientation methods.
 */
+@gidGir("VideoOrientationMethod")
 enum GstVideoOrientationMethod
 {
   /**
@@ -2495,6 +2541,7 @@ enum GstVideoOrientationMethod
 /**
     Overlay format flags.
 */
+@gidGir("VideoOverlayFormatFlags")
 enum GstVideoOverlayFormatFlags : uint
 {
   /**
@@ -2516,6 +2563,7 @@ enum GstVideoOverlayFormatFlags : uint
 /**
     The different flags that can be used when packing and unpacking.
 */
+@gidGir("VideoPackFlags")
 enum GstVideoPackFlags : uint
 {
   /**
@@ -2543,6 +2591,7 @@ enum GstVideoPackFlags : uint
 /**
     Different primaries conversion modes
 */
+@gidGir("VideoPrimariesMode")
 enum GstVideoPrimariesMode
 {
   /**
@@ -2565,6 +2614,7 @@ enum GstVideoPrimariesMode
 /**
     Different resampler flags.
 */
+@gidGir("VideoResamplerFlags")
 enum GstVideoResamplerFlags : uint
 {
   /**
@@ -2583,6 +2633,7 @@ enum GstVideoResamplerFlags : uint
 /**
     Different subsampling and upsampling methods
 */
+@gidGir("VideoResamplerMethod")
 enum GstVideoResamplerMethod
 {
   /**
@@ -2616,6 +2667,7 @@ enum GstVideoResamplerMethod
 /**
     Different scale flags.
 */
+@gidGir("VideoScalerFlags")
 enum GstVideoScalerFlags : uint
 {
   /**
@@ -2632,6 +2684,7 @@ enum GstVideoScalerFlags : uint
 /**
     Enum value describing the available tiling modes.
 */
+@gidGir("VideoTileMode")
 enum GstVideoTileMode
 {
   /**
@@ -2656,6 +2709,7 @@ enum GstVideoTileMode
 /**
     Enum value describing the most common tiling types.
 */
+@gidGir("VideoTileType")
 enum GstVideoTileType
 {
   /**
@@ -2670,6 +2724,7 @@ enum GstVideoTileType
     Flags related to the time code information.
     For drop frame, only 30000/1001 and 60000/1001 frame rates are supported.
 */
+@gidGir("VideoTimeCodeFlags")
 enum GstVideoTimeCodeFlags : uint
 {
   /**
@@ -2692,6 +2747,7 @@ enum GstVideoTimeCodeFlags : uint
     The video transfer function defines the formula for converting between
     non-linear RGB (R'G'B') and linear RGB
 */
+@gidGir("VideoTransferFunction")
 enum GstVideoTransferFunction
 {
   /**
@@ -2798,6 +2854,7 @@ enum GstVideoTransferFunction
 /**
     Return values for #GstVideoVBIParser
 */
+@gidGir("VideoVBIParserResult")
 enum GstVideoVBIParserResult
 {
   /**
@@ -3191,6 +3248,7 @@ struct GstVideoAggregatorConvertPadClass
 }
 
 /** */
+@gidGir("VideoAggregatorConvertPadPrivate")
 struct GstVideoAggregatorConvertPadPrivate;
 
 /** */
@@ -3246,6 +3304,7 @@ struct GstVideoAggregatorPadClass
 }
 
 /** */
+@gidGir("VideoAggregatorPadPrivate")
 struct GstVideoAggregatorPadPrivate;
 
 /**
@@ -3270,6 +3329,7 @@ struct GstVideoAggregatorParallelConvertPadClass
 }
 
 /** */
+@gidGir("VideoAggregatorPrivate")
 struct GstVideoAggregatorPrivate;
 
 /**
@@ -3311,6 +3371,7 @@ struct GstVideoAlignment
     Note that the contents of the data are always stored as 8bit data (i.e. do not contain
     the parity check bits).
 */
+@gidGir("VideoAncillary")
 struct GstVideoAncillary
 {
   /**
@@ -3405,6 +3466,7 @@ struct GstVideoBufferPoolClass
 }
 
 /** */
+@gidGir("VideoBufferPoolPrivate")
 struct GstVideoBufferPoolPrivate;
 
 /**
@@ -3621,6 +3683,7 @@ struct GstVideoCodecState
     values can be used to construct a matrix to transform RGB to and from the
     XYZ colorspace.
 */
+@gidGir("VideoColorPrimariesInfo")
 struct GstVideoColorPrimariesInfo
 {
   /**
@@ -4077,6 +4140,7 @@ struct GstVideoDecoderClass
 }
 
 /** */
+@gidGir("VideoDecoderPrivate")
 struct GstVideoDecoderPrivate;
 
 /**
@@ -4370,6 +4434,7 @@ struct GstVideoEncoderClass
 }
 
 /** */
+@gidGir("VideoEncoderPrivate")
 struct GstVideoEncoderPrivate;
 
 /**
@@ -4821,6 +4886,7 @@ struct GstVideoMasteringDisplayInfo
     Used to represent display_primaries and white_point of
     #GstVideoMasteringDisplayInfo struct. See #GstVideoMasteringDisplayInfo
 */
+@gidGir("VideoMasteringDisplayInfoCoordinates")
 struct GstVideoMasteringDisplayInfoCoordinates
 {
   /**
@@ -5397,6 +5463,7 @@ struct GstVideoOverlayRectangle;
 /**
     Helper structure representing a rectangular area.
 */
+@gidGir("VideoRectangle")
 struct GstVideoRectangle
 {
   /**
@@ -5610,12 +5677,14 @@ struct GstVideoSinkClass
 }
 
 /** */
+@gidGir("VideoSinkPrivate")
 struct GstVideoSinkPrivate;
 
 /**
     Description of a tile. This structure allow to describe arbitrary tile
     dimensions and sizes.
 */
+@gidGir("VideoTileInfo")
 struct GstVideoTileInfo
 {
   /**

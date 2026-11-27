@@ -15,6 +15,7 @@ import gid.webkit6.types;
     WebKitWebsitePolicies allows you to configure per-page policies,
     currently only autoplay policies are supported.
 */
+@gidGir("WebsitePolicies", "WebsitePoliciesClass")
 class WebsitePolicies : gid.gobject2.object.ObjectWrap
 {
 

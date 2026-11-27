@@ -54,6 +54,7 @@ import gid.pango1.types;
     omit clip nodes if the child node is entirely contained within the
     clip rectangle.
 */
+@gidGir("Snapshot", "SnapshotClass")
 class Snapshot : gid.gdk4.snapshot.Snapshot
 {
 

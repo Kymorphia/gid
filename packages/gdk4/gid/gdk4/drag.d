@@ -27,6 +27,7 @@ import gid.gobject2.object;
     and so they are not normally needed in GTK applications. See the
     "Drag and Drop" section of the GTK documentation for more information.
 */
+@gidGir("Drag")
 class Drag : gid.gobject2.object.ObjectWrap
 {
 

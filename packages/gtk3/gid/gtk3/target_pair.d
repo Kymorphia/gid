@@ -13,6 +13,7 @@ import gid.gtk3.types;
     information as a table of #GtkTargetEntry, but in
     an efficient form.
 */
+@gidGir("TargetPair")
 class TargetPair : StructWrap!(GtkTargetPair)
 {
   /**

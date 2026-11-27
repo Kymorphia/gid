@@ -18,6 +18,7 @@ import gid.gobject2.gid_builder;
     Data output stream implements [gid.gio2.output_stream.OutputStream] and includes functions
     for writing data directly to an output stream.
 */
+@gidGir("DataOutputStream", "DataOutputStreamClass")
 class DataOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, gid.gio2.seekable.Seekable
 {
 

@@ -45,6 +45,7 @@ import gid.gobject2.types;
     only be accessed through the `func@GObject.VALUE_TYPE` macro and related
     macros.
 */
+@gidGir("Value")
 class Value : BoxedWrap!g_value_get_type
 {
   /**

@@ -12,6 +12,7 @@ import gid.gtk3.types;
     [GtkWidget’s geometry management section][geometry-management] for
     more information.
 */
+@gidGir("Requisition")
 struct Requisition
 {
   /**

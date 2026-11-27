@@ -47,6 +47,7 @@ import gid.json1.types;
     have a reference count not equal to 1. To this end, JSON-GLib uses
     [gid.json1.node.Node.copy] and [gid.json1.node.Node.unref] internally.
 */
+@gidGir("Node")
 class Node : gid.gobject2.boxed.BoxedWrap!(json_node_get_type)
 {
 

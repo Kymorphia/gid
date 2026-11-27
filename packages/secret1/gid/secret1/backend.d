@@ -19,6 +19,7 @@ import gid.secret1.types;
     #SecretBackend represents a backend implementation of password
     storage.
 */
+@gidGir("Backend", "BackendInterface")
 interface Backend : gid.gio2.async_initable.AsyncInitable
 {
 

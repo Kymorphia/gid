@@ -14,6 +14,7 @@ import gid.gstbase1.types;
 
     Deprecated: Use #GstVecDeque instead.
 */
+@gidGir("QueueArray")
 class QueueArray : OpaqueWrap!(GstQueueArray*, void, void)
 {
 

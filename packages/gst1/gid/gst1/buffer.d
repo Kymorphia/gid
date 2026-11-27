@@ -118,6 +118,7 @@ import gid.gst1.types;
     buffer from being returned to a buffer pool until the #GstMemory is available
     for re-use. (Since: 1.6)
 */
+@gidGir("Buffer")
 class Buffer : gid.gobject2.boxed.BoxedWrap!(gst_buffer_get_type)
 {
 

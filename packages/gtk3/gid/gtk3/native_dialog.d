@@ -28,6 +28,7 @@ import gid.gtk3.window;
     to run any native dialog in a modal way with a recursive mainloop,
     similar to [gid.gtk3.dialog.Dialog.run].
 */
+@gidGir("NativeDialog", "NativeDialogClass")
 class NativeDialog : gid.gobject2.object.ObjectWrap
 {
 

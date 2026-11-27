@@ -47,6 +47,7 @@ import gid.gtk3.widget;
     whose alignments cause them to be positioned at an edge get the style classes
     “.left”, “.right”, “.top”, and/or “.bottom” according to their position.
 */
+@gidGir("Overlay", "OverlayClass")
 class Overlay : gid.gtk3.bin.Bin
 {
 

@@ -24,6 +24,7 @@ import gid.soup3.types;
     As an added bonus, when @data is filled in, it is always terminated
     with a `\0` byte (which is not reflected in @length).
 */
+@gidGir("MessageBody")
 class MessageBody : gid.gobject2.boxed.BoxedWrap!(soup_message_body_get_type)
 {
 

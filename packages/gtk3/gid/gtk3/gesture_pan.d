@@ -27,6 +27,7 @@ import gid.gtk3.widget;
     the #GtkGesturePan::pan signal will be emitted as input events
     are received, containing the offset in the given axis.
 */
+@gidGir("GesturePan", "GesturePanClass")
 class GesturePan : gid.gtk3.gesture_drag.GestureDrag
 {
 

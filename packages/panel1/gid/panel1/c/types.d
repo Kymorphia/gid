@@ -5,9 +5,16 @@ public import gid.core.basictypes;
 public import gid.adw1.c.types;
 public import gid.gtk4.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Panel";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1";
+
 /**
     The area of the panel.
 */
+@gidGir("Area")
 enum PanelArea
 {
   /**
@@ -40,6 +47,7 @@ enum PanelArea
 }
 
 /** */
+@gidGir("Action")
 struct PanelAction;
 
 /** */

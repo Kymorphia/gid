@@ -25,6 +25,7 @@ import gid.soup3.types;
     Note that the base [gid.soup3.cookie_jar.CookieJar] class does not support any form
     of long-term cookie persistence.
 */
+@gidGir("CookieJar", "CookieJarClass")
 class CookieJar : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

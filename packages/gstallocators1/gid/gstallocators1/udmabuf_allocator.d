@@ -16,6 +16,7 @@ import gid.gstallocators1.types;
     [gid.gst1.allocator.Allocator.alloc] method using `memfd_create()` and `UDMABUF_CREATE`.
     Platforms not supporting that (most non-Linux) will always return null.
 */
+@gidGir("UdmabufAllocator", "UdmabufAllocatorClass")
 class UdmabufAllocator : gid.gstallocators1.dma_buf_allocator.DmaBufAllocator
 {
 

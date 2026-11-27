@@ -21,6 +21,7 @@ import gid.gstvideo1.video_time_code_interval;
     @frames must be less than or equal to @config.fps_n / @config.fps_d
     These values are *NOT* automatically normalized.
 */
+@gidGir("VideoTimeCode")
 class VideoTimeCode : gid.gobject2.boxed.BoxedWrap!(gst_video_time_code_get_type)
 {
 

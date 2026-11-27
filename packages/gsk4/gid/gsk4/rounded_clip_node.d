@@ -12,6 +12,7 @@ import gid.gsk4.types;
 /**
     A render node applying a rounded rectangle clip to its single child.
 */
+@gidGir("RoundedClipNode")
 class RoundedClipNode : gid.gsk4.render_node.RenderNode
 {
 

@@ -37,6 +37,7 @@ import gid.gstnet1.types;
     send @GST_MESSAGE_ELEMENT messages with an attached #GstStructure containing
     statistics about clock accuracy and network traffic.
 */
+@gidGir("NetClientClock", "NetClientClockClass")
 class NetClientClock : gid.gst1.system_clock.SystemClock
 {
 

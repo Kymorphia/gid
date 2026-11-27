@@ -12,6 +12,7 @@ import gid.gst1.types;
     The #GstMetaInfo provides information about a specific metadata
     structure.
 */
+@gidGir("MetaInfo")
 struct MetaInfo
 {
   /**

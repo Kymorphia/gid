@@ -53,6 +53,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.spinner.Spinner] uses the `enum@Gtk.AccessibleRole.progress-bar` role.
 */
+@gidGir("Spinner", "SpinnerClass")
 class Spinner : gid.gtk4.widget.Widget
 {
 

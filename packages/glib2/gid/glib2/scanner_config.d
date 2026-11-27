@@ -12,6 +12,7 @@ import gid.glib2.types;
     be changed during the parsing phase and will affect the lexical
     parsing of the next unpeeked token.
 */
+@gidGir("ScannerConfig")
 class ScannerConfig : StructWrap!(GScannerConfig)
 {
   /**

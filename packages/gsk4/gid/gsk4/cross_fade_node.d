@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A render node cross fading between two child nodes.
 */
+@gidGir("CrossFadeNode")
 class CrossFadeNode : gid.gsk4.render_node.RenderNode
 {
 

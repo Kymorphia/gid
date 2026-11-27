@@ -26,6 +26,7 @@ import gid.gtk4.types;
     document. The predefined keys try to use shared values as much as possible
     so that moving such a document between systems still works.
 */
+@gidGir("PrintSettings")
 class PrintSettings : gid.gobject2.object.ObjectWrap
 {
 

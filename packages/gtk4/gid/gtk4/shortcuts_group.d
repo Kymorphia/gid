@@ -40,6 +40,7 @@ import gid.gtk4.types;
 
     Deprecated: This widget will be removed in GTK 5
 */
+@gidGir("ShortcutsGroup", "ShortcutsGroupClass")
 class ShortcutsGroup : gid.gtk4.box.Box
 {
 

@@ -21,6 +21,7 @@ import gid.gtk3.widget;
     too far of the initial press point, the #GtkGestureLongPress::cancelled
     signal will be emitted.
 */
+@gidGir("GestureLongPress", "GestureLongPressClass")
 class GestureLongPress : gid.gtk3.gesture_single.GestureSingle
 {
 

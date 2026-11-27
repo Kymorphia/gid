@@ -65,6 +65,7 @@ import gid.gst1.types;
     in the PLAYING state. This default behaviour can be changed with the
     [gid.gst1.element.Element.setStartTime] method.
 */
+@gidGir("Pipeline", "PipelineClass")
 class Pipeline : gid.gst1.bin.Bin
 {
 

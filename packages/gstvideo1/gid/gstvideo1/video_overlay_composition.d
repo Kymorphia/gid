@@ -34,6 +34,7 @@ import gid.gstvideo1.video_overlay_rectangle;
     on top of the video, and for surface buffers it can just attach them to
     the buffer and let the sink render the overlays.
 */
+@gidGir("VideoOverlayComposition")
 class VideoOverlayComposition : gid.gobject2.boxed.BoxedWrap!(gst_video_overlay_composition_get_type)
 {
 

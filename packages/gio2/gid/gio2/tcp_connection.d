@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
     This is the subclass of [gid.gio2.socket_connection.SocketConnection] that is created
     for TCP/IP sockets.
 */
+@gidGir("TcpConnection", "TcpConnectionClass")
 class TcpConnection : gid.gio2.socket_connection.SocketConnection
 {
 

@@ -70,6 +70,7 @@ import gid.gtksource5.types;
         region_iter.next()
     ```
 */
+@gidGir("Region", "RegionClass")
 class Region : gid.gobject2.object.ObjectWrap
 {
 

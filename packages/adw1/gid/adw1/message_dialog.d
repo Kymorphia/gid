@@ -160,6 +160,7 @@ import gid.gtk4.window;
 
     Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
 */
+@gidGir("MessageDialog", "MessageDialogClass")
 class MessageDialog : gid.gtk4.window.Window
 {
 

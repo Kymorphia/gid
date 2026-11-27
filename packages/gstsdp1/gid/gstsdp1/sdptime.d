@@ -11,6 +11,7 @@ import gid.gstsdp1.types;
     The contents of the SDP "t=" field which specify the start and stop times for
     a conference session.
 */
+@gidGir("SDPTime")
 class SDPTime : StructWrap!(GstSDPTime)
 {
   /**

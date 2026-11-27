@@ -48,6 +48,7 @@ import gid.pango1.attr_list;
     To connect a widget to the users preferred input method, you should use
     [gid.gtk4.immulticontext.IMMulticontext].
 */
+@gidGir("IMContext", "IMContextClass")
 class IMContext : gid.gobject2.object.ObjectWrap
 {
 

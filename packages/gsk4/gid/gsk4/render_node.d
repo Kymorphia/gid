@@ -25,6 +25,7 @@ import gid.gsk4.types;
     them. All [gid.gsk4.render_node.RenderNode]s are immutable, you can only specify their
     properties during construction.
 */
+@gidGir("RenderNode")
 class RenderNode : ReffedWrap!(GskRenderNode*, gsk_render_node_ref, gsk_render_node_unref)
 {
 

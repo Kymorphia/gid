@@ -14,6 +14,7 @@ import gid.gtk4.types;
     Scrolling functions usually allow passing a `NULL` scroll info which will
     cause the default values to be used and just scroll the element into view.
 */
+@gidGir("ScrollInfo")
 class ScrollInfo : gid.gobject2.boxed.BoxedWrap!(gtk_scroll_info_get_type)
 {
 

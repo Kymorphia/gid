@@ -24,6 +24,7 @@ import gid.gst1.types;
     These are then used by [gid.gst1.control_source.ControlSource.controlSourceGetValue] and
     [gid.gst1.control_source.ControlSource.controlSourceGetValueArray] to get values for specific timestamps.
 */
+@gidGir("ControlSource", "ControlSourceClass")
 class ControlSource : gid.gst1.object.ObjectWrap
 {
 

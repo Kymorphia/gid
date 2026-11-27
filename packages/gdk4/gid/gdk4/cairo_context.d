@@ -17,6 +17,7 @@ import gid.gobject2.gid_builder;
     [gid.gdk4.surface.Surface.createCairoContext], and the context
     can then be used to draw on that surface.
 */
+@gidGir("CairoContext")
 class CairoContext : gid.gdk4.draw_context.DrawContext
 {
 

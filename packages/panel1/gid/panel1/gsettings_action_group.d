@@ -13,6 +13,7 @@ import gid.panel1.c.types;
 import gid.panel1.types;
 
 /** */
+@gidGir("GSettingsActionGroup", "GSettingsActionGroupClass")
 class GSettingsActionGroup : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.ActionGroup
 {
 

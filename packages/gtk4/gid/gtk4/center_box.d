@@ -58,6 +58,7 @@ import gid.gtk4.widget;
     Starting from GTK 4.12, [gid.gtk4.center_box.CenterBox] uses the [gid.gtk4.types.AccessibleRole.Generic]
     role.
 */
+@gidGir("CenterBox", "CenterBoxClass")
 class CenterBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

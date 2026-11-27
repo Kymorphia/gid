@@ -11,6 +11,7 @@ import gid.gdk3.types;
     A #GdkRGBA is used to represent a (possibly translucent)
     color, in a way that is compatible with cairo’s notion of color.
 */
+@gidGir("RGBA")
 struct RGBA
 {
   /**

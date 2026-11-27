@@ -60,6 +60,7 @@ import gid.gtk4.widget;
     [gid.gtk4.layout_manager.LayoutManager.layoutChanged] every time a property is
     updated, in order to queue a new size measuring and allocation.
 */
+@gidGir("LayoutManager", "LayoutManagerClass")
 class LayoutManager : gid.gobject2.object.ObjectWrap
 {
 

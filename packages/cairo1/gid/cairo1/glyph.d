@@ -23,6 +23,7 @@ import gid.core.utils;
     drawing or measuring text, each glyph is individually positioned
     with respect to the overall origin
 */
+@gidGir("Glyph")
 struct Glyph
 {
   /**

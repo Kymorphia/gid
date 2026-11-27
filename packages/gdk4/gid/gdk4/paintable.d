@@ -58,6 +58,7 @@ import gid.gobject2.object;
     [gid.gdk4.paintable.Paintable.invalidateSize],
     [gid.gdk4.paintable.Paintable.newEmpty].
 */
+@gidGir("Paintable", "PaintableInterface")
 interface Paintable : GidWrap
 {
 

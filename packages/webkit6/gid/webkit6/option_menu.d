@@ -19,6 +19,7 @@ import gid.webkit6.types;
     #WebKitWebView::show-option-menu is emitted, providing a WebKitOptionMenu with the
     #WebKitOptionMenuItem<!-- -->s that should be displayed.
 */
+@gidGir("OptionMenu", "OptionMenuClass")
 class OptionMenu : gid.gobject2.object.ObjectWrap
 {
 

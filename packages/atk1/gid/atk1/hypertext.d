@@ -24,6 +24,7 @@ import gid.gobject2.object;
     Hypertext instances have textual content; they may implement Image
     as well, and Hyperlinks need not have non-zero text offsets.
 */
+@gidGir("Hypertext", "HypertextIface")
 interface Hypertext : GidWrap
 {
 

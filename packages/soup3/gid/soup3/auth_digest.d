@@ -16,6 +16,7 @@ import gid.soup3.types;
     support for it, call [gid.soup3.session.Session.removeFeatureByType]
     passing `SOUP_TYPE_AUTH_DIGEST`.
 */
+@gidGir("AuthDigest")
 class AuthDigest : gid.soup3.auth.Auth
 {
 

@@ -17,6 +17,7 @@ import gid.panel1.c.types;
 import gid.panel1.types;
 
 /** */
+@gidGir("SaveDelegate", "SaveDelegateClass")
 class SaveDelegate : gid.gobject2.object.ObjectWrap
 {
 

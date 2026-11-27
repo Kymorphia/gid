@@ -42,6 +42,7 @@ import gid.gst1.types;
       ...
     ```
 */
+@gidGir("ElementFactory", "ElementFactoryClass")
 class ElementFactory : gid.gst1.plugin_feature.PluginFeature
 {
 

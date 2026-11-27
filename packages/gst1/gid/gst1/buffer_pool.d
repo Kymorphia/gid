@@ -51,6 +51,7 @@ import gid.gst1.types;
     All further [gid.gst1.buffer_pool.BufferPool.acquireBuffer] calls will return an error. When
     all buffers are returned to the pool they will be freed.
 */
+@gidGir("BufferPool", "BufferPoolClass")
 class BufferPool : gid.gst1.object.ObjectWrap
 {
 

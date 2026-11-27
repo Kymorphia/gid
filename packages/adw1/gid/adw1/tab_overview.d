@@ -101,6 +101,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.tab_overview.TabOverview] has a single CSS node with name `taboverview`.
 */
+@gidGir("TabOverview", "TabOverviewClass")
 class TabOverview : gid.gtk4.widget.Widget
 {
 

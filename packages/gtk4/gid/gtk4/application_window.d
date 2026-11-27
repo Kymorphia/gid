@@ -100,6 +100,7 @@ import gid.gtk4.window;
     GtkWidget *window = gtk_application_window_new (app);
     ```
 */
+@gidGir("ApplicationWindow", "ApplicationWindowClass")
 class ApplicationWindow : gid.gtk4.window.Window, gid.gio2.action_group.ActionGroup, gid.gio2.action_map.ActionMap
 {
 

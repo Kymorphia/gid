@@ -5,9 +5,16 @@ public import gid.core.basictypes;
 public import gid.gobject2.c.types;
 public import gid.gio2.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GMime";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "3.0";
+
 /**
     An address type.
 */
+@gidGir("AddressType")
 enum GMimeAddressType
 {
   /**
@@ -44,6 +51,7 @@ enum GMimeAddressType
 /**
     A description of the user's preference for encrypted messaging.
 */
+@gidGir("AutocryptPreferEncrypt")
 enum GMimeAutocryptPreferEncrypt
 {
   /**
@@ -60,6 +68,7 @@ enum GMimeAutocryptPreferEncrypt
 /**
     A cipher algorithm.
 */
+@gidGir("CipherAlgo")
 enum GMimeCipherAlgo
 {
   /**
@@ -126,6 +135,7 @@ enum GMimeCipherAlgo
 /**
     A Content-Transfer-Encoding enumeration.
 */
+@gidGir("ContentEncoding")
 enum GMimeContentEncoding
 {
   /**
@@ -167,6 +177,7 @@ enum GMimeContentEncoding
 /**
     Decryption flags.
 */
+@gidGir("DecryptFlags")
 enum GMimeDecryptFlags : uint
 {
   /**
@@ -198,6 +209,7 @@ enum GMimeDecryptFlags : uint
 /**
     A hash algorithm.
 */
+@gidGir("DigestAlgo")
 enum GMimeDigestAlgo
 {
   /**
@@ -282,6 +294,7 @@ enum GMimeDigestAlgo
     provide a means of letting the filter know what the encoding
     constraints are for the stream.
 */
+@gidGir("EncodingConstraint")
 enum GMimeEncodingConstraint
 {
   /**
@@ -303,6 +316,7 @@ enum GMimeEncodingConstraint
 /**
     Encryption flags.
 */
+@gidGir("EncryptFlags")
 enum GMimeEncryptFlags : uint
 {
   /**
@@ -336,6 +350,7 @@ enum GMimeEncryptFlags : uint
     educated guesses as to what the best charset and/or encodings to
     use for the content passed through the filter.
 */
+@gidGir("FilterBestFlags")
 enum GMimeFilterBestFlags : uint
 {
   /**
@@ -352,6 +367,7 @@ enum GMimeFilterBestFlags : uint
 /**
     The mode for a #GMimeFilterFrom filter.
 */
+@gidGir("FilterFromMode")
 enum GMimeFilterFromMode
 {
   /**
@@ -373,6 +389,7 @@ enum GMimeFilterFromMode
 /**
     The mode for the #GMimeFilterGZip filter.
 */
+@gidGir("FilterGZipMode")
 enum GMimeFilterGZipMode
 {
   /**
@@ -389,6 +406,7 @@ enum GMimeFilterGZipMode
 /**
     An enum of formats.
 */
+@gidGir("Format")
 enum GMimeFormat
 {
   /**
@@ -414,6 +432,7 @@ enum GMimeFormat
     characters ("\r\n" aka CRLF). Most text-based network protocols such as SMTP,
     POP3, and IMAP use the CRLF sequence as well.
 */
+@gidGir("NewLineFormat")
 enum GMimeNewLineFormat
 {
   /**
@@ -430,6 +449,7 @@ enum GMimeNewLineFormat
 /**
     The type of OpenPGP data found, if any.
 */
+@gidGir("OpenPGPData")
 enum GMimeOpenPGPData
 {
   /**
@@ -461,6 +481,7 @@ enum GMimeOpenPGPData
 /**
     The current state of the #GMimeFilterOpenPGP filter.
 */
+@gidGir("OpenPGPState")
 enum GMimeOpenPGPState : uint
 {
   /**
@@ -521,6 +542,7 @@ enum GMimeOpenPGPState : uint
     some older email clients to improperly encode using the method described in
     <ulink url="https://tools.ietf.org/html/rfc2047">rfc2047</ulink> instead.
 */
+@gidGir("ParamEncodingMethod")
 enum GMimeParamEncodingMethod
 {
   /**
@@ -543,6 +565,7 @@ enum GMimeParamEncodingMethod
     Issues the @GMimeParser detects. Note that the `GMIME_CRIT_*` issues indicate that some parts of the @GMimeParser input may
     be ignored or will be interpreted differently by other software products.
 */
+@gidGir("ParserWarning")
 enum GMimeParserWarning
 {
   /**
@@ -634,6 +657,7 @@ enum GMimeParserWarning
 /**
     A public-key algorithm.
 */
+@gidGir("PubKeyAlgo")
 enum GMimePubKeyAlgo
 {
   /**
@@ -695,6 +719,7 @@ enum GMimePubKeyAlgo
 /**
     An RFC compliance mode.
 */
+@gidGir("RfcComplianceMode")
 enum GMimeRfcComplianceMode
 {
   /**
@@ -711,6 +736,7 @@ enum GMimeRfcComplianceMode
 /**
     The S/MIME data type.
 */
+@gidGir("SecureMimeType")
 enum GMimeSecureMimeType
 {
   /**
@@ -742,6 +768,7 @@ enum GMimeSecureMimeType
 /**
     Relative seek position.
 */
+@gidGir("SeekWhence")
 enum GMimeSeekWhence
 {
   /**
@@ -764,6 +791,7 @@ enum GMimeSeekWhence
     A value representing the signature status bit flags for a particular
     #GMimeSignature.
 */
+@gidGir("SignatureStatus")
 enum GMimeSignatureStatus
 {
   /**
@@ -830,6 +858,7 @@ enum GMimeSignatureStatus
 /**
     The buffering mode for a #GMimeStreamBuffer stream.
 */
+@gidGir("StreamBufferMode")
 enum GMimeStreamBufferMode
 {
   /**
@@ -854,6 +883,7 @@ enum GMimeStreamBufferMode
     and an end-entity certificate (e.g., with CA:FALSE set) would have
     @GMIME_TRUST_NEVER.
 */
+@gidGir("Trust")
 enum GMimeTrust
 {
   /**
@@ -904,6 +934,7 @@ enum GMimeTrust
     Note that the GMime API currently only exposes the highest-validty
     User ID for any given certificate.
 */
+@gidGir("Validity")
 enum GMimeValidity
 {
   /**
@@ -940,6 +971,7 @@ enum GMimeValidity
 /**
     Signature verification flags.
 */
+@gidGir("VerifyFlags")
 enum GMimeVerifyFlags : uint
 {
   /**
@@ -1973,6 +2005,7 @@ struct GMimeFormatOptions;
 struct GMimeGpgContext;
 
 /** */
+@gidGir("GpgContextClass")
 struct GMimeGpgContextClass;
 
 /**
@@ -2633,6 +2666,7 @@ struct GMimePartIter;
 struct GMimePkcs7Context;
 
 /** */
+@gidGir("Pkcs7ContextClass")
 struct GMimePkcs7ContextClass;
 
 /**
@@ -2980,6 +3014,7 @@ struct GMimeStreamGIOClass
 /**
     An I/O vector for use with [gid.gmime3.stream.Stream.writev].
 */
+@gidGir("StreamIOVector")
 struct GMimeStreamIOVector
 {
   /**

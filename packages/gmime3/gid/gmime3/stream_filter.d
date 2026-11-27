@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
 /**
     A #GMimeStream which passes data through any #GMimeFilter objects.
 */
+@gidGir("StreamFilter", "StreamFilterClass")
 class StreamFilter : gid.gmime3.stream.Stream
 {
 

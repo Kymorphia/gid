@@ -37,6 +37,7 @@ import gid.gtk3.widget;
     GtkSwitch has two css nodes, the main node with the name switch and a subnode
     named slider. Neither of them is using any style classes.
 */
+@gidGir("Switch", "SwitchClass")
 class Switch : gid.gtk3.widget.Widget, gid.gtk3.actionable.Actionable, gid.gtk3.activatable.Activatable
 {
 

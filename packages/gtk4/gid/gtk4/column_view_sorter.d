@@ -44,6 +44,7 @@ import gid.gtk4.types;
       }
     ```
 */
+@gidGir("ColumnViewSorter", "ColumnViewSorterClass")
 class ColumnViewSorter : gid.gtk4.sorter.Sorter
 {
 

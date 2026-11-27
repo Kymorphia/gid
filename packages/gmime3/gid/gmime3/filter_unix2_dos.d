@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A filter to convert a stream from Windows/DOS line endings to Unix line endings.
 */
+@gidGir("FilterUnix2Dos", "FilterUnix2DosClass")
 class FilterUnix2Dos : gid.gmime3.filter.Filter
 {
 

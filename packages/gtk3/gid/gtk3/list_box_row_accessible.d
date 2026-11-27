@@ -12,6 +12,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("ListBoxRowAccessible", "ListBoxRowAccessibleClass")
 class ListBoxRowAccessible : gid.gtk3.container_accessible.ContainerAccessible
 {
 

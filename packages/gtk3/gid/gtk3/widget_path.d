@@ -60,6 +60,7 @@ import gid.gtk3.widget;
     All this information will be used to match the style information
     that applies to the described widget.
 */
+@gidGir("WidgetPath")
 class WidgetPath : gid.gobject2.boxed.BoxedWrap!(gtk_widget_path_get_type)
 {
 

@@ -40,6 +40,7 @@ import gid.gobject2.types;
     during normal construction and automatically initialize them, throwing
     an exception on failure.
 */
+@gidGir("Initable", "InitableIface")
 interface Initable : GidWrap
 {
 

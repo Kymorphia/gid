@@ -41,6 +41,7 @@ import gid.gtk4.widget;
     contains a button node. To differentiate it from a plain [gid.gtk4.button.Button],
     it gets the .color style class.
 */
+@gidGir("ColorDialogButton", "ColorDialogButtonClass")
 class ColorDialogButton : gid.gtk4.widget.Widget
 {
 

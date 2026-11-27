@@ -13,6 +13,7 @@ import gid.gsk4.types;
 /**
     A render node for a border.
 */
+@gidGir("BorderNode")
 class BorderNode : gid.gsk4.render_node.RenderNode
 {
 

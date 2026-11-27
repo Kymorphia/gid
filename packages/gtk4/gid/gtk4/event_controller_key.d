@@ -17,6 +17,7 @@ import gid.gtk4.widget;
 /**
     Provides access to key events.
 */
+@gidGir("EventControllerKey", "EventControllerKeyClass")
 class EventControllerKey : gid.gtk4.event_controller.EventController
 {
 

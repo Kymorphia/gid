@@ -112,6 +112,7 @@ import gid.gtk3.widget;
     In horizontal orientation, the nodes are always arranged from left to right,
     regardless of text direction.
 */
+@gidGir("LevelBar", "LevelBarClass")
 class LevelBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
 {
 

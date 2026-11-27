@@ -19,6 +19,7 @@ import gid.gtk4.types;
     the [gid.gtk4.accessible_hypertext.AccessibleHypertext] interface and return
     [gid.gtk4.accessible_hyperlink.AccessibleHyperlink] objects for each of the links.
 */
+@gidGir("AccessibleHyperlink", "AccessibleHyperlinkClass")
 class AccessibleHyperlink : gid.gobject2.object.ObjectWrap, gid.gtk4.accessible.Accessible
 {
 

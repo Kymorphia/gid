@@ -51,6 +51,7 @@ import gid.gobject2.object;
     [gid.gio2.file_attribute_matcher.FileAttributeMatcher] allows for searching through a [gid.gio2.file_info.FileInfo]
     for attributes.
 */
+@gidGir("FileInfo", "FileInfoClass")
 class FileInfo : gid.gobject2.object.ObjectWrap
 {
 

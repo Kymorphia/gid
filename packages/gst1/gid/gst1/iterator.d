@@ -51,6 +51,7 @@ import gid.gst1.types;
       gst_iterator_free (it);
     ```
 */
+@gidGir("Iterator")
 class Iterator : gid.gobject2.boxed.BoxedWrap!(gst_iterator_get_type)
 {
 

@@ -44,6 +44,7 @@ import gid.gdk3.window;
     1/4 of a second of the first. For a triple click to occur, the third
     button press must also occur within 1/2 second of the first button press.
 */
+@gidGir("EventButton")
 class EventButton : StructWrap!(GdkEventButton, gdk_event_copy, gdk_event_free)
 {
   /**

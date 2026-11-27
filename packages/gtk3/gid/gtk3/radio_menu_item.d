@@ -56,6 +56,7 @@ import gid.gtk3.types;
     GtkRadioMenuItem has a main CSS node with name menuitem, and a subnode
     with name radio, which gets the .left or .right style class.
 */
+@gidGir("RadioMenuItem", "RadioMenuItemClass")
 class RadioMenuItem : gid.gtk3.check_menu_item.CheckMenuItem
 {
 

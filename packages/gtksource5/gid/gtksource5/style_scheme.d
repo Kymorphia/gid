@@ -25,6 +25,7 @@ import gid.gtksource5.types;
     The two style schemes with IDs "classic" and "tango" follow more closely the
     GTK theme (for example for the background color).
 */
+@gidGir("StyleScheme", "StyleSchemeClass")
 class StyleScheme : gid.gobject2.object.ObjectWrap
 {
 

@@ -44,6 +44,7 @@ import gid.gobject2.object;
     understood by [gid.gio2.icon.Icon.deserialize], yielding one of the built-in
     icon types.
 */
+@gidGir("Icon", "IconIface")
 interface Icon : GidWrap
 {
 

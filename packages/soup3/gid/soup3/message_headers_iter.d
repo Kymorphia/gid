@@ -16,6 +16,7 @@ import gid.soup3.types;
     
     You may not modify the headers while iterating over them.
 */
+@gidGir("MessageHeadersIter")
 class MessageHeadersIter : StructWrap!(SoupMessageHeadersIter)
 {
   /**

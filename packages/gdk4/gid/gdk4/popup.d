@@ -21,6 +21,7 @@ import gid.gobject2.object;
     They can be modal, which is indicated by the [gid.gdk4.popup.Popup.autohide]
     property.
 */
+@gidGir("Popup", "PopupInterface")
 interface Popup : GidWrap
 {
 

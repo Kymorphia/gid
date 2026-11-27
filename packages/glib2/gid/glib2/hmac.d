@@ -25,6 +25,7 @@ import gid.gobject2.boxed;
     To create a new [gid.glib2.hmac.Hmac], use [gid.glib2.hmac.Hmac.new_]. To free a [gid.glib2.hmac.Hmac], use
     [gid.glib2.hmac.Hmac.unref].
 */
+@gidGir("Hmac")
 class Hmac : gid.gobject2.boxed.BoxedWrap!(g_hmac_get_type)
 {
 

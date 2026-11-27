@@ -14,6 +14,7 @@ import gid.gstbase1.types;
     also provides size-related functionality. This object should be used for
     any #GstElement that wishes to provide some sort of queueing functionality.
 */
+@gidGir("DataQueue", "DataQueueClass")
 class DataQueue : gid.gobject2.object.ObjectWrap
 {
 

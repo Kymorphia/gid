@@ -24,6 +24,7 @@ import gid.gtk3.types;
     mouse button by setting 0. While the gesture is active, the button being
     currently pressed can be known through [gid.gtk4.gesture_single.GestureSingle.getCurrentButton].
 */
+@gidGir("GestureSingle", "GestureSingleClass")
 class GestureSingle : gid.gtk3.gesture.Gesture
 {
 

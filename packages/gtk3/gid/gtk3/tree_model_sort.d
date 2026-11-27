@@ -113,6 +113,7 @@ import gid.gtk3.types;
     }
     ```
 */
+@gidGir("TreeModelSort", "TreeModelSortClass")
 class TreeModelSort : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_source.TreeDragSource, gid.gtk3.tree_model.TreeModel, gid.gtk3.tree_sortable.TreeSortable
 {
 

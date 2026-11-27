@@ -13,6 +13,7 @@ import gid.gstvideo1.types;
     The interface allows unified access to control flipping and rotation
     operations of video-sources or operators.
 */
+@gidGir("VideoDirection", "VideoDirectionInterface")
 interface VideoDirection : GidWrap
 {
 

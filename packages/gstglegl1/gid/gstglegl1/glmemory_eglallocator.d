@@ -12,6 +12,7 @@ import gid.gstglegl1.types;
 /**
     Opaque #GstGLMemoryEGLAllocator struct
 */
+@gidGir("GLMemoryEGLAllocator", "GLMemoryEGLAllocatorClass")
 class GLMemoryEGLAllocator : gid.gstgl1.glmemory_allocator.GLMemoryAllocator
 {
 

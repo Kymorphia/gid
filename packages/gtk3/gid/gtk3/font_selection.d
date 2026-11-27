@@ -20,6 +20,7 @@ import gid.pango1.font_face;
 import gid.pango1.font_family;
 
 /** */
+@gidGir("FontSelection", "FontSelectionClass")
 class FontSelection : gid.gtk3.box.Box
 {
 

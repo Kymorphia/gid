@@ -57,6 +57,7 @@ import gid.gtk3.types;
     GtkFileChooserButton has a CSS node with name “filechooserbutton”, containing
     a subnode for the internal button with name “button” and style class “.file”.
 */
+@gidGir("FileChooserButton", "FileChooserButtonClass")
 class FileChooserButton : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
 {
 

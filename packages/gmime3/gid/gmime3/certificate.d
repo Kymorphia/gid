@@ -12,6 +12,7 @@ import gid.gobject2.object;
 /**
     An object containing useful information about a certificate.
 */
+@gidGir("Certificate", "CertificateClass")
 class Certificate : gid.gobject2.object.ObjectWrap
 {
 

@@ -18,6 +18,7 @@ import gid.gtksource4.view;
 import gid.pango1.font_description;
 
 /** */
+@gidGir("Map", "MapClass")
 class Map : gid.gtksource4.view.View
 {
 

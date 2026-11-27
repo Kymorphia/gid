@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     An opaque type representing a list of files.
 */
+@gidGir("FileList")
 class FileList : gid.gobject2.boxed.BoxedWrap!(gdk_file_list_get_type)
 {
 

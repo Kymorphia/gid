@@ -96,6 +96,7 @@ import gid.gtk3.widget;
     
     GtkToolPalette has a single CSS node named toolpalette.
 */
+@gidGir("ToolPalette", "ToolPaletteClass")
 class ToolPalette : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gid.gtk3.scrollable.Scrollable
 {
 

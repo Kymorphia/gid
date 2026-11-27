@@ -152,6 +152,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.navigation_split_view.NavigationSplitView] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("NavigationSplitView", "NavigationSplitViewClass")
 class NavigationSplitView : gid.gtk4.widget.Widget
 {
 

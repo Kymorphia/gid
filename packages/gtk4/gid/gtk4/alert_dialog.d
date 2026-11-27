@@ -23,6 +23,7 @@ import gid.gtk4.window;
     If you don't need to wait for a button to be clicked, you can use
     [gid.gtk4.alert_dialog.AlertDialog.show].
 */
+@gidGir("AlertDialog", "AlertDialogClass")
 class AlertDialog : gid.gobject2.object.ObjectWrap
 {
 

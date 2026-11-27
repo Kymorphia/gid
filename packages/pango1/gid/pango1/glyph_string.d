@@ -18,6 +18,7 @@ import gid.pango1.types;
     The storage for the glyph information is owned by the structure
     which simplifies memory management.
 */
+@gidGir("GlyphString")
 class GlyphString : gid.gobject2.boxed.BoxedWrap!(pango_glyph_string_get_type)
 {
 

@@ -48,6 +48,7 @@ import gid.gtk4.widget;
         implemented according to the design of each platform and/or
         application requiring them.
 */
+@gidGir("AppChooserWidget")
 class AppChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.app_chooser.AppChooser
 {
 

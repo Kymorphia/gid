@@ -16,6 +16,7 @@ import gid.gtk4.types;
     To obtain the numbers to compare, this sorter evaluates a
     [gid.gtk4.expression.Expression].
 */
+@gidGir("NumericSorter", "NumericSorterClass")
 class NumericSorter : gid.gtk4.sorter.Sorter
 {
 

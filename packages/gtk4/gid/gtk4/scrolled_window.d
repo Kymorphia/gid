@@ -100,6 +100,7 @@ import gid.gtk4.widget;
     Starting from GTK 4.12, [gid.gtk4.scrolled_window.ScrolledWindow] uses the [gid.gtk4.types.AccessibleRole.Generic]
     role.
 */
+@gidGir("ScrolledWindow")
 class ScrolledWindow : gid.gtk4.widget.Widget
 {
 

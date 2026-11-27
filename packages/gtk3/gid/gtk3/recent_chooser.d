@@ -23,6 +23,7 @@ import gid.gtk3.types;
     
     Recently used files are supported since GTK+ 2.10.
 */
+@gidGir("RecentChooser", "RecentChooserIface")
 interface RecentChooser : GidWrap
 {
 

@@ -10,6 +10,7 @@ import gid.gio2.types;
 /**
     Struct used in `func@Gio.DBusError.register_error_domain`.
 */
+@gidGir("DBusErrorEntry")
 class DBusErrorEntry : StructWrap!(GDBusErrorEntry)
 {
   /**

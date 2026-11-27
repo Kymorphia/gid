@@ -24,6 +24,7 @@ import gid.gobject2.boxed;
     The structure is opaque -- none of its fields may be directly
     accessed.
 */
+@gidGir("Thread")
 class Thread : gid.gobject2.boxed.BoxedWrap!(g_thread_get_type)
 {
 

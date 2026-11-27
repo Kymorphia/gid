@@ -24,6 +24,7 @@ import gid.gtk4.types;
     
     Unlike a [gid.gtk4.widget.Widget], a [gid.gtk4.constraint_guide.ConstraintGuide] will not be drawn.
 */
+@gidGir("ConstraintGuide", "ConstraintGuideClass")
 class ConstraintGuide : gid.gobject2.object.ObjectWrap, gid.gtk4.constraint_target.ConstraintTarget
 {
 

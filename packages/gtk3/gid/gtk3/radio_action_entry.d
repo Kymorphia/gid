@@ -11,6 +11,7 @@ import gid.gtk3.types;
     #GtkRadioActionEntry structs are used with
     [gid.gtk3.action_group.ActionGroup.addRadioActions] to construct groups of radio actions.
 */
+@gidGir("RadioActionEntry")
 class RadioActionEntry : StructWrap!(GtkRadioActionEntry)
 {
   /**

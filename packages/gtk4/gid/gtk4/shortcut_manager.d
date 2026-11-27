@@ -22,6 +22,7 @@ import gid.gtk4.types;
     Every widget that implements [gid.gtk4.shortcut_manager.ShortcutManager] will be used as a
     [gid.gtk4.types.ShortcutScope.Managed].
 */
+@gidGir("ShortcutManager", "ShortcutManagerInterface")
 interface ShortcutManager : GidWrap
 {
 

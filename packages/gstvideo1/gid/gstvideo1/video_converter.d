@@ -12,6 +12,7 @@ import gid.gstvideo1.video_frame;
 import gid.gstvideo1.video_info;
 
 /** */
+@gidGir("VideoConverter")
 class VideoConverter : OpaqueWrap!(GstVideoConverter*, void, void)
 {
 

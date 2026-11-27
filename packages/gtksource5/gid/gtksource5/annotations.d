@@ -18,6 +18,7 @@ import gid.gtksource5.types;
     Add [gid.gtksource5.annotation_provider.AnnotationProvider]s with [gid.gtksource5.annotations.Annotations.addProvider] to
     display all the annotations added to each [gid.gtksource5.annotation_provider.AnnotationProvider].
 */
+@gidGir("Annotations", "AnnotationsClass")
 class Annotations : gid.gobject2.object.ObjectWrap
 {
 

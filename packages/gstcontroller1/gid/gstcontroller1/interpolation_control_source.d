@@ -20,6 +20,7 @@ import gid.gstcontroller1.types;
     
     All functions are MT-safe.
 */
+@gidGir("InterpolationControlSource", "InterpolationControlSourceClass")
 class InterpolationControlSource : gid.gstcontroller1.timed_value_control_source.TimedValueControlSource
 {
 

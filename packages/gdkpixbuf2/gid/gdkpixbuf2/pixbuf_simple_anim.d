@@ -13,6 +13,7 @@ import gid.gobject2.gid_builder;
 /**
     An opaque struct representing a simple animation.
 */
+@gidGir("PixbufSimpleAnim", "PixbufSimpleAnimClass")
 class PixbufSimpleAnim : gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation
 {
 

@@ -27,6 +27,7 @@ import gid.gtk3.types;
     
     The #GtkCellRendererCombo cell renderer was added in GTK+ 2.6.
 */
+@gidGir("CellRendererCombo", "CellRendererComboClass")
 class CellRendererCombo : gid.gtk3.cell_renderer_text.CellRendererText
 {
 

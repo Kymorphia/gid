@@ -11,6 +11,7 @@ import gid.gtk4.types;
 /**
     A [gid.gobject2.param_spec.ParamSpec] for properties holding a [gid.gtk4.expression.Expression].
 */
+@gidGir("ParamSpecExpression")
 class ParamSpecExpression : gid.gobject2.param_spec.ParamSpec
 {
 

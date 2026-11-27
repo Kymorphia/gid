@@ -14,6 +14,7 @@ import gid.gtk3.types;
 import gid.gtk3.window_accessible;
 
 /** */
+@gidGir("PlugAccessible", "PlugAccessibleClass")
 class PlugAccessible : gid.gtk3.window_accessible.WindowAccessible
 {
 

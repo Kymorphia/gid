@@ -20,6 +20,7 @@ import gid.gtk4.types;
     which are updated to reflect changes in the pointer position as it
     moves over the widget.
 */
+@gidGir("EventControllerMotion", "EventControllerMotionClass")
 class EventControllerMotion : gid.gtk4.event_controller.EventController
 {
 

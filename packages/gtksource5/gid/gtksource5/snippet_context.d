@@ -21,6 +21,7 @@ import gid.gtksource5.types;
     The [gid.gtksource5.snippet.Snippet] will build the context and then expand each of the
     chunks during the insertion/edit phase.
 */
+@gidGir("SnippetContext", "SnippetContextClass")
 class SnippetContext : gid.gobject2.object.ObjectWrap
 {
 

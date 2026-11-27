@@ -107,6 +107,7 @@ import gid.pango1.tab_array;
     just a single handle for the text cursor, it gets the style class
     .insertion-cursor.
 */
+@gidGir("Entry", "EntryClass")
 class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.gtk3.editable.Editable
 {
 

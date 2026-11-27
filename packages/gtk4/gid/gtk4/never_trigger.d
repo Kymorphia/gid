@@ -13,6 +13,7 @@ import gid.gtk4.types;
 /**
     A [gid.gtk4.shortcut_trigger.ShortcutTrigger] that never triggers.
 */
+@gidGir("NeverTrigger", "NeverTriggerClass")
 class NeverTrigger : gid.gtk4.shortcut_trigger.ShortcutTrigger
 {
 

@@ -71,6 +71,7 @@ import gid.gobject2.object;
       x = event->button.x;
     ```
 */
+@gidGir("Event")
 class Event : gid.gobject2.boxed.BoxedWrap!(gdk_event_get_type)
 {
 

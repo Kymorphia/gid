@@ -11,6 +11,7 @@ import gid.graphene1.vec2;
 /**
     A point with two coordinates.
 */
+@gidGir("Point")
 struct Point
 {
   /**

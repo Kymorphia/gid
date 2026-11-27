@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A render node applying a blending function between its two child nodes.
 */
+@gidGir("BlendNode")
 class BlendNode : gid.gsk4.render_node.RenderNode
 {
 

@@ -20,6 +20,7 @@ import gid.gobject2.object;
     Data input stream implements [gid.gio2.input_stream.InputStream] and includes functions
     for reading structured data directly from a binary input stream.
 */
+@gidGir("DataInputStream", "DataInputStreamClass")
 class DataInputStream : gid.gio2.buffered_input_stream.BufferedInputStream
 {
 

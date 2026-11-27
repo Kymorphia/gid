@@ -13,6 +13,7 @@ import gid.gdk3.window;
     Generated when a selection is requested or ownership of a selection
     is taken over by another client application.
 */
+@gidGir("EventSelection")
 class EventSelection : StructWrap!(GdkEventSelection, gdk_event_copy, gdk_event_free)
 {
   /**

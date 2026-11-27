@@ -11,6 +11,7 @@ import gid.harfbuzz0.types;
 /**
     Current drawing state.
 */
+@gidGir("draw_state_t")
 class DrawState : gid.gobject2.boxed.BoxedWrap!(hb_gobject_draw_state_get_type)
 {
   /**

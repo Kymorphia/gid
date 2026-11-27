@@ -13,6 +13,7 @@ import gid.gst1.types;
     Note that GstClockEntry should be treated as an opaque structure. It must
     not be extended or allocated using a custom allocator.
 */
+@gidGir("ClockEntry")
 class ClockEntry : StructWrap!(GstClockEntry)
 {
   /**

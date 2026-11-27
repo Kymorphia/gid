@@ -11,6 +11,7 @@ import gid.gtksource4.style_scheme;
 import gid.gtksource4.types;
 
 /** */
+@gidGir("StyleSchemeManager", "StyleSchemeManagerClass")
 class StyleSchemeManager : gid.gobject2.object.ObjectWrap
 {
 

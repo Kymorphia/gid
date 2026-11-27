@@ -12,6 +12,7 @@ import gid.gobject2.types;
     
     See also: [gid.gobject2.global.signalQuery]
 */
+@gidGir("SignalQuery")
 class SignalQuery : StructWrap!(GSignalQuery)
 {
   /**

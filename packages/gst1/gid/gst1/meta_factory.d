@@ -31,6 +31,7 @@ import gid.gst1.types;
     }
     ```
 */
+@gidGir("MetaFactory", "MetaFactoryClass")
 class MetaFactory : gid.gst1.plugin_feature.PluginFeature
 {
 

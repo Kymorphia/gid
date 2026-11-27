@@ -59,6 +59,7 @@ import gid.gtk4.types;
     [gid.gtk4.shortcut_trigger.ShortcutTrigger.parseString] to learn more about the syntax
     for triggers.
 */
+@gidGir("ShortcutController", "ShortcutControllerClass")
 class ShortcutController : gid.gtk4.event_controller.EventController, gid.gio2.list_model.ListModel, gid.gtk4.buildable.Buildable
 {
 

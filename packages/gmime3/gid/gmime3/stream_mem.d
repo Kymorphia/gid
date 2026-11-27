@@ -13,6 +13,7 @@ import gid.gobject2.object;
 /**
     A memory-backed #GMimeStream.
 */
+@gidGir("StreamMem", "StreamMemClass")
 class StreamMem : gid.gmime3.stream.Stream
 {
 

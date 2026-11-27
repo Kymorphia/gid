@@ -11,6 +11,7 @@ import gid.gstsdp1.types;
     The contents of the SDP "k=" field which is used to convey encryption
     keys.
 */
+@gidGir("SDPKey")
 class SDPKey : StructWrap!(GstSDPKey)
 {
   /**

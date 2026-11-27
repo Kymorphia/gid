@@ -88,6 +88,7 @@ import gid.gstbase1.types;
     
     This class used to live in gst-plugins-bad and was moved to core.
 */
+@gidGir("Aggregator", "AggregatorClass")
 class Aggregator : gid.gst1.element.Element
 {
 

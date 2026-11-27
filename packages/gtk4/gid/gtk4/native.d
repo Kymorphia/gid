@@ -28,6 +28,7 @@ import gid.gtk4.types;
     a [gid.gsk4.renderer.Renderer] for rendering on that surface. To get the
     renderer, use [gid.gtk4.native.Native.getRenderer].
 */
+@gidGir("Native", "NativeInterface")
 interface Native : GidWrap
 {
 

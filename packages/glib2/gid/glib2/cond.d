@@ -74,6 +74,7 @@ import gid.glib2.types;
     
     A #GCond should only be accessed via the g_cond_ functions.
 */
+@gidGir("Cond")
 class Cond : StructWrap!(GCond)
 {
   /**

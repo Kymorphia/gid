@@ -18,6 +18,7 @@ import gid.gstaudio1.types;
     
     This object is internally used to implement the clock in #GstAudioBaseSink.
 */
+@gidGir("AudioClock", "AudioClockClass")
 class AudioClock : gid.gst1.system_clock.SystemClock
 {
 

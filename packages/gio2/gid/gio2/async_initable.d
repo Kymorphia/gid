@@ -118,6 +118,7 @@ import gid.gobject2.types;
     }
     ```
 */
+@gidGir("AsyncInitable", "AsyncInitableIface")
 interface AsyncInitable : GidWrap
 {
 

@@ -16,6 +16,7 @@ import gid.gdk3.window;
           reliably, so this event can not be guaranteed to provide useful
           information.
 */
+@gidGir("EventVisibility")
 class EventVisibility : StructWrap!(GdkEventVisibility, gdk_event_copy, gdk_event_free)
 {
   /**

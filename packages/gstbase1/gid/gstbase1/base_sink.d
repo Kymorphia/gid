@@ -134,6 +134,7 @@ import gid.gstbase1.types;
     perform an ASYNC state change. This feature is mostly usable when dealing
     with non-synchronized streams or sparse streams.
 */
+@gidGir("BaseSink", "BaseSinkClass")
 class BaseSink : gid.gst1.element.Element
 {
 

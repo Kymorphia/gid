@@ -18,6 +18,7 @@ import gid.graphene1.vec4;
     The contents of the [gid.graphene1.plane.Plane] are private, and should not be
     modified directly.
 */
+@gidGir("Plane")
 class Plane : gid.gobject2.boxed.BoxedWrap!(graphene_plane_get_type)
 {
   /**

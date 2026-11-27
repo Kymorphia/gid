@@ -82,6 +82,7 @@ import gid.gtk4.window;
     [gid.gtk4.print_operation_preview.PrintOperationPreview.isSelected]
     are useful when implementing a print preview.
 */
+@gidGir("PrintOperation", "PrintOperationClass")
 class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_preview.PrintOperationPreview
 {
 

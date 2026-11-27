@@ -33,6 +33,7 @@ import gid.webkit6.website_data;
     stored by particular websites, or clear data for all websites modified since a given
     period of time.
 */
+@gidGir("WebsiteDataManager", "WebsiteDataManagerClass")
 class WebsiteDataManager : gid.gobject2.object.ObjectWrap
 {
 

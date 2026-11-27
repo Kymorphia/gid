@@ -22,6 +22,7 @@ import gid.gtk4.types;
     Deprecated: List views use widgets to display their contents.
         You should use [gid.gtk4.toggle_button.ToggleButton] instead
 */
+@gidGir("CellRendererToggle")
 class CellRendererToggle : gid.gtk4.cell_renderer.CellRenderer
 {
 

@@ -27,6 +27,7 @@ import gid.gtk3.types;
     #GtkSymbolicColor is deprecated. Symbolic colors are considered an
     implementation detail of GTK+.
 */
+@gidGir("SymbolicColor")
 class SymbolicColor : gid.gobject2.boxed.BoxedWrap!(gtk_symbolic_color_get_type)
 {
 

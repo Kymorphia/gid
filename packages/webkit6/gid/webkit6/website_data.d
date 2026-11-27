@@ -25,6 +25,7 @@ import gid.webkit6.types;
     A list of WebKitWebsiteData can be retrieved with [gid.webkit6.website_data_manager.WebsiteDataManager.fetch]. See #WebKitWebsiteDataManager
     for more information.
 */
+@gidGir("WebsiteData")
 class WebsiteData : gid.gobject2.boxed.BoxedWrap!(webkit_website_data_get_type)
 {
 

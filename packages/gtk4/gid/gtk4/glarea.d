@@ -138,6 +138,7 @@ import gid.gtk4.widget;
     If you need to change the options for creating the [gid.gdk4.glcontext.GLContext]
     you should use the [gid.gtk4.glarea.GLArea.createContext] signal.
 */
+@gidGir("GLArea", "GLAreaClass")
 class GLArea : gid.gtk4.widget.Widget
 {
 

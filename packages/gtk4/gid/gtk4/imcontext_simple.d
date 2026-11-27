@@ -49,6 +49,7 @@ import gid.gtk4.types;
      yields U+00E! LATIN SMALL LETTER_A WITH ACUTE, i.e. á. Note that this
      depends on the keyboard layout including dead keys.
 */
+@gidGir("IMContextSimple", "IMContextSimpleClass")
 class IMContextSimple : gid.gtk4.imcontext.IMContext
 {
 

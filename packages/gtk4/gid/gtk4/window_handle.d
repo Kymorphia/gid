@@ -34,6 +34,7 @@ import gid.gtk4.widget;
     Starting from GTK 4.12, [gid.gtk4.window_handle.WindowHandle] uses the [gid.gtk4.types.AccessibleRole.Generic]
     role.
 */
+@gidGir("WindowHandle", "WindowHandleClass")
 class WindowHandle : gid.gtk4.widget.Widget
 {
 

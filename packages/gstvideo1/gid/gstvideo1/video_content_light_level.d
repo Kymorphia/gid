@@ -11,6 +11,7 @@ import gid.gstvideo1.types;
 /**
     Content light level information specified in CEA-861.3, Appendix A.
 */
+@gidGir("VideoContentLightLevel")
 struct VideoContentLightLevel
 {
   /**

@@ -14,6 +14,7 @@ import gid.gstgl1.types;
 /**
     Allocation parameters
 */
+@gidGir("GLRenderbufferAllocationParams")
 class GLRenderbufferAllocationParams : gid.gobject2.boxed.BoxedWrap!(gst_gl_renderbuffer_allocation_params_get_type)
 {
 

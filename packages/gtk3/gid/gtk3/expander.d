@@ -101,6 +101,7 @@ import gid.gtk3.widget;
     a subnode with name title and node below it with name arrow. The arrow of an
     expander that is showing its child gets the :checked pseudoclass added to it.
 */
+@gidGir("Expander", "ExpanderClass")
 class Expander : gid.gtk3.bin.Bin
 {
 

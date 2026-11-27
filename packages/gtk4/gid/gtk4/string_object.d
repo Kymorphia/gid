@@ -16,6 +16,7 @@ import gid.gtk4.types;
     a [gid.gtk4.string_object.StringObject.string_] property that can be used
     for property bindings and expressions.
 */
+@gidGir("StringObject", "StringObjectClass")
 class StringObject : gid.gobject2.object.ObjectWrap
 {
 

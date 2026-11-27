@@ -16,6 +16,7 @@ import gid.webkit6.types;
     You can use the WebKitOptionMenuItem of a #WebKitOptionMenu to build your
     own menus.
 */
+@gidGir("OptionMenuItem")
 class OptionMenuItem : gid.gobject2.boxed.BoxedWrap!(webkit_option_menu_item_get_type)
 {
 

@@ -27,6 +27,7 @@ import gid.gtksource5.types;
     Snippet chunks can reference other snippet chunks as well as post-process
     the values from other chunks such as capitalization.
 */
+@gidGir("Snippet", "SnippetClass")
 class Snippet : gid.gobject2.object.ObjectWrap
 {
 

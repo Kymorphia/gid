@@ -13,6 +13,7 @@ import gid.gtk4.widget;
 /**
     An auxiliary object used by [gid.gtk4.notebook.Notebook].
 */
+@gidGir("NotebookPage")
 class NotebookPage : gid.gobject2.object.ObjectWrap
 {
 

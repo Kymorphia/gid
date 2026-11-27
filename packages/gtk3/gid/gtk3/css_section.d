@@ -15,6 +15,7 @@ import gid.gtk3.types;
     one another, you can use [gid.gtk4.css_section.CssSection.getParent] to get the
     containing region.
 */
+@gidGir("CssSection")
 class CssSection : gid.gobject2.boxed.BoxedWrap!(gtk_css_section_get_type)
 {
 

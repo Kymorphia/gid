@@ -22,6 +22,7 @@ import gid.gtksource5.types;
     [gid.gtksource5.language_manager.LanguageManager.guessLanguage] to get a [gid.gtksource5.language.Language] for
     given file name and content type.
 */
+@gidGir("LanguageManager", "LanguageManagerClass")
 class LanguageManager : gid.gobject2.object.ObjectWrap
 {
 

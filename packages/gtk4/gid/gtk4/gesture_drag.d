@@ -21,6 +21,7 @@ import gid.gtk4.types;
     [gid.gtk4.gesture_drag.GestureDrag.getOffset] and
     [gid.gtk4.gesture_drag.GestureDrag.getStartPoint].
 */
+@gidGir("GestureDrag", "GestureDragClass")
 class GestureDrag : gid.gtk4.gesture_single.GestureSingle
 {
 

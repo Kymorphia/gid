@@ -12,6 +12,7 @@ import gid.gstgl1.glcontext;
 import gid.gstgl1.types;
 
 /** */
+@gidGir("GLAllocationParams")
 class GLAllocationParams : gid.gobject2.boxed.BoxedWrap!(gst_gl_allocation_params_get_type)
 {
   /**

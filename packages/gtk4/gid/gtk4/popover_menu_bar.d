@@ -50,6 +50,7 @@ import gid.gtk4.widget;
     the menu items use the [gid.gtk4.types.AccessibleRole.MenuItem] role and
     the menus use the [gid.gtk4.types.AccessibleRole.Menu] role.
 */
+@gidGir("PopoverMenuBar")
 class PopoverMenuBar : gid.gtk4.widget.Widget
 {
 

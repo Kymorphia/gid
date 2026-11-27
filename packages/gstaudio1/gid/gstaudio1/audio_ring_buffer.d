@@ -23,6 +23,7 @@ import gid.gstaudio1.types;
     abstraction for DMA based ringbuffers as well as a pure software
     implementations.
 */
+@gidGir("AudioRingBuffer", "AudioRingBufferClass")
 class AudioRingBuffer : gid.gst1.object.ObjectWrap
 {
 

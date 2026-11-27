@@ -32,6 +32,7 @@ import gid.soup3.types;
     always existed in the background, and you can use `g_type_from_name
     ("SoupAuthManager")` to get its [gid.gobject2.types.size_t] in earlier releases.)
 */
+@gidGir("AuthManager", "AuthManagerClass")
 class AuthManager : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionFeature
 {
 

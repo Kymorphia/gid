@@ -29,6 +29,7 @@ import gid.gtk3.widget;
     
     GtkActionBar has a single CSS node with name actionbar.
 */
+@gidGir("ActionBar", "ActionBarClass")
 class ActionBar : gid.gtk3.bin.Bin
 {
 

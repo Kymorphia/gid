@@ -23,6 +23,7 @@ import gid.webkit6.web_view;
     settings with [gid.webkit6.print_operation.PrintOperation.setPrintSettings] or
     display the print dialog with [gid.webkit6.print_operation.PrintOperation.runDialog].
 */
+@gidGir("PrintOperation", "PrintOperationClass")
 class PrintOperation : gid.gobject2.object.ObjectWrap
 {
 

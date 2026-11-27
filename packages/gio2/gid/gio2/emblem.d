@@ -19,6 +19,7 @@ import gid.gobject2.object;
     Currently, only metainformation about the emblem's origin is
     supported. More may be added in the future.
 */
+@gidGir("Emblem", "EmblemClass")
 class Emblem : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon
 {
 

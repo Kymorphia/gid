@@ -24,6 +24,7 @@ import gid.gst1.types;
     gst_id_str_clear (&s);
     ```
 */
+@gidGir("IdStr")
 class IdStr : gid.gobject2.boxed.BoxedWrap!(gst_id_str_get_type)
 {
 

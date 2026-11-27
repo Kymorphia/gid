@@ -12,6 +12,7 @@ import gid.gtk3.types;
     #GtkToggleActionEntry structs are used with
     [gid.gtk3.action_group.ActionGroup.addToggleActions] to construct toggle actions.
 */
+@gidGir("ToggleActionEntry")
 class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
 {
   /**

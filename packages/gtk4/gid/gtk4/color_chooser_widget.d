@@ -54,6 +54,7 @@ import gid.gtk4.widget;
 
     Deprecated: Direct use of [gid.gtk4.color_chooser_widget.ColorChooserWidget] is deprecated.
 */
+@gidGir("ColorChooserWidget")
 class ColorChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.color_chooser.ColorChooser
 {
 

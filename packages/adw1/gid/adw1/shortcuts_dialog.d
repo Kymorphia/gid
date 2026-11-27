@@ -105,6 +105,7 @@ import gid.gtk4.shortcut_manager_mixin;
     
     See also: [gid.adw1.shortcut_label.ShortcutLabel].
 */
+@gidGir("ShortcutsDialog", "ShortcutsDialogClass")
 class ShortcutsDialog : gid.adw1.dialog.Dialog
 {
 

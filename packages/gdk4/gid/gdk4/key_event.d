@@ -11,6 +11,7 @@ import gid.gdk4.types;
 /**
     An event related to a key-based device.
 */
+@gidGir("KeyEvent")
 class KeyEvent : gid.gdk4.event.Event
 {
 

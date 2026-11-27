@@ -14,6 +14,7 @@ import gid.panel1.types;
     Specifies a position in the dock. You receive a #PanelPosition in the
     handler to `signal@PanelDock::create-frame`.
 */
+@gidGir("Position", "PositionClass")
 class Position : gid.gobject2.object.ObjectWrap
 {
 

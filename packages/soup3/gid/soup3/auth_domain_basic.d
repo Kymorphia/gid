@@ -17,6 +17,7 @@ import gid.soup3.types;
     [gid.soup3.auth_domain_basic.AuthDomainBasic] handles the server side of HTTP "Basic" (ie,
     cleartext password) authentication.
 */
+@gidGir("AuthDomainBasic", "AuthDomainBasicClass")
 class AuthDomainBasic : gid.soup3.auth_domain.AuthDomain
 {
 

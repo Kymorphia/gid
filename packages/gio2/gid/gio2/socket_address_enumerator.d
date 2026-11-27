@@ -30,6 +30,7 @@ import gid.gobject2.object;
     enumeration with that [gid.gio2.socket_address_enumerator.SocketAddressEnumerator] is not possible, and it can
     be unreffed.
 */
+@gidGir("SocketAddressEnumerator", "SocketAddressEnumeratorClass")
 class SocketAddressEnumerator : gid.gobject2.object.ObjectWrap
 {
 

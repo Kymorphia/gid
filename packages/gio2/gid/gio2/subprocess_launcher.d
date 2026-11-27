@@ -21,6 +21,7 @@ import gid.gobject2.object;
     options.  It can also be used to launch multiple subprocesses with
     a similar configuration.
 */
+@gidGir("SubprocessLauncher")
 class SubprocessLauncher : gid.gobject2.object.ObjectWrap
 {
 

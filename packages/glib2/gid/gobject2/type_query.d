@@ -12,6 +12,7 @@ import gid.gobject2.types;
     
     See also: [gid.gobject2.global.typeQuery]
 */
+@gidGir("TypeQuery")
 class TypeQuery : StructWrap!(GTypeQuery)
 {
   /**

@@ -33,6 +33,7 @@ import gid.gtk3.types;
     #GtkWidget:halign, #GtkWidget:valign and #GtkWidget:margin properties on the
     child widget.
 */
+@gidGir("Alignment", "AlignmentClass")
 class Alignment : gid.gtk3.bin.Bin
 {
 

@@ -57,6 +57,7 @@ import gid.gtk4.types;
     }
     ```
 */
+@gidGir("PageSetup")
 class PageSetup : gid.gobject2.object.ObjectWrap
 {
 

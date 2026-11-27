@@ -15,6 +15,7 @@ import gid.gstvideo1.types;
     for modifying the color balance implemented by an element providing the
     #GstColorBalance interface. For example, Hue or Saturation.
 */
+@gidGir("ColorBalanceChannel", "ColorBalanceChannelClass")
 class ColorBalanceChannel : gid.gobject2.object.ObjectWrap
 {
 

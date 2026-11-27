@@ -17,6 +17,7 @@ import gid.gobject2.object;
 /**
     A multipart/signed MIME part.
 */
+@gidGir("MultipartSigned", "MultipartSignedClass")
 class MultipartSigned : gid.gmime3.multipart.Multipart
 {
 

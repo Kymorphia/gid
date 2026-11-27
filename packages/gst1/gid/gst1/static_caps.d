@@ -14,6 +14,7 @@ import gid.gst1.types;
     used in conjunction with GST_STATIC_CAPS() and [gid.gst1.static_caps.StaticCaps.get] to
     instantiate a #GstCaps.
 */
+@gidGir("StaticCaps")
 class StaticCaps : gid.gobject2.boxed.BoxedWrap!(gst_static_caps_get_type)
 {
   /**

@@ -19,6 +19,7 @@ import gid.webkit6.types;
     #WebKitWebView::permission-request signal with a
     #WebKitPermissionRequest object attached to it.
 */
+@gidGir("PermissionRequest", "PermissionRequestInterface")
 interface PermissionRequest : GidWrap
 {
 

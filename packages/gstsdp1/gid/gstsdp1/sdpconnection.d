@@ -10,6 +10,7 @@ import gid.gstsdp1.types;
 /**
     The contents of the SDP "c=" field which contains connection data.
 */
+@gidGir("SDPConnection")
 class SDPConnection : StructWrap!(GstSDPConnection)
 {
   /**

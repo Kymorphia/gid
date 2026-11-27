@@ -22,6 +22,7 @@ import gid.gtk3.widget;
     It is used for reliable pointer grabs and selection handling in the code
     for drag-and-drop.
 */
+@gidGir("Invisible", "InvisibleClass")
 class Invisible : gid.gtk3.widget.Widget
 {
 

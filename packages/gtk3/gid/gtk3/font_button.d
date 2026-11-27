@@ -30,6 +30,7 @@ import gid.gtk3.types;
     
     GtkFontButton has a single CSS node with name button and style class .font.
 */
+@gidGir("FontButton", "FontButtonClass")
 class FontButton : gid.gtk3.button.Button, gid.gtk3.font_chooser.FontChooser
 {
 

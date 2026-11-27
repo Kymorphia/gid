@@ -83,6 +83,7 @@ import gid.pango1.layout;
     
     Printing support was added in GTK+ 2.10.
 */
+@gidGir("PrintContext")
 class PrintContext : gid.gobject2.object.ObjectWrap
 {
 

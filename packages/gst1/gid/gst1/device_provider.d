@@ -27,6 +27,7 @@ import gid.gst1.types;
     Applications would normally use a #GstDeviceMonitor to monitor devices
     from all relevant providers.
 */
+@gidGir("DeviceProvider", "DeviceProviderClass")
 class DeviceProvider : gid.gst1.object.ObjectWrap
 {
 

@@ -16,6 +16,7 @@ import gid.gobject2.object;
     used as a proxy for a menu model that is exported over D-Bus with
     [gid.gio2.dbus_connection.DBusConnection.exportMenuModel].
 */
+@gidGir("DBusMenuModel")
 class DBusMenuModel : gid.gio2.menu_model.MenuModel
 {
 

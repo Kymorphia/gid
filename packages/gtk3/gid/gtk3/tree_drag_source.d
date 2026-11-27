@@ -12,6 +12,7 @@ import gid.gtk3.tree_path;
 import gid.gtk3.types;
 
 /** */
+@gidGir("TreeDragSource", "TreeDragSourceIface")
 interface TreeDragSource : GidWrap
 {
 

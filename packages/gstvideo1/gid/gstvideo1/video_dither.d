@@ -11,6 +11,7 @@ import gid.gstvideo1.types;
     GstVideoDither provides implementations of several dithering algorithms
     that can be applied to lines of video pixels to quantize and dither them.
 */
+@gidGir("VideoDither")
 class VideoDither : OpaqueWrap!(GstVideoDither*, void, void)
 {
 

@@ -80,6 +80,7 @@ import gid.gtk3.widget;
     </object>
     ```
 */
+@gidGir("SizeGroup", "SizeGroupClass")
 class SizeGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 {
 

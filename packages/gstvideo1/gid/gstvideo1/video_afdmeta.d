@@ -25,6 +25,7 @@ import gid.gstvideo1.types;
     
     and SMPTE ST2016-1
 */
+@gidGir("VideoAFDMeta")
 class VideoAFDMeta : StructWrap!(GstVideoAFDMeta)
 {
   /**

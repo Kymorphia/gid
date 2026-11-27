@@ -72,6 +72,7 @@ import gid.glib2.types;
     
     A GRWLock should only be accessed with the g_rw_lock_ functions.
 */
+@gidGir("RWLock")
 class RWLock : StructWrap!(GRWLock)
 {
   /**

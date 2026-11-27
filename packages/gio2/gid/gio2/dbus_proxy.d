@@ -73,6 +73,7 @@ import gid.gobject2.object;
     An example using a proxy for a well-known name can be found in
     [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
 */
+@gidGir("DBusProxy", "DBusProxyClass")
 class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncInitable, gid.gio2.dbus_interface.DBusInterface, gid.gio2.initable.Initable
 {
 

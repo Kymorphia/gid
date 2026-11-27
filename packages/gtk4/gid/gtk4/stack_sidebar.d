@@ -39,6 +39,7 @@ import gid.gtk4.widget;
     .needs-attention style class to the widgets representing the stack
     pages.
 */
+@gidGir("StackSidebar")
 class StackSidebar : gid.gtk4.widget.Widget
 {
 

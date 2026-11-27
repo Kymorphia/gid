@@ -23,6 +23,7 @@ import gid.webkit6.web_view;
     download process, or to simply figure out what is to be downloaded,
     and handle the download process itself.
 */
+@gidGir("Download", "DownloadClass")
 class Download : gid.gobject2.object.ObjectWrap
 {
 

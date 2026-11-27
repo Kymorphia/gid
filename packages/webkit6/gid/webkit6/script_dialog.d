@@ -11,6 +11,7 @@ import gid.webkit6.types;
 /**
     Carries details to be shown in user-facing dialogs.
 */
+@gidGir("ScriptDialog")
 class ScriptDialog : gid.gobject2.boxed.BoxedWrap!(webkit_script_dialog_get_type)
 {
 

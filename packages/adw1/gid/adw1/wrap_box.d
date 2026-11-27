@@ -76,6 +76,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.wrap_box.WrapBox] uses the [gid.gtk4.types.AccessibleRole.Group] role.
 */
+@gidGir("WrapBox", "WrapBoxClass")
 class WrapBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 {
 

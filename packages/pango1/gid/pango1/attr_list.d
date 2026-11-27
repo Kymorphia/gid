@@ -23,6 +23,7 @@ import gid.pango1.types;
     suitable for storing attributes for large amounts of text. In general, you
     should not use a single [gid.pango1.attr_list.AttrList] for more than one paragraph of text.
 */
+@gidGir("AttrList")
 class AttrList : gid.gobject2.boxed.BoxedWrap!(pango_attr_list_get_type)
 {
 

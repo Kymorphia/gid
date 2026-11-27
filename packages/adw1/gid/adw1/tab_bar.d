@@ -75,6 +75,7 @@ import gid.gtk4.widget;
       <img src="tab-bar-inline.png" alt="tab-bar-inline">
     </picture>
 */
+@gidGir("TabBar", "TabBarClass")
 class TabBar : gid.gtk4.widget.Widget
 {
 

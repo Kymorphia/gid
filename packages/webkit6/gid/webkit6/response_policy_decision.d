@@ -21,6 +21,7 @@ import gid.webkit6.uriresponse;
     whether or not to download a particular resource or to load it
     normally.
 */
+@gidGir("ResponsePolicyDecision", "ResponsePolicyDecisionClass")
 class ResponsePolicyDecision : gid.webkit6.policy_decision.PolicyDecision
 {
 

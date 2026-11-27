@@ -11,6 +11,7 @@ import gid.gobject2.types;
 /**
     A #GParamSpec derived structure that contains the meta data for unichar (unsigned integer) properties.
 */
+@gidGir("ParamSpecUnichar")
 class ParamSpecUnichar : gid.gobject2.param_spec.ParamSpec
 {
 

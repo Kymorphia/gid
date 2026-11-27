@@ -199,6 +199,7 @@ import gid.pango1.types;
     It is possible to implement custom handling for links and their tooltips with
     the #GtkLabel::activate-link signal and the [gid.gtk4.label.Label.getCurrentUri] function.
 */
+@gidGir("Label", "LabelClass")
 class Label : gid.gtk3.misc.Misc
 {
 

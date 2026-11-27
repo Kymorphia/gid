@@ -244,6 +244,7 @@ import gid.gtk4.widget;
     
     [gid.adw1.sidebar.Sidebar] uses the [gid.gtk4.types.AccessibleRole.Generic] role.
 */
+@gidGir("Sidebar", "SidebarClass")
 class Sidebar : gid.gtk4.widget.Widget
 {
 

@@ -12,6 +12,7 @@ import gid.gstsdp1.types;
 /**
     Hold the common fields for all payloads
 */
+@gidGir("MIKEYPayload")
 class MIKEYPayload : gid.gobject2.boxed.BoxedWrap!(gst_mikey_payload_get_type)
 {
 

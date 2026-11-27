@@ -22,6 +22,7 @@ import gid.gobject2.object;
     resolve the list of names so that fallback icons work nicely with
     themes that inherit other themes.
 */
+@gidGir("ThemedIcon", "ThemedIconClass")
 class ThemedIcon : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon
 {
 

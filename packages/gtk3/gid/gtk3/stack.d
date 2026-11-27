@@ -33,6 +33,7 @@ import gid.gtk3.widget;
     
     GtkStack has a single CSS node named stack.
 */
+@gidGir("Stack", "StackClass")
 class Stack : gid.gtk3.container.Container
 {
 

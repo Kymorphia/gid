@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     A color stop in a gradient node.
 */
+@gidGir("ColorStop")
 class ColorStop : StructWrap!(GskColorStop)
 {
   /**

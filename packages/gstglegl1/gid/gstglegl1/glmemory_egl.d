@@ -12,6 +12,7 @@ import gid.gstglegl1.types;
     #GstGLMemoryEGL is created or wrapped through [gid.gstgl1.glbase_memory.GLBaseMemory.alloc]
     with #GstGLVideoAllocationParams.
 */
+@gidGir("GLMemoryEGL")
 class GLMemoryEGL : gid.gobject2.boxed.BoxedWrap!(gst_gl_memory_egl_get_type)
 {
   /**

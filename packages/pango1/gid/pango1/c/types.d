@@ -7,6 +7,12 @@ public import gid.gio2.c.types;
 public import gid.harfbuzz0.c.types;
 public import gid.cairo1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "Pango";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     A `PangoGlyph` represents a single glyph in the output form of a string.
 */
@@ -45,6 +51,7 @@ alias PangoLayoutRun = PangoGlyphItem;
     See [gid.pango1.layout.Layout.setAutoDir] for how text direction affects
     the interpretation of [gid.pango1.types.Alignment] values.
 */
+@gidGir("Alignment")
 enum PangoAlignment
 {
   /**
@@ -71,6 +78,7 @@ enum PangoAlignment
     values are given below. The type of structure used to store the attribute is
     listed in parentheses after the description.
 */
+@gidGir("AttrType")
 enum PangoAttrType
 {
   /**
@@ -265,6 +273,7 @@ enum PangoAttrType
 /**
     An enumeration that affects baseline shifts between runs.
 */
+@gidGir("BaselineShift")
 enum PangoBaselineShift
 {
   /**
@@ -294,6 +303,7 @@ enum PangoBaselineShift
 
     Deprecated: Use fribidi for this information
 */
+@gidGir("BidiType")
 enum PangoBidiType
 {
   /**
@@ -419,6 +429,7 @@ enum PangoBidiType
     Since 1.44, only [gid.pango1.types.CoverageLevel.None] and [gid.pango1.types.CoverageLevel.Exact]
     will be returned.
 */
+@gidGir("CoverageLevel")
 enum PangoCoverageLevel
 {
   /**
@@ -470,6 +481,7 @@ enum PangoCoverageLevel
     directly. [gid.pango1.types.Direction] is only retained because it is used in some
     public apis.
 */
+@gidGir("Direction")
 enum PangoDirection
 {
   /**
@@ -518,6 +530,7 @@ enum PangoDirection
     text in order to make it fit to a given width and replaced
     with an ellipsis.
 */
+@gidGir("EllipsizeMode")
 enum PangoEllipsizeMode
 {
   /**
@@ -544,6 +557,7 @@ enum PangoEllipsizeMode
 /**
     Specifies whether a font should or should not have color glyphs.
 */
+@gidGir("FontColor")
 enum PangoFontColor
 {
   /**
@@ -566,6 +580,7 @@ enum PangoFontColor
     The bits in a [gid.pango1.types.FontMask] correspond to the set fields in a
     [gid.pango1.font_description.FontDescription].
 */
+@gidGir("FontMask")
 enum PangoFontMask : uint
 {
   /**
@@ -623,6 +638,7 @@ enum PangoFontMask : uint
     An enumeration that affects font sizes for superscript
     and subscript positioning and for (emulated) Small Caps.
 */
+@gidGir("FontScale")
 enum PangoFontScale
 {
   /**
@@ -661,6 +677,7 @@ enum PangoFontScale
     
     See also: [gid.pango1.types.GravityHint]
 */
+@gidGir("Gravity")
 enum PangoGravity
 {
   /**
@@ -697,6 +714,7 @@ enum PangoGravity
     
     See also [gid.pango1.types.Gravity]
 */
+@gidGir("GravityHint")
 enum PangoGravityHint
 {
   /**
@@ -723,6 +741,7 @@ enum PangoGravityHint
 /**
     Errors that can be returned by [gid.pango1.layout.Layout.deserialize].
 */
+@gidGir("LayoutDeserializeError")
 enum PangoLayoutDeserializeError
 {
   /**
@@ -748,6 +767,7 @@ enum PangoLayoutDeserializeError
     
     New members may be added to this enumeration over time.
 */
+@gidGir("LayoutDeserializeFlags")
 enum PangoLayoutDeserializeFlags : uint
 {
   /**
@@ -767,6 +787,7 @@ enum PangoLayoutDeserializeFlags : uint
     
     New members may be added to this enumeration over time.
 */
+@gidGir("LayoutSerializeFlags")
 enum PangoLayoutSerializeFlags : uint
 {
   /**
@@ -789,6 +810,7 @@ enum PangoLayoutSerializeFlags : uint
     The [gid.pango1.types.Overline] enumeration is used to specify whether text
     should be overlined, and if so, the type of line.
 */
+@gidGir("Overline")
 enum PangoOverline
 {
   /**
@@ -807,6 +829,7 @@ enum PangoOverline
     [gid.pango1.types.RenderPart] defines different items to render for such
     purposes as setting colors.
 */
+@gidGir("RenderPart")
 enum PangoRenderPart
 {
   /**
@@ -847,6 +870,7 @@ enum PangoRenderPart
     [gid.glib2.types.UnicodeScript] enumeration instead,
     whose values are interchangeable with [gid.pango1.types.Script].
 */
+@gidGir("Script")
 enum PangoScript
 {
   /**
@@ -1446,6 +1470,7 @@ enum PangoScript
     
     [gid.pango1.types.ShapeFlags] can be passed to `func@Pango.shape_with_flags`.
 */
+@gidGir("ShapeFlags")
 enum PangoShapeFlags : uint
 {
   /**
@@ -1464,6 +1489,7 @@ enum PangoShapeFlags : uint
     These flags affect how Pango treats characters that are normally
     not visible in the output.
 */
+@gidGir("ShowFlags")
 enum PangoShowFlags : uint
 {
   /**
@@ -1492,6 +1518,7 @@ enum PangoShowFlags : uint
     An enumeration specifying the width of the font relative to other designs
     within a family.
 */
+@gidGir("Stretch")
 enum PangoStretch
 {
   /**
@@ -1543,6 +1570,7 @@ enum PangoStretch
 /**
     An enumeration specifying the various slant styles possible for a font.
 */
+@gidGir("Style")
 enum PangoStyle
 {
   /**
@@ -1565,6 +1593,7 @@ enum PangoStyle
     [gid.pango1.types.TabAlign] specifies where the text appears relative to the tab stop
     position.
 */
+@gidGir("TabAlign")
 enum PangoTabAlign
 {
   /**
@@ -1595,6 +1624,7 @@ enum PangoTabAlign
 /**
     An enumeration that affects how Pango treats characters during shaping.
 */
+@gidGir("TextTransform")
 enum PangoTextTransform
 {
   /**
@@ -1623,6 +1653,7 @@ enum PangoTextTransform
     The [gid.pango1.types.Underline] enumeration is used to specify whether text
     should be underlined, and if so, the type of underlining.
 */
+@gidGir("Underline")
 enum PangoUnderline
 {
   /**
@@ -1687,6 +1718,7 @@ enum PangoUnderline
 /**
     An enumeration specifying capitalization variant of the font.
 */
+@gidGir("Variant")
 enum PangoVariant
 {
   /**
@@ -1739,6 +1771,7 @@ enum PangoVariant
     Weight is specified as a numeric value ranging from 100 to 1000.
     This enumeration simply provides some common, predefined values.
 */
+@gidGir("Weight")
 enum PangoWeight
 {
   /**
@@ -1811,6 +1844,7 @@ enum PangoWeight
     breaking at grapheme boundaries that are determined by the Unicode text
     segmentation algorithm.
 */
+@gidGir("WrapMode")
 enum PangoWrapMode
 {
   /**
@@ -1894,6 +1928,7 @@ struct PangoAnalysis
     The functions in this structure should not be called directly. Instead,
     one should use the wrapper functions provided for [gid.pango1.attribute.Attribute].
 */
+@gidGir("AttrClass")
 struct PangoAttrClass
 {
   /**
@@ -2195,6 +2230,7 @@ struct PangoColor
 struct PangoContext;
 
 /** */
+@gidGir("ContextClass")
 struct PangoContextClass;
 
 /**
@@ -2522,6 +2558,7 @@ struct PangoFontsetClass
 struct PangoFontsetSimple;
 
 /** */
+@gidGir("FontsetSimpleClass")
 struct PangoFontsetSimpleClass;
 
 /**
@@ -2541,6 +2578,7 @@ struct PangoFontsetSimpleClass;
     3. Advance the current point to (x + width, y)
     4. Render the next glyph
 */
+@gidGir("GlyphGeometry")
 struct PangoGlyphGeometry
 {
   /**
@@ -2730,6 +2768,7 @@ struct PangoGlyphString
     that is, in Arabic text, accent glyphs follow the glyphs for the
     base character.
 */
+@gidGir("GlyphVisAttr")
 struct PangoGlyphVisAttr
 {
   mixin(bitfields!(
@@ -2826,6 +2865,7 @@ struct PangoLanguage;
 struct PangoLayout;
 
 /** */
+@gidGir("LayoutClass")
 struct PangoLayoutClass;
 
 /**
@@ -2886,6 +2926,7 @@ struct PangoLayoutLine
     The [gid.pango1.types.LogAttr] structure stores information about the attributes of a
     single character.
 */
+@gidGir("LogAttr")
 struct PangoLogAttr
 {
   mixin(bitfields!(
@@ -3033,6 +3074,7 @@ struct PangoMatrix
     extents of a single glyph or section of text. (See, for instance,
     [gid.pango1.font.Font.getGlyphExtents].)
 */
+@gidGir("Rectangle")
 struct PangoRectangle
 {
   /**
@@ -3183,6 +3225,7 @@ struct PangoRendererClass
 }
 
 /** */
+@gidGir("RendererPrivate")
 struct PangoRendererPrivate;
 
 /**

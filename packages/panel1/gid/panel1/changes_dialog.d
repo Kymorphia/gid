@@ -25,6 +25,7 @@ import gid.panel1.save_delegate;
 import gid.panel1.types;
 
 /** */
+@gidGir("ChangesDialog", "ChangesDialogClass")
 class ChangesDialog : gid.adw1.alert_dialog.AlertDialog
 {
 

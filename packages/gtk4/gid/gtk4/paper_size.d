@@ -24,6 +24,7 @@ import gid.gtk4.types;
     and height) of a paper size and its name, it also provides
     default print margins.
 */
+@gidGir("PaperSize")
 class PaperSize : gid.gobject2.boxed.BoxedWrap!(gtk_paper_size_get_type)
 {
 

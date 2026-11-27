@@ -19,6 +19,7 @@ private extern(C) GstRTSPTransport* rtspTransportCopy(const(GstRTSPTransport)* t
 /**
     Provides helper functions to deal with RTSP transport strings.
 */
+@gidGir("RTSPTransport")
 class RTSPTransport : StructWrap!(GstRTSPTransport, rtspTransportCopy, gst_rtsp_transport_free)
 {
   /**

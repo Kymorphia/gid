@@ -118,6 +118,7 @@ import gid.gobject2.object;
     [RFC9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-etag).
     [gid.gio2.file.File] Entity Tags are a very similar concept.
 */
+@gidGir("File", "FileIface")
 interface File : GidWrap
 {
 

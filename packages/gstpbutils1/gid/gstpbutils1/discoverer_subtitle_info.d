@@ -13,6 +13,7 @@ import gid.gstpbutils1.types;
     #GstDiscovererStreamInfo specific to subtitle streams (this includes text and
     image based ones).
 */
+@gidGir("DiscovererSubtitleInfo")
 class DiscovererSubtitleInfo : gid.gstpbutils1.discoverer_stream_info.DiscovererStreamInfo
 {
 

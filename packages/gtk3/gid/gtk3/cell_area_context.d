@@ -22,6 +22,7 @@ import gid.gtk3.types;
     row also be used for the same row when calling other #GtkCellArea APIs
     such as [gid.gtk3.cell_area.CellArea.render] and [gid.gtk4.cell_area.CellArea.event].
 */
+@gidGir("CellAreaContext", "CellAreaContextClass")
 class CellAreaContext : gid.gobject2.object.ObjectWrap
 {
 

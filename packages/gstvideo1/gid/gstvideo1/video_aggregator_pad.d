@@ -14,6 +14,7 @@ import gid.gstvideo1.video_aggregator;
 import gid.gstvideo1.video_frame;
 
 /** */
+@gidGir("VideoAggregatorPad", "VideoAggregatorPadClass")
 class VideoAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
 {
 

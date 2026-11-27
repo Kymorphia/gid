@@ -47,6 +47,7 @@ import gid.gtk3.widget;
     
     This object was added in 3.24.
 */
+@gidGir("EventControllerScroll", "EventControllerScrollClass")
 class EventControllerScroll : gid.gtk3.event_controller.EventController
 {
 

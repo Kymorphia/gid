@@ -12,6 +12,7 @@ import gid.gtksource4.types;
     #GtkSourceRegionIter is an opaque datatype; ignore all its fields.
     Initialize the iter with [gid.gtksource5.region.Region.getStartRegionIter].
 */
+@gidGir("RegionIter")
 class RegionIter : StructWrap!(GtkSourceRegionIter)
 {
   /**

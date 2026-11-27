@@ -17,6 +17,7 @@ import gid.gobject2.object;
 /**
     A leaf-node MIME part object.
 */
+@gidGir("Part", "PartClass")
 class Part : gid.gmime3.object.ObjectWrap
 {
 

@@ -19,6 +19,7 @@ import gid.gobject2.boxed;
     #GVariantBuilder is not threadsafe in any way.  Do not attempt to
     access it from more than one thread.
 */
+@gidGir("VariantBuilder")
 class VariantBuilder : gid.gobject2.boxed.BoxedWrap!(g_variant_builder_get_type)
 {
 

@@ -14,6 +14,7 @@ import gid.gio2.types;
     The scope can be used with [gid.gio2.global.ioModulesLoadAllInDirectoryWithScope]
     or [gid.gio2.global.ioModulesScanAllInDirectoryWithScope].
 */
+@gidGir("IOModuleScope")
 class IOModuleScope : OpaqueWrap!(GIOModuleScope*, void, void)
 {
 

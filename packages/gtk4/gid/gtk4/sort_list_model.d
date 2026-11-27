@@ -45,6 +45,7 @@ import gid.gtk4.types;
     The [gid.gtk4.sort_list_model.SortListModel.sorter] will then be used to sort items
     inside their sections.
 */
+@gidGir("SortListModel", "SortListModelClass")
 class SortListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel, gid.gtk4.section_model.SectionModel
 {
 

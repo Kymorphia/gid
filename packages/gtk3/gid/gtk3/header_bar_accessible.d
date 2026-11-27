@@ -12,6 +12,7 @@ import gid.gtk3.container_accessible;
 import gid.gtk3.types;
 
 /** */
+@gidGir("HeaderBarAccessible", "HeaderBarAccessibleClass")
 class HeaderBarAccessible : gid.gtk3.container_accessible.ContainerAccessible
 {
 

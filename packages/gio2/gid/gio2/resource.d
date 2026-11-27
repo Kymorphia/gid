@@ -175,6 +175,7 @@ import gid.gobject2.object;
     but this is not strictly required.  It is possible to overlay the location of
     a single resource with an individual file.
 */
+@gidGir("Resource")
 class Resource : gid.gobject2.boxed.BoxedWrap!(g_resource_get_type)
 {
 

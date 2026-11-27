@@ -11,6 +11,7 @@ import gid.gsk4.types;
 /**
     The shadow parameters in a shadow node.
 */
+@gidGir("Shadow")
 class Shadow : StructWrap!(GskShadow)
 {
   /**

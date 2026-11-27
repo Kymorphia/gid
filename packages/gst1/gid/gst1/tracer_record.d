@@ -13,6 +13,7 @@ import gid.gst1.types;
     Tracing modules will create instances of this class to announce the data they
     will log and create a log formatter.
 */
+@gidGir("TracerRecord", "TracerRecordClass")
 class TracerRecord : gid.gst1.object.ObjectWrap
 {
 

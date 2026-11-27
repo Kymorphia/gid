@@ -12,6 +12,7 @@ import gid.gobject2.gid_builder;
 /**
     A GnuPG crypto context.
 */
+@gidGir("GpgContext", "GpgContextClass")
 class GpgContext : gid.gmime3.crypto_context.CryptoContext
 {
 

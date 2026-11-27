@@ -12,6 +12,7 @@ import gid.gobject2.object;
 /**
     Represents a value [gid.adw1.animation.Animation] can animate.
 */
+@gidGir("AnimationTarget", "AnimationTargetClass")
 class AnimationTarget : gid.gobject2.object.ObjectWrap
 {
 

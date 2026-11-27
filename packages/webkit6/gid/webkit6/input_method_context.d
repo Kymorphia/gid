@@ -24,6 +24,7 @@ import gid.webkit6.types;
     may provide feedback about this process by displaying the intermediate
     composition states as preedit text.
 */
+@gidGir("InputMethodContext", "InputMethodContextClass")
 class InputMethodContext : gid.gobject2.object.ObjectWrap
 {
 

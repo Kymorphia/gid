@@ -36,6 +36,7 @@ import gid.gtksource5.view;
     displayed using [gid.gtksource5.completion_cell.CompletionCell] which allows for some level of
     customization.
 */
+@gidGir("CompletionContext", "CompletionContextClass")
 class CompletionContext : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
 

@@ -120,6 +120,7 @@ import gid.gtk3.types;
     problematic calls out of init() and into a constructor()
     for your class.
 */
+@gidGir("CellLayout", "CellLayoutIface")
 interface CellLayout : GidWrap
 {
 

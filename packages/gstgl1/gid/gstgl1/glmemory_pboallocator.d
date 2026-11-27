@@ -12,6 +12,7 @@ import gid.gstgl1.types;
 /**
     Opaque #GstGLMemoryPBOAllocator struct
 */
+@gidGir("GLMemoryPBOAllocator", "GLMemoryPBOAllocatorClass")
 class GLMemoryPBOAllocator : gid.gstgl1.glmemory_allocator.GLMemoryAllocator
 {
 

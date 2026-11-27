@@ -5,10 +5,17 @@ public import gid.core.basictypes;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
+/// GIR namespace of the binding (used to export D-defined GObject types to GIR)
+enum string _gidGirNamespace = "GstApp";
+
+/// GIR namespace version of the binding
+enum string _gidGirVersion = "1.0";
+
 /**
     Buffer dropping scheme to avoid the element's internal queue to block when
     full.
 */
+@gidGir("AppLeakyType")
 enum GstAppLeakyType
 {
   /**
@@ -30,6 +37,7 @@ enum GstAppLeakyType
 /**
     The stream type.
 */
+@gidGir("AppStreamType")
 enum GstAppStreamType
 {
   /**
@@ -105,6 +113,7 @@ struct GstAppSink
     A set of callbacks that can be installed on the appsink with
     [gid.gstapp1.app_sink.AppSink.setCallbacks].
 */
+@gidGir("AppSinkCallbacks")
 struct GstAppSinkCallbacks
 {
   /**
@@ -189,6 +198,7 @@ struct GstAppSinkClass
 }
 
 /** */
+@gidGir("AppSinkPrivate")
 struct GstAppSinkPrivate;
 
 /**
@@ -282,6 +292,7 @@ struct GstAppSrc
     A set of callbacks that can be installed on the appsrc with
     [gid.gstapp1.app_src.AppSrc.setCallbacks].
 */
+@gidGir("AppSrcCallbacks")
 struct GstAppSrcCallbacks
 {
   /**
@@ -341,6 +352,7 @@ struct GstAppSrcClass
 }
 
 /** */
+@gidGir("AppSrcPrivate")
 struct GstAppSrcPrivate;
 
 /**

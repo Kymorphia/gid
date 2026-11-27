@@ -59,6 +59,7 @@ import gid.gtk3.widget;
     a single CSS node named row. The row nodes get the .activatable
     style class added when appropriate.
 */
+@gidGir("ListBox", "ListBoxClass")
 class ListBox : gid.gtk3.container.Container
 {
 

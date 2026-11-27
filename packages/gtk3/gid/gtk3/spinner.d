@@ -27,6 +27,7 @@ import gid.gtk3.widget;
     GtkSpinner has a single CSS node with the name spinner. When the animation is
     active, the :checked pseudoclass is added to this node.
 */
+@gidGir("Spinner", "SpinnerClass")
 class Spinner : gid.gtk3.widget.Widget
 {
 
