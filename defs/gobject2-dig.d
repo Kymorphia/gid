@@ -142,13 +142,13 @@ mixin template _GObjectSignalMembers(T, string mem)
       ~ "(string detail, imported!\"gid.gobject2.dig\"._dSignalParams!(T, mem) args) { return"
       ~ " imported!\"gid.gobject2.dig\"._dSignalEmit!(T, mem)(this, detail, args); }");
 
-    mixin("final gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
+    mixin("final imported!\"gid.core.basictypes\".gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
       ~ "(C)(string detail, C callback, imported!\"std.typecons\".Flag!\"After\" after ="
       ~ " imported!\"std.typecons\".No.After) nothrow if (imported!\"std.traits\".isCallable!C) { return"
       ~ " imported!\"gid.gobject2.dig\"._dSignalConnect!(T, mem, C)(this, detail, callback, after); }");
   }
 
-  mixin("final gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
+  mixin("final imported!\"gid.core.basictypes\".gulong connect" ~ imported!"gid.gobject2.dig"._dSignalTitle(mem)
     ~ "(C)(C callback, imported!\"std.typecons\".Flag!\"After\" after = imported!\"std.typecons\".No.After)"
     ~ " nothrow if (imported!\"std.traits\".isCallable!C) { return"
     ~ " imported!\"gid.gobject2.dig\"._dSignalConnect!(T, mem, C)(this, null, callback, after); }");
