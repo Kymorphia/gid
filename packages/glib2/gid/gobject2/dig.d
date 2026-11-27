@@ -194,6 +194,15 @@ mixin template GObjectNamespace(string ns, string symbolPrefix = null)
 * public default constructor `this()`. The type name (namespace and name) must be unique. Don't unload the library
 * after it has been loaded.
 *
+* The exported C functions are named after the C symbol prefix of the namespace and the type name in snake case
+* (`mylib_foo_bar_` for `MylibFooBar`):
+* - `get_type` (unless cSymbol is given)
+* - `new`, which returns a new instance (transfer full, or a floating reference for a GInitiallyUnowned type), if
+*   the class has a public default constructor
+* - one invoker per `@gVirtual` method the class declares, named after the D invoker (`vfuncDoThing` gives
+*   `mylib_foo_bar_do_thing(MylibFooBar *self, ...)`), which calls the implementation in the class struct of the
+*   instance (D, C, or another language)
+*
 * Params:
 *   ns = Namespace, or null to use the one declared with GObjectNamespace
 *   name = Type name without the namespace, or null to use the D class name
@@ -205,7 +214,7 @@ mixin template GObjectNamespace(string ns, string symbolPrefix = null)
 *
 * class Foo : gid.gobject2.object.ObjectWrap
 * {
-*   mixin GObjectExport; // Type MylibFoo, C function mylib_foo_get_type()
+*   mixin GObjectExport; // Type MylibFoo, C functions mylib_foo_get_type() and mylib_foo_new()
 *
 *   this()
 *   {
@@ -216,6 +225,32 @@ mixin template GObjectNamespace(string ns, string symbolPrefix = null)
 */
 mixin template GObjectExport(string ns = null, string name = null, string cSymbol = null)
 {
+  mixin imported!"gid.gobject2.dig"._GObjectExportNames!(ns, name, "GObjectExport");
+  mixin imported!"gid.gobject2.dig".GObjectSubclass!(_gidExportNs ~ _gidExportName);
+  mixin imported!"gid.gobject2.dig"._GObjectExportEntryPoints!cSymbol;
+
+  static if (imported!"gid.gobject2.dig"._dHasPublicDefaultCtor!(typeof(this)))
+  {
+    /// Exported `<prefix>_<type>_new()` C function: a new instance (with `g_object_new`), transfer full (floating
+    /// for a GInitiallyUnowned type)
+    pragma(mangle, _gidExportSymbolBase ~ "_new")
+    export extern(C) static imported!"gid.gobject2.c.types".GObject* _gidExportNew() nothrow
+    {
+      imported!"gid.core.utils".gidInitRuntime();
+      imported!"gid.core.utils".gidAttachThread();
+      return cast(imported!"gid.gobject2.c.types".GObject*)imported!"gid.gobject2.c.functions"
+      .g_object_new_with_properties(_getGType, 0, null, null);
+    }
+  }
+}
+
+/**
+* Namespace, type name and C symbol prefix of a GObjectExport class or GObjectInterfaceExport interface.
+* The symbol base is the C symbol prefix of the namespace followed by the type name in snake case
+* (`mylib_foo_bar` for `MylibFooBar`), the prefix of the exported C functions of the type.
+*/
+mixin template _GObjectExportNames(string ns, string name, string mixinName)
+{
   static if (ns.length > 0)
     private enum string _gidExportNs = ns;
   else static if (__traits(compiles, _gidNamespace))
@@ -223,23 +258,33 @@ mixin template GObjectExport(string ns = null, string name = null, string cSymbo
   else
     private enum string _gidExportNs = null;
 
-  static assert(_gidExportNs.length > 0, "GObjectExport: no namespace for " ~ typeof(this).stringof ~ ", declare it"
-  ~ " at module scope with `mixin GObjectNamespace!(\"Mylib\");` or pass it: `mixin GObjectExport!(\"Mylib\");`");
+  static assert(_gidExportNs.length > 0, mixinName ~ ": no namespace for " ~ typeof(this).stringof ~ ", declare it"
+  ~ " at module scope with `mixin GObjectNamespace!(\"Mylib\");` or pass it: `mixin " ~ mixinName
+  ~ "!(\"Mylib\");`");
 
   private enum string _gidExportName = name.length > 0 ? name : __traits(identifier, typeof(this));
 
-  mixin imported!"gid.gobject2.dig".GObjectSubclass!(_gidExportNs ~ _gidExportName);
+  /// C symbol prefix of the exported functions of the type (`mylib_foo`)
+  static if (__traits(compiles, _gidSymbolPrefix) && __traits(compiles, _gidNamespace)
+    && _gidExportNs == _gidNamespace) // Declared namespace: use its symbol prefix
+  enum string _gidExportSymbolBase = _gidSymbolPrefix ~ "_" ~ imported!"gid.gobject2.dig"._snakeCaseName(_gidExportName);
+  else
+    enum string _gidExportSymbolBase = imported!"gid.gobject2.dig"._snakeCaseName(_gidExportNs) ~ "_"
+  ~ imported!"gid.gobject2.dig"._snakeCaseName(_gidExportName);
+}
 
+/**
+* Exported C functions of a GObjectExport class or GObjectInterfaceExport interface: `get_type`, and the invokers of
+* the `@gVirtual` methods it declares (`<prefix>_<type>_<invoker>`), and the library constructor which initializes
+* the D runtime.
+*/
+mixin template _GObjectExportEntryPoints(string cSymbol)
+{
   /// Name of the exported get_type C function
   static if (cSymbol.length > 0)
     enum string _gidExportGetTypeSymbol = cSymbol;
-  else static if (__traits(compiles, _gidSymbolPrefix) && __traits(compiles, _gidNamespace)
-  && _gidExportNs == _gidNamespace) // Declared namespace: use its symbol prefix
-  enum string _gidExportGetTypeSymbol = _gidSymbolPrefix ~ "_"
-  ~ imported!"gid.gobject2.dig"._snakeCaseName(_gidExportName) ~ "_get_type";
   else
-    enum string _gidExportGetTypeSymbol = imported!"gid.gobject2.dig"._exportGetTypeSymbol(_gidExportNs,
-  _gidExportName);
+    enum string _gidExportGetTypeSymbol = _gidExportSymbolBase ~ "_get_type";
 
   /// Exported get_type function of the GType
   pragma(mangle, _gidExportGetTypeSymbol)
@@ -256,6 +301,39 @@ mixin template GObjectExport(string ns = null, string name = null, string cSymbo
   {
     imported!"gid.core.utils".gidInitRuntime();
   }
+
+  static foreach (_gidExportVfuncMem; imported!"gid.gobject2.dig_vfunc"._dVfuncMembers!(typeof(this)))
+  mixin imported!"gid.gobject2.dig_vfunc"._GObjectExportVfuncInvoker!(typeof(this), _gidExportVfuncMem,
+  _gidExportSymbolBase);
+}
+
+/**
+* True if the class T has a public constructor without arguments (or none at all) and is not abstract
+*/
+template _dHasPublicDefaultCtor(T)
+{
+  // Only the constructors declared by T count: without any, the implicit default constructor is used (base class
+  // constructors are found too while the class is still being analyzed)
+  enum bool _dHasPublicDefaultCtor = () {
+  static if (__traits(isAbstractClass, T))
+    return false;
+  else
+  {
+    bool declared, found;
+
+    static if (__traits(hasMember, T, "__ctor"))
+      static foreach (ctor; __traits(getOverloads, T, "__ctor"))
+    static if (is(__traits(parent, ctor) == T))
+    {
+      declared = true;
+
+      static if (imported!"std.traits".Parameters!ctor.length == 0 && __traits(getVisibility, ctor) == "public")
+        found = true;
+    }
+
+    return found || !declared;
+  }
+}();
 }
 
 /**

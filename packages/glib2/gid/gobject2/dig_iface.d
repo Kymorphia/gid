@@ -82,6 +82,39 @@ mixin template GObjectInterface(string typeName = null)
 }
 
 /**
+* Use this instead of GObjectInterface when a D interface should be usable from other languages (C, Python, GJS, and
+* so on) from a shared library, like GObjectExport for classes. The type name is the namespace followed by the name.
+*
+* The exported C functions are named after the C symbol prefix of the namespace and the type name in snake case:
+* `get_type` (unless cSymbol is given), and one invoker per `@gVirtual` method (`vfuncArea` of `MylibShape` gives
+* `mylib_shape_area(MylibShape *self, ...)`), which calls the implementation of the object (D, C, or another
+* language) through the interface struct.
+*
+* Params:
+*   ns = Namespace, or null to use the one declared with GObjectNamespace
+*   name = Type name without the namespace, or null to use the D interface name
+*   cSymbol = Name of the exported C get_type function, or null for the default
+*
+* Example:
+* ---
+* mixin GObjectNamespace!("Mylib");
+*
+* interface Shape
+* {
+*   mixin GObjectInterfaceExport; // Type MylibShape, C functions mylib_shape_get_type() and mylib_shape_area()
+*
+*   @gVirtual double vfuncArea();
+* }
+* ---
+*/
+mixin template GObjectInterfaceExport(string ns = null, string name = null, string cSymbol = null)
+{
+  mixin imported!"gid.gobject2.dig"._GObjectExportNames!(ns, name, "GObjectInterfaceExport");
+  mixin imported!"gid.gobject2.dig_iface".GObjectInterface!(_gidExportNs ~ _gidExportName);
+  mixin imported!"gid.gobject2.dig"._GObjectExportEntryPoints!cSymbol;
+}
+
+/**
 * Adds the invoker `foo` for the `@gVirtual` method `vfuncFoo` of a D interface (see GObjectInterface).
 */
 mixin template _GObjectIfaceVfuncMembers(I, string mem)
