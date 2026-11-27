@@ -326,7 +326,7 @@ private static extern(C) _dVfuncCReturn!(T, mem) _dVfuncTrampoline(T, string mem
 
 /**
  * Install the trampolines of the @gVirtual methods of T into its class struct, or into an interface struct if T is an
- * interface (see GObjectSubclass and GObjectInterface). No-op if T has none.
+ * interface (see GObjectSubclass and GInterfaceDef). No-op if T has none.
  */
 package static void _installDVfuncs(T)(void* klass) nothrow
 {
@@ -335,7 +335,7 @@ package static void _installDVfuncs(T)(void* klass) nothrow
 }
 
 /**
- * Exported C invoker of a @gVirtual method of a GObjectExport class or GObjectInterfaceExport interface (see
+ * Exported C invoker of a @gVirtual method of a GObjectExport class or GInterfaceExport interface (see
  * _GObjectExportVfuncInvoker): calls the function pointer of the class struct (or interface struct) of the instance,
  * so that implementations in C, D or other languages are used. The arguments and return value are already C values.
  * Returns 0 (or does nothing) if the slot is not set, and logs a critical error if self is not an instance of T, as
@@ -382,7 +382,7 @@ static _dVfuncCReturn!(T, mem) _dVfuncCInvoke(T, string mem)(GObject* self, _dVf
 
 /**
  * Adds the exported C invoker `<symbolBase>_<invoker>` of the @gVirtual method mem of the GObjectExport class or
- * GObjectInterfaceExport interface T (for example `mylib_shape_area` for `vfuncArea` of `MylibShape`). Its first
+ * GInterfaceExport interface T (for example `mylib_shape_area` for `vfuncArea` of `MylibShape`). Its first
  * parameter is the instance, followed by the C types of the arguments (see gVirtual).
  */
 mixin template _GObjectExportVfuncInvoker(T, string mem, string symbolBase)

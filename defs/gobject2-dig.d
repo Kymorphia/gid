@@ -7,7 +7,7 @@
  *
  * Import `gid.gobject2.object` (or this module) and add `mixin GObjectSubclass` or `mixin GObjectExport` to a class.
  * Mark fields or getters and setters with `@gProperty`, public methods with `@gSignal`, and new virtual methods with
- * `@gVirtual`. Add `mixin GObjectInterface` to a D interface to make it a GObject interface.
+ * `@gVirtual`. Add `mixin GInterfaceDef` to a D interface to make it a GObject interface.
  */
 public import gid.gobject2.dig_property;
 public import gid.gobject2.dig_signal;
@@ -244,7 +244,7 @@ mixin template GObjectExport(string ns = null, string name = null, string cSymbo
 }
 
 /**
- * Namespace, type name and C symbol prefix of a GObjectExport class or GObjectInterfaceExport interface.
+ * Namespace, type name and C symbol prefix of a GObjectExport class or GInterfaceExport interface.
  * The symbol base is the C symbol prefix of the namespace followed by the type name in snake case
  * (`mylib_foo_bar` for `MylibFooBar`), the prefix of the exported C functions of the type.
  */
@@ -273,7 +273,7 @@ mixin template _GObjectExportNames(string ns, string name, string mixinName)
 }
 
 /**
- * Exported C functions of a GObjectExport class or GObjectInterfaceExport interface: `get_type`, and the invokers of
+ * Exported C functions of a GObjectExport class or GInterfaceExport interface: `get_type`, and the invokers of
  * the `@gVirtual` methods it declares (`<prefix>_<type>_<invoker>`), and the library constructor which initializes
  * the D runtime.
  */

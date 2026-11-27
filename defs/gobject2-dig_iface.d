@@ -3,7 +3,7 @@
 //!inhibit init funcs imports
 
 /**
- * `GObjectInterface` and the helpers that register a D interface as a GObject interface type.
+ * `GInterfaceDef` and the helpers that register a D interface as a GObject interface type.
  */
 import core.atomic;
 import std.meta : AliasSeq;
@@ -28,7 +28,7 @@ import gid.gobject2.c.types;
  * ---
  * interface Shape
  * {
- *   mixin GObjectInterface!"MyShape";
+ *   mixin GInterfaceDef!"MyShape";
  *
  *   @gVirtual double vfuncArea();
  * }
@@ -56,9 +56,9 @@ import gid.gobject2.c.types;
  * prerequisites. A GObject which implements the interface in another language is wrapped as the D interface, and its
  * methods call that implementation.
  */
-mixin template GObjectInterface(string typeName = null)
+mixin template GInterfaceDef(string typeName = null)
 {
-  static assert(is(typeof(this) == interface), "GObjectInterface can only be used in interfaces");
+  static assert(is(typeof(this) == interface), "GInterfaceDef can only be used in interfaces");
 
   /// The D interface declaring this mixin
   alias _gidDInterfaceOf = typeof(this);
@@ -81,7 +81,7 @@ mixin template GObjectInterface(string typeName = null)
 }
 
 /**
- * Use this instead of GObjectInterface when a D interface should be usable from other languages (C, Python, GJS, and
+ * Use this instead of GInterfaceDef when a D interface should be usable from other languages (C, Python, GJS, and
  * so on) from a shared library, like GObjectExport for classes. The type name is the namespace followed by the name.
  *
  * The exported C functions are named after the C symbol prefix of the namespace and the type name in snake case:
@@ -100,21 +100,21 @@ mixin template GObjectInterface(string typeName = null)
  *
  * interface Shape
  * {
- *   mixin GObjectInterfaceExport; // Type MylibShape, C functions mylib_shape_get_type() and mylib_shape_area()
+ *   mixin GInterfaceExport; // Type MylibShape, C functions mylib_shape_get_type() and mylib_shape_area()
  *
  *   @gVirtual double vfuncArea();
  * }
  * ---
  */
-mixin template GObjectInterfaceExport(string ns = null, string name = null, string cSymbol = null)
+mixin template GInterfaceExport(string ns = null, string name = null, string cSymbol = null)
 {
-  mixin imported!"gid.gobject2.dig"._GObjectExportNames!(ns, name, "GObjectInterfaceExport");
-  mixin imported!"gid.gobject2.dig_iface".GObjectInterface!(_gidExportNs ~ _gidExportName);
+  mixin imported!"gid.gobject2.dig"._GObjectExportNames!(ns, name, "GInterfaceExport");
+  mixin imported!"gid.gobject2.dig_iface".GInterfaceDef!(_gidExportNs ~ _gidExportName);
   mixin imported!"gid.gobject2.dig"._GObjectExportEntryPoints!cSymbol;
 }
 
 /**
- * Adds the invoker `foo` for the `@gVirtual` method `vfuncFoo` of a D interface (see GObjectInterface).
+ * Adds the invoker `foo` for the `@gVirtual` method `vfuncFoo` of a D interface (see GInterfaceDef).
  */
 mixin template _GObjectIfaceVfuncMembers(I, string mem)
 {
@@ -125,7 +125,7 @@ mixin template _GObjectIfaceVfuncMembers(I, string mem)
 }
 
 /**
- * True if I is a D interface registered with GObjectInterface
+ * True if I is a D interface registered with GInterfaceDef
  */
 enum bool _isDInterface(I) = is(I == interface) && is(I._gidDInterfaceOf == I);
 
@@ -136,7 +136,7 @@ private template _dIfaceGType(I)
 }
 
 /**
- * Register the GType of a D interface (see GObjectInterface). Returns the GType, or 0 if the name is already used.
+ * Register the GType of a D interface (see GInterfaceDef). Returns the GType, or 0 if the name is already used.
  */
 static GType _registerDInterface(I)(string name) nothrow
 {
@@ -145,7 +145,7 @@ static GType _registerDInterface(I)(string name) nothrow
 
   static foreach (J; InterfacesTuple!I)
     static assert(_isDInterface!J, "Interface " ~ fullyQualifiedName!I ~ " can only extend interfaces declared with"
-      ~ " GObjectInterface, not " ~ fullyQualifiedName!J);
+      ~ " GInterfaceDef, not " ~ fullyQualifiedName!J);
 
   if (auto t = atomicLoad(*cast(shared GType*)&_dIfaceGType!I))
     return t;
@@ -164,7 +164,7 @@ static GType _registerDInterface(I)(string name) nothrow
     {
       enum fqn = fullyQualifiedName!I;
       g_log("Gid", GLogLevelFlags.LevelCritical, "Can't register GType %s for %s: name already used, pass a"
-        ~ " different typeName to GObjectInterface", name.toStringz, fqn.ptr);
+        ~ " different typeName to GInterfaceDef", name.toStringz, fqn.ptr);
       atomicStore(*cast(shared bool*)&failed, true);
       return 0;
     }

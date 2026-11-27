@@ -283,7 +283,7 @@ So `mixin GObjectNamespace!("Mylib");` plus `mixin GObjectExport;` gives `MylibF
 
 - `mylib_foo_new()` creates an instance with `g_object_new` (transfer full, floating for `GInitiallyUnowned`). It is exported when the class has a public `this()`, explicit or implicit, and isn't abstract.
 - `mylib_foo_<invoker>(self, ...)` is exported for each `@gVirtual` the class declares (`vfuncScaleBy` gives `mylib_foo_scale_by`). It calls the slot of the instance's class struct, so D, C and Python implementations are all used. Arguments and the result are the C values of the slot; the D trampoline converts them. A wrong instance type logs a "Gid" critical and returns 0/null.
-- `GObjectInterfaceExport(ns, name, cSymbol)` does the same for D interfaces: `mylib_shape_get_type()` plus invokers through the interface struct. Plain `GObjectInterface` exports nothing.
+- `GInterfaceExport(ns, name, cSymbol)` does the same for D interfaces: `mylib_shape_get_type()` plus invokers through the interface struct. Plain `GInterfaceDef` exports nothing.
 
 **Name collisions.** If the GType name is already registered (by another library, or by two D classes with the same name), registration fails for both `GObjectSubclass` and `GObjectExport`: a "Gid" critical names the GType and the D class (`fullyQualifiedName`) and suggests passing a different `typeName` (or `GObjectExport` name or ns) or renaming the class. `_getGType` stays 0 and the critical is not repeated. Two exported get_type functions with the same symbol name are a link or `dlsym` problem, as in C.
 
@@ -343,7 +343,7 @@ The fast path is `Thread.getThis !is null` (a TLS read and a compare). The slow 
 
 Phase 3 lets a D class declare **new** GObject properties, signals, and virtual methods, so they are visible to C and other languages (and to GIR in phase 4). `@gProperty`, `@gSignal`, `@gVirtual`, and `@gMethod` are the reserved UDAs. Public docs stay short and do not mention internals or phases.
 
-**Module layout.** The public names (`GObjectSubclass`, `GObjectExport`, `GObjectNamespace`, `@gProperty`, `@gSignal`, `gSignalAccumulator`, `@gVirtual`, and the reserved `@gMethod`) live in `gid.gobject2.dig`, `gid.gobject2.dig_property`, `gid.gobject2.dig_signal`, `gid.gobject2.dig_vfunc`, and `gid.gobject2.dig_iface` (`GObjectInterface`) (`defs/gobject2-dig.d` and the `gobject2-dig_*.d` files). `gid.gobject2.object` re-exports them, so `import gid.gobject2.object : GObjectSubclass, gProperty, gSignal;` still works. `ObjectWrap` (wrapping, construction, `_getDObject`, get/set property, signal connect) stays in `gid.gobject2.object`.
+**Module layout.** The public names (`GObjectSubclass`, `GObjectExport`, `GObjectNamespace`, `@gProperty`, `@gSignal`, `gSignalAccumulator`, `@gVirtual`, and the reserved `@gMethod`) live in `gid.gobject2.dig`, `gid.gobject2.dig_property`, `gid.gobject2.dig_signal`, `gid.gobject2.dig_vfunc`, and `gid.gobject2.dig_iface` (`GInterfaceDef`) (`defs/gobject2-dig.d` and the `gobject2-dig_*.d` files). `gid.gobject2.object` re-exports them, so `import gid.gobject2.object : GObjectSubclass, gProperty, gSignal;` still works. `ObjectWrap` (wrapping, construction, `_getDObject`, get/set property, signal connect) stays in `gid.gobject2.object`.
 
 ### User-facing API (planned)
 
@@ -436,7 +436,7 @@ Read and write work from D (`getProperty` / `setProperty`), from C (`g_object_ge
 
 ### Step 4 behaviour
 
-**Declaration.** A D `interface` with `mixin GObjectInterface!"TypeName"` (the name defaults to `D` + the fully qualified D name) is a GObject interface type, registered on first use of `I._getGType()` (also when a class implementing it is registered). Its methods are abstract `@gVirtual` methods named `vfunc` + TitleCase. The mixin adds a public final invoker with the short name to the interface (`area()` for `vfuncArea`), so it is available on any object typed as the interface. `@gSignal` in an interface is rejected at compile time.
+**Declaration.** A D `interface` with `mixin GInterfaceDef!"TypeName"` (the name defaults to `D` + the fully qualified D name) is a GObject interface type, registered on first use of `I._getGType()` (also when a class implementing it is registered). Its methods are abstract `@gVirtual` methods named `vfunc` + TitleCase. The mixin adds a public final invoker with the short name to the interface (`area()` for `vfuncArea`), so it is available on any object typed as the interface. `@gSignal` in an interface is rejected at compile time.
 
 **Implementing in D.** A D class lists the interface as a base and implements the `vfunc` methods, with `mixin GObjectSubclass` (or `GObjectExport`) as for any D type. `_addDSubclassIface` recognizes D-defined interfaces (`_gidDInterfaceOf`) and adds them with an `interface_init` that writes one trampoline per method. The trampoline casts the bound D object to the interface and calls the method (D virtual dispatch), so a D subclass overrides with a normal `override`, and the interface is only added to the first D type in a hierarchy which implements it.
 
