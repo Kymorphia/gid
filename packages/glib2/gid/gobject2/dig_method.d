@@ -659,7 +659,8 @@ package template _dExportReturn(T, alias fn)
     alias _dExportReturn = Unqual!(ReturnType!fn);
 }
 
-package enum bool _dIsBindingType(PT) = __traits(compiles, imported!"gid.gobject2.dig"._dGirType!PT.name);
+package enum bool _dIsBindingType(PT) = __traits(compiles, imported!"gid.gobject2.dig"._dGirType!PT.name)
+&& !(__traits(compiles, PT._gidExportedAs) && is(PT._gidExportedAs == PT)); // Not a GObjectExport type
 package enum bool _dIsExportedType(PT) = __traits(compiles, PT._gidExportedAs) && is(PT._gidExportedAs == PT);
 
 private enum bool _dIsScalar(PT) = is(PT == bool) || (isIntegral!PT && PT.sizeof <= 8) || is(PT == float)

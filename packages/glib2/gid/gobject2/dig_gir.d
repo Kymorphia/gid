@@ -29,7 +29,7 @@ import gid.gobject2.dig_iface : _isDInterface;
 *
 * Members:
 *   namespace = GIR namespace, the namespace of the exported types (see GObjectNamespace)
-*   nsVersion = Version of the GIR namespace ("1.0")
+*   nsVersion = Version of the GIR namespace ("1.0"), or null to use the version given to GObjectNamespace
 *   sharedLibrary = Name of the shared library which C, Python and other languages load ("libmylib.so"), can be
 *     changed with the `--shared-library` option of the program
 *   cIncludes = C headers to list in the GIR (optional)
@@ -49,7 +49,9 @@ struct GirInfo
 * GObjectExport classes and the GInterfaceExport interfaces of the namespace of `info` (types of other namespaces are
 * skipped). Mix it in under `version (GidGir)` and build the library sources as an executable with that version.
 *
-* The program writes `<Namespace>-<version>.gir` in the current directory. Options: `--gir FILE` writes another
+* The program writes `<Namespace>-<version>.gir` in the current directory. The version is the one of `info` or the
+* one given to GObjectNamespace (they must be the same if both are given). Types of other namespaces that the API uses
+* need the GIR version of their namespace: `mixin GObjectNamespace!("Widgets", "1.0");`. Options: `--gir FILE` writes another
 * file (`-` for the standard output), and `--shared-library NAME` changes the shared library name.
 *
 * Params:
@@ -62,8 +64,8 @@ struct GirInfo
 * module mylib;
 * public import mylib.counter;
 *
-* mixin GObjectNamespace!("Mylib");
-* version (GidGir) mixin GObjectGirMain!(GirInfo("Mylib", "1.0", "libmylib.so"), mylib.counter);
+* mixin GObjectNamespace!("Mylib", "1.0");
+* version (GidGir) mixin GObjectGirMain!(GirInfo("Mylib", null, "libmylib.so"), mylib.counter); // Version 1.0
 * ---
 *
 * dub.json:
@@ -94,7 +96,7 @@ int girMain(GirInfo info, Modules...)(string[] args)
   import std.getopt : defaultGetoptPrinter, getopt, GetOptException;
   import std.stdio : stderr, stdout;
 
-  string output = info.namespace ~ "-" ~ info.nsVersion ~ ".gir";
+  string output;
   string sharedLibrary;
 
   try
@@ -104,7 +106,7 @@ int girMain(GirInfo info, Modules...)(string[] args)
 
     if (help.helpWanted)
     {
-      defaultGetoptPrinter("Write the GIR file of " ~ info.namespace ~ "-" ~ info.nsVersion ~ ".", help.options);
+      defaultGetoptPrinter("Write the GIR file of " ~ info.namespace ~ ".", help.options);
       return 0;
     }
   }
@@ -116,12 +118,15 @@ int girMain(GirInfo info, Modules...)(string[] args)
 
   try
   {
-    auto xml = girXml!(info, Modules)(sharedLibrary);
+    auto gir = _girWrite!(info, Modules)(sharedLibrary);
+
+    if (output.length == 0)
+      output = info.namespace ~ "-" ~ gir.nsVersion ~ ".gir";
 
     if (output == "-")
-      stdout.write(xml);
+      stdout.write(gir.xml);
     else
-      write(output, xml);
+      write(output, gir.xml);
   }
   catch (Exception e)
   {
@@ -145,8 +150,21 @@ int girMain(GirInfo info, Modules...)(string[] args)
 */
 string girXml(GirInfo info, Modules...)(string sharedLibrary = null)
 {
-  import std.algorithm : sort;
-  import std.array : join;
+  return _girWrite!(info, Modules)(sharedLibrary).xml;
+}
+
+/// The GIR XML and the namespace version (see girXml)
+struct _GirOutput
+{
+  string xml; ///
+  string nsVersion; ///
+}
+
+/// ditto
+_GirOutput _girWrite(GirInfo info, Modules...)(string sharedLibrary)
+{
+  import std.algorithm : sort, uniq;
+  import std.array : array, join;
 
   _GirWriter w;
   w.info = info;
@@ -160,6 +178,21 @@ string girXml(GirInfo info, Modules...)(string sharedLibrary = null)
     else static if (_girExportKind!(Mod, mem, info.namespace) == 2)
     _girInterface!(__traits(getMember, Mod, mem))(w);
   }
+
+  // Version: the one of info, or of the GObjectNamespace declaration of the types
+  auto declared = w.nsVersions.dup.sort.uniq.array;
+  string nsVersion = info.nsVersion;
+
+  if (declared.length > 1)
+    w.errors ~= "the types of " ~ info.namespace ~ " have different GIR versions: " ~ declared.join(", ");
+  else if (declared.length == 1 && nsVersion.length > 0 && declared[0] != nsVersion)
+  w.errors ~= "the GirInfo version " ~ nsVersion ~ " differs from the GIR version " ~ declared[0]
+  ~ " given to GObjectNamespace";
+  else if (nsVersion.length == 0 && declared.length == 1)
+  nsVersion = declared[0];
+  else if (nsVersion.length == 0)
+  w.errors ~= "no GIR version: pass it to GirInfo or to GObjectNamespace (GObjectNamespace!(\"" ~ info.namespace
+  ~ "\", \"1.0\"))";
 
   if (w.errors.length > 0)
     throw new Exception("Can't write the GIR of " ~ info.namespace ~ ":\n  " ~ w.errors.join("\n  "));
@@ -178,13 +211,13 @@ string girXml(GirInfo info, Modules...)(string sharedLibrary = null)
   foreach (h; info.cIncludes)
     xml ~= "  <c:include name=\"" ~ _girEsc(h) ~ "\"/>\n";
 
-  xml ~= "  <namespace name=\"" ~ _girEsc(info.namespace) ~ "\" version=\"" ~ _girEsc(info.nsVersion)
+  xml ~= "  <namespace name=\"" ~ _girEsc(info.namespace) ~ "\" version=\"" ~ _girEsc(nsVersion)
   ~ "\" shared-library=\"" ~ _girEsc(sharedLibrary.length > 0 ? sharedLibrary : info.sharedLibrary)
   ~ "\" c:identifier-prefixes=\"" ~ _girEsc(info.namespace) ~ "\" c:symbol-prefixes=\""
   ~ _girEsc(w.symbolPrefix.length > 0 ? w.symbolPrefix : imported!"gid.gobject2.dig"._snakeCaseName(info.namespace))
   ~ "\">\n" ~ w.body ~ "  </namespace>\n</repository>\n";
 
-  return xml;
+  return _GirOutput(xml, nsVersion);
 }
 
 /// State of the GIR writer
@@ -196,6 +229,7 @@ struct _GirWriter
   string body; /// Content of the namespace element
   string[] errors; /// Problems found
   bool[string] done; /// Types written
+  string[] nsVersions; /// GIR versions declared for the types written
 }
 
 // 1 for a GObjectExport class of namespace ns, 2 for a GInterfaceExport interface, 0 otherwise
@@ -263,8 +297,13 @@ private string _girRefName(PT)(ref _GirWriter w, string where)
     if (PT._gidExportNs == w.info.namespace)
       return PT._gidExportName;
 
-    w.errors ~= where ~ ": type " ~ PT.stringof ~ " is in namespace " ~ PT._gidExportNs ~ ", not " ~ w.info.namespace
-    ~ " (types of other D namespaces can't be used yet)";
+    // Type of another D namespace: included with the version of its GObjectNamespace declaration
+    if (PT._gidExportNsVersion.length == 0)
+      w.errors ~= where ~ ": type " ~ PT.stringof ~ " is in namespace " ~ PT._gidExportNs ~ ", which has no GIR version"
+    ~ " (pass it to GObjectNamespace: GObjectNamespace!(\"" ~ PT._gidExportNs ~ "\", \"1.0\"))";
+    else
+      w.includes[PT._gidExportNs] = PT._gidExportNsVersion;
+
     return PT._gidExportNs ~ "." ~ PT._gidExportName;
   }
   else static if (_dIsBindingType!PT)
@@ -650,6 +689,9 @@ private void _girClass(T)(ref _GirWriter w)
   w.done[typeName] = true;
   _girSymbolPrefix!T(w);
 
+  if (T._gidExportNsVersion.length > 0)
+    w.nsVersions ~= T._gidExportNsVersion;
+
   auto gtype = T._getGType();
 
   if (!gtype)
@@ -720,6 +762,9 @@ private void _girInterface(I)(ref _GirWriter w)
 
   w.done[typeName] = true;
   _girSymbolPrefix!I(w);
+
+  if (I._gidExportNsVersion.length > 0)
+    w.nsVersions ~= I._gidExportNsVersion;
 
   if (!I._getGType())
   {
