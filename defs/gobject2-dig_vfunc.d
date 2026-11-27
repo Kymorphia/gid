@@ -8,7 +8,7 @@
 import std.traits : OriginalType, Parameters, ReturnType, hasUDA, isFloatingPoint, isIntegral;
 import std.meta : staticMap;
 
-import gid.gobject2.c.functions : g_type_interface_peek;
+import gid.gobject2.c.functions : g_type_check_instance_is_a, g_type_interface_peek;
 import gid.gobject2.c.types : GObject, GTypeClass, GTypeInstance;
 
 /**
@@ -116,10 +116,11 @@ private template _dVfuncCType(PT)
       ~ " string, or ObjectWrap classes");
 }
 
-// Argument types of the vfunc function pointer after the instance
-private alias _dVfuncCParams(T, string mem) = staticMap!(_dVfuncCType, _dVfuncParams!(T, mem));
+/// Argument types of the vfunc function pointer after the instance
+alias _dVfuncCParams(T, string mem) = staticMap!(_dVfuncCType, _dVfuncParams!(T, mem));
 
-private template _dVfuncCReturn(T, string mem)
+/// Return type of the vfunc function pointer
+template _dVfuncCReturn(T, string mem)
 {
   alias R = _dVfuncReturn!(T, mem);
 
@@ -132,8 +133,8 @@ private template _dVfuncCReturn(T, string mem)
       ~ " void, bool, integers, float, double, or an enum");
 }
 
-// Value returned when no implementation is called (0 also for floating point types, whose init is NaN)
-private template _dVfuncZero(R)
+/// Value returned when no implementation is called (0 also for floating point types, whose init is NaN)
+template _dVfuncZero(R)
 {
   static if (isFloatingPoint!R)
     enum R _dVfuncZero = 0;
@@ -331,4 +332,65 @@ package static void _installDVfuncs(T)(void* klass) nothrow
 {
   static foreach (mem; _dVfuncMembers!T)
     *cast(void**)(cast(ubyte*)klass + _dVfuncOffset!(T, mem)) = cast(void*)&_dVfuncTrampoline!(T, mem);
+}
+
+/**
+ * Exported C invoker of a @gVirtual method of a GObjectExport class or GObjectInterfaceExport interface (see
+ * _GObjectExportVfuncInvoker): calls the function pointer of the class struct (or interface struct) of the instance,
+ * so that implementations in C, D or other languages are used. The arguments and return value are already C values.
+ * Returns 0 (or does nothing) if the slot is not set, and logs a critical error if self is not an instance of T, as
+ * GObject C functions do.
+ */
+static _dVfuncCReturn!(T, mem) _dVfuncCInvoke(T, string mem)(GObject* self, _dVfuncCParams!(T, mem) args) nothrow
+{
+  import gid.glib2.c.functions : g_return_if_fail_warning;
+
+  alias CR = _dVfuncCReturn!(T, mem);
+  alias Fn = extern(C) CR function(GObject*, _dVfuncCParams!(T, mem)) nothrow;
+  enum where = T.stringof ~ "." ~ _dVfuncInvokerName(mem) ~ "\0";
+
+  imported!"gid.core.utils".gidAttachThread(); // Registering the GType allocates D memory
+  auto gtype = T._getGType();
+
+  if (!self || !gtype || !g_type_check_instance_is_a(cast(GTypeInstance*)self, gtype))
+  {
+    g_return_if_fail_warning("Gid", where.ptr, "self is an instance of the type\0".ptr);
+
+    static if (!is(CR == void))
+      return _dVfuncZero!CR;
+    else
+      return;
+  }
+
+  auto klass = (cast(GTypeInstance*)self).gClass;
+
+  static if (is(T == interface)) // Slots are in the interface struct of the class of the object
+    void* vtable = g_type_interface_peek(klass, gtype);
+  else
+    void* vtable = klass;
+
+  auto fn = vtable ? *cast(Fn*)(cast(ubyte*)vtable + _dVfuncOffset!(T, mem)) : null;
+
+  static if (is(CR == void))
+  {
+    if (fn)
+      fn(self, args);
+  }
+  else
+    return fn ? fn(self, args) : _dVfuncZero!CR;
+}
+
+/**
+ * Adds the exported C invoker `<symbolBase>_<invoker>` of the @gVirtual method mem of the GObjectExport class or
+ * GObjectInterfaceExport interface T (for example `mylib_shape_area` for `vfuncArea` of `MylibShape`). Its first
+ * parameter is the instance, followed by the C types of the arguments (see gVirtual).
+ */
+mixin template _GObjectExportVfuncInvoker(T, string mem, string symbolBase)
+{
+  mixin("pragma(mangle, \"" ~ symbolBase ~ "_" ~ imported!"gid.gobject2.dig"._snakeCaseName(
+    imported!"gid.gobject2.dig_vfunc"._dVfuncInvokerName(mem)) ~ "\") export extern(C) static"
+    ~ " imported!\"gid.gobject2.dig_vfunc\"._dVfuncCReturn!(T, \"" ~ mem ~ "\") _gidExportInvoker_" ~ mem
+    ~ "(imported!\"gid.gobject2.c.types\".GObject* self, imported!\"gid.gobject2.dig_vfunc\"._dVfuncCParams!(T, \""
+    ~ mem ~ "\") args) nothrow { return imported!\"gid.gobject2.dig_vfunc\"._dVfuncCInvoke!(T, \"" ~ mem
+    ~ "\")(self, args); }");
 }

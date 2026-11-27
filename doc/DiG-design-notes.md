@@ -279,6 +279,12 @@ Phase 2 makes D subclass GTypes usable from C and other languages: a D shared li
 
 So `mixin GObjectNamespace!("Mylib");` plus `mixin GObjectExport;` gives `MylibFoo` / `mylib_foo_get_type`, and `GObjectNamespace!("MyLib", "mylib")` gives `mylib_foo_get_type` instead of `my_lib_foo_get_type`. Two visible declarations are ambiguous, which is a compile error. Phase 4 (GIR export) will use the same declaration for the C symbols of exported methods and for the GIR `namespace`, `c:identifier-prefixes` and `c:symbol-prefixes`.
 
+**Other C entry points (GIR export step 2).** They share the get_type prefix (`mylib_foo`):
+
+- `mylib_foo_new()` creates an instance with `g_object_new` (transfer full, floating for `GInitiallyUnowned`). It is exported when the class has a public `this()`, explicit or implicit, and isn't abstract.
+- `mylib_foo_<invoker>(self, ...)` is exported for each `@gVirtual` the class declares (`vfuncScaleBy` gives `mylib_foo_scale_by`). It calls the slot of the instance's class struct, so D, C and Python implementations are all used. Arguments and the result are the C values of the slot; the D trampoline converts them. A wrong instance type logs a "Gid" critical and returns 0/null.
+- `GObjectInterfaceExport(ns, name, cSymbol)` does the same for D interfaces: `mylib_shape_get_type()` plus invokers through the interface struct. Plain `GObjectInterface` exports nothing.
+
 **Name collisions.** If the GType name is already registered (by another library, or by two D classes with the same name), registration fails for both `GObjectSubclass` and `GObjectExport`: a "Gid" critical names the GType and the D class (`fullyQualifiedName`) and suggests passing a different `typeName` (or `GObjectExport` name or ns) or renaming the class. `_getGType` stays 0 and the critical is not repeated. Two exported get_type functions with the same symbol name are a link or `dlsym` problem, as in C.
 
 **D runtime initialization** (`gid.gid.gidInitRuntime`). It is idempotent and thread safe (an atomic flag plus a mutex), and calls `Runtime.initialize()` once. `rt_init` is reference counted: in a D program that loads a D library (or links it), `rt_init` only increments the count. The runtime is never terminated by gid (no `rt_term`) for these reasons:
@@ -295,7 +301,7 @@ So `mixin GObjectNamespace!("Mylib");` plus `mixin GObjectExport;` gives `MylibF
 - hand written C callbacks in `defs`: `DClosure._cmarshal`, the destroy notifies `thawDelegate`/`ptrThawDestroyNotify`, and the gdk content (de)serializer, gio/gtk compare and sort, gtk3 menu detacher and gst pad getrange callbacks;
 - `classInit`, `ifaceInit` and `_dSubclassInstanceInit` of D subclass GTypes;
 - `_cObjToggleNotify`;
-- exported get_type functions.
+- exported get_type, `_new` and vfunc invoker functions.
 
 The fast path is `Thread.getThis !is null` (a TLS read and a compare). The slow path calls `thread_attachThis()` and sets a value for a pthread key whose destructor calls `thread_detachThis()` when the thread exits. The detach matters: a thread attached with `thread_attachThis` that exits without detaching makes the next `GC.collect` hang in stop-the-world (verified with LDC 1.43: a C program creating a pthread that calls into a D library, then collecting, hangs). Threads stay attached until they exit, because attaching per call would cost too much on hot vfunc paths. On Windows, druntime detaches threads of D DLLs on `DLL_THREAD_DETACH`, so the key is POSIX only. Not covered: free functions registered through `defs` free/copy callbacks (e.g. boxed `freeCb`, which only call C), and D code reached from C by other means than gid entry points (user `extern(C)` functions must call `gidAttachThread()` themselves).
 
