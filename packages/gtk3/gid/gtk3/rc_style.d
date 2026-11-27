@@ -152,7 +152,7 @@ class RcStyle : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMergeTramp(GtkRcStyle* dest, GtkRcStyle* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.rc_style.RcStyle)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dest);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.rc_style.RcStyle)(cast(void*)dest);
           if (!_obj)
           {
             auto _klass = cast(GtkRcStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dest);
@@ -179,7 +179,7 @@ class RcStyle : gid.gobject2.object.ObjectWrap
         static extern(C) uint _vfuncParseTramp(GtkRcStyle* rcStyle, GtkSettings* settings, GScanner* scanner) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.rc_style.RcStyle)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)rcStyle);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.rc_style.RcStyle)(cast(void*)rcStyle);
           if (!_obj)
           {
             auto _klass = cast(GtkRcStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)rcStyle);

@@ -189,7 +189,7 @@ class GLBaseFilter : gid.gstbase1.base_transform.BaseTransform
         static extern(C) gboolean _vfuncGlSetCapsTramp(GstGLBaseFilter* filter, GstCaps* incaps, GstCaps* outcaps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_filter.GLBaseFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_filter.GLBaseFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -227,7 +227,7 @@ class GLBaseFilter : gid.gstbase1.base_transform.BaseTransform
         static extern(C) gboolean _vfuncGlStartTramp(GstGLBaseFilter* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_filter.GLBaseFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_filter.GLBaseFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -259,7 +259,7 @@ class GLBaseFilter : gid.gstbase1.base_transform.BaseTransform
         static extern(C) void _vfuncGlStopTramp(GstGLBaseFilter* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_filter.GLBaseFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_filter.GLBaseFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);

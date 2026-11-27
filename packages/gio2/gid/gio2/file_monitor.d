@@ -312,7 +312,7 @@ class FileMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncCancelTramp(GFileMonitor* monitor) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_monitor.FileMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_monitor.FileMonitor)(cast(void*)monitor);
           if (!_obj)
           {
             auto _klass = cast(GFileMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor);
@@ -344,7 +344,7 @@ class FileMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GFileMonitor* monitor, GFile* file, GFile* otherFile, GFileMonitorEvent eventType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_monitor.FileMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_monitor.FileMonitor)(cast(void*)monitor);
           if (!_obj)
           {
             auto _klass = cast(GFileMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor);

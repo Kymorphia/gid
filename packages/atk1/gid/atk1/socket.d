@@ -194,7 +194,7 @@ class Socket : gid.atk1.object.ObjectWrap, gid.atk1.component.Component
         static extern(C) void _vfuncEmbedTramp(AtkSocket* obj, const(char)* plugId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.socket.Socket)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.socket.Socket)(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkSocketClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj);

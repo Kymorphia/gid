@@ -2,6 +2,7 @@
 module gid.gio2.app_info_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.app_info;
 public import gid.gio2.app_info_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.app_launch_context;
@@ -1353,7 +1354,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncAddSupportsTypeTramp(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1386,7 +1387,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncCanDeleteTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1418,7 +1419,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncCanRemoveSupportsTypeTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1450,7 +1451,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncDoDeleteTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1482,7 +1483,7 @@ template AppInfoT()
         static extern(C) GAppInfo* _vfuncDupTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1514,7 +1515,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncEqualTramp(GAppInfo* appinfo1, GAppInfo* appinfo2) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo1);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo1);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo1), gid.gio2.app_info.AppInfo._getGType);
@@ -1546,7 +1547,7 @@ template AppInfoT()
         static extern(C) GIcon* _vfuncGetIconTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1578,7 +1579,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncLaunchTramp(GAppInfo* appinfo, GList* files, GAppLaunchContext* context, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1611,7 +1612,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncLaunchUrisTramp(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1644,7 +1645,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncLaunchUrisFinishTramp(GAppInfo* appinfo, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1676,7 +1677,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncRemoveSupportsTypeTramp(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1709,7 +1710,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncSetAsDefaultForExtensionTramp(GAppInfo* appinfo, const(char)* extension, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1742,7 +1743,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncSetAsDefaultForTypeTramp(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1775,7 +1776,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncSetAsLastUsedForTypeTramp(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1808,7 +1809,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncShouldShowTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1840,7 +1841,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncSupportsFilesTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);
@@ -1872,7 +1873,7 @@ template AppInfoT()
         static extern(C) gboolean _vfuncSupportsUrisTramp(GAppInfo* appinfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appinfo);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)appinfo);
           if (!_obj)
           {
             auto _klass = cast(GAppInfoIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appinfo), gid.gio2.app_info.AppInfo._getGType);

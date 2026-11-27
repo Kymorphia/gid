@@ -192,7 +192,7 @@ class Misc : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncThreadsEnterTramp(AtkMisc* misc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.misc.Misc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)misc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.misc.Misc)(cast(void*)misc);
           if (!_obj)
           {
             auto _klass = cast(AtkMiscClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)misc);
@@ -219,7 +219,7 @@ class Misc : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncThreadsLeaveTramp(AtkMisc* misc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.misc.Misc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)misc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.misc.Misc)(cast(void*)misc);
           if (!_obj)
           {
             auto _klass = cast(AtkMiscClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)misc);

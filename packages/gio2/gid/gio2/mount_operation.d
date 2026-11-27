@@ -1048,7 +1048,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAbortedTramp(GMountOperation* op) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.mount_operation.MountOperation)(cast(void*)op);
           if (!_obj)
           {
             auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
@@ -1075,7 +1075,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAskPasswordTramp(GMountOperation* op, const(char)* message, const(char)* defaultUser, const(char)* defaultDomain, GAskPasswordFlags flags) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.mount_operation.MountOperation)(cast(void*)op);
           if (!_obj)
           {
             auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
@@ -1106,7 +1106,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAskQuestionTramp(GMountOperation* op, const(char)* message, const(char*)* choices) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.mount_operation.MountOperation)(cast(void*)op);
           if (!_obj)
           {
             auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
@@ -1147,7 +1147,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncReplyTramp(GMountOperation* op, GMountOperationResult result) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.mount_operation.MountOperation)(cast(void*)op);
           if (!_obj)
           {
             auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
@@ -1174,7 +1174,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncShowProcessesTramp(GMountOperation* op, const(char)* message, GArray* processes, const(char*)* choices) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.mount_operation.MountOperation)(cast(void*)op);
           if (!_obj)
           {
             auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
@@ -1216,7 +1216,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncShowUnmountProgressTramp(GMountOperation* op, const(char)* message, long timeLeft, long bytesLeft) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.mount_operation.MountOperation)(cast(void*)op);
           if (!_obj)
           {
             auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);

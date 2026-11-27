@@ -998,7 +998,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncAcceptCapsTramp(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1033,7 +1033,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) void _vfuncBeforeTransformTramp(GstBaseTransform* trans, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1065,7 +1065,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncCopyMetadataTramp(GstBaseTransform* trans, GstBuffer* input, GstBuffer* outbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1103,7 +1103,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncDecideAllocationTramp(GstBaseTransform* trans, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1138,7 +1138,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncFilterMetaTramp(GstBaseTransform* trans, GstQuery* query, GType api, const(GstStructure)* params) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1173,7 +1173,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) GstCaps* _vfuncFixateCapsTramp(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps, GstCaps* othercaps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1208,7 +1208,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncGenerateOutputTramp(GstBaseTransform* trans, GstBuffer** outbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1242,7 +1242,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncGetUnitSizeTramp(GstBaseTransform* trans, GstCaps* caps, size_t* size) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1277,7 +1277,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncPrepareOutputBufferTramp(GstBaseTransform* trans, GstBuffer* input, GstBuffer** outbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1314,7 +1314,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncProposeAllocationTramp(GstBaseTransform* trans, GstQuery* decideQuery, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1352,7 +1352,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncQueryTramp(GstBaseTransform* trans, GstPadDirection direction, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1387,7 +1387,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetCapsTramp(GstBaseTransform* trans, GstCaps* incaps, GstCaps* outcaps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1425,7 +1425,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkEventTramp(GstBaseTransform* trans, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1457,7 +1457,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcEventTramp(GstBaseTransform* trans, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1489,7 +1489,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStartTramp(GstBaseTransform* trans) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1521,7 +1521,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStopTramp(GstBaseTransform* trans) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1553,7 +1553,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncSubmitInputBufferTramp(GstBaseTransform* trans, gboolean isDiscont, GstBuffer* input) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1588,7 +1588,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncTransformTramp(GstBaseTransform* trans, GstBuffer* inbuf, GstBuffer* outbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1626,7 +1626,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) GstCaps* _vfuncTransformCapsTramp(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps, GstCaps* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1664,7 +1664,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncTransformIpTramp(GstBaseTransform* trans, GstBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1699,7 +1699,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncTransformMetaTramp(GstBaseTransform* trans, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);
@@ -1738,7 +1738,7 @@ class BaseTransform : gid.gst1.element.Element
         static extern(C) gboolean _vfuncTransformSizeTramp(GstBaseTransform* trans, GstPadDirection direction, GstCaps* caps, size_t size, GstCaps* othercaps, size_t* othersize) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_transform.BaseTransform)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_transform.BaseTransform)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstBaseTransformClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);

@@ -343,7 +343,7 @@ class Frame : gid.gtk3.bin.Bin
         static extern(C) void _vfuncComputeChildAllocationTramp(GtkFrame* frame, GtkAllocation* allocation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.frame.Frame)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)frame);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.frame.Frame)(cast(void*)frame);
           if (!_obj)
           {
             auto _klass = cast(GtkFrameClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)frame);

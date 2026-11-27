@@ -1335,7 +1335,7 @@ class TextTag : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncEventTramp(GtkTextTag* tag, GObject* eventObject, GdkEvent* event, const(GtkTextIter)* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_tag.TextTag)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)tag);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_tag.TextTag)(cast(void*)tag);
           if (!_obj)
           {
             auto _klass = cast(GtkTextTagClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)tag);

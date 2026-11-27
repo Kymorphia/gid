@@ -446,7 +446,7 @@ class AudioBaseSink : gid.gstbase1.base_sink.BaseSink
         static extern(C) GstAudioRingBuffer* _vfuncCreateRingbufferTramp(GstAudioBaseSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_base_sink.AudioBaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_base_sink.AudioBaseSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -478,7 +478,7 @@ class AudioBaseSink : gid.gstbase1.base_sink.BaseSink
         static extern(C) GstBuffer* _vfuncPayloadTramp(GstAudioBaseSink* sink, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_base_sink.AudioBaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_base_sink.AudioBaseSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);

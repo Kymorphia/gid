@@ -339,7 +339,7 @@ class Workbench : gid.gtk4.window_group.WindowGroup
         static extern(C) void _vfuncActivateTramp(PanelWorkbench* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.workbench.Workbench)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.workbench.Workbench)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelWorkbenchClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -366,7 +366,7 @@ class Workbench : gid.gtk4.window_group.WindowGroup
         static extern(C) gboolean _vfuncUnloadFinishTramp(PanelWorkbench* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.workbench.Workbench)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.workbench.Workbench)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelWorkbenchClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

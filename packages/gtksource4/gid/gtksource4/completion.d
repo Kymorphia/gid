@@ -896,7 +896,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncActivateProposalTramp(GtkSourceCompletion* completion) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion.Completion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -923,7 +923,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncHideTramp(GtkSourceCompletion* completion) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion.Completion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -950,7 +950,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncMoveCursorTramp(GtkSourceCompletion* completion, GtkScrollStep step, int num) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion.Completion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -977,7 +977,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncMovePageTramp(GtkSourceCompletion* completion, GtkScrollStep step, int num) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion.Completion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -1004,7 +1004,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncPopulateContextTramp(GtkSourceCompletion* completion, GtkSourceCompletionContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion.Completion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -1031,7 +1031,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) gboolean _vfuncProposalActivatedTramp(GtkSourceCompletion* completion, GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion.Completion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -1063,7 +1063,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncShowTramp(GtkSourceCompletion* completion) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion.Completion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);

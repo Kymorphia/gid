@@ -301,7 +301,7 @@ class ControlBinding : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncGetGValueArrayTramp(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.control_binding.ControlBinding)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)binding);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.control_binding.ControlBinding)(cast(void*)binding);
           if (!_obj)
           {
             auto _klass = cast(GstControlBindingClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)binding);
@@ -337,7 +337,7 @@ class ControlBinding : gid.gst1.object.ObjectWrap
         static extern(C) GValue* _vfuncGetValueTramp(GstControlBinding* binding, GstClockTime timestamp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.control_binding.ControlBinding)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)binding);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.control_binding.ControlBinding)(cast(void*)binding);
           if (!_obj)
           {
             auto _klass = cast(GstControlBindingClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)binding);
@@ -369,7 +369,7 @@ class ControlBinding : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncSyncValuesTramp(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.control_binding.ControlBinding)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)binding);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.control_binding.ControlBinding)(cast(void*)binding);
           if (!_obj)
           {
             auto _klass = cast(GstControlBindingClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)binding);

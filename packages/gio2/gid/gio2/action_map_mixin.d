@@ -2,6 +2,7 @@
 module gid.gio2.action_map_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.action_map;
 public import gid.gio2.action_map_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.action;
@@ -284,7 +285,7 @@ template ActionMapT()
         static extern(C) void _vfuncAddActionTramp(GActionMap* actionMap, GAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionMap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionMap);
           if (!_obj)
           {
             auto _klass = cast(GActionMapInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionMap), gid.gio2.action_map.ActionMap._getGType);
@@ -311,7 +312,7 @@ template ActionMapT()
         static extern(C) GAction* _vfuncLookupActionTramp(GActionMap* actionMap, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionMap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionMap);
           if (!_obj)
           {
             auto _klass = cast(GActionMapInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionMap), gid.gio2.action_map.ActionMap._getGType);
@@ -344,7 +345,7 @@ template ActionMapT()
         static extern(C) void _vfuncRemoveActionTramp(GActionMap* actionMap, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionMap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionMap);
           if (!_obj)
           {
             auto _klass = cast(GActionMapInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionMap), gid.gio2.action_map.ActionMap._getGType);

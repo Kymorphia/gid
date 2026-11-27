@@ -2,6 +2,7 @@
 module gid.gio2.proxy_resolver_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.proxy_resolver;
 public import gid.gio2.proxy_resolver_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -357,7 +358,7 @@ template ProxyResolverT()
         static extern(C) gboolean _vfuncIsSupportedTramp(GProxyResolver* resolver) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GProxyResolverInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver), gid.gio2.proxy_resolver.ProxyResolver._getGType);
@@ -389,7 +390,7 @@ template ProxyResolverT()
         static extern(C) char** _vfuncLookupTramp(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GProxyResolverInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver), gid.gio2.proxy_resolver.ProxyResolver._getGType);
@@ -431,7 +432,7 @@ template ProxyResolverT()
         static extern(C) char** _vfuncLookupFinishTramp(GProxyResolver* resolver, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GProxyResolverInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver), gid.gio2.proxy_resolver.ProxyResolver._getGType);

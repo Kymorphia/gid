@@ -1403,7 +1403,7 @@ class ComboBox : gid.gtk3.bin.Bin, gid.gtk3.cell_editable.CellEditable, gid.gtk3
         static extern(C) void _vfuncChangedTramp(GtkComboBox* comboBox) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.combo_box.ComboBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)comboBox);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.combo_box.ComboBox)(cast(void*)comboBox);
           if (!_obj)
           {
             auto _klass = cast(GtkComboBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)comboBox);
@@ -1430,7 +1430,7 @@ class ComboBox : gid.gtk3.bin.Bin, gid.gtk3.cell_editable.CellEditable, gid.gtk3
         static extern(C) char* _vfuncFormatEntryTextTramp(GtkComboBox* comboBox, const(char)* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.combo_box.ComboBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)comboBox);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.combo_box.ComboBox)(cast(void*)comboBox);
           if (!_obj)
           {
             auto _klass = cast(GtkComboBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)comboBox);

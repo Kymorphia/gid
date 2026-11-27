@@ -839,7 +839,7 @@ class Dialog : gid.gtk4.widget.Widget, gid.gtk4.shortcut_manager.ShortcutManager
         static extern(C) void _vfuncCloseAttemptTramp(AdwDialog* dialog) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.dialog.Dialog)(cast(void*)dialog);
           if (!_obj)
           {
             auto _klass = cast(AdwDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);
@@ -866,7 +866,7 @@ class Dialog : gid.gtk4.widget.Widget, gid.gtk4.shortcut_manager.ShortcutManager
         static extern(C) void _vfuncClosedTramp(AdwDialog* dialog) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.dialog.Dialog)(cast(void*)dialog);
           if (!_obj)
           {
             auto _klass = cast(AdwDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);

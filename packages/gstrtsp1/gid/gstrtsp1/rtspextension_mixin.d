@@ -2,6 +2,7 @@
 module gid.gstrtsp1.rtspextension_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstrtsp1.rtspextension;
 public import gid.gstrtsp1.rtspextension_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -344,7 +345,7 @@ template RTSPExtensionT()
         static extern(C) GstRTSPResult _vfuncAfterSendTramp(GstRTSPExtension* ext, GstRTSPMessage* req, GstRTSPMessage* resp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -382,7 +383,7 @@ template RTSPExtensionT()
         static extern(C) GstRTSPResult _vfuncBeforeSendTramp(GstRTSPExtension* ext, GstRTSPMessage* req) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -417,7 +418,7 @@ template RTSPExtensionT()
         static extern(C) gboolean _vfuncConfigureStreamTramp(GstRTSPExtension* ext, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -452,7 +453,7 @@ template RTSPExtensionT()
         static extern(C) gboolean _vfuncDetectServerTramp(GstRTSPExtension* ext, GstRTSPMessage* resp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -487,7 +488,7 @@ template RTSPExtensionT()
         static extern(C) GstRTSPResult _vfuncParseSdpTramp(GstRTSPExtension* ext, GstSDPMessage* sdp, GstStructure* s) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -525,7 +526,7 @@ template RTSPExtensionT()
         static extern(C) GstRTSPResult _vfuncReceiveRequestTramp(GstRTSPExtension* ext, GstRTSPMessage* req) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -560,7 +561,7 @@ template RTSPExtensionT()
         static extern(C) GstRTSPResult _vfuncSendTramp(GstRTSPExtension* ext, GstRTSPMessage* req, GstRTSPMessage* resp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -598,7 +599,7 @@ template RTSPExtensionT()
         static extern(C) GstRTSPResult _vfuncSetupMediaTramp(GstRTSPExtension* ext, GstSDPMedia* media) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);
@@ -631,7 +632,7 @@ template RTSPExtensionT()
         static extern(C) GstRTSPResult _vfuncStreamSelectTramp(GstRTSPExtension* ext, GstRTSPUrl* url) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTSPExtensionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext), gid.gstrtsp1.rtspextension.RTSPExtension._getGType);

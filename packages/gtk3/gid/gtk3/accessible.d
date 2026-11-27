@@ -205,7 +205,7 @@ class Accessible : gid.atk1.object.ObjectWrap
         static extern(C) void _vfuncConnectWidgetDestroyedTramp(GtkAccessible* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.accessible.Accessible)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.accessible.Accessible)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -232,7 +232,7 @@ class Accessible : gid.atk1.object.ObjectWrap
         static extern(C) void _vfuncWidgetSetTramp(GtkAccessible* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.accessible.Accessible)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.accessible.Accessible)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -259,7 +259,7 @@ class Accessible : gid.atk1.object.ObjectWrap
         static extern(C) void _vfuncWidgetUnsetTramp(GtkAccessible* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.accessible.Accessible)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.accessible.Accessible)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);

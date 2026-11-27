@@ -214,7 +214,7 @@ class MenuLinkIter : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncGetNextTramp(GMenuLinkIter* iter, const(char*)* outLink, GMenuModel** value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_link_iter.MenuLinkIter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_link_iter.MenuLinkIter)(cast(void*)iter);
           if (!_obj)
           {
             auto _klass = cast(GMenuLinkIterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iter);

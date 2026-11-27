@@ -2,6 +2,7 @@
 module gid.gtksource4.undo_manager_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtksource4.undo_manager;
 public import gid.gtksource4.undo_manager_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -381,7 +382,7 @@ template UndoManagerT()
         static extern(C) void _vfuncBeginNotUndoableActionTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);
@@ -408,7 +409,7 @@ template UndoManagerT()
         static extern(C) gboolean _vfuncCanRedoTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);
@@ -440,7 +441,7 @@ template UndoManagerT()
         static extern(C) void _vfuncCanRedoChangedTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);
@@ -467,7 +468,7 @@ template UndoManagerT()
         static extern(C) gboolean _vfuncCanUndoTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);
@@ -499,7 +500,7 @@ template UndoManagerT()
         static extern(C) void _vfuncCanUndoChangedTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);
@@ -526,7 +527,7 @@ template UndoManagerT()
         static extern(C) void _vfuncEndNotUndoableActionTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);
@@ -553,7 +554,7 @@ template UndoManagerT()
         static extern(C) void _vfuncRedoTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);
@@ -580,7 +581,7 @@ template UndoManagerT()
         static extern(C) void _vfuncUndoTramp(GtkSourceUndoManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceUndoManagerIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager), gid.gtksource4.undo_manager.UndoManager._getGType);

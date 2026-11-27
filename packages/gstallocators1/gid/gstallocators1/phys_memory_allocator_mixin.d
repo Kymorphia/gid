@@ -2,6 +2,7 @@
 module gid.gstallocators1.phys_memory_allocator_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstallocators1.phys_memory_allocator;
 public import gid.gstallocators1.phys_memory_allocator_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -70,7 +71,7 @@ template PhysMemoryAllocatorT()
         static extern(C) size_t _vfuncGetPhysAddrTramp(GstPhysMemoryAllocator* allocator, GstMemory* mem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)allocator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)allocator);
           if (!_obj)
           {
             auto _klass = cast(GstPhysMemoryAllocatorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)allocator), gid.gstallocators1.phys_memory_allocator.PhysMemoryAllocator._getGType);

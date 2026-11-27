@@ -464,7 +464,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) gboolean _vfuncCanSeekTramp(GFileIOStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -496,7 +496,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) gboolean _vfuncCanTruncateTramp(GFileIOStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -528,7 +528,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) char* _vfuncGetEtagTramp(GFileIOStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -560,7 +560,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) GFileInfo* _vfuncQueryInfoTramp(GFileIOStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -593,7 +593,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) GFileInfo* _vfuncQueryInfoFinishTramp(GFileIOStream* stream, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -625,7 +625,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) gboolean _vfuncSeekTramp(GFileIOStream* stream, long offset, GSeekType type, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -657,7 +657,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) long _vfuncTellTramp(GFileIOStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -687,7 +687,7 @@ class FileIOStream : gid.gio2.iostream.IOStream, gid.gio2.seekable.Seekable
         static extern(C) gboolean _vfuncTruncateFnTramp(GFileIOStream* stream, long size, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_iostream.FileIOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_iostream.FileIOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GFileIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);

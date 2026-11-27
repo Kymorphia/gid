@@ -1210,7 +1210,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncActivateCursorRowTramp(GtkListBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1237,7 +1237,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncMoveCursorTramp(GtkListBox* box, GtkMovementStep step, int count) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1264,7 +1264,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncRowActivatedTramp(GtkListBox* box, GtkListBoxRow* row) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1291,7 +1291,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncRowSelectedTramp(GtkListBox* box, GtkListBoxRow* row) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1318,7 +1318,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncSelectAllTramp(GtkListBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1345,7 +1345,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncSelectedRowsChangedTramp(GtkListBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1372,7 +1372,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncToggleCursorRowTramp(GtkListBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1399,7 +1399,7 @@ class ListBox : gid.gtk3.container.Container
         static extern(C) void _vfuncUnselectAllTramp(GtkListBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.list_box.ListBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);

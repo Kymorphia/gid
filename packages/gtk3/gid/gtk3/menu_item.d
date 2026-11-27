@@ -987,7 +987,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
         static extern(C) void _vfuncActivateTramp(GtkMenuItem* menuItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_item.MenuItem)(cast(void*)menuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
@@ -1014,7 +1014,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
         static extern(C) void _vfuncActivateItemTramp(GtkMenuItem* menuItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_item.MenuItem)(cast(void*)menuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
@@ -1041,7 +1041,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
         static extern(C) void _vfuncDeselectTramp(GtkMenuItem* menuItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_item.MenuItem)(cast(void*)menuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
@@ -1068,7 +1068,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
         static extern(C) void _vfuncSelectTramp(GtkMenuItem* menuItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_item.MenuItem)(cast(void*)menuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
@@ -1095,7 +1095,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
         static extern(C) void _vfuncSetLabelTramp(GtkMenuItem* menuItem, const(char)* label) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_item.MenuItem)(cast(void*)menuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
@@ -1124,7 +1124,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
         static extern(C) void _vfuncToggleSizeAllocateTramp(GtkMenuItem* menuItem, int allocation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_item.MenuItem)(cast(void*)menuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
@@ -1151,7 +1151,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
         static extern(C) void _vfuncToggleSizeRequestTramp(GtkMenuItem* menuItem, int* requisition) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_item.MenuItem)(cast(void*)menuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);

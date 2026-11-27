@@ -700,7 +700,7 @@ class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDoneTramp(GApplicationCommandLine* cmdline) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application_command_line.ApplicationCommandLine)(cast(void*)cmdline);
           if (!_obj)
           {
             auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);
@@ -727,7 +727,7 @@ class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
         static extern(C) GInputStream* _vfuncGetStdinTramp(GApplicationCommandLine* cmdline) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application_command_line.ApplicationCommandLine)(cast(void*)cmdline);
           if (!_obj)
           {
             auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);
@@ -759,7 +759,7 @@ class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPrintLiteralTramp(GApplicationCommandLine* cmdline, const(char)* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application_command_line.ApplicationCommandLine)(cast(void*)cmdline);
           if (!_obj)
           {
             auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);
@@ -788,7 +788,7 @@ class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPrinterrLiteralTramp(GApplicationCommandLine* cmdline, const(char)* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application_command_line.ApplicationCommandLine)(cast(void*)cmdline);
           if (!_obj)
           {
             auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);

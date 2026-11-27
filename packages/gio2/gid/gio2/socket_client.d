@@ -1161,7 +1161,7 @@ class SocketClient : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncEventTramp(GSocketClient* client, GSocketClientEvent event, GSocketConnectable* connectable, GIOStream* connection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_client.SocketClient)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)client);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_client.SocketClient)(cast(void*)client);
           if (!_obj)
           {
             auto _klass = cast(GSocketClientClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)client);

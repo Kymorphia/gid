@@ -2,6 +2,7 @@
 module gid.giounix2.desktop_app_info_lookup_mixin;
 
 public import gid.core.basictypes;
+public import gid.giounix2.desktop_app_info_lookup;
 public import gid.giounix2.desktop_app_info_lookup_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.app_info;
@@ -117,7 +118,7 @@ template DesktopAppInfoLookupT()
         static extern(C) GAppInfo* _vfuncGetDefaultForUriSchemeTramp(GDesktopAppInfoLookup* lookup, const(char)* uriScheme) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)lookup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)lookup);
           if (!_obj)
           {
             auto _klass = cast(GDesktopAppInfoLookupIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)lookup), gid.giounix2.desktop_app_info_lookup.DesktopAppInfoLookup._getGType);

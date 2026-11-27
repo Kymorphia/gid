@@ -167,7 +167,7 @@ class ColorBalanceChannel : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncValueChangedTramp(GstColorBalanceChannel* channel, int value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.color_balance_channel.ColorBalanceChannel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)channel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.color_balance_channel.ColorBalanceChannel)(cast(void*)channel);
           if (!_obj)
           {
             auto _klass = cast(GstColorBalanceChannelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)channel);

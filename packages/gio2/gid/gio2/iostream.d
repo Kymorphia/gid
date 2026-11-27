@@ -558,7 +558,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncCloseFinishTramp(GIOStream* stream, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.iostream.IOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -590,7 +590,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncCloseFnTramp(GIOStream* stream, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.iostream.IOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -622,7 +622,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
         static extern(C) GInputStream* _vfuncGetInputStreamTramp(GIOStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.iostream.IOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -654,7 +654,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
         static extern(C) GOutputStream* _vfuncGetOutputStreamTramp(GIOStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.iostream.IOStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);

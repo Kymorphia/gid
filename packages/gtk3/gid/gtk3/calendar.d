@@ -936,7 +936,7 @@ class Calendar : gid.gtk3.widget.Widget
         static extern(C) void _vfuncDaySelectedTramp(GtkCalendar* calendar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar);
           if (!_obj)
           {
             auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
@@ -963,7 +963,7 @@ class Calendar : gid.gtk3.widget.Widget
         static extern(C) void _vfuncDaySelectedDoubleClickTramp(GtkCalendar* calendar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar);
           if (!_obj)
           {
             auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
@@ -990,7 +990,7 @@ class Calendar : gid.gtk3.widget.Widget
         static extern(C) void _vfuncMonthChangedTramp(GtkCalendar* calendar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar);
           if (!_obj)
           {
             auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
@@ -1017,7 +1017,7 @@ class Calendar : gid.gtk3.widget.Widget
         static extern(C) void _vfuncNextMonthTramp(GtkCalendar* calendar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar);
           if (!_obj)
           {
             auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
@@ -1044,7 +1044,7 @@ class Calendar : gid.gtk3.widget.Widget
         static extern(C) void _vfuncNextYearTramp(GtkCalendar* calendar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar);
           if (!_obj)
           {
             auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
@@ -1071,7 +1071,7 @@ class Calendar : gid.gtk3.widget.Widget
         static extern(C) void _vfuncPrevMonthTramp(GtkCalendar* calendar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar);
           if (!_obj)
           {
             auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
@@ -1098,7 +1098,7 @@ class Calendar : gid.gtk3.widget.Widget
         static extern(C) void _vfuncPrevYearTramp(GtkCalendar* calendar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar);
           if (!_obj)
           {
             auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);

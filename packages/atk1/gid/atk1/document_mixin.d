@@ -2,6 +2,7 @@
 module gid.atk1.document_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.document;
 public import gid.atk1.document_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -687,7 +688,7 @@ template DocumentT()
         static extern(C) int _vfuncGetCurrentPageNumberTramp(AtkDocument* document) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)document);
           if (!_obj)
           {
             auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
@@ -717,7 +718,7 @@ template DocumentT()
         static extern(C) void* _vfuncGetDocumentTramp(AtkDocument* document) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)document);
           if (!_obj)
           {
             auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
@@ -747,7 +748,7 @@ template DocumentT()
         static extern(C) int _vfuncGetPageCountTramp(AtkDocument* document) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)document);
           if (!_obj)
           {
             auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
@@ -777,7 +778,7 @@ template DocumentT()
         static extern(C) gboolean _vfuncSetDocumentAttributeTramp(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)document);
           if (!_obj)
           {
             auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
@@ -811,7 +812,7 @@ template DocumentT()
         static extern(C) gboolean _vfuncSetTextSelectionsTramp(AtkDocument* document, GArray* selections) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)document);
           if (!_obj)
           {
             auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);

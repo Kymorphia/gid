@@ -2,6 +2,7 @@
 module gid.gtk4.buildable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.buildable;
 public import gid.gtk4.buildable_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -325,7 +326,7 @@ template BuildableT()
         static extern(C) void _vfuncAddChildTramp(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* type) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);
@@ -354,7 +355,7 @@ template BuildableT()
         static extern(C) void _vfuncCustomFinishedTramp(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, void* data) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);
@@ -383,7 +384,7 @@ template BuildableT()
         static extern(C) void _vfuncCustomTagEndTramp(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, void* data) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);
@@ -412,7 +413,7 @@ template BuildableT()
         static extern(C) gboolean _vfuncCustomTagStartTramp(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, GtkBuildableParser* parser, void** data) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);
@@ -449,7 +450,7 @@ template BuildableT()
         static extern(C) GObject* _vfuncGetInternalChildTramp(GtkBuildable* buildable, GtkBuilder* builder, const(char)* childname) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);
@@ -482,7 +483,7 @@ template BuildableT()
         static extern(C) void _vfuncParserFinishedTramp(GtkBuildable* buildable, GtkBuilder* builder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);
@@ -509,7 +510,7 @@ template BuildableT()
         static extern(C) void _vfuncSetBuildablePropertyTramp(GtkBuildable* buildable, GtkBuilder* builder, const(char)* name, const(GValue)* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);
@@ -538,7 +539,7 @@ template BuildableT()
         static extern(C) void _vfuncSetIdTramp(GtkBuildable* buildable, const(char)* id) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buildable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)buildable);
           if (!_obj)
           {
             auto _klass = cast(GtkBuildableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buildable), gid.gtk4.buildable.Buildable._getGType);

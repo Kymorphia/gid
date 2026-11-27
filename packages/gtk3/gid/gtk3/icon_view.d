@@ -2026,7 +2026,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) gboolean _vfuncActivateCursorItemTramp(GtkIconView* iconView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
@@ -2058,7 +2058,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) void _vfuncItemActivatedTramp(GtkIconView* iconView, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
@@ -2090,7 +2090,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) gboolean _vfuncMoveCursorTramp(GtkIconView* iconView, GtkMovementStep step, int count) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
@@ -2122,7 +2122,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) void _vfuncSelectAllTramp(GtkIconView* iconView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
@@ -2149,7 +2149,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) void _vfuncSelectCursorItemTramp(GtkIconView* iconView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
@@ -2176,7 +2176,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) void _vfuncSelectionChangedTramp(GtkIconView* iconView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
@@ -2203,7 +2203,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) void _vfuncToggleCursorItemTramp(GtkIconView* iconView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
@@ -2230,7 +2230,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
         static extern(C) void _vfuncUnselectAllTramp(GtkIconView* iconView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_view.IconView)(cast(void*)iconView);
           if (!_obj)
           {
             auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);

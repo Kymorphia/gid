@@ -332,7 +332,7 @@ class LinkButton : gid.gtk3.button.Button
         static extern(C) gboolean _vfuncActivateLinkTramp(GtkLinkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.link_button.LinkButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.link_button.LinkButton)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkLinkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);

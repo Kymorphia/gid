@@ -370,7 +370,7 @@ class CheckMenuItem : gid.gtk3.menu_item.MenuItem
         static extern(C) void _vfuncDrawIndicatorTramp(GtkCheckMenuItem* checkMenuItem, cairo_t* cr) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.check_menu_item.CheckMenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)checkMenuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.check_menu_item.CheckMenuItem)(cast(void*)checkMenuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkCheckMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)checkMenuItem);
@@ -402,7 +402,7 @@ class CheckMenuItem : gid.gtk3.menu_item.MenuItem
         static extern(C) void _vfuncToggledTramp(GtkCheckMenuItem* checkMenuItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.check_menu_item.CheckMenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)checkMenuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.check_menu_item.CheckMenuItem)(cast(void*)checkMenuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkCheckMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)checkMenuItem);

@@ -669,7 +669,7 @@ class TlsInteraction : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsInteractionResult _vfuncAskPasswordTramp(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_interaction.TlsInteraction)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interaction);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_interaction.TlsInteraction)(cast(void*)interaction);
           if (!_obj)
           {
             auto _klass = cast(GTlsInteractionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interaction);
@@ -701,7 +701,7 @@ class TlsInteraction : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsInteractionResult _vfuncAskPasswordFinishTramp(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_interaction.TlsInteraction)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interaction);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_interaction.TlsInteraction)(cast(void*)interaction);
           if (!_obj)
           {
             auto _klass = cast(GTlsInteractionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interaction);
@@ -733,7 +733,7 @@ class TlsInteraction : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsInteractionResult _vfuncRequestCertificateTramp(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_interaction.TlsInteraction)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interaction);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_interaction.TlsInteraction)(cast(void*)interaction);
           if (!_obj)
           {
             auto _klass = cast(GTlsInteractionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interaction);
@@ -765,7 +765,7 @@ class TlsInteraction : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsInteractionResult _vfuncRequestCertificateFinishTramp(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_interaction.TlsInteraction)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interaction);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_interaction.TlsInteraction)(cast(void*)interaction);
           if (!_obj)
           {
             auto _klass = cast(GTlsInteractionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interaction);

@@ -208,7 +208,7 @@ class VideoAggregator : gid.gstbase1.aggregator.Aggregator
         static extern(C) GstFlowReturn _vfuncAggregateFramesTramp(GstVideoAggregator* videoaggregator, GstBuffer* outbuffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator.VideoAggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoaggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator.VideoAggregator)(cast(void*)videoaggregator);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoaggregator);
@@ -243,7 +243,7 @@ class VideoAggregator : gid.gstbase1.aggregator.Aggregator
         static extern(C) void _vfuncFindBestFormatTramp(GstVideoAggregator* vagg, GstCaps* downstreamCaps, GstVideoInfo* bestInfo, gboolean* atLeastOneAlpha) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator.VideoAggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vagg);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator.VideoAggregator)(cast(void*)vagg);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vagg);
@@ -280,7 +280,7 @@ class VideoAggregator : gid.gstbase1.aggregator.Aggregator
         static extern(C) GstCaps* _vfuncUpdateCapsTramp(GstVideoAggregator* videoaggregator, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator.VideoAggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoaggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator.VideoAggregator)(cast(void*)videoaggregator);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoaggregator);

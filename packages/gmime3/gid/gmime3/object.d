@@ -724,7 +724,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncEncodeTramp(GMimeObject* object, GMimeEncodingConstraint constraint) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -751,7 +751,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncGetHeadersTramp(GMimeObject* object, GMimeFormatOptions* options) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -786,7 +786,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncHeaderAddedTramp(GMimeObject* object, GMimeHeader* header) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -813,7 +813,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncHeaderChangedTramp(GMimeObject* object, GMimeHeader* header) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -840,7 +840,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncHeaderRemovedTramp(GMimeObject* object, GMimeHeader* header) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -867,7 +867,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncHeadersClearedTramp(GMimeObject* object) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -894,7 +894,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetContentTypeTramp(GMimeObject* object, GMimeContentType* contentType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -921,7 +921,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) ptrdiff_t _vfuncWriteToStreamTramp(GMimeObject* object, GMimeFormatOptions* options, gboolean contentOnly, GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);

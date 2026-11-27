@@ -680,7 +680,7 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
         static extern(C) void _vfuncApplicationActivatedTramp(GtkAppChooserWidget* self, GAppInfo* appInfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.app_chooser_widget.AppChooserWidget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.app_chooser_widget.AppChooserWidget)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAppChooserWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -707,7 +707,7 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
         static extern(C) void _vfuncApplicationSelectedTramp(GtkAppChooserWidget* self, GAppInfo* appInfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.app_chooser_widget.AppChooserWidget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.app_chooser_widget.AppChooserWidget)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAppChooserWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -734,7 +734,7 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
         static extern(C) void _vfuncPopulatePopupTramp(GtkAppChooserWidget* self, GtkMenu* menu, GAppInfo* appInfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.app_chooser_widget.AppChooserWidget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.app_chooser_widget.AppChooserWidget)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAppChooserWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

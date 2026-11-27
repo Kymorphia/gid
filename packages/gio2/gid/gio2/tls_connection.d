@@ -1176,7 +1176,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
         static extern(C) gboolean _vfuncAcceptCertificateTramp(GTlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)connection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_connection.TlsConnection)(cast(void*)connection);
           if (!_obj)
           {
             auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)connection);
@@ -1208,7 +1208,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
         static extern(C) gboolean _vfuncGetBindingDataTramp(GTlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_connection.TlsConnection)(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn);
@@ -1241,7 +1241,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
         static extern(C) gboolean _vfuncHandshakeTramp(GTlsConnection* conn, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_connection.TlsConnection)(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn);
@@ -1273,7 +1273,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
         static extern(C) gboolean _vfuncHandshakeFinishTramp(GTlsConnection* conn, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_connection.TlsConnection)(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn);

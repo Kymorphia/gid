@@ -122,7 +122,7 @@ class GLBaseMemoryAllocator : gid.gst1.allocator.Allocator
         static extern(C) GstGLBaseMemory* _vfuncAllocTramp(GstGLBaseMemoryAllocator* allocator, GstGLAllocationParams* params) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_memory_allocator.GLBaseMemoryAllocator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)allocator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_memory_allocator.GLBaseMemoryAllocator)(cast(void*)allocator);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseMemoryAllocatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)allocator);

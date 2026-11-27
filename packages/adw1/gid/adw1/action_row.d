@@ -583,7 +583,7 @@ class ActionRow : gid.adw1.preferences_row.PreferencesRow
         static extern(C) void _vfuncActivateTramp(AdwActionRow* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.action_row.ActionRow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.action_row.ActionRow)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwActionRowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

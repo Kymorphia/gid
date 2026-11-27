@@ -356,7 +356,7 @@ class Device : gid.gst1.object.ObjectWrap
         static extern(C) GstElement* _vfuncCreateElementTramp(GstDevice* device, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.device.Device)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)device);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.device.Device)(cast(void*)device);
           if (!_obj)
           {
             auto _klass = cast(GstDeviceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)device);
@@ -389,7 +389,7 @@ class Device : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncReconfigureElementTramp(GstDevice* device, GstElement* element) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.device.Device)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)device);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.device.Device)(cast(void*)device);
           if (!_obj)
           {
             auto _klass = cast(GstDeviceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)device);

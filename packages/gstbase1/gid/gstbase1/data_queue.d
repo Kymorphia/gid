@@ -137,7 +137,7 @@ class DataQueue : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncEmptyTramp(GstDataQueue* queue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.data_queue.DataQueue)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)queue);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.data_queue.DataQueue)(cast(void*)queue);
           if (!_obj)
           {
             auto _klass = cast(GstDataQueueClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)queue);
@@ -164,7 +164,7 @@ class DataQueue : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncFullTramp(GstDataQueue* queue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.data_queue.DataQueue)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)queue);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.data_queue.DataQueue)(cast(void*)queue);
           if (!_obj)
           {
             auto _klass = cast(GstDataQueueClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)queue);

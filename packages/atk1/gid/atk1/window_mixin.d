@@ -2,6 +2,7 @@
 module gid.atk1.window_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.window;
 public import gid.atk1.window_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;

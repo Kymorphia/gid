@@ -2,6 +2,7 @@
 module gid.gio2.async_initable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.async_initable;
 public import gid.gio2.async_initable_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -365,7 +366,7 @@ template AsyncInitableT()
         static extern(C) gboolean _vfuncInitFinishTramp(GAsyncInitable* initable, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)initable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)initable);
           if (!_obj)
           {
             auto _klass = cast(GAsyncInitableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)initable), gid.gio2.async_initable.AsyncInitable._getGType);

@@ -569,7 +569,7 @@ class Scale : gid.gtk4.range.Range
         static extern(C) void _vfuncGetLayoutOffsetsTramp(GtkScale* scale, int* x, int* y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.scale.Scale)(cast(void*)scale);
           if (!_obj)
           {
             auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);

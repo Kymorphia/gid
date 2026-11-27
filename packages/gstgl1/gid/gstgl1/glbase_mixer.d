@@ -154,7 +154,7 @@ class GLBaseMixer : gid.gstvideo1.video_aggregator.VideoAggregator
         static extern(C) gboolean _vfuncGlStartTramp(GstGLBaseMixer* mix) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_mixer.GLBaseMixer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mix);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_mixer.GLBaseMixer)(cast(void*)mix);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseMixerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mix);
@@ -186,7 +186,7 @@ class GLBaseMixer : gid.gstvideo1.video_aggregator.VideoAggregator
         static extern(C) void _vfuncGlStopTramp(GstGLBaseMixer* mix) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_mixer.GLBaseMixer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mix);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_mixer.GLBaseMixer)(cast(void*)mix);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseMixerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mix);

@@ -452,7 +452,7 @@ class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_sourc
         static extern(C) void _vfuncModifyTramp(GtkTreeModelFilter* self, GtkTreeModel* childModel, GtkTreeIter* iter, GValue* value, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_model_filter.TreeModelFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_model_filter.TreeModelFilter)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -487,7 +487,7 @@ class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_sourc
         static extern(C) gboolean _vfuncVisibleTramp(GtkTreeModelFilter* self, GtkTreeModel* childModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_model_filter.TreeModelFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_model_filter.TreeModelFilter)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

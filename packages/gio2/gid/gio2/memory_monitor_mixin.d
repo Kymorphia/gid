@@ -2,6 +2,7 @@
 module gid.gio2.memory_monitor_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.memory_monitor;
 public import gid.gio2.memory_monitor_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -177,7 +178,7 @@ template MemoryMonitorT()
         static extern(C) void _vfuncLowMemoryWarningTramp(GMemoryMonitor* monitor, GMemoryMonitorWarningLevel level) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)monitor);
           if (!_obj)
           {
             auto _klass = cast(GMemoryMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.memory_monitor.MemoryMonitor._getGType);

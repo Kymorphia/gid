@@ -2296,7 +2296,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) GstStateChangeReturn _vfuncChangeStateTramp(GstElement* element, GstStateChange transition) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2328,7 +2328,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) GstStateChangeReturn _vfuncGetStateTramp(GstElement* element, GstState* state, GstState* pending, GstClockTime timeout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2368,7 +2368,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncNoMorePadsTramp(GstElement* element) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2395,7 +2395,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncPadAddedTramp(GstElement* element, GstPad* pad) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2422,7 +2422,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncPadRemovedTramp(GstElement* element, GstPad* pad) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2449,7 +2449,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncPostMessageTramp(GstElement* element, GstMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2481,7 +2481,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) GstClock* _vfuncProvideClockTramp(GstElement* element) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2513,7 +2513,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncQueryTramp(GstElement* element, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2548,7 +2548,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncReleasePadTramp(GstElement* element, GstPad* pad) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2575,7 +2575,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) GstPad* _vfuncRequestNewPadTramp(GstElement* element, GstPadTemplate* templ, const(char)* name, const(GstCaps)* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2608,7 +2608,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncSendEventTramp(GstElement* element, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2640,7 +2640,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncSetBusTramp(GstElement* element, GstBus* bus) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2667,7 +2667,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncSetClockTramp(GstElement* element, GstClock* clock) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2699,7 +2699,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncSetContextTramp(GstElement* element, GstContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2731,7 +2731,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) GstStateChangeReturn _vfuncSetStateTramp(GstElement* element, GstState state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
@@ -2763,7 +2763,7 @@ class Element : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncStateChangedTramp(GstElement* element, GstState oldstate, GstState newstate, GstState pending) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.element.Element)(cast(void*)element);
           if (!_obj)
           {
             auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);

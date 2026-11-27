@@ -771,7 +771,7 @@ class FileEnumerator : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncCloseFinishTramp(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_enumerator.FileEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_enumerator.FileEnumerator)(cast(void*)enumerator);
           if (!_obj)
           {
             auto _klass = cast(GFileEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);
@@ -803,7 +803,7 @@ class FileEnumerator : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncCloseFnTramp(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_enumerator.FileEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_enumerator.FileEnumerator)(cast(void*)enumerator);
           if (!_obj)
           {
             auto _klass = cast(GFileEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);
@@ -835,7 +835,7 @@ class FileEnumerator : gid.gobject2.object.ObjectWrap
         static extern(C) GFileInfo* _vfuncNextFileTramp(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_enumerator.FileEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_enumerator.FileEnumerator)(cast(void*)enumerator);
           if (!_obj)
           {
             auto _klass = cast(GFileEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);
@@ -867,7 +867,7 @@ class FileEnumerator : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncNextFilesFinishTramp(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.file_enumerator.FileEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.file_enumerator.FileEnumerator)(cast(void*)enumerator);
           if (!_obj)
           {
             auto _klass = cast(GFileEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);

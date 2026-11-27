@@ -278,7 +278,7 @@ class StreamCollection : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncStreamNotifyTramp(GstStreamCollection* collection, GstStream* stream, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.stream_collection.StreamCollection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)collection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.stream_collection.StreamCollection)(cast(void*)collection);
           if (!_obj)
           {
             auto _klass = cast(GstStreamCollectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)collection);

@@ -1121,7 +1121,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncCloseTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1148,7 +1148,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncControlsViewportTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1180,7 +1180,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncDrawTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1207,7 +1207,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) size_t _vfuncGetDisplayTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1237,7 +1237,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) size_t _vfuncGetWindowHandleTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1267,7 +1267,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncHandleEventsTramp(GstGLWindow* window, gboolean handleEvents) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1294,7 +1294,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncHasOutputSurfaceTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1326,7 +1326,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncOpenTramp(GstGLWindow* window, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1358,7 +1358,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncQueueResizeTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1385,7 +1385,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncQuitTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1412,7 +1412,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncRunTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1439,7 +1439,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncSetPreferredSizeTramp(GstGLWindow* window, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1466,7 +1466,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncSetRenderRectangleTramp(GstGLWindow* window, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1498,7 +1498,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncSetWindowHandleTramp(GstGLWindow* window, size_t handle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -1525,7 +1525,7 @@ class GLWindow : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncShowTramp(GstGLWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glwindow.GLWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glwindow.GLWindow)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GstGLWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);

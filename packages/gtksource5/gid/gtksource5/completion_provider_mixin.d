@@ -2,6 +2,7 @@
 module gid.gtksource5.completion_provider_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtksource5.completion_provider;
 public import gid.gtksource5.completion_provider_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk4.types;
@@ -602,7 +603,7 @@ template CompletionProviderT()
         static extern(C) void _vfuncActivateTramp(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -629,7 +630,7 @@ template CompletionProviderT()
         static extern(C) void _vfuncDisplayTramp(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal, GtkSourceCompletionCell* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -656,7 +657,7 @@ template CompletionProviderT()
         static extern(C) int _vfuncGetPriorityTramp(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -686,7 +687,7 @@ template CompletionProviderT()
         static extern(C) char* _vfuncGetTitleTramp(GtkSourceCompletionProvider* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -718,7 +719,7 @@ template CompletionProviderT()
         static extern(C) gboolean _vfuncIsTriggerTramp(GtkSourceCompletionProvider* self, const(GtkTextIter)* iter, dchar ch) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -750,7 +751,7 @@ template CompletionProviderT()
         static extern(C) gboolean _vfuncKeyActivatesTramp(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal, uint keyval, GdkModifierType state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -782,7 +783,7 @@ template CompletionProviderT()
         static extern(C) GPtrArray* _vfuncListAlternatesTramp(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -814,7 +815,7 @@ template CompletionProviderT()
         static extern(C) GListModel* _vfuncPopulateFinishTramp(GtkSourceCompletionProvider* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);
@@ -846,7 +847,7 @@ template CompletionProviderT()
         static extern(C) void _vfuncRefilterTramp(GtkSourceCompletionProvider* self, GtkSourceCompletionContext* context, GListModel* model) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.completion_provider.CompletionProvider._getGType);

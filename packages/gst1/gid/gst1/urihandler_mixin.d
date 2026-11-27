@@ -2,6 +2,7 @@
 module gid.gst1.urihandler_mixin;
 
 public import gid.core.basictypes;
+public import gid.gst1.urihandler;
 public import gid.gst1.urihandler_iface_proxy;
 public import gid.core.utils;
 public import gid.glib2.error;
@@ -183,7 +184,7 @@ template URIHandlerT()
         static extern(C) char* _vfuncGetUriTramp(GstURIHandler* handler) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)handler);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)handler);
           if (!_obj)
           {
             auto _klass = cast(GstURIHandlerInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)handler), gid.gst1.urihandler.URIHandler._getGType);
@@ -215,7 +216,7 @@ template URIHandlerT()
         static extern(C) gboolean _vfuncSetUriTramp(GstURIHandler* handler, const(char)* uri, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)handler);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)handler);
           if (!_obj)
           {
             auto _klass = cast(GstURIHandlerInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)handler), gid.gst1.urihandler.URIHandler._getGType);

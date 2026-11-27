@@ -4293,7 +4293,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncAuthenticateTramp(WebKitWebView* webView, WebKitAuthenticationRequest* request) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4325,7 +4325,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncCloseTramp(WebKitWebView* webView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4352,7 +4352,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncContextMenuTramp(WebKitWebView* webView, WebKitContextMenu* contextMenu, WebKitHitTestResult* hitTestResult) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4384,7 +4384,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncContextMenuDismissedTramp(WebKitWebView* webView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4411,7 +4411,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncDecidePolicyTramp(WebKitWebView* webView, WebKitPolicyDecision* decision, WebKitPolicyDecisionType type) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4443,7 +4443,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncEnterFullscreenTramp(WebKitWebView* webView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4475,7 +4475,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncInsecureContentDetectedTramp(WebKitWebView* webView, WebKitInsecureContentEvent event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4502,7 +4502,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncLeaveFullscreenTramp(WebKitWebView* webView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4534,7 +4534,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncLoadChangedTramp(WebKitWebView* webView, WebKitLoadEvent loadEvent) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4561,7 +4561,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncLoadFailedTramp(WebKitWebView* webView, WebKitLoadEvent loadEvent, const(char)* failingUri, GError* error) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4594,7 +4594,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncLoadFailedWithTlsErrorsTramp(WebKitWebView* webView, const(char)* failingUri, GTlsCertificate* certificate, GTlsCertificateFlags errors) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4627,7 +4627,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncMouseTargetChangedTramp(WebKitWebView* webView, WebKitHitTestResult* hitTestResult, uint modifiers) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4654,7 +4654,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncPermissionRequestTramp(WebKitWebView* webView, WebKitPermissionRequest* permissionRequest) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4686,7 +4686,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncPrintTramp(WebKitWebView* webView, WebKitPrintOperation* printOperation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4718,7 +4718,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncQueryPermissionStateTramp(WebKitWebView* webView, WebKitPermissionStateQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4753,7 +4753,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncReadyToShowTramp(WebKitWebView* webView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4780,7 +4780,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncResourceLoadStartedTramp(WebKitWebView* webView, WebKitWebResource* resource, WebKitURIRequest* request) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4807,7 +4807,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncRunAsModalTramp(WebKitWebView* webView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4834,7 +4834,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncRunColorChooserTramp(WebKitWebView* webView, WebKitColorChooserRequest* request) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4866,7 +4866,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncRunFileChooserTramp(WebKitWebView* webView, WebKitFileChooserRequest* request) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4898,7 +4898,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncScriptDialogTramp(WebKitWebView* webView, WebKitScriptDialog* dialog) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4933,7 +4933,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncShowNotificationTramp(WebKitWebView* webView, WebKitNotification* notification) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4965,7 +4965,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncShowOptionMenuTramp(WebKitWebView* webView, WebKitOptionMenu* menu, GdkRectangle* rectangle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -4997,7 +4997,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncSubmitFormTramp(WebKitWebView* webView, WebKitFormSubmissionRequest* request) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -5024,7 +5024,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncUserMessageReceivedTramp(WebKitWebView* webView, WebKitUserMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -5056,7 +5056,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) gboolean _vfuncWebProcessCrashedTramp(WebKitWebView* webView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
@@ -5088,7 +5088,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
         static extern(C) void _vfuncWebProcessTerminatedTramp(WebKitWebView* webView, WebKitWebProcessTerminationReason reason) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.web_view.WebView)(cast(void*)webView);
           if (!_obj)
           {
             auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);

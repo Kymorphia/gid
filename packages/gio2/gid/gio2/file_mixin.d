@@ -2,6 +2,7 @@
 module gid.gio2.file_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.file;
 public import gid.gio2.file_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.app_info;
@@ -8551,7 +8552,7 @@ template FileT()
         static extern(C) GFileOutputStream* _vfuncAppendToTramp(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8583,7 +8584,7 @@ template FileT()
         static extern(C) GFileOutputStream* _vfuncAppendToFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8615,7 +8616,7 @@ template FileT()
         static extern(C) gboolean _vfuncCopyFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8647,7 +8648,7 @@ template FileT()
         static extern(C) GFileOutputStream* _vfuncCreateTramp(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8679,7 +8680,7 @@ template FileT()
         static extern(C) GFileOutputStream* _vfuncCreateFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8711,7 +8712,7 @@ template FileT()
         static extern(C) GFileIOStream* _vfuncCreateReadwriteTramp(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8743,7 +8744,7 @@ template FileT()
         static extern(C) GFileIOStream* _vfuncCreateReadwriteFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8775,7 +8776,7 @@ template FileT()
         static extern(C) gboolean _vfuncDeleteFileTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8807,7 +8808,7 @@ template FileT()
         static extern(C) gboolean _vfuncDeleteFileFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8839,7 +8840,7 @@ template FileT()
         static extern(C) GFile* _vfuncDupTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8871,7 +8872,7 @@ template FileT()
         static extern(C) gboolean _vfuncEjectMountableFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8903,7 +8904,7 @@ template FileT()
         static extern(C) gboolean _vfuncEjectMountableWithOperationFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8935,7 +8936,7 @@ template FileT()
         static extern(C) GFileEnumerator* _vfuncEnumerateChildrenTramp(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -8968,7 +8969,7 @@ template FileT()
         static extern(C) GFileEnumerator* _vfuncEnumerateChildrenFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9000,7 +9001,7 @@ template FileT()
         static extern(C) gboolean _vfuncEqualTramp(GFile* file1, GFile* file2) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file1);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file1);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file1), gid.gio2.file.File._getGType);
@@ -9032,7 +9033,7 @@ template FileT()
         static extern(C) GMount* _vfuncFindEnclosingMountTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9064,7 +9065,7 @@ template FileT()
         static extern(C) GMount* _vfuncFindEnclosingMountFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9096,7 +9097,7 @@ template FileT()
         static extern(C) char* _vfuncGetBasenameTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9128,7 +9129,7 @@ template FileT()
         static extern(C) GFile* _vfuncGetChildForDisplayNameTramp(GFile* file, const(char)* displayName, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9161,7 +9162,7 @@ template FileT()
         static extern(C) GFile* _vfuncGetParentTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9193,7 +9194,7 @@ template FileT()
         static extern(C) char* _vfuncGetParseNameTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9225,7 +9226,7 @@ template FileT()
         static extern(C) char* _vfuncGetPathTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9257,7 +9258,7 @@ template FileT()
         static extern(C) char* _vfuncGetRelativePathTramp(GFile* parent, GFile* descendant) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gio2.file.File._getGType);
@@ -9289,7 +9290,7 @@ template FileT()
         static extern(C) char* _vfuncGetUriTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9321,7 +9322,7 @@ template FileT()
         static extern(C) char* _vfuncGetUriSchemeTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9353,7 +9354,7 @@ template FileT()
         static extern(C) gboolean _vfuncHasUriSchemeTramp(GFile* file, const(char)* uriScheme) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9386,7 +9387,7 @@ template FileT()
         static extern(C) uint _vfuncHashTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9416,7 +9417,7 @@ template FileT()
         static extern(C) gboolean _vfuncIsNativeTramp(GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9448,7 +9449,7 @@ template FileT()
         static extern(C) gboolean _vfuncMakeDirectoryTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9480,7 +9481,7 @@ template FileT()
         static extern(C) gboolean _vfuncMakeDirectoryFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9512,7 +9513,7 @@ template FileT()
         static extern(C) gboolean _vfuncMakeSymbolicLinkTramp(GFile* file, const(char)* symlinkValue, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9545,7 +9546,7 @@ template FileT()
         static extern(C) gboolean _vfuncMakeSymbolicLinkFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9577,7 +9578,7 @@ template FileT()
         static extern(C) gboolean _vfuncMeasureDiskUsageFinishTramp(GFile* file, GAsyncResult* result, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9621,7 +9622,7 @@ template FileT()
         static extern(C) GFileMonitor* _vfuncMonitorDirTramp(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9653,7 +9654,7 @@ template FileT()
         static extern(C) GFileMonitor* _vfuncMonitorFileTramp(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9685,7 +9686,7 @@ template FileT()
         static extern(C) gboolean _vfuncMountEnclosingVolumeFinishTramp(GFile* location, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)location);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)location);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)location), gid.gio2.file.File._getGType);
@@ -9717,7 +9718,7 @@ template FileT()
         static extern(C) GFile* _vfuncMountMountableFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9749,7 +9750,7 @@ template FileT()
         static extern(C) gboolean _vfuncMoveFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9781,7 +9782,7 @@ template FileT()
         static extern(C) GFileIOStream* _vfuncOpenReadwriteTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9813,7 +9814,7 @@ template FileT()
         static extern(C) GFileIOStream* _vfuncOpenReadwriteFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9845,7 +9846,7 @@ template FileT()
         static extern(C) gboolean _vfuncPollMountableFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9877,7 +9878,7 @@ template FileT()
         static extern(C) gboolean _vfuncPrefixMatchesTramp(GFile* prefix, GFile* file) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)prefix);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)prefix);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)prefix), gid.gio2.file.File._getGType);
@@ -9909,7 +9910,7 @@ template FileT()
         static extern(C) gboolean _vfuncQueryExistsTramp(GFile* file, GCancellable* cancellable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9941,7 +9942,7 @@ template FileT()
         static extern(C) GFileInfo* _vfuncQueryFilesystemInfoTramp(GFile* file, const(char)* attributes, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -9974,7 +9975,7 @@ template FileT()
         static extern(C) GFileInfo* _vfuncQueryFilesystemInfoFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10006,7 +10007,7 @@ template FileT()
         static extern(C) GFileInfo* _vfuncQueryInfoTramp(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10039,7 +10040,7 @@ template FileT()
         static extern(C) GFileInfo* _vfuncQueryInfoFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10071,7 +10072,7 @@ template FileT()
         static extern(C) GFileAttributeInfoList* _vfuncQuerySettableAttributesTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10103,7 +10104,7 @@ template FileT()
         static extern(C) GFileAttributeInfoList* _vfuncQueryWritableNamespacesTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10135,7 +10136,7 @@ template FileT()
         static extern(C) GFileInputStream* _vfuncReadFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10167,7 +10168,7 @@ template FileT()
         static extern(C) GFileInputStream* _vfuncReadFnTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10199,7 +10200,7 @@ template FileT()
         static extern(C) GFileOutputStream* _vfuncReplaceTramp(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10232,7 +10233,7 @@ template FileT()
         static extern(C) GFileOutputStream* _vfuncReplaceFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10264,7 +10265,7 @@ template FileT()
         static extern(C) GFileIOStream* _vfuncReplaceReadwriteTramp(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10297,7 +10298,7 @@ template FileT()
         static extern(C) GFileIOStream* _vfuncReplaceReadwriteFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10329,7 +10330,7 @@ template FileT()
         static extern(C) GFile* _vfuncResolveRelativePathTramp(GFile* file, const(char)* relativePath) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10362,7 +10363,7 @@ template FileT()
         static extern(C) gboolean _vfuncSetAttributeTramp(GFile* file, const(char)* attribute, GFileAttributeType type, void* valueP, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10395,7 +10396,7 @@ template FileT()
         static extern(C) gboolean _vfuncSetAttributesFinishTramp(GFile* file, GAsyncResult* result, GFileInfo** info, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10429,7 +10430,7 @@ template FileT()
         static extern(C) gboolean _vfuncSetAttributesFromInfoTramp(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10461,7 +10462,7 @@ template FileT()
         static extern(C) GFile* _vfuncSetDisplayNameTramp(GFile* file, const(char)* displayName, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10494,7 +10495,7 @@ template FileT()
         static extern(C) GFile* _vfuncSetDisplayNameFinishTramp(GFile* file, GAsyncResult* res, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10526,7 +10527,7 @@ template FileT()
         static extern(C) gboolean _vfuncStartMountableFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10558,7 +10559,7 @@ template FileT()
         static extern(C) gboolean _vfuncStopMountableFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10590,7 +10591,7 @@ template FileT()
         static extern(C) gboolean _vfuncTrashTramp(GFile* file, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10622,7 +10623,7 @@ template FileT()
         static extern(C) gboolean _vfuncTrashFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10654,7 +10655,7 @@ template FileT()
         static extern(C) gboolean _vfuncUnmountMountableFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);
@@ -10686,7 +10687,7 @@ template FileT()
         static extern(C) gboolean _vfuncUnmountMountableWithOperationFinishTramp(GFile* file, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)file);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)file);
           if (!_obj)
           {
             auto _klass = cast(GFileIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)file), gid.gio2.file.File._getGType);

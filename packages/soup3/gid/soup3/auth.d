@@ -551,7 +551,7 @@ class Auth : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAuthenticateTramp(SoupAuth* auth, const(char)* username, const(char)* password) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth.Auth)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)auth);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth.Auth)(cast(void*)auth);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)auth);
@@ -581,7 +581,7 @@ class Auth : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncCanAuthenticateTramp(SoupAuth* auth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth.Auth)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)auth);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth.Auth)(cast(void*)auth);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)auth);
@@ -613,7 +613,7 @@ class Auth : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncGetAuthorizationTramp(SoupAuth* auth, SoupMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth.Auth)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)auth);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth.Auth)(cast(void*)auth);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)auth);
@@ -645,7 +645,7 @@ class Auth : gid.gobject2.object.ObjectWrap
         static extern(C) GSList* _vfuncGetProtectionSpaceTramp(SoupAuth* auth, GUri* sourceUri) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth.Auth)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)auth);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth.Auth)(cast(void*)auth);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)auth);
@@ -680,7 +680,7 @@ class Auth : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncIsAuthenticatedTramp(SoupAuth* auth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth.Auth)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)auth);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth.Auth)(cast(void*)auth);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)auth);
@@ -712,7 +712,7 @@ class Auth : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncIsReadyTramp(SoupAuth* auth, SoupMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth.Auth)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)auth);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth.Auth)(cast(void*)auth);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)auth);

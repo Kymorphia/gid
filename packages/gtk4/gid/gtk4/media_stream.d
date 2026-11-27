@@ -808,7 +808,7 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
         static extern(C) void _vfuncPauseTramp(GtkMediaStream* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_stream.MediaStream)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -835,7 +835,7 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
         static extern(C) gboolean _vfuncPlayTramp(GtkMediaStream* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_stream.MediaStream)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -867,7 +867,7 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
         static extern(C) void _vfuncRealizeTramp(GtkMediaStream* self, GdkSurface* surface) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_stream.MediaStream)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -894,7 +894,7 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
         static extern(C) void _vfuncSeekTramp(GtkMediaStream* self, long timestamp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_stream.MediaStream)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -921,7 +921,7 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
         static extern(C) void _vfuncUnrealizeTramp(GtkMediaStream* self, GdkSurface* surface) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_stream.MediaStream)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -948,7 +948,7 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
         static extern(C) void _vfuncUpdateAudioTramp(GtkMediaStream* self, gboolean muted, double volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_stream.MediaStream)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

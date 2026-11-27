@@ -265,7 +265,7 @@ class SocketAddress : gid.gobject2.object.ObjectWrap, gid.gio2.socket_connectabl
         static extern(C) GSocketFamily _vfuncGetFamilyTramp(GSocketAddress* address) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_address.SocketAddress)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)address);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_address.SocketAddress)(cast(void*)address);
           if (!_obj)
           {
             auto _klass = cast(GSocketAddressClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)address);
@@ -297,7 +297,7 @@ class SocketAddress : gid.gobject2.object.ObjectWrap, gid.gio2.socket_connectabl
         static extern(C) ptrdiff_t _vfuncGetNativeSizeTramp(GSocketAddress* address) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_address.SocketAddress)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)address);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_address.SocketAddress)(cast(void*)address);
           if (!_obj)
           {
             auto _klass = cast(GSocketAddressClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)address);
@@ -327,7 +327,7 @@ class SocketAddress : gid.gobject2.object.ObjectWrap, gid.gio2.socket_connectabl
         static extern(C) gboolean _vfuncToNativeTramp(GSocketAddress* address, void* dest, size_t destlen, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_address.SocketAddress)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)address);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_address.SocketAddress)(cast(void*)address);
           if (!_obj)
           {
             auto _klass = cast(GSocketAddressClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)address);

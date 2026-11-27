@@ -306,7 +306,7 @@ class AudioAggregator : gid.gstbase1.aggregator.Aggregator
         static extern(C) gboolean _vfuncAggregateOneBufferTramp(GstAudioAggregator* aagg, GstAudioAggregatorPad* pad, GstBuffer* inbuf, uint inOffset, GstBuffer* outbuf, uint outOffset, uint numFrames) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_aggregator.AudioAggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aagg);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_aggregator.AudioAggregator)(cast(void*)aagg);
           if (!_obj)
           {
             auto _klass = cast(GstAudioAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aagg);
@@ -344,7 +344,7 @@ class AudioAggregator : gid.gstbase1.aggregator.Aggregator
         static extern(C) GstBuffer* _vfuncCreateOutputBufferTramp(GstAudioAggregator* aagg, uint numFrames) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_aggregator.AudioAggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aagg);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_aggregator.AudioAggregator)(cast(void*)aagg);
           if (!_obj)
           {
             auto _klass = cast(GstAudioAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aagg);

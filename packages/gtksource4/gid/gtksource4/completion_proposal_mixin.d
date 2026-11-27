@@ -2,6 +2,7 @@
 module gid.gtksource4.completion_proposal_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtksource4.completion_proposal;
 public import gid.gtksource4.completion_proposal_iface_proxy;
 public import gid.core.utils;
 public import gid.gdkpixbuf2.pixbuf;
@@ -487,7 +488,7 @@ template CompletionProposalT()
         static extern(C) void _vfuncChangedTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -514,7 +515,7 @@ template CompletionProposalT()
         static extern(C) gboolean _vfuncEqualTramp(GtkSourceCompletionProposal* proposal, GtkSourceCompletionProposal* other) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -546,7 +547,7 @@ template CompletionProposalT()
         static extern(C) GIcon* _vfuncGetGiconTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -578,7 +579,7 @@ template CompletionProposalT()
         static extern(C) GdkPixbuf* _vfuncGetIconTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -610,7 +611,7 @@ template CompletionProposalT()
         static extern(C) char* _vfuncGetInfoTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -642,7 +643,7 @@ template CompletionProposalT()
         static extern(C) char* _vfuncGetLabelTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -674,7 +675,7 @@ template CompletionProposalT()
         static extern(C) char* _vfuncGetMarkupTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -706,7 +707,7 @@ template CompletionProposalT()
         static extern(C) char* _vfuncGetTextTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);
@@ -738,7 +739,7 @@ template CompletionProposalT()
         static extern(C) uint _vfuncHashTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource4.completion_proposal.CompletionProposal._getGType);

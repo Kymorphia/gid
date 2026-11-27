@@ -2,6 +2,7 @@
 module gid.gtk4.accessible_hypertext_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.accessible_hypertext;
 public import gid.gtk4.accessible_hypertext_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -116,7 +117,7 @@ template AccessibleHypertextT()
         static extern(C) GtkAccessibleHyperlink* _vfuncGetLinkTramp(GtkAccessibleHypertext* self, uint index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleHypertextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_hypertext.AccessibleHypertext._getGType);
@@ -148,7 +149,7 @@ template AccessibleHypertextT()
         static extern(C) uint _vfuncGetLinkAtTramp(GtkAccessibleHypertext* self, uint offset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleHypertextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_hypertext.AccessibleHypertext._getGType);
@@ -178,7 +179,7 @@ template AccessibleHypertextT()
         static extern(C) uint _vfuncGetNLinksTramp(GtkAccessibleHypertext* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleHypertextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_hypertext.AccessibleHypertext._getGType);

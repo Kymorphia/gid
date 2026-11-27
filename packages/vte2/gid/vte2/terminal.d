@@ -5865,7 +5865,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncBellTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -5892,7 +5892,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncCharSizeChangedTramp(VteTerminal* terminal, uint charWidth, uint charHeight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -5919,7 +5919,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncChildExitedTramp(VteTerminal* terminal, int status) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -5946,7 +5946,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncCommitTramp(VteTerminal* terminal, const(char)* text, uint size) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -5975,7 +5975,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncContentsChangedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6002,7 +6002,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncCopyClipboardTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6029,7 +6029,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncCursorMovedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6056,7 +6056,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncDecreaseFontSizeTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6083,7 +6083,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncDeiconifyWindowTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6110,7 +6110,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncEncodingChangedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6137,7 +6137,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncEofTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6164,7 +6164,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncIconTitleChangedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6191,7 +6191,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncIconifyWindowTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6218,7 +6218,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncIncreaseFontSizeTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6245,7 +6245,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncLowerWindowTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6272,7 +6272,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncMaximizeWindowTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6299,7 +6299,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncMoveWindowTramp(VteTerminal* terminal, uint x, uint y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6326,7 +6326,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncPasteClipboardTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6353,7 +6353,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncRaiseWindowTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6380,7 +6380,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncRefreshWindowTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6407,7 +6407,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncResizeWindowTramp(VteTerminal* terminal, uint width, uint height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6434,7 +6434,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncRestoreWindowTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6461,7 +6461,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncSelectionChangedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6488,7 +6488,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncSetupContextMenuTramp(VteTerminal* terminal, const(VteEventContext)* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6515,7 +6515,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncTermpropChangedTramp(VteTerminal* terminal, const(char)* prop) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6544,7 +6544,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncTextDeletedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6571,7 +6571,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncTextInsertedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6598,7 +6598,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncTextModifiedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6625,7 +6625,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncTextScrolledTramp(VteTerminal* terminal, int delta) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
@@ -6652,7 +6652,7 @@ class Terminal : gid.gtk3.widget.Widget, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncWindowTitleChangedTramp(VteTerminal* terminal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.vte2.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.vte2.terminal.Terminal)(cast(void*)terminal);
           if (!_obj)
           {
             auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);

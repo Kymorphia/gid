@@ -2,6 +2,7 @@
 module gid.gtksource5.style_scheme_chooser_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtksource5.style_scheme_chooser;
 public import gid.gtksource5.style_scheme_chooser_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -144,7 +145,7 @@ template StyleSchemeChooserT()
         static extern(C) GtkSourceStyleScheme* _vfuncGetStyleSchemeTramp(GtkSourceStyleSchemeChooser* chooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceStyleSchemeChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtksource5.style_scheme_chooser.StyleSchemeChooser._getGType);
@@ -176,7 +177,7 @@ template StyleSchemeChooserT()
         static extern(C) void _vfuncSetStyleSchemeTramp(GtkSourceStyleSchemeChooser* chooser, GtkSourceStyleScheme* scheme) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceStyleSchemeChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtksource5.style_scheme_chooser.StyleSchemeChooser._getGType);

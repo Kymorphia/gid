@@ -369,7 +369,7 @@ class GLDisplay : gid.gst1.object.ObjectWrap
         static extern(C) GstGLWindow* _vfuncCreateWindowTramp(GstGLDisplay* display) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.gldisplay.GLDisplay)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)display);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.gldisplay.GLDisplay)(cast(void*)display);
           if (!_obj)
           {
             auto _klass = cast(GstGLDisplayClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)display);
@@ -401,7 +401,7 @@ class GLDisplay : gid.gst1.object.ObjectWrap
         static extern(C) size_t _vfuncGetHandleTramp(GstGLDisplay* display) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.gldisplay.GLDisplay)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)display);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.gldisplay.GLDisplay)(cast(void*)display);
           if (!_obj)
           {
             auto _klass = cast(GstGLDisplayClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)display);

@@ -415,7 +415,7 @@ class AppChooserButton : gid.gtk3.combo_box.ComboBox, gid.gtk3.app_chooser.AppCh
         static extern(C) void _vfuncCustomItemActivatedTramp(GtkAppChooserButton* self, const(char)* itemName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.app_chooser_button.AppChooserButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.app_chooser_button.AppChooserButton)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAppChooserButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

@@ -2,6 +2,7 @@
 module gid.gio2.drive_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.drive;
 public import gid.gio2.drive_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -1701,7 +1702,7 @@ template DriveT()
         static extern(C) gboolean _vfuncCanEjectTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1733,7 +1734,7 @@ template DriveT()
         static extern(C) gboolean _vfuncCanPollForMediaTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1765,7 +1766,7 @@ template DriveT()
         static extern(C) gboolean _vfuncCanStartTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1797,7 +1798,7 @@ template DriveT()
         static extern(C) gboolean _vfuncCanStartDegradedTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1829,7 +1830,7 @@ template DriveT()
         static extern(C) gboolean _vfuncCanStopTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1861,7 +1862,7 @@ template DriveT()
         static extern(C) void _vfuncChangedTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1888,7 +1889,7 @@ template DriveT()
         static extern(C) void _vfuncDisconnectedTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1915,7 +1916,7 @@ template DriveT()
         static extern(C) void _vfuncEjectButtonTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1942,7 +1943,7 @@ template DriveT()
         static extern(C) gboolean _vfuncEjectFinishTramp(GDrive* drive, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -1974,7 +1975,7 @@ template DriveT()
         static extern(C) gboolean _vfuncEjectWithOperationFinishTramp(GDrive* drive, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2006,7 +2007,7 @@ template DriveT()
         static extern(C) char** _vfuncEnumerateIdentifiersTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2047,7 +2048,7 @@ template DriveT()
         static extern(C) GIcon* _vfuncGetIconTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2079,7 +2080,7 @@ template DriveT()
         static extern(C) char* _vfuncGetIdentifierTramp(GDrive* drive, const(char)* kind) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2112,7 +2113,7 @@ template DriveT()
         static extern(C) char* _vfuncGetNameTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2144,7 +2145,7 @@ template DriveT()
         static extern(C) GDriveStartStopType _vfuncGetStartStopTypeTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2176,7 +2177,7 @@ template DriveT()
         static extern(C) GIcon* _vfuncGetSymbolicIconTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2208,7 +2209,7 @@ template DriveT()
         static extern(C) GList* _vfuncGetVolumesTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2240,7 +2241,7 @@ template DriveT()
         static extern(C) gboolean _vfuncHasMediaTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2272,7 +2273,7 @@ template DriveT()
         static extern(C) gboolean _vfuncHasVolumesTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2304,7 +2305,7 @@ template DriveT()
         static extern(C) gboolean _vfuncIsMediaCheckAutomaticTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2336,7 +2337,7 @@ template DriveT()
         static extern(C) gboolean _vfuncIsMediaRemovableTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2368,7 +2369,7 @@ template DriveT()
         static extern(C) gboolean _vfuncIsRemovableTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2400,7 +2401,7 @@ template DriveT()
         static extern(C) gboolean _vfuncPollForMediaFinishTramp(GDrive* drive, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2432,7 +2433,7 @@ template DriveT()
         static extern(C) gboolean _vfuncStartFinishTramp(GDrive* drive, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2464,7 +2465,7 @@ template DriveT()
         static extern(C) void _vfuncStopButtonTramp(GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);
@@ -2491,7 +2492,7 @@ template DriveT()
         static extern(C) gboolean _vfuncStopFinishTramp(GDrive* drive, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)drive);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)drive);
           if (!_obj)
           {
             auto _klass = cast(GDriveIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)drive), gid.gio2.drive.Drive._getGType);

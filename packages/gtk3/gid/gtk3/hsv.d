@@ -322,7 +322,7 @@ class HSV : gid.gtk3.widget.Widget
         static extern(C) void _vfuncChangedTramp(GtkHSV* hsv) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.hsv.HSV)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hsv);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.hsv.HSV)(cast(void*)hsv);
           if (!_obj)
           {
             auto _klass = cast(GtkHSVClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hsv);
@@ -349,7 +349,7 @@ class HSV : gid.gtk3.widget.Widget
         static extern(C) void _vfuncMoveTramp(GtkHSV* hsv, GtkDirectionType type) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.hsv.HSV)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hsv);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.hsv.HSV)(cast(void*)hsv);
           if (!_obj)
           {
             auto _klass = cast(GtkHSVClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hsv);

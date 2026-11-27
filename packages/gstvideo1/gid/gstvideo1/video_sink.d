@@ -176,7 +176,7 @@ class VideoSink : gid.gstbase1.base_sink.BaseSink
         static extern(C) gboolean _vfuncSetInfoTramp(GstVideoSink* videoSink, GstCaps* caps, const(GstVideoInfo)* info) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_sink.VideoSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoSink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_sink.VideoSink)(cast(void*)videoSink);
           if (!_obj)
           {
             auto _klass = cast(GstVideoSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoSink);
@@ -211,7 +211,7 @@ class VideoSink : gid.gstbase1.base_sink.BaseSink
         static extern(C) GstFlowReturn _vfuncShowFrameTramp(GstVideoSink* videoSink, GstBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_sink.VideoSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoSink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_sink.VideoSink)(cast(void*)videoSink);
           if (!_obj)
           {
             auto _klass = cast(GstVideoSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoSink);

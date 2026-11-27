@@ -829,7 +829,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) void _vfuncActivateTramp(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, uint button, GdkModifierType state, int nPresses) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -861,7 +861,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) void _vfuncBeginTramp(GtkSourceGutterRenderer* renderer, GtkSourceGutterLines* lines) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -888,7 +888,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) void _vfuncChangeBufferTramp(GtkSourceGutterRenderer* renderer, GtkSourceBuffer* oldBuffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -915,7 +915,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) void _vfuncChangeViewTramp(GtkSourceGutterRenderer* renderer, GtkSourceView* oldView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -942,7 +942,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) void _vfuncEndTramp(GtkSourceGutterRenderer* renderer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -969,7 +969,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) gboolean _vfuncQueryActivatableTramp(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -1004,7 +1004,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) void _vfuncQueryDataTramp(GtkSourceGutterRenderer* renderer, GtkSourceGutterLines* lines, uint line) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -1031,7 +1031,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
         static extern(C) void _vfuncSnapshotLineTramp(GtkSourceGutterRenderer* renderer, GtkSnapshot* snapshot, GtkSourceGutterLines* lines, uint line) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.gutter_renderer.GutterRenderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);

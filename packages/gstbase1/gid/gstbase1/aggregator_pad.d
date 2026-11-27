@@ -318,7 +318,7 @@ class AggregatorPad : gid.gst1.pad.Pad
         static extern(C) GstFlowReturn _vfuncFlushTramp(GstAggregatorPad* aggpad, GstAggregator* aggregator) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator_pad.AggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggpad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator_pad.AggregatorPad)(cast(void*)aggpad);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggpad);
@@ -350,7 +350,7 @@ class AggregatorPad : gid.gst1.pad.Pad
         static extern(C) gboolean _vfuncSkipBufferTramp(GstAggregatorPad* aggpad, GstAggregator* aggregator, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator_pad.AggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggpad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator_pad.AggregatorPad)(cast(void*)aggpad);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggpad);

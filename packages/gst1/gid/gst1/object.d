@@ -769,7 +769,7 @@ class ObjectWrap : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncDeepNotifyTramp(GstObject* object, GstObject* orig, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GstObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);

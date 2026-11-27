@@ -569,7 +569,7 @@ class Scale : gid.gtk3.range.Range
         static extern(C) void _vfuncDrawValueTramp(GtkScale* scale) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.scale.Scale)(cast(void*)scale);
           if (!_obj)
           {
             auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);
@@ -596,7 +596,7 @@ class Scale : gid.gtk3.range.Range
         static extern(C) char* _vfuncFormatValueTramp(GtkScale* scale, double value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.scale.Scale)(cast(void*)scale);
           if (!_obj)
           {
             auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);
@@ -628,7 +628,7 @@ class Scale : gid.gtk3.range.Range
         static extern(C) void _vfuncGetLayoutOffsetsTramp(GtkScale* scale, int* x, int* y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.scale.Scale)(cast(void*)scale);
           if (!_obj)
           {
             auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);

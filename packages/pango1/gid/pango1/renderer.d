@@ -763,7 +763,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncBeginTramp(PangoRenderer* renderer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -790,7 +790,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawErrorUnderlineTramp(PangoRenderer* renderer, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -817,7 +817,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawGlyphTramp(PangoRenderer* renderer, PangoFont* font, PangoGlyph glyph, double x, double y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -844,7 +844,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawGlyphItemTramp(PangoRenderer* renderer, const(char)* text, PangoGlyphItem* glyphItem, int x, int y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -877,7 +877,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawGlyphsTramp(PangoRenderer* renderer, PangoFont* font, PangoGlyphString* glyphs, int x, int y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -909,7 +909,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawRectangleTramp(PangoRenderer* renderer, PangoRenderPart part, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -936,7 +936,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawShapeTramp(PangoRenderer* renderer, PangoAttrShape* attr, int x, int y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -965,7 +965,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawTrapezoidTramp(PangoRenderer* renderer, PangoRenderPart part, double y1, double x11, double x21, double y2, double x12, double x22) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -992,7 +992,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncEndTramp(PangoRenderer* renderer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -1019,7 +1019,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPartChangedTramp(PangoRenderer* renderer, PangoRenderPart part) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
@@ -1046,7 +1046,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPrepareRunTramp(PangoRenderer* renderer, PangoLayoutRun* run) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.renderer.Renderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.renderer.Renderer)(cast(void*)renderer);
           if (!_obj)
           {
             auto _klass = cast(PangoRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);

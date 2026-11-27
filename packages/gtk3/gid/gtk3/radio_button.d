@@ -433,7 +433,7 @@ class RadioButton : gid.gtk3.check_button.CheckButton
         static extern(C) void _vfuncGroupChangedTramp(GtkRadioButton* radioButton) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.radio_button.RadioButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)radioButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.radio_button.RadioButton)(cast(void*)radioButton);
           if (!_obj)
           {
             auto _klass = cast(GtkRadioButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)radioButton);

@@ -2,6 +2,7 @@
 module gid.gstvideo1.video_direction_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstvideo1.video_direction;
 public import gid.gstvideo1.video_direction_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.gid_builder;

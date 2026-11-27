@@ -173,7 +173,7 @@ class GLMixer : gid.gstgl1.glbase_mixer.GLBaseMixer
         static extern(C) gboolean _vfuncProcessBuffersTramp(GstGLMixer* mix, GstBuffer* outbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glmixer.GLMixer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mix);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glmixer.GLMixer)(cast(void*)mix);
           if (!_obj)
           {
             auto _klass = cast(GstGLMixerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mix);
@@ -208,7 +208,7 @@ class GLMixer : gid.gstgl1.glbase_mixer.GLBaseMixer
         static extern(C) gboolean _vfuncProcessTexturesTramp(GstGLMixer* mix, GstGLMemory* outTex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glmixer.GLMixer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mix);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glmixer.GLMixer)(cast(void*)mix);
           if (!_obj)
           {
             auto _klass = cast(GstGLMixerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mix);

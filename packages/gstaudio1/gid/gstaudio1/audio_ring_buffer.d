@@ -988,7 +988,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncAcquireTramp(GstAudioRingBuffer* buf, GstAudioRingBufferSpec* spec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1021,7 +1021,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncActivateTramp(GstAudioRingBuffer* buf, gboolean active) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1053,7 +1053,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncClearAllTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1080,7 +1080,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncCloseDeviceTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1112,7 +1112,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) uint _vfuncCommitTramp(GstAudioRingBuffer* buf, ulong* sample, ubyte* data, int inSamples, int outSamples, int* accum) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1145,7 +1145,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) uint _vfuncDelayTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1175,7 +1175,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncOpenDeviceTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1207,7 +1207,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncPauseTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1239,7 +1239,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncReleaseTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1271,7 +1271,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncResumeTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1303,7 +1303,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncStartTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
@@ -1335,7 +1335,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncStopTramp(GstAudioRingBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(void*)buf);
           if (!_obj)
           {
             auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);

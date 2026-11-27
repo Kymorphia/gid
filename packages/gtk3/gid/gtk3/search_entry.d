@@ -414,7 +414,7 @@ class SearchEntry : gid.gtk3.entry.Entry
         static extern(C) void _vfuncNextMatchTramp(GtkSearchEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.search_entry.SearchEntry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -441,7 +441,7 @@ class SearchEntry : gid.gtk3.entry.Entry
         static extern(C) void _vfuncPreviousMatchTramp(GtkSearchEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.search_entry.SearchEntry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -468,7 +468,7 @@ class SearchEntry : gid.gtk3.entry.Entry
         static extern(C) void _vfuncSearchChangedTramp(GtkSearchEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.search_entry.SearchEntry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -495,7 +495,7 @@ class SearchEntry : gid.gtk3.entry.Entry
         static extern(C) void _vfuncStopSearchTramp(GtkSearchEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.search_entry.SearchEntry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);

@@ -3428,7 +3428,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncActivateTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3455,7 +3455,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncBackspaceTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3482,7 +3482,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncCopyClipboardTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3509,7 +3509,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncCutClipboardTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3536,7 +3536,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncDeleteFromCursorTramp(GtkEntry* entry, GtkDeleteType type, int count) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3563,7 +3563,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncInsertAtCursorTramp(GtkEntry* entry, const(char)* str) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3592,7 +3592,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncInsertEmojiTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3619,7 +3619,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncMoveCursorTramp(GtkEntry* entry, GtkMovementStep step, int count, gboolean extendSelection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3646,7 +3646,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncPasteClipboardTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3673,7 +3673,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncPopulatePopupTramp(GtkEntry* entry, GtkWidget* popup) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3700,7 +3700,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncToggleDirectionTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
@@ -3727,7 +3727,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncToggleOverwriteTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);

@@ -1618,7 +1618,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncActivateTramp(GtkStatusIcon* statusIcon) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.status_icon.StatusIcon)(cast(void*)statusIcon);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
@@ -1645,7 +1645,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncButtonPressEventTramp(GtkStatusIcon* statusIcon, GdkEventButton* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.status_icon.StatusIcon)(cast(void*)statusIcon);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
@@ -1678,7 +1678,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncButtonReleaseEventTramp(GtkStatusIcon* statusIcon, GdkEventButton* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.status_icon.StatusIcon)(cast(void*)statusIcon);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
@@ -1711,7 +1711,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPopupMenuTramp(GtkStatusIcon* statusIcon, uint button, uint activateTime) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.status_icon.StatusIcon)(cast(void*)statusIcon);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
@@ -1738,7 +1738,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncQueryTooltipTramp(GtkStatusIcon* statusIcon, int x, int y, gboolean keyboardMode, GtkTooltip* tooltip) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.status_icon.StatusIcon)(cast(void*)statusIcon);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
@@ -1770,7 +1770,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncScrollEventTramp(GtkStatusIcon* statusIcon, GdkEventScroll* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.status_icon.StatusIcon)(cast(void*)statusIcon);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
@@ -1803,7 +1803,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncSizeChangedTramp(GtkStatusIcon* statusIcon, int size) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.status_icon.StatusIcon)(cast(void*)statusIcon);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);

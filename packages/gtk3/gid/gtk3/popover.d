@@ -637,7 +637,7 @@ class Popover : gid.gtk3.bin.Bin
         static extern(C) void _vfuncClosedTramp(GtkPopover* popover) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.popover.Popover)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)popover);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.popover.Popover)(cast(void*)popover);
           if (!_obj)
           {
             auto _klass = cast(GtkPopoverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)popover);

@@ -2,6 +2,7 @@
 module gid.gtk3.recent_chooser_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.recent_chooser;
 public import gid.gtk3.recent_chooser_iface_proxy;
 public import gid.core.utils;
 public import gid.glib2.error;
@@ -1121,7 +1122,7 @@ template RecentChooserT()
         static extern(C) void _vfuncAddFilterTramp(GtkRecentChooser* chooser, GtkRecentFilter* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1148,7 +1149,7 @@ template RecentChooserT()
         static extern(C) char* _vfuncGetCurrentUriTramp(GtkRecentChooser* chooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1180,7 +1181,7 @@ template RecentChooserT()
         static extern(C) GList* _vfuncGetItemsTramp(GtkRecentChooser* chooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1212,7 +1213,7 @@ template RecentChooserT()
         static extern(C) void _vfuncItemActivatedTramp(GtkRecentChooser* chooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1239,7 +1240,7 @@ template RecentChooserT()
         static extern(C) void _vfuncRemoveFilterTramp(GtkRecentChooser* chooser, GtkRecentFilter* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1266,7 +1267,7 @@ template RecentChooserT()
         static extern(C) void _vfuncSelectAllTramp(GtkRecentChooser* chooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1293,7 +1294,7 @@ template RecentChooserT()
         static extern(C) gboolean _vfuncSelectUriTramp(GtkRecentChooser* chooser, const(char)* uri, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1326,7 +1327,7 @@ template RecentChooserT()
         static extern(C) void _vfuncSelectionChangedTramp(GtkRecentChooser* chooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1353,7 +1354,7 @@ template RecentChooserT()
         static extern(C) gboolean _vfuncSetCurrentUriTramp(GtkRecentChooser* chooser, const(char)* uri, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1386,7 +1387,7 @@ template RecentChooserT()
         static extern(C) void _vfuncUnselectAllTramp(GtkRecentChooser* chooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);
@@ -1413,7 +1414,7 @@ template RecentChooserT()
         static extern(C) void _vfuncUnselectUriTramp(GtkRecentChooser* chooser, const(char)* uri) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.recent_chooser.RecentChooser._getGType);

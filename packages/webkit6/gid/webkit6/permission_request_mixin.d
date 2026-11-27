@@ -2,6 +2,7 @@
 module gid.webkit6.permission_request_mixin;
 
 public import gid.core.basictypes;
+public import gid.webkit6.permission_request;
 public import gid.webkit6.permission_request_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -107,7 +108,7 @@ template PermissionRequestT()
         static extern(C) void _vfuncAllowTramp(WebKitPermissionRequest* request) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)request);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)request);
           if (!_obj)
           {
             auto _klass = cast(WebKitPermissionRequestInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)request), gid.webkit6.permission_request.PermissionRequest._getGType);
@@ -134,7 +135,7 @@ template PermissionRequestT()
         static extern(C) void _vfuncDenyTramp(WebKitPermissionRequest* request) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)request);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)request);
           if (!_obj)
           {
             auto _klass = cast(WebKitPermissionRequestInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)request), gid.webkit6.permission_request.PermissionRequest._getGType);

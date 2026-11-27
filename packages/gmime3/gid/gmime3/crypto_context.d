@@ -698,7 +698,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
         static extern(C) GMimeDecryptResult* _vfuncDecryptTramp(GMimeCryptoContext* ctx, GMimeDecryptFlags flags, const(char)* sessionKey, GMimeStream* istream, GMimeStream* ostream, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.crypto_context.CryptoContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ctx);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.crypto_context.CryptoContext)(cast(void*)ctx);
           if (!_obj)
           {
             auto _klass = cast(GMimeCryptoContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ctx);
@@ -731,7 +731,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
         static extern(C) GMimeDigestAlgo _vfuncDigestIdTramp(GMimeCryptoContext* ctx, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.crypto_context.CryptoContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ctx);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.crypto_context.CryptoContext)(cast(void*)ctx);
           if (!_obj)
           {
             auto _klass = cast(GMimeCryptoContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ctx);
@@ -764,7 +764,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncEncryptTramp(GMimeCryptoContext* ctx, gboolean sign, const(char)* userid, GMimeEncryptFlags flags, GPtrArray* recipients, GMimeStream* istream, GMimeStream* ostream, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.crypto_context.CryptoContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ctx);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.crypto_context.CryptoContext)(cast(void*)ctx);
           if (!_obj)
           {
             auto _klass = cast(GMimeCryptoContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ctx);
@@ -796,7 +796,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncExportKeysTramp(GMimeCryptoContext* ctx, const(char*)* keys, GMimeStream* ostream, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.crypto_context.CryptoContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ctx);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.crypto_context.CryptoContext)(cast(void*)ctx);
           if (!_obj)
           {
             auto _klass = cast(GMimeCryptoContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ctx);
@@ -838,7 +838,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncImportKeysTramp(GMimeCryptoContext* ctx, GMimeStream* istream, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.crypto_context.CryptoContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ctx);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.crypto_context.CryptoContext)(cast(void*)ctx);
           if (!_obj)
           {
             auto _klass = cast(GMimeCryptoContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ctx);
@@ -868,7 +868,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncSignTramp(GMimeCryptoContext* ctx, gboolean detach, const(char)* userid, GMimeStream* istream, GMimeStream* ostream, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.crypto_context.CryptoContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ctx);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.crypto_context.CryptoContext)(cast(void*)ctx);
           if (!_obj)
           {
             auto _klass = cast(GMimeCryptoContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ctx);
@@ -899,7 +899,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
         static extern(C) GMimeSignatureList* _vfuncVerifyTramp(GMimeCryptoContext* ctx, GMimeVerifyFlags flags, GMimeStream* istream, GMimeStream* sigstream, GMimeStream* ostream, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.crypto_context.CryptoContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ctx);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.crypto_context.CryptoContext)(cast(void*)ctx);
           if (!_obj)
           {
             auto _klass = cast(GMimeCryptoContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ctx);

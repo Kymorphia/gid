@@ -504,7 +504,7 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GtkTreeSelection* selection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_selection.TreeSelection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_selection.TreeSelection)(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeSelectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection);

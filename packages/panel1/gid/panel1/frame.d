@@ -506,7 +506,7 @@ class Frame : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
         static extern(C) gboolean _vfuncAdoptWidgetTramp(PanelFrame* self, PanelWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.frame.Frame)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.frame.Frame)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelFrameClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -538,7 +538,7 @@ class Frame : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
         static extern(C) void _vfuncPageClosedTramp(PanelFrame* self, PanelWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.frame.Frame)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.frame.Frame)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelFrameClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

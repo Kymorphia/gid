@@ -1200,7 +1200,7 @@ class Server : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRequestAbortedTramp(SoupServer* server, SoupServerMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.server.Server)(cast(void*)server);
           if (!_obj)
           {
             auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);
@@ -1227,7 +1227,7 @@ class Server : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRequestFinishedTramp(SoupServer* server, SoupServerMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.server.Server)(cast(void*)server);
           if (!_obj)
           {
             auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);
@@ -1254,7 +1254,7 @@ class Server : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRequestReadTramp(SoupServer* server, SoupServerMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.server.Server)(cast(void*)server);
           if (!_obj)
           {
             auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);
@@ -1281,7 +1281,7 @@ class Server : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRequestStartedTramp(SoupServer* server, SoupServerMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.server.Server)(cast(void*)server);
           if (!_obj)
           {
             auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);

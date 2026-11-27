@@ -663,7 +663,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) GVariant* _vfuncGetItemAttributeValueTramp(GMenuModel* model, int itemIndex, const(char)* attribute, const(GVariantType)* expectedType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);
@@ -696,7 +696,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGetItemAttributesTramp(GMenuModel* model, int itemIndex, GHashTable** attributes) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);
@@ -727,7 +727,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) GMenuModel* _vfuncGetItemLinkTramp(GMenuModel* model, int itemIndex, const(char)* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);
@@ -760,7 +760,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGetItemLinksTramp(GMenuModel* model, int itemIndex, GHashTable** links) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);
@@ -791,7 +791,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncGetNItemsTramp(GMenuModel* model) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);
@@ -821,7 +821,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncIsMutableTramp(GMenuModel* model) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);
@@ -853,7 +853,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) GMenuAttributeIter* _vfuncIterateItemAttributesTramp(GMenuModel* model, int itemIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);
@@ -885,7 +885,7 @@ class MenuModel : gid.gobject2.object.ObjectWrap
         static extern(C) GMenuLinkIter* _vfuncIterateItemLinksTramp(GMenuModel* model, int itemIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_model.MenuModel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_model.MenuModel)(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GMenuModelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model);

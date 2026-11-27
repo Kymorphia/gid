@@ -2,6 +2,7 @@
 module gid.gio2.tls_file_database_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.tls_file_database;
 public import gid.gio2.tls_file_database_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;

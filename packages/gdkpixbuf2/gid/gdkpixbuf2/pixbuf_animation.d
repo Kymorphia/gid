@@ -505,7 +505,7 @@ class PixbufAnimation : gid.gobject2.object.ObjectWrap
         static extern(C) GdkPixbufAnimationIter* _vfuncGetIterTramp(GdkPixbufAnimation* animation, const(GTimeVal)* startTime) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)animation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)(cast(void*)animation);
           if (!_obj)
           {
             auto _klass = cast(GdkPixbufAnimationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)animation);
@@ -537,7 +537,7 @@ class PixbufAnimation : gid.gobject2.object.ObjectWrap
         static extern(C) GdkPixbuf* _vfuncGetStaticImageTramp(GdkPixbufAnimation* animation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)animation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)(cast(void*)animation);
           if (!_obj)
           {
             auto _klass = cast(GdkPixbufAnimationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)animation);
@@ -569,7 +569,7 @@ class PixbufAnimation : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncIsStaticImageTramp(GdkPixbufAnimation* animation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)animation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)(cast(void*)animation);
           if (!_obj)
           {
             auto _klass = cast(GdkPixbufAnimationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)animation);

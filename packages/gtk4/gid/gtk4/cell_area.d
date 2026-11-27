@@ -2023,7 +2023,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) gboolean _vfuncActivateTramp(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, const(GdkRectangle)* cellArea, GtkCellRendererState flags, gboolean editOnly) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2055,7 +2055,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncAddTramp(GtkCellArea* area, GtkCellRenderer* renderer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2082,7 +2082,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncApplyAttributesTramp(GtkCellArea* area, GtkTreeModel* treeModel, GtkTreeIter* iter, gboolean isExpander, gboolean isExpanded) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2114,7 +2114,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) GtkCellAreaContext* _vfuncCopyContextTramp(GtkCellArea* area, GtkCellAreaContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2146,7 +2146,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) GtkCellAreaContext* _vfuncCreateContextTramp(GtkCellArea* area) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2178,7 +2178,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) int _vfuncEventTramp(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, GdkEvent* event, const(GdkRectangle)* cellArea, GtkCellRendererState flags) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2208,7 +2208,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) gboolean _vfuncFocusTramp(GtkCellArea* area, GtkDirectionType direction) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2240,7 +2240,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncGetCellPropertyTramp(GtkCellArea* area, GtkCellRenderer* renderer, uint propertyId, GValue* value, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2272,7 +2272,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncGetPreferredHeightTramp(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int* minimumHeight, int* naturalHeight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2307,7 +2307,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncGetPreferredHeightForWidthTramp(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2342,7 +2342,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncGetPreferredWidthTramp(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int* minimumWidth, int* naturalWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2377,7 +2377,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncGetPreferredWidthForHeightTramp(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int height, int* minimumWidth, int* naturalWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2412,7 +2412,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkCellArea* area) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2444,7 +2444,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) gboolean _vfuncIsActivatableTramp(GtkCellArea* area) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2476,7 +2476,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncRemoveTramp(GtkCellArea* area, GtkCellRenderer* renderer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2503,7 +2503,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncSetCellPropertyTramp(GtkCellArea* area, GtkCellRenderer* renderer, uint propertyId, const(GValue)* value, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -2530,7 +2530,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
         static extern(C) void _vfuncSnapshotTramp(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, GtkSnapshot* snapshot, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags, gboolean paintFocus) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area.CellArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area.CellArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);

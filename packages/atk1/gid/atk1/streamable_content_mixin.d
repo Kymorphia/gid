@@ -2,6 +2,7 @@
 module gid.atk1.streamable_content_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.streamable_content;
 public import gid.atk1.streamable_content_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -250,7 +251,7 @@ template StreamableContentT()
         static extern(C) int _vfuncGetNMimeTypesTramp(AtkStreamableContent* streamable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)streamable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)streamable);
           if (!_obj)
           {
             auto _klass = cast(AtkStreamableContentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)streamable), gid.atk1.streamable_content.StreamableContent._getGType);
@@ -280,7 +281,7 @@ template StreamableContentT()
         static extern(C) GIOChannel* _vfuncGetStreamTramp(AtkStreamableContent* streamable, const(char)* mimeType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)streamable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)streamable);
           if (!_obj)
           {
             auto _klass = cast(AtkStreamableContentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)streamable), gid.atk1.streamable_content.StreamableContent._getGType);

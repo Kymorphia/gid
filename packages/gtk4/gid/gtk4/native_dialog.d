@@ -454,7 +454,7 @@ class NativeDialog : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncHideTramp(GtkNativeDialog* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.native_dialog.NativeDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.native_dialog.NativeDialog)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkNativeDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -481,7 +481,7 @@ class NativeDialog : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncResponseTramp(GtkNativeDialog* self, int responseId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.native_dialog.NativeDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.native_dialog.NativeDialog)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkNativeDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -508,7 +508,7 @@ class NativeDialog : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncShowTramp(GtkNativeDialog* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.native_dialog.NativeDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.native_dialog.NativeDialog)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkNativeDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

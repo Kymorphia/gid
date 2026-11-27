@@ -2,6 +2,7 @@
 module gid.gio2.dbus_object_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.dbus_object;
 public import gid.gio2.dbus_object_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -321,7 +322,7 @@ template DBusObjectT()
         static extern(C) GDBusInterface* _vfuncGetInterfaceTramp(GDBusObject* object, const(char)* interfaceName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GDBusObjectIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object), gid.gio2.dbus_object.DBusObject._getGType);
@@ -354,7 +355,7 @@ template DBusObjectT()
         static extern(C) GList* _vfuncGetInterfacesTramp(GDBusObject* object) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GDBusObjectIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object), gid.gio2.dbus_object.DBusObject._getGType);
@@ -386,7 +387,7 @@ template DBusObjectT()
         static extern(C) void _vfuncInterfaceAddedTramp(GDBusObject* object, GDBusInterface* interface_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GDBusObjectIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object), gid.gio2.dbus_object.DBusObject._getGType);
@@ -413,7 +414,7 @@ template DBusObjectT()
         static extern(C) void _vfuncInterfaceRemovedTramp(GDBusObject* object, GDBusInterface* interface_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GDBusObjectIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object), gid.gio2.dbus_object.DBusObject._getGType);

@@ -1183,7 +1183,7 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
         static extern(C) void _vfuncGSignalTramp(GDBusProxy* proxy, const(char)* senderName, const(char)* signalName, GVariant* parameters) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.dbus_proxy.DBusProxy)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proxy);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.dbus_proxy.DBusProxy)(cast(void*)proxy);
           if (!_obj)
           {
             auto _klass = cast(GDBusProxyClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proxy);

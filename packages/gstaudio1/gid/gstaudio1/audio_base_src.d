@@ -253,7 +253,7 @@ class AudioBaseSrc : gid.gstbase1.push_src.PushSrc
         static extern(C) GstAudioRingBuffer* _vfuncCreateRingbufferTramp(GstAudioBaseSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_base_src.AudioBaseSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_base_src.AudioBaseSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioBaseSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);

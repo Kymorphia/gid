@@ -2149,7 +2149,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncActivateTramp(GApplication* application) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2176,7 +2176,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncAddPlatformDataTramp(GApplication* application, GVariantBuilder* builder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2208,7 +2208,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncAfterEmitTramp(GApplication* application, GVariant* platformData) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2235,7 +2235,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncBeforeEmitTramp(GApplication* application, GVariant* platformData) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2262,7 +2262,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) int _vfuncCommandLineTramp(GApplication* application, GApplicationCommandLine* commandLine) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2292,7 +2292,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) gboolean _vfuncDbusRegisterTramp(GApplication* application, GDBusConnection* connection, const(char)* objectPath, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2325,7 +2325,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncDbusUnregisterTramp(GApplication* application, GDBusConnection* connection, const(char)* objectPath) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2354,7 +2354,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) int _vfuncHandleLocalOptionsTramp(GApplication* application, GVariantDict* options) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2388,7 +2388,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) gboolean _vfuncNameLostTramp(GApplication* application) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2420,7 +2420,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncOpenTramp(GApplication* application, GFile** files, int nFiles, const(char)* hint) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2453,7 +2453,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncQuitMainloopTramp(GApplication* application) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2480,7 +2480,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncRunMainloopTramp(GApplication* application) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2507,7 +2507,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncShutdownTramp(GApplication* application) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -2534,7 +2534,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
         static extern(C) void _vfuncStartupTramp(GApplication* application) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);

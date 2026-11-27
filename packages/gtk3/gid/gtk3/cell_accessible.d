@@ -117,7 +117,7 @@ class CellAccessible : gid.gtk3.accessible.Accessible, gid.atk1.action.Action, g
         static extern(C) void _vfuncUpdateCacheTramp(GtkCellAccessible* cell, gboolean emitSignal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_accessible.CellAccessible)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_accessible.CellAccessible)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);

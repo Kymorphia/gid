@@ -1151,7 +1151,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDriveChangedTramp(GVolumeMonitor* volumeMonitor, GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1178,7 +1178,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDriveConnectedTramp(GVolumeMonitor* volumeMonitor, GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1205,7 +1205,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDriveDisconnectedTramp(GVolumeMonitor* volumeMonitor, GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1232,7 +1232,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDriveEjectButtonTramp(GVolumeMonitor* volumeMonitor, GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1259,7 +1259,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDriveStopButtonTramp(GVolumeMonitor* volumeMonitor, GDrive* drive) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1286,7 +1286,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncGetConnectedDrivesTramp(GVolumeMonitor* volumeMonitor) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1318,7 +1318,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) GMount* _vfuncGetMountForUuidTramp(GVolumeMonitor* volumeMonitor, const(char)* uuid) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1351,7 +1351,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncGetMountsTramp(GVolumeMonitor* volumeMonitor) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1383,7 +1383,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) GVolume* _vfuncGetVolumeForUuidTramp(GVolumeMonitor* volumeMonitor, const(char)* uuid) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1416,7 +1416,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncGetVolumesTramp(GVolumeMonitor* volumeMonitor) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1448,7 +1448,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMountAddedTramp(GVolumeMonitor* volumeMonitor, GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1475,7 +1475,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMountChangedTramp(GVolumeMonitor* volumeMonitor, GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1502,7 +1502,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMountPreUnmountTramp(GVolumeMonitor* volumeMonitor, GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1529,7 +1529,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMountRemovedTramp(GVolumeMonitor* volumeMonitor, GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1556,7 +1556,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncVolumeAddedTramp(GVolumeMonitor* volumeMonitor, GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1583,7 +1583,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncVolumeChangedTramp(GVolumeMonitor* volumeMonitor, GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);
@@ -1610,7 +1610,7 @@ class VolumeMonitor : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncVolumeRemovedTramp(GVolumeMonitor* volumeMonitor, GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.volume_monitor.VolumeMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volumeMonitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(void*)volumeMonitor);
           if (!_obj)
           {
             auto _klass = cast(GVolumeMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volumeMonitor);

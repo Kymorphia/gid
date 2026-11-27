@@ -2,6 +2,7 @@
 module gid.panel1.frame_header_mixin;
 
 public import gid.core.basictypes;
+public import gid.panel1.frame_header;
 public import gid.panel1.frame_header_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -239,7 +240,7 @@ template FrameHeaderT()
         static extern(C) void _vfuncAddPrefixTramp(PanelFrameHeader* self, int priority, GtkWidget* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelFrameHeaderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.panel1.frame_header.FrameHeader._getGType);
@@ -266,7 +267,7 @@ template FrameHeaderT()
         static extern(C) void _vfuncAddSuffixTramp(PanelFrameHeader* self, int priority, GtkWidget* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelFrameHeaderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.panel1.frame_header.FrameHeader._getGType);
@@ -293,7 +294,7 @@ template FrameHeaderT()
         static extern(C) gboolean _vfuncCanDropTramp(PanelFrameHeader* self, PanelWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelFrameHeaderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.panel1.frame_header.FrameHeader._getGType);
@@ -325,7 +326,7 @@ template FrameHeaderT()
         static extern(C) void _vfuncPageChangedTramp(PanelFrameHeader* self, PanelWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelFrameHeaderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.panel1.frame_header.FrameHeader._getGType);

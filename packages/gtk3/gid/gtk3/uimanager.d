@@ -1162,7 +1162,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncActionsChangedTramp(GtkUIManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -1189,7 +1189,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncAddWidgetTramp(GtkUIManager* manager, GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -1216,7 +1216,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncConnectProxyTramp(GtkUIManager* manager, GtkAction* action, GtkWidget* proxy) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -1243,7 +1243,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncDisconnectProxyTramp(GtkUIManager* manager, GtkAction* action, GtkWidget* proxy) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -1270,7 +1270,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) GtkAction* _vfuncGetActionTramp(GtkUIManager* manager, const(char)* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -1303,7 +1303,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) GtkWidget* _vfuncGetWidgetTramp(GtkUIManager* manager, const(char)* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -1336,7 +1336,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncPostActivateTramp(GtkUIManager* manager, GtkAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -1363,7 +1363,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncPreActivateTramp(GtkUIManager* manager, GtkAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.uimanager.UIManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);

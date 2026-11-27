@@ -478,7 +478,7 @@ class FontButton : gid.gtk3.button.Button, gid.gtk3.font_chooser.FontChooser
         static extern(C) void _vfuncFontSetTramp(GtkFontButton* gfp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.font_button.FontButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)gfp);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.font_button.FontButton)(cast(void*)gfp);
           if (!_obj)
           {
             auto _klass = cast(GtkFontButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)gfp);

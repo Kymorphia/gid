@@ -2,6 +2,7 @@
 module gid.gtksource5.hover_provider_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtksource5.hover_provider;
 public import gid.gtksource5.hover_provider_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -159,7 +160,7 @@ template HoverProviderT()
         static extern(C) gboolean _vfuncPopulateTramp(GtkSourceHoverProvider* self, GtkSourceHoverContext* context, GtkSourceHoverDisplay* display, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceHoverProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.hover_provider.HoverProvider._getGType);
@@ -191,7 +192,7 @@ template HoverProviderT()
         static extern(C) gboolean _vfuncPopulateFinishTramp(GtkSourceHoverProvider* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceHoverProviderInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtksource5.hover_provider.HoverProvider._getGType);

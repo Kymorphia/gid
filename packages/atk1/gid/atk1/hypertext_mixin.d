@@ -2,6 +2,7 @@
 module gid.atk1.hypertext_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.hypertext;
 public import gid.atk1.hypertext_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -245,7 +246,7 @@ template HypertextT()
         static extern(C) AtkHyperlink* _vfuncGetLinkTramp(AtkHypertext* hypertext, int linkIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hypertext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)hypertext);
           if (!_obj)
           {
             auto _klass = cast(AtkHypertextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hypertext), gid.atk1.hypertext.Hypertext._getGType);
@@ -277,7 +278,7 @@ template HypertextT()
         static extern(C) int _vfuncGetLinkIndexTramp(AtkHypertext* hypertext, int charIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hypertext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)hypertext);
           if (!_obj)
           {
             auto _klass = cast(AtkHypertextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hypertext), gid.atk1.hypertext.Hypertext._getGType);
@@ -307,7 +308,7 @@ template HypertextT()
         static extern(C) int _vfuncGetNLinksTramp(AtkHypertext* hypertext) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hypertext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)hypertext);
           if (!_obj)
           {
             auto _klass = cast(AtkHypertextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hypertext), gid.atk1.hypertext.Hypertext._getGType);
@@ -337,7 +338,7 @@ template HypertextT()
         static extern(C) void _vfuncLinkSelectedTramp(AtkHypertext* hypertext, int linkIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hypertext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)hypertext);
           if (!_obj)
           {
             auto _klass = cast(AtkHypertextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hypertext), gid.atk1.hypertext.Hypertext._getGType);

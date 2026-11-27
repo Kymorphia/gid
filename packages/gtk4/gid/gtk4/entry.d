@@ -2226,7 +2226,7 @@ class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.g
         static extern(C) void _vfuncActivateTramp(GtkEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.entry.Entry)(cast(void*)entry);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);

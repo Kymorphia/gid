@@ -357,7 +357,7 @@ class TaskPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncCleanupTramp(GstTaskPool* pool) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.task_pool.TaskPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.task_pool.TaskPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstTaskPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -384,7 +384,7 @@ class TaskPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncDisposeHandleTramp(GstTaskPool* pool, void* id) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.task_pool.TaskPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.task_pool.TaskPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstTaskPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -411,7 +411,7 @@ class TaskPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncJoinTramp(GstTaskPool* pool, void* id) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.task_pool.TaskPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.task_pool.TaskPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstTaskPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -438,7 +438,7 @@ class TaskPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncPrepareTramp(GstTaskPool* pool, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.task_pool.TaskPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.task_pool.TaskPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstTaskPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);

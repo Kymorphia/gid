@@ -301,7 +301,7 @@ _dVfuncCParams!(T, mem) cargs) nothrow
   else
     enum impl = "_gidVfuncImpl_" ~ _dVfuncInvokerName(mem);
 
-  auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
+  auto self = imported!"gid.gobject2.object".ObjectWrap._vfuncDObject!T(obj);
 
   if (self)
   {

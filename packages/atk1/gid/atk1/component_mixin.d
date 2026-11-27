@@ -2,6 +2,7 @@
 module gid.atk1.component_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.component;
 public import gid.atk1.component_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -814,7 +815,7 @@ template ComponentT()
         static extern(C) void _vfuncBoundsChangedTramp(AtkComponent* component, AtkRectangle* bounds) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -841,7 +842,7 @@ template ComponentT()
         static extern(C) gboolean _vfuncContainsTramp(AtkComponent* component, int x, int y, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -873,7 +874,7 @@ template ComponentT()
         static extern(C) double _vfuncGetAlphaTramp(AtkComponent* component) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -903,7 +904,7 @@ template ComponentT()
         static extern(C) void _vfuncGetExtentsTramp(AtkComponent* component, int* x, int* y, int* width, int* height, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -946,7 +947,7 @@ template ComponentT()
         static extern(C) AtkLayer _vfuncComponentGetLayerTramp(AtkComponent* component) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -978,7 +979,7 @@ template ComponentT()
         static extern(C) int _vfuncComponentGetMdiZorderTramp(AtkComponent* component) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1008,7 +1009,7 @@ template ComponentT()
         static extern(C) void _vfuncComponentGetPositionTramp(AtkComponent* component, int* x, int* y, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1043,7 +1044,7 @@ template ComponentT()
         static extern(C) void _vfuncGetSizeTramp(AtkComponent* component, int* width, int* height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1078,7 +1079,7 @@ template ComponentT()
         static extern(C) gboolean _vfuncComponentGrabFocusTramp(AtkComponent* component) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1110,7 +1111,7 @@ template ComponentT()
         static extern(C) AtkObject* _vfuncRefAccessibleAtPointTramp(AtkComponent* component, int x, int y, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1142,7 +1143,7 @@ template ComponentT()
         static extern(C) void _vfuncRemoveFocusHandlerTramp(AtkComponent* component, uint handlerId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1169,7 +1170,7 @@ template ComponentT()
         static extern(C) gboolean _vfuncScrollToTramp(AtkComponent* component, AtkScrollType type) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1201,7 +1202,7 @@ template ComponentT()
         static extern(C) gboolean _vfuncScrollToPointTramp(AtkComponent* component, AtkCoordType coords, int x, int y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1233,7 +1234,7 @@ template ComponentT()
         static extern(C) gboolean _vfuncSetExtentsTramp(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1265,7 +1266,7 @@ template ComponentT()
         static extern(C) gboolean _vfuncSetPositionTramp(AtkComponent* component, int x, int y, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);
@@ -1297,7 +1298,7 @@ template ComponentT()
         static extern(C) gboolean _vfuncSetSizeTramp(AtkComponent* component, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)component);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)component);
           if (!_obj)
           {
             auto _klass = cast(AtkComponentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)component), gid.atk1.component.Component._getGType);

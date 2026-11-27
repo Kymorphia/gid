@@ -1440,7 +1440,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncActivateTramp(GtkAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.action.Action)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
@@ -1467,7 +1467,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncConnectProxyTramp(GtkAction* action, GtkWidget* proxy) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.action.Action)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
@@ -1494,7 +1494,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) GtkWidget* _vfuncCreateMenuTramp(GtkAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.action.Action)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
@@ -1526,7 +1526,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) GtkWidget* _vfuncCreateMenuItemTramp(GtkAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.action.Action)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
@@ -1558,7 +1558,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) GtkWidget* _vfuncCreateToolItemTramp(GtkAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.action.Action)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
@@ -1590,7 +1590,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) void _vfuncDisconnectProxyTramp(GtkAction* action, GtkWidget* proxy) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.action.Action)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);

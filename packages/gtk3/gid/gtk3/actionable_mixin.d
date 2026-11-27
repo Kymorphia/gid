@@ -2,6 +2,7 @@
 module gid.gtk3.actionable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.actionable;
 public import gid.gtk3.actionable_iface_proxy;
 public import gid.core.utils;
 public import gid.glib2.variant;
@@ -308,7 +309,7 @@ template ActionableT()
         static extern(C) GVariant* _vfuncGetActionTargetValueTramp(GtkActionable* actionable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionable);
           if (!_obj)
           {
             auto _klass = cast(GtkActionableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionable), gid.gtk3.actionable.Actionable._getGType);
@@ -340,7 +341,7 @@ template ActionableT()
         static extern(C) void _vfuncSetActionNameTramp(GtkActionable* actionable, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionable);
           if (!_obj)
           {
             auto _klass = cast(GtkActionableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionable), gid.gtk3.actionable.Actionable._getGType);
@@ -369,7 +370,7 @@ template ActionableT()
         static extern(C) void _vfuncSetActionTargetValueTramp(GtkActionable* actionable, GVariant* targetValue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionable);
           if (!_obj)
           {
             auto _klass = cast(GtkActionableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionable), gid.gtk3.actionable.Actionable._getGType);

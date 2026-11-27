@@ -2765,7 +2765,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncApplyTagTramp(GtkTextBuffer* buffer, GtkTextTag* tag, const(GtkTextIter)* start, const(GtkTextIter)* end) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -2792,7 +2792,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncBeginUserActionTramp(GtkTextBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -2819,7 +2819,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GtkTextBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -2846,7 +2846,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDeleteRangeTramp(GtkTextBuffer* buffer, GtkTextIter* start, GtkTextIter* end) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -2881,7 +2881,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncEndUserActionTramp(GtkTextBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -2908,7 +2908,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncInsertChildAnchorTramp(GtkTextBuffer* buffer, GtkTextIter* iter, GtkTextChildAnchor* anchor) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -2940,7 +2940,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncInsertPaintableTramp(GtkTextBuffer* buffer, GtkTextIter* iter, GdkPaintable* paintable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -2972,7 +2972,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncInsertTextTramp(GtkTextBuffer* buffer, GtkTextIter* pos, const(char)* newText, int newTextLength) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -3005,7 +3005,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMarkDeletedTramp(GtkTextBuffer* buffer, GtkTextMark* mark) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -3032,7 +3032,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMarkSetTramp(GtkTextBuffer* buffer, const(GtkTextIter)* location, GtkTextMark* mark) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -3059,7 +3059,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncModifiedChangedTramp(GtkTextBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -3086,7 +3086,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPasteDoneTramp(GtkTextBuffer* buffer, GdkClipboard* clipboard) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -3113,7 +3113,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRedoTramp(GtkTextBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -3140,7 +3140,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRemoveTagTramp(GtkTextBuffer* buffer, GtkTextTag* tag, const(GtkTextIter)* start, const(GtkTextIter)* end) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -3167,7 +3167,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncUndoTramp(GtkTextBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.text_buffer.TextBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);

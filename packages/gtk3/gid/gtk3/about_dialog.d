@@ -1034,7 +1034,7 @@ class AboutDialog : gid.gtk3.dialog.Dialog
         static extern(C) gboolean _vfuncActivateLinkTramp(GtkAboutDialog* dialog, const(char)* uri) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.about_dialog.AboutDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.about_dialog.AboutDialog)(cast(void*)dialog);
           if (!_obj)
           {
             auto _klass = cast(GtkAboutDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);

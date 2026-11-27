@@ -348,7 +348,7 @@ class MediaFile : gid.gtk4.media_stream.MediaStream
         static extern(C) void _vfuncCloseTramp(GtkMediaFile* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_file.MediaFile)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_file.MediaFile)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaFileClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -375,7 +375,7 @@ class MediaFile : gid.gtk4.media_stream.MediaStream
         static extern(C) void _vfuncOpenTramp(GtkMediaFile* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.media_file.MediaFile)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.media_file.MediaFile)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkMediaFileClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

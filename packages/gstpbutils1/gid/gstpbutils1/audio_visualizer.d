@@ -170,7 +170,7 @@ class AudioVisualizer : gid.gst1.element.Element
         static extern(C) gboolean _vfuncDecideAllocationTramp(GstAudioVisualizer* scope_, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.audio_visualizer.AudioVisualizer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scope_);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.audio_visualizer.AudioVisualizer)(cast(void*)scope_);
           if (!_obj)
           {
             auto _klass = cast(GstAudioVisualizerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scope_);
@@ -205,7 +205,7 @@ class AudioVisualizer : gid.gst1.element.Element
         static extern(C) gboolean _vfuncRenderTramp(GstAudioVisualizer* scope_, GstBuffer* audio, GstVideoFrame* video) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.audio_visualizer.AudioVisualizer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scope_);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.audio_visualizer.AudioVisualizer)(cast(void*)scope_);
           if (!_obj)
           {
             auto _klass = cast(GstAudioVisualizerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scope_);
@@ -241,7 +241,7 @@ class AudioVisualizer : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetupTramp(GstAudioVisualizer* scope_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.audio_visualizer.AudioVisualizer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scope_);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.audio_visualizer.AudioVisualizer)(cast(void*)scope_);
           if (!_obj)
           {
             auto _klass = cast(GstAudioVisualizerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scope_);

@@ -2,6 +2,7 @@
 module gid.gio2.converter_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.converter;
 public import gid.gio2.converter_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -355,7 +356,7 @@ template ConverterT()
         static extern(C) GConverterResult _vfuncConvertTramp(GConverter* converter, void* inbuf, size_t inbufSize, void* outbuf, size_t outbufSize, GConverterFlags flags, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)converter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)converter);
           if (!_obj)
           {
             auto _klass = cast(GConverterIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)converter), gid.gio2.converter.Converter._getGType);
@@ -393,7 +394,7 @@ template ConverterT()
         static extern(C) void _vfuncResetTramp(GConverter* converter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)converter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)converter);
           if (!_obj)
           {
             auto _klass = cast(GConverterIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)converter), gid.gio2.converter.Converter._getGType);

@@ -374,7 +374,7 @@ class Statusbar : gid.gtk3.box.Box
         static extern(C) void _vfuncTextPoppedTramp(GtkStatusbar* statusbar, uint contextId, const(char)* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.statusbar.Statusbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusbar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.statusbar.Statusbar)(cast(void*)statusbar);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusbar);
@@ -403,7 +403,7 @@ class Statusbar : gid.gtk3.box.Box
         static extern(C) void _vfuncTextPushedTramp(GtkStatusbar* statusbar, uint contextId, const(char)* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.statusbar.Statusbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusbar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.statusbar.Statusbar)(cast(void*)statusbar);
           if (!_obj)
           {
             auto _klass = cast(GtkStatusbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusbar);

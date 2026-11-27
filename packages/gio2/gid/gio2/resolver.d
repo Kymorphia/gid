@@ -1333,7 +1333,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncLookupByAddressTramp(GResolver* resolver, GInetAddress* address, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1365,7 +1365,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncLookupByAddressFinishTramp(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1397,7 +1397,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupByNameTramp(GResolver* resolver, const(char)* hostname, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1430,7 +1430,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupByNameFinishTramp(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1462,7 +1462,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupByNameWithFlagsTramp(GResolver* resolver, const(char)* hostname, GResolverNameLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1495,7 +1495,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupByNameWithFlagsFinishTramp(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1527,7 +1527,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupRecordsTramp(GResolver* resolver, const(char)* rrname, GResolverRecordType recordType, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1560,7 +1560,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupRecordsFinishTramp(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1592,7 +1592,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupServiceFinishTramp(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);
@@ -1624,7 +1624,7 @@ class Resolver : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncReloadTramp(GResolver* resolver) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.resolver.Resolver)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)resolver);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.resolver.Resolver)(cast(void*)resolver);
           if (!_obj)
           {
             auto _klass = cast(GResolverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)resolver);

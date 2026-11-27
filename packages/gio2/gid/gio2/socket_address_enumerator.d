@@ -324,7 +324,7 @@ class SocketAddressEnumerator : gid.gobject2.object.ObjectWrap
         static extern(C) GSocketAddress* _vfuncNextTramp(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_address_enumerator.SocketAddressEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_address_enumerator.SocketAddressEnumerator)(cast(void*)enumerator);
           if (!_obj)
           {
             auto _klass = cast(GSocketAddressEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);
@@ -356,7 +356,7 @@ class SocketAddressEnumerator : gid.gobject2.object.ObjectWrap
         static extern(C) GSocketAddress* _vfuncNextFinishTramp(GSocketAddressEnumerator* enumerator, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_address_enumerator.SocketAddressEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_address_enumerator.SocketAddressEnumerator)(cast(void*)enumerator);
           if (!_obj)
           {
             auto _klass = cast(GSocketAddressEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);

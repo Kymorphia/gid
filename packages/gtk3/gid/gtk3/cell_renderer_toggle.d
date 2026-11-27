@@ -315,7 +315,7 @@ class CellRendererToggle : gid.gtk3.cell_renderer.CellRenderer
         static extern(C) void _vfuncToggledTramp(GtkCellRendererToggle* cellRendererToggle, const(char)* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer_toggle.CellRendererToggle)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellRendererToggle);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer_toggle.CellRendererToggle)(cast(void*)cellRendererToggle);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererToggleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellRendererToggle);

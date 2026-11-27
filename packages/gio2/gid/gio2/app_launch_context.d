@@ -566,7 +566,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncGetDisplayTramp(GAppLaunchContext* context, GAppInfo* info, GList* files) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.app_launch_context.AppLaunchContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -599,7 +599,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncGetStartupNotifyIdTramp(GAppLaunchContext* context, GAppInfo* info, GList* files) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.app_launch_context.AppLaunchContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -632,7 +632,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncLaunchFailedTramp(GAppLaunchContext* context, const(char)* startupNotifyId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.app_launch_context.AppLaunchContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -661,7 +661,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncLaunchStartedTramp(GAppLaunchContext* context, GAppInfo* info, GVariant* platformData) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.app_launch_context.AppLaunchContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -688,7 +688,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncLaunchedTramp(GAppLaunchContext* context, GAppInfo* info, GVariant* platformData) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.app_launch_context.AppLaunchContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);

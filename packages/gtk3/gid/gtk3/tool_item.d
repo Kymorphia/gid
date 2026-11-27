@@ -714,7 +714,7 @@ class ToolItem : gid.gtk3.bin.Bin, gid.gtk3.activatable.Activatable
         static extern(C) gboolean _vfuncCreateMenuProxyTramp(GtkToolItem* toolItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tool_item.ToolItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tool_item.ToolItem)(cast(void*)toolItem);
           if (!_obj)
           {
             auto _klass = cast(GtkToolItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolItem);
@@ -746,7 +746,7 @@ class ToolItem : gid.gtk3.bin.Bin, gid.gtk3.activatable.Activatable
         static extern(C) void _vfuncToolbarReconfiguredTramp(GtkToolItem* toolItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tool_item.ToolItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tool_item.ToolItem)(cast(void*)toolItem);
           if (!_obj)
           {
             auto _klass = cast(GtkToolItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolItem);

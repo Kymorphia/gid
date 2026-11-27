@@ -746,7 +746,7 @@ class Dock : gid.gtk4.widget.Widget
         static extern(C) void _vfuncPanelDragBeginTramp(PanelDock* self, PanelWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.dock.Dock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.dock.Dock)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelDockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -773,7 +773,7 @@ class Dock : gid.gtk4.widget.Widget
         static extern(C) void _vfuncPanelDragEndTramp(PanelDock* self, PanelWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.dock.Dock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.dock.Dock)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelDockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

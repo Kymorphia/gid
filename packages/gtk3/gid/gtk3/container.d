@@ -1328,7 +1328,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) void _vfuncAddTramp(GtkContainer* container, GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1355,7 +1355,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) void _vfuncCheckResizeTramp(GtkContainer* container) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1382,7 +1382,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) GType _vfuncChildTypeTramp(GtkContainer* container) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1414,7 +1414,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) char* _vfuncCompositeNameTramp(GtkContainer* container, GtkWidget* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1446,7 +1446,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) void _vfuncGetChildPropertyTramp(GtkContainer* container, GtkWidget* child, uint propertyId, GValue* value, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1478,7 +1478,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) GtkWidgetPath* _vfuncGetPathForChildTramp(GtkContainer* container, GtkWidget* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1510,7 +1510,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) void _vfuncRemoveTramp(GtkContainer* container, GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1537,7 +1537,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) void _vfuncSetChildPropertyTramp(GtkContainer* container, GtkWidget* child, uint propertyId, const(GValue)* value, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
@@ -1564,7 +1564,7 @@ class Container : gid.gtk3.widget.Widget
         static extern(C) void _vfuncSetFocusChildTramp(GtkContainer* container, GtkWidget* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.container.Container)(cast(void*)container);
           if (!_obj)
           {
             auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);

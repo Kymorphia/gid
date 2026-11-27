@@ -3216,7 +3216,7 @@ class Window : gid.gtk3.bin.Bin
         static extern(C) void _vfuncActivateDefaultTramp(GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -3243,7 +3243,7 @@ class Window : gid.gtk3.bin.Bin
         static extern(C) void _vfuncActivateFocusTramp(GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -3270,7 +3270,7 @@ class Window : gid.gtk3.bin.Bin
         static extern(C) gboolean _vfuncEnableDebuggingTramp(GtkWindow* window, gboolean toggle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -3302,7 +3302,7 @@ class Window : gid.gtk3.bin.Bin
         static extern(C) void _vfuncKeysChangedTramp(GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -3329,7 +3329,7 @@ class Window : gid.gtk3.bin.Bin
         static extern(C) void _vfuncSetFocusTramp(GtkWindow* window, GtkWidget* focus) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);

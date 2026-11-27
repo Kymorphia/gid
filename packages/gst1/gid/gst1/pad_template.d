@@ -388,7 +388,7 @@ class PadTemplate : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncPadCreatedTramp(GstPadTemplate* templ, GstPad* pad) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.pad_template.PadTemplate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)templ);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.pad_template.PadTemplate)(cast(void*)templ);
           if (!_obj)
           {
             auto _klass = cast(GstPadTemplateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)templ);

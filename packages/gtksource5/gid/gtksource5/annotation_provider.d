@@ -312,7 +312,7 @@ class AnnotationProvider : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncPopulateHoverFinishTramp(GtkSourceAnnotationProvider* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.annotation_provider.AnnotationProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.annotation_provider.AnnotationProvider)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceAnnotationProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

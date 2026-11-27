@@ -1056,7 +1056,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
         static extern(C) void _vfuncActionActivatedTramp(GtkEntryCompletion* completion, int index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry_completion.EntryCompletion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -1083,7 +1083,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
         static extern(C) gboolean _vfuncCursorOnMatchTramp(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry_completion.EntryCompletion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -1118,7 +1118,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
         static extern(C) gboolean _vfuncInsertPrefixTramp(GtkEntryCompletion* completion, const(char)* prefix) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry_completion.EntryCompletion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -1151,7 +1151,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
         static extern(C) gboolean _vfuncMatchSelectedTramp(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry_completion.EntryCompletion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
@@ -1186,7 +1186,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
         static extern(C) void _vfuncNoMatchesTramp(GtkEntryCompletion* completion) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.entry_completion.EntryCompletion)(cast(void*)completion);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);

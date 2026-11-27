@@ -2,6 +2,7 @@
 module gid.gio2.remote_action_group_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.remote_action_group;
 public import gid.gio2.remote_action_group_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -177,7 +178,7 @@ template RemoteActionGroupT()
         static extern(C) void _vfuncActivateActionFullTramp(GRemoteActionGroup* remote, const(char)* actionName, GVariant* parameter, GVariant* platformData) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)remote);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)remote);
           if (!_obj)
           {
             auto _klass = cast(GRemoteActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)remote), gid.gio2.remote_action_group.RemoteActionGroup._getGType);
@@ -206,7 +207,7 @@ template RemoteActionGroupT()
         static extern(C) void _vfuncChangeActionStateFullTramp(GRemoteActionGroup* remote, const(char)* actionName, GVariant* value, GVariant* platformData) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)remote);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)remote);
           if (!_obj)
           {
             auto _klass = cast(GRemoteActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)remote), gid.gio2.remote_action_group.RemoteActionGroup._getGType);

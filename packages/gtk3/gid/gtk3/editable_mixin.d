@@ -2,6 +2,7 @@
 module gid.gtk3.editable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.editable;
 public import gid.gtk3.editable_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -744,7 +745,7 @@ template EditableT()
         static extern(C) void _vfuncChangedTramp(GtkEditable* editable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -771,7 +772,7 @@ template EditableT()
         static extern(C) void _vfuncDeleteTextTramp(GtkEditable* editable, int startPos, int endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -798,7 +799,7 @@ template EditableT()
         static extern(C) void _vfuncDoDeleteTextTramp(GtkEditable* editable, int startPos, int endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -825,7 +826,7 @@ template EditableT()
         static extern(C) void _vfuncDoInsertTextTramp(GtkEditable* editable, const(char)* newText, int newTextLength, int* position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -854,7 +855,7 @@ template EditableT()
         static extern(C) char* _vfuncGetCharsTramp(GtkEditable* editable, int startPos, int endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -886,7 +887,7 @@ template EditableT()
         static extern(C) int _vfuncGetPositionTramp(GtkEditable* editable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -916,7 +917,7 @@ template EditableT()
         static extern(C) gboolean _vfuncGetSelectionBoundsTramp(GtkEditable* editable, int* startPos, int* endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -956,7 +957,7 @@ template EditableT()
         static extern(C) void _vfuncInsertTextTramp(GtkEditable* editable, const(char)* newText, int newTextLength, int* position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -985,7 +986,7 @@ template EditableT()
         static extern(C) void _vfuncSetPositionTramp(GtkEditable* editable, int position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
@@ -1012,7 +1013,7 @@ template EditableT()
         static extern(C) void _vfuncSetSelectionBoundsTramp(GtkEditable* editable, int startPos, int endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)editable);
           if (!_obj)
           {
             auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);

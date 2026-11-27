@@ -1746,7 +1746,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) void _vfuncEosTramp(GstAppSink* appsink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
@@ -1773,7 +1773,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) GstFlowReturn _vfuncNewPrerollTramp(GstAppSink* appsink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
@@ -1805,7 +1805,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) GstFlowReturn _vfuncNewSampleTramp(GstAppSink* appsink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
@@ -1837,7 +1837,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) GstSample* _vfuncPullPrerollTramp(GstAppSink* appsink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
@@ -1869,7 +1869,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) GstSample* _vfuncPullSampleTramp(GstAppSink* appsink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
@@ -1901,7 +1901,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) GstMiniObject* _vfuncTryPullObjectTramp(GstAppSink* appsink, GstClockTime timeout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
@@ -1933,7 +1933,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) GstSample* _vfuncTryPullPrerollTramp(GstAppSink* appsink, GstClockTime timeout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
@@ -1965,7 +1965,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
         static extern(C) GstSample* _vfuncTryPullSampleTramp(GstAppSink* appsink, GstClockTime timeout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_sink.AppSink)(cast(void*)appsink);
           if (!_obj)
           {
             auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);

@@ -1139,7 +1139,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncArrayElementTramp(JsonParser* parser, JsonArray* array, int index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1171,7 +1171,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncArrayEndTramp(JsonParser* parser, JsonArray* array) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1203,7 +1203,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncArrayStartTramp(JsonParser* parser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1230,7 +1230,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncErrorTramp(JsonParser* parser, const(GError)* error) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1257,7 +1257,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncObjectEndTramp(JsonParser* parser, JsonObject* object) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1289,7 +1289,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncObjectMemberTramp(JsonParser* parser, JsonObject* object, const(char)* memberName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1322,7 +1322,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncObjectStartTramp(JsonParser* parser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1349,7 +1349,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncParseEndTramp(JsonParser* parser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
@@ -1376,7 +1376,7 @@ class Parser : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncParseStartTramp(JsonParser* parser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.json1.parser.Parser)(cast(void*)parser);
           if (!_obj)
           {
             auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);

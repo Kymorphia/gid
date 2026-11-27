@@ -523,7 +523,7 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
         static extern(C) void _vfuncFlushTramp(GDBusInterfaceSkeleton* interface_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)(cast(void*)interface_);
           if (!_obj)
           {
             auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);
@@ -550,7 +550,7 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
         static extern(C) gboolean _vfuncGAuthorizeMethodTramp(GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)(cast(void*)interface_);
           if (!_obj)
           {
             auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);
@@ -582,7 +582,7 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
         static extern(C) GDBusInterfaceInfo* _vfuncGetInfoTramp(GDBusInterfaceSkeleton* interface_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)(cast(void*)interface_);
           if (!_obj)
           {
             auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);
@@ -614,7 +614,7 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
         static extern(C) GVariant* _vfuncGetPropertiesTramp(GDBusInterfaceSkeleton* interface_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)(cast(void*)interface_);
           if (!_obj)
           {
             auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);

@@ -375,7 +375,7 @@ class RadioMenuItem : gid.gtk3.check_menu_item.CheckMenuItem
         static extern(C) void _vfuncGroupChangedTramp(GtkRadioMenuItem* radioMenuItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.radio_menu_item.RadioMenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)radioMenuItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.radio_menu_item.RadioMenuItem)(cast(void*)radioMenuItem);
           if (!_obj)
           {
             auto _klass = cast(GtkRadioMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)radioMenuItem);

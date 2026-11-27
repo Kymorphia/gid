@@ -2,6 +2,7 @@
 module gid.atk1.text_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.text;
 public import gid.atk1.text_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -1562,7 +1563,7 @@ template TextT()
         static extern(C) gboolean _vfuncTextAddSelectionTramp(AtkText* text, int startOffset, int endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1594,7 +1595,7 @@ template TextT()
         static extern(C) int _vfuncGetCaretOffsetTramp(AtkText* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1624,7 +1625,7 @@ template TextT()
         static extern(C) dchar _vfuncGetCharacterAtOffsetTramp(AtkText* text, int offset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1654,7 +1655,7 @@ template TextT()
         static extern(C) int _vfuncGetCharacterCountTramp(AtkText* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1684,7 +1685,7 @@ template TextT()
         static extern(C) void _vfuncGetCharacterExtentsTramp(AtkText* text, int offset, int* x, int* y, int* width, int* height, AtkCoordType coords) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1727,7 +1728,7 @@ template TextT()
         static extern(C) int _vfuncGetNSelectionsTramp(AtkText* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1757,7 +1758,7 @@ template TextT()
         static extern(C) int _vfuncGetOffsetAtPointTramp(AtkText* text, int x, int y, AtkCoordType coords) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1787,7 +1788,7 @@ template TextT()
         static extern(C) void _vfuncGetRangeExtentsTramp(AtkText* text, int startOffset, int endOffset, AtkCoordType coordType, AtkTextRectangle* rect) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1814,7 +1815,7 @@ template TextT()
         static extern(C) char* _vfuncGetSelectionTramp(AtkText* text, int selectionNum, int* startOffset, int* endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1846,7 +1847,7 @@ template TextT()
         static extern(C) char* _vfuncGetStringAtOffsetTramp(AtkText* text, int offset, AtkTextGranularity granularity, int* startOffset, int* endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1878,7 +1879,7 @@ template TextT()
         static extern(C) char* _vfuncGetTextTramp(AtkText* text, int startOffset, int endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1910,7 +1911,7 @@ template TextT()
         static extern(C) char* _vfuncGetTextAfterOffsetTramp(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1942,7 +1943,7 @@ template TextT()
         static extern(C) char* _vfuncGetTextAtOffsetTramp(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -1974,7 +1975,7 @@ template TextT()
         static extern(C) char* _vfuncGetTextBeforeOffsetTramp(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2006,7 +2007,7 @@ template TextT()
         static extern(C) gboolean _vfuncTextRemoveSelectionTramp(AtkText* text, int selectionNum) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2038,7 +2039,7 @@ template TextT()
         static extern(C) gboolean _vfuncScrollSubstringToTramp(AtkText* text, int startOffset, int endOffset, AtkScrollType type) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2070,7 +2071,7 @@ template TextT()
         static extern(C) gboolean _vfuncScrollSubstringToPointTramp(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2102,7 +2103,7 @@ template TextT()
         static extern(C) gboolean _vfuncSetCaretOffsetTramp(AtkText* text, int offset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2134,7 +2135,7 @@ template TextT()
         static extern(C) gboolean _vfuncSetSelectionTramp(AtkText* text, int selectionNum, int startOffset, int endOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2166,7 +2167,7 @@ template TextT()
         static extern(C) void _vfuncTextAttributesChangedTramp(AtkText* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2193,7 +2194,7 @@ template TextT()
         static extern(C) void _vfuncTextCaretMovedTramp(AtkText* text, int location) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2220,7 +2221,7 @@ template TextT()
         static extern(C) void _vfuncTextChangedTramp(AtkText* text, int position, int length) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);
@@ -2247,7 +2248,7 @@ template TextT()
         static extern(C) void _vfuncTextSelectionChangedTramp(AtkText* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.text.Text._getGType);

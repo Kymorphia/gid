@@ -545,7 +545,7 @@ class InfoBar : gid.gtk3.box.Box
         static extern(C) void _vfuncCloseTramp(GtkInfoBar* infoBar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.info_bar.InfoBar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)infoBar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.info_bar.InfoBar)(cast(void*)infoBar);
           if (!_obj)
           {
             auto _klass = cast(GtkInfoBarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)infoBar);
@@ -572,7 +572,7 @@ class InfoBar : gid.gtk3.box.Box
         static extern(C) void _vfuncResponseTramp(GtkInfoBar* infoBar, int responseId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.info_bar.InfoBar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)infoBar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.info_bar.InfoBar)(cast(void*)infoBar);
           if (!_obj)
           {
             auto _klass = cast(GtkInfoBarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)infoBar);

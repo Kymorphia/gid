@@ -592,7 +592,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDiscoveredTramp(GstDiscoverer* discoverer, GstDiscovererInfo* info, const(GError)* err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.discoverer.Discoverer)(cast(void*)discoverer);
           if (!_obj)
           {
             auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);
@@ -619,7 +619,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncFinishedTramp(GstDiscoverer* discoverer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.discoverer.Discoverer)(cast(void*)discoverer);
           if (!_obj)
           {
             auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);
@@ -646,7 +646,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
         static extern(C) GstDiscovererInfo* _vfuncLoadSerializeInfoTramp(GstDiscoverer* dc, char* uri) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.discoverer.Discoverer)(cast(void*)dc);
           if (!_obj)
           {
             auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dc);
@@ -679,7 +679,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSourceSetupTramp(GstDiscoverer* discoverer, GstElement* source) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.discoverer.Discoverer)(cast(void*)discoverer);
           if (!_obj)
           {
             auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);
@@ -706,7 +706,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncStartingTramp(GstDiscoverer* discoverer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstpbutils1.discoverer.Discoverer)(cast(void*)discoverer);
           if (!_obj)
           {
             auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);

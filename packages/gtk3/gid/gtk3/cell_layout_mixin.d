@@ -2,6 +2,7 @@
 module gid.gtk3.cell_layout_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.cell_layout;
 public import gid.gtk3.cell_layout_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -569,7 +570,7 @@ template CellLayoutT()
         static extern(C) void _vfuncAddAttributeTramp(GtkCellLayout* cellLayout, GtkCellRenderer* cell, const(char)* attribute, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellLayout);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellLayout);
           if (!_obj)
           {
             auto _klass = cast(GtkCellLayoutIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellLayout), gid.gtk3.cell_layout.CellLayout._getGType);
@@ -598,7 +599,7 @@ template CellLayoutT()
         static extern(C) void _vfuncClearTramp(GtkCellLayout* cellLayout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellLayout);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellLayout);
           if (!_obj)
           {
             auto _klass = cast(GtkCellLayoutIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellLayout), gid.gtk3.cell_layout.CellLayout._getGType);
@@ -625,7 +626,7 @@ template CellLayoutT()
         static extern(C) void _vfuncClearAttributesTramp(GtkCellLayout* cellLayout, GtkCellRenderer* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellLayout);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellLayout);
           if (!_obj)
           {
             auto _klass = cast(GtkCellLayoutIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellLayout), gid.gtk3.cell_layout.CellLayout._getGType);
@@ -652,7 +653,7 @@ template CellLayoutT()
         static extern(C) GtkCellArea* _vfuncGetAreaTramp(GtkCellLayout* cellLayout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellLayout);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellLayout);
           if (!_obj)
           {
             auto _klass = cast(GtkCellLayoutIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellLayout), gid.gtk3.cell_layout.CellLayout._getGType);
@@ -684,7 +685,7 @@ template CellLayoutT()
         static extern(C) void _vfuncPackEndTramp(GtkCellLayout* cellLayout, GtkCellRenderer* cell, gboolean expand) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellLayout);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellLayout);
           if (!_obj)
           {
             auto _klass = cast(GtkCellLayoutIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellLayout), gid.gtk3.cell_layout.CellLayout._getGType);
@@ -711,7 +712,7 @@ template CellLayoutT()
         static extern(C) void _vfuncPackStartTramp(GtkCellLayout* cellLayout, GtkCellRenderer* cell, gboolean expand) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellLayout);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellLayout);
           if (!_obj)
           {
             auto _klass = cast(GtkCellLayoutIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellLayout), gid.gtk3.cell_layout.CellLayout._getGType);
@@ -738,7 +739,7 @@ template CellLayoutT()
         static extern(C) void _vfuncReorderTramp(GtkCellLayout* cellLayout, GtkCellRenderer* cell, int position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellLayout);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellLayout);
           if (!_obj)
           {
             auto _klass = cast(GtkCellLayoutIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellLayout), gid.gtk3.cell_layout.CellLayout._getGType);

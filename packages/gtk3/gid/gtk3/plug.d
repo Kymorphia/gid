@@ -295,7 +295,7 @@ class Plug : gid.gtk3.window.Window
         static extern(C) void _vfuncEmbeddedTramp(GtkPlug* plug) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.plug.Plug)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)plug);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.plug.Plug)(cast(void*)plug);
           if (!_obj)
           {
             auto _klass = cast(GtkPlugClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)plug);

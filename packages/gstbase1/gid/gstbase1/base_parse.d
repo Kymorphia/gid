@@ -873,7 +873,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncDetectTramp(GstBaseParse* parse, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -908,7 +908,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) GstCaps* _vfuncGetSinkCapsTramp(GstBaseParse* parse, GstCaps* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -943,7 +943,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncHandleFrameTramp(GstBaseParse* parse, GstBaseParseFrame* frame, int* skipsize) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -978,7 +978,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncPrePushFrameTramp(GstBaseParse* parse, GstBaseParseFrame* frame) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -1013,7 +1013,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetSinkCapsTramp(GstBaseParse* parse, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -1048,7 +1048,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkEventTramp(GstBaseParse* parse, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -1083,7 +1083,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkQueryTramp(GstBaseParse* parse, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -1118,7 +1118,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcEventTramp(GstBaseParse* parse, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -1153,7 +1153,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcQueryTramp(GstBaseParse* parse, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -1188,7 +1188,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStartTramp(GstBaseParse* parse) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
@@ -1220,7 +1220,7 @@ class BaseParse : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStopTramp(GstBaseParse* parse) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.base_parse.BaseParse)(cast(void*)parse);
           if (!_obj)
           {
             auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);

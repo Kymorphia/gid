@@ -2,6 +2,7 @@
 module gid.gtk4.builder_scope_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.builder_scope;
 public import gid.gtk4.builder_scope_iface_proxy;
 public import gid.core.utils;
 public import gid.glib2.error;
@@ -167,7 +168,7 @@ template BuilderScopeT()
         static extern(C) GClosure* _vfuncCreateClosureTramp(GtkBuilderScope* self, GtkBuilder* builder, const(char)* functionName, GtkBuilderClosureFlags flags, GObject* object, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkBuilderScopeInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.builder_scope.BuilderScope._getGType);
@@ -200,7 +201,7 @@ template BuilderScopeT()
         static extern(C) GType _vfuncGetTypeFromFunctionTramp(GtkBuilderScope* self, GtkBuilder* builder, const(char)* functionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkBuilderScopeInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.builder_scope.BuilderScope._getGType);
@@ -233,7 +234,7 @@ template BuilderScopeT()
         static extern(C) GType _vfuncGetTypeFromNameTramp(GtkBuilderScope* self, GtkBuilder* builder, const(char)* typeName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkBuilderScopeInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.builder_scope.BuilderScope._getGType);

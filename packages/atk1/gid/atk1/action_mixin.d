@@ -2,6 +2,7 @@
 module gid.atk1.action_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.action;
 public import gid.atk1.action_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -431,7 +432,7 @@ template ActionT()
         static extern(C) gboolean _vfuncDoActionTramp(AtkAction* action, int i) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(AtkActionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action), gid.atk1.action.Action._getGType);
@@ -463,7 +464,7 @@ template ActionT()
         static extern(C) int _vfuncGetNActionsTramp(AtkAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(AtkActionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action), gid.atk1.action.Action._getGType);
@@ -493,7 +494,7 @@ template ActionT()
         static extern(C) gboolean _vfuncActionSetDescriptionTramp(AtkAction* action, int i, const(char)* desc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(AtkActionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action), gid.atk1.action.Action._getGType);

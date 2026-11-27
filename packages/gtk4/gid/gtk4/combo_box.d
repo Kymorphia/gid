@@ -1265,7 +1265,7 @@ class ComboBox : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gi
         static extern(C) void _vfuncActivateTramp(GtkComboBox* comboBox) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.combo_box.ComboBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)comboBox);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.combo_box.ComboBox)(cast(void*)comboBox);
           if (!_obj)
           {
             auto _klass = cast(GtkComboBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)comboBox);
@@ -1292,7 +1292,7 @@ class ComboBox : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gi
         static extern(C) void _vfuncChangedTramp(GtkComboBox* comboBox) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.combo_box.ComboBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)comboBox);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.combo_box.ComboBox)(cast(void*)comboBox);
           if (!_obj)
           {
             auto _klass = cast(GtkComboBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)comboBox);
@@ -1319,7 +1319,7 @@ class ComboBox : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gi
         static extern(C) char* _vfuncFormatEntryTextTramp(GtkComboBox* comboBox, const(char)* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.combo_box.ComboBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)comboBox);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.combo_box.ComboBox)(cast(void*)comboBox);
           if (!_obj)
           {
             auto _klass = cast(GtkComboBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)comboBox);

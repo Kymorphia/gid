@@ -184,7 +184,7 @@ class GLBaseSrc : gid.gstbase1.push_src.PushSrc
         static extern(C) gboolean _vfuncFillGlMemoryTramp(GstGLBaseSrc* src, GstGLMemory* mem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_src.GLBaseSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_src.GLBaseSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -219,7 +219,7 @@ class GLBaseSrc : gid.gstbase1.push_src.PushSrc
         static extern(C) gboolean _vfuncGlStartTramp(GstGLBaseSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_src.GLBaseSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_src.GLBaseSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -251,7 +251,7 @@ class GLBaseSrc : gid.gstbase1.push_src.PushSrc
         static extern(C) void _vfuncGlStopTramp(GstGLBaseSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glbase_src.GLBaseSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glbase_src.GLBaseSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstGLBaseSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);

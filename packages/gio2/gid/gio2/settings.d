@@ -2084,7 +2084,7 @@ class Settings : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GSettings* settings, const(char)* key) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings.Settings)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)settings);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings.Settings)(cast(void*)settings);
           if (!_obj)
           {
             auto _klass = cast(GSettingsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)settings);
@@ -2113,7 +2113,7 @@ class Settings : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncWritableChangeEventTramp(GSettings* settings, GQuark key) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings.Settings)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)settings);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings.Settings)(cast(void*)settings);
           if (!_obj)
           {
             auto _klass = cast(GSettingsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)settings);
@@ -2145,7 +2145,7 @@ class Settings : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncWritableChangedTramp(GSettings* settings, const(char)* key) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings.Settings)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)settings);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings.Settings)(cast(void*)settings);
           if (!_obj)
           {
             auto _klass = cast(GSettingsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)settings);

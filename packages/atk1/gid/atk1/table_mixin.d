@@ -2,6 +2,7 @@
 module gid.atk1.table_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.table;
 public import gid.atk1.table_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -1709,7 +1710,7 @@ template TableT()
         static extern(C) gboolean _vfuncAddColumnSelectionTramp(AtkTable* table, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1741,7 +1742,7 @@ template TableT()
         static extern(C) gboolean _vfuncAddRowSelectionTramp(AtkTable* table, int row) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1773,7 +1774,7 @@ template TableT()
         static extern(C) void _vfuncColumnDeletedTramp(AtkTable* table, int column, int numDeleted) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1800,7 +1801,7 @@ template TableT()
         static extern(C) void _vfuncColumnInsertedTramp(AtkTable* table, int column, int numInserted) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1827,7 +1828,7 @@ template TableT()
         static extern(C) void _vfuncColumnReorderedTramp(AtkTable* table) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1854,7 +1855,7 @@ template TableT()
         static extern(C) AtkObject* _vfuncGetCaptionTramp(AtkTable* table) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1886,7 +1887,7 @@ template TableT()
         static extern(C) int _vfuncGetColumnAtIndexTramp(AtkTable* table, int index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1916,7 +1917,7 @@ template TableT()
         static extern(C) int _vfuncGetColumnExtentAtTramp(AtkTable* table, int row, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1946,7 +1947,7 @@ template TableT()
         static extern(C) AtkObject* _vfuncGetColumnHeaderTramp(AtkTable* table, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -1978,7 +1979,7 @@ template TableT()
         static extern(C) int _vfuncGetIndexAtTramp(AtkTable* table, int row, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2008,7 +2009,7 @@ template TableT()
         static extern(C) int _vfuncGetNColumnsTramp(AtkTable* table) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2038,7 +2039,7 @@ template TableT()
         static extern(C) int _vfuncGetNRowsTramp(AtkTable* table) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2068,7 +2069,7 @@ template TableT()
         static extern(C) int _vfuncGetRowAtIndexTramp(AtkTable* table, int index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2098,7 +2099,7 @@ template TableT()
         static extern(C) int _vfuncGetRowExtentAtTramp(AtkTable* table, int row, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2128,7 +2129,7 @@ template TableT()
         static extern(C) AtkObject* _vfuncGetRowHeaderTramp(AtkTable* table, int row) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2160,7 +2161,7 @@ template TableT()
         static extern(C) AtkObject* _vfuncGetSummaryTramp(AtkTable* table) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2192,7 +2193,7 @@ template TableT()
         static extern(C) gboolean _vfuncIsColumnSelectedTramp(AtkTable* table, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2224,7 +2225,7 @@ template TableT()
         static extern(C) gboolean _vfuncIsRowSelectedTramp(AtkTable* table, int row) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2256,7 +2257,7 @@ template TableT()
         static extern(C) gboolean _vfuncIsSelectedTramp(AtkTable* table, int row, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2288,7 +2289,7 @@ template TableT()
         static extern(C) void _vfuncModelChangedTramp(AtkTable* table) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2315,7 +2316,7 @@ template TableT()
         static extern(C) AtkObject* _vfuncRefAtTramp(AtkTable* table, int row, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2347,7 +2348,7 @@ template TableT()
         static extern(C) gboolean _vfuncRemoveColumnSelectionTramp(AtkTable* table, int column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2379,7 +2380,7 @@ template TableT()
         static extern(C) gboolean _vfuncRemoveRowSelectionTramp(AtkTable* table, int row) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2411,7 +2412,7 @@ template TableT()
         static extern(C) void _vfuncRowDeletedTramp(AtkTable* table, int row, int numDeleted) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2438,7 +2439,7 @@ template TableT()
         static extern(C) void _vfuncRowInsertedTramp(AtkTable* table, int row, int numInserted) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2465,7 +2466,7 @@ template TableT()
         static extern(C) void _vfuncRowReorderedTramp(AtkTable* table) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2492,7 +2493,7 @@ template TableT()
         static extern(C) void _vfuncSetCaptionTramp(AtkTable* table, AtkObject* caption) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2519,7 +2520,7 @@ template TableT()
         static extern(C) void _vfuncSetColumnDescriptionTramp(AtkTable* table, int column, const(char)* description) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2548,7 +2549,7 @@ template TableT()
         static extern(C) void _vfuncSetColumnHeaderTramp(AtkTable* table, int column, AtkObject* header) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2575,7 +2576,7 @@ template TableT()
         static extern(C) void _vfuncSetRowDescriptionTramp(AtkTable* table, int row, const(char)* description) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2604,7 +2605,7 @@ template TableT()
         static extern(C) void _vfuncSetRowHeaderTramp(AtkTable* table, int row, AtkObject* header) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);
@@ -2631,7 +2632,7 @@ template TableT()
         static extern(C) void _vfuncSetSummaryTramp(AtkTable* table, AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(AtkTableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table), gid.atk1.table.Table._getGType);

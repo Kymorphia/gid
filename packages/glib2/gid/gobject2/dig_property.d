@@ -508,7 +508,7 @@ nothrow
 
   imported!"gid.core.utils".gidAttachThread();
 
-  auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
+  auto self = imported!"gid.gobject2.object".ObjectWrap._vfuncDObject!T(obj);
   uint id = 1;
 
   static foreach (mem; __traits(allMembers, T))
@@ -557,7 +557,7 @@ nothrow
 
   imported!"gid.core.utils".gidAttachThread();
 
-  auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
+  auto self = imported!"gid.gobject2.object".ObjectWrap._vfuncDObject!T(obj);
   uint id = 1;
 
   static foreach (mem; __traits(allMembers, T))

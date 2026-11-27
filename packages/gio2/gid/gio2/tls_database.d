@@ -1152,7 +1152,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncCreateCertificateHandleTramp(GTlsDatabase* self, GTlsCertificate* certificate) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1184,7 +1184,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsCertificate* _vfuncLookupCertificateForHandleTramp(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1217,7 +1217,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsCertificate* _vfuncLookupCertificateForHandleFinishTramp(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1249,7 +1249,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsCertificate* _vfuncLookupCertificateIssuerTramp(GTlsDatabase* self, GTlsCertificate* certificate, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1281,7 +1281,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsCertificate* _vfuncLookupCertificateIssuerFinishTramp(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1313,7 +1313,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupCertificatesIssuedByTramp(GTlsDatabase* self, GByteArray* issuerRawDn, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1346,7 +1346,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GList* _vfuncLookupCertificatesIssuedByFinishTramp(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1378,7 +1378,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsCertificateFlags _vfuncVerifyChainTramp(GTlsDatabase* self, GTlsCertificate* chain, const(char)* purpose, GSocketConnectable* identity, GTlsInteraction* interaction, GTlsDatabaseVerifyFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1411,7 +1411,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsCertificateFlags _vfuncVerifyChainFinishTramp(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_database.TlsDatabase)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_database.TlsDatabase)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GTlsDatabaseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

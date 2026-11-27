@@ -115,6 +115,8 @@ struct GidIfaceVfunc {}
 class ObjectWrap : GidWrap
 {
   protected GObject* _cInstancePtr; // Pointer to wrapped C GObject
+  private ObjectWrap _gidPeer; // The other D object of the C instance (see _bindGObject)
+  private bool _gidSecondary; // Secondary D object, which holds no reference (see _bindGObject)
   package DClosure[gulong] _signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
@@ -174,7 +176,7 @@ class ObjectWrap : GidWrap
       return SOURCE_REMOVE;
     }
 
-    if (_cInstancePtr) // Might be null if an exception occurred during construction
+    if (_cInstancePtr && !_gidSecondary) // Might be null if an exception occurred during construction
     {
       debug objectDebugLog("dtor");
       g_object_set_qdata(_cInstancePtr, gidObjectQuark, null); // Clear C object -> D object data pointer
@@ -220,10 +222,35 @@ class ObjectWrap : GidWrap
     debug objectDebugLog("new");
   }
 
-  // Bind a C GObject to this D object with qdata and a toggle reference, without changing the caller's reference
+  /*
+  * Bind a C GObject to this D object with qdata and a toggle reference, without changing the caller's reference.
+  *
+  * A C instance can have a second D object, of a D class which isn't related to the first: an instance of a type
+  * exported by a D library (GObjectExport) has the D object of the library, and a D program using the library
+  * through its GIR binding needs an object of the binding class (or of its own D subclass of it). The first D object
+  * is the primary one, it holds the toggle reference and is found with qdata. The secondary one holds no reference
+  * and isn't added to the GC roots. The two refer to each other: the secondary keeps the primary alive (and so the C
+  * instance), the primary keeps the secondary alive while the C instance has other references.
+  */
   private final void _bindGObject(void* cObj) nothrow
   {
     assert(!_cInstancePtr);
+
+    auto primary = cast(ObjectWrap)g_object_get_qdata(cast(GObject*)cObj, gidObjectQuark);
+
+    if (primary && primary !is this) // Instance already has a D object of an unrelated class?
+    {
+      if (primary._gidPeer)
+        g_log("Gid", GLogLevelFlags.LevelCritical, "%s: instance already has two D objects, replacing the second",
+      g_type_name((cast(GTypeInstance*)cObj).gClass.gType));
+
+      _cInstancePtr = cast(GObject*)cObj;
+      _gidSecondary = true;
+      _gidPeer = primary;
+      primary._gidPeer = this;
+      debug objectDebugLog("bind secondary");
+      return;
+    }
 
     _cInstancePtr = cast(GObject*)cObj;
 
@@ -334,12 +361,12 @@ class ObjectWrap : GidWrap
     gidAttachThread(); // Instances can be created by threads created by C
     auto cObj = cast(GObject*)instance;
 
-    if (g_object_get_qdata(cObj, gidObjectQuark)) // Already bound to a D object?
+    if (_boundDObject!T(cObj)) // Already bound to a D object of T?
       return;
 
     auto instType = (cast(GTypeClass*)klass).gType; // klass is the class of the type being instantiated
 
-    if (dSubclassConstructing && dSubclassConstructingType == instType) // Constructed from D?
+    if (dSubclassConstructing && dSubclassConstructingType == instType && cast(T)dSubclassConstructing) // From D?
     {
       auto dObj = dSubclassConstructing;
       dSubclassConstructing = null; // Do not bind other instances created while constructing this one
@@ -347,12 +374,16 @@ class ObjectWrap : GidWrap
       return;
     }
 
-    auto nearest = instType; // Nearest D subclass GType of the instance
-    while (nearest && !g_type_get_qdata(nearest, gidSubclassQuark))
-      nearest = g_type_parent(nearest);
-
-    if (nearest != T._getGType)
-      return;
+    // The D object is created by the nearest D subclass GType whose D class is T or derived from it. D subclass
+    // types of unrelated D classes (a D program's subclass of the binding of a type exported by a D library) get
+    // their own D object (see _bindGObject).
+    auto nearest = T._getGType;
+    for (auto t = instType; t && t != nearest; t = g_type_parent(t))
+    {
+      auto dClass = g_type_get_qdata(t, gidSubclassQuark);
+      if (dClass && (dClass is cast(void*)1 || _isDClassOf!T(cast(TypeInfo_Class)dClass)))
+        return;
+    }
 
     static if (__traits(compiles, () => new T())) // Has a public default constructor?
     {
@@ -441,7 +472,31 @@ class ObjectWrap : GidWrap
   */
   protected final void* _vfuncClass() nothrow
   {
-    return _vfuncClassOf(_cInstancePtr);
+    auto thisClass = typeid(this);
+
+    // Only D subclass types of this object's D class and its base classes are skipped, the types of a D library
+    // which exported the type the object's class binds (see _bindGObject) have the implementations to call
+    bool ownDType(GType t)
+    {
+      auto dClass = g_type_get_qdata(t, gidSubclassQuark);
+      return dClass && (dClass is cast(void*)1 || _isDerivedClass(thisClass, cast(TypeInfo_Class)dClass));
+    }
+
+    auto gtype = (cast(GTypeInstance*)_cInstancePtr).gClass.gType;
+
+    for (auto t = gtype; t; t = g_type_parent(t)) // Skip types C registered as subclasses of D types (_vfuncClassOf)
+    {
+      if (ownDType(t))
+      {
+        gtype = t;
+        break;
+      }
+    }
+
+    while (ownDType(gtype))
+      gtype = g_type_parent(gtype);
+
+    return g_type_class_peek(gtype);
   }
 
   /**
@@ -481,6 +536,51 @@ class ObjectWrap : GidWrap
   static ObjectWrap _vfuncDObject(void* cObj) nothrow
   {
     return cObj ? cast(ObjectWrap)g_object_get_qdata(cast(GObject*)cObj, gidObjectQuark) : null;
+  }
+
+  /**
+  * Get the D object of type T bound to a C instance for a virtual method trampoline, signal or property handler,
+  * without creating a D object if none is bound. Also finds the secondary D object of an instance (see
+  * _bindGObject).
+  * Params:
+  *   T = The D class or interface
+  *   cObj = The C GObject instance
+  * Returns: The D object or null
+  */
+  static T _vfuncDObject(T)(void* cObj) nothrow
+  {
+    return cast(T)_boundDObject!T(cObj);
+  }
+
+  // true if the D class is the class or interface T or derived from it
+  private static bool _isDClassOf(T)(const TypeInfo_Class c) nothrow
+  {
+    static if (is(T == interface))
+      return typeid(T).isBaseOf(c);
+    else
+      return _isDerivedClass(c, typeid(T));
+  }
+
+  // true if the D class c is base or derived from it (classes of the same name are equal, the D modules of a
+  // binding can be linked into more than one shared library)
+  private static bool _isDerivedClass(const TypeInfo_Class c, const TypeInfo_Class base) nothrow
+  {
+    for (auto ci = cast()c; ci; ci = ci.base)
+      if (ci is base || ci.name == base.name)
+      return true;
+
+    return false;
+  }
+
+  // The primary or secondary D object of a C instance which is a T, or null (see _bindGObject)
+  private static ObjectWrap _boundDObject(T)(void* cObj) nothrow
+  {
+    auto primary = cObj ? cast(ObjectWrap)g_object_get_qdata(cast(GObject*)cObj, gidObjectQuark) : null;
+
+    if (!primary || cast(T)primary)
+      return primary;
+
+    return primary._gidPeer && cast(T)primary._gidPeer ? primary._gidPeer : null;
   }
 
   /**
@@ -581,7 +681,7 @@ class ObjectWrap : GidWrap
       return null;
 
     // Cast return value to ObjectWrap or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
-    if (auto dObj = cast(ObjectWrap)g_object_get_qdata(cast(GObject*)cptr, gidObjectQuark))
+    if (auto dObj = _boundDObject!T(cptr)) // A bound D object, which isn't a T if there is no other (see below)
     {
       if (take)
         g_object_unref(cast(GObject*)cptr);
@@ -602,47 +702,61 @@ class ObjectWrap : GidWrap
     }
 
     // Traverse the C GObject type ancestry until we find a corresponding D class
+    bool anyFound; // A D class was found, but isn't a T
     for (auto gTypeClass = (cast(GTypeInstance*)cptr).gClass; gTypeClass;
     gTypeClass = g_type_class_peek_parent(gTypeClass))
     {
-      TypeInfo_Class dClassType;
-      bool found;
+      TypeInfo_Class[2] candBuf;
+      size_t nCands;
 
-      // D subclass GTypes store their D class (see _setDSubclassGType)
+      // D subclass GTypes store their D class (see _setDSubclassGType). A type exported by a D library can also have
+      // a binding class (a D program using the library through its GIR binding), the one which is a T is used.
       auto dSubclass = g_type_get_qdata(gTypeClass.gType, gidSubclassQuark);
-      auto dSubclassInfo = cast(TypeInfo_Class)dSubclass;
       if (dSubclass && dSubclass !is cast(void*)1)
-      {
-        dClassType = dSubclassInfo;
-        found = true;
-      }
-      else if (auto c = gTypeClass.gType in gtypeClasses)
-      {
-        dClassType = *c;
-        found = true;
-      }
+        candBuf[nCands++] = cast(TypeInfo_Class)dSubclass;
+
+      if (auto c = gTypeClass.gType in gtypeClasses)
+        candBuf[nCands++] = *c;
       else if (auto typeName = g_type_name(gTypeClass.gType))
       {
         if (auto cands = cast(string)typeName[0 .. strlen(typeName)] in gtypeNameClasses) // Not stored, cast is safe
         {
-          found = true;
-          dClassType = (*cands).length == 1 ? (*cands)[0] : selectClass!T(*cands, gTypeClass.gType);
+          auto c = (*cands).length == 1 ? (*cands)[0] : selectClass!T(*cands, gTypeClass.gType);
+
+          if (c)
+            candBuf[nCands++] = c;
+          else
+            anyFound = true;
         }
       }
 
-      if (found)
-      { // If T is an interface type, make sure the matching object class implements it (and a class was found)
-        if (!dClassType || (is(T == interface) && !typeid(T).isBaseOf(cast(const)dClassType)))
-          break;
+      foreach (dClassType; candBuf[0 .. nCands])
+      {
+        anyFound = true;
+
+        if (!_isDClassOf!T(dClassType))
+          continue;
 
         if (auto obj = assumeWontThrow(_d_newclass(cast()dClassType)))
         {
-          (cast(ObjectWrap)obj)._setGObject(cptr, take);
+          (cast(ObjectWrap)obj)._setGObject(cptr, take); // Secondary D object if the instance has one already
           return cast(T)obj;
         }
 
         return null;
       }
+
+      if (anyFound) // The classes of the ancestor types of a class which isn't a T can't be either
+        break;
+    }
+
+    // The instance has a D object or a D class which isn't a T (for interfaces, a proxy object is created below)
+    if (!is(T == interface) && (anyFound || g_object_get_qdata(cast(GObject*)cptr, gidObjectQuark)))
+    {
+      if (take)
+        g_object_unref(cast(GObject*)cptr);
+
+      return null;
     }
 
     static if (is(T == interface) && is(T._gidDInterfaceOf == T)) // D-defined interface (see GInterfaceDef)
@@ -1689,7 +1803,7 @@ class ObjectWrap : GidWrap
         static extern(C) void _vfuncConstructedTramp(GObject* object) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gobject2.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -1716,7 +1830,7 @@ class ObjectWrap : GidWrap
         static extern(C) void _vfuncGetPropertyTramp(GObject* object, uint propertyId, GValue* value, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gobject2.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -1748,7 +1862,7 @@ class ObjectWrap : GidWrap
         static extern(C) void _vfuncNotifyTramp(GObject* object, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gobject2.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
@@ -1775,7 +1889,7 @@ class ObjectWrap : GidWrap
         static extern(C) void _vfuncSetPropertyTramp(GObject* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gobject2.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);

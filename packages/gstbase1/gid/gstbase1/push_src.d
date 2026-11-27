@@ -202,7 +202,7 @@ class PushSrc : gid.gstbase1.base_src.BaseSrc
         static extern(C) GstFlowReturn _vfuncAllocTramp(GstPushSrc* src, GstBuffer** buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.push_src.PushSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.push_src.PushSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstPushSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -240,7 +240,7 @@ class PushSrc : gid.gstbase1.base_src.BaseSrc
         static extern(C) GstFlowReturn _vfuncCreateTramp(GstPushSrc* src, GstBuffer** buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.push_src.PushSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.push_src.PushSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstPushSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -278,7 +278,7 @@ class PushSrc : gid.gstbase1.base_src.BaseSrc
         static extern(C) GstFlowReturn _vfuncFillTramp(GstPushSrc* src, GstBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.push_src.PushSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.push_src.PushSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstPushSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);

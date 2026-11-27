@@ -2,6 +2,7 @@
 module gid.gtk4.font_chooser_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.font_chooser;
 public import gid.gtk4.font_chooser_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -857,7 +858,7 @@ template FontChooserT()
         static extern(C) void _vfuncFontActivatedTramp(GtkFontChooser* chooser, const(char)* fontname) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.font_chooser.FontChooser._getGType);
@@ -886,7 +887,7 @@ template FontChooserT()
         static extern(C) PangoFontFace* _vfuncGetFontFaceTramp(GtkFontChooser* fontchooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)fontchooser);
           if (!_obj)
           {
             auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk4.font_chooser.FontChooser._getGType);
@@ -918,7 +919,7 @@ template FontChooserT()
         static extern(C) PangoFontFamily* _vfuncGetFontFamilyTramp(GtkFontChooser* fontchooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)fontchooser);
           if (!_obj)
           {
             auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk4.font_chooser.FontChooser._getGType);
@@ -950,7 +951,7 @@ template FontChooserT()
         static extern(C) PangoFontMap* _vfuncGetFontMapTramp(GtkFontChooser* fontchooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)fontchooser);
           if (!_obj)
           {
             auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk4.font_chooser.FontChooser._getGType);
@@ -982,7 +983,7 @@ template FontChooserT()
         static extern(C) int _vfuncGetFontSizeTramp(GtkFontChooser* fontchooser) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)fontchooser);
           if (!_obj)
           {
             auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk4.font_chooser.FontChooser._getGType);
@@ -1012,7 +1013,7 @@ template FontChooserT()
         static extern(C) void _vfuncSetFontMapTramp(GtkFontChooser* fontchooser, PangoFontMap* fontmap) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)fontchooser);
           if (!_obj)
           {
             auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk4.font_chooser.FontChooser._getGType);

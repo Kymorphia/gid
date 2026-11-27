@@ -222,7 +222,7 @@ class MenuAttributeIter : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncGetNextTramp(GMenuAttributeIter* iter, const(char*)* outName, GVariant** value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.menu_attribute_iter.MenuAttributeIter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.menu_attribute_iter.MenuAttributeIter)(cast(void*)iter);
           if (!_obj)
           {
             auto _klass = cast(GMenuAttributeIterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iter);

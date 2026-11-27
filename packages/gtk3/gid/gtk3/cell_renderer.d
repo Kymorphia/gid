@@ -1152,7 +1152,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) gboolean _vfuncActivateTramp(GtkCellRenderer* cell, GdkEvent* event, GtkWidget* widget, const(char)* path, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1188,7 +1188,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncEditingCanceledTramp(GtkCellRenderer* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1215,7 +1215,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncEditingStartedTramp(GtkCellRenderer* cell, GtkCellEditable* editable, const(char)* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1244,7 +1244,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncGetAlignedAreaTramp(GtkCellRenderer* cell, GtkWidget* widget, GtkCellRendererState flags, const(GdkRectangle)* cellArea, GdkRectangle* alignedArea) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1271,7 +1271,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncGetPreferredHeightTramp(GtkCellRenderer* cell, GtkWidget* widget, int* minimumSize, int* naturalSize) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1306,7 +1306,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncGetPreferredHeightForWidthTramp(GtkCellRenderer* cell, GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1341,7 +1341,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncGetPreferredWidthTramp(GtkCellRenderer* cell, GtkWidget* widget, int* minimumSize, int* naturalSize) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1376,7 +1376,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncGetPreferredWidthForHeightTramp(GtkCellRenderer* cell, GtkWidget* widget, int height, int* minimumWidth, int* naturalWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1411,7 +1411,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkCellRenderer* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1443,7 +1443,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncGetSizeTramp(GtkCellRenderer* cell, GtkWidget* widget, const(GdkRectangle)* cellArea, int* xOffset, int* yOffset, int* width, int* height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1486,7 +1486,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncRenderTramp(GtkCellRenderer* cell, cairo_t* cr, GtkWidget* widget, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
@@ -1518,7 +1518,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) GtkCellEditable* _vfuncStartEditingTramp(GtkCellRenderer* cell, GdkEvent* event, GtkWidget* widget, const(char)* path, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer.CellRenderer)(cast(void*)cell);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);

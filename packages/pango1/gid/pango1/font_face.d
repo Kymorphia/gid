@@ -317,7 +317,7 @@ class FontFace : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFontDescription* _vfuncDescribeTramp(PangoFontFace* face) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_face.FontFace)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)face);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_face.FontFace)(cast(void*)face);
           if (!_obj)
           {
             auto _klass = cast(PangoFontFaceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)face);
@@ -349,7 +349,7 @@ class FontFace : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFontFamily* _vfuncGetFamilyTramp(PangoFontFace* face) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_face.FontFace)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)face);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_face.FontFace)(cast(void*)face);
           if (!_obj)
           {
             auto _klass = cast(PangoFontFaceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)face);
@@ -381,7 +381,7 @@ class FontFace : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncIsSynthesizedTramp(PangoFontFace* face) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_face.FontFace)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)face);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_face.FontFace)(cast(void*)face);
           if (!_obj)
           {
             auto _klass = cast(PangoFontFaceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)face);
@@ -413,7 +413,7 @@ class FontFace : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncListSizesTramp(PangoFontFace* face, int** sizes, int* nSizes) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_face.FontFace)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)face);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_face.FontFace)(cast(void*)face);
           if (!_obj)
           {
             auto _klass = cast(PangoFontFaceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)face);

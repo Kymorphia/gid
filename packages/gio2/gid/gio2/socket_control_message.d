@@ -285,7 +285,7 @@ class SocketControlMessage : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncGetLevelTramp(GSocketControlMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_control_message.SocketControlMessage)(cast(void*)message);
           if (!_obj)
           {
             auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);
@@ -315,7 +315,7 @@ class SocketControlMessage : gid.gobject2.object.ObjectWrap
         static extern(C) size_t _vfuncGetSizeTramp(GSocketControlMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_control_message.SocketControlMessage)(cast(void*)message);
           if (!_obj)
           {
             auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);
@@ -345,7 +345,7 @@ class SocketControlMessage : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncGetTypeTramp(GSocketControlMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_control_message.SocketControlMessage)(cast(void*)message);
           if (!_obj)
           {
             auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);
@@ -375,7 +375,7 @@ class SocketControlMessage : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSerializeTramp(GSocketControlMessage* message, void* data) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_control_message.SocketControlMessage)(cast(void*)message);
           if (!_obj)
           {
             auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);

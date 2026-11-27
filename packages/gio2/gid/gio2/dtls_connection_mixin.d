@@ -2,6 +2,7 @@
 module gid.gio2.dtls_connection_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.dtls_connection;
 public import gid.gio2.dtls_connection_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -1406,7 +1407,7 @@ template DtlsConnectionT()
         static extern(C) gboolean _vfuncAcceptCertificateTramp(GDtlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)connection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)connection);
           if (!_obj)
           {
             auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)connection), gid.gio2.dtls_connection.DtlsConnection._getGType);
@@ -1438,7 +1439,7 @@ template DtlsConnectionT()
         static extern(C) gboolean _vfuncGetBindingDataTramp(GDtlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
@@ -1471,7 +1472,7 @@ template DtlsConnectionT()
         static extern(C) gboolean _vfuncHandshakeTramp(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
@@ -1503,7 +1504,7 @@ template DtlsConnectionT()
         static extern(C) gboolean _vfuncHandshakeFinishTramp(GDtlsConnection* conn, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
@@ -1535,7 +1536,7 @@ template DtlsConnectionT()
         static extern(C) void _vfuncSetAdvertisedProtocolsTramp(GDtlsConnection* conn, const(char*)* protocols) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
@@ -1575,7 +1576,7 @@ template DtlsConnectionT()
         static extern(C) gboolean _vfuncShutdownTramp(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
@@ -1607,7 +1608,7 @@ template DtlsConnectionT()
         static extern(C) gboolean _vfuncShutdownFinishTramp(GDtlsConnection* conn, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)conn);
           if (!_obj)
           {
             auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);

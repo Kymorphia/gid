@@ -604,7 +604,7 @@ class Permission : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncAcquireTramp(GPermission* permission, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.permission.Permission)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)permission);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.permission.Permission)(cast(void*)permission);
           if (!_obj)
           {
             auto _klass = cast(GPermissionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)permission);
@@ -636,7 +636,7 @@ class Permission : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncAcquireFinishTramp(GPermission* permission, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.permission.Permission)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)permission);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.permission.Permission)(cast(void*)permission);
           if (!_obj)
           {
             auto _klass = cast(GPermissionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)permission);
@@ -668,7 +668,7 @@ class Permission : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncReleaseTramp(GPermission* permission, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.permission.Permission)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)permission);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.permission.Permission)(cast(void*)permission);
           if (!_obj)
           {
             auto _klass = cast(GPermissionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)permission);
@@ -700,7 +700,7 @@ class Permission : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncReleaseFinishTramp(GPermission* permission, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.permission.Permission)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)permission);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.permission.Permission)(cast(void*)permission);
           if (!_obj)
           {
             auto _klass = cast(GPermissionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)permission);

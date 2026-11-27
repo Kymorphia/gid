@@ -468,7 +468,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncGetWritableTramp(GSettingsBackend* backend, const(char)* key) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
@@ -501,7 +501,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) GVariant* _vfuncReadTramp(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType, gboolean defaultValue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
@@ -534,7 +534,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) GVariant* _vfuncReadUserValueTramp(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
@@ -567,7 +567,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncResetTramp(GSettingsBackend* backend, const(char)* key, void* originTag) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
@@ -596,7 +596,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSubscribeTramp(GSettingsBackend* backend, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
@@ -625,7 +625,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSyncTramp(GSettingsBackend* backend) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
@@ -652,7 +652,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncUnsubscribeTramp(GSettingsBackend* backend, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
@@ -681,7 +681,7 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncWriteTramp(GSettingsBackend* backend, const(char)* key, GVariant* value, void* originTag) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);

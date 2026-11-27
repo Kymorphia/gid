@@ -2885,7 +2885,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncBackspaceTramp(GtkTextView* textView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -2912,7 +2912,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncCopyClipboardTramp(GtkTextView* textView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -2939,7 +2939,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncCutClipboardTramp(GtkTextView* textView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -2966,7 +2966,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncDeleteFromCursorTramp(GtkTextView* textView, GtkDeleteType type, int count) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -2993,7 +2993,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncDrawLayerTramp(GtkTextView* textView, GtkTextViewLayer layer, cairo_t* cr) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3025,7 +3025,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncExtendSelectionTramp(GtkTextView* textView, GtkTextExtendSelection granularity, const(GtkTextIter)* location, GtkTextIter* start, GtkTextIter* end) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3063,7 +3063,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncInsertAtCursorTramp(GtkTextView* textView, const(char)* str) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3092,7 +3092,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncInsertEmojiTramp(GtkTextView* textView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3119,7 +3119,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncMoveCursorTramp(GtkTextView* textView, GtkMovementStep step, int count, gboolean extendSelection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3146,7 +3146,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncPasteClipboardTramp(GtkTextView* textView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3173,7 +3173,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncPopulatePopupTramp(GtkTextView* textView, GtkWidget* popup) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3200,7 +3200,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncSetAnchorTramp(GtkTextView* textView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
@@ -3227,7 +3227,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncToggleOverwriteTramp(GtkTextView* textView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_view.TextView)(cast(void*)textView);
           if (!_obj)
           {
             auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);

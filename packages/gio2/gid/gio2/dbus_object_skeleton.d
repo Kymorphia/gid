@@ -302,7 +302,7 @@ class DBusObjectSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.
         static extern(C) gboolean _vfuncAuthorizeMethodTramp(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.dbus_object_skeleton.DBusObjectSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.dbus_object_skeleton.DBusObjectSkeleton)(cast(void*)object);
           if (!_obj)
           {
             auto _klass = cast(GDBusObjectSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);

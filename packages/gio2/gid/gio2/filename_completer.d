@@ -224,7 +224,7 @@ class FilenameCompleter : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGotCompletionDataTramp(GFilenameCompleter* filenameCompleter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.filename_completer.FilenameCompleter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filenameCompleter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.filename_completer.FilenameCompleter)(cast(void*)filenameCompleter);
           if (!_obj)
           {
             auto _klass = cast(GFilenameCompleterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filenameCompleter);

@@ -2,6 +2,7 @@
 module gid.gio2.async_result_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.async_result;
 public import gid.gio2.async_result_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -268,7 +269,7 @@ template AsyncResultT()
         static extern(C) GObject* _vfuncGetSourceObjectTramp(GAsyncResult* res) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)res);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)res);
           if (!_obj)
           {
             auto _klass = cast(GAsyncResultIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)res), gid.gio2.async_result.AsyncResult._getGType);
@@ -300,7 +301,7 @@ template AsyncResultT()
         static extern(C) void* _vfuncGetUserDataTramp(GAsyncResult* res) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)res);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)res);
           if (!_obj)
           {
             auto _klass = cast(GAsyncResultIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)res), gid.gio2.async_result.AsyncResult._getGType);
@@ -330,7 +331,7 @@ template AsyncResultT()
         static extern(C) gboolean _vfuncIsTaggedTramp(GAsyncResult* res, void* sourceTag) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)res);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)res);
           if (!_obj)
           {
             auto _klass = cast(GAsyncResultIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)res), gid.gio2.async_result.AsyncResult._getGType);

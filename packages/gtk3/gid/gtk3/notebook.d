@@ -1691,7 +1691,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) gboolean _vfuncChangeCurrentPageTramp(GtkNotebook* notebook, int offset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1723,7 +1723,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) gboolean _vfuncFocusTabTramp(GtkNotebook* notebook, GtkNotebookTab type) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1755,7 +1755,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) int _vfuncInsertPageTramp(GtkNotebook* notebook, GtkWidget* child, GtkWidget* tabLabel, GtkWidget* menuLabel, int position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1785,7 +1785,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) void _vfuncMoveFocusOutTramp(GtkNotebook* notebook, GtkDirectionType direction) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1812,7 +1812,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) void _vfuncPageAddedTramp(GtkNotebook* notebook, GtkWidget* child, uint pageNum) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1839,7 +1839,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) void _vfuncPageRemovedTramp(GtkNotebook* notebook, GtkWidget* child, uint pageNum) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1866,7 +1866,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) void _vfuncPageReorderedTramp(GtkNotebook* notebook, GtkWidget* child, uint pageNum) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1893,7 +1893,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) gboolean _vfuncReorderTabTramp(GtkNotebook* notebook, GtkDirectionType direction, gboolean moveToLast) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1925,7 +1925,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) gboolean _vfuncSelectPageTramp(GtkNotebook* notebook, gboolean moveFocus) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
@@ -1957,7 +1957,7 @@ class Notebook : gid.gtk3.container.Container
         static extern(C) void _vfuncSwitchPageTramp(GtkNotebook* notebook, GtkWidget* page, uint pageNum) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.notebook.Notebook)(cast(void*)notebook);
           if (!_obj)
           {
             auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);

@@ -2,6 +2,7 @@
 module gid.gtk3.scrollable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.scrollable;
 public import gid.gtk3.scrollable_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -300,7 +301,7 @@ template ScrollableT()
         static extern(C) gboolean _vfuncGetBorderTramp(GtkScrollable* scrollable, GtkBorder* border) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scrollable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)scrollable);
           if (!_obj)
           {
             auto _klass = cast(GtkScrollableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scrollable), gid.gtk3.scrollable.Scrollable._getGType);

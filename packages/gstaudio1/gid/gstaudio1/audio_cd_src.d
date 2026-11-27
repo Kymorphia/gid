@@ -264,7 +264,7 @@ class AudioCdSrc : gid.gstbase1.push_src.PushSrc, gid.gst1.urihandler.URIHandler
         static extern(C) void _vfuncCloseTramp(GstAudioCdSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_cd_src.AudioCdSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_cd_src.AudioCdSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioCdSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -291,7 +291,7 @@ class AudioCdSrc : gid.gstbase1.push_src.PushSrc, gid.gst1.urihandler.URIHandler
         static extern(C) gboolean _vfuncOpenTramp(GstAudioCdSrc* src, const(char)* device) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_cd_src.AudioCdSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_cd_src.AudioCdSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioCdSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -324,7 +324,7 @@ class AudioCdSrc : gid.gstbase1.push_src.PushSrc, gid.gst1.urihandler.URIHandler
         static extern(C) GstBuffer* _vfuncReadSectorTramp(GstAudioCdSrc* src, int sector) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_cd_src.AudioCdSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_cd_src.AudioCdSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioCdSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);

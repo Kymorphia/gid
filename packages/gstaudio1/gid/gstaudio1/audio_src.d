@@ -270,7 +270,7 @@ class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
         static extern(C) gboolean _vfuncCloseTramp(GstAudioSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_src.AudioSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_src.AudioSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -302,7 +302,7 @@ class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
         static extern(C) uint _vfuncDelayTramp(GstAudioSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_src.AudioSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_src.AudioSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -332,7 +332,7 @@ class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
         static extern(C) gboolean _vfuncOpenTramp(GstAudioSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_src.AudioSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_src.AudioSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -364,7 +364,7 @@ class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
         static extern(C) gboolean _vfuncPrepareTramp(GstAudioSrc* src, GstAudioRingBufferSpec* spec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_src.AudioSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_src.AudioSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -397,7 +397,7 @@ class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
         static extern(C) uint _vfuncReadTramp(GstAudioSrc* src, void* data, uint length, GstClockTime* timestamp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_src.AudioSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_src.AudioSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -430,7 +430,7 @@ class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
         static extern(C) void _vfuncResetTramp(GstAudioSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_src.AudioSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_src.AudioSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
@@ -457,7 +457,7 @@ class AudioSrc : gid.gstaudio1.audio_base_src.AudioBaseSrc
         static extern(C) gboolean _vfuncUnprepareTramp(GstAudioSrc* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_src.AudioSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_src.AudioSrc)(cast(void*)src);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);

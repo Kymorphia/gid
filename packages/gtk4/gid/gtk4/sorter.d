@@ -307,7 +307,7 @@ class Sorter : gid.gobject2.object.ObjectWrap
         static extern(C) GtkOrdering _vfuncCompareTramp(GtkSorter* self, GObject* item1, GObject* item2) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.sorter.Sorter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.sorter.Sorter)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSorterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -339,7 +339,7 @@ class Sorter : gid.gobject2.object.ObjectWrap
         static extern(C) GtkSorterOrder _vfuncGetOrderTramp(GtkSorter* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.sorter.Sorter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.sorter.Sorter)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSorterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

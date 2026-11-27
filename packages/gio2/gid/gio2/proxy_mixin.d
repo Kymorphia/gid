@@ -2,6 +2,7 @@
 module gid.gio2.proxy_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.proxy;
 public import gid.gio2.proxy_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -289,7 +290,7 @@ template ProxyT()
         static extern(C) GIOStream* _vfuncConnectTramp(GProxy* proxy, GIOStream* connection, GProxyAddress* proxyAddress, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proxy);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proxy);
           if (!_obj)
           {
             auto _klass = cast(GProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proxy), gid.gio2.proxy.Proxy._getGType);
@@ -321,7 +322,7 @@ template ProxyT()
         static extern(C) GIOStream* _vfuncConnectFinishTramp(GProxy* proxy, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proxy);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proxy);
           if (!_obj)
           {
             auto _klass = cast(GProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proxy), gid.gio2.proxy.Proxy._getGType);
@@ -353,7 +354,7 @@ template ProxyT()
         static extern(C) gboolean _vfuncSupportsHostnameTramp(GProxy* proxy) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proxy);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proxy);
           if (!_obj)
           {
             auto _klass = cast(GProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proxy), gid.gio2.proxy.Proxy._getGType);

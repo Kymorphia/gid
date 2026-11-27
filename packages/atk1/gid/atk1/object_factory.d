@@ -164,7 +164,7 @@ class ObjectFactory : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncInvalidateTramp(AtkObjectFactory* factory) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object_factory.ObjectFactory)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)factory);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object_factory.ObjectFactory)(cast(void*)factory);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectFactoryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)factory);

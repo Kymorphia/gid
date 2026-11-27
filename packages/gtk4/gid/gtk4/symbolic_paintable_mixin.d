@@ -2,6 +2,7 @@
 module gid.gtk4.symbolic_paintable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.symbolic_paintable;
 public import gid.gtk4.symbolic_paintable_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk4.rgba;
@@ -171,7 +172,7 @@ template SymbolicPaintableT()
         static extern(C) void _vfuncSnapshotSymbolicTramp(GtkSymbolicPaintable* paintable, GdkSnapshot* snapshot, double width, double height, const(GdkRGBA)* colors, size_t nColors) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GtkSymbolicPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gtk4.symbolic_paintable.SymbolicPaintable._getGType);
@@ -202,7 +203,7 @@ template SymbolicPaintableT()
         static extern(C) void _vfuncSnapshotWithWeightTramp(GtkSymbolicPaintable* paintable, GdkSnapshot* snapshot, double width, double height, const(GdkRGBA)* colors, size_t nColors, double weight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GtkSymbolicPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gtk4.symbolic_paintable.SymbolicPaintable._getGType);

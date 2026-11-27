@@ -1034,7 +1034,7 @@ class MessageDialog : gid.gtk4.window.Window
         static extern(C) void _vfuncResponseTramp(AdwMessageDialog* self, const(char)* response) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.message_dialog.MessageDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.message_dialog.MessageDialog)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwMessageDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

@@ -165,7 +165,7 @@ class TagMux : gid.gst1.element.Element, gid.gst1.tag_setter.TagSetter
         static extern(C) GstBuffer* _vfuncRenderEndTagTramp(GstTagMux* mux, const(GstTagList)* tagList) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gsttag1.tag_mux.TagMux)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mux);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gsttag1.tag_mux.TagMux)(cast(void*)mux);
           if (!_obj)
           {
             auto _klass = cast(GstTagMuxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mux);
@@ -197,7 +197,7 @@ class TagMux : gid.gst1.element.Element, gid.gst1.tag_setter.TagSetter
         static extern(C) GstBuffer* _vfuncRenderStartTagTramp(GstTagMux* mux, const(GstTagList)* tagList) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gsttag1.tag_mux.TagMux)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mux);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gsttag1.tag_mux.TagMux)(cast(void*)mux);
           if (!_obj)
           {
             auto _klass = cast(GstTagMuxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mux);

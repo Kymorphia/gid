@@ -1444,7 +1444,7 @@ class Session : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRequestQueuedTramp(SoupSession* session, SoupMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.session.Session)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)session);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.session.Session)(cast(void*)session);
           if (!_obj)
           {
             auto _klass = cast(SoupSessionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)session);
@@ -1471,7 +1471,7 @@ class Session : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRequestUnqueuedTramp(SoupSession* session, SoupMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.session.Session)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)session);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.session.Session)(cast(void*)session);
           if (!_obj)
           {
             auto _klass = cast(SoupSessionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)session);

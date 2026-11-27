@@ -209,7 +209,7 @@ class DataWrapper : gid.gobject2.object.ObjectWrap
         static extern(C) ptrdiff_t _vfuncWriteToStreamTramp(GMimeDataWrapper* wrapper, GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.data_wrapper.DataWrapper)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)wrapper);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.data_wrapper.DataWrapper)(cast(void*)wrapper);
           if (!_obj)
           {
             auto _klass = cast(GMimeDataWrapperClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)wrapper);

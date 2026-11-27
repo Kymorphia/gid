@@ -496,7 +496,7 @@ class DeviceProvider : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncStartTramp(GstDeviceProvider* provider) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.device_provider.DeviceProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.device_provider.DeviceProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GstDeviceProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
@@ -528,7 +528,7 @@ class DeviceProvider : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncStopTramp(GstDeviceProvider* provider) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.device_provider.DeviceProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.device_provider.DeviceProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GstDeviceProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);

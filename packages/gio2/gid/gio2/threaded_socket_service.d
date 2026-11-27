@@ -220,7 +220,7 @@ class ThreadedSocketService : gid.gio2.socket_service.SocketService
         static extern(C) gboolean _vfuncRunTramp(GThreadedSocketService* service, GSocketConnection* connection, GObject* sourceObject) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.threaded_socket_service.ThreadedSocketService)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)service);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.threaded_socket_service.ThreadedSocketService)(cast(void*)service);
           if (!_obj)
           {
             auto _klass = cast(GThreadedSocketServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)service);

@@ -2,6 +2,7 @@
 module gid.gtk3.tree_model_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.tree_model;
 public import gid.gtk3.tree_model_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -1513,7 +1514,7 @@ template TreeModelT()
         static extern(C) GType _vfuncGetColumnTypeTramp(GtkTreeModel* treeModel, int index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1545,7 +1546,7 @@ template TreeModelT()
         static extern(C) GtkTreeModelFlags _vfuncGetFlagsTramp(GtkTreeModel* treeModel) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1577,7 +1578,7 @@ template TreeModelT()
         static extern(C) gboolean _vfuncGetIterTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1619,7 +1620,7 @@ template TreeModelT()
         static extern(C) int _vfuncGetNColumnsTramp(GtkTreeModel* treeModel) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1649,7 +1650,7 @@ template TreeModelT()
         static extern(C) GtkTreePath* _vfuncGetPathTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1684,7 +1685,7 @@ template TreeModelT()
         static extern(C) void _vfuncGetValueTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, int column, GValue* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1723,7 +1724,7 @@ template TreeModelT()
         static extern(C) gboolean _vfuncIterChildrenTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1765,7 +1766,7 @@ template TreeModelT()
         static extern(C) gboolean _vfuncIterHasChildTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1800,7 +1801,7 @@ template TreeModelT()
         static extern(C) int _vfuncIterNChildrenTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1834,7 +1835,7 @@ template TreeModelT()
         static extern(C) gboolean _vfuncIterNextTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1869,7 +1870,7 @@ template TreeModelT()
         static extern(C) gboolean _vfuncIterNthChildTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent, int n) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1911,7 +1912,7 @@ template TreeModelT()
         static extern(C) gboolean _vfuncIterParentTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1953,7 +1954,7 @@ template TreeModelT()
         static extern(C) gboolean _vfuncIterPreviousTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -1988,7 +1989,7 @@ template TreeModelT()
         static extern(C) void _vfuncRefNodeTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -2020,7 +2021,7 @@ template TreeModelT()
         static extern(C) void _vfuncRowChangedTramp(GtkTreeModel* treeModel, GtkTreePath* path, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -2055,7 +2056,7 @@ template TreeModelT()
         static extern(C) void _vfuncRowDeletedTramp(GtkTreeModel* treeModel, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -2087,7 +2088,7 @@ template TreeModelT()
         static extern(C) void _vfuncRowHasChildToggledTramp(GtkTreeModel* treeModel, GtkTreePath* path, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -2122,7 +2123,7 @@ template TreeModelT()
         static extern(C) void _vfuncRowInsertedTramp(GtkTreeModel* treeModel, GtkTreePath* path, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
@@ -2157,7 +2158,7 @@ template TreeModelT()
         static extern(C) void _vfuncUnrefNodeTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)treeModel);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);

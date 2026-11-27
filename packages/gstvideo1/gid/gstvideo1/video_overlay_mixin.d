@@ -2,6 +2,7 @@
 module gid.gstvideo1.video_overlay_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstvideo1.video_overlay;
 public import gid.gstvideo1.video_overlay_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -493,7 +494,7 @@ template VideoOverlayT()
         static extern(C) void _vfuncExposeTramp(GstVideoOverlay* overlay) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)overlay);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);
@@ -520,7 +521,7 @@ template VideoOverlayT()
         static extern(C) void _vfuncHandleEventsTramp(GstVideoOverlay* overlay, gboolean handleEvents) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)overlay);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);
@@ -547,7 +548,7 @@ template VideoOverlayT()
         static extern(C) void _vfuncSetRenderRectangleTramp(GstVideoOverlay* overlay, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)overlay);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);
@@ -574,7 +575,7 @@ template VideoOverlayT()
         static extern(C) void _vfuncSetWindowHandleTramp(GstVideoOverlay* overlay, size_t handle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)overlay);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);

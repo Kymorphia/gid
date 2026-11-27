@@ -828,7 +828,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderActivityTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -860,7 +860,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderArrowTramp(GtkThemingEngine* engine, cairo_t* cr, double angle, double x, double y, double size) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -892,7 +892,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderBackgroundTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -924,7 +924,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderCheckTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -956,7 +956,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderExpanderTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -988,7 +988,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderExtensionTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height, GtkPositionType gapSide) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1020,7 +1020,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderFocusTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1052,7 +1052,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderFrameTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1084,7 +1084,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderFrameGapTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height, GtkPositionType gapSide, double xy0Gap, double xy1Gap) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1116,7 +1116,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderHandleTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1148,7 +1148,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderIconTramp(GtkThemingEngine* engine, cairo_t* cr, GdkPixbuf* pixbuf, double x, double y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1180,7 +1180,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderIconSurfaceTramp(GtkThemingEngine* engine, cairo_t* cr, cairo_surface_t* surface, double x, double y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1215,7 +1215,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderLayoutTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, PangoLayout* layout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1247,7 +1247,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderLineTramp(GtkThemingEngine* engine, cairo_t* cr, double x0, double y0, double x1, double y1) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1279,7 +1279,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderOptionTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);
@@ -1311,7 +1311,7 @@ class ThemingEngine : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRenderSliderTramp(GtkThemingEngine* engine, cairo_t* cr, double x, double y, double width, double height, GtkOrientation orientation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.theming_engine.ThemingEngine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)engine);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.theming_engine.ThemingEngine)(cast(void*)engine);
           if (!_obj)
           {
             auto _klass = cast(GtkThemingEngineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)engine);

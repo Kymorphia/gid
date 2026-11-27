@@ -1760,7 +1760,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChildrenChangedTramp(AtkObject* accessible, uint changeIndex, void* changedChild) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -1787,7 +1787,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncFocusEventTramp(AtkObject* accessible, gboolean focusIn) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -1814,7 +1814,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncGetIndexInParentTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -1844,7 +1844,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) AtkLayer _vfuncGetLayerTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -1876,7 +1876,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncGetMdiZorderTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -1906,7 +1906,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncGetNChildrenTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -1936,7 +1936,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) AtkObject* _vfuncGetParentTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -1968,7 +1968,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) AtkRole _vfuncGetRoleTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2000,7 +2000,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncInitializeTramp(AtkObject* accessible, void* data) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2027,7 +2027,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPropertyChangeTramp(AtkObject* accessible, AtkPropertyValues* values) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2056,7 +2056,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) AtkRelationSet* _vfuncRefRelationSetTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2088,7 +2088,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) AtkStateSet* _vfuncRefStateSetTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2120,7 +2120,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRemovePropertyChangeHandlerTramp(AtkObject* accessible, uint handlerId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2147,7 +2147,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetDescriptionTramp(AtkObject* accessible, const(char)* description) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2176,7 +2176,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetNameTramp(AtkObject* accessible, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2205,7 +2205,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetParentTramp(AtkObject* accessible, AtkObject* parent) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2232,7 +2232,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetRoleTramp(AtkObject* accessible, AtkRole role) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2259,7 +2259,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncStateChangeTramp(AtkObject* accessible, const(char)* name, gboolean stateSet) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
@@ -2288,7 +2288,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncVisibleDataChangedTramp(AtkObject* accessible) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.object.ObjectWrap)(cast(void*)accessible);
           if (!_obj)
           {
             auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);

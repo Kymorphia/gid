@@ -1087,7 +1087,7 @@ class TreeViewColumn : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3
         static extern(C) void _vfuncClickedTramp(GtkTreeViewColumn* treeColumn) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view_column.TreeViewColumn)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeColumn);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view_column.TreeViewColumn)(cast(void*)treeColumn);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewColumnClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeColumn);

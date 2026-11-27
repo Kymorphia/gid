@@ -822,7 +822,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) gboolean _vfuncAcceptPositionTramp(GtkPaned* paned) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.paned.Paned)(cast(void*)paned);
           if (!_obj)
           {
             auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
@@ -854,7 +854,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) gboolean _vfuncCancelPositionTramp(GtkPaned* paned) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.paned.Paned)(cast(void*)paned);
           if (!_obj)
           {
             auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
@@ -886,7 +886,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) gboolean _vfuncCycleChildFocusTramp(GtkPaned* paned, gboolean reverse) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.paned.Paned)(cast(void*)paned);
           if (!_obj)
           {
             auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
@@ -918,7 +918,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) gboolean _vfuncCycleHandleFocusTramp(GtkPaned* paned, gboolean reverse) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.paned.Paned)(cast(void*)paned);
           if (!_obj)
           {
             auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
@@ -950,7 +950,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) gboolean _vfuncMoveHandleTramp(GtkPaned* paned, GtkScrollType scroll) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.paned.Paned)(cast(void*)paned);
           if (!_obj)
           {
             auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
@@ -982,7 +982,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) gboolean _vfuncToggleHandleFocusTramp(GtkPaned* paned) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.paned.Paned)(cast(void*)paned);
           if (!_obj)
           {
             auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);

@@ -553,7 +553,7 @@ class InetAddress : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncToStringTramp(GInetAddress* address) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.inet_address.InetAddress)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)address);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.inet_address.InetAddress)(cast(void*)address);
           if (!_obj)
           {
             auto _klass = cast(GInetAddressClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)address);

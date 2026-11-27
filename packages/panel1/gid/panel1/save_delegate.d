@@ -671,7 +671,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncCloseTramp(PanelSaveDelegate* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.save_delegate.SaveDelegate)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -698,7 +698,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDiscardTramp(PanelSaveDelegate* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.save_delegate.SaveDelegate)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -725,7 +725,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncSaveTramp(PanelSaveDelegate* self, GTask* task) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.save_delegate.SaveDelegate)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -757,7 +757,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncSaveFinishTramp(PanelSaveDelegate* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.save_delegate.SaveDelegate)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

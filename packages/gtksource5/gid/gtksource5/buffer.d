@@ -1014,7 +1014,7 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
         static extern(C) void _vfuncBracketMatchedTramp(GtkSourceBuffer* buffer, GtkTextIter* iter, GtkSourceBracketMatchType state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.buffer.Buffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.buffer.Buffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);

@@ -365,7 +365,7 @@ class HSTSEnforcer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.S
         static extern(C) void _vfuncChangedTramp(SoupHSTSEnforcer* enforcer, SoupHSTSPolicy* oldPolicy, SoupHSTSPolicy* newPolicy) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.hstsenforcer.HSTSEnforcer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enforcer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.hstsenforcer.HSTSEnforcer)(cast(void*)enforcer);
           if (!_obj)
           {
             auto _klass = cast(SoupHSTSEnforcerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enforcer);
@@ -400,7 +400,7 @@ class HSTSEnforcer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.S
         static extern(C) gboolean _vfuncHasValidPolicyTramp(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.hstsenforcer.HSTSEnforcer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hstsEnforcer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.hstsenforcer.HSTSEnforcer)(cast(void*)hstsEnforcer);
           if (!_obj)
           {
             auto _klass = cast(SoupHSTSEnforcerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hstsEnforcer);
@@ -433,7 +433,7 @@ class HSTSEnforcer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.S
         static extern(C) gboolean _vfuncIsPersistentTramp(SoupHSTSEnforcer* hstsEnforcer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.hstsenforcer.HSTSEnforcer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hstsEnforcer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.hstsenforcer.HSTSEnforcer)(cast(void*)hstsEnforcer);
           if (!_obj)
           {
             auto _klass = cast(SoupHSTSEnforcerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hstsEnforcer);

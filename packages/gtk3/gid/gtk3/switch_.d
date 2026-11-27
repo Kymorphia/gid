@@ -381,7 +381,7 @@ class Switch : gid.gtk3.widget.Widget, gid.gtk3.actionable.Actionable, gid.gtk3.
         static extern(C) void _vfuncActivateTramp(GtkSwitch* sw) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.switch_.Switch)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sw);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.switch_.Switch)(cast(void*)sw);
           if (!_obj)
           {
             auto _klass = cast(GtkSwitchClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sw);
@@ -408,7 +408,7 @@ class Switch : gid.gtk3.widget.Widget, gid.gtk3.actionable.Actionable, gid.gtk3.
         static extern(C) gboolean _vfuncStateSetTramp(GtkSwitch* sw, gboolean state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.switch_.Switch)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sw);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.switch_.Switch)(cast(void*)sw);
           if (!_obj)
           {
             auto _klass = cast(GtkSwitchClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sw);

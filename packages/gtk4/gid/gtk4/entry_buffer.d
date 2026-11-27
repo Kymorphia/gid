@@ -579,7 +579,7 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) uint _vfuncDeleteTextTramp(GtkEntryBuffer* buffer, uint position, uint nChars) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.entry_buffer.EntryBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -609,7 +609,7 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDeletedTextTramp(GtkEntryBuffer* buffer, uint position, uint nChars) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.entry_buffer.EntryBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -636,7 +636,7 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) uint _vfuncGetLengthTramp(GtkEntryBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.entry_buffer.EntryBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -666,7 +666,7 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) uint _vfuncInsertTextTramp(GtkEntryBuffer* buffer, uint position, const(char)* chars, uint nChars) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.entry_buffer.EntryBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
@@ -697,7 +697,7 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncInsertedTextTramp(GtkEntryBuffer* buffer, uint position, const(char)* chars, uint nChars) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.entry_buffer.EntryBuffer)(cast(void*)buffer);
           if (!_obj)
           {
             auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);

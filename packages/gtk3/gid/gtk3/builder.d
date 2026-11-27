@@ -902,7 +902,7 @@ class Builder : gid.gobject2.object.ObjectWrap
         static extern(C) GType _vfuncGetTypeFromNameTramp(GtkBuilder* builder, const(char)* typeName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.builder.Builder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)builder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.builder.Builder)(cast(void*)builder);
           if (!_obj)
           {
             auto _klass = cast(GtkBuilderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)builder);

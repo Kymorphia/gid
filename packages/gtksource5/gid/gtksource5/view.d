@@ -1710,7 +1710,7 @@ class View : gid.gtk4.text_view.TextView
         static extern(C) void _vfuncLineMarkActivatedTramp(GtkSourceView* view, const(GtkTextIter)* iter, uint button, GdkModifierType state, int nPresses) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.view.View)(cast(void*)view);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
@@ -1737,7 +1737,7 @@ class View : gid.gtk4.text_view.TextView
         static extern(C) void _vfuncMoveLinesTramp(GtkSourceView* view, gboolean down) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.view.View)(cast(void*)view);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
@@ -1764,7 +1764,7 @@ class View : gid.gtk4.text_view.TextView
         static extern(C) void _vfuncMoveWordsTramp(GtkSourceView* view, int step) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.view.View)(cast(void*)view);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
@@ -1791,7 +1791,7 @@ class View : gid.gtk4.text_view.TextView
         static extern(C) void _vfuncPushSnippetTramp(GtkSourceView* view, GtkSourceSnippet* snippet, GtkTextIter* location) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.view.View)(cast(void*)view);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
@@ -1823,7 +1823,7 @@ class View : gid.gtk4.text_view.TextView
         static extern(C) void _vfuncShowCompletionTramp(GtkSourceView* view) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource5.view.View)(cast(void*)view);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);

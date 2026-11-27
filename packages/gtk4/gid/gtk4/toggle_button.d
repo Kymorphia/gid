@@ -381,7 +381,7 @@ class ToggleButton : gid.gtk4.button.Button
         static extern(C) void _vfuncToggledTramp(GtkToggleButton* toggleButton) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.toggle_button.ToggleButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toggleButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.toggle_button.ToggleButton)(cast(void*)toggleButton);
           if (!_obj)
           {
             auto _klass = cast(GtkToggleButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toggleButton);

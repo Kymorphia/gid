@@ -640,7 +640,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) void _vfuncAddTramp(GMimeMultipart* multipart, GMimeObject* part) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -667,7 +667,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) void _vfuncClearTramp(GMimeMultipart* multipart) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -694,7 +694,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) gboolean _vfuncContainsTramp(GMimeMultipart* multipart, GMimeObject* part) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -726,7 +726,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) int _vfuncGetCountTramp(GMimeMultipart* multipart) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -756,7 +756,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) GMimeObject* _vfuncGetPartTramp(GMimeMultipart* multipart, int index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -788,7 +788,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) int _vfuncIndexOfTramp(GMimeMultipart* multipart, GMimeObject* part) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -818,7 +818,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) void _vfuncInsertTramp(GMimeMultipart* multipart, int index, GMimeObject* part) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -845,7 +845,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) gboolean _vfuncRemoveTramp(GMimeMultipart* multipart, GMimeObject* part) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -877,7 +877,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) GMimeObject* _vfuncRemoveAtTramp(GMimeMultipart* multipart, int index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);
@@ -909,7 +909,7 @@ class Multipart : gid.gmime3.object.ObjectWrap
         static extern(C) void _vfuncSetBoundaryTramp(GMimeMultipart* multipart, const(char)* boundary) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.multipart.Multipart)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)multipart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.multipart.Multipart)(cast(void*)multipart);
           if (!_obj)
           {
             auto _klass = cast(GMimeMultipartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)multipart);

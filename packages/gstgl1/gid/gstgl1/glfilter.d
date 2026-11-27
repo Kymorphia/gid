@@ -310,7 +310,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
         static extern(C) gboolean _vfuncFilterTramp(GstGLFilter* filter, GstBuffer* inbuf, GstBuffer* outbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glfilter.GLFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glfilter.GLFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -348,7 +348,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
         static extern(C) gboolean _vfuncFilterTextureTramp(GstGLFilter* filter, GstGLMemory* input, GstGLMemory* output) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glfilter.GLFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glfilter.GLFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -386,7 +386,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
         static extern(C) gboolean _vfuncInitFboTramp(GstGLFilter* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glfilter.GLFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glfilter.GLFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -418,7 +418,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
         static extern(C) gboolean _vfuncSetCapsTramp(GstGLFilter* filter, GstCaps* incaps, GstCaps* outcaps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glfilter.GLFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glfilter.GLFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -456,7 +456,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
         static extern(C) GstCaps* _vfuncTransformInternalCapsTramp(GstGLFilter* filter, GstPadDirection direction, GstCaps* caps, GstCaps* filterCaps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glfilter.GLFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glfilter.GLFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstGLFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);

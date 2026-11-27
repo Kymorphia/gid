@@ -477,7 +477,7 @@ class Part : gid.gmime3.object.ObjectWrap
         static extern(C) void _vfuncSetContentTramp(GMimePart* mimePart, GMimeDataWrapper* content) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.part.Part)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mimePart);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.part.Part)(cast(void*)mimePart);
           if (!_obj)
           {
             auto _klass = cast(GMimePartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mimePart);

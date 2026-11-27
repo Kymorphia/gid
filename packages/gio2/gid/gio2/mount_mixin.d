@@ -2,6 +2,7 @@
 module gid.gio2.mount_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.mount;
 public import gid.gio2.mount_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -1720,7 +1721,7 @@ template MountT()
         static extern(C) gboolean _vfuncCanEjectTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1752,7 +1753,7 @@ template MountT()
         static extern(C) gboolean _vfuncCanUnmountTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1784,7 +1785,7 @@ template MountT()
         static extern(C) void _vfuncChangedTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1811,7 +1812,7 @@ template MountT()
         static extern(C) gboolean _vfuncEjectFinishTramp(GMount* mount, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1843,7 +1844,7 @@ template MountT()
         static extern(C) gboolean _vfuncEjectWithOperationFinishTramp(GMount* mount, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1875,7 +1876,7 @@ template MountT()
         static extern(C) GFile* _vfuncGetDefaultLocationTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1907,7 +1908,7 @@ template MountT()
         static extern(C) GDrive* _vfuncGetDriveTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1939,7 +1940,7 @@ template MountT()
         static extern(C) GIcon* _vfuncGetIconTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -1971,7 +1972,7 @@ template MountT()
         static extern(C) char* _vfuncGetNameTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2003,7 +2004,7 @@ template MountT()
         static extern(C) GFile* _vfuncGetRootTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2035,7 +2036,7 @@ template MountT()
         static extern(C) GIcon* _vfuncGetSymbolicIconTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2067,7 +2068,7 @@ template MountT()
         static extern(C) char* _vfuncGetUuidTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2099,7 +2100,7 @@ template MountT()
         static extern(C) GVolume* _vfuncGetVolumeTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2131,7 +2132,7 @@ template MountT()
         static extern(C) char** _vfuncGuessContentTypeFinishTramp(GMount* mount, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2172,7 +2173,7 @@ template MountT()
         static extern(C) char** _vfuncGuessContentTypeSyncTramp(GMount* mount, gboolean forceRescan, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2213,7 +2214,7 @@ template MountT()
         static extern(C) void _vfuncPreUnmountTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2240,7 +2241,7 @@ template MountT()
         static extern(C) gboolean _vfuncRemountFinishTramp(GMount* mount, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2272,7 +2273,7 @@ template MountT()
         static extern(C) gboolean _vfuncUnmountFinishTramp(GMount* mount, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2304,7 +2305,7 @@ template MountT()
         static extern(C) gboolean _vfuncUnmountWithOperationFinishTramp(GMount* mount, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);
@@ -2336,7 +2337,7 @@ template MountT()
         static extern(C) void _vfuncUnmountedTramp(GMount* mount) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mount);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)mount);
           if (!_obj)
           {
             auto _klass = cast(GMountIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mount), gid.gio2.mount.Mount._getGType);

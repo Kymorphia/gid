@@ -2,6 +2,7 @@
 module gid.gtk4.color_chooser_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.color_chooser;
 public import gid.gtk4.color_chooser_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk4.rgba;
@@ -386,7 +387,7 @@ template ColorChooserT()
         static extern(C) void _vfuncAddPaletteTramp(GtkColorChooser* chooser, GtkOrientation orientation, int colorsPerLine, int nColors, GdkRGBA* colors) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);
@@ -417,7 +418,7 @@ template ColorChooserT()
         static extern(C) void _vfuncColorActivatedTramp(GtkColorChooser* chooser, const(GdkRGBA)* color) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);
@@ -444,7 +445,7 @@ template ColorChooserT()
         static extern(C) void _vfuncGetRgbaTramp(GtkColorChooser* chooser, GdkRGBA* color) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);
@@ -471,7 +472,7 @@ template ColorChooserT()
         static extern(C) void _vfuncSetRgbaTramp(GtkColorChooser* chooser, const(GdkRGBA)* color) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)chooser);
           if (!_obj)
           {
             auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);

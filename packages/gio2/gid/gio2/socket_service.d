@@ -297,7 +297,7 @@ class SocketService : gid.gio2.socket_listener.SocketListener
         static extern(C) gboolean _vfuncIncomingTramp(GSocketService* service, GSocketConnection* connection, GObject* sourceObject) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_service.SocketService)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)service);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_service.SocketService)(cast(void*)service);
           if (!_obj)
           {
             auto _klass = cast(GSocketServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)service);

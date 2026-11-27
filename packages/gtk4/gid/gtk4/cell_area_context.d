@@ -517,7 +517,7 @@ class CellAreaContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAllocateTramp(GtkCellAreaContext* context, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area_context.CellAreaContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -544,7 +544,7 @@ class CellAreaContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGetPreferredHeightForWidthTramp(GtkCellAreaContext* context, int width, int* minimumHeight, int* naturalHeight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area_context.CellAreaContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -579,7 +579,7 @@ class CellAreaContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGetPreferredWidthForHeightTramp(GtkCellAreaContext* context, int height, int* minimumWidth, int* naturalWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area_context.CellAreaContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -614,7 +614,7 @@ class CellAreaContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncResetTramp(GtkCellAreaContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.cell_area_context.CellAreaContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);

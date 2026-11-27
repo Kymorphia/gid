@@ -184,7 +184,7 @@ class CheckButton : gid.gtk3.toggle_button.ToggleButton
         static extern(C) void _vfuncDrawIndicatorTramp(GtkCheckButton* checkButton, cairo_t* cr) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.check_button.CheckButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)checkButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.check_button.CheckButton)(cast(void*)checkButton);
           if (!_obj)
           {
             auto _klass = cast(GtkCheckButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)checkButton);

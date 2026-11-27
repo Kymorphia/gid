@@ -2,6 +2,7 @@
 module gid.gio2.tls_backend_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.tls_backend;
 public import gid.gio2.tls_backend_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -248,7 +249,7 @@ template TlsBackendT()
         static extern(C) GTlsDatabase* _vfuncGetDefaultDatabaseTramp(GTlsBackend* backend) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GTlsBackendInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend), gid.gio2.tls_backend.TlsBackend._getGType);
@@ -280,7 +281,7 @@ template TlsBackendT()
         static extern(C) gboolean _vfuncSupportsDtlsTramp(GTlsBackend* backend) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GTlsBackendInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend), gid.gio2.tls_backend.TlsBackend._getGType);
@@ -312,7 +313,7 @@ template TlsBackendT()
         static extern(C) gboolean _vfuncSupportsTlsTramp(GTlsBackend* backend) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)backend);
           if (!_obj)
           {
             auto _klass = cast(GTlsBackendInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend), gid.gio2.tls_backend.TlsBackend._getGType);

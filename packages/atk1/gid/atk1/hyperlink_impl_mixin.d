@@ -2,6 +2,7 @@
 module gid.atk1.hyperlink_impl_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.hyperlink_impl;
 public import gid.atk1.hyperlink_impl_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -87,7 +88,7 @@ template HyperlinkImplT()
         static extern(C) AtkHyperlink* _vfuncGetHyperlinkTramp(AtkHyperlinkImpl* impl) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)impl);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)impl);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkImplIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)impl), gid.atk1.hyperlink_impl.HyperlinkImpl._getGType);

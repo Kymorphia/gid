@@ -493,7 +493,7 @@ class ToolButton : gid.gtk3.tool_item.ToolItem, gid.gtk3.actionable.Actionable
         static extern(C) void _vfuncClickedTramp(GtkToolButton* toolItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tool_button.ToolButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolItem);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tool_button.ToolButton)(cast(void*)toolItem);
           if (!_obj)
           {
             auto _klass = cast(GtkToolButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolItem);

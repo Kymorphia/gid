@@ -601,7 +601,7 @@ class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncChangedTramp(GtkAdjustment* adjustment) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.adjustment.Adjustment)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)adjustment);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.adjustment.Adjustment)(cast(void*)adjustment);
           if (!_obj)
           {
             auto _klass = cast(GtkAdjustmentClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)adjustment);
@@ -628,7 +628,7 @@ class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncValueChangedTramp(GtkAdjustment* adjustment) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.adjustment.Adjustment)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)adjustment);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.adjustment.Adjustment)(cast(void*)adjustment);
           if (!_obj)
           {
             auto _klass = cast(GtkAdjustmentClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)adjustment);

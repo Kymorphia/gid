@@ -969,7 +969,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncActivateTramp(GstGLContext* context, gboolean activate) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1001,7 +1001,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncCheckFeatureTramp(GstGLContext* context, const(char)* feature) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1034,7 +1034,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncChooseFormatTramp(GstGLContext* context, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1066,7 +1066,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncCreateContextTramp(GstGLContext* context, GstGLAPI glApi, GstGLContext* otherContext, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1098,7 +1098,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncDestroyContextTramp(GstGLContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1125,7 +1125,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) GstStructure* _vfuncGetConfigTramp(GstGLContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1157,7 +1157,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) GstGLAPI _vfuncGetGlApiTramp(GstGLContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1189,7 +1189,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) size_t _vfuncGetGlContextTramp(GstGLContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1219,7 +1219,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) GstGLPlatform _vfuncGetGlPlatformTramp(GstGLContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1251,7 +1251,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncGetGlPlatformVersionTramp(GstGLContext* context, int* major, int* minor) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1278,7 +1278,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncRequestConfigTramp(GstGLContext* context, GstStructure* glConfig) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1310,7 +1310,7 @@ class GLContext : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncSwapBuffersTramp(GstGLContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);

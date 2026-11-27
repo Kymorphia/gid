@@ -2,6 +2,7 @@
 module gid.gio2.pollable_output_stream_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.pollable_output_stream;
 public import gid.gio2.pollable_output_stream_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -427,7 +428,7 @@ template PollableOutputStreamT()
         static extern(C) gboolean _vfuncCanPollTramp(GPollableOutputStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableOutputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_output_stream.PollableOutputStream._getGType);
@@ -459,7 +460,7 @@ template PollableOutputStreamT()
         static extern(C) GSource* _vfuncCreateSourceTramp(GPollableOutputStream* stream, GCancellable* cancellable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableOutputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_output_stream.PollableOutputStream._getGType);
@@ -491,7 +492,7 @@ template PollableOutputStreamT()
         static extern(C) gboolean _vfuncIsWritableTramp(GPollableOutputStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableOutputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_output_stream.PollableOutputStream._getGType);
@@ -523,7 +524,7 @@ template PollableOutputStreamT()
         static extern(C) ptrdiff_t _vfuncWriteNonblockingTramp(GPollableOutputStream* stream, void* buffer, size_t count, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableOutputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_output_stream.PollableOutputStream._getGType);
@@ -556,7 +557,7 @@ template PollableOutputStreamT()
         static extern(C) GPollableReturn _vfuncWritevNonblockingTramp(GPollableOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableOutputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_output_stream.PollableOutputStream._getGType);

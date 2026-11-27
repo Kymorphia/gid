@@ -316,7 +316,7 @@ class VideoAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
         static extern(C) void _vfuncCleanFrameTramp(GstVideoAggregatorPad* pad, GstVideoAggregator* videoaggregator, GstVideoFrame* preparedFrame) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
@@ -345,7 +345,7 @@ class VideoAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
         static extern(C) gboolean _vfuncPrepareFrameTramp(GstVideoAggregatorPad* pad, GstVideoAggregator* videoaggregator, GstBuffer* buffer, GstVideoFrame* preparedFrame) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
@@ -381,7 +381,7 @@ class VideoAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
         static extern(C) void _vfuncPrepareFrameFinishTramp(GstVideoAggregatorPad* pad, GstVideoAggregator* videoaggregator, GstVideoFrame* preparedFrame) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
@@ -410,7 +410,7 @@ class VideoAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
         static extern(C) void _vfuncPrepareFrameStartTramp(GstVideoAggregatorPad* pad, GstVideoAggregator* videoaggregator, GstBuffer* buffer, GstVideoFrame* preparedFrame) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
@@ -443,7 +443,7 @@ class VideoAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
         static extern(C) void _vfuncUpdateConversionInfoTramp(GstVideoAggregatorPad* pad) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator_pad.VideoAggregatorPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);

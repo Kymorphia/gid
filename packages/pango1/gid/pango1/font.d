@@ -574,7 +574,7 @@ class Font : gid.gobject2.object.ObjectWrap
         static extern(C) hb_font_t* _vfuncCreateHbFontTramp(PangoFont* font) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font.Font)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)font);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font.Font)(cast(void*)font);
           if (!_obj)
           {
             auto _klass = cast(PangoFontClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)font);
@@ -606,7 +606,7 @@ class Font : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFontDescription* _vfuncDescribeTramp(PangoFont* font) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font.Font)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)font);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font.Font)(cast(void*)font);
           if (!_obj)
           {
             auto _klass = cast(PangoFontClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)font);
@@ -638,7 +638,7 @@ class Font : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFontDescription* _vfuncDescribeAbsoluteTramp(PangoFont* font) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font.Font)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)font);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font.Font)(cast(void*)font);
           if (!_obj)
           {
             auto _klass = cast(PangoFontClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)font);
@@ -670,7 +670,7 @@ class Font : gid.gobject2.object.ObjectWrap
         static extern(C) PangoCoverage* _vfuncGetCoverageTramp(PangoFont* font, PangoLanguage* language) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font.Font)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)font);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font.Font)(cast(void*)font);
           if (!_obj)
           {
             auto _klass = cast(PangoFontClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)font);
@@ -705,7 +705,7 @@ class Font : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFontMap* _vfuncGetFontMapTramp(PangoFont* font) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font.Font)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)font);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font.Font)(cast(void*)font);
           if (!_obj)
           {
             auto _klass = cast(PangoFontClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)font);
@@ -737,7 +737,7 @@ class Font : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGetGlyphExtentsTramp(PangoFont* font, PangoGlyph glyph, PangoRectangle* inkRect, PangoRectangle* logicalRect) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font.Font)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)font);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font.Font)(cast(void*)font);
           if (!_obj)
           {
             auto _klass = cast(PangoFontClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)font);
@@ -764,7 +764,7 @@ class Font : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFontMetrics* _vfuncGetMetricsTramp(PangoFont* font, PangoLanguage* language) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font.Font)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)font);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font.Font)(cast(void*)font);
           if (!_obj)
           {
             auto _klass = cast(PangoFontClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)font);

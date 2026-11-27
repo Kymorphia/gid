@@ -405,7 +405,7 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAllocateTramp(GtkLayoutManager* manager, GtkWidget* widget, int width, int height, int baseline) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.layout_manager.LayoutManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -432,7 +432,7 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
         static extern(C) GtkLayoutChild* _vfuncCreateLayoutChildTramp(GtkLayoutManager* manager, GtkWidget* widget, GtkWidget* forChild) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.layout_manager.LayoutManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -464,7 +464,7 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
         static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkLayoutManager* manager, GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.layout_manager.LayoutManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -496,7 +496,7 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncMeasureTramp(GtkLayoutManager* manager, GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.layout_manager.LayoutManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -539,7 +539,7 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRootTramp(GtkLayoutManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.layout_manager.LayoutManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
@@ -566,7 +566,7 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncUnrootTramp(GtkLayoutManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.layout_manager.LayoutManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);

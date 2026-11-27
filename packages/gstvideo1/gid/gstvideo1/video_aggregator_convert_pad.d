@@ -131,7 +131,7 @@ class VideoAggregatorConvertPad : gid.gstvideo1.video_aggregator_pad.VideoAggreg
         static extern(C) void _vfuncCreateConversionInfoTramp(GstVideoAggregatorConvertPad* pad, GstVideoAggregator* agg, GstVideoInfo* conversionInfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_aggregator_convert_pad.VideoAggregatorConvertPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_aggregator_convert_pad.VideoAggregatorConvertPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstVideoAggregatorConvertPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);

@@ -674,7 +674,7 @@ class NavigationPage : gid.gtk4.widget.Widget
         static extern(C) void _vfuncHiddenTramp(AdwNavigationPage* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.navigation_page.NavigationPage)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -701,7 +701,7 @@ class NavigationPage : gid.gtk4.widget.Widget
         static extern(C) void _vfuncHidingTramp(AdwNavigationPage* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.navigation_page.NavigationPage)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -728,7 +728,7 @@ class NavigationPage : gid.gtk4.widget.Widget
         static extern(C) void _vfuncShowingTramp(AdwNavigationPage* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.navigation_page.NavigationPage)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -755,7 +755,7 @@ class NavigationPage : gid.gtk4.widget.Widget
         static extern(C) void _vfuncShownTramp(AdwNavigationPage* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.navigation_page.NavigationPage)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

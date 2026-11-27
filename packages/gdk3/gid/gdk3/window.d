@@ -3383,7 +3383,7 @@ class Window : gid.gobject2.object.ObjectWrap
         static extern(C) cairo_surface_t* _vfuncCreateSurfaceTramp(GdkWindow* window, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk3.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GdkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);

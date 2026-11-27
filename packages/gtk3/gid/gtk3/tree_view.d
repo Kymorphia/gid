@@ -3242,7 +3242,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncColumnsChangedTramp(GtkTreeView* treeView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3269,7 +3269,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncCursorChangedTramp(GtkTreeView* treeView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3296,7 +3296,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncExpandCollapseCursorRowTramp(GtkTreeView* treeView, gboolean logical, gboolean expand, gboolean openAll) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3328,7 +3328,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncMoveCursorTramp(GtkTreeView* treeView, GtkMovementStep step, int count) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3360,7 +3360,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncRowActivatedTramp(GtkTreeView* treeView, GtkTreePath* path, GtkTreeViewColumn* column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3392,7 +3392,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncRowCollapsedTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3427,7 +3427,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) void _vfuncRowExpandedTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3462,7 +3462,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncSelectAllTramp(GtkTreeView* treeView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3494,7 +3494,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncSelectCursorParentTramp(GtkTreeView* treeView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3526,7 +3526,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncSelectCursorRowTramp(GtkTreeView* treeView, gboolean startEditing) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3558,7 +3558,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncStartInteractiveSearchTramp(GtkTreeView* treeView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3590,7 +3590,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncTestCollapseRowTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3628,7 +3628,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncTestExpandRowTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3666,7 +3666,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncToggleCursorRowTramp(GtkTreeView* treeView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
@@ -3698,7 +3698,7 @@ class TreeView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
         static extern(C) gboolean _vfuncUnselectAllTramp(GtkTreeView* treeView) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.tree_view.TreeView)(cast(void*)treeView);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);

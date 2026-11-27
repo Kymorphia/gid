@@ -578,7 +578,7 @@ class ContentProvider : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAttachClipboardTramp(GdkContentProvider* provider, GdkClipboard* clipboard) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk4.content_provider.ContentProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk4.content_provider.ContentProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GdkContentProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
@@ -605,7 +605,7 @@ class ContentProvider : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncContentChangedTramp(GdkContentProvider* provider) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk4.content_provider.ContentProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk4.content_provider.ContentProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GdkContentProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
@@ -632,7 +632,7 @@ class ContentProvider : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDetachClipboardTramp(GdkContentProvider* provider, GdkClipboard* clipboard) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk4.content_provider.ContentProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk4.content_provider.ContentProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GdkContentProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
@@ -659,7 +659,7 @@ class ContentProvider : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncGetValueTramp(GdkContentProvider* provider, GValue* value, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk4.content_provider.ContentProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk4.content_provider.ContentProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GdkContentProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
@@ -694,7 +694,7 @@ class ContentProvider : gid.gobject2.object.ObjectWrap
         static extern(C) GdkContentFormats* _vfuncRefFormatsTramp(GdkContentProvider* provider) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk4.content_provider.ContentProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk4.content_provider.ContentProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GdkContentProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
@@ -726,7 +726,7 @@ class ContentProvider : gid.gobject2.object.ObjectWrap
         static extern(C) GdkContentFormats* _vfuncRefStorableFormatsTramp(GdkContentProvider* provider) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk4.content_provider.ContentProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk4.content_provider.ContentProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GdkContentProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
@@ -758,7 +758,7 @@ class ContentProvider : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncWriteMimeTypeFinishTramp(GdkContentProvider* provider, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdk4.content_provider.ContentProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdk4.content_provider.ContentProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GdkContentProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);

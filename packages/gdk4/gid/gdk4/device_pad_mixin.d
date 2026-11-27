@@ -2,6 +2,7 @@
 module gid.gdk4.device_pad_mixin;
 
 public import gid.core.basictypes;
+public import gid.gdk4.device_pad;
 public import gid.gdk4.device_pad_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk4.c.functions;

@@ -685,7 +685,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
         static extern(C) gboolean _vfuncHandleEventTramp(GstRTPBaseDepayload* filter, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -720,7 +720,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
         static extern(C) gboolean _vfuncPacketLostTramp(GstRTPBaseDepayload* filter, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -755,7 +755,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
         static extern(C) GstBuffer* _vfuncProcessTramp(GstRTPBaseDepayload* base, GstBuffer* in_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)base);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)(cast(void*)base);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)base);
@@ -790,7 +790,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
         static extern(C) GstBuffer* _vfuncProcessRtpPacketTramp(GstRTPBaseDepayload* base, GstRTPBuffer* rtpBuffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)base);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)(cast(void*)base);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)base);
@@ -823,7 +823,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetCapsTramp(GstRTPBaseDepayload* filter, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);

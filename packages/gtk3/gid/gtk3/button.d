@@ -1118,7 +1118,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
         static extern(C) void _vfuncActivateTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
@@ -1145,7 +1145,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
         static extern(C) void _vfuncClickedTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
@@ -1172,7 +1172,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
         static extern(C) void _vfuncEnterTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
@@ -1199,7 +1199,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
         static extern(C) void _vfuncLeaveTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
@@ -1226,7 +1226,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
         static extern(C) void _vfuncPressedTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
@@ -1253,7 +1253,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
         static extern(C) void _vfuncReleasedTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);

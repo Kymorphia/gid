@@ -618,7 +618,7 @@ class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
         static extern(C) void _vfuncActivateTramp(GtkCheckButton* checkButton) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.check_button.CheckButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)checkButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.check_button.CheckButton)(cast(void*)checkButton);
           if (!_obj)
           {
             auto _klass = cast(GtkCheckButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)checkButton);
@@ -645,7 +645,7 @@ class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
         static extern(C) void _vfuncToggledTramp(GtkCheckButton* checkButton) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.check_button.CheckButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)checkButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.check_button.CheckButton)(cast(void*)checkButton);
           if (!_obj)
           {
             auto _klass = cast(GtkCheckButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)checkButton);

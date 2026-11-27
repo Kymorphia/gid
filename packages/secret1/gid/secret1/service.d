@@ -1680,7 +1680,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
         static extern(C) GType _vfuncGetCollectionGtypeTramp(SecretService* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.secret1.service.Service)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1712,7 +1712,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
         static extern(C) GType _vfuncGetItemGtypeTramp(SecretService* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.secret1.service.Service)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1744,7 +1744,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
         static extern(C) GVariant* _vfuncPromptFinishTramp(SecretService* self, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.secret1.service.Service)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1776,7 +1776,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
         static extern(C) GVariant* _vfuncPromptSyncTramp(SecretService* self, SecretPrompt* prompt, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.secret1.service.Service)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

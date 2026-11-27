@@ -681,7 +681,7 @@ class TlsCertificate : gid.gobject2.object.ObjectWrap
         static extern(C) GTlsCertificateFlags _vfuncVerifyTramp(GTlsCertificate* cert, GSocketConnectable* identity, GTlsCertificate* trustedCa) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.tls_certificate.TlsCertificate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cert);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.tls_certificate.TlsCertificate)(cast(void*)cert);
           if (!_obj)
           {
             auto _klass = cast(GTlsCertificateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cert);

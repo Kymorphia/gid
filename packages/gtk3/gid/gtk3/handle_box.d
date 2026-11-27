@@ -460,7 +460,7 @@ class HandleBox : gid.gtk3.bin.Bin
         static extern(C) void _vfuncChildAttachedTramp(GtkHandleBox* handleBox, GtkWidget* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.handle_box.HandleBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)handleBox);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.handle_box.HandleBox)(cast(void*)handleBox);
           if (!_obj)
           {
             auto _klass = cast(GtkHandleBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)handleBox);
@@ -487,7 +487,7 @@ class HandleBox : gid.gtk3.bin.Bin
         static extern(C) void _vfuncChildDetachedTramp(GtkHandleBox* handleBox, GtkWidget* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.handle_box.HandleBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)handleBox);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.handle_box.HandleBox)(cast(void*)handleBox);
           if (!_obj)
           {
             auto _klass = cast(GtkHandleBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)handleBox);

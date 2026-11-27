@@ -1579,7 +1579,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncCloseTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1611,7 +1611,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncDecideAllocationTramp(GstVideoDecoder* decoder, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1646,7 +1646,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncDrainTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1678,7 +1678,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncFinishTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1710,7 +1710,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncFlushTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1742,7 +1742,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) GstCaps* _vfuncGetcapsTramp(GstVideoDecoder* decoder, GstCaps* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1777,7 +1777,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncHandleFrameTramp(GstVideoDecoder* decoder, GstVideoCodecFrame* frame) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1809,7 +1809,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncHandleMissingDataTramp(GstVideoDecoder* decoder, GstClockTime timestamp, GstClockTime duration) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1841,7 +1841,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncNegotiateTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1873,7 +1873,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncOpenTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1905,7 +1905,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncParseTramp(GstVideoDecoder* decoder, GstVideoCodecFrame* frame, GstAdapter* adapter, gboolean atEos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1940,7 +1940,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncProposeAllocationTramp(GstVideoDecoder* decoder, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -1975,7 +1975,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncResetTramp(GstVideoDecoder* decoder, gboolean hard) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2007,7 +2007,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetFormatTramp(GstVideoDecoder* decoder, GstVideoCodecState* state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2042,7 +2042,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkEventTramp(GstVideoDecoder* decoder, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2077,7 +2077,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkQueryTramp(GstVideoDecoder* decoder, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2112,7 +2112,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcEventTramp(GstVideoDecoder* decoder, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2147,7 +2147,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcQueryTramp(GstVideoDecoder* decoder, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2182,7 +2182,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStartTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2214,7 +2214,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStopTramp(GstVideoDecoder* decoder) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);
@@ -2246,7 +2246,7 @@ class VideoDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncTransformMetaTramp(GstVideoDecoder* decoder, GstVideoCodecFrame* frame, GstMeta* meta) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_decoder.VideoDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)decoder);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_decoder.VideoDecoder)(cast(void*)decoder);
           if (!_obj)
           {
             auto _klass = cast(GstVideoDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)decoder);

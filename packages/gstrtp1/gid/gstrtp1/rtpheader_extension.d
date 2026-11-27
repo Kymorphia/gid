@@ -591,7 +591,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) size_t _vfuncGetMaxSizeTramp(GstRTPHeaderExtension* ext, const(GstBuffer)* inputMeta) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);
@@ -621,7 +621,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) GstRTPHeaderExtensionFlags _vfuncGetSupportedFlagsTramp(GstRTPHeaderExtension* ext) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);
@@ -653,7 +653,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) gboolean _vfuncReadTramp(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionFlags readFlags, const(ubyte)* data, size_t size, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);
@@ -691,7 +691,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetAttributesTramp(GstRTPHeaderExtension* ext, GstRTPHeaderExtensionDirection direction, const(char)* attributes) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);
@@ -724,7 +724,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetCapsFromAttributesTramp(GstRTPHeaderExtension* ext, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);
@@ -759,7 +759,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetNonRtpSinkCapsTramp(GstRTPHeaderExtension* ext, const(GstCaps)* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);
@@ -791,7 +791,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) gboolean _vfuncUpdateNonRtpSrcCapsTramp(GstRTPHeaderExtension* ext, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);
@@ -826,7 +826,7 @@ class RTPHeaderExtension : gid.gst1.element.Element
         static extern(C) ptrdiff_t _vfuncWriteTramp(GstRTPHeaderExtension* ext, const(GstBuffer)* inputMeta, GstRTPHeaderExtensionFlags writeFlags, GstBuffer* output, ubyte* data, size_t size) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)ext);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(void*)ext);
           if (!_obj)
           {
             auto _klass = cast(GstRTPHeaderExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)ext);

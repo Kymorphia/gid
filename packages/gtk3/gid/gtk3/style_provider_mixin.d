@@ -2,6 +2,7 @@
 module gid.gtk3.style_provider_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.style_provider;
 public import gid.gtk3.style_provider_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -202,7 +203,7 @@ template StyleProviderT()
         static extern(C) GtkIconFactory* _vfuncGetIconFactoryTramp(GtkStyleProvider* provider, GtkWidgetPath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleProviderIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider), gid.gtk3.style_provider.StyleProvider._getGType);
@@ -237,7 +238,7 @@ template StyleProviderT()
         static extern(C) GtkStyleProperties* _vfuncGetStyleTramp(GtkStyleProvider* provider, GtkWidgetPath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleProviderIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider), gid.gtk3.style_provider.StyleProvider._getGType);
@@ -272,7 +273,7 @@ template StyleProviderT()
         static extern(C) gboolean _vfuncGetStylePropertyTramp(GtkStyleProvider* provider, GtkWidgetPath* path, GtkStateFlags state, GParamSpec* pspec, GValue* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleProviderIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider), gid.gtk3.style_provider.StyleProvider._getGType);

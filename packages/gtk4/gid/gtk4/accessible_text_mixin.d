@@ -2,6 +2,7 @@
 module gid.gtk4.accessible_text_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.accessible_text;
 public import gid.gtk4.accessible_text_iface_proxy;
 public import gid.core.utils;
 public import gid.glib2.bytes;
@@ -479,7 +480,7 @@ template AccessibleTextT()
         static extern(C) uint _vfuncGetCaretPositionTramp(GtkAccessibleText* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);
@@ -509,7 +510,7 @@ template AccessibleTextT()
         static extern(C) GBytes* _vfuncGetContentsTramp(GtkAccessibleText* self, uint start, uint end) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);
@@ -541,7 +542,7 @@ template AccessibleTextT()
         static extern(C) GBytes* _vfuncGetContentsAtTramp(GtkAccessibleText* self, uint offset, GtkAccessibleTextGranularity granularity, uint* start, uint* end) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);
@@ -573,7 +574,7 @@ template AccessibleTextT()
         static extern(C) void _vfuncGetDefaultAttributesTramp(GtkAccessibleText* self, char*** attributeNames, char*** attributeValues) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);
@@ -632,7 +633,7 @@ template AccessibleTextT()
         static extern(C) gboolean _vfuncGetExtentsTramp(GtkAccessibleText* self, uint start, uint end, graphene_rect_t* extents) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);
@@ -667,7 +668,7 @@ template AccessibleTextT()
         static extern(C) gboolean _vfuncGetOffsetTramp(GtkAccessibleText* self, const(graphene_point_t)* point, uint* offset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);
@@ -699,7 +700,7 @@ template AccessibleTextT()
         static extern(C) gboolean _vfuncSetCaretPositionTramp(GtkAccessibleText* self, uint offset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);
@@ -731,7 +732,7 @@ template AccessibleTextT()
         static extern(C) gboolean _vfuncSetSelectionTramp(GtkAccessibleText* self, size_t i, GtkAccessibleTextRange* range) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleTextInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible_text.AccessibleText._getGType);

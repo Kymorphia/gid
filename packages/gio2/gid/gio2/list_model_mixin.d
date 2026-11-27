@@ -2,6 +2,7 @@
 module gid.gio2.list_model_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.list_model;
 public import gid.gio2.list_model_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -384,7 +385,7 @@ template ListModelT()
         static extern(C) GObject* _vfuncGetItemTramp(GListModel* list, uint position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)list);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)list);
           if (!_obj)
           {
             auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)list), gid.gio2.list_model.ListModel._getGType);
@@ -416,7 +417,7 @@ template ListModelT()
         static extern(C) GType _vfuncGetItemTypeTramp(GListModel* list) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)list);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)list);
           if (!_obj)
           {
             auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)list), gid.gio2.list_model.ListModel._getGType);
@@ -448,7 +449,7 @@ template ListModelT()
         static extern(C) uint _vfuncGetNItemsTramp(GListModel* list) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)list);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)list);
           if (!_obj)
           {
             auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)list), gid.gio2.list_model.ListModel._getGType);

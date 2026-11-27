@@ -818,7 +818,7 @@ class GLArea : gid.gtk3.widget.Widget
         static extern(C) gboolean _vfuncRenderTramp(GtkGLArea* area, GdkGLContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.glarea.GLArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.glarea.GLArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkGLAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
@@ -850,7 +850,7 @@ class GLArea : gid.gtk3.widget.Widget
         static extern(C) void _vfuncResizeTramp(GtkGLArea* area, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.glarea.GLArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.glarea.GLArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkGLAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);

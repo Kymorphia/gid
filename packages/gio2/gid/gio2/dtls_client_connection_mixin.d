@@ -2,6 +2,7 @@
 module gid.gio2.dtls_client_connection_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.dtls_client_connection;
 public import gid.gio2.dtls_client_connection_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;

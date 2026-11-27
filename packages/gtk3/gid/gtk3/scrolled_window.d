@@ -1212,7 +1212,7 @@ class ScrolledWindow : gid.gtk3.bin.Bin
         static extern(C) void _vfuncMoveFocusOutTramp(GtkScrolledWindow* scrolledWindow, GtkDirectionType direction) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.scrolled_window.ScrolledWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scrolledWindow);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.scrolled_window.ScrolledWindow)(cast(void*)scrolledWindow);
           if (!_obj)
           {
             auto _klass = cast(GtkScrolledWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scrolledWindow);
@@ -1239,7 +1239,7 @@ class ScrolledWindow : gid.gtk3.bin.Bin
         static extern(C) gboolean _vfuncScrollChildTramp(GtkScrolledWindow* scrolledWindow, GtkScrollType scroll, gboolean horizontal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.scrolled_window.ScrolledWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scrolledWindow);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.scrolled_window.ScrolledWindow)(cast(void*)scrolledWindow);
           if (!_obj)
           {
             auto _klass = cast(GtkScrolledWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scrolledWindow);

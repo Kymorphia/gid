@@ -511,7 +511,7 @@ class CookieJar : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Sess
         static extern(C) void _vfuncChangedTramp(SoupCookieJar* jar, SoupCookie* oldCookie, SoupCookie* newCookie) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.cookie_jar.CookieJar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)jar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.cookie_jar.CookieJar)(cast(void*)jar);
           if (!_obj)
           {
             auto _klass = cast(SoupCookieJarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)jar);
@@ -546,7 +546,7 @@ class CookieJar : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Sess
         static extern(C) gboolean _vfuncIsPersistentTramp(SoupCookieJar* jar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.cookie_jar.CookieJar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)jar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.cookie_jar.CookieJar)(cast(void*)jar);
           if (!_obj)
           {
             auto _klass = cast(SoupCookieJarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)jar);
@@ -578,7 +578,7 @@ class CookieJar : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Sess
         static extern(C) void _vfuncSaveTramp(SoupCookieJar* jar) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.cookie_jar.CookieJar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)jar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.cookie_jar.CookieJar)(cast(void*)jar);
           if (!_obj)
           {
             auto _klass = cast(SoupCookieJarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)jar);

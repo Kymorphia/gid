@@ -2,6 +2,7 @@
 module gid.gtksource5.completion_proposal_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtksource5.completion_proposal;
 public import gid.gtksource5.completion_proposal_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -94,7 +95,7 @@ template CompletionProposalT()
         static extern(C) char* _vfuncGetTypedTextTramp(GtkSourceCompletionProposal* proposal) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proposal);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)proposal);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionProposalInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proposal), gid.gtksource5.completion_proposal.CompletionProposal._getGType);

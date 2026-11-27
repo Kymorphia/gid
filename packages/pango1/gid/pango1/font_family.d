@@ -389,7 +389,7 @@ class FontFamily : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) PangoFontFace* _vfuncGetFaceTramp(PangoFontFamily* family, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_family.FontFamily)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)family);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_family.FontFamily)(cast(void*)family);
           if (!_obj)
           {
             auto _klass = cast(PangoFontFamilyClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)family);
@@ -422,7 +422,7 @@ class FontFamily : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) gboolean _vfuncIsMonospaceTramp(PangoFontFamily* family) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_family.FontFamily)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)family);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_family.FontFamily)(cast(void*)family);
           if (!_obj)
           {
             auto _klass = cast(PangoFontFamilyClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)family);
@@ -454,7 +454,7 @@ class FontFamily : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) gboolean _vfuncIsVariableTramp(PangoFontFamily* family) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_family.FontFamily)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)family);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_family.FontFamily)(cast(void*)family);
           if (!_obj)
           {
             auto _klass = cast(PangoFontFamilyClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)family);

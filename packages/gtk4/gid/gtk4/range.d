@@ -855,7 +855,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
         static extern(C) void _vfuncAdjustBoundsTramp(GtkRange* range, double newValue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.range.Range)(cast(void*)range);
           if (!_obj)
           {
             auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
@@ -882,7 +882,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
         static extern(C) gboolean _vfuncChangeValueTramp(GtkRange* range, GtkScrollType scroll, double newValue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.range.Range)(cast(void*)range);
           if (!_obj)
           {
             auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
@@ -914,7 +914,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
         static extern(C) void _vfuncGetRangeBorderTramp(GtkRange* range, GtkBorder* border) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.range.Range)(cast(void*)range);
           if (!_obj)
           {
             auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
@@ -941,7 +941,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
         static extern(C) void _vfuncMoveSliderTramp(GtkRange* range, GtkScrollType scroll) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.range.Range)(cast(void*)range);
           if (!_obj)
           {
             auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
@@ -968,7 +968,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
         static extern(C) void _vfuncValueChangedTramp(GtkRange* range) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.range.Range)(cast(void*)range);
           if (!_obj)
           {
             auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);

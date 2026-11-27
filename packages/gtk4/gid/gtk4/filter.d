@@ -280,7 +280,7 @@ class Filter : gid.gobject2.object.ObjectWrap
         static extern(C) GtkFilterMatch _vfuncGetStrictnessTramp(GtkFilter* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.filter.Filter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.filter.Filter)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -312,7 +312,7 @@ class Filter : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncMatchTramp(GtkFilter* self, GObject* item) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.filter.Filter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.filter.Filter)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

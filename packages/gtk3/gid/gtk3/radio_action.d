@@ -349,7 +349,7 @@ class RadioAction : gid.gtk3.toggle_action.ToggleAction
         static extern(C) void _vfuncChangedTramp(GtkRadioAction* action, GtkRadioAction* current) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.radio_action.RadioAction)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.radio_action.RadioAction)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkRadioActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);

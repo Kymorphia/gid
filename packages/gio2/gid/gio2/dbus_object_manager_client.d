@@ -794,7 +794,7 @@ class DBusObjectManagerClient : gid.gobject2.object.ObjectWrap, gid.gio2.async_i
         static extern(C) void _vfuncInterfaceProxySignalTramp(GDBusObjectManagerClient* manager, GDBusObjectProxy* objectProxy, GDBusProxy* interfaceProxy, const(char)* senderName, const(char)* signalName, GVariant* parameters) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.dbus_object_manager_client.DBusObjectManagerClient)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GDBusObjectManagerClientClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);

@@ -2214,7 +2214,7 @@ class Pad : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncLinkedTramp(GstPad* pad, GstPad* peer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.pad.Pad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.pad.Pad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
@@ -2241,7 +2241,7 @@ class Pad : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncUnlinkedTramp(GstPad* pad, GstPad* peer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.pad.Pad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.pad.Pad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);

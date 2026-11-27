@@ -2,6 +2,7 @@
 module gid.gtk3.cell_accessible_parent_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.cell_accessible_parent;
 public import gid.gtk3.cell_accessible_parent_iface_proxy;
 public import gid.atk1.object;
 public import gid.atk1.relation_set;
@@ -301,7 +302,7 @@ template CellAccessibleParentT()
         static extern(C) void _vfuncActivateTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -328,7 +329,7 @@ template CellAccessibleParentT()
         static extern(C) void _vfuncEditTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -355,7 +356,7 @@ template CellAccessibleParentT()
         static extern(C) void _vfuncExpandCollapseTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -382,7 +383,7 @@ template CellAccessibleParentT()
         static extern(C) void _vfuncGetCellAreaTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell, GdkRectangle* cellRect) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -409,7 +410,7 @@ template CellAccessibleParentT()
         static extern(C) void _vfuncGetCellExtentsTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell, int* x, int* y, int* width, int* height, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -436,7 +437,7 @@ template CellAccessibleParentT()
         static extern(C) void _vfuncGetCellPositionTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell, int* row, int* column) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -463,7 +464,7 @@ template CellAccessibleParentT()
         static extern(C) int _vfuncGetChildIndexTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -493,7 +494,7 @@ template CellAccessibleParentT()
         static extern(C) GPtrArray* _vfuncGetColumnHeaderCellsTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -525,7 +526,7 @@ template CellAccessibleParentT()
         static extern(C) GtkCellRendererState _vfuncGetRendererStateTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -557,7 +558,7 @@ template CellAccessibleParentT()
         static extern(C) GPtrArray* _vfuncGetRowHeaderCellsTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -589,7 +590,7 @@ template CellAccessibleParentT()
         static extern(C) gboolean _vfuncCellAccessibleParentGrabFocusTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);
@@ -621,7 +622,7 @@ template CellAccessibleParentT()
         static extern(C) void _vfuncUpdateRelationsetTramp(GtkCellAccessibleParent* parent, GtkCellAccessible* cell, AtkRelationSet* relationset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GtkCellAccessibleParentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gtk3.cell_accessible_parent.CellAccessibleParent._getGType);

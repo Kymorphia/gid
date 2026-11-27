@@ -2,6 +2,7 @@
 module gid.gio2.volume_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.volume;
 public import gid.gio2.volume_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -1219,7 +1220,7 @@ template VolumeT()
         static extern(C) gboolean _vfuncCanEjectTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1251,7 +1252,7 @@ template VolumeT()
         static extern(C) gboolean _vfuncCanMountTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1283,7 +1284,7 @@ template VolumeT()
         static extern(C) void _vfuncChangedTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1310,7 +1311,7 @@ template VolumeT()
         static extern(C) gboolean _vfuncEjectFinishTramp(GVolume* volume, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1342,7 +1343,7 @@ template VolumeT()
         static extern(C) gboolean _vfuncEjectWithOperationFinishTramp(GVolume* volume, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1374,7 +1375,7 @@ template VolumeT()
         static extern(C) char** _vfuncEnumerateIdentifiersTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1415,7 +1416,7 @@ template VolumeT()
         static extern(C) GFile* _vfuncGetActivationRootTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1447,7 +1448,7 @@ template VolumeT()
         static extern(C) GDrive* _vfuncGetDriveTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1479,7 +1480,7 @@ template VolumeT()
         static extern(C) GIcon* _vfuncGetIconTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1511,7 +1512,7 @@ template VolumeT()
         static extern(C) char* _vfuncGetIdentifierTramp(GVolume* volume, const(char)* kind) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1544,7 +1545,7 @@ template VolumeT()
         static extern(C) GMount* _vfuncGetMountTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1576,7 +1577,7 @@ template VolumeT()
         static extern(C) char* _vfuncGetNameTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1608,7 +1609,7 @@ template VolumeT()
         static extern(C) GIcon* _vfuncGetSymbolicIconTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1640,7 +1641,7 @@ template VolumeT()
         static extern(C) char* _vfuncGetUuidTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1672,7 +1673,7 @@ template VolumeT()
         static extern(C) gboolean _vfuncMountFinishTramp(GVolume* volume, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1704,7 +1705,7 @@ template VolumeT()
         static extern(C) void _vfuncRemovedTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);
@@ -1731,7 +1732,7 @@ template VolumeT()
         static extern(C) gboolean _vfuncShouldAutomountTramp(GVolume* volume) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)volume);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)volume);
           if (!_obj)
           {
             auto _klass = cast(GVolumeIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)volume), gid.gio2.volume.Volume._getGType);

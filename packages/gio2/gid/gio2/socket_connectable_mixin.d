@@ -2,6 +2,7 @@
 module gid.gio2.socket_connectable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.socket_connectable;
 public import gid.gio2.socket_connectable_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -233,7 +234,7 @@ template SocketConnectableT()
         static extern(C) GSocketAddressEnumerator* _vfuncEnumerateTramp(GSocketConnectable* connectable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)connectable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)connectable);
           if (!_obj)
           {
             auto _klass = cast(GSocketConnectableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)connectable), gid.gio2.socket_connectable.SocketConnectable._getGType);
@@ -265,7 +266,7 @@ template SocketConnectableT()
         static extern(C) GSocketAddressEnumerator* _vfuncProxyEnumerateTramp(GSocketConnectable* connectable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)connectable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)connectable);
           if (!_obj)
           {
             auto _klass = cast(GSocketConnectableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)connectable), gid.gio2.socket_connectable.SocketConnectable._getGType);
@@ -297,7 +298,7 @@ template SocketConnectableT()
         static extern(C) char* _vfuncToStringTramp(GSocketConnectable* connectable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)connectable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)connectable);
           if (!_obj)
           {
             auto _klass = cast(GSocketConnectableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)connectable), gid.gio2.socket_connectable.SocketConnectable._getGType);

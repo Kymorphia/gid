@@ -659,7 +659,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAreaPreparedTramp(GdkPixbufLoader* loader) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)(cast(void*)loader);
           if (!_obj)
           {
             auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);
@@ -686,7 +686,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAreaUpdatedTramp(GdkPixbufLoader* loader, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)(cast(void*)loader);
           if (!_obj)
           {
             auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);
@@ -713,7 +713,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncClosedTramp(GdkPixbufLoader* loader) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)(cast(void*)loader);
           if (!_obj)
           {
             auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);
@@ -740,7 +740,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSizePreparedTramp(GdkPixbufLoader* loader, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)(cast(void*)loader);
           if (!_obj)
           {
             auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);

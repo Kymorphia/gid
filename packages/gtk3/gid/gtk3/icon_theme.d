@@ -847,7 +847,7 @@ class IconTheme : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GtkIconTheme* iconTheme) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.icon_theme.IconTheme)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconTheme);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.icon_theme.IconTheme)(cast(void*)iconTheme);
           if (!_obj)
           {
             auto _klass = cast(GtkIconThemeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconTheme);

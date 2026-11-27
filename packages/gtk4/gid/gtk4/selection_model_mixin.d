@@ -2,6 +2,7 @@
 module gid.gtk4.selection_model_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.selection_model;
 public import gid.gtk4.selection_model_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -635,7 +636,7 @@ template SelectionModelT()
         static extern(C) GtkBitset* _vfuncGetSelectionInRangeTramp(GtkSelectionModel* model, uint position, uint nItems) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -667,7 +668,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncIsSelectedTramp(GtkSelectionModel* model, uint position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -699,7 +700,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncSelectAllTramp(GtkSelectionModel* model) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -731,7 +732,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncSelectItemTramp(GtkSelectionModel* model, uint position, gboolean unselectRest) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -763,7 +764,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncSelectRangeTramp(GtkSelectionModel* model, uint position, uint nItems, gboolean unselectRest) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -795,7 +796,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncSetSelectionTramp(GtkSelectionModel* model, GtkBitset* selected, GtkBitset* mask) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -833,7 +834,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncUnselectAllTramp(GtkSelectionModel* model) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -865,7 +866,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncUnselectItemTramp(GtkSelectionModel* model, uint position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);
@@ -897,7 +898,7 @@ template SelectionModelT()
         static extern(C) gboolean _vfuncUnselectRangeTramp(GtkSelectionModel* model, uint position, uint nItems) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)model);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)model);
           if (!_obj)
           {
             auto _klass = cast(GtkSelectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)model), gid.gtk4.selection_model.SelectionModel._getGType);

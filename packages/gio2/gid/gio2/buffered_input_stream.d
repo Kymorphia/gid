@@ -507,7 +507,7 @@ class BufferedInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.
         static extern(C) ptrdiff_t _vfuncFillTramp(GBufferedInputStream* stream, ptrdiff_t count, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.buffered_input_stream.BufferedInputStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.buffered_input_stream.BufferedInputStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GBufferedInputStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -537,7 +537,7 @@ class BufferedInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.
         static extern(C) ptrdiff_t _vfuncFillFinishTramp(GBufferedInputStream* stream, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.buffered_input_stream.BufferedInputStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.buffered_input_stream.BufferedInputStream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GBufferedInputStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);

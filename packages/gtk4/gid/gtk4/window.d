@@ -2138,7 +2138,7 @@ class Window : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.root.Roo
         static extern(C) void _vfuncActivateDefaultTramp(GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -2165,7 +2165,7 @@ class Window : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.root.Roo
         static extern(C) void _vfuncActivateFocusTramp(GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -2192,7 +2192,7 @@ class Window : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.root.Roo
         static extern(C) gboolean _vfuncCloseRequestTramp(GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -2224,7 +2224,7 @@ class Window : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.root.Roo
         static extern(C) gboolean _vfuncEnableDebuggingTramp(GtkWindow* window, gboolean toggle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
@@ -2256,7 +2256,7 @@ class Window : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.root.Roo
         static extern(C) void _vfuncKeysChangedTramp(GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.window.Window)(cast(void*)window);
           if (!_obj)
           {
             auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);

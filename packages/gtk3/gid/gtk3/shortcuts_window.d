@@ -315,7 +315,7 @@ class ShortcutsWindow : gid.gtk3.window.Window
         static extern(C) void _vfuncCloseTramp(GtkShortcutsWindow* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.shortcuts_window.ShortcutsWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.shortcuts_window.ShortcutsWindow)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkShortcutsWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -342,7 +342,7 @@ class ShortcutsWindow : gid.gtk3.window.Window
         static extern(C) void _vfuncSearchTramp(GtkShortcutsWindow* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.shortcuts_window.ShortcutsWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.shortcuts_window.ShortcutsWindow)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkShortcutsWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

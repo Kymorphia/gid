@@ -180,7 +180,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
         static extern(C) gboolean _vfuncSetInfoTramp(GstVideoFilter* filter, GstCaps* incaps, GstVideoInfo* inInfo, GstCaps* outcaps, GstVideoInfo* outInfo) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_filter.VideoFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_filter.VideoFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstVideoFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -224,7 +224,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
         static extern(C) GstFlowReturn _vfuncTransformFrameTramp(GstVideoFilter* filter, GstVideoFrame* inframe, GstVideoFrame* outframe) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_filter.VideoFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_filter.VideoFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstVideoFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -258,7 +258,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
         static extern(C) GstFlowReturn _vfuncTransformFrameIpTramp(GstVideoFilter* trans, GstVideoFrame* frame) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstvideo1.video_filter.VideoFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)trans);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstvideo1.video_filter.VideoFilter)(cast(void*)trans);
           if (!_obj)
           {
             auto _klass = cast(GstVideoFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)trans);

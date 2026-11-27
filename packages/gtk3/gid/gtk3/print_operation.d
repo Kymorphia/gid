@@ -2057,7 +2057,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncBeginPrintTramp(GtkPrintOperation* operation, GtkPrintContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2084,7 +2084,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncCustomWidgetApplyTramp(GtkPrintOperation* operation, GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2111,7 +2111,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncDoneTramp(GtkPrintOperation* operation, GtkPrintOperationResult result) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2138,7 +2138,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncDrawPageTramp(GtkPrintOperation* operation, GtkPrintContext* context, int pageNr) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2165,7 +2165,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncEndPrintTramp(GtkPrintOperation* operation, GtkPrintContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2192,7 +2192,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) gboolean _vfuncPaginateTramp(GtkPrintOperation* operation, GtkPrintContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2224,7 +2224,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) gboolean _vfuncPreviewTramp(GtkPrintOperation* operation, GtkPrintOperationPreview* preview, GtkPrintContext* context, GtkWindow* parent) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2256,7 +2256,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncRequestPageSetupTramp(GtkPrintOperation* operation, GtkPrintContext* context, int pageNr, GtkPageSetup* setup) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2283,7 +2283,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncStatusChangedTramp(GtkPrintOperation* operation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
@@ -2310,7 +2310,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
         static extern(C) void _vfuncUpdateCustomWidgetTramp(GtkPrintOperation* operation, GtkWidget* widget, GtkPageSetup* setup, GtkPrintSettings* settings) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.print_operation.PrintOperation)(cast(void*)operation);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);

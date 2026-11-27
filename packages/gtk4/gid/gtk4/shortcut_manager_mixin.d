@@ -2,6 +2,7 @@
 module gid.gtk4.shortcut_manager_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.shortcut_manager;
 public import gid.gtk4.shortcut_manager_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -102,7 +103,7 @@ template ShortcutManagerT()
         static extern(C) void _vfuncAddControllerTramp(GtkShortcutManager* self, GtkShortcutController* controller) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkShortcutManagerInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.shortcut_manager.ShortcutManager._getGType);
@@ -129,7 +130,7 @@ template ShortcutManagerT()
         static extern(C) void _vfuncRemoveControllerTramp(GtkShortcutManager* self, GtkShortcutController* controller) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkShortcutManagerInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.shortcut_manager.ShortcutManager._getGType);

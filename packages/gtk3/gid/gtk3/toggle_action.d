@@ -290,7 +290,7 @@ class ToggleAction : gid.gtk3.action.Action
         static extern(C) void _vfuncToggledTramp(GtkToggleAction* action) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.toggle_action.ToggleAction)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.toggle_action.ToggleAction)(cast(void*)action);
           if (!_obj)
           {
             auto _klass = cast(GtkToggleActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);

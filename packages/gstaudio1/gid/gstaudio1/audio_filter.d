@@ -130,7 +130,7 @@ class AudioFilter : gid.gstbase1.base_transform.BaseTransform
         static extern(C) gboolean _vfuncSetupTramp(GstAudioFilter* filter, const(GstAudioInfo)* info) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_filter.AudioFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_filter.AudioFilter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GstAudioFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);

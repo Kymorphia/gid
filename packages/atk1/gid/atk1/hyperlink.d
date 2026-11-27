@@ -496,7 +496,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) int _vfuncGetEndIndexTramp(AtkHyperlink* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -526,7 +526,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) int _vfuncGetNAnchorsTramp(AtkHyperlink* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -556,7 +556,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) AtkObject* _vfuncGetObjectTramp(AtkHyperlink* link, int i) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -588,7 +588,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) int _vfuncGetStartIndexTramp(AtkHyperlink* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -618,7 +618,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) char* _vfuncGetUriTramp(AtkHyperlink* link, int i) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -650,7 +650,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) gboolean _vfuncIsSelectedLinkTramp(AtkHyperlink* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -682,7 +682,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) gboolean _vfuncIsValidTramp(AtkHyperlink* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -714,7 +714,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) void _vfuncLinkActivatedTramp(AtkHyperlink* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);
@@ -741,7 +741,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
         static extern(C) uint _vfuncLinkStateTramp(AtkHyperlink* link) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.hyperlink.Hyperlink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)link);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.hyperlink.Hyperlink)(cast(void*)link);
           if (!_obj)
           {
             auto _klass = cast(AtkHyperlinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)link);

@@ -699,7 +699,7 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
         static extern(C) void _vfuncOrientationChangedTramp(GtkToolbar* toolbar, GtkOrientation orientation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.toolbar.Toolbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolbar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.toolbar.Toolbar)(cast(void*)toolbar);
           if (!_obj)
           {
             auto _klass = cast(GtkToolbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolbar);
@@ -726,7 +726,7 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
         static extern(C) gboolean _vfuncPopupContextMenuTramp(GtkToolbar* toolbar, int x, int y, int buttonNumber) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.toolbar.Toolbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolbar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.toolbar.Toolbar)(cast(void*)toolbar);
           if (!_obj)
           {
             auto _klass = cast(GtkToolbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolbar);
@@ -758,7 +758,7 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
         static extern(C) void _vfuncStyleChangedTramp(GtkToolbar* toolbar, GtkToolbarStyle style) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.toolbar.Toolbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolbar);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.toolbar.Toolbar)(cast(void*)toolbar);
           if (!_obj)
           {
             auto _klass = cast(GtkToolbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolbar);

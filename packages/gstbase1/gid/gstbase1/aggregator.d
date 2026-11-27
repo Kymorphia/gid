@@ -1217,7 +1217,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncAggregateTramp(GstAggregator* aggregator, gboolean timeout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1249,7 +1249,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstBuffer* _vfuncClipTramp(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstBuffer* buf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1281,7 +1281,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstAggregatorPad* _vfuncCreateNewPadTramp(GstAggregator* self, GstPadTemplate* templ, const(char)* reqName, const(GstCaps)* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1314,7 +1314,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncDecideAllocationTramp(GstAggregator* self, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1349,7 +1349,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncFinishBufferTramp(GstAggregator* aggregator, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1381,7 +1381,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncFinishBufferListTramp(GstAggregator* aggregator, GstBufferList* bufferlist) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1413,7 +1413,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstCaps* _vfuncFixateSrcCapsTramp(GstAggregator* self, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1445,7 +1445,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncFlushTramp(GstAggregator* aggregator) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1477,7 +1477,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstClockTime _vfuncGetNextTimeTramp(GstAggregator* aggregator) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1509,7 +1509,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncNegotiateTramp(GstAggregator* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1541,7 +1541,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncNegotiatedSrcCapsTramp(GstAggregator* self, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1576,7 +1576,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstSample* _vfuncPeekNextSampleTramp(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1608,7 +1608,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncProposeAllocationTramp(GstAggregator* self, GstAggregatorPad* pad, GstQuery* decideQuery, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -1646,7 +1646,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkEventTramp(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1678,7 +1678,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncSinkEventPreQueueTramp(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1710,7 +1710,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkQueryTramp(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1745,7 +1745,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkQueryPreQueueTramp(GstAggregator* aggregator, GstAggregatorPad* aggregatorPad, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1780,7 +1780,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcActivateTramp(GstAggregator* aggregator, GstPadMode mode, gboolean active) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1812,7 +1812,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcEventTramp(GstAggregator* aggregator, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1844,7 +1844,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcQueryTramp(GstAggregator* aggregator, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1879,7 +1879,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStartTramp(GstAggregator* aggregator) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1911,7 +1911,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStopTramp(GstAggregator* aggregator) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aggregator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)aggregator);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aggregator);
@@ -1943,7 +1943,7 @@ class Aggregator : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncUpdateSrcCapsTramp(GstAggregator* self, GstCaps* caps, GstCaps** ret) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstbase1.aggregator.Aggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstbase1.aggregator.Aggregator)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GstAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

@@ -1438,7 +1438,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncActivateOskTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1465,7 +1465,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncActivateOskWithEventTramp(GtkIMContext* context, GdkEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1497,7 +1497,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncCommitTramp(GtkIMContext* context, const(char)* str) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1526,7 +1526,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncDeleteSurroundingTramp(GtkIMContext* context, int offset, int nChars) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1558,7 +1558,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncFilterKeypressTramp(GtkIMContext* context, GdkEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1590,7 +1590,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncFocusInTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1617,7 +1617,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncFocusOutTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1644,7 +1644,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGetPreeditStringTramp(GtkIMContext* context, char** str, PangoAttrList** attrs, int* cursorPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1677,7 +1677,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncGetSurroundingTramp(GtkIMContext* context, char** text, int* cursorIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1711,7 +1711,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncGetSurroundingWithSelectionTramp(GtkIMContext* context, char** text, int* cursorIndex, int* anchorIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1745,7 +1745,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncInvalidCompositionTramp(GtkIMContext* context, const(char)* str) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1778,7 +1778,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPreeditChangedTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1805,7 +1805,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPreeditEndTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1832,7 +1832,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPreeditStartTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1859,7 +1859,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncResetTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1886,7 +1886,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncRetrieveSurroundingTramp(GtkIMContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1918,7 +1918,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetClientWidgetTramp(GtkIMContext* context, GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1945,7 +1945,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetCursorLocationTramp(GtkIMContext* context, GdkRectangle* area) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1972,7 +1972,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetSurroundingTramp(GtkIMContext* context, const(char)* text, int len, int cursorIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -2001,7 +2001,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetSurroundingWithSelectionTramp(GtkIMContext* context, const(char)* text, int len, int cursorIndex, int anchorIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -2030,7 +2030,7 @@ class IMContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetUsePreeditTramp(GtkIMContext* context, gboolean usePreedit) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.imcontext.IMContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.imcontext.IMContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkIMContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);

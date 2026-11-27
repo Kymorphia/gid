@@ -2,6 +2,7 @@
 module gid.json1.serializable_mixin;
 
 public import gid.core.basictypes;
+public import gid.json1.serializable;
 public import gid.json1.serializable_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -405,7 +406,7 @@ template SerializableT()
         static extern(C) gboolean _vfuncDeserializePropertyTramp(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)serializable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)serializable);
           if (!_obj)
           {
             auto _klass = cast(JsonSerializableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)serializable), gid.json1.serializable.Serializable._getGType);
@@ -448,7 +449,7 @@ template SerializableT()
         static extern(C) GParamSpec* _vfuncFindPropertyTramp(JsonSerializable* serializable, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)serializable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)serializable);
           if (!_obj)
           {
             auto _klass = cast(JsonSerializableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)serializable), gid.json1.serializable.Serializable._getGType);
@@ -481,7 +482,7 @@ template SerializableT()
         static extern(C) void _vfuncGetPropertyTramp(JsonSerializable* serializable, GParamSpec* pspec, GValue* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)serializable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)serializable);
           if (!_obj)
           {
             auto _klass = cast(JsonSerializableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)serializable), gid.json1.serializable.Serializable._getGType);
@@ -517,7 +518,7 @@ template SerializableT()
         static extern(C) JsonNode* _vfuncSerializePropertyTramp(JsonSerializable* serializable, const(char)* propertyName, const(GValue)* value, GParamSpec* pspec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)serializable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)serializable);
           if (!_obj)
           {
             auto _klass = cast(JsonSerializableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)serializable), gid.json1.serializable.Serializable._getGType);
@@ -550,7 +551,7 @@ template SerializableT()
         static extern(C) void _vfuncSetPropertyTramp(JsonSerializable* serializable, GParamSpec* pspec, const(GValue)* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)serializable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)serializable);
           if (!_obj)
           {
             auto _klass = cast(JsonSerializableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)serializable), gid.json1.serializable.Serializable._getGType);

@@ -504,7 +504,7 @@ class AccelGroup : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAccelChangedTramp(GtkAccelGroup* accelGroup, uint keyval, GdkModifierType modifier, GClosure* accelClosure) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.accel_group.AccelGroup)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accelGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.accel_group.AccelGroup)(cast(void*)accelGroup);
           if (!_obj)
           {
             auto _klass = cast(GtkAccelGroupClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accelGroup);

@@ -1561,7 +1561,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
         static extern(C) GstFlowReturn _vfuncEndOfStreamTramp(GstAppSrc* appsrc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_src.AppSrc)(cast(void*)appsrc);
           if (!_obj)
           {
             auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
@@ -1593,7 +1593,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
         static extern(C) void _vfuncEnoughDataTramp(GstAppSrc* appsrc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_src.AppSrc)(cast(void*)appsrc);
           if (!_obj)
           {
             auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
@@ -1620,7 +1620,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
         static extern(C) void _vfuncNeedDataTramp(GstAppSrc* appsrc, uint length) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_src.AppSrc)(cast(void*)appsrc);
           if (!_obj)
           {
             auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
@@ -1647,7 +1647,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
         static extern(C) GstFlowReturn _vfuncPushBufferTramp(GstAppSrc* appsrc, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_src.AppSrc)(cast(void*)appsrc);
           if (!_obj)
           {
             auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
@@ -1679,7 +1679,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
         static extern(C) GstFlowReturn _vfuncPushBufferListTramp(GstAppSrc* appsrc, GstBufferList* bufferList) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_src.AppSrc)(cast(void*)appsrc);
           if (!_obj)
           {
             auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
@@ -1711,7 +1711,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
         static extern(C) GstFlowReturn _vfuncPushSampleTramp(GstAppSrc* appsrc, GstSample* sample) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_src.AppSrc)(cast(void*)appsrc);
           if (!_obj)
           {
             auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
@@ -1746,7 +1746,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
         static extern(C) gboolean _vfuncSeekDataTramp(GstAppSrc* appsrc, ulong offset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstapp1.app_src.AppSrc)(cast(void*)appsrc);
           if (!_obj)
           {
             auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);

@@ -895,7 +895,7 @@ class Assistant : gid.gtk3.window.Window
         static extern(C) void _vfuncApplyTramp(GtkAssistant* assistant) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.assistant.Assistant)(cast(void*)assistant);
           if (!_obj)
           {
             auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);
@@ -922,7 +922,7 @@ class Assistant : gid.gtk3.window.Window
         static extern(C) void _vfuncCancelTramp(GtkAssistant* assistant) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.assistant.Assistant)(cast(void*)assistant);
           if (!_obj)
           {
             auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);
@@ -949,7 +949,7 @@ class Assistant : gid.gtk3.window.Window
         static extern(C) void _vfuncCloseTramp(GtkAssistant* assistant) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.assistant.Assistant)(cast(void*)assistant);
           if (!_obj)
           {
             auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);
@@ -976,7 +976,7 @@ class Assistant : gid.gtk3.window.Window
         static extern(C) void _vfuncPrepareTramp(GtkAssistant* assistant, GtkWidget* page) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.assistant.Assistant)(cast(void*)assistant);
           if (!_obj)
           {
             auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);

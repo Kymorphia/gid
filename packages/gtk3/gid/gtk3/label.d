@@ -1786,7 +1786,7 @@ class Label : gid.gtk3.misc.Misc
         static extern(C) gboolean _vfuncActivateLinkTramp(GtkLabel* label, const(char)* uri) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.label.Label)(cast(void*)label);
           if (!_obj)
           {
             auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);
@@ -1819,7 +1819,7 @@ class Label : gid.gtk3.misc.Misc
         static extern(C) void _vfuncCopyClipboardTramp(GtkLabel* label) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.label.Label)(cast(void*)label);
           if (!_obj)
           {
             auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);
@@ -1846,7 +1846,7 @@ class Label : gid.gtk3.misc.Misc
         static extern(C) void _vfuncMoveCursorTramp(GtkLabel* label, GtkMovementStep step, int count, gboolean extendSelection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.label.Label)(cast(void*)label);
           if (!_obj)
           {
             auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);
@@ -1873,7 +1873,7 @@ class Label : gid.gtk3.misc.Misc
         static extern(C) void _vfuncPopulatePopupTramp(GtkLabel* label, GtkMenu* menu) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.label.Label)(cast(void*)label);
           if (!_obj)
           {
             auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);

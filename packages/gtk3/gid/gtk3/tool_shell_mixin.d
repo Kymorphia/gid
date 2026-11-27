@@ -2,6 +2,7 @@
 module gid.gtk3.tool_shell_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.tool_shell;
 public import gid.gtk3.tool_shell_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -398,7 +399,7 @@ template ToolShellT()
         static extern(C) PangoEllipsizeMode _vfuncGetEllipsizeModeTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -430,7 +431,7 @@ template ToolShellT()
         static extern(C) GtkIconSize _vfuncGetIconSizeTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -462,7 +463,7 @@ template ToolShellT()
         static extern(C) GtkOrientation _vfuncGetOrientationTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -494,7 +495,7 @@ template ToolShellT()
         static extern(C) GtkReliefStyle _vfuncGetReliefStyleTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -526,7 +527,7 @@ template ToolShellT()
         static extern(C) GtkToolbarStyle _vfuncGetStyleTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -558,7 +559,7 @@ template ToolShellT()
         static extern(C) float _vfuncGetTextAlignmentTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -588,7 +589,7 @@ template ToolShellT()
         static extern(C) GtkOrientation _vfuncGetTextOrientationTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -620,7 +621,7 @@ template ToolShellT()
         static extern(C) GtkSizeGroup* _vfuncGetTextSizeGroupTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);
@@ -652,7 +653,7 @@ template ToolShellT()
         static extern(C) void _vfuncRebuildMenuTramp(GtkToolShell* shell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)shell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)shell);
           if (!_obj)
           {
             auto _klass = cast(GtkToolShellIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)shell), gid.gtk3.tool_shell.ToolShell._getGType);

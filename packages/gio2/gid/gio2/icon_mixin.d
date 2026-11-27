@@ -2,6 +2,7 @@
 module gid.gio2.icon_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.icon;
 public import gid.gio2.icon_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -256,7 +257,7 @@ template IconT()
         static extern(C) gboolean _vfuncEqualTramp(GIcon* icon1, GIcon* icon2) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)icon1);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)icon1);
           if (!_obj)
           {
             auto _klass = cast(GIconIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)icon1), gid.gio2.icon.Icon._getGType);
@@ -288,7 +289,7 @@ template IconT()
         static extern(C) uint _vfuncHashTramp(GIcon* icon) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)icon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)icon);
           if (!_obj)
           {
             auto _klass = cast(GIconIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)icon), gid.gio2.icon.Icon._getGType);
@@ -318,7 +319,7 @@ template IconT()
         static extern(C) GVariant* _vfuncSerializeTramp(GIcon* icon) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)icon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)icon);
           if (!_obj)
           {
             auto _klass = cast(GIconIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)icon), gid.gio2.icon.Icon._getGType);

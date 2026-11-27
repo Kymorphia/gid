@@ -485,7 +485,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) void _vfuncChangedTramp(PangoFontMap* fontmap) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_map.FontMap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontmap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_map.FontMap)(cast(void*)fontmap);
           if (!_obj)
           {
             auto _klass = cast(PangoFontMapClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontmap);
@@ -512,7 +512,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) PangoFontFamily* _vfuncGetFamilyTramp(PangoFontMap* fontmap, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_map.FontMap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontmap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_map.FontMap)(cast(void*)fontmap);
           if (!_obj)
           {
             auto _klass = cast(PangoFontMapClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontmap);
@@ -545,7 +545,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) uint _vfuncGetSerialTramp(PangoFontMap* fontmap) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_map.FontMap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontmap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_map.FontMap)(cast(void*)fontmap);
           if (!_obj)
           {
             auto _klass = cast(PangoFontMapClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontmap);
@@ -575,7 +575,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) PangoFont* _vfuncLoadFontTramp(PangoFontMap* fontmap, PangoContext* context, const(PangoFontDescription)* desc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_map.FontMap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontmap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_map.FontMap)(cast(void*)fontmap);
           if (!_obj)
           {
             auto _klass = cast(PangoFontMapClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontmap);
@@ -607,7 +607,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
         static extern(C) PangoFontset* _vfuncLoadFontsetTramp(PangoFontMap* fontmap, PangoContext* context, const(PangoFontDescription)* desc, PangoLanguage* language) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.font_map.FontMap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontmap);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.font_map.FontMap)(cast(void*)fontmap);
           if (!_obj)
           {
             auto _klass = cast(PangoFontMapClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontmap);

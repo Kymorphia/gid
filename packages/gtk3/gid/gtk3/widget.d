@@ -12236,7 +12236,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncButtonPressEventTramp(GtkWidget* widget, GdkEventButton* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12269,7 +12269,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncButtonReleaseEventTramp(GtkWidget* widget, GdkEventButton* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12302,7 +12302,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncCanActivateAccelTramp(GtkWidget* widget, uint signalId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12334,7 +12334,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncChildNotifyTramp(GtkWidget* widget, GParamSpec* childProperty) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12361,7 +12361,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncCompositedChangedTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12388,7 +12388,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncConfigureEventTramp(GtkWidget* widget, GdkEventConfigure* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12421,7 +12421,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncDamageEventTramp(GtkWidget* widget, GdkEventExpose* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12454,7 +12454,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncDeleteEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12487,7 +12487,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDestroyTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12514,7 +12514,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncDestroyEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12547,7 +12547,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDirectionChangedTramp(GtkWidget* widget, GtkTextDirection previousDirection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12574,7 +12574,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDragBeginTramp(GtkWidget* widget, GdkDragContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12601,7 +12601,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDragDataDeleteTramp(GtkWidget* widget, GdkDragContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12628,7 +12628,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDragDataGetTramp(GtkWidget* widget, GdkDragContext* context, GtkSelectionData* selectionData, uint info, uint time) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12660,7 +12660,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDragDataReceivedTramp(GtkWidget* widget, GdkDragContext* context, int x, int y, GtkSelectionData* selectionData, uint info, uint time) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12692,7 +12692,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncDragDropTramp(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12724,7 +12724,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDragEndTramp(GtkWidget* widget, GdkDragContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12751,7 +12751,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncDragFailedTramp(GtkWidget* widget, GdkDragContext* context, GtkDragResult result) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12783,7 +12783,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncDragLeaveTramp(GtkWidget* widget, GdkDragContext* context, uint time) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12810,7 +12810,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncDragMotionTramp(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12842,7 +12842,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncDrawTramp(GtkWidget* widget, cairo_t* cr) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12877,7 +12877,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncEnterNotifyEventTramp(GtkWidget* widget, GdkEventCrossing* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12910,7 +12910,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncEventTramp(GtkWidget* widget, GdkEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12945,7 +12945,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncFocusTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -12977,7 +12977,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncFocusInEventTramp(GtkWidget* widget, GdkEventFocus* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13010,7 +13010,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncFocusOutEventTramp(GtkWidget* widget, GdkEventFocus* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13043,7 +13043,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) AtkObject* _vfuncGetAccessibleTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13075,7 +13075,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncGetPreferredHeightTramp(GtkWidget* widget, int* minimumHeight, int* naturalHeight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13110,7 +13110,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncGetPreferredHeightAndBaselineForWidthTramp(GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight, int* minimumBaseline, int* naturalBaseline) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13153,7 +13153,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncGetPreferredHeightForWidthTramp(GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13188,7 +13188,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncGetPreferredWidthTramp(GtkWidget* widget, int* minimumWidth, int* naturalWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13223,7 +13223,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncGetPreferredWidthForHeightTramp(GtkWidget* widget, int height, int* minimumWidth, int* naturalWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13258,7 +13258,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13290,7 +13290,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncGrabBrokenEventTramp(GtkWidget* widget, GdkEventGrabBroken* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13323,7 +13323,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncGrabFocusTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13350,7 +13350,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncGrabNotifyTramp(GtkWidget* widget, gboolean wasGrabbed) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13377,7 +13377,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncHideTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13404,7 +13404,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncHierarchyChangedTramp(GtkWidget* widget, GtkWidget* previousToplevel) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13431,7 +13431,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncKeyPressEventTramp(GtkWidget* widget, GdkEventKey* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13464,7 +13464,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncKeyReleaseEventTramp(GtkWidget* widget, GdkEventKey* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13497,7 +13497,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncKeynavFailedTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13529,7 +13529,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncLeaveNotifyEventTramp(GtkWidget* widget, GdkEventCrossing* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13562,7 +13562,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncMapTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13589,7 +13589,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncMapEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13622,7 +13622,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncMnemonicActivateTramp(GtkWidget* widget, gboolean groupCycling) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13654,7 +13654,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncMotionNotifyEventTramp(GtkWidget* widget, GdkEventMotion* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13687,7 +13687,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncMoveFocusTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13714,7 +13714,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncParentSetTramp(GtkWidget* widget, GtkWidget* previousParent) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13741,7 +13741,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncPopupMenuTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13773,7 +13773,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncPropertyNotifyEventTramp(GtkWidget* widget, GdkEventProperty* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13806,7 +13806,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncProximityInEventTramp(GtkWidget* widget, GdkEventProximity* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13839,7 +13839,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncProximityOutEventTramp(GtkWidget* widget, GdkEventProximity* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13872,7 +13872,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncQueryTooltipTramp(GtkWidget* widget, int x, int y, gboolean keyboardTooltip, GtkTooltip* tooltip) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13904,7 +13904,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncQueueDrawRegionTramp(GtkWidget* widget, const(cairo_region_t)* region) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13931,7 +13931,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncRealizeTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13958,7 +13958,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncScreenChangedTramp(GtkWidget* widget, GdkScreen* previousScreen) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -13985,7 +13985,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncScrollEventTramp(GtkWidget* widget, GdkEventScroll* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14018,7 +14018,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncSelectionClearEventTramp(GtkWidget* widget, GdkEventSelection* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14051,7 +14051,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncSelectionGetTramp(GtkWidget* widget, GtkSelectionData* selectionData, uint info, uint time) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14083,7 +14083,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncSelectionNotifyEventTramp(GtkWidget* widget, GdkEventSelection* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14116,7 +14116,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncSelectionReceivedTramp(GtkWidget* widget, GtkSelectionData* selectionData, uint time) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14148,7 +14148,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncSelectionRequestEventTramp(GtkWidget* widget, GdkEventSelection* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14181,7 +14181,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncShowTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14208,7 +14208,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncShowAllTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14235,7 +14235,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncShowHelpTramp(GtkWidget* widget, GtkWidgetHelpType helpType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14267,7 +14267,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncSizeAllocateTramp(GtkWidget* widget, GtkAllocation* allocation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14294,7 +14294,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncStateChangedTramp(GtkWidget* widget, GtkStateType previousState) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14321,7 +14321,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncStateFlagsChangedTramp(GtkWidget* widget, GtkStateFlags previousStateFlags) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14348,7 +14348,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncStyleSetTramp(GtkWidget* widget, GtkStyle* previousStyle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14375,7 +14375,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncStyleUpdatedTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14402,7 +14402,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncTouchEventTramp(GtkWidget* widget, GdkEventTouch* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14435,7 +14435,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncUnmapTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14462,7 +14462,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncUnmapEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14495,7 +14495,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) void _vfuncUnrealizeTramp(GtkWidget* widget) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14522,7 +14522,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncVisibilityNotifyEventTramp(GtkWidget* widget, GdkEventVisibility* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
@@ -14555,7 +14555,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
         static extern(C) gboolean _vfuncWindowStateEventTramp(GtkWidget* widget, GdkEventWindowState* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.widget.Widget)(cast(void*)widget);
           if (!_obj)
           {
             auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);

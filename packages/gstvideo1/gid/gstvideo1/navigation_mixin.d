@@ -2,6 +2,7 @@
 module gid.gstvideo1.navigation_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstvideo1.navigation;
 public import gid.gstvideo1.navigation_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -232,7 +233,7 @@ template NavigationT()
         static extern(C) void _vfuncSendEventTramp(GstNavigation* navigation, GstStructure* structure) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)navigation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)navigation);
           if (!_obj)
           {
             auto _klass = cast(GstNavigationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)navigation), gid.gstvideo1.navigation.Navigation._getGType);
@@ -264,7 +265,7 @@ template NavigationT()
         static extern(C) void _vfuncSendEventSimpleTramp(GstNavigation* navigation, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)navigation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)navigation);
           if (!_obj)
           {
             auto _klass = cast(GstNavigationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)navigation), gid.gstvideo1.navigation.Navigation._getGType);

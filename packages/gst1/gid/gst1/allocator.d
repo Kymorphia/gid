@@ -236,7 +236,7 @@ class Allocator : gid.gst1.object.ObjectWrap
         static extern(C) GstMemory* _vfuncAllocTramp(GstAllocator* allocator, size_t size, GstAllocationParams* params) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.allocator.Allocator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)allocator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.allocator.Allocator)(cast(void*)allocator);
           if (!_obj)
           {
             auto _klass = cast(GstAllocatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)allocator);
@@ -268,7 +268,7 @@ class Allocator : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncFreeTramp(GstAllocator* allocator, GstMemory* memory) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.allocator.Allocator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)allocator);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.allocator.Allocator)(cast(void*)allocator);
           if (!_obj)
           {
             auto _klass = cast(GstAllocatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)allocator);

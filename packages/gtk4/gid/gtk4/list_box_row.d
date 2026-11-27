@@ -384,7 +384,7 @@ class ListBoxRow : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
         static extern(C) void _vfuncActivateTramp(GtkListBoxRow* row) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.list_box_row.ListBoxRow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)row);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.list_box_row.ListBoxRow)(cast(void*)row);
           if (!_obj)
           {
             auto _klass = cast(GtkListBoxRowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)row);

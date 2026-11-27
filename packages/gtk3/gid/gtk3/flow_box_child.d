@@ -217,7 +217,7 @@ class FlowBoxChild : gid.gtk3.bin.Bin
         static extern(C) void _vfuncActivateTramp(GtkFlowBoxChild* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box_child.FlowBoxChild)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)child);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box_child.FlowBoxChild)(cast(void*)child);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxChildClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)child);

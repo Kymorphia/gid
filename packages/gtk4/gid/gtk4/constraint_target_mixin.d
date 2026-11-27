@@ -2,6 +2,7 @@
 module gid.gtk4.constraint_target_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.constraint_target;
 public import gid.gtk4.constraint_target_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.gid_builder;

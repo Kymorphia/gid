@@ -335,7 +335,7 @@ class Socket : gid.gtk3.container.Container
         static extern(C) void _vfuncPlugAddedTramp(GtkSocket* socket) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.socket.Socket)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)socket);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.socket.Socket)(cast(void*)socket);
           if (!_obj)
           {
             auto _klass = cast(GtkSocketClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)socket);
@@ -362,7 +362,7 @@ class Socket : gid.gtk3.container.Container
         static extern(C) gboolean _vfuncPlugRemovedTramp(GtkSocket* socket) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.socket.Socket)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)socket);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.socket.Socket)(cast(void*)socket);
           if (!_obj)
           {
             auto _klass = cast(GtkSocketClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)socket);

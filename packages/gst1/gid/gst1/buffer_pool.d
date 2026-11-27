@@ -786,7 +786,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) GstFlowReturn _vfuncAcquireBufferTramp(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -824,7 +824,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) GstFlowReturn _vfuncAllocBufferTramp(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -862,7 +862,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncFlushStartTramp(GstBufferPool* pool) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -889,7 +889,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncFlushStopTramp(GstBufferPool* pool) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -916,7 +916,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncFreeBufferTramp(GstBufferPool* pool, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -948,7 +948,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncReleaseBufferTramp(GstBufferPool* pool, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -975,7 +975,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncResetBufferTramp(GstBufferPool* pool, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -1007,7 +1007,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncSetConfigTramp(GstBufferPool* pool, GstStructure* config) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -1039,7 +1039,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncStartTramp(GstBufferPool* pool) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
@@ -1071,7 +1071,7 @@ class BufferPool : gid.gst1.object.ObjectWrap
         static extern(C) gboolean _vfuncStopTramp(GstBufferPool* pool) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.buffer_pool.BufferPool)(cast(void*)pool);
           if (!_obj)
           {
             auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);

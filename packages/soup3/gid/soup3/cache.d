@@ -228,7 +228,7 @@ class Cache : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.SessionF
         static extern(C) SoupCacheability _vfuncGetCacheabilityTramp(SoupCache* cache, SoupMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.cache.Cache)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cache);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.cache.Cache)(cast(void*)cache);
           if (!_obj)
           {
             auto _klass = cast(SoupCacheClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cache);

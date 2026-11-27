@@ -1031,7 +1031,7 @@ class Clock : gid.gst1.object.ObjectWrap
         static extern(C) GstClockTime _vfuncChangeResolutionTramp(GstClock* clock, GstClockTime oldResolution, GstClockTime newResolution) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.clock.Clock)(cast(void*)clock);
           if (!_obj)
           {
             auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
@@ -1063,7 +1063,7 @@ class Clock : gid.gst1.object.ObjectWrap
         static extern(C) GstClockTime _vfuncGetInternalTimeTramp(GstClock* clock) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.clock.Clock)(cast(void*)clock);
           if (!_obj)
           {
             auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
@@ -1095,7 +1095,7 @@ class Clock : gid.gst1.object.ObjectWrap
         static extern(C) GstClockTime _vfuncGetResolutionTramp(GstClock* clock) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.clock.Clock)(cast(void*)clock);
           if (!_obj)
           {
             auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
@@ -1127,7 +1127,7 @@ class Clock : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncUnscheduleTramp(GstClock* clock, GstClockEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.clock.Clock)(cast(void*)clock);
           if (!_obj)
           {
             auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
@@ -1156,7 +1156,7 @@ class Clock : gid.gst1.object.ObjectWrap
         static extern(C) GstClockReturn _vfuncWaitTramp(GstClock* clock, GstClockEntry* entry, GstClockTimeDiff* jitter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.clock.Clock)(cast(void*)clock);
           if (!_obj)
           {
             auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
@@ -1193,7 +1193,7 @@ class Clock : gid.gst1.object.ObjectWrap
         static extern(C) GstClockReturn _vfuncWaitAsyncTramp(GstClock* clock, GstClockEntry* entry) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.clock.Clock)(cast(void*)clock);
           if (!_obj)
           {
             auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);

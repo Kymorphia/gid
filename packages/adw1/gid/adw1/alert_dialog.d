@@ -1004,7 +1004,7 @@ class AlertDialog : gid.adw1.dialog.Dialog
         static extern(C) void _vfuncResponseTramp(AdwAlertDialog* self, const(char)* response) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.adw1.alert_dialog.AlertDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.adw1.alert_dialog.AlertDialog)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwAlertDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

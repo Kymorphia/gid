@@ -2,6 +2,7 @@
 module gid.atk1.value_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.value;
 public import gid.atk1.value_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -705,7 +706,7 @@ template ValueT()
         static extern(C) void _vfuncGetCurrentValueTramp(AtkValue* obj, GValue* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -741,7 +742,7 @@ template ValueT()
         static extern(C) double _vfuncGetIncrementTramp(AtkValue* obj) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -771,7 +772,7 @@ template ValueT()
         static extern(C) void _vfuncGetMaximumValueTramp(AtkValue* obj, GValue* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -807,7 +808,7 @@ template ValueT()
         static extern(C) void _vfuncGetMinimumIncrementTramp(AtkValue* obj, GValue* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -843,7 +844,7 @@ template ValueT()
         static extern(C) void _vfuncGetMinimumValueTramp(AtkValue* obj, GValue* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -879,7 +880,7 @@ template ValueT()
         static extern(C) AtkRange* _vfuncGetRangeTramp(AtkValue* obj) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -911,7 +912,7 @@ template ValueT()
         static extern(C) GSList* _vfuncGetSubRangesTramp(AtkValue* obj) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -943,7 +944,7 @@ template ValueT()
         static extern(C) void _vfuncGetValueAndTextTramp(AtkValue* obj, double* value, char** text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -978,7 +979,7 @@ template ValueT()
         static extern(C) gboolean _vfuncSetCurrentValueTramp(AtkValue* obj, const(GValue)* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
@@ -1010,7 +1011,7 @@ template ValueT()
         static extern(C) void _vfuncSetValueTramp(AtkValue* obj, double newValue) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);

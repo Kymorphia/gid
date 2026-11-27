@@ -2,6 +2,7 @@
 module gid.gstvideo1.video_orientation_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstvideo1.video_orientation;
 public import gid.gstvideo1.video_orientation_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -375,7 +376,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncGetHcenterTramp(GstVideoOrientation* videoOrientation, int* center) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);
@@ -407,7 +408,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncGetHflipTramp(GstVideoOrientation* videoOrientation, gboolean* flip) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);
@@ -441,7 +442,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncGetVcenterTramp(GstVideoOrientation* videoOrientation, int* center) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);
@@ -473,7 +474,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncGetVflipTramp(GstVideoOrientation* videoOrientation, gboolean* flip) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);
@@ -507,7 +508,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncSetHcenterTramp(GstVideoOrientation* videoOrientation, int center) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);
@@ -539,7 +540,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncSetHflipTramp(GstVideoOrientation* videoOrientation, gboolean flip) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);
@@ -571,7 +572,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncSetVcenterTramp(GstVideoOrientation* videoOrientation, int center) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);
@@ -603,7 +604,7 @@ template VideoOrientationT()
         static extern(C) gboolean _vfuncSetVflipTramp(GstVideoOrientation* videoOrientation, gboolean flip) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)videoOrientation);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)videoOrientation);
           if (!_obj)
           {
             auto _klass = cast(GstVideoOrientationInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)videoOrientation), gid.gstvideo1.video_orientation.VideoOrientation._getGType);

@@ -604,7 +604,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncCloseTramp(GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -634,7 +634,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncEosTramp(GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -666,7 +666,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncFlushTramp(GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -696,7 +696,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) long _vfuncLengthTramp(GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -726,7 +726,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) ptrdiff_t _vfuncReadTramp(GMimeStream* stream, ubyte* buf, size_t len) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -759,7 +759,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) int _vfuncResetTramp(GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -789,7 +789,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) long _vfuncSeekTramp(GMimeStream* stream, long offset, GMimeSeekWhence whence) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -819,7 +819,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) GMimeStream* _vfuncSubstreamTramp(GMimeStream* stream, long start, long end) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -851,7 +851,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) long _vfuncTellTramp(GMimeStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
@@ -881,7 +881,7 @@ class Stream : gid.gobject2.object.ObjectWrap
         static extern(C) ptrdiff_t _vfuncWriteTramp(GMimeStream* stream, const(ubyte)* buf, size_t len) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.stream.Stream)(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);

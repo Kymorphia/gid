@@ -738,7 +738,7 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
         static extern(C) GtkAction* _vfuncGetActionTramp(GtkActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.action_group.ActionGroup)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.action_group.ActionGroup)(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GtkActionGroupClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup);

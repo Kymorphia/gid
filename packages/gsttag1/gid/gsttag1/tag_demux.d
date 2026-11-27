@@ -151,7 +151,7 @@ class TagDemux : gid.gst1.element.Element
         static extern(C) GstTagList* _vfuncMergeTagsTramp(GstTagDemux* demux, const(GstTagList)* startTags, const(GstTagList)* endTags) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gsttag1.tag_demux.TagDemux)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)demux);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gsttag1.tag_demux.TagDemux)(cast(void*)demux);
           if (!_obj)
           {
             auto _klass = cast(GstTagDemuxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)demux);

@@ -2,6 +2,7 @@
 module gid.gio2.power_profile_monitor_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.power_profile_monitor;
 public import gid.gio2.power_profile_monitor_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;

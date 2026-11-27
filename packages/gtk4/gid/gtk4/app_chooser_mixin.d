@@ -2,6 +2,7 @@
 module gid.gtk4.app_chooser_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.app_chooser;
 public import gid.gtk4.app_chooser_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.app_info;

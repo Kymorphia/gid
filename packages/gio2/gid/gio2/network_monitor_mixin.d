@@ -2,6 +2,7 @@
 module gid.gio2.network_monitor_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.network_monitor;
 public import gid.gio2.network_monitor_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -473,7 +474,7 @@ template NetworkMonitorT()
         static extern(C) gboolean _vfuncCanReachTramp(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)monitor);
           if (!_obj)
           {
             auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.network_monitor.NetworkMonitor._getGType);
@@ -505,7 +506,7 @@ template NetworkMonitorT()
         static extern(C) gboolean _vfuncCanReachFinishTramp(GNetworkMonitor* monitor, GAsyncResult* result, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)monitor);
           if (!_obj)
           {
             auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.network_monitor.NetworkMonitor._getGType);
@@ -537,7 +538,7 @@ template NetworkMonitorT()
         static extern(C) void _vfuncNetworkChangedTramp(GNetworkMonitor* monitor, gboolean networkAvailable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)monitor);
           if (!_obj)
           {
             auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.network_monitor.NetworkMonitor._getGType);

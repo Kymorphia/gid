@@ -1007,7 +1007,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) gboolean _vfuncAddElementTramp(GstBin* bin, GstElement* element) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
@@ -1039,7 +1039,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) void _vfuncDeepElementAddedTramp(GstBin* bin, GstBin* subBin, GstElement* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
@@ -1066,7 +1066,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) void _vfuncDeepElementRemovedTramp(GstBin* bin, GstBin* subBin, GstElement* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
@@ -1093,7 +1093,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) gboolean _vfuncDoLatencyTramp(GstBin* bin) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
@@ -1125,7 +1125,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) void _vfuncElementAddedTramp(GstBin* bin, GstElement* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
@@ -1152,7 +1152,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) void _vfuncElementRemovedTramp(GstBin* bin, GstElement* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
@@ -1179,7 +1179,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) void _vfuncHandleMessageTramp(GstBin* bin, GstMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
@@ -1206,7 +1206,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
         static extern(C) gboolean _vfuncRemoveElementTramp(GstBin* bin, GstElement* element) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bin.Bin)(cast(void*)bin);
           if (!_obj)
           {
             auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);

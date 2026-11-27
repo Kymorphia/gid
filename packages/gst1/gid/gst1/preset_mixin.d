@@ -2,6 +2,7 @@
 module gid.gst1.preset_mixin;
 
 public import gid.core.basictypes;
+public import gid.gst1.preset;
 public import gid.gst1.preset_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -483,7 +484,7 @@ template PresetT()
         static extern(C) gboolean _vfuncDeletePresetTramp(GstPreset* preset, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);
@@ -516,7 +517,7 @@ template PresetT()
         static extern(C) gboolean _vfuncGetMetaTramp(GstPreset* preset, const(char)* name, const(char)* tag, char** value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);
@@ -552,7 +553,7 @@ template PresetT()
         static extern(C) char** _vfuncGetPresetNamesTramp(GstPreset* preset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);
@@ -593,7 +594,7 @@ template PresetT()
         static extern(C) char** _vfuncGetPropertyNamesTramp(GstPreset* preset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);
@@ -634,7 +635,7 @@ template PresetT()
         static extern(C) gboolean _vfuncLoadPresetTramp(GstPreset* preset, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);
@@ -667,7 +668,7 @@ template PresetT()
         static extern(C) gboolean _vfuncRenamePresetTramp(GstPreset* preset, const(char)* oldName, const(char)* newName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);
@@ -701,7 +702,7 @@ template PresetT()
         static extern(C) gboolean _vfuncSavePresetTramp(GstPreset* preset, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);
@@ -734,7 +735,7 @@ template PresetT()
         static extern(C) gboolean _vfuncSetMetaTramp(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preset);
           if (!_obj)
           {
             auto _klass = cast(GstPresetInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preset), gid.gst1.preset.Preset._getGType);

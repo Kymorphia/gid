@@ -775,7 +775,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncCopyTramp(GtkStyle* style, GtkStyle* src) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -802,7 +802,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawArrowTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, GtkArrowType arrowType, gboolean fill, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -835,7 +835,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawBoxTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -868,7 +868,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawBoxGapTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height, GtkPositionType gapSide, int gapX, int gapWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -901,7 +901,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawCheckTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -934,7 +934,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawDiamondTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -967,7 +967,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawExpanderTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, int x, int y, GtkExpanderStyle expanderStyle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1000,7 +1000,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawExtensionTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height, GtkPositionType gapSide) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1033,7 +1033,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawFlatBoxTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1066,7 +1066,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawFocusTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1099,7 +1099,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawHandleTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height, GtkOrientation orientation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1132,7 +1132,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawHlineTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, int x1, int x2, int y) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1165,7 +1165,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawLayoutTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, gboolean useText, GtkWidget* widget, const(char)* detail, int x, int y, PangoLayout* layout) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1198,7 +1198,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawOptionTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1231,7 +1231,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawResizeGripTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, GdkWindowEdge edge, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1264,7 +1264,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawShadowTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1297,7 +1297,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawShadowGapTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height, GtkPositionType gapSide, int gapX, int gapWidth) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1330,7 +1330,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawSliderTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height, GtkOrientation orientation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1363,7 +1363,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawSpinnerTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, uint step, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1396,7 +1396,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawTabTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkShadowType shadowType, GtkWidget* widget, const(char)* detail, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1429,7 +1429,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDrawVlineTramp(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, int y1, int y2, int x) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1462,7 +1462,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncInitFromRcTramp(GtkStyle* style, GtkRcStyle* rcStyle) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1489,7 +1489,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncRealizeTramp(GtkStyle* style) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1516,7 +1516,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) GdkPixbuf* _vfuncRenderIconTramp(GtkStyle* style, const(GtkIconSource)* source, GtkTextDirection direction, GtkStateType state, GtkIconSize size, GtkWidget* widget, const(char)* detail) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1549,7 +1549,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetBackgroundTramp(GtkStyle* style, GdkWindow* window, GtkStateType stateType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);
@@ -1576,7 +1576,7 @@ class Style : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncUnrealizeTramp(GtkStyle* style) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.style.Style)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)style);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.style.Style)(cast(void*)style);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)style);

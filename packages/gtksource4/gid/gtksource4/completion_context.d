@@ -251,7 +251,7 @@ class CompletionContext : gid.gobject2.initially_unowned.InitiallyUnowned
         static extern(C) void _vfuncCancelledTramp(GtkSourceCompletionContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtksource4.completion_context.CompletionContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtksource4.completion_context.CompletionContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkSourceCompletionContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);

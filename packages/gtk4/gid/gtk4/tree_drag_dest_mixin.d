@@ -2,6 +2,7 @@
 module gid.gtk4.tree_drag_dest_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.tree_drag_dest;
 public import gid.gtk4.tree_drag_dest_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -159,7 +160,7 @@ template TreeDragDestT()
         static extern(C) gboolean _vfuncDragDataReceivedTramp(GtkTreeDragDest* dragDest, GtkTreePath* dest, const(GValue)* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dragDest);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)dragDest);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeDragDestIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dragDest), gid.gtk4.tree_drag_dest.TreeDragDest._getGType);
@@ -194,7 +195,7 @@ template TreeDragDestT()
         static extern(C) gboolean _vfuncRowDropPossibleTramp(GtkTreeDragDest* dragDest, GtkTreePath* destPath, const(GValue)* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dragDest);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)dragDest);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeDragDestIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dragDest), gid.gtk4.tree_drag_dest.TreeDragDest._getGType);

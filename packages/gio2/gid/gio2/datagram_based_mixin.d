@@ -2,6 +2,7 @@
 module gid.gio2.datagram_based_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.datagram_based;
 public import gid.gio2.datagram_based_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -645,7 +646,7 @@ template DatagramBasedT()
         static extern(C) GIOCondition _vfuncConditionCheckTramp(GDatagramBased* datagramBased, GIOCondition condition) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)datagramBased);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)datagramBased);
           if (!_obj)
           {
             auto _klass = cast(GDatagramBasedInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)datagramBased), gid.gio2.datagram_based.DatagramBased._getGType);
@@ -677,7 +678,7 @@ template DatagramBasedT()
         static extern(C) gboolean _vfuncConditionWaitTramp(GDatagramBased* datagramBased, GIOCondition condition, long timeout, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)datagramBased);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)datagramBased);
           if (!_obj)
           {
             auto _klass = cast(GDatagramBasedInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)datagramBased), gid.gio2.datagram_based.DatagramBased._getGType);
@@ -709,7 +710,7 @@ template DatagramBasedT()
         static extern(C) GSource* _vfuncCreateSourceTramp(GDatagramBased* datagramBased, GIOCondition condition, GCancellable* cancellable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)datagramBased);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)datagramBased);
           if (!_obj)
           {
             auto _klass = cast(GDatagramBasedInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)datagramBased), gid.gio2.datagram_based.DatagramBased._getGType);
@@ -741,7 +742,7 @@ template DatagramBasedT()
         static extern(C) int _vfuncReceiveMessagesTramp(GDatagramBased* datagramBased, GInputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)datagramBased);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)datagramBased);
           if (!_obj)
           {
             auto _klass = cast(GDatagramBasedInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)datagramBased), gid.gio2.datagram_based.DatagramBased._getGType);
@@ -775,7 +776,7 @@ template DatagramBasedT()
         static extern(C) int _vfuncSendMessagesTramp(GDatagramBased* datagramBased, GOutputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)datagramBased);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)datagramBased);
           if (!_obj)
           {
             auto _klass = cast(GDatagramBasedInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)datagramBased), gid.gio2.datagram_based.DatagramBased._getGType);

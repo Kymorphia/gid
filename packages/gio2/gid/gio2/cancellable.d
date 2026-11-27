@@ -529,7 +529,7 @@ class Cancellable : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncCancelledTramp(GCancellable* cancellable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.cancellable.Cancellable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cancellable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable);
           if (!_obj)
           {
             auto _klass = cast(GCancellableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cancellable);

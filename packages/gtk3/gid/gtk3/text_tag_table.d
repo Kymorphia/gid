@@ -413,7 +413,7 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
         static extern(C) void _vfuncTagAddedTramp(GtkTextTagTable* table, GtkTextTag* tag) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_tag_table.TextTagTable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_tag_table.TextTagTable)(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(GtkTextTagTableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table);
@@ -440,7 +440,7 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
         static extern(C) void _vfuncTagChangedTramp(GtkTextTagTable* table, GtkTextTag* tag, gboolean sizeChanged) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_tag_table.TextTagTable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_tag_table.TextTagTable)(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(GtkTextTagTableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table);
@@ -467,7 +467,7 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
         static extern(C) void _vfuncTagRemovedTramp(GtkTextTagTable* table, GtkTextTag* tag) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.text_tag_table.TextTagTable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.text_tag_table.TextTagTable)(cast(void*)table);
           if (!_obj)
           {
             auto _klass = cast(GtkTextTagTableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table);

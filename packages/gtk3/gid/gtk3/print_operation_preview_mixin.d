@@ -2,6 +2,7 @@
 module gid.gtk3.print_operation_preview_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.print_operation_preview;
 public import gid.gtk3.print_operation_preview_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -311,7 +312,7 @@ template PrintOperationPreviewT()
         static extern(C) void _vfuncEndPreviewTramp(GtkPrintOperationPreview* preview) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preview);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preview);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationPreviewIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preview), gid.gtk3.print_operation_preview.PrintOperationPreview._getGType);
@@ -338,7 +339,7 @@ template PrintOperationPreviewT()
         static extern(C) void _vfuncGotPageSizeTramp(GtkPrintOperationPreview* preview, GtkPrintContext* context, GtkPageSetup* pageSetup) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preview);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preview);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationPreviewIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preview), gid.gtk3.print_operation_preview.PrintOperationPreview._getGType);
@@ -365,7 +366,7 @@ template PrintOperationPreviewT()
         static extern(C) gboolean _vfuncIsSelectedTramp(GtkPrintOperationPreview* preview, int pageNr) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preview);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preview);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationPreviewIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preview), gid.gtk3.print_operation_preview.PrintOperationPreview._getGType);
@@ -397,7 +398,7 @@ template PrintOperationPreviewT()
         static extern(C) void _vfuncReadyTramp(GtkPrintOperationPreview* preview, GtkPrintContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preview);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preview);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationPreviewIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preview), gid.gtk3.print_operation_preview.PrintOperationPreview._getGType);
@@ -424,7 +425,7 @@ template PrintOperationPreviewT()
         static extern(C) void _vfuncRenderPageTramp(GtkPrintOperationPreview* preview, int pageNr) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)preview);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)preview);
           if (!_obj)
           {
             auto _klass = cast(GtkPrintOperationPreviewIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)preview), gid.gtk3.print_operation_preview.PrintOperationPreview._getGType);

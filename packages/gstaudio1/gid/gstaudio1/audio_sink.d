@@ -346,7 +346,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) gboolean _vfuncCloseTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -378,7 +378,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) uint _vfuncDelayTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -408,7 +408,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) gboolean _vfuncOpenTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -440,7 +440,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) void _vfuncPauseTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -467,7 +467,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) gboolean _vfuncPrepareTramp(GstAudioSink* sink, GstAudioRingBufferSpec* spec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -500,7 +500,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) void _vfuncResetTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -527,7 +527,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) void _vfuncResumeTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -554,7 +554,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) void _vfuncStopTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -581,7 +581,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) gboolean _vfuncUnprepareTramp(GstAudioSink* sink) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
@@ -613,7 +613,7 @@ class AudioSink : gid.gstaudio1.audio_base_sink.AudioBaseSink
         static extern(C) int _vfuncWriteTramp(GstAudioSink* sink, void* data, uint length) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_sink.AudioSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_sink.AudioSink)(cast(void*)sink);
           if (!_obj)
           {
             auto _klass = cast(GstAudioSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);

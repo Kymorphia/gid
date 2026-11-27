@@ -2,6 +2,7 @@
 module gid.atk1.editable_text_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.editable_text;
 public import gid.atk1.editable_text_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -255,7 +256,7 @@ template EditableTextT()
         static extern(C) void _vfuncCopyTextTramp(AtkEditableText* text, int startPos, int endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkEditableTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.editable_text.EditableText._getGType);
@@ -282,7 +283,7 @@ template EditableTextT()
         static extern(C) void _vfuncCutTextTramp(AtkEditableText* text, int startPos, int endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkEditableTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.editable_text.EditableText._getGType);
@@ -309,7 +310,7 @@ template EditableTextT()
         static extern(C) void _vfuncDeleteTextTramp(AtkEditableText* text, int startPos, int endPos) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkEditableTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.editable_text.EditableText._getGType);
@@ -336,7 +337,7 @@ template EditableTextT()
         static extern(C) void _vfuncPasteTextTramp(AtkEditableText* text, int position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkEditableTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.editable_text.EditableText._getGType);
@@ -363,7 +364,7 @@ template EditableTextT()
         static extern(C) void _vfuncSetTextContentsTramp(AtkEditableText* text, const(char)* string_) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)text);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)text);
           if (!_obj)
           {
             auto _klass = cast(AtkEditableTextIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)text), gid.atk1.editable_text.EditableText._getGType);

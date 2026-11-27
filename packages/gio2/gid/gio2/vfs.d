@@ -521,7 +521,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncAddWritableNamespacesTramp(GVfs* vfs, GFileAttributeInfoList* list) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);
@@ -553,7 +553,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) GFile* _vfuncGetFileForPathTramp(GVfs* vfs, const(char)* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);
@@ -586,7 +586,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) GFile* _vfuncGetFileForUriTramp(GVfs* vfs, const(char)* uri) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);
@@ -619,7 +619,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncIsActiveTramp(GVfs* vfs) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);
@@ -651,7 +651,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncLocalFileMovedTramp(GVfs* vfs, const(char)* source, const(char)* dest) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);
@@ -681,7 +681,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncLocalFileRemovedTramp(GVfs* vfs, const(char)* filename) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);
@@ -710,7 +710,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncLocalFileSetAttributesTramp(GVfs* vfs, const(char)* filename, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);
@@ -743,7 +743,7 @@ class Vfs : gid.gobject2.object.ObjectWrap
         static extern(C) GFile* _vfuncParseNameTramp(GVfs* vfs, const(char)* parseName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.vfs.Vfs)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)vfs);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.vfs.Vfs)(cast(void*)vfs);
           if (!_obj)
           {
             auto _klass = cast(GVfsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)vfs);

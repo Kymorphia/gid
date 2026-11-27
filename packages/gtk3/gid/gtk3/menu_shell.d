@@ -947,7 +947,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) void _vfuncActivateCurrentTramp(GtkMenuShell* menuShell, gboolean forceHide) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -974,7 +974,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) void _vfuncCancelTramp(GtkMenuShell* menuShell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -1001,7 +1001,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) void _vfuncDeactivateTramp(GtkMenuShell* menuShell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -1028,7 +1028,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) int _vfuncGetPopupDelayTramp(GtkMenuShell* menuShell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -1058,7 +1058,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) void _vfuncInsertTramp(GtkMenuShell* menuShell, GtkWidget* child, int position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -1085,7 +1085,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) void _vfuncMoveCurrentTramp(GtkMenuShell* menuShell, GtkMenuDirectionType direction) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -1112,7 +1112,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) gboolean _vfuncMoveSelectedTramp(GtkMenuShell* menuShell, int distance) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -1144,7 +1144,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) void _vfuncSelectItemTramp(GtkMenuShell* menuShell, GtkWidget* menuItem) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
@@ -1171,7 +1171,7 @@ class MenuShell : gid.gtk3.container.Container
         static extern(C) void _vfuncSelectionDoneTramp(GtkMenuShell* menuShell) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_shell.MenuShell)(cast(void*)menuShell);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);

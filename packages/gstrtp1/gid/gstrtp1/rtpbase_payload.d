@@ -872,7 +872,7 @@ class RTPBasePayload : gid.gst1.element.Element
         static extern(C) GstCaps* _vfuncGetCapsTramp(GstRTPBasePayload* payload, GstPad* pad, GstCaps* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_payload.RTPBasePayload)(cast(void*)payload);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
@@ -907,7 +907,7 @@ class RTPBasePayload : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncHandleBufferTramp(GstRTPBasePayload* payload, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_payload.RTPBasePayload)(cast(void*)payload);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
@@ -942,7 +942,7 @@ class RTPBasePayload : gid.gst1.element.Element
         static extern(C) gboolean _vfuncQueryTramp(GstRTPBasePayload* payload, GstPad* pad, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_payload.RTPBasePayload)(cast(void*)payload);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
@@ -977,7 +977,7 @@ class RTPBasePayload : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetCapsTramp(GstRTPBasePayload* payload, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_payload.RTPBasePayload)(cast(void*)payload);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
@@ -1012,7 +1012,7 @@ class RTPBasePayload : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkEventTramp(GstRTPBasePayload* payload, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_payload.RTPBasePayload)(cast(void*)payload);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
@@ -1047,7 +1047,7 @@ class RTPBasePayload : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcEventTramp(GstRTPBasePayload* payload, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstrtp1.rtpbase_payload.RTPBasePayload)(cast(void*)payload);
           if (!_obj)
           {
             auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);

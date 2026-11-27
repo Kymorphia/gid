@@ -296,7 +296,7 @@ class Filter : gid.gobject2.object.ObjectWrap
         static extern(C) GMimeFilter* _vfuncCopyTramp(GMimeFilter* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.filter.Filter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.filter.Filter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GMimeFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
@@ -328,7 +328,7 @@ class Filter : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncResetTramp(GMimeFilter* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gmime3.filter.Filter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gmime3.filter.Filter)(cast(void*)filter);
           if (!_obj)
           {
             auto _klass = cast(GMimeFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);

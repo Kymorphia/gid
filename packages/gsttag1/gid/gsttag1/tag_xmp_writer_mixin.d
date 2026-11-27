@@ -2,6 +2,7 @@
 module gid.gsttag1.tag_xmp_writer_mixin;
 
 public import gid.core.basictypes;
+public import gid.gsttag1.tag_xmp_writer;
 public import gid.gsttag1.tag_xmp_writer_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.gid_builder;

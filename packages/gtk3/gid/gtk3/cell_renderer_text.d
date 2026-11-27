@@ -899,7 +899,7 @@ class CellRendererText : gid.gtk3.cell_renderer.CellRenderer
         static extern(C) void _vfuncEditedTramp(GtkCellRendererText* cellRendererText, const(char)* path, const(char)* newText) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer_text.CellRendererText)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellRendererText);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer_text.CellRendererText)(cast(void*)cellRendererText);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererTextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellRendererText);

@@ -352,7 +352,7 @@ class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.Styl
         static extern(C) void _vfuncParsingErrorTramp(GtkCssProvider* provider, GtkCssSection* section, const(GError)* error) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.css_provider.CssProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.css_provider.CssProvider)(cast(void*)provider);
           if (!_obj)
           {
             auto _klass = cast(GtkCssProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);

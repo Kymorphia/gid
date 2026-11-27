@@ -439,7 +439,7 @@ class RecentManager : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GtkRecentManager* manager) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.recent_manager.RecentManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.recent_manager.RecentManager)(cast(void*)manager);
           if (!_obj)
           {
             auto _klass = cast(GtkRecentManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);

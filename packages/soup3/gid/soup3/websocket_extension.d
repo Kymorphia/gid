@@ -324,7 +324,7 @@ class WebsocketExtension : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncGetRequestParamsTramp(SoupWebsocketExtension* extension) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.websocket_extension.WebsocketExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)extension);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.websocket_extension.WebsocketExtension)(cast(void*)extension);
           if (!_obj)
           {
             auto _klass = cast(SoupWebsocketExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)extension);
@@ -356,7 +356,7 @@ class WebsocketExtension : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncGetResponseParamsTramp(SoupWebsocketExtension* extension) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.websocket_extension.WebsocketExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)extension);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.websocket_extension.WebsocketExtension)(cast(void*)extension);
           if (!_obj)
           {
             auto _klass = cast(SoupWebsocketExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)extension);
@@ -388,7 +388,7 @@ class WebsocketExtension : gid.gobject2.object.ObjectWrap
         static extern(C) GBytes* _vfuncProcessIncomingMessageTramp(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.websocket_extension.WebsocketExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)extension);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.websocket_extension.WebsocketExtension)(cast(void*)extension);
           if (!_obj)
           {
             auto _klass = cast(SoupWebsocketExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)extension);
@@ -420,7 +420,7 @@ class WebsocketExtension : gid.gobject2.object.ObjectWrap
         static extern(C) GBytes* _vfuncProcessOutgoingMessageTramp(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.websocket_extension.WebsocketExtension)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)extension);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.websocket_extension.WebsocketExtension)(cast(void*)extension);
           if (!_obj)
           {
             auto _klass = cast(SoupWebsocketExtensionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)extension);

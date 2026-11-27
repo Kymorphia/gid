@@ -2,6 +2,7 @@
 module gid.gtk4.section_model_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.section_model;
 public import gid.gtk4.section_model_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -199,7 +200,7 @@ template SectionModelT()
         static extern(C) void _vfuncGetSectionTramp(GtkSectionModel* self, uint position, uint* outStart, uint* outEnd) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkSectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.section_model.SectionModel._getGType);

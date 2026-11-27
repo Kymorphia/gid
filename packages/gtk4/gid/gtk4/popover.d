@@ -754,7 +754,7 @@ class Popover : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.shortcu
         static extern(C) void _vfuncActivateDefaultTramp(GtkPopover* popover) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.popover.Popover)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)popover);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.popover.Popover)(cast(void*)popover);
           if (!_obj)
           {
             auto _klass = cast(GtkPopoverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)popover);
@@ -781,7 +781,7 @@ class Popover : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.shortcu
         static extern(C) void _vfuncClosedTramp(GtkPopover* popover) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.popover.Popover)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)popover);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.popover.Popover)(cast(void*)popover);
           if (!_obj)
           {
             auto _klass = cast(GtkPopoverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)popover);

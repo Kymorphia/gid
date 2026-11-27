@@ -2,6 +2,7 @@
 module gid.gio2.pollable_input_stream_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.pollable_input_stream;
 public import gid.gio2.pollable_input_stream_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -306,7 +307,7 @@ template PollableInputStreamT()
         static extern(C) gboolean _vfuncCanPollTramp(GPollableInputStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableInputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_input_stream.PollableInputStream._getGType);
@@ -338,7 +339,7 @@ template PollableInputStreamT()
         static extern(C) GSource* _vfuncCreateSourceTramp(GPollableInputStream* stream, GCancellable* cancellable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableInputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_input_stream.PollableInputStream._getGType);
@@ -370,7 +371,7 @@ template PollableInputStreamT()
         static extern(C) gboolean _vfuncIsReadableTramp(GPollableInputStream* stream) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)stream);
           if (!_obj)
           {
             auto _klass = cast(GPollableInputStreamInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream), gid.gio2.pollable_input_stream.PollableInputStream._getGType);

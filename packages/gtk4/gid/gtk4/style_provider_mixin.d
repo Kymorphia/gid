@@ -2,6 +2,7 @@
 module gid.gtk4.style_provider_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.style_provider;
 public import gid.gtk4.style_provider_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.dclosure;

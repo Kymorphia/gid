@@ -850,7 +850,7 @@ class Application : gid.gio2.application.Application
         static extern(C) void _vfuncWindowAddedTramp(GtkApplication* application, GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GtkApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
@@ -877,7 +877,7 @@ class Application : gid.gio2.application.Application
         static extern(C) void _vfuncWindowRemovedTramp(GtkApplication* application, GtkWindow* window) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.application.Application)(cast(void*)application);
           if (!_obj)
           {
             auto _klass = cast(GtkApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);

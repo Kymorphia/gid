@@ -2,6 +2,7 @@
 module gid.gio2.debug_controller_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.debug_controller;
 public import gid.gio2.debug_controller_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;

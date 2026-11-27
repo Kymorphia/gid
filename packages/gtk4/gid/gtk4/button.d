@@ -645,7 +645,7 @@ class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
         static extern(C) void _vfuncActivateTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
@@ -672,7 +672,7 @@ class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
         static extern(C) void _vfuncClickedTramp(GtkButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.button.Button)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);

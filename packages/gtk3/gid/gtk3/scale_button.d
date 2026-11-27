@@ -497,7 +497,7 @@ class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncValueChangedTramp(GtkScaleButton* button, double value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.scale_button.ScaleButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.scale_button.ScaleButton)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkScaleButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);

@@ -2,6 +2,7 @@
 module gid.gtk3.cell_editable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.cell_editable;
 public import gid.gtk3.cell_editable_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk3.event;
@@ -288,7 +289,7 @@ template CellEditableT()
         static extern(C) void _vfuncEditingDoneTramp(GtkCellEditable* cellEditable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellEditable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellEditable);
           if (!_obj)
           {
             auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellEditable), gid.gtk3.cell_editable.CellEditable._getGType);
@@ -315,7 +316,7 @@ template CellEditableT()
         static extern(C) void _vfuncRemoveWidgetTramp(GtkCellEditable* cellEditable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellEditable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellEditable);
           if (!_obj)
           {
             auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellEditable), gid.gtk3.cell_editable.CellEditable._getGType);
@@ -342,7 +343,7 @@ template CellEditableT()
         static extern(C) void _vfuncStartEditingTramp(GtkCellEditable* cellEditable, GdkEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellEditable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)cellEditable);
           if (!_obj)
           {
             auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellEditable), gid.gtk3.cell_editable.CellEditable._getGType);

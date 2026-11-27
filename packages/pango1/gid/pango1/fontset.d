@@ -289,7 +289,7 @@ class Fontset : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFont* _vfuncGetFontTramp(PangoFontset* fontset, uint wc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.fontset.Fontset)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.fontset.Fontset)(cast(void*)fontset);
           if (!_obj)
           {
             auto _klass = cast(PangoFontsetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontset);
@@ -321,7 +321,7 @@ class Fontset : gid.gobject2.object.ObjectWrap
         static extern(C) PangoLanguage* _vfuncGetLanguageTramp(PangoFontset* fontset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.fontset.Fontset)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.fontset.Fontset)(cast(void*)fontset);
           if (!_obj)
           {
             auto _klass = cast(PangoFontsetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontset);
@@ -353,7 +353,7 @@ class Fontset : gid.gobject2.object.ObjectWrap
         static extern(C) PangoFontMetrics* _vfuncGetMetricsTramp(PangoFontset* fontset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.pango1.fontset.Fontset)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontset);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.pango1.fontset.Fontset)(cast(void*)fontset);
           if (!_obj)
           {
             auto _klass = cast(PangoFontsetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontset);

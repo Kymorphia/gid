@@ -2,6 +2,7 @@
 module gid.gstaudio1.stream_volume_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstaudio1.stream_volume;
 public import gid.gstaudio1.stream_volume_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.gid_builder;

@@ -2,6 +2,7 @@
 module gid.gstvideo1.color_balance_mixin;
 
 public import gid.core.basictypes;
+public import gid.gstvideo1.color_balance;
 public import gid.gstvideo1.color_balance_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -323,7 +324,7 @@ template ColorBalanceT()
         static extern(C) GstColorBalanceType _vfuncGetBalanceTypeTramp(GstColorBalance* balance) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)balance);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)balance);
           if (!_obj)
           {
             auto _klass = cast(GstColorBalanceInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)balance), gid.gstvideo1.color_balance.ColorBalance._getGType);
@@ -355,7 +356,7 @@ template ColorBalanceT()
         static extern(C) int _vfuncGetValueTramp(GstColorBalance* balance, GstColorBalanceChannel* channel) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)balance);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)balance);
           if (!_obj)
           {
             auto _klass = cast(GstColorBalanceInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)balance), gid.gstvideo1.color_balance.ColorBalance._getGType);
@@ -385,7 +386,7 @@ template ColorBalanceT()
         static extern(C) void _vfuncSetValueTramp(GstColorBalance* balance, GstColorBalanceChannel* channel, int value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)balance);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)balance);
           if (!_obj)
           {
             auto _klass = cast(GstColorBalanceInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)balance), gid.gstvideo1.color_balance.ColorBalance._getGType);
@@ -412,7 +413,7 @@ template ColorBalanceT()
         static extern(C) void _vfuncValueChangedTramp(GstColorBalance* balance, GstColorBalanceChannel* channel, int value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)balance);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)balance);
           if (!_obj)
           {
             auto _klass = cast(GstColorBalanceInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)balance), gid.gstvideo1.color_balance.ColorBalance._getGType);

@@ -2,6 +2,7 @@
 module gid.giounix2.file_descriptor_based_mixin;
 
 public import gid.core.basictypes;
+public import gid.giounix2.file_descriptor_based;
 public import gid.giounix2.file_descriptor_based_iface_proxy;
 public import gid.core.utils;
 public import gid.giounix2.c.functions;
@@ -85,7 +86,7 @@ template FileDescriptorBasedT()
         static extern(C) int _vfuncGetFdTramp(GFileDescriptorBased* fdBased) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fdBased);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)fdBased);
           if (!_obj)
           {
             auto _klass = cast(GFileDescriptorBasedIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fdBased), gid.giounix2.file_descriptor_based.FileDescriptorBased._getGType);

@@ -2,6 +2,7 @@
 module gid.gst1.child_proxy_mixin;
 
 public import gid.core.basictypes;
+public import gid.gst1.child_proxy;
 public import gid.gst1.child_proxy_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -460,7 +461,7 @@ template ChildProxyT()
         static extern(C) void _vfuncChildAddedTramp(GstChildProxy* parent, GObject* child, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GstChildProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gst1.child_proxy.ChildProxy._getGType);
@@ -489,7 +490,7 @@ template ChildProxyT()
         static extern(C) void _vfuncChildRemovedTramp(GstChildProxy* parent, GObject* child, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GstChildProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gst1.child_proxy.ChildProxy._getGType);
@@ -518,7 +519,7 @@ template ChildProxyT()
         static extern(C) GObject* _vfuncGetChildByIndexTramp(GstChildProxy* parent, uint index) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GstChildProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gst1.child_proxy.ChildProxy._getGType);
@@ -550,7 +551,7 @@ template ChildProxyT()
         static extern(C) GObject* _vfuncGetChildByNameTramp(GstChildProxy* parent, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GstChildProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gst1.child_proxy.ChildProxy._getGType);
@@ -583,7 +584,7 @@ template ChildProxyT()
         static extern(C) uint _vfuncGetChildrenCountTramp(GstChildProxy* parent) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parent);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)parent);
           if (!_obj)
           {
             auto _klass = cast(GstChildProxyInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parent), gid.gst1.child_proxy.ChildProxy._getGType);

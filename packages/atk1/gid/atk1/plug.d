@@ -161,7 +161,7 @@ class Plug : gid.atk1.object.ObjectWrap, gid.atk1.component.Component
         static extern(C) char* _vfuncGetObjectIdTramp(AtkPlug* obj) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.atk1.plug.Plug)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.atk1.plug.Plug)(cast(void*)obj);
           if (!_obj)
           {
             auto _klass = cast(AtkPlugClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj);

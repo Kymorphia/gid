@@ -965,7 +965,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncChangeValueTramp(GtkSpinButton* spinButton, GtkScrollType scroll) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.spin_button.SpinButton)(cast(void*)spinButton);
           if (!_obj)
           {
             auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);
@@ -992,7 +992,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
         static extern(C) int _vfuncOutputTramp(GtkSpinButton* spinButton) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.spin_button.SpinButton)(cast(void*)spinButton);
           if (!_obj)
           {
             auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);
@@ -1022,7 +1022,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncValueChangedTramp(GtkSpinButton* spinButton) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.spin_button.SpinButton)(cast(void*)spinButton);
           if (!_obj)
           {
             auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);
@@ -1049,7 +1049,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncWrappedTramp(GtkSpinButton* spinButton) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.spin_button.SpinButton)(cast(void*)spinButton);
           if (!_obj)
           {
             auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);

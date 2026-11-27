@@ -508,7 +508,7 @@ class ColorSelection : gid.gtk3.box.Box
         static extern(C) void _vfuncColorChangedTramp(GtkColorSelection* colorSelection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.color_selection.ColorSelection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)colorSelection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.color_selection.ColorSelection)(cast(void*)colorSelection);
           if (!_obj)
           {
             auto _klass = cast(GtkColorSelectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)colorSelection);

@@ -859,7 +859,7 @@ class Widget : gid.gtk4.widget.Widget
         static extern(C) GtkWidget* _vfuncGetDefaultFocusTramp(PanelWidget* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.widget.Widget)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
@@ -891,7 +891,7 @@ class Widget : gid.gtk4.widget.Widget
         static extern(C) void _vfuncPresentedTramp(PanelWidget* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.widget.Widget)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

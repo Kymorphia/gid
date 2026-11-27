@@ -522,7 +522,7 @@ class StyleContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GtkStyleContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.style_context.StyleContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.style_context.StyleContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(GtkStyleContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);

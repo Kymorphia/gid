@@ -575,7 +575,7 @@ class LevelBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncOffsetChangedTramp(GtkLevelBar* self, const(char)* name) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.level_bar.LevelBar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.level_bar.LevelBar)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkLevelBarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

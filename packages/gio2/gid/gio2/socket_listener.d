@@ -587,7 +587,7 @@ class SocketListener : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncChangedTramp(GSocketListener* listener) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_listener.SocketListener)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)listener);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_listener.SocketListener)(cast(void*)listener);
           if (!_obj)
           {
             auto _klass = cast(GSocketListenerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)listener);
@@ -614,7 +614,7 @@ class SocketListener : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncEventTramp(GSocketListener* listener, GSocketListenerEvent event, GSocket* socket) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.socket_listener.SocketListener)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)listener);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.socket_listener.SocketListener)(cast(void*)listener);
           if (!_obj)
           {
             auto _klass = cast(GSocketListenerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)listener);

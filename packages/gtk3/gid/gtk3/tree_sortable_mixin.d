@@ -2,6 +2,7 @@
 module gid.gtk3.tree_sortable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.tree_sortable;
 public import gid.gtk3.tree_sortable_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -458,7 +459,7 @@ template TreeSortableT()
         static extern(C) gboolean _vfuncGetSortColumnIdTramp(GtkTreeSortable* sortable, int* sortColumnId, GtkSortType* order) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sortable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)sortable);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeSortableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sortable), gid.gtk3.tree_sortable.TreeSortable._getGType);
@@ -490,7 +491,7 @@ template TreeSortableT()
         static extern(C) gboolean _vfuncHasDefaultSortFuncTramp(GtkTreeSortable* sortable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sortable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)sortable);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeSortableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sortable), gid.gtk3.tree_sortable.TreeSortable._getGType);
@@ -522,7 +523,7 @@ template TreeSortableT()
         static extern(C) void _vfuncSetSortColumnIdTramp(GtkTreeSortable* sortable, int sortColumnId, GtkSortType order) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sortable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)sortable);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeSortableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sortable), gid.gtk3.tree_sortable.TreeSortable._getGType);
@@ -549,7 +550,7 @@ template TreeSortableT()
         static extern(C) void _vfuncSortColumnChangedTramp(GtkTreeSortable* sortable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sortable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)sortable);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeSortableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sortable), gid.gtk3.tree_sortable.TreeSortable._getGType);

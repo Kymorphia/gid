@@ -349,7 +349,7 @@ class CellRendererAccel : gid.gtk3.cell_renderer_text.CellRendererText
         static extern(C) void _vfuncAccelClearedTramp(GtkCellRendererAccel* accel, const(char)* pathString) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer_accel.CellRendererAccel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer_accel.CellRendererAccel)(cast(void*)accel);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererAccelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accel);
@@ -378,7 +378,7 @@ class CellRendererAccel : gid.gtk3.cell_renderer_text.CellRendererText
         static extern(C) void _vfuncAccelEditedTramp(GtkCellRendererAccel* accel, const(char)* pathString, uint accelKey, GdkModifierType accelMods, uint hardwareKeycode) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.cell_renderer_accel.CellRendererAccel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accel);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.cell_renderer_accel.CellRendererAccel)(cast(void*)accel);
           if (!_obj)
           {
             auto _klass = cast(GtkCellRendererAccelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accel);

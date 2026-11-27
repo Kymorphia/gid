@@ -753,7 +753,7 @@ class Bus : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncMessageTramp(GstBus* bus, GstMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bus.Bus)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bus);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bus.Bus)(cast(void*)bus);
           if (!_obj)
           {
             auto _klass = cast(GstBusClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bus);
@@ -785,7 +785,7 @@ class Bus : gid.gst1.object.ObjectWrap
         static extern(C) void _vfuncSyncMessageTramp(GstBus* bus, GstMessage* message) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gst1.bus.Bus)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bus);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gst1.bus.Bus)(cast(void*)bus);
           if (!_obj)
           {
             auto _klass = cast(GstBusClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bus);

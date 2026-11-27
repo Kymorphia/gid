@@ -473,7 +473,7 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncAcceptsTramp(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* header) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth_domain.AuthDomain)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)domain);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth_domain.AuthDomain)(cast(void*)domain);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthDomainClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)domain);
@@ -506,7 +506,7 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
         static extern(C) char* _vfuncChallengeTramp(SoupAuthDomain* domain, SoupServerMessage* msg) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth_domain.AuthDomain)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)domain);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth_domain.AuthDomain)(cast(void*)domain);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthDomainClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)domain);
@@ -538,7 +538,7 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncCheckPasswordTramp(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.soup3.auth_domain.AuthDomain)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)domain);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.soup3.auth_domain.AuthDomain)(cast(void*)domain);
           if (!_obj)
           {
             auto _klass = cast(SoupAuthDomainClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)domain);

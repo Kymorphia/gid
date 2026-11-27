@@ -1293,7 +1293,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncActivateCursorChildTramp(GtkFlowBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box.FlowBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1320,7 +1320,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncChildActivatedTramp(GtkFlowBox* box, GtkFlowBoxChild* child) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box.FlowBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1347,7 +1347,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) gboolean _vfuncMoveCursorTramp(GtkFlowBox* box, GtkMovementStep step, int count) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box.FlowBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1379,7 +1379,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncSelectAllTramp(GtkFlowBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box.FlowBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1406,7 +1406,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncSelectedChildrenChangedTramp(GtkFlowBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box.FlowBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1433,7 +1433,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncToggleCursorChildTramp(GtkFlowBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box.FlowBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
@@ -1460,7 +1460,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
         static extern(C) void _vfuncUnselectAllTramp(GtkFlowBox* box) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.flow_box.FlowBox)(cast(void*)box);
           if (!_obj)
           {
             auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);

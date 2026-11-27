@@ -295,7 +295,7 @@ class MenuToolButton : gid.gtk3.tool_button.ToolButton
         static extern(C) void _vfuncShowMenuTramp(GtkMenuToolButton* button) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.menu_tool_button.MenuToolButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.menu_tool_button.MenuToolButton)(cast(void*)button);
           if (!_obj)
           {
             auto _klass = cast(GtkMenuToolButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);

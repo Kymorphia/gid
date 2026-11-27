@@ -2,6 +2,7 @@
 module gid.gio2.action_group_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.action_group;
 public import gid.gio2.action_group_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -1206,7 +1207,7 @@ template ActionGroupT()
         static extern(C) void _vfuncActionAddedTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1235,7 +1236,7 @@ template ActionGroupT()
         static extern(C) void _vfuncActionEnabledChangedTramp(GActionGroup* actionGroup, const(char)* actionName, gboolean enabled) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1264,7 +1265,7 @@ template ActionGroupT()
         static extern(C) void _vfuncActionRemovedTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1293,7 +1294,7 @@ template ActionGroupT()
         static extern(C) void _vfuncActionStateChangedTramp(GActionGroup* actionGroup, const(char)* actionName, GVariant* state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1322,7 +1323,7 @@ template ActionGroupT()
         static extern(C) void _vfuncActivateActionTramp(GActionGroup* actionGroup, const(char)* actionName, GVariant* parameter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1351,7 +1352,7 @@ template ActionGroupT()
         static extern(C) void _vfuncChangeActionStateTramp(GActionGroup* actionGroup, const(char)* actionName, GVariant* value) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1380,7 +1381,7 @@ template ActionGroupT()
         static extern(C) gboolean _vfuncGetActionEnabledTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1413,7 +1414,7 @@ template ActionGroupT()
         static extern(C) const(GVariantType)* _vfuncGetActionParameterTypeTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1446,7 +1447,7 @@ template ActionGroupT()
         static extern(C) GVariant* _vfuncGetActionStateTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1479,7 +1480,7 @@ template ActionGroupT()
         static extern(C) GVariant* _vfuncGetActionStateHintTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1512,7 +1513,7 @@ template ActionGroupT()
         static extern(C) const(GVariantType)* _vfuncGetActionStateTypeTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1545,7 +1546,7 @@ template ActionGroupT()
         static extern(C) gboolean _vfuncHasActionTramp(GActionGroup* actionGroup, const(char)* actionName) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1578,7 +1579,7 @@ template ActionGroupT()
         static extern(C) char** _vfuncListActionsTramp(GActionGroup* actionGroup) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);
@@ -1619,7 +1620,7 @@ template ActionGroupT()
         static extern(C) gboolean _vfuncQueryActionTramp(GActionGroup* actionGroup, const(char)* actionName, gboolean* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, GVariant** stateHint, GVariant** state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)actionGroup);
           if (!_obj)
           {
             auto _klass = cast(GActionGroupInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup), gid.gio2.action_group.ActionGroup._getGType);

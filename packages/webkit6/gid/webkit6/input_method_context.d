@@ -802,7 +802,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncCommittedTramp(WebKitInputMethodContext* context, const(char)* text) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -831,7 +831,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncDeleteSurroundingTramp(WebKitInputMethodContext* context, int offset, uint nChars) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -858,7 +858,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) gboolean _vfuncFilterKeyEventTramp(WebKitInputMethodContext* context, GdkEvent* keyEvent) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -890,7 +890,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncGetPreeditTramp(WebKitInputMethodContext* context, char** text, GList** underlines, uint* cursorOffset) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -935,7 +935,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncNotifyCursorAreaTramp(WebKitInputMethodContext* context, int x, int y, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -962,7 +962,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncNotifyFocusInTramp(WebKitInputMethodContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -989,7 +989,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncNotifyFocusOutTramp(WebKitInputMethodContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1016,7 +1016,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncNotifySurroundingTramp(WebKitInputMethodContext* context, const(char)* text, uint length, uint cursorIndex, uint selectionIndex) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1045,7 +1045,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPreeditChangedTramp(WebKitInputMethodContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1072,7 +1072,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPreeditFinishedTramp(WebKitInputMethodContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1099,7 +1099,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncPreeditStartedTramp(WebKitInputMethodContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1126,7 +1126,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncResetTramp(WebKitInputMethodContext* context) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
@@ -1153,7 +1153,7 @@ class InputMethodContext : gid.gobject2.object.ObjectWrap
         static extern(C) void _vfuncSetEnablePreeditTramp(WebKitInputMethodContext* context, gboolean enabled) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.webkit6.input_method_context.InputMethodContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.webkit6.input_method_context.InputMethodContext)(cast(void*)context);
           if (!_obj)
           {
             auto _klass = cast(WebKitInputMethodContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);

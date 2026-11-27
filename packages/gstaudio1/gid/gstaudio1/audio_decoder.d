@@ -1151,7 +1151,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncCloseTramp(GstAudioDecoder* dec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1183,7 +1183,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncDecideAllocationTramp(GstAudioDecoder* dec, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1218,7 +1218,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) void _vfuncFlushTramp(GstAudioDecoder* dec, gboolean hard) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1245,7 +1245,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) GstCaps* _vfuncGetcapsTramp(GstAudioDecoder* dec, GstCaps* filter) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1280,7 +1280,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncHandleFrameTramp(GstAudioDecoder* dec, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1315,7 +1315,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncNegotiateTramp(GstAudioDecoder* dec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1347,7 +1347,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncOpenTramp(GstAudioDecoder* dec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1379,7 +1379,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) GstFlowReturn _vfuncParseTramp(GstAudioDecoder* dec, GstAdapter* adapter, int* offset, int* length) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1411,7 +1411,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncProposeAllocationTramp(GstAudioDecoder* dec, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1446,7 +1446,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSetFormatTramp(GstAudioDecoder* dec, GstCaps* caps) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1481,7 +1481,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkEventTramp(GstAudioDecoder* dec, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1516,7 +1516,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSinkQueryTramp(GstAudioDecoder* dec, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1551,7 +1551,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcEventTramp(GstAudioDecoder* dec, GstEvent* event) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1586,7 +1586,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncSrcQueryTramp(GstAudioDecoder* dec, GstQuery* query) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1621,7 +1621,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStartTramp(GstAudioDecoder* dec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1653,7 +1653,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncStopTramp(GstAudioDecoder* dec) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dec);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)dec);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dec);
@@ -1685,7 +1685,7 @@ class AudioDecoder : gid.gst1.element.Element
         static extern(C) gboolean _vfuncTransformMetaTramp(GstAudioDecoder* enc, GstBuffer* outbuf, GstMeta* meta, GstBuffer* inbuf) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_decoder.AudioDecoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_decoder.AudioDecoder)(cast(void*)enc);
           if (!_obj)
           {
             auto _klass = cast(GstAudioDecoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enc);

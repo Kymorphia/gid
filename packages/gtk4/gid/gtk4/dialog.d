@@ -591,7 +591,7 @@ class Dialog : gid.gtk4.window.Window
         static extern(C) void _vfuncCloseTramp(GtkDialog* dialog) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.dialog.Dialog)(cast(void*)dialog);
           if (!_obj)
           {
             auto _klass = cast(GtkDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);
@@ -618,7 +618,7 @@ class Dialog : gid.gtk4.window.Window
         static extern(C) void _vfuncResponseTramp(GtkDialog* dialog, int responseId) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.dialog.Dialog)(cast(void*)dialog);
           if (!_obj)
           {
             auto _klass = cast(GtkDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);

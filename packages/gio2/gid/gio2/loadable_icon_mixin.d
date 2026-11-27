@@ -2,6 +2,7 @@
 module gid.gio2.loadable_icon_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.loadable_icon;
 public import gid.gio2.loadable_icon_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.async_result;
@@ -249,7 +250,7 @@ template LoadableIconT()
         static extern(C) GInputStream* _vfuncLoadTramp(GLoadableIcon* icon, int size, char** type, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)icon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)icon);
           if (!_obj)
           {
             auto _klass = cast(GLoadableIconIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)icon), gid.gio2.loadable_icon.LoadableIcon._getGType);
@@ -287,7 +288,7 @@ template LoadableIconT()
         static extern(C) GInputStream* _vfuncLoadFinishTramp(GLoadableIcon* icon, GAsyncResult* res, char** type, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)icon);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)icon);
           if (!_obj)
           {
             auto _klass = cast(GLoadableIconIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)icon), gid.gio2.loadable_icon.LoadableIcon._getGType);

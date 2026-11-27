@@ -2,6 +2,7 @@
 module gid.gdk4.paintable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gdk4.paintable;
 public import gid.gdk4.paintable_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk4.c.functions;
@@ -563,7 +564,7 @@ template PaintableT()
         static extern(C) GdkPaintable* _vfuncGetCurrentImageTramp(GdkPaintable* paintable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GdkPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gdk4.paintable.Paintable._getGType);
@@ -595,7 +596,7 @@ template PaintableT()
         static extern(C) GdkPaintableFlags _vfuncGetFlagsTramp(GdkPaintable* paintable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GdkPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gdk4.paintable.Paintable._getGType);
@@ -627,7 +628,7 @@ template PaintableT()
         static extern(C) double _vfuncGetIntrinsicAspectRatioTramp(GdkPaintable* paintable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GdkPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gdk4.paintable.Paintable._getGType);
@@ -657,7 +658,7 @@ template PaintableT()
         static extern(C) int _vfuncGetIntrinsicHeightTramp(GdkPaintable* paintable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GdkPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gdk4.paintable.Paintable._getGType);
@@ -687,7 +688,7 @@ template PaintableT()
         static extern(C) int _vfuncGetIntrinsicWidthTramp(GdkPaintable* paintable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GdkPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gdk4.paintable.Paintable._getGType);
@@ -717,7 +718,7 @@ template PaintableT()
         static extern(C) void _vfuncSnapshotTramp(GdkPaintable* paintable, GdkSnapshot* snapshot, double width, double height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paintable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)paintable);
           if (!_obj)
           {
             auto _klass = cast(GdkPaintableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paintable), gid.gdk4.paintable.Paintable._getGType);

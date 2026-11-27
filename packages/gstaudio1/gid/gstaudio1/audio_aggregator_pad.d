@@ -161,7 +161,7 @@ class AudioAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
         static extern(C) GstBuffer* _vfuncConvertBufferTramp(GstAudioAggregatorPad* pad, GstAudioInfo* inInfo, GstAudioInfo* outInfo, GstBuffer* buffer) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstAudioAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
@@ -202,7 +202,7 @@ class AudioAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
         static extern(C) void _vfuncUpdateConversionInfoTramp(GstAudioAggregatorPad* pad) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad)(cast(void*)pad);
           if (!_obj)
           {
             auto _klass = cast(GstAudioAggregatorPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);

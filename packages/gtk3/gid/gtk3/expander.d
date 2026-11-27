@@ -630,7 +630,7 @@ class Expander : gid.gtk3.bin.Bin
         static extern(C) void _vfuncActivateTramp(GtkExpander* expander) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.expander.Expander)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)expander);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.expander.Expander)(cast(void*)expander);
           if (!_obj)
           {
             auto _klass = cast(GtkExpanderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)expander);

@@ -2,6 +2,7 @@
 module gid.gtk4.accessible_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk4.accessible;
 public import gid.gtk4.accessible_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -595,7 +596,7 @@ template AccessibleT()
         static extern(C) char* _vfuncGetAccessibleIdTramp(GtkAccessible* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
@@ -627,7 +628,7 @@ template AccessibleT()
         static extern(C) GtkAccessible* _vfuncGetAccessibleParentTramp(GtkAccessible* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
@@ -659,7 +660,7 @@ template AccessibleT()
         static extern(C) GtkATContext* _vfuncGetAtContextTramp(GtkAccessible* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
@@ -691,7 +692,7 @@ template AccessibleT()
         static extern(C) gboolean _vfuncGetBoundsTramp(GtkAccessible* self, int* x, int* y, int* width, int* height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
@@ -723,7 +724,7 @@ template AccessibleT()
         static extern(C) GtkAccessible* _vfuncGetFirstAccessibleChildTramp(GtkAccessible* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
@@ -755,7 +756,7 @@ template AccessibleT()
         static extern(C) GtkAccessible* _vfuncGetNextAccessibleSiblingTramp(GtkAccessible* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
@@ -787,7 +788,7 @@ template AccessibleT()
         static extern(C) gboolean _vfuncGetPlatformStateTramp(GtkAccessible* self, GtkAccessiblePlatformState state) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);

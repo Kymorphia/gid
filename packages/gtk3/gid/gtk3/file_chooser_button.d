@@ -368,7 +368,7 @@ class FileChooserButton : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
         static extern(C) void _vfuncFileSetTramp(GtkFileChooserButton* fc) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.file_chooser_button.FileChooserButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fc);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.file_chooser_button.FileChooserButton)(cast(void*)fc);
           if (!_obj)
           {
             auto _klass = cast(GtkFileChooserButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fc);

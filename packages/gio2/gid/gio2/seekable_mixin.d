@@ -2,6 +2,7 @@
 module gid.gio2.seekable_mixin;
 
 public import gid.core.basictypes;
+public import gid.gio2.seekable;
 public import gid.gio2.seekable_iface_proxy;
 public import gid.core.utils;
 public import gid.gio2.c.functions;
@@ -318,7 +319,7 @@ template SeekableT()
         static extern(C) gboolean _vfuncSeekableCanSeekTramp(GSeekable* seekable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)seekable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)seekable);
           if (!_obj)
           {
             auto _klass = cast(GSeekableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)seekable), gid.gio2.seekable.Seekable._getGType);
@@ -350,7 +351,7 @@ template SeekableT()
         static extern(C) gboolean _vfuncSeekableCanTruncateTramp(GSeekable* seekable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)seekable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)seekable);
           if (!_obj)
           {
             auto _klass = cast(GSeekableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)seekable), gid.gio2.seekable.Seekable._getGType);
@@ -382,7 +383,7 @@ template SeekableT()
         static extern(C) gboolean _vfuncSeekableSeekTramp(GSeekable* seekable, long offset, GSeekType type, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)seekable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)seekable);
           if (!_obj)
           {
             auto _klass = cast(GSeekableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)seekable), gid.gio2.seekable.Seekable._getGType);
@@ -414,7 +415,7 @@ template SeekableT()
         static extern(C) long _vfuncSeekableTellTramp(GSeekable* seekable) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)seekable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)seekable);
           if (!_obj)
           {
             auto _klass = cast(GSeekableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)seekable), gid.gio2.seekable.Seekable._getGType);
@@ -444,7 +445,7 @@ template SeekableT()
         static extern(C) gboolean _vfuncSeekableTruncateFnTramp(GSeekable* seekable, long offset, GCancellable* cancellable, GError** _err) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)seekable);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)seekable);
           if (!_obj)
           {
             auto _klass = cast(GSeekableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)seekable), gid.gio2.seekable.Seekable._getGType);

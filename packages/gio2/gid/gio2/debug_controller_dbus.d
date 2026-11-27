@@ -377,7 +377,7 @@ class DebugControllerDBus : gid.gobject2.object.ObjectWrap, gid.gio2.debug_contr
         static extern(C) gboolean _vfuncAuthorizeTramp(GDebugControllerDBus* controller, GDBusMethodInvocation* invocation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gio2.debug_controller_dbus.DebugControllerDBus)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)controller);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gio2.debug_controller_dbus.DebugControllerDBus)(cast(void*)controller);
           if (!_obj)
           {
             auto _klass = cast(GDebugControllerDBusClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)controller);

@@ -2,6 +2,7 @@
 module gid.atk1.selection_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.selection;
 public import gid.atk1.selection_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -424,7 +425,7 @@ template SelectionT()
         static extern(C) gboolean _vfuncSelectionAddSelectionTramp(AtkSelection* selection, int i) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);
@@ -456,7 +457,7 @@ template SelectionT()
         static extern(C) gboolean _vfuncClearSelectionTramp(AtkSelection* selection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);
@@ -488,7 +489,7 @@ template SelectionT()
         static extern(C) int _vfuncGetSelectionCountTramp(AtkSelection* selection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);
@@ -518,7 +519,7 @@ template SelectionT()
         static extern(C) gboolean _vfuncIsChildSelectedTramp(AtkSelection* selection, int i) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);
@@ -550,7 +551,7 @@ template SelectionT()
         static extern(C) AtkObject* _vfuncRefSelectionTramp(AtkSelection* selection, int i) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);
@@ -582,7 +583,7 @@ template SelectionT()
         static extern(C) gboolean _vfuncSelectionRemoveSelectionTramp(AtkSelection* selection, int i) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);
@@ -614,7 +615,7 @@ template SelectionT()
         static extern(C) gboolean _vfuncSelectAllSelectionTramp(AtkSelection* selection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);
@@ -646,7 +647,7 @@ template SelectionT()
         static extern(C) void _vfuncSelectionChangedTramp(AtkSelection* selection) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)selection);
           if (!_obj)
           {
             auto _klass = cast(AtkSelectionIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection), gid.atk1.selection.Selection._getGType);

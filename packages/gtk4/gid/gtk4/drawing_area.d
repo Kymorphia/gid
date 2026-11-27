@@ -405,7 +405,7 @@ class DrawingArea : gid.gtk4.widget.Widget
         static extern(C) void _vfuncResizeTramp(GtkDrawingArea* area, int width, int height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk4.drawing_area.DrawingArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk4.drawing_area.DrawingArea)(cast(void*)area);
           if (!_obj)
           {
             auto _klass = cast(GtkDrawingAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);

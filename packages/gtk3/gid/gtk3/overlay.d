@@ -304,7 +304,7 @@ class Overlay : gid.gtk3.bin.Bin
         static extern(C) gboolean _vfuncGetChildPositionTramp(GtkOverlay* overlay, GtkWidget* widget, GtkAllocation* allocation) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.overlay.Overlay)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.overlay.Overlay)(cast(void*)overlay);
           if (!_obj)
           {
             auto _klass = cast(GtkOverlayClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay);

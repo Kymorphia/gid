@@ -2,6 +2,7 @@
 module gid.adw1.swipeable_mixin;
 
 public import gid.core.basictypes;
+public import gid.adw1.swipeable;
 public import gid.adw1.swipeable_iface_proxy;
 public import gid.adw1.c.functions;
 public import gid.adw1.c.types;
@@ -265,7 +266,7 @@ template SwipeableT()
         static extern(C) double _vfuncGetCancelProgressTramp(AdwSwipeable* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwSwipeableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.adw1.swipeable.Swipeable._getGType);
@@ -295,7 +296,7 @@ template SwipeableT()
         static extern(C) double _vfuncGetDistanceTramp(AdwSwipeable* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwSwipeableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.adw1.swipeable.Swipeable._getGType);
@@ -325,7 +326,7 @@ template SwipeableT()
         static extern(C) double _vfuncGetProgressTramp(AdwSwipeable* self) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwSwipeableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.adw1.swipeable.Swipeable._getGType);
@@ -355,7 +356,7 @@ template SwipeableT()
         static extern(C) double* _vfuncGetSnapPointsTramp(AdwSwipeable* self, int* nSnapPoints) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwSwipeableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.adw1.swipeable.Swipeable._getGType);
@@ -395,7 +396,7 @@ template SwipeableT()
         static extern(C) void _vfuncGetSwipeAreaTramp(AdwSwipeable* self, AdwNavigationDirection navigationDirection, gboolean isDrag, GdkRectangle* rect) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(AdwSwipeableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.adw1.swipeable.Swipeable._getGType);

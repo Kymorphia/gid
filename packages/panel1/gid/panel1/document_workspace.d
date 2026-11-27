@@ -359,7 +359,7 @@ class DocumentWorkspace : gid.panel1.workspace.Workspace
         static extern(C) gboolean _vfuncAddWidgetTramp(PanelDocumentWorkspace* self, PanelWidget* widget, PanelPosition* position) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.panel1.document_workspace.DocumentWorkspace)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.panel1.document_workspace.DocumentWorkspace)(cast(void*)self);
           if (!_obj)
           {
             auto _klass = cast(PanelDocumentWorkspaceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);

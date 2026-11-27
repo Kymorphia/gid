@@ -2,6 +2,7 @@
 module gid.atk1.image_mixin;
 
 public import gid.core.basictypes;
+public import gid.atk1.image;
 public import gid.atk1.image_iface_proxy;
 public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
@@ -273,7 +274,7 @@ template ImageT()
         static extern(C) void _vfuncGetImagePositionTramp(AtkImage* image, int* x, int* y, AtkCoordType coordType) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)image);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)image);
           if (!_obj)
           {
             auto _klass = cast(AtkImageIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)image), gid.atk1.image.Image._getGType);
@@ -308,7 +309,7 @@ template ImageT()
         static extern(C) void _vfuncGetImageSizeTramp(AtkImage* image, int* width, int* height) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)image);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)image);
           if (!_obj)
           {
             auto _klass = cast(AtkImageIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)image), gid.atk1.image.Image._getGType);
@@ -343,7 +344,7 @@ template ImageT()
         static extern(C) gboolean _vfuncSetImageDescriptionTramp(AtkImage* image, const(char)* description) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)image);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)image);
           if (!_obj)
           {
             auto _klass = cast(AtkImageIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)image), gid.atk1.image.Image._getGType);

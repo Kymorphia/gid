@@ -459,7 +459,7 @@ class ColorButton : gid.gtk3.button.Button, gid.gtk3.color_chooser.ColorChooser
         static extern(C) void _vfuncColorSetTramp(GtkColorButton* cp) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(gid.gtk3.color_button.ColorButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cp);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(gid.gtk3.color_button.ColorButton)(cast(void*)cp);
           if (!_obj)
           {
             auto _klass = cast(GtkColorButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cp);

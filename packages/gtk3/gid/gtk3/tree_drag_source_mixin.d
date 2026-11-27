@@ -2,6 +2,7 @@
 module gid.gtk3.tree_drag_source_mixin;
 
 public import gid.core.basictypes;
+public import gid.gtk3.tree_drag_source;
 public import gid.gtk3.tree_drag_source_iface_proxy;
 public import gid.core.utils;
 public import gid.gobject2.c.functions;
@@ -186,7 +187,7 @@ template TreeDragSourceT()
         static extern(C) gboolean _vfuncDragDataDeleteTramp(GtkTreeDragSource* dragSource, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dragSource);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)dragSource);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeDragSourceIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dragSource), gid.gtk3.tree_drag_source.TreeDragSource._getGType);
@@ -221,7 +222,7 @@ template TreeDragSourceT()
         static extern(C) gboolean _vfuncDragDataGetTramp(GtkTreeDragSource* dragSource, GtkTreePath* path, GtkSelectionData* selectionData) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dragSource);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)dragSource);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeDragSourceIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dragSource), gid.gtk3.tree_drag_source.TreeDragSource._getGType);
@@ -259,7 +260,7 @@ template TreeDragSourceT()
         static extern(C) gboolean _vfuncRowDraggableTramp(GtkTreeDragSource* dragSource, GtkTreePath* path) nothrow
         {
           gidAttachThread();
-          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dragSource);
+          auto _obj = gid.gobject2.object.ObjectWrap._vfuncDObject!(typeof(this))(cast(void*)dragSource);
           if (!_obj)
           {
             auto _klass = cast(GtkTreeDragSourceIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dragSource), gid.gtk3.tree_drag_source.TreeDragSource._getGType);
