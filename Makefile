@@ -2,7 +2,7 @@ all: binding packages
 
 .PHONY: binding
 binding:
-	dub run gidgen --root=gidgen --compiler=ldc2 -- --report --report-file report.txt
+	dub run --root=gidgen --compiler=ldc2 -- --report --report-file report.txt
 
 .PHONY: packages
 packages:
