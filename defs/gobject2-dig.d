@@ -316,6 +316,55 @@ static string _snakeCaseName(string s) pure nothrow
 }
 
 /**
+ * GIR name of a type of a giD binding, such as `gid.gtk4.widget.Widget` ("Gtk.Widget") or `gid.gtk4.types.Orientation`
+ * ("Gtk.Orientation"), used to export D-defined GObject types to GIR. The type name comes from the `@gidGir`
+ * attribute which gidgen adds to the D declaration of each binding type, and the namespace and version from the
+ * `_gidGirNamespace` and `_gidGirVersion` constants of the c/types.d module of the binding.
+ *
+ * Members:
+ *   namespace = GIR namespace ("Gtk")
+ *   nsVersion = GIR namespace version ("4.0")
+ *   name = GIR type name without the namespace ("Widget")
+ *   fullName = GIR type name with the namespace ("Gtk.Widget")
+ *   typeStruct = GIR name of the class or interface structure without the namespace ("WidgetClass"), or null
+ */
+template _dGirType(T)
+{
+  import gid.core.basictypes : gidGir;
+  import std.traits : getUDAs, moduleName;
+
+  static if (__traits(compiles, getUDAs!(T, gidGir)))
+    private alias _udas = getUDAs!(T, gidGir);
+  else
+    private alias _udas = imported!"std.meta".AliasSeq!();
+
+  static assert(_udas.length == 1, "Type " ~ T.stringof ~ " is not a type of a giD binding (no @gidGir attribute)");
+
+  private enum string _mod = moduleName!T;
+  private enum string _pkg = () {
+    if (_mod.length > 8 && _mod[$ - 8 .. $] == ".c.types")
+      return _mod[0 .. $ - 8];
+
+    foreach_reverse (i, c; _mod)
+      if (c == '.')
+        return _mod[0 .. i];
+
+    return _mod;
+  }();
+
+  static if (_udas.length == 1)
+  {
+    private alias _ctypes = imported!(_pkg ~ ".c.types");
+
+    enum string namespace = _ctypes._gidGirNamespace;
+    enum string nsVersion = _ctypes._gidGirVersion;
+    enum string name = _udas[0].name;
+    enum string fullName = namespace ~ "." ~ name;
+    enum string typeStruct = _udas[0].typeStruct;
+  }
+}
+
+/**
  * Check a GObject namespace name (see GObjectNamespace): non-empty, starts with an ASCII letter, followed by ASCII
  * letters and digits (it prefixes GType names and is a GIR namespace).
  * Params:
