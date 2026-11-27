@@ -512,6 +512,7 @@ static string _snakeCaseName(string s) pure nothrow
  *   name = GIR type name without the namespace ("Widget")
  *   fullName = GIR type name with the namespace ("Gtk.Widget")
  *   typeStruct = GIR name of the class or interface structure without the namespace ("WidgetClass"), or null
+ *   cIncludes = C headers of the namespace (`["gtk/gtk.h"]`), binding types only (from `_gidGirCIncludes`)
  */
 template _dGirType(T)
 {
@@ -556,6 +557,11 @@ template _dGirType(T)
     enum string name = _udas[0].name;
     enum string fullName = namespace ~ "." ~ name;
     enum string typeStruct = _udas[0].typeStruct;
+
+    static if (__traits(compiles, _ctypes._gidGirCIncludes))
+      enum string[] cIncludes = _ctypes._gidGirCIncludes;
+    else
+      enum string[] cIncludes = null;
   }
   }
 }

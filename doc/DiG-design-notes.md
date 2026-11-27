@@ -353,8 +353,8 @@ version (GidGir) mixin GObjectGirMain!(GirInfo("Mylib", null, "libmylib.so"), my
 
 ```sh
 dub build                      # libmylib.so
-dub run -c gir                 # writes Mylib-1.0.gir (--gir FILE or --gir - for another file or stdout,
-                               # --shared-library NAME for another library name)
+dub run -c gir                 # writes Mylib-1.0.gir and mylib.h (--gir FILE, --header FILE, - for stdout,
+                               # --no-header, --shared-library NAME for another library name)
 g-ir-compiler Mylib-1.0.gir -o Mylib-1.0.typelib
 ```
 
@@ -386,6 +386,8 @@ Compile the mixer GIR with `g-ir-compiler --includedir=DIR` where `DIR` has `Wid
 **Using a D library through its GIR (GIR export step 5).** gidgen generates a D binding from the GIR of a D library like from any other GIR, so a D program can use the library without its D sources (`test/roundtrip` in gidgen: `gidgen.json` with the test repository as dependency, the `//!gir GidgenExport-1.0` definitions and a client program). An instance of an exported type then has two D objects: the library's (`ExportVirt`, with its state) and the program's binding object (`gidgrt.gidgenexport1.virt.Virt`), or the program's D subclass of the binding class. The first one bound is the primary object: it is found with qdata and holds the toggle reference. The other is a secondary object, which holds no reference and isn't a GC root. The two refer to each other, so the secondary keeps the primary (and the instance) alive, and the primary keeps the secondary alive while the instance has other references. `_getDObject!T` and the trampolines (`_vfuncDObject!T`) return whichever of the two is a `T`, and create a secondary binding object (or interface proxy) if neither is. The D object of each D subclass type in an instance's ancestry is created by the nearest type whose D class is derived from its own, so a program's subclass of an exported class gets its D object and the library's D object too. `super.vfuncX()` (`_vfuncClass`) only skips the D subclass types of the object's own class family, so it reaches the library's implementation.
 
 Limits: types of another D namespace can't be used in the API yet, D-defined enums appear as their integer type in virtual methods and signals, and there are no doc comments in the GIR.
+
+**C header (GIR export step 6).** The gir program also writes the C header of the namespace (`mylib.h`: the namespace in snake case, or the first `GirInfo.cIncludes` entry), which the GIR lists as its `<c:include>`. It is generated from the GIR XML just written (`girHeader!(info, modules)` returns it), so the two always agree: `G_BEGIN_DECLS`, `#include <glib-object.h>` and the headers of the namespaces it uses (the `_gidGirCIncludes` of the binding's `c/types.d`, which gidgen writes from the GIR `<c:include>`, and `<namespace>.h` for other D namespaces), type macros (`MYLIB_TYPE_FOO`, `MYLIB_FOO()`, `MYLIB_IS_FOO()`, `_CLASS`, `_IS_FOO_CLASS`, `_GET_CLASS`, `_GET_IFACE`), forward typedefs, the instance struct (only `parent_instance`: DiG types have the instance size of their parent), the class struct (`parent_class` and the `@gVirtual` slots) or interface struct, `get_type` and the prototypes of the constructors, methods, functions and invokers (`GError **error` for throws). Structs are ordered so a parent is defined before its subclasses. User guide: [DiG-Export.md](DiG-Export.md).
 
 **Name collisions.** If the GType name is already registered (by another library, or by two D classes with the same name), registration fails for both `GObjectSubclass` and `GObjectExport`: a "Gid" critical names the GType and the D class (`fullyQualifiedName`) and suggests passing a different `typeName` (or `GObjectExport` name or ns) or renaming the class. `_getGType` stays 0 and the critical is not repeated. Two exported get_type functions with the same symbol name are a link or `dlsym` problem, as in C.
 
