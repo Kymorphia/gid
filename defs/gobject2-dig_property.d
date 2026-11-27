@@ -507,7 +507,7 @@ private static extern(C) void _dPropertyGet(T)(GObject* obj, uint propertyId, GV
 
   imported!"gid.core.utils".gidAttachThread();
 
-  auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
+  auto self = imported!"gid.gobject2.object".ObjectWrap._vfuncDObject!T(obj);
   uint id = 1;
 
   static foreach (mem; __traits(allMembers, T))
@@ -556,7 +556,7 @@ private static extern(C) void _dPropertySet(T)(GObject* obj, uint propertyId, co
 
   imported!"gid.core.utils".gidAttachThread();
 
-  auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
+  auto self = imported!"gid.gobject2.object".ObjectWrap._vfuncDObject!T(obj);
   uint id = 1;
 
   static foreach (mem; __traits(allMembers, T))

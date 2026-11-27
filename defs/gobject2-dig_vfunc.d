@@ -300,7 +300,7 @@ private static extern(C) _dVfuncCReturn!(T, mem) _dVfuncTrampoline(T, string mem
   else
     enum impl = "_gidVfuncImpl_" ~ _dVfuncInvokerName(mem);
 
-  auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
+  auto self = imported!"gid.gobject2.object".ObjectWrap._vfuncDObject!T(obj);
 
   if (self)
   {

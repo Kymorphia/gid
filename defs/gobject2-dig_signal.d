@@ -405,7 +405,7 @@ private static extern(C) void _dSignalClassMarshal(T, string mem)(GClosure* clos
   alias R = _dSignalReturn!(T, mem);
   enum where = T.stringof ~ "." ~ mem;
 
-  auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(g_value_get_object(&paramVals[0]));
+  auto self = imported!"gid.gobject2.object".ObjectWrap._vfuncDObject!T(g_value_get_object(&paramVals[0]));
 
   if (!self || nParams != P.length + 1)
     return;
