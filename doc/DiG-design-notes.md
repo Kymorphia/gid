@@ -340,8 +340,8 @@ class Baz : ObjectWrap
 module mylib;
 public import mylib.counter;
 
-mixin GObjectNamespace!("Mylib");
-version (GidGir) mixin GObjectGirMain!(GirInfo("Mylib", "1.0", "libmylib.so"), mylib.counter);
+mixin GObjectNamespace!("Mylib", "1.0"); // Namespace and GIR version
+version (GidGir) mixin GObjectGirMain!(GirInfo("Mylib", null, "libmylib.so"), mylib.counter);
 ```
 
 ```json
@@ -359,6 +359,27 @@ g-ir-compiler Mylib-1.0.gir -o Mylib-1.0.typelib
 ```
 
 List the modules that declare the exported types. The GIR has the `GObjectExport` classes and `GInterfaceExport` interfaces of the `GirInfo` namespace (types of other namespaces are skipped): parent and interfaces, the class or interface struct with the `@gVirtual` slots, `get_type`, `_new` and `@gConstructor` constructors, methods and static functions, virtual methods with their invokers, properties (flags and default values as registered) and signals (flags as registered). Parameters carry the same rules as the C functions: transfer full for returned strings, arrays, objects, boxed types and variants (`@gTransfer(GidOwnership.None)` for objects), `@gNullable`, `out`/`ref` parameters, and `throws` for a `GError **error`. Binding types (`Gtk.Widget`, `GLib.Variant`) add an `<include>` of their namespace. `girXml!(info, modules)` returns the XML for custom build steps.
+
+**GIR versions and other D libraries (GIR export step 4b).** `GObjectNamespace` takes an optional GIR version: `GObjectNamespace!("Mylib", "1.0")`. After the namespace come, in any order, the version, the C symbol prefix (`"mylib"`, `null` for the default), the `GidExport` flags and the `GidSkip` mode; a string starting with a digit is the version. So `GObjectNamespace!("Mylib")`, `("Mylib", "mylib")`, `("Mylib", null, GidExport.All)` and `("Mylib", "1.0", "mylib", GidExport.All)` all work. The `GirInfo` version can be `null` to use this one; giving two different versions is an error.
+
+Exported types can be used by another D library with its own namespace. Its GIR then includes the first namespace and refers to its types by their qualified names, as for binding types:
+
+```d
+// widgets library (libwidgets.so)
+mixin GObjectNamespace!("Widgets", "1.0");
+class Knob : ObjectWrap { mixin GObjectExport; @gProperty double level; }
+
+// mixer library (libmixer.so, linked with libwidgets.so)
+import widgets : Knob;
+mixin GObjectNamespace!("Mixer", "1.0");
+class Channel : ObjectWrap
+{
+  mixin GObjectExport;
+  @gMethod Knob getGainKnob() { ... } // <include name="Widgets" version="1.0"/>, type name="Widgets.Knob"
+}
+```
+
+Compile the mixer GIR with `g-ir-compiler --includedir=DIR` where `DIR` has `Widgets-1.0.gir`. The used namespace needs a version in its `GObjectNamespace`, else writing the GIR fails with a message saying so. When several D libraries are loaded into one process (Python loading both typelibs, for example), build them with the shared D runtime (`"dflags-ldc": ["-link-defaultlib-shared"]`); D shared libraries with a static runtime can't be loaded together.
 
 Limits: types of another D namespace can't be used in the API yet, D-defined enums appear as their integer type in virtual methods and signals, and there are no doc comments in the GIR.
 

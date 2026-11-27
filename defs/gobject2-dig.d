@@ -160,38 +160,44 @@ mixin template _GObjectSignalMembers(T, string mem)
  *
  * For example, `mixin GObjectNamespace!("Mylib");` names types `MylibFoo` and C functions `mylib_foo_...`.
  *
- * After the namespace you can pass, in any order: the C function prefix, GidExport flags and a GidSkip mode. The
- * flags and mode are the defaults of the GObjectExport classes that see this declaration; a class that passes its own
- * GidExport flags or GidSkip mode replaces them.
+ * After the namespace you can pass, in any order: the GIR version, the C function prefix, GidExport flags and a
+ * GidSkip mode. A string that starts with a digit is the version ("1.0"), another string is the prefix. The version is
+ * needed when the types are used by the GIR of another namespace (see GObjectGirMain). The flags and mode are the
+ * defaults of the GObjectExport classes that see this declaration; a class that passes its own GidExport flags or
+ * GidSkip mode replaces them.
  *
  * Params:
  *   ns = Namespace ("Mylib")
- *   Options = C function prefix (null to derive one from the namespace: "MyLib" becomes "my_lib"; pass "mylib" if
- *     that is what you want), GidExport flags, GidSkip mode
+ *   Options = GIR version ("1.0"), C function prefix (null to derive one from the namespace: "MyLib" becomes
+ *     "my_lib"; pass "mylib" if that is what you want), GidExport flags, GidSkip mode
  *
  * Example:
  * ---
  * mixin GObjectNamespace!("Mylib");
- * mixin GObjectNamespace!("MyLib", "mylib", GidExport.All | GidExport.Throws, GidSkip.Error); // Or with defaults
+ * mixin GObjectNamespace!("Mylib", "1.0"); // With the GIR version
+ * mixin GObjectNamespace!("MyLib", "1.0", "mylib", GidExport.All | GidExport.Throws, GidSkip.Error); // Or more
  * ---
  */
 mixin template GObjectNamespace(string ns, Options...)
 {
-  private enum _gidNamespaceOptions = imported!"gid.gobject2.dig_method"._dParseExportOptions!("GObjectNamespace", 1,
+  private enum _gidNamespaceOptions = imported!"gid.gobject2.dig_method"._dParseExportOptions!("GObjectNamespace", 2,
     Options);
   static assert(_gidNamespaceOptions.error is null, _gidNamespaceOptions.error);
 
+  private enum _gidNamespaceStrings = imported!"gid.gobject2.dig"._dNamespaceStrings(_gidNamespaceOptions.strings);
+  static assert(_gidNamespaceStrings.error is null, _gidNamespaceStrings.error);
+
   static assert(imported!"gid.gobject2.dig"._isValidNamespace(ns), "GObjectNamespace: invalid namespace \""
     ~ ns ~ "\" (must start with an ASCII letter, followed by letters and digits)");
-  static assert(_gidNamespaceOptions.str(0).length == 0
-    || imported!"gid.gobject2.dig"._isValidSymbolPrefix(_gidNamespaceOptions.str(0)),
-    "GObjectNamespace: invalid C symbol prefix \"" ~ _gidNamespaceOptions.str(0) ~ "\"");
 
   /// GObject namespace of exported types (see GObjectExport)
   enum string _gidNamespace = ns;
 
+  /// GIR version of the namespace, or null
+  enum string _gidNamespaceVersion = _gidNamespaceStrings.nsVersion;
+
   /// C symbol prefix of exported types
-  enum string _gidSymbolPrefix = _gidNamespaceOptions.str(0).length > 0 ? _gidNamespaceOptions.str(0)
+  enum string _gidSymbolPrefix = _gidNamespaceStrings.prefix.length > 0 ? _gidNamespaceStrings.prefix
     : imported!"gid.gobject2.dig"._snakeCaseName(ns);
 
   /// Default GidExport flags of exported types
@@ -349,6 +355,13 @@ mixin template _GObjectExportNames(string ns, string name, string mixinName)
     ~ " at module scope with `mixin GObjectNamespace!(\"Mylib\");` or pass it: `mixin " ~ mixinName
     ~ "!(\"Mylib\");`");
 
+  /// GIR version of the namespace: the one declared with GObjectNamespace for its namespace, otherwise null
+  static if (__traits(compiles, _gidNamespace) && __traits(compiles, _gidNamespaceVersion)
+      && _gidExportNs == _gidNamespace)
+    enum string _gidExportNsVersion = _gidNamespaceVersion;
+  else
+    enum string _gidExportNsVersion = null;
+
   /// Type name without the namespace
   enum string _gidExportName = name.length > 0 ? name : __traits(identifier, typeof(this));
 
@@ -489,7 +502,9 @@ static string _snakeCaseName(string s) pure nothrow
  * GIR name of a type of a giD binding, such as `gid.gtk4.widget.Widget` ("Gtk.Widget") or `gid.gtk4.types.Orientation`
  * ("Gtk.Orientation"), used to export D-defined GObject types to GIR. The type name comes from the `@gidGir`
  * attribute which gidgen adds to the D declaration of each binding type, and the namespace and version from the
- * `_gidGirNamespace` and `_gidGirVersion` constants of the c/types.d module of the binding.
+ * `_gidGirNamespace` and `_gidGirVersion` constants of the c/types.d module of the binding. GObjectExport classes and
+ * GInterfaceExport interfaces have the namespace and name of their export, and the GIR version of their GObjectNamespace
+ * declaration (null if it has none).
  *
  * Members:
  *   namespace = GIR namespace ("Gtk")
@@ -503,6 +518,16 @@ template _dGirType(T)
   import gid.core.basictypes : gidGir;
   import std.traits : getUDAs, moduleName;
 
+  static if (__traits(compiles, T._gidExportedAs) && is(T._gidExportedAs == T) && __traits(compiles, T._gidExportNs))
+  { // GObjectExport class or GInterfaceExport interface
+    enum string namespace = T._gidExportNs;
+    enum string nsVersion = T._gidExportNsVersion; // null if GObjectNamespace has no version
+    enum string name = T._gidExportName;
+    enum string fullName = namespace ~ "." ~ name;
+    enum string typeStruct = name ~ (is(T == interface) ? "Interface" : "Class");
+  }
+  else
+  {
   static if (__traits(compiles, getUDAs!(T, gidGir)))
     private alias _udas = getUDAs!(T, gidGir);
   else
@@ -532,6 +557,7 @@ template _dGirType(T)
     enum string fullName = namespace ~ "." ~ name;
     enum string typeStruct = _udas[0].typeStruct;
   }
+  }
 }
 
 /**
@@ -548,6 +574,65 @@ static bool _isValidNamespace(string ns) pure nothrow
 
   foreach (char c; ns)
     if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')))
+      return false;
+
+  return true;
+}
+
+/// The string options of GObjectNamespace (see _dNamespaceStrings)
+struct _DNamespaceStrings
+{
+  string prefix; /// C symbol prefix, or null
+  string nsVersion; /// GIR version, or null
+  string error; /// Problem, or null
+}
+
+/**
+ * Sort the string options of GObjectNamespace: a string starting with a digit is the GIR version (digits separated by
+ * dots, "1.0"), another one the C symbol prefix. null is the default symbol prefix.
+ */
+static _DNamespaceStrings _dNamespaceStrings(string[] strings) pure nothrow
+{
+  _DNamespaceStrings r;
+  bool hasPrefix, hasVersion;
+
+  foreach (s; strings)
+  {
+    if (s.length > 0 && s[0] >= '0' && s[0] <= '9')
+    {
+      if (hasVersion)
+        r.error = "GObjectNamespace: more than one GIR version";
+      else if (!_isValidGirVersion(s))
+        r.error = "GObjectNamespace: invalid GIR version \"" ~ s ~ "\" (use digits separated by dots, such as \"1.0\")";
+
+      hasVersion = true;
+      r.nsVersion = s;
+    }
+    else
+    {
+      if (hasPrefix)
+        r.error = "GObjectNamespace: more than one C symbol prefix (a GIR version starts with a digit)";
+      else if (s.length > 0 && !_isValidSymbolPrefix(s))
+        r.error = "GObjectNamespace: invalid C symbol prefix \"" ~ s ~ "\"";
+
+      hasPrefix = true;
+      r.prefix = s;
+    }
+  }
+
+  return r;
+}
+
+/**
+ * Check a GIR namespace version: digits separated by single dots ("1.0", "2").
+ */
+static bool _isValidGirVersion(string v) pure nothrow
+{
+  if (v.length == 0 || v[0] == '.' || v[$ - 1] == '.')
+    return false;
+
+  foreach (i, char c; v)
+    if (!((c >= '0' && c <= '9') || (c == '.' && v[i - 1] != '.')))
       return false;
 
   return true;
